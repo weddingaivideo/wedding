@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Validate that all assets referenced in the gallery HTML exist on disk."""
+import os
 import re, sys
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 HTML = (ROOT / "gallery" / "index.html").read_text(encoding="utf-8")
 
 # Match both <img src> and <source src=...> and <source srcset=...> and <video poster>

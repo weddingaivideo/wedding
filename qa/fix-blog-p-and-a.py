@@ -18,11 +18,11 @@ Bug 2 (extra <a> + stray </a>):
 
 Scope: blog/*.html and other pages that went through i18n_inject.
 """
+import os
 import re
 from pathlib import Path
 
-ROOT = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai")
-
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 # ----------------------------------------------------------------------------
 # Bug 1: Missing <p> + stray </p>
 # Pattern: a TAGS tag (strong, em, code, b, i, a, span) opens, content follows,

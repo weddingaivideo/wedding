@@ -11,12 +11,12 @@ What it does (per <video ...> tag):
 
 Idempotent: re-running on already-converted files is a no-op.
 """
+import os
 import re
 import sys
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
-
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 # Match a full <video ...> opening tag (no newlines inside, multi-line OK).
 VIDEO_TAG = re.compile(r'<video\b[^>]*>', re.IGNORECASE | re.DOTALL)
 

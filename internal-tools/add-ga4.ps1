@@ -1,3 +1,5 @@
+if ($env:WEDDINGAI_ROOT) { $root = $env:WEDDINGAI_ROOT }
+else { $root = Split-Path -Parent $PSScriptRoot }
 # Add GA4 to all HTML files in weddingai folder
 # Replace G-XXXXXXXXXX with actual GA4 Measurement ID before running.
 # Uses the same deferred-load pattern as the main pages (interaction + idle fallback)
@@ -45,7 +47,7 @@ $ga4Snippet = @"
     </script>
 "@
 
-$files = Get-ChildItem -Path "C:\Users\qiaoshan\.openclaw\workspace\weddingai" -Recurse -Include "*.html"
+$files = Get-ChildItem -Path "$root" -Recurse -Include "*.html"
 $count = 0
 
 foreach ($file in $files) {

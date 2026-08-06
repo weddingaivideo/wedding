@@ -8,7 +8,8 @@ param(
     [string]$NewId = "G-4FE7KSJDNB"
 )
 
-$root = "C:\Users\qiaoshan\.openclaw\workspace\weddingai"
+if ($env:WEDDINGAI_ROOT) { $root = $env:WEDDINGAI_ROOT }
+else { $root = Split-Path -Parent $PSScriptRoot }
 $htmlFiles = Get-ChildItem $root -Recurse -Filter "*.html" -File | Where-Object { $_.Name -ne "google-site-verification.html" }
 
 # Build the canonical lazy-load snippet (here-string keeps single-quote escaping sane).

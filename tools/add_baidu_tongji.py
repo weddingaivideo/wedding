@@ -10,13 +10,14 @@ Skips:
 Idempotent: re-running is safe. Will also clean up the broken v1 insertion
 (`</script>    <!-- Baidu Tongji...` glued on the same line).
 """
+import os
 from __future__ import annotations
 
 import re
 import sys
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 BAIDU_ID = "784c824843f328ed5f8254991ef8b2f4"
 SKIP_NAMES = {"google-site-verification.html"}
 SKIP_DIR_PARTS = {"tmp"}

@@ -1,8 +1,9 @@
 """Fix the truncated title in cinematic-wedding-trailer-guide."""
+import os
 import json
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 LANGS = ["en", "zh", "es", "fr", "de", "pt", "ja", "ru", "ar", "th"]
 
 # EN key - exact value

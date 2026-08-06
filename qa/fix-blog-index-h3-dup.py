@@ -4,11 +4,12 @@ Fix double </h3> introduced by the first wrap script.
 The first script wrapped `<a ...>...</a></h3>` in `<h3>...</h3>`, producing
 `<h3><a ...>...</a></h3></h3>`. This script removes the duplicate closing.
 """
+import os
 import re
 import sys
 from pathlib import Path
 
-FILE = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai/blog/index.html")
+FILE = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent) / "blog" / "index.html"
 content = FILE.read_text(encoding="utf-8")
 
 # Find: </a></h3></h3>  →  </a></h3>

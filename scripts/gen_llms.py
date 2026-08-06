@@ -10,11 +10,12 @@ llms-full.txt: full text dump of all 73 HTML pages concatenated, for LLM
 Both are regenerated on every deploy. They sit at the site root and are
 referenced by AI crawlers (GPTBot, ClaudeBot, etc.) for index discovery.
 """
+import os
 import re
 from pathlib import Path
 from datetime import date
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 SITE = "https://weddingai.video"
 EXCLUDE_DIRS = {"admin", "functions", "tmp", "__pycache__", "qa", "i18n",
                 "js", "styles", "scripts", "docs", "search", "internal-docs",

@@ -1,7 +1,8 @@
 """Bump i18n.js cache buster from 3.19 to 3.21 across all HTML files."""
+import os
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 EXCLUDE_DIRS = {"admin", "functions", "tmp", "__pycache__", "qa", "i18n", "js", "styles", "scripts", "docs"}
 
 def should_process(p):

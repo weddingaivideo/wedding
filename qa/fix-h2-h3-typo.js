@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const root = 'C:\\Users\\qiaoshan\\.openclaw\\workspace\\weddingai';
+const root = path.join(__dirname, '..');
 const files = [
   'services\\absence-compensation\\celebrity-message\\index.html',
   'services\\absence-compensation\\family-message\\index.html',

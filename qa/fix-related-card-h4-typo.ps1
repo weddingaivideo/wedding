@@ -17,7 +17,8 @@
 # Idempotent: re-running on already-fixed files is a no-op (the source no
 # longer contains </h4>).
 
-$root = "C:\Users\qiaoshan\.openclaw\workspace\weddingai"
+if ($env:WEDDINGAI_ROOT) { $root = $env:WEDDINGAI_ROOT }
+else { $root = Split-Path -Parent $PSScriptRoot }
 $fixes = @(
     # (file, from, to)
     # 1) celebrity-message — card1

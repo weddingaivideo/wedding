@@ -7,10 +7,11 @@ Touches:
 
 Run after any change to i18n JSON files or js/i18n.js, before deploy.
 """
+import os
 import re
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 EXCLUDE_DIRS = {"admin", "functions", "tmp", "__pycache__", "qa", "i18n", "styles", "scripts", "docs", "search"}
 
 # Bump pairs: (old, new)

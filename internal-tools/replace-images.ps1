@@ -1,5 +1,5 @@
-$root = "C:\Users\qiaoshan\.openclaw\workspace\weddingai"
-
+if ($env:WEDDINGAI_ROOT) { $root = $env:WEDDINGAI_ROOT }
+else { $root = Split-Path -Parent $PSScriptRoot }
 # ── index.html ──────────────────────────────────────────────────────────────
 $index = Get-Content "$root\index.html" -Raw
 

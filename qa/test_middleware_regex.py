@@ -1,11 +1,12 @@
 """Test the middleware regex transformations in isolation.
 Simulate what the middleware does, then verify the output."""
+import os
 import json
 import re
 import sys
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 sys.path.insert(0, str(ROOT / "functions" / "_lib"))
 
 

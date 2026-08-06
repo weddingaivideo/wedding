@@ -3,9 +3,10 @@ Clean up the stray </a> tags in blog/index.html footer.
 After multiple edits, we have 4 orphan </a> + 5 whitespace-only lines.
 Replace that block with a single clean block.
 """
+import os
 from pathlib import Path
 
-FILE = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai/blog/index.html")
+FILE = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent) / "blog" / "index.html"
 content = FILE.read_text(encoding="utf-8")
 
 # Find: </picture></a>\n                 <whitespace+></a>+\n                 <p data-i18n="404.p_text.ai...

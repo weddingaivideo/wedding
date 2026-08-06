@@ -10,11 +10,12 @@ This script:
 2. Looks up TEXT in en.json to find the matching i18n key
 3. Replaces with <a ... data-i18n="key">TEXT</a> (data-i18n-restored removed)
 """
+import os
 import json
 import re
 from pathlib import Path
 
-ROOT = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 EN_JSON = ROOT / "i18n" / "en.json"
 
 # Load en.json as text-to-key lookup

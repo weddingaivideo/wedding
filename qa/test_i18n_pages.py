@@ -1,10 +1,11 @@
 """Test that the full pipeline works for blog posts (Article schema)."""
+import os
 import json
 import re
 import sys
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 sys.path.insert(0, str(ROOT))
 
 # Reuse functions from test_middleware_regex

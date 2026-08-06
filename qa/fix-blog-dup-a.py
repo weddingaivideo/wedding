@@ -14,12 +14,12 @@ After fix, also check for the related bug:
   Or:      <a><a ...>TEXT</a>  (open without attrs)
   Or:      </p> orphan closes
 """
+import os
 import re
 import sys
 from pathlib import Path
 
-ROOT = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai")
-
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 # Match: <a href="X"><a href="X" data-i18n="Y">TEXT</a>
 # Or:     <a href="X"><a href="X" data-i18n="Y" ...attrs>TEXT</a>
 DUP_A_RE = re.compile(

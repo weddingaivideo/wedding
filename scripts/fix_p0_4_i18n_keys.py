@@ -14,11 +14,11 @@ Target keys (add hash suffix to match sibling key convention):
   - index.p_text.real_weddings_intro.e5f6a7b8
   - index.p_text.mike_rachel_first_dance_slow_motion.9c0d1e2f
 """
+import os
 import json
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
-
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 OLD_TO_NEW = {
     "index.h2_text.real_weddings_real_stories": "index.h2_text.real_weddings_real_stories.a1b2c3d4",
     "index.p_text.real_weddings_intro": "index.p_text.real_weddings_intro.e5f6a7b8",

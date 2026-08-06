@@ -1,4 +1,6 @@
-Get-ChildItem "C:\Users\qiaoshan\.openclaw\workspace\weddingai" -Recurse -Include "*.html" | ForEach-Object {
+if ($env:WEDDINGAI_ROOT) { $root = $env:WEDDINGAI_ROOT }
+else { $root = Split-Path -Parent $PSScriptRoot }
+Get-ChildItem "$root" -Recurse -Include "*.html" | ForEach-Object {
     $content = Get-Content $_.FullName -Raw
     $badLinks = [regex]::Matches($content, 'href="([^"# ]*)/"') | Where-Object {
         $_.Groups[1].Value -notmatch '\.(css|js|png|jpg|svg|woff|ico)' -and

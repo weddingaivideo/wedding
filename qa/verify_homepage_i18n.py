@@ -1,12 +1,12 @@
 """Verify the homepage has all the required JSON-LD blocks AND middleware will
 correctly rewrite inLanguage for non-EN pages."""
+import os
 import json
 import re
 import sys
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
-
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 # Reuse functions
 exec((ROOT / "qa" / "test_middleware_regex.py").read_text(encoding="utf-8").split("# --- Tests ---")[0])
 

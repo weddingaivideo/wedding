@@ -15,9 +15,10 @@ Replace:
 
 Note: /services/video-enhancement/slow-motion/ is a REAL path and must stay.
 """
+import os
 import re
 from pathlib import Path
-ROOT = Path(r'C:\Users\qiaoshan\.openclaw\workspace\weddingai')
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 
 # Service slugs that actually live under /services/personalization/
 PERSONALIZATION_SLUGS = {

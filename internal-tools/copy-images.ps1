@@ -1,6 +1,6 @@
 $src = "C:\Users\qiaoshan\.openclaw\media\tool-image-generation\"
-$dst = "C:\Users\qiaoshan\.openclaw\workspace\weddingai\images\"
-
+if ($env:WEDDINGAI_ROOT) { $root = Join-Path $env:WEDDINGAI_ROOT "images" }
+else { $root = Join-Path (Split-Path -Parent $PSScriptRoot) "images" }
 $mapping = @{
     "hero-wedding-vineyard---1f105497-bbda-4274-80df-dccda519636c.png" = "hero-wedding-vineyard.png"
     "dv-repair-before-after---4be9f690-5d94-4b49-8da1-67a0837e6810.png" = "wedding-restoration-before-after.png"

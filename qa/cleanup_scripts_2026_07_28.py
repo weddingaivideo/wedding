@@ -14,10 +14,11 @@ After this, .assetsignore already excludes scripts/, qa/, *.txt, *.pyc, and
 __pycache__/ so deploy is unaffected. The archive directory itself must
 also be .assetsignore'd to prevent accidental deployment.
 """
+import os
 import shutil
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 SCRIPTS = ROOT / "scripts"
 QA = ROOT / "qa"
 ARCHIVE = SCRIPTS / "archive" / "2026-07-28"

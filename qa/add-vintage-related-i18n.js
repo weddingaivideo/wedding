@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = 'C:\\Users\\qiaoshan\\.openclaw\\workspace\\weddingai\\i18n';
+const ROOT = path.join(__dirname, '..', 'i18n');
 const HEX = 'e8f9a0b1';
 
 function entry(shortKey, value) {

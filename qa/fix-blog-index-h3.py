@@ -7,12 +7,12 @@ Missing the opening <h3>. Restore the heading semantic for SEO + a11y.
 
 Idempotent: re-running on already-fixed file is a no-op (anchors already inside <h3>).
 """
+import os
 import re
 import sys
 from pathlib import Path
 
-FILE = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai/blog/index.html")
-
+FILE = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent) / "blog" / "index.html"
 content = FILE.read_text(encoding="utf-8")
 
 # Pattern: any line that contains a title anchor ending in </a></h3> with no

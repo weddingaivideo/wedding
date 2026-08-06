@@ -8,11 +8,11 @@ fields that need adjustment per the audit:
 - Meta description: add data points (500+ couples, $49-$499, 48h)
 - Hero trust: rephrase to balance 500+ claim with 4.9/5 from 6 reviews
 """
+import os
 import json
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
-
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 # i18n keys
 KEY_H1 = "index.h1_text.make_every_wedding_moment_unforgettable.26538929"
 KEY_TITLE = "index.title_text.ai_powered_wedding_video_services_weddin.58583865"

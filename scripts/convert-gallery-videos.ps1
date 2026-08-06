@@ -1,7 +1,9 @@
+if ($env:WEDDINGAI_ROOT) { $root = $env:WEDDINGAI_ROOT }
+else { $root = Split-Path -Parent $PSScriptRoot }
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $true
 
-$imgDir = 'C:\Users\qiaoshan\.openclaw\workspace\weddingai\images'
+$imgDir = Join-Path $root 'images'
 $ffmpeg = 'C:\ffmpeg\bin\ffmpeg.exe'
 
 function Invoke-FFmpeg {

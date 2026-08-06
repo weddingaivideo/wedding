@@ -6,11 +6,11 @@ Fix:     <a href="X" data-i18n="..." [attrs]>TEXT</a>
 
 The V1 regex only matched exact href-only. V2 matches any attrs.
 """
+import os
 import re
 from pathlib import Path
 
-ROOT = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai")
-
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 # Match: <a href="X" ...><a href="X" ... data-i18n="..." ...>TEXT</a>
 # The key constraint: same href in both <a> openings
 DUP_A_RE = re.compile(

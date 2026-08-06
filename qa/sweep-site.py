@@ -1,11 +1,11 @@
 """
 Sweep all 50 blog posts + key pages for tag balance.
 """
+import os
 import re
 from pathlib import Path
 
-ROOT = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai")
-
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 def count(content, pattern):
     return len(re.findall(pattern, content))
 

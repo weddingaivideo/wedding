@@ -2,10 +2,11 @@
 services/video-enhancement/vintage-restoration/. English source is in the HTML;
 we add the 8 non-EN locales here.
 """
+import os
 import json
 from pathlib import Path
 
-I18N_DIR = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai\i18n")
+I18N_DIR = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent) / "i18n"
 HEX = "e8f9a0b1"
 
 # Each tuple: (short slot key in our key path, value)

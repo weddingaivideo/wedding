@@ -2,11 +2,12 @@
 Validate <a> balance in blog/index.html using HTMLParser.
 Also reports <h3> balance.
 """
+import os
 from html.parser import HTMLParser
 import sys
 from pathlib import Path
 
-FILE = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai/blog/index.html")
+FILE = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent) / "blog" / "index.html"
 content = FILE.read_text(encoding="utf-8")
 
 class TagBalanceChecker(HTMLParser):

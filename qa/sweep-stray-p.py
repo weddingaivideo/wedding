@@ -6,10 +6,11 @@ links in the footer-bottom block. Pattern occurs in index.html, order/,
 Pattern: `Terms of Service</a></p>` at end of footer-bottom line.
 Fix:     `Terms of Service</a>` (no closing p).
 """
+import os
 import re
 from pathlib import Path
 
-ROOT = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 total = 0
 files = 0
 

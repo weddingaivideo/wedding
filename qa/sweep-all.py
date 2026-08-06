@@ -1,11 +1,11 @@
 """
 Final sweep: check tag balance on all changed files.
 """
+import os
 import re
 from pathlib import Path
 
-ROOT = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai")
-
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 # Files we touched
 files = [
     "404.html",

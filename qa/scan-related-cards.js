@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const root = 'C:\\Users\\qiaoshan\\.openclaw\\workspace\\weddingai\\services';
+const root = path.join(__dirname, '..', 'services');
 function walk(d) {
   for (const e of fs.readdirSync(d, { withFileTypes: true })) {
     const p = path.join(d, e.name);

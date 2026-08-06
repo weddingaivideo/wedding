@@ -1,5 +1,6 @@
 $ErrorActionPreference = "Stop"
-$root = "C:\Users\qiaoshan\.openclaw\workspace\weddingai"
+if ($env:WEDDINGAI_ROOT) { $root = $env:WEDDINGAI_ROOT }
+else { $root = Split-Path -Parent $PSScriptRoot }
 $baseUrl = "https://weddingai.video"
 
 function Get-LastModForPath([string]$urlPath) {

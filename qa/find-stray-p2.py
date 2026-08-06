@@ -1,11 +1,12 @@
 """
 Find stray </p> in index.html.
 """
+import os
 import re
 import bisect
 from pathlib import Path
 
-FILE = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai/index.html")
+FILE = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent) / "index.html"
 content = FILE.read_text(encoding="utf-8")
 
 opens = list(re.finditer(r'<p[\s>]', content))

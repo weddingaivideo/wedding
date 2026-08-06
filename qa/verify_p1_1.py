@@ -1,15 +1,17 @@
 """Verify P1-1 fix: pre-deploy-check.ps1 can read functions/docs/[id].js now."""
+import os
 import subprocess
 import re
 import sys
 from pathlib import Path
 
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 # Run pre-deploy-check.ps1 and capture output
 r = subprocess.run(
     ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
-     "-File", r"C:\Users\qiaoshan\.openclaw\workspace\weddingai\pre-deploy-check.ps1"],
+     "-File", str(ROOT / "internal-tools" / "pre-deploy-check.ps1")],
     capture_output=True, text=True, timeout=300,
-    cwd=r"C:\Users\qiaoshan\.openclaw\workspace\weddingai",
+    cwd=str(ROOT),
 )
 out = r.stdout
 
@@ -35,7 +37,7 @@ elif "No hardcoded" not in out:
     found_bad = True
 
 # Confirm the fixed line is in the script
-script = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai\pre-deploy-check.ps1").read_text(encoding="utf-8")
+script = (ROOT / "internal-tools" / "pre-deploy-check.ps1").read_text(encoding="utf-8")
 if "[System.IO.File]::ReadAllText" in script:
     print("PASS: pre-deploy-check.ps1 uses [System.IO.File]::ReadAllText")
 else:

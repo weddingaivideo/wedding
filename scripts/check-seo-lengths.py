@@ -3,9 +3,9 @@
 import os
 import re
 from html import unescape
+from pathlib import Path
 
-ROOT = r"C:\Users\qiaoshan\.openclaw\workspace\weddingai"
-
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 TITLE_MAX = 60
 DESC_MAX = 160
 

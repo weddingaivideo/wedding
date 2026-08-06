@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const root = 'C:\\Users\\qiaoshan\\.openclaw\\workspace\\weddingai';
+const root = path.join(__dirname, '..');
 const files = [
   'services\\personalization\\wedding-trailer\\index.html',
   'services\\video-enhancement\\slow-motion\\index.html',

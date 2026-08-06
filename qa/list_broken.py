@@ -1,7 +1,8 @@
 """List all broken local hrefs across the site."""
+import os
 import re
 from pathlib import Path
-ROOT = Path(r'C:\Users\qiaoshan\.openclaw\workspace\weddingai')
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 broken = {}
 for f in ROOT.rglob('*.html'):
     parts = {str(p) for p in f.parts}

@@ -1,8 +1,9 @@
 """Fix all truncated 'Won't Tell' in en.json for cinematic-wedding-trailer."""
+import os
 import json
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 en_path = ROOT / "i18n" / "en.json"
 en = json.loads(en_path.read_text(encoding="utf-8"))
 

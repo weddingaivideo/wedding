@@ -1,9 +1,10 @@
 """Test that article dates are diversified per URL."""
+import os
 import json
 import re
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 exec((ROOT / "qa" / "test_middleware_regex.py").read_text(encoding="utf-8").split("# --- Tests ---")[0])
 
 # Re-define the diversify function (it's not in the test file)

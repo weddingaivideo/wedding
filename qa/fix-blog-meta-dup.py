@@ -3,10 +3,11 @@ Fix duplicate data-i18n-attr=" in blog post meta description lines.
 Pattern: <meta name="description" data-i18n-attr="data-i18n-attr="content:...key..." content="..." />
 Fix:    <meta name="description" data-i18n-attr="content:...key..." content="..." />
 """
+import os
 import re
 from pathlib import Path
 
-BLOG_DIR = Path(r"C:/Users/qiaoshan/.openclaw/workspace/weddingai/blog")
+BLOG_DIR = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent) / "blog"
 files_fixed = 0
 
 for html_file in BLOG_DIR.rglob("index.html"):

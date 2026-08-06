@@ -20,12 +20,13 @@ This script:
   4) Optionally runs in pre-deploy-check via `pre-deploy-check.ps1`
      (printed as a WARN if < 30 days remain)
 """
+import os
 import re
 import sys
 from datetime import date
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 REDIRECTS = ROOT / "_redirects"
 BLOG_DIR = ROOT / "blog"
 MIGRATION_DATE = date(2026, 7, 23)

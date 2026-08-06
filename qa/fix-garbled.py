@@ -3,10 +3,11 @@ These were introduced when the LLM hallucinated non-existent script during
 the initial bulk-write. Each value below is the clean correct translation
 replacing the corrupted one.
 """
+import os
 import json
 from pathlib import Path
 
-I18N_DIR = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai\i18n")
+I18N_DIR = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent) / "i18n"
 HEX = "e8f9a0b1"
 
 FIXES = {

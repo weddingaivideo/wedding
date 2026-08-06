@@ -1,9 +1,10 @@
 """Verify applyDataI18nAttr works on real HTML."""
+import os
 import re
 import json
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 exec((ROOT / "qa" / "test_middleware_regex.py").read_text(encoding="utf-8").split("# --- Tests ---")[0])
 
 zh = json.loads((ROOT / "i18n" / "zh.json").read_text(encoding="utf-8"))
