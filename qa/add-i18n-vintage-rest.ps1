@@ -1,5 +1,5 @@
-if ($env:WEDDINGAI_ROOT) { $root = Join-Path $env:WEDDINGAI_ROOT ""i18n"" }
-else { $root = Join-Path (Split-Path -Parent $PSScriptRoot) ""i18n"" }
+if ($env:WEDDINGAI_ROOT) { $root = Join-Path $env:WEDDINGAI_ROOT "i18n" }
+else { $root = Join-Path (Split-Path -Parent $PSScriptRoot) "i18n" }
 $HEX = "e8f9a0b1"
 $linesByLang = @{
     'fr' = @(

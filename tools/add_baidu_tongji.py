@@ -10,9 +10,9 @@ Skips:
 Idempotent: re-running is safe. Will also clean up the broken v1 insertion
 (`</script>    <!-- Baidu Tongji...` glued on the same line).
 """
-import os
 from __future__ import annotations
 
+import os
 import re
 import sys
 from pathlib import Path
