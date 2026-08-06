@@ -1,0 +1,67 @@
+name: Pre-Deploy Check
+
+# Gates deploys to main/dev by running the same checks that were previously
+# run locally before `wrangler pages deploy`:
+#   - internal-tools/pre-deploy-check.ps1  (PowerShell, ~25 checks)
+#   - qa/full_qa.py                        (Python, i18n + structural)
+#
+# Both scripts auto-resolve the repo root from their own location, so this
+# workflow works on any runner. pre-deploy-check.ps1 is PowerShell, so we
+# must use windows-latest (ubuntu-latest can't run it).
+#
+# How to gate CF Pages production deploy on this check:
+#   Cloudflare dashboard → weddingai-video → Settings → Builds →
+#   "Production branch control" → enable + select branch `main` →
+#   the CF Pages UI will then require the "Pre-Deploy Check" job to pass
+#   on the head commit before promoting it.
+#
+# For GitHub-side branch protection (e.g. require this check on PRs):
+#   Repo Settings → Branches → main → Require status checks →
+#   search for "pre-deploy" and tick it.
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+# Don't cancel a running check if a new commit lands on the same branch —
+# we want the result that ran against the actual HEAD.
+concurrency:
+  group: pre-deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  pre-deploy:
+    name: Pre-deploy validation
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          # .gitattributes has `text eol=lf` for *.html/*.css/*.js/etc.;
+          # we don't want checkout to rewrite line endings on windows-latest
+          # (would mask or create real diffs vs the dev box's CRLF default).
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run pre-deploy-check.ps1 (PowerShell, ~25 checks)
+        # CSP nonces, hN tag mismatch, inline event handlers, GA4 ID,
+        # Cloudflare Functions health, relative <script src>, CSS empty
+        # rules, critical files present, secrets in functions/, etc.
+        # This is the same script the owner runs locally before deploying.
+        shell: pwsh
+        run: .\internal-tools\pre-deploy-check.ps1
+
+      - name: Run qa/full_qa.py (Python QA scan)
+        # Complements the PS check: i18n injection garbage, broken local
+        # hrefs, i18n key shape, cross-tag dups, missing alt, etc.
+        # Known baseline: ~277 BROKEN_LOCAL_HREF + 675 I18N_KEY_MALFORMED
+        # + 14 TAG_BALANCE (all pre-existing, not failures of new code).
+        shell: pwsh
+        run: python qa/full_qa.py

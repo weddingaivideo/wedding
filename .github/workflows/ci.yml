@@ -65,12 +65,6 @@ jobs:
           done
           echo "✅ All internal file paths have _redirects 404 rules"
 
-      - name: Run pre-deploy checks
-        run: |
-          # Full PowerShell check requires Windows. On Linux, run the
-          # Python-only QA pass instead.
-          python qa/full_qa.py
-
       - name: Verify sitemap has today's lastmod
         run: |
           if [ ! -f sitemap.xml ]; then

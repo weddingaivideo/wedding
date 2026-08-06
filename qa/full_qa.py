@@ -14,7 +14,13 @@ import sys
 from pathlib import Path
 from collections import defaultdict, Counter
 
-ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
+# Resolve repo root from this script's location so the same script works
+# both on the dev box (C:\Users\qiaoshan\...workspace\weddingai\qa\full_qa.py)
+# and on CI runners (D:\a\wedding\wedding\qa\full_qa.py after actions/checkout).
+# QA_ROOT env var overrides for unusual layouts (e.g. running the script as
+# a copy from a different directory).
+import os
+ROOT = Path(os.environ.get("QA_ROOT") or Path(__file__).resolve().parent.parent)
 EXCLUDE_DIRS = {"admin", "functions", "tmp", "__pycache__", "qa", "i18n", "js", "styles", "scripts", "docs", "search"}
 EXCLUDE_FILES = {"google-site-verification.html"}
 

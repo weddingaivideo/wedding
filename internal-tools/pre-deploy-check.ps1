@@ -1,8 +1,18 @@
 # WeddingAI.video — Pre-Deploy Check
 # Run this BEFORE deploying to catch common bugs.
 # Exits with non-zero if any check fails.
+#
+# Path resolution: $root is the repo root. We default to the parent of this
+# script's directory so the same script works both on the dev box
+# (C:\Users\qiaoshan\...\weddingai\internal-tools\pre-deploy-check.ps1)
+# and on CI runners (D:\a\wedding\wedding\internal-tools\...).
+# Override with $env:WEDDINGAI_ROOT if you need a different layout.
 
-$root = "C:\Users\qiaoshan\.openclaw\workspace\weddingai"
+if ($env:WEDDINGAI_ROOT) {
+    $root = $env:WEDDINGAI_ROOT
+} else {
+    $root = Split-Path -Parent $PSScriptRoot
+}
 $errors = 0
 $warnings = 0
 
