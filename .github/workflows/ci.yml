@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Check secrets not in tracked files
+        run: |
+          echo "::group::Checking for live secret strings in tracked files"
+          if grep -rPn "(re_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{36}|AIza[A-Za-z0-9_-]{35}|AKIA[0-9A-Z]{16})" \
+              --include="*.js" --include="*.html" --include="*.md" --include="*.ps1" --include="*.py" \
+              --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=qa --exclude-dir=tmp \
+              . 2>/dev/null; then
+            echo "❌ Live secret string found in tracked files (rotate immediately!)"
+            exit 1
+          else
+            echo "✅ No live secrets in tracked files"
+          fi
+
+      - name: Verify .assetsignore is in place
+        run: |
+          if [ ! -f .assetsignore ]; then
+            echo "❌ .assetsignore missing — internal files would be deployed publicly"
+            exit 1
+          fi
+          for pat in "qa/" "scripts/" "*.py" "*.md"; do
+            if ! grep -F -q "$pat" .assetsignore; then
+              echo "❌ .assetsignore missing pattern: $pat"
+              exit 1
+            fi
+          done
+          echo "✅ .assetsignore has all required exclusion patterns"
+
+      - name: Check language list sync
+        run: python scripts/check_langs_sync.py
+
+      - name: Verify internal paths are 404 in _redirects
+        run: |
+          for path in /AGENTS.md /CHANGELOG.md /README.md /_headers.bak /scripts/ /qa/ /tmp/ /netlify.toml; do
+            if ! grep -q "^${path%/}\([[:space:]]\|/\)" _redirects; then
+              echo "❌ _redirects missing 404 rule for ${path}"
+              exit 1
+            fi
+          done
+          echo "✅ All internal file paths have _redirects 404 rules"
+
+      - name: Run pre-deploy checks
+        run: |
+          # Full PowerShell check requires Windows. On Linux, run the
+          # Python-only QA pass instead.
+          python qa/full_qa.py
+
+      - name: Verify sitemap has today's lastmod
+        run: |
+          if [ ! -f sitemap.xml ]; then
+            echo "❌ sitemap.xml missing — run python qa/gen_sitemap.py first"
+            exit 1
+          fi
+          today=$(date -u +%Y-%m-%d)
+          if ! grep -q "<lastmod>${today}</lastmod>" sitemap.xml; then
+            echo "❌ sitemap.xml lastmod is not today (${today}). Run python qa/gen_sitemap.py"
+            exit 1
+          fi
+          echo "✅ sitemap.xml has lastmod=${today}"
+
+      - name: Validate sitemap XML
+        run: python qa/verify_sitemap.py
+
+  deploy-preview:
+    needs: validate
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Deploy preview to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        run: npx --yes wrangler@4.114 pages deploy . --project-name=weddingai-video --commit-dirty=true

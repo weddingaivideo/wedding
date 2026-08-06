@@ -1,0 +1,84 @@
+# .assetsignore — WeddingAI.video
+# Wrangler 4.114+ deploys everything in the [assets] directory by default.
+# This file excludes project-internal files from being uploaded to the
+# Cloudflare Pages edge (so they are NOT publicly accessible at /<path>).
+#
+# Without this, AGENTS.md / CHANGELOG.md / qa/*.py / scripts/*.ps1
+# would all become downloadable from https://weddingai.video/<file>.
+# That previously exposed Resend API key + DLQ_TOKEN + internal architecture.
+#
+# Wrangler 4.114+ silently deletes cloud-side files matching new patterns
+# on next deploy. Verify with:
+#   foreach ($p in @("/AGENTS.md","/CHANGELOG.md","/qa/","/scripts/","/tmp/")) {
+#       $code = (curl.exe -s -o NUL -w "%{http_code}" "https://weddingai.video$p")
+#       "$code  $p"
+#   }
+# All should return 404.
+
+# Internal documentation / notes (not part of the public site)
+# Wrangler 4.114 .assetsignore ONLY reliably excludes by directory name.
+# Bare filename globs (`*.md`, `**/*.md`) are NOT applied — caught 2026-07-28
+# when AGENTS.md / CHANGELOG.md / README.md were publicly readable at
+# /AGENTS.md despite a `*.md` rule. All internal .md files are now under
+# internal-docs/ which is excluded below.
+internal-docs/
+# Private local-only HTML (architecture overviews, design docs). Intentionally
+# kept in the repo for offline review but never deployed to the edge.
+private/
+
+# (Removed 2026-08-05: admin/leads/ was deleted — see _redirects for the
+#  full rationale. The /api/dead-letters JSON API + the daily cron in
+#  functions/scheduled.js replace the UI.)
+
+# Local tooling & QA scripts
+qa/
+scripts/
+**/internal-tools/
+internal-tools/
+internal-tools/**
+__pycache__/
+*.py
+*.pyc
+*.ps1
+*.psm1
+*.psd1
+
+# Netlify / Cloudflare deploy config (legacy — switched to wrangler.toml)
+netlify.toml
+
+# Local environment / wrangler cache
+.dev.vars
+.dev.vars.*
+.wrangler/
+.git/
+.gitignore
+
+# CI config (exposes secret references if deployed publicly)
+.github/
+
+# Build / temporary outputs
+dist/
+build/
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Temporary working files
+tmp/
+
+# Backup files
+_*.bak
+*.bak
+
+# IndexNow key (private — the full key stored locally for reference)
+indexnow-key.txt
+
+# NOTE: /bca20c476d04af209950cbf5921e821d.txt is the IndexNow *public* verification
+# file. It is INTENTIONALLY deployed — Bing IndexNow crawls the URL
+# /<key>.txt to confirm site ownership before accepting URL submissions.
+# The file's name IS the key, and its content is the key string itself.
+# Do not delete, rename, or move this file.
+# (Added 2026-07-28 — the file was missing from the repo root, breaking
+# IndexNow submissions; verification was previously 404.)

@@ -1,0 +1,145 @@
+# Cloudflare Pages custom headers.
+# References:
+#   - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+#   - https://infosec.mozilla.org/guidelines/web_security
+
+# IMPORTANT: Cloudflare Pages overrides Cache-Control on static assets at
+# the CDN layer (CSS/JS/images get max-age=14400, HTML gets max-age=0).
+# The _headers file CANNOT shorten these values. Workaround: bump the
+# ?v= query string on every CSS/JS change. Custom headers (non-Cache-Control)
+# do work — they're applied at the edge as expected.
+
+# ---------- Security headers (applied to every page) -------------------------
+
+/*
+  # Content-Security-Policy: STATIC FALLBACK (active policy is in HTML).
+  # The effective CSP for HTML pages is the per-request nonce-bearing
+  # <meta http-equiv="Content-Security-Policy"> injected by
+  # functions/_middleware.js (injectMetaCsp + buildCsp). CF Pages drops
+  # CSP headers set from middleware (verified 2026-08-04), so the only
+  # way to get a per-request nonce to the client is via the HTML body
+  # that the middleware already mutates for i18n/nonce/etc.
+  #
+  # Why this static policy still has 'unsafe-inline' in script-src:
+  #   - Non-HTML responses (CSS/JS/images) have no <meta> CSP, so only
+  #     this header applies. They have no inline scripts anyway, so
+  #     'unsafe-inline' is harmless there.
+  #   - For HTML, this header is intersected with the meta-delivered
+  #     nonce policy. CSP3 says: when a nonce is present in ANY active
+  #     policy, 'unsafe-inline' is IGNORED. Net effect on modern browsers:
+  #     nonce-only enforcement → no XSS via un-nonced inline script.
+  #   - Old browsers (no meta CSP, or no nonce semantics) get the
+  #     'unsafe-inline' fallback so the page still works.
+  #
+  # If you tighten this (drop 'unsafe-inline' here), DO NOT also tighten
+  # the meta CSP — you need at least one of the two policies to allow
+  # the existing inline event handler patterns (we currently have none
+  # in deployed HTML, so dropping 'unsafe-inline' from the static
+  # policy is now safe; only do it after auditing the meta path works
+  # in production for at least one deploy cycle).
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://*.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://*.cloudflareinsights.com https://*.analytics.google.com; frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net; form-action 'self'
+  #
+  # Reporting-Endpoints: required for the meta-delivered CSP's
+  # `report-to csp-endpoint` directive to actually deliver violation
+  # reports. Without this header, the browser knows WHERE to report
+  # (per the meta tag) but not the endpoint URL. Reports are POSTed to
+  # /functions/__csp_report.js, which logs to Cloudflare Pages
+  # console (escalate later via Sentry / Slack webhook if noise becomes
+  # unmanageable).
+  Reporting-Endpoints: csp-endpoint="https://weddingai.video/__csp_report"
+  #
+  # Force HTTPS for 2 years; covers subdomains. `preload` is intentionally
+  # omitted to keep the option reversible if the site ever needs to drop HTTPS.
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
+  # Clickjacking protection (legacy header; CSP frame-ancestors is preferred
+  # but X-Frame-Options still wins support across all browsers and proxies).
+  X-Frame-Options: SAMEORIGIN
+  # Modern browsers ignore X-XSS-Protection; setting it to 0 explicitly
+  # disables the old filter to avoid known bypasses.
+  X-XSS-Protection: 0
+  # Disable powerful APIs the site does not use. Reduces the attack surface
+  # if any third-party script is compromised.
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  # Isolate the browsing context: prevent window.opener access from cross-origin
+  # popups. Helps mitigate Spectre-class side-channel attacks.
+  Cross-Origin-Opener-Policy: same-origin
+  # COEP `credentialless` (not `require-corp`) because we load cross-origin
+  # iframes (AdSense via googlesyndication.com) that don't send CORP headers.
+  # `require-corp` would break those embeds. `credentialless` is the practical
+  # choice for a static site with ad embeds: cross-origin loads are allowed
+  # but no credentials are sent, which is enough to enable cross-origin
+  # isolation (SharedArrayBuffer, high-resolution timers) when we ever need them.
+  Cross-Origin-Embedder-Policy: credentialless
+  # Referrer policy for outbound links and resource requests.
+  Referrer-Policy: strict-origin-when-cross-origin
+  # Preconnect to known third-party origins (DNS + TCP + TLS warmup).
+  # Speeds up AdSense and Cloudflare Web Analytics beacons. GTM/GA4 are
+  # covered transitively — GTM loads GA over its own connection, so a
+  # separate preconnect for www.google-analytics.com is redundant. Only
+  # two origins need warming, well under the 4-preconnect Chrome warning.
+  Link: <https://pagead2.googlesyndication.com>; rel=preconnect; crossorigin, <https://static.cloudflareinsights.com>; rel=preconnect; crossorigin
+
+
+# ---------- Fine-grained per-type caching -------------------------------
+# CSS/JS use ?v=N versioning so cache-busting is via query string.
+# HTML is short-lived (1 min) so deploys propagate fast; pure static
+# assets (images, fonts) cache 30 days. The CDN still enforces its own
+# max-age=14400 for static — this only adjusts the HTML TTL.
+/*.html
+  Cache-Control: public, max-age=60
+/blog/*/*.html
+  Cache-Control: public, max-age=300
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+/llms.txt
+  Cache-Control: public, max-age=86400
+/llms-full.txt
+  Cache-Control: public, max-age=86400
+
+# Images & fonts: long cache (1 year) since they have hashed filenames
+# or are content-stable.
+
+# ---------- Cross-Origin-Resource-Policy for static assets ---------------
+# CORP `same-origin` on static assets (images, fonts, CSS, JS, video):
+# blocks other origins from embedding our resources, mitigating speculative
+# side-channel attacks (Spectre). HTML pages are intentionally excluded
+# because we want them to be linkable / shareable on social platforms.
+# (Audit recommendation, 2026-08-04; low risk but free security win.)
+#
+# Pattern notes (CF _headers glob uses single-segment `*`):
+#   - `/styles*` matches BOTH `/styles/i18n.css` (folder) AND
+#     `/styles.min.css` (root-level, no slash).
+#   - `/js*` matches `/js/main.min.js` (folder) AND `/jsbundle.js` (root).
+#   - `/images/*` covers /images/...; images never live at the root.
+#   - `/fonts/*` covers /fonts/...; same.
+# This avoids the duplicate-header issue you'd get from listing both
+# `/js/*` and `/js/main.min.js` (CF would emit two CORP values,
+# merged as "same-origin,same-origin").
+/images/*
+  Cross-Origin-Resource-Policy: same-origin
+/fonts/*
+  Cross-Origin-Resource-Policy: same-origin
+/styles*
+  Cross-Origin-Resource-Policy: same-origin
+/js*
+  Cross-Origin-Resource-Policy: same-origin
+
+# ---------- Video files (hero loop + case studies) -----------------------
+# The hero video file is content-addressable by name (hero-wedding-loop.{webm,mp4}).
+# Cloudflare's CDN applies its own default cache to /images/* but being explicit
+# here documents intent and works on non-CF deployments. We also force the proper
+# Content-Type so the bytes start playing immediately without a MIME sniff.
+# Note: CF overrides Cache-Control at the edge; this header still benefits from-
+# CF-cache hits because the path matches /images/* anyway.
+# Accept-Ranges: bytes is the default but explicit = no surprises with seeking
+# (essential for autoplay browsers that start playback at a non-zero offset).
+/images/*.mp4
+  Content-Type: video/mp4
+  Accept-Ranges: bytes
+/images/*.webm
+  Content-Type: video/webm
+  Accept-Ranges: bytes
+
+# ---------- IndexNow verification key (no cache) ----------
+/bca20c476d04af209950cbf5921e821d.txt
+  Cache-Control: no-store, must-revalidate

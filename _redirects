@@ -1,0 +1,279 @@
+# WeddingAI.video — v3.8.0 URL rewrites for Cloudflare Pages
+#
+# Strategy: directory structure (`<page>/index.html`) + this _redirects file.
+# - <page>/ (with trailing slash) is served directly by Pages as the
+#   directory's index.html — 200 OK, 0 redirects, served cleanly.
+# - <page>.html is 308'd to <page>/ for back-compat with old external
+#   links / old Google index / any hard-coded .html URLs.
+#
+# We do NOT add rules for the no-extension no-slash form (e.g. /about).
+# Pages' default 308 behavior for those is acceptable as a single back-compat
+# hop. The internal site never links to that form.
+#
+# Why so few rules: more rules = more chances of self-redirects and
+# conflict with Pages' own normalization (which strips trailing slashes
+# before matching rules). Keep this minimal.
+
+# Belt-and-suspenders 404 for the legacy GSC verification HTML template
+# (production uses bca20c476d04af209950cbf5921e821d.txt instead; the
+# .html template was never filled and was deleted 2026-07-28 but the
+# catch-all `/*.html -> /:splat/ 308` rule below would otherwise 308-redirect
+# to a nonexistent target). MUST be above the `/*.html` rule.
+/google-site-verification.html    /404                            404
+
+# .html back-compat: 308 redirect to the directory form for any depth.
+# Both top-level (<page>.html → <page>/) and service pages (/services/*.html
+# → /services/<slug>/) flow through this single rule — line 24 of the
+# previous revision was redundant (this wildcard already covers it).
+/*.html                          /:splat/                 308
+
+# Short URL aliases (v3.9.0) — for marketing / social / easy sharing.
+# Each short slug 308s to its canonical /services/<category>/<service>/ URL.
+# Both forms (with and without trailing slash) are listed because Pages
+# does NOT auto-normalize a missing trailing slash (URL Normalization
+# toggle is off to avoid 308 self-redirects). Without the no-slash rule
+# below, /pet-wedding would SPA-fallback to the homepage instead of
+# hitting this redirect.
+/family-message/                 /services/absence-compensation/family-message/      308
+/family-tribute/                 /services/absence-compensation/family-tribute/      308
+/celebrity-message/              /services/absence-compensation/celebrity-message/   308
+/slow-motion/                    /services/video-enhancement/slow-motion/           308
+/vintage-restoration/            /services/video-enhancement/vintage-restoration/  308
+/ai-video-generator/             /services/personalization/ai-video-generator/     308
+/pet-wedding/                    /services/personalization/pet-wedding/             308
+/wedding-trailer/                /services/personalization/wedding-trailer/         308
+/multilingual/                   /services/personalization/multilingual/            308
+/cartoon-style/                  /services/personalization/cartoon-style/           308
+/meme-generator/                 /services/personalization/meme-generator/          308
+
+# Blog (v3.12.0) — generated from articles/*.md by scripts/generate-blog.py
+# /blog.html is already handled by the `/*.html` wildcard above, so only
+# the no-trailing-slash form needs an explicit rule.
+/blog                           /blog/                   308
+
+# Belt-and-suspenders 404 for any leftover internal file that should
+# never have made it into the deploy. .assetsignore is the primary
+# defense; these _redirects rules are a second layer in case a future
+# deploy path bypasses .assetsignore (e.g. manual wrangler upload).
+# (Added 2026-07-28 after AGENTS.md / CHANGELOG.md were found publicly
+# readable at weddingai.video/AGENTS.md and contained Resend API key.)
+/AGENTS.md                       /404                            404
+/CHANGELOG.md                    /404                            404
+/README.md                       /404                            404
+/RESEND_SETUP.md                 /404                            404
+/TESTING-PLAN.md                 /404                            404
+/_redirects                      /404                            404
+/scripts                         /404                            404
+/scripts/*                       /404                            404
+
+# PowerShell scripts were moved to internal-tools/ on 2026-07-28 so
+# .assetsignore (line 35) excludes them. The rules below use the
+# `404!` (force) flag so they OVERRIDE any matching static file — CF
+# Pages normally serves static files ahead of _redirects, which means
+# an old or stale .ps1 at the root could still leak via the CDN cache
+# (observed 2026-07-28: pre-deploy-check.ps1 still 200-OK at
+# weddingai.video/pre-deploy-check.ps1 even after the file was
+# removed from the deploy root). The `!` forces the rule to win.
+/*.ps1                            /404                            404!
+/*.psm1                           /404                            404!
+/*.psd1                           /404                            404!
+/internal-tools                   /404                            404!
+/internal-tools/*                 /404                            404!
+/qa                              /404                            404
+/qa/*                            /404                            404
+/tmp                             /404                            404
+/tmp/*                           /404                            404
+/indexnow-key.txt                /404                            404
+/.github                         /404                            404
+/.github/*                       /404                            404
+/netlify.toml                    /404                            404
+
+# (Removed 2026-08-05: the /admin/leads/ DLQ viewer page was deleted. Lead
+#  records are still queryable via the /api/dead-letters JSON API — token
+#  gated by env.DLQ_TOKEN — and a daily cron in functions/scheduled.js
+#  auto-retries any failed Resend sends. No HTML UI needed.)
+
+# Belt-and-suspenders: even if Cloudflare's edge cache still has the old
+# admin/leads/index.html (the new deployment removed the file but custom
+# domain cache can lag), these 404 rules make sure /admin/leads/* always
+# returns 404 regardless of cache state.
+# (Added 2026-08-05 after the first deploy's edge cache kept serving the
+# broken page for several minutes on the custom domain while the *.pages.dev
+# preview URL correctly showed 404.)
+/admin                           /404                            404
+/admin/                          /404                            404
+/admin/leads                     /404                            404
+/admin/leads/                    /404                            404
+/admin/leads/*                   /404                            404
+/admin/*                         /404                            404
+
+# Internal-only files (renamed from public paths 2026-07-28). The directory
+# .assetsignore rule for internal-docs/ doesn't recursively exclude subfiles
+# in wrangler 4.114, so .assetsignore-only protection leaves a 1-edge-rev
+# window where /internal-docs/<file> can return 200. Belt-and-suspenders
+# _redirects 404 for the full subtree.
+/internal-docs                    /404                            404
+/internal-docs/*                  /404                            404
+/internal-admin                   /404                            404
+/internal-admin/*                 /404                            404
+
+# Bare filename globs in .assetsignore don't work in wrangler 4.114
+# (caught 2026-07-28: /.gitignore and /.assetsignore were 200-OK despite
+# the directory-level .assetsignore). The actual files are not deployable
+# via the user-edited .assetsignore, so the only protection is _redirects
+# 404 rules here.
+# (These are deployment-config files, not user content. Kept in the repo
+# because they affect local dev; the .git/ in the production path would
+# be the same effect if we had a build step that uploaded it.)
+# Note: /internal-docs/ and /internal-admin/ were 2026-07-28 moved out of
+# the deploy root (to ../weddingai-private/), so wrangler no longer
+# uploads them. Old cloud-side copies are still there but
+# /internal-docs/ and /internal-admin/ already 404 because nothing
+# matches them. No _redirects rules needed.
+/.gitignore                       /404                            404
+/.assetsignore                    /404                            404
+
+# Note: /google-site-verification.html already 404s via the rule near the
+# top of this file (line 22, placed above `/*.html` to take precedence).
+
+# 2026-08-04 Screaming Frog 4xx cleanup — 30 belt-and-suspenders 301s.
+# Every rule below corresponds to a URL the crawl reported as 4xx. The
+# corresponding inlinks have also been fixed in the source HTML (54 files
+# across 9 languages — see scripts/fix-4xx-inlinks.py). These 301s catch
+# any external link / old social share / sitemap that still points at the
+# old URL.
+#
+# Strategy: 301 (permanent) — these are deliberate URL consolidations,
+# not temporary moves. The destination is always a verified 200 OK page.
+
+# --- Category A: root-level (missing /blog/) slugs -> canonical /blog/<slug>/ ---
+/weddingai-video-guide/             /blog/weddingai-video-guide/            301
+/weddingai-video-guide              /blog/weddingai-video-guide/            301
+/make-first-ai-wedding-video/       /blog/make-first-ai-wedding-video/      301
+/make-first-ai-wedding-video        /blog/make-first-ai-wedding-video/      301
+/wedding-video-music-guide-new/     /blog/wedding-video-music-guide-new/    301
+/wedding-video-music-guide-new      /blog/wedding-video-music-guide-new/    301
+/wedding-video-cost-2026-new/       /blog/wedding-video-cost-2026-new/      301
+/weddingai-video-case-studies/      /blog/weddingai-video-case-studies/     301
+/weddingai-video-case-studies       /blog/weddingai-video-case-studies/     301
+/how-to-make-wedding-video         /blog/how-to-make-wedding-video/        301
+/how-to-make-wedding-video/        /blog/how-to-make-wedding-video/        301
+/wedding-video-captions            /blog/wedding-video-captions/           301
+/wedding-video-captions/           /blog/wedding-video-captions/           301
+/wedding-video-photo-checklist     /blog/wedding-video-photo-checklist/    301
+/wedding-video-photo-checklist/    /blog/wedding-video-photo-checklist/    301
+/ai-editor-vs-traditional-editing/  /blog/ai-editor-vs-traditional-editing/ 301
+
+# --- Category B: .md leakage (no inlinks; here so an old link / indexer that
+#     somehow surfaces a .md URL goes somewhere sensible instead of 404) ---
+/diy-wedding-video-phone.md          /blog/diy-wedding-video-phone/          301
+/wedding-highlight-video.md          /blog/wedding-highlight-video/          301
+/couple-slideshow-video.md           /blog/couple-slideshow-video/           301
+/wedding-video-trends-2026.md        /blog/wedding-video-trends-2026/        301
+/ai-tools-for-photographers.md      /blog/ai-tools-for-photographers/      301
+/photographer-upsell-video.md        /blog/photographer-upsell-video/        301
+/ai-wont-replace-photographers.md   /blog/ai-wont-replace-photographers/   301
+/wedding-slideshow-guide.md          /blog/wedding-slideshow-guide/          301
+/bride-wedding-video-checklist.md    /blog/bride-wedding-video-checklist/    301
+/destination-wedding-video-guide.md  /blog/destination-wedding-video/        301
+/wedding-video-without-videographer.md /blog/wedding-video-without-videographer/ 301
+/small-wedding-video-ideas.md        /blog/micro-wedding-video/              301
+/wedding-package-video-upsell.md     /blog/photographer-upsell-video/        301
+/wedding-video-photo-checklist.md    /blog/wedding-video-photo-checklist/    301
+
+# --- Category C: wrong slug / real 404s ---
+/blog/destination-wedding-video-guide  /blog/destination-wedding-video/    301
+/blog/destination-wedding-video-guide/ /blog/destination-wedding-video/    301
+/blog/wedding-video-under-500          /blog/wedding-video-cost-2026/      301
+/blog/wedding-video-under-500/         /blog/wedding-video-cost-2026/      301
+/blog/small-wedding-video-ideas        /blog/micro-wedding-video/          301
+/blog/small-wedding-video-ideas/       /blog/micro-wedding-video/          301
+/wedding-package-video-upsell          /blog/photographer-upsell-video/    301
+/wedding-package-video-upsell/         /blog/photographer-upsell-video/    301
+
+# --- Category D: missing service / sub-page ---
+# wedding-invitation/  ->  multilingual/  (closest semantic neighbor)
+/services/personalization/wedding-invitation/   /services/personalization/multilingual/   301
+# vintage-restoration sub-pages were never built; 301 to the service main page.
+/services/video-enhancement/vintage-restoration/gallery/  /services/video-enhancement/vintage-restoration/  301
+/services/video-enhancement/vintage-restoration/about/    /services/video-enhancement/vintage-restoration/  301
+
+# i18n language-prefix URL rewrite (managed by sync_langs_redirects.py)
+# /xx/path  →  /path  with 200 (internal rewrite, browser URL stays /xx/path)
+# This gives every supported language its own indexable URL.
+# Canonical + hreflang alternates are baked into the static HTML files.
+# DO NOT edit by hand — run: python scripts/sync_langs_redirects.py
+/en/*    /:splat 200
+/zh/*    /:splat 200
+/es/*    /:splat 200
+/fr/*    /:splat 200
+/de/*    /:splat 200
+/pt/*    /:splat 200
+/ja/*    /:splat 200
+/ru/*    /:splat 200
+/ar/*    /:splat 200
+/th/*    /:splat 200
+
+
+# === Blog 01-50 -> semantic-slug migration (auto-generated) ===
+# When: 2026-07-23 (rename-blog-dirs.py).
+# Purpose: external links / social shares pointing at the old numeric
+#   /blog/01-restore-old-wedding-videos/ URLs still 301 to the new
+#   canonical /blog/restore-vhs-wedding-footage/. 0 deploy cost
+#   (static _redirects file), preserves any SEO value accumulated on
+#   the old paths during pre-rename indexing.
+# Safe to delete: after 2027-01-23 (6-month retention). At that point
+#   all 4xx crawl + 6-month user-share decay should have flushed
+#   external references. Until then, prefer to keep.
+# To regenerate this block after adding a new blog post: re-run
+#   scripts/rename-blog-dirs.py against a fresh rename map.
+/blog/01-restore-old-wedding-videos/  /blog/restore-vhs-wedding-footage/  301
+/blog/02-vhs-to-digital-wedding-cost/  /blog/vhs-to-digital-wedding-cost/  301
+/blog/03-ai-wedding-video-generator/  /blog/ai-wedding-video-generator-guide/  301
+/blog/04-wedding-video-from-photos/  /blog/wedding-video-from-photos/  301
+/blog/05-wedding-slow-motion-effect/  /blog/wedding-slow-motion-effect/  301
+/blog/06-honor-deceased-parent-wedding/  /blog/honor-deceased-parent-wedding/  301
+/blog/07-cinematic-wedding-trailer/  /blog/cinematic-wedding-trailer-guide/  301
+/blog/08-pet-wedding-videos/  /blog/pet-wedding-videos/  301
+/blog/09-include-remote-family-wedding-video/  /blog/include-remote-family-wedding-video/  301
+/blog/10-multilingual-wedding-videos/  /blog/multilingual-wedding-videos/  301
+/blog/11-unique-wedding-video-ideas/  /blog/unique-wedding-video-ideas/  301
+/blog/12-wedding-video-formats/  /blog/wedding-video-formats/  301
+/blog/13-how-long-should-wedding-video-be/  /blog/how-long-should-wedding-video-be/  301
+/blog/14-wedding-video-vs-photos/  /blog/wedding-video-vs-photos/  301
+/blog/15-wedding-video-social-media/  /blog/wedding-video-social-media/  301
+/blog/16-raw-wedding-footage-ideas/  /blog/raw-wedding-footage-ideas/  301
+/blog/17-ai-wedding-video-industry/  /blog/ai-wedding-video-industry/  301
+/blog/18-ai-vs-human-wedding-editing/  /blog/ai-vs-human-wedding-editing/  301
+/blog/19-choose-wedding-videographer/  /blog/choose-wedding-videographer/  301
+/blog/20-wedding-highlight-reel/  /blog/wedding-highlight-reel/  301
+/blog/21-restore-old-wedding-photos/  /blog/restore-old-wedding-photos/  301
+/blog/22-elopement-video-ideas/  /blog/elopement-video-ideas/  301
+/blog/23-destination-wedding-video/  /blog/destination-wedding-video/  301
+/blog/24-wedding-video-music/  /blog/wedding-video-music/  301
+/blog/25-wedding-video-gift-ideas/  /blog/wedding-video-gift-ideas/  301
+/blog/26-wedding-anniversary-video-ideas/  /blog/wedding-anniversary-video-ideas/  301
+/blog/27-spring-wedding-video-trends/  /blog/spring-wedding-video-trends/  301
+/blog/28-christmas-wedding-video/  /blog/christmas-wedding-video/  301
+/blog/29-summer-wedding-video-tips/  /blog/summer-wedding-video-tips/  301
+/blog/30-what-to-do-with-wedding-video/  /blog/what-to-do-with-wedding-video/  301
+/blog/31-micro-wedding-video/  /blog/micro-wedding-video/  301
+/blog/32-share-wedding-video-with-family/  /blog/share-wedding-video-with-family/  301
+/blog/33-same-sex-wedding-video/  /blog/same-sex-wedding-video/  301
+/blog/34-vow-renewal-video/  /blog/vow-renewal-video/  301
+/blog/35-wedding-video-for-parents/  /blog/wedding-video-for-parents/  301
+/blog/36-digitize-parents-wedding-video/  /blog/digitize-parents-wedding-video/  301
+/blog/37-fix-shaky-wedding-video/  /blog/fix-shaky-wedding-video/  301
+/blog/38-wedding-photo-slideshow/  /blog/wedding-photo-slideshow/  301
+/blog/39-wedding-video-subtitles/  /blog/wedding-video-subtitles/  301
+/blog/40-cartoon-wedding-video/  /blog/cartoon-wedding-video/  301
+/blog/41-wedding-memes/  /blog/wedding-memes/  301
+/blog/42-wedding-video-music-guide/  /blog/wedding-video-music-guide/  301
+/blog/43-wedding-video-audio-fix/  /blog/wedding-video-audio-fix/  301
+/blog/44-wedding-video-timeline/  /blog/wedding-video-timeline/  301
+/blog/45-send-large-wedding-video/  /blog/send-large-wedding-video/  301
+/blog/46-weddingai-video-review/  /blog/weddingai-video-review/  301
+/blog/47-wedding-video-cost-2026/  /blog/wedding-video-cost-2026/  301
+/blog/48-skip-wedding-videographer/  /blog/skip-wedding-videographer/  301
+/blog/49-budget-wedding-video/  /blog/budget-wedding-video/  301
+/blog/50-weddingai-success-stories/  /blog/weddingai-success-stories/  301

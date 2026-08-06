@@ -1,0 +1,48 @@
+/* WeddingAI.video — i18n language switcher + RTL support */
+.wa-lang-switcher { list-style: none; }
+.wa-lang-switcher select {
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 64px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%236B6B6B' d='M0 0l5 6 5-6z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.4rem center;
+    padding-right: 1.5rem;
+}
+.wa-lang-switcher select:hover { border-color: var(--color-primary); }
+.wa-lang-switcher select:focus { outline: 0; border-color: var(--color-primary); box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15); }
+
+@media (max-width: 768px) {
+    .wa-lang-switcher { width: 100%; }
+    .wa-lang-switcher select { width: 100%; }
+}
+
+/* RTL (right-to-left) — applied when <html dir="rtl"> via i18n.js for ar */
+html[dir="rtl"] body { direction: rtl; }
+html[dir="rtl"] .main-nav .nav-list { flex-direction: row-reverse; }
+html[dir="rtl"] .hero-content,
+html[dir="rtl"] .section-cta,
+html[dir="rtl"] .success-section,
+html[dir="rtl"] .pricing-box,
+html[dir="rtl"] .form-wrapper,
+html[dir="rtl"] .blog-article,
+html[dir="rtl"] .header-inner,
+html[dir="rtl"] .footer-inner { text-align: right; }
+html[dir="rtl"] .service-card-img,
+html[dir="rtl"] .case-img,
+html[dir="rtl"] .gallery-card-img,
+html[dir="rtl"] .blog-hero img { direction: ltr; }  /* keep images LTR */
+
+/* For elements that are visually directional (e.g. arrows), flip via scaleX(-1) */
+html[dir="rtl"] .flip-rtl { transform: scaleX(-1); }

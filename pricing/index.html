@@ -1,0 +1,529 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- Preconnects live in _headers Link header (sent before HTML parses). -->
+
+    <title>Wedding Video Pricing | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/pricing/">
+    <link rel="alternate" hreflang="en" href="https://weddingai.video/pricing/">
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/pricing/">
+    <link rel="alternate" hreflang="es" href="https://weddingai.video/es/pricing/">
+    <link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/pricing/">
+    <link rel="alternate" hreflang="de" href="https://weddingai.video/de/pricing/">
+    <link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/pricing/">
+    <link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/pricing/">
+    <link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/pricing/">
+    <link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/pricing/">
+    <link rel="alternate" hreflang="th" href="https://weddingai.video/th/pricing/">
+    <link rel="alternate" hreflang="x-default" href="https://weddingai.video/pricing/">
+    <meta name="description" content="Transparent per-project pricing for 11 wedding video services. Most projects $150-$400. No hidden fees, no hourly billing. Free quote in 24 hours.">
+    <meta name="keywords" content="wedding video pricing, wedding video cost, AI wedding video price, wedding video service quote">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <link rel="stylesheet" href="/styles.min.css?v=3.28">
+    <link rel="stylesheet" href="/styles/i18n.css">
+<script defer src="/js/main.min.js?v=3.20"></script>
+    <style>
+        .page-hero-bg { background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%); }
+        .page-hero-overlay { background: rgba(0,0,0,0.5); }
+        .page-hero-content h1 { color: var(--color-white); }
+        .page-hero-content p { color: rgba(255,255,255,0.9); }
+
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-md); margin: var(--spacing-xl) 0; }
+        .pricing-tier { background: var(--color-white); border: 2px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-lg); display: flex; flex-direction: column; }
+        .pricing-tier.featured { border-color: var(--color-primary); box-shadow: 0 8px 32px rgba(212,175,55,0.18); position: relative; }
+        .pricing-tier.featured .pricing-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--color-primary); color: var(--color-white); padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; }
+        .pricing-tier h3 { font-size: 1.25rem; color: var(--color-secondary); margin-bottom: var(--spacing-xs); }
+        .pricing-tier .price { font-size: 2.25rem; font-weight: 700; color: var(--color-primary); margin-bottom: var(--spacing-xs); }
+        .pricing-tier .price-suffix { color: var(--color-text-light); font-size: 0.875rem; font-weight: 400; }
+        .pricing-tier .tier-blurb { color: var(--color-text-light); margin-bottom: var(--spacing-md); font-size: 0.9375rem; min-height: 3em; }
+        .pricing-tier ul { list-style: none; padding: 0; margin: 0 0 var(--spacing-lg) 0; flex-grow: 1; }
+        .pricing-tier ul li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.9375rem; }
+        .pricing-tier ul li::before { content: "✓"; position: absolute; left: 0; color: var(--color-primary); font-weight: 700; }
+        .pricing-tier .btn { width: 100%; text-align: center; }
+
+        .full-pricing-table { width: 100%; border-collapse: collapse; margin: var(--spacing-xl) 0; background: var(--color-white); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+        .full-pricing-table thead { background: var(--color-secondary); color: var(--color-white); }
+        .full-pricing-table th, .full-pricing-table td { padding: 0.875rem 1rem; text-align: left; border-bottom: 1px solid var(--color-border); }
+        .full-pricing-table th { font-weight: 700; font-size: 0.875rem; letter-spacing: 0.05em; }
+        .full-pricing-table td { font-size: 0.9375rem; }
+        .full-pricing-table tr:hover { background: var(--color-bg-alt); }
+        .full-pricing-table a { color: var(--color-secondary); text-decoration: underline; text-decoration-color: var(--color-primary); text-underline-offset: 2px; }
+        .full-pricing-table a:hover { color: var(--color-primary); }
+
+        .bundle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--spacing-md); margin: var(--spacing-lg) 0; }
+        .bundle-card { background: var(--color-bg-alt); border-radius: var(--radius-md); padding: var(--spacing-md); border-left: 4px solid var(--color-primary); }
+        .bundle-card h4 { color: var(--color-secondary); margin-bottom: var(--spacing-xs); font-size: 1.0625rem; }
+        .bundle-card .bundle-discount { color: var(--color-primary); font-weight: 700; margin-bottom: var(--spacing-xs); }
+        .bundle-card p { color: var(--color-text-light); font-size: 0.875rem; }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred to first interaction or idle (avoids wasted bytes on bouncers) -->
+    <script nonce="__CSP_NONCE__">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+    window.__loadGtag = function() {
+      if (window.__gtagLoaded) return;
+      window.__gtagLoaded = true;
+      var s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+      s.async = true;
+      s.onload = function() {
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: location.href,
+          page_path: location.pathname + location.search
+        });
+      };
+      s.setAttribute('data-gtag-lazy', '1');
+      document.head.appendChild(s);
+    };
+
+    // Engaged users: load on first interaction (scroll/click/touch/keydown).
+    ['scroll','click','touchstart','keydown'].forEach(function(evt){
+      window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+    });
+    // Passive readers / non-interactors: fallback to idle / load+3s.
+    window.addEventListener('load', function() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+      } else {
+        setTimeout(window.__loadGtag, 3000);
+      }
+    });
+    </script>
+    <script nonce="__CSP_NONCE__">
+    window.addEventListener('load', function() {
+      var loadAds = function() {
+        var s = document.createElement('script');
+        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1670381960525419';
+        s.async = true; s.crossOrigin = 'anonymous'; s.setAttribute('data-ad-lazy','1');
+        document.head.appendChild(s);
+      };
+      if ('requestIdleCallback' in window) { requestIdleCallback(loadAds, { timeout: 4000 }); }
+      else { setTimeout(loadAds, 3000); }
+    });
+    </script>
+    <meta property="og:title" content="Wedding Video Pricing | Transparent Per-Project Rates">
+    <meta property="og:description" content="Transparent per-project pricing for all 11 wedding video services. Most projects $150-$400. Get a free quote in 24 hours.">
+    <meta property="og:url" content="https://weddingai.video/pricing/">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="WeddingAI.video — AI-powered wedding video services">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+<script src="/js/langs.js" defer></script>
+<script src="/js/i18n.js?v=4.28" defer></script>
+<script nonce="__CSP_NONCE__">
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link" data-i18n="pricing.a_text.skip_to_main_content.9509d335">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video — wedding video services"><picture><source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px"><source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px"><img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px"></picture></a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Browse our wedding video services" data-i18n="404.a_text.services.84864121" aria-haspopup="true" aria-expanded="false">Services <span  aria-hidden="true" data-i18n="pricing.span_text.2.66754317">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.video_enhancement.98039549">Video Enhancement</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/" data-i18n="404.a_text.slow_motion.30129340">Slow Motion</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/" data-i18n="404.a_text.vintage_restoration.91827364">Vintage Restoration</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.personalization.44366515">Personalization</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/" data-i18n="404.a_text.wedding_trailer.04692297">Wedding Trailer</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/" data-i18n="404.a_text.ai_video_generator.39420322">AI Video Generator</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/" data-i18n="404.a_text.pet_wedding.23911820">Pet Wedding</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/" data-i18n="404.a_text.multilingual.74639147">Multilingual</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/" data-i18n="404.a_text.cartoon_style.16664616">Cartoon Style</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/" data-i18n="404.a_text.wedding_memes.22951185">Wedding Memes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.absence_compensation.22965696">Absence Compensation</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/" data-i18n="404.a_text.family_tribute.39408322">Family Tribute</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/" data-i18n="404.a_text.family_message.27013166">Family Message</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/celebrity-message/" data-i18n="404.a_text.celebrity_message.59529435">Celebrity Message</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link" data-i18n="nav.a_text.view_all_services.91827365">View all services &rarr;</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/gallery/" title="View our gallery and case studies" data-i18n="404.a_text.gallery.96646935">Gallery</a></li>
+                    <li><a href="/blog/" title="Read our wedding video blog" data-i18n="404.a_text.blog.95723762">Blog</a></li>
+                    <li><a href="/resources/" title="In-depth wedding video guides" data-i18n="404.a_text.resources.rrrrrrr1">Resources</a></li>
+                    <li><a href="/about/" title="Learn about us" data-i18n="404.a_text.about.69447212">About</a></li>
+                    <li><a href="/pricing/" title="View transparent pricing" data-i18n="404.a_text.pricing.43854765">Pricing</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option></select></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+    <section class="page-hero page-hero-small">
+        <div class="page-hero-bg"></div>
+        <div class="page-hero-overlay"></div>
+        <div class="container page-hero-content">
+            
+        <!-- P0 ADD: Starting at $9.9 callout -->
+        <div class="container" style="text-align:center;margin:0 auto var(--spacing-md);">
+            <div class="hero-price-badge" data-i18n="services.common.hero_starting_price.9d9e9d90" style="display:inline-flex;">💰 Starting at $9.9</div>
+            <p class="hero-trust" data-i18n="services.common.hero_trust.9d9e9d91" style="color:var(--color-text-light);font-size:0.9375rem;margin-top:0.5rem;">✓ Two free revisions · Full refund if not satisfied</p>
+        </div>
+        
+        <h1 data-i18n="pricing.h1_text.transparent_pricing_for_every_wedding_vi.4a395ccc">Transparent Pricing for Every Wedding Video Service</h1>
+            <p data-i18n="pricing.p_text.no_hourly_billing_no_surprise_fees_the_p.9ad017c8">No hourly billing. No surprise fees. The price you see is the price you pay &mdash; and every project includes 2 free revisions, 24-hour quote response, and 100% satisfaction guarantee.</p>
+        </div>
+    </section>
+
+    <!-- FULL PRICING TABLE -->
+    <section class="section" style="background: var(--color-bg-alt);">
+        <div class="container">
+            <header class="section-header">
+                <h2 data-i18n="pricing.h2_text.all_11_services_at_a_glance.7c8d9e0f">All 11 Services at a Glance</h2>
+                <p  class="section-intro" data-i18n="pricing.p_text.every_project_is_quoted_individually_bas.48f59c6e">Every project is quoted individually based on footage length, complexity, and turnaround.</p>
+            </header>
+
+            <table class="full-pricing-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="pricing.th_text.service.898c5bf1">Service</th>
+                        <th data-i18n="pricing.th_text.delivery.78db55ba">Delivery</th>
+                        <th data-i18n="pricing.th_text.best_for.346d903e">Best for</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="/services/personalization/meme-generator/" data-i18n="pricing.a_text.wedding_gifs_amp_memes.83d4d8f9">Wedding GIFs &amp; Memes</a></td>
+                        <td data-i18n="pricing.td_text.48_hrs.7ede133f">48 hrs</td>
+                        <td data-i18n="pricing.td_text.group_chat_amp_social_shareables.3ef0cfcf">Group chat &amp; social shareables<br>Wedding highlight memes &amp; reaction GIFs<br>Vertical short-video clips (Reels / TikTok / Shorts)</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/services/video-enhancement/slow-motion/" data-i18n="pricing.a_text.ai_slow_motion_enhancement.d010e2e9">AI Slow Motion Enhancement</a></td>
+                        <td data-i18n="pricing.td_text.48ndash72_hrs.0f68d984">48&ndash;72 hrs</td>
+                        <td data-i18n="pricing.td_text.first_dance_vows_ring_closeups.0bae226e">First dance, vows, ring close-ups<br>4x&ndash;8x slow-motion playback<br>Cinematic emotional moments</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/services/video-enhancement/vintage-restoration/" data-i18n="pricing.a_text.vintage_footage_restoration.zzzzzz1">Vintage Footage Restoration</a></td>
+                        <td data-i18n="pricing.td_text.5ndash7_days.4364bb34">5&ndash;7 days</td>
+                        <td data-i18n="pricing.td_text.30_year_old_vhs_8mm_hi8_tapes.zzzzzz3">30-year-old VHS, 8mm, Hi8 wedding tapes<br>Parents' or grandparents' wedding memories<br>Anniversary &amp; family legacy films</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/services/personalization/multilingual/" data-i18n="pricing.a_text.multilingual_wedding_video.d4659a92">Multilingual Wedding Video</a></td>
+                        <td data-i18n="pricing.td_text.3ndash5_days.220eca3e">3&ndash;5 days</td>
+                        <td data-i18n="pricing.td_text.multilanguage_families.e053d8ba">Multi-language families<br>Bilingual &amp; cross-border weddings<br>Live broadcast for overseas guests</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/services/absence-compensation/family-tribute/" data-i18n="pricing.a_text.tribute_to_loved_ones.a86ca576">Tribute to Loved Ones</a></td>
+                        <td data-i18n="pricing.td_text.7ndash10_days.499c33ea">7&ndash;10 days</td>
+                        <td data-i18n="pricing.td_text.honoring_a_loved_one_who_has_passed.9fa396ba">Honoring a loved one who has passed<br>Memorial anniversary films<br>Wedding tribute &amp; memorial speeches</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/services/absence-compensation/family-message/" data-i18n="pricing.a_text.remote_family_video_message.65f308e9">Remote Family Video Message</a></td>
+                        <td data-i18n="pricing.td_text.5ndash7_days.4364bb34">5&ndash;7 days</td>
+                        <td data-i18n="pricing.td_text.family_abroad_blended_ceremonies.4704defa">Family abroad, blended ceremonies<br>Remote relatives who can't attend in person<br>Multi-generational wedding toasts</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/services/personalization/pet-wedding/" data-i18n="pricing.a_text.pet_wedding_video.cad834f7">Pet Wedding Video</a></td>
+                        <td data-i18n="pricing.td_text.3ndash5_days.220eca3e">3&ndash;5 days</td>
+                        <td data-i18n="pricing.td_text.including_pets_in_the_celebration.021ceeda">Including pets in the celebration<br>Pets as ring bearer / flower &ldquo;pawler&rdquo;<br>Heartwarming, fun wedding moments</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/services/personalization/cartoon-style/" data-i18n="pricing.a_text.cartoon__animated_style.6a90a3e1">Cartoon / Animated Style</a></td>
+                        <td data-i18n="pricing.td_text.5ndash7_days.4364bb34">5&ndash;7 days</td>
+                        <td data-i18n="pricing.td_text.ghibli__pixar__anime_style_of_your_day.34dffac0">Ghibli / Pixar / anime style of your day<br>Wedding invites &amp; reception short clips<br>Stylized animated keepsake</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/services/personalization/ai-video-generator/" data-i18n="pricing.a_text.ai_wedding_video_generator.4011af12">AI Wedding Video Generator</a></td>
+                        <td data-i18n="pricing.td_text.3ndash5_days.220eca3e">3&ndash;5 days</td>
+                        <td data-i18n="pricing.td_text.photos_turned_into_a_cinematic_film.2cdbc4d7">Photos turned into a cinematic film<br>Still photos only &rarr; motion video<br>Travel / engagement / proposal montages</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/services/personalization/wedding-trailer/" data-i18n="pricing.a_text.cinematic_wedding_trailer.42c12f0e">Cinematic Wedding Trailer</a></td>
+                        <td data-i18n="pricing.td_text.3ndash5_days.220eca3e">3&ndash;5 days</td>
+                        <td data-i18n="pricing.td_text.60ndash180_sec_socialready_highlight.719eb502">60&ndash;180 sec social-ready highlight<br>Wedding trailer &amp; invite teaser<br>Reception opening screen on the big day</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/services/absence-compensation/celebrity-message/" data-i18n="pricing.a_text.celebritystyle_wedding_message.29bafe71">Celebrity-Style Wedding Message</a></td>
+                        <td data-i18n="pricing.td_text.5ndash7_days.4364bb34">5&ndash;7 days</td>
+                        <td data-i18n="pricing.td_text.reception_opener_surprise_moment.99b02f6e">Reception opener, surprise moment<br>Custom celebrity / character cameo<br>MC-led wedding opener &amp; ice-breaker</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p  style="text-align:center;color:var(--color-text-light);font-size:.875rem;margin-top:var(--spacing-md);" data-i18n="pricing.p_text.all_prices_in_usd_international_payment.5544efa2">All prices in USD. International payment accepted. EU/UK customers see equivalent pricing in local currency on the quote.</p>
+        </div>
+    </section>
+
+    <!-- BUNDLE DISCOUNTS -->
+    <section class="section" style="background: var(--color-white);">
+        <div class="container" style="max-width: 980px;">
+            <header class="section-header">
+                <h2 data-i18n="pricing.h2_text.bundle_discounts_amp_popular_combination.31c6419b">Bundle Discounts &amp; Popular Combinations</h2>
+                <p  class="section-intro" data-i18n="pricing.p_text.most_couples_book_2_or_3_services_togeth.50e81311">Most couples book 2 or 3 services together &mdash; and we discount accordingly.</p>
+            </header>
+
+            <div class="bundle-grid">
+                <div class="bundle-card">
+                    <h4 data-i18n="pricing.h4_text.the_complete_film_package.1acc96f9">The Complete Film Package</h4>
+                    <p  class="bundle-discount" data-i18n="pricing.p_text.save_15.aea2880e">Save 15%</p>
+                    <p data-i18n="pricing.p_text.ai_video_generator_main_film__trailer_so.233aaa0e">AI Video Generator (main film) + Trailer (social-ready) + Multilingual (for international family). Most-booked bundle.</p>
+                </div>
+                <div class="bundle-card">
+                    <h4 data-i18n="pricing.h4_text.the_heritage_package.e944e951">The Heritage Package</h4>
+                    <p  class="bundle-discount" data-i18n="pricing.p_text.save_15.aea2880e">Save 15%</p>
+                    <p data-i18n="pricing.p_text.family_tribute_honoring_a_loved_one__res.3eb2e649">Family Tribute (honoring a loved one) + Restoration (old footage from the same era). Often used for 30th / 40th / 50th anniversary videos.</p>
+                </div>
+                <div class="bundle-card">
+                    <h4 data-i18n="pricing.h4_text.the_shareworthy_package.a0f6b113">The Share-Worthy Package</h4>
+                    <p  class="bundle-discount" data-i18n="pricing.p_text.save_10.53fed32f">Save 10%</p>
+                    <p data-i18n="pricing.p_text.trailer_cinematic_1ndash3_min__meme_gene.f2f29725">Trailer (cinematic 1&ndash;3 min) + Meme Generator (10 social clips) + Pet Wedding (funny opener). Optimized for different platforms.</p>
+                </div>
+                <div class="bundle-card">
+                    <h4 data-i18n="pricing.h4_text.the_international_family_package.482c838e">The International Family Package</h4>
+                    <p  class="bundle-discount" data-i18n="pricing.p_text.save_15.aea2880e">Save 15%</p>
+                    <p data-i18n="pricing.p_text.multilingual_2ndash3_languages__family_m.dced1211">Multilingual (2&ndash;3 languages) + Family Message (remote relatives recorded separately) + Trailer (final 1-minute highlight).</p>
+                </div>
+                <div class="bundle-card">
+                    <h4 data-i18n="pricing.h4_text.the_memory_keepers_package.bbbbbbb1">The Memory Keepers Package</h4>
+                    <p  class="bundle-discount" data-i18n="pricing.p_text.save_10.53fed32f">Save 10%</p>
+                    <p data-i18n="pricing.p_text.vintage_restoration_parents_old_foot.bbbbbbb2">Vintage Restoration (parents' or grandparents' old footage) + Family Tribute (in-memory moments) + AI Video Generator (stills &rarr; film). Ideal for 30th / 40th / 50th anniversary films and family memory preservation.</p>
+                </div>
+                <div class="bundle-card">
+                    <h4 data-i18n="pricing.h4_text.the_cinematic_couple_package.bbbbbbb3">The Cinematic Couple Package</h4>
+                    <p  class="bundle-discount" data-i18n="pricing.p_text.save_10.53fed32f">Save 10%</p>
+                    <p data-i18n="pricing.p_text.cinematic_trailer_1ndash3_min_highligh.bbbbbbb4">Cinematic Trailer (1&ndash;3 min highlight) + Slow Motion Enhancement (first dance, vows) + Celebrity-Style Message (reception opener). The full &ldquo;wow factor&rdquo; for couples who want cinematic impact and an emotional moment.</p>
+                </div>
+            </div>
+
+            <h3  style="margin-top:var(--spacing-xl);font-size:1.125rem;color:var(--color-secondary);" data-i18n="pricing.h3_text.how_bundle_discounts_work.d71758cc">How bundle discounts work</h3>
+            <ul style="padding-left: var(--spacing-lg);line-height:1.8;color:var(--color-text-light);margin-top:var(--spacing-sm);">
+                <li><strong data-i18n="pricing.strong_text.2_services.2239cfde">2 services:</strong> 10% off the total</li>
+                <li><strong data-i18n="pricing.strong_text.3_services.5fe1eeb6">3 services:</strong> 15% off the total</li>
+                <li><strong data-i18n="pricing.strong_text.5_services.fdf0a353">5+ services:</strong> 20% off the total</li>
+                <li data-i18n="pricing.li_text.discounts_applied_automatically_mdash_ju.b0fe88eb">Discounts applied automatically &mdash; just tell us which services you want in the form below.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CTA + SIMPLE FORM -->
+    <section class="section" style="background: var(--color-bg-alt);">
+        <div class="container" style="max-width: 720px;">
+            <header class="section-header">
+                <h2 data-i18n="pricing.h2_text.get_your_personalized_quote.56f390f7">Get Your Personalized Quote</h2>
+                <p  class="section-intro" data-i18n="pricing.p_text.sofia_reads_every_form_within_24_hours_m.6d81c30a">Sofia reads every form within 24 hours &mdash; usually within 4 hours during business days. No commitment, free consultation. Or browse the  <a href="/services/" style="color:var(--color-primary);text-decoration:underline;" data-i18n="pricing.a_text.full_service_catalog.aa76d8f7">full service catalog</a> to compare details.</p>
+            </header>
+            <div style="text-align:center;margin-top:var(--spacing-lg);">
+                <a href="/order/" class="btn btn-primary btn-large" data-i18n="pricing.a_text.get_a_free_quote_rarr.3a1437ed">Get a Free Quote &rarr;</a>
+                <p  style="margin-top:var(--spacing-md);color:var(--color-text-light);font-size:.875rem;" data-i18n="pricing.p_text.or_email_us_directly.5a963fe2">Or email us directly:  <a href="mailto:order@weddingai.video" style="color:var(--color-primary);" data-i18n="pricing.a_text.orderweddingaivideo.4b1997dd">order@weddingai.video</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" style="background: var(--color-white);">
+        <div class="container" style="max-width: 820px;">
+            <header class="section-header" style="text-align: left; margin-bottom: var(--spacing-md);">
+                <h2  style="text-align: left;" data-i18n="pricing.h2_text.pricing_faq.91a9031e">Pricing FAQ</h2>
+            </header>
+
+            <details class="faq-item">
+                <summary data-i18n="pricing.summary_text.why_is_the_price_a_range_instead_of_a_fl.ff30ba75">Why is the price a range instead of a flat fee?</summary>
+                <p data-i18n="pricing.p_text.every_project_is_different_a_5minute_vhs.688d1fd6">Every project is different. A 5-minute VHS tape and a 3-hour 4K wedding film are not the same work. We quote based on footage length, complexity, and turnaround. The "starting at" prices cover our most common small projects.</p>
+            </details>
+            <details class="faq-item">
+                <summary data-i18n="pricing.summary_text.do_you_charge_hourly.ba871e30">Do you charge hourly?</summary>
+                <p data-i18n="pricing.p_text.never_we_charge_per_project_youll_know_t.75e97d17">Never. We charge per project. You'll know the exact price before we start &mdash; and the price won't change unless you add scope.</p>
+            </details>
+            <details class="faq-item">
+                <summary data-i18n="pricing.summary_text.are_there_hidden_fees.6f8673e5">Are there hidden fees?</summary>
+                <p data-i18n="pricing.p_text.no_file_delivery_format_conversion_and_2.58eb9769">No. File delivery, format conversion, and 2 rounds of revisions are included in every project. The only time the price changes is if you ask for additional work after delivery.</p>
+            </details>
+            <details class="faq-item">
+                <summary data-i18n="pricing.summary_text.what_payment_methods_do_you_accept.709854bd">What payment methods do you accept?</summary>
+                <p data-i18n="pricing.p_text.all_major_credit_cards_via_stripe_paypal.40bdf833">All major credit cards (via Stripe), PayPal, and bank transfer for projects over $1,000. Invoices are sent on delivery; payment is due within 14 days.</p>
+            </details>
+            <details class="faq-item">
+                <summary data-i18n="pricing.summary_text.can_i_get_a_refund_if_im_not_happy.e9ae0e6e">Can I get a refund if I'm not happy?</summary>
+                <p data-i18n="pricing.p_text.yes_two_free_revisions_are_included_with.47c01c4f">Yes. Two free revisions are included with every service. If after revisions you're still not happy, we offer a full refund. We've processed over 500 projects and refunded fewer than 5.</p>
+            </details>
+            <details class="faq-item">
+                <summary data-i18n="pricing.summary_text.do_you_offer_discounts_for_nonprofits_or.5dbc2fa5">Do you offer discounts for non-profits or destination weddings?</summary>
+                <p data-i18n="pricing.p_text.sometimes_if_your_wedding_serves_a_chari.94b264cf">Sometimes. If your wedding serves a charitable cause (e.g. a vow-renewal fundraiser) or you have a tight story to tell, mention it in the form &mdash; we'll see what we can do.</p>
+            </details>
+        </div>
+    </section>
+
+    </main>
+
+    <script type="application/ld+json" nonce="__CSP_NONCE__">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://weddingai.video/"},
+            {"@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://weddingai.video/pricing/"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json" nonce="__CSP_NONCE__">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "WeddingAI.video Pricing",
+        "description": "Transparent per-project pricing for 11 wedding video services",
+        "provider": {"@id": "https://weddingai.video/#organization"},
+        "url": "https://weddingai.video/pricing/",
+        "priceRange": "$$",
+        "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "USD",
+            "lowPrice": "9.90",
+            "highPrice": "399",
+            "offerCount": "11"
+        }
+    }
+    </script>
+    <script type="application/ld+json" nonce="__CSP_NONCE__">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Why is the price a range instead of a flat fee?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Every project is different. A 5-minute VHS tape and a 3-hour 4K wedding film are not the same work. We quote based on footage length, complexity, and turnaround. The \"starting at\" prices cover our most common small projects."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do you charge hourly?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Never. We charge per project. You'll know the exact price before we start — and the price won't change unless you add scope."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are there hidden fees?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. File delivery, format conversion, and 2 rounds of revisions are included in every project. The only time the price changes is if you ask for additional work after delivery."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What payment methods do you accept?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "All major credit cards (via Stripe), PayPal, and bank transfer for projects over $1,000. Invoices are sent on delivery; payment is due within 14 days."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I get a refund if I'm not happy?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Two free revisions are included with every service. If after revisions you're still not happy, we offer a full refund. We've processed over 500 projects and refunded fewer than 5."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do you offer discounts for non-profits or destination weddings?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sometimes. If your wedding serves a charitable cause (e.g. a vow-renewal fundraiser) or you have a tight story to tell, mention it in the form — we'll see what we can do."
+                }
+            }
+        ]
+    }
+    </script>
+
+
+        <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo" title="WeddingAI.video — wedding video services"><picture><source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px"><source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px"><img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px"></picture></a>
+                <p data-i18n="pricing.p_text.aipowered_wedding_video_services_for_cou.1f50c438">AI-powered wedding video services for couples worldwide.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <div class="footer-col">
+                    <h3 data-i18n="pricing.h3_text.services.99d4aa88">Services</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/" data-i18n="pricing.a_text.slow_motion.0b4330ba">Slow Motion</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/" data-i18n="pricing.a_text.family_tribute.4eaf26ca">Family Tribute</a></li>
+                        <li><a href="/services/absence-compensation/family-message/" data-i18n="pricing.a_text.family_message.93955650">Family Message</a></li>
+                        <li><a href="/services/absence-compensation/celebrity-message/" data-i18n="pricing.a_text.celebrity_message.a8b0df66">Celebrity Message</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/" data-i18n="pricing.a_text.ai_video_generator.09508a44">AI Video Generator</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/" data-i18n="pricing.a_text.wedding_trailer.9de1a4fb">Wedding Trailer</a></li>
+                        <li><a href="/services/personalization/pet-wedding/" data-i18n="pricing.a_text.pet_wedding.51adcd54">Pet Wedding</a></li>
+                        <li><a href="/services/personalization/multilingual/" data-i18n="pricing.a_text.multilingual.7f129733">Multilingual</a></li>
+                        <li><a href="/services/personalization/cartoon-style/" data-i18n="pricing.a_text.cartoon_style.70b6983d">Cartoon Style</a></li>
+                        <li><a href="/services/personalization/meme-generator/" data-i18n="pricing.a_text.wedding_memes.7b6391d0">Wedding Memes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="pricing.h3_text.company.71773527">Company</h3>
+                    <ul>
+                        <li><a href="/about/" data-i18n="pricing.a_text.about_us.16168aed">About Us</a></li>
+                        <li><a href="/gallery/" data-i18n="pricing.a_text.gallery.cbd6b69f">Gallery</a></li>
+                        <li><a href="/pricing/" data-i18n="pricing.a_text.pricing.de722d22">Pricing</a></li>
+                        <li><a href="/order/" data-i18n="pricing.a_text.get_a_quote.f8629080">Get a Quote</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="pricing.h3_text.contact.66df8702">Contact</h3>
+                    <ul>
+                        <li><a href="mailto:order@weddingai.video" data-i18n="pricing.a_text.orderweddingaivideo.4b1997dd">order@weddingai.video</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p data-i18n="pricing.p_text.copy_2026_weddingaivideo_all_rights_rese.2b80fc2c">&copy; 2026 WeddingAI.video. All rights reserved.</p>
+                <div class="footer-featured">
+                    <span  class="footer-featured-label" data-i18n="pricing.span_text.as_featured_on.d52825a8"></span>
+                    </div>
+                <a href="/privacy/" data-i18n="pricing.a_text.privacy_policy.facb8411">Privacy Policy</a> &middot; <a href="/terms/" data-i18n="pricing.a_text.terms_of_service.25af8633">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

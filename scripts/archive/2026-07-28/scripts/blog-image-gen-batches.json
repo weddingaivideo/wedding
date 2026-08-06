@@ -1,0 +1,1866 @@
+{
+  "heroes": [
+    [
+      {
+        "prompt": "split frame: left side faded vintage wedding photo, right side restored color version, soft editorial light, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/01-restore-old-wedding-videos.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "vintage analog magnetic tape cassette on a wooden table, soft window light, shallow depth of field, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/02-vhs-to-digital-wedding-cost.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a glowing laptop screen showing AI video generation interface, soft purple and teal ambient light, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/03-ai-wedding-video-generator.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a stack of polaroid wedding photos fanning out on a wooden table, warm light, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/04-wedding-video-from-photos.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding couple sharing their first dance, motion-blurred and crisp in same frame, cinematic slow motion still, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/05-wedding-slow-motion-effect.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a softly lit wedding photo frame on a mantle, single warm candle, ethereal glow, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/06-honor-deceased-parent-wedding.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding couple in dramatic golden-hour backlight, hair blowing, cinematic color grade, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/07-cinematic-wedding-trailer.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an adorable golden retriever wearing a wedding collar with a bow tie, soft light, shallow DOF, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/08-pet-wedding-videos.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/09-include-remote-family-wedding-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding reception table with multilingual welcome signs, soft bokeh of multi-language scripts, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/10-multilingual-wedding-videos.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/11-unique-wedding-video-ideas.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/12-wedding-video-formats.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a vintage film clapperboard on a wedding table, soft bokeh of bride and groom in background, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/13-how-long-should-wedding-video-be.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "split frame: left side a still wedding photo print, right side a wedding video playing on a tablet, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/14-wedding-video-vs-photos.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "smartphone screen displaying a vertical wedding video, hand holding phone, bokeh wedding reception in background, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/15-wedding-video-social-media.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with raw, wedding in the scene, soft warm light, shallow depth of field, editorial wedding photography, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/16-raw-wedding-footage-ideas.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/17-ai-wedding-video-industry.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with video, editing in the scene, soft warm light, shallow depth of field, editorial wedding photography, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/18-ai-vs-human-wedding-editing.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding videographer with a cinema camera on a gimbal, shooting a couple during golden hour, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/19-choose-wedding-videographer.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "smartphone screen displaying a vertical wedding video, hand holding phone, bokeh wedding reception in background, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/20-wedding-highlight-reel.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "split frame: left side faded vintage wedding photo, right side restored color version, soft editorial light, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/21-restore-old-wedding-photos.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an intimate elopement ceremony on a cliffside at sunset, just the couple and an officiant, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/22-elopement-video-ideas.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a destination wedding ceremony on a Mediterranean coastal terrace, turquoise sea, golden hour, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/23-destination-wedding-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/24-wedding-video-music.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/25-wedding-video-gift-ideas.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a couple renewing vows under a flower arch at golden hour, soft intimate moment, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/26-wedding-anniversary-video-ideas.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a spring wedding under a tunnel of cherry blossoms, soft pink petals falling, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/27-spring-wedding-video-trends.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a winter wedding ceremony with snow falling softly, warm fairy lights, evergreen garlands, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/28-christmas-wedding-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bright summer outdoor wedding ceremony, golden grass meadow, lens flare, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/29-summer-wedding-video-tips.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/30-what-to-do-with-wedding-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "an intimate elopement ceremony on a cliffside at sunset, just the couple and an officiant, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/31-micro-wedding-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a smartphone screen showing a wedding video being uploaded to a cloud service, hand holding phone, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/32-share-wedding-video-with-family.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "two grooms holding hands at a wedding altar, joyful tears, rainbow confetti, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/33-same-sex-wedding-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a couple renewing vows under a flower arch at golden hour, soft intimate moment, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/34-vow-renewal-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/35-wedding-video-for-parents.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/36-digitize-parents-wedding-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/37-fix-shaky-wedding-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an open wedding photo album on a wooden table, soft window light, shallow depth of field, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/38-wedding-photo-slideshow.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/39-wedding-video-subtitles.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding couple rendered in soft Studio Ghibli-inspired watercolor animation style, cherry blossoms, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/40-cartoon-wedding-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with wedding, memes in the scene, soft warm light, shallow depth of field, editorial wedding photography, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/41-wedding-memes.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/42-wedding-video-music-guide.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/43-wedding-video-audio-fix.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/44-wedding-video-timeline.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a smartphone screen showing a wedding video being uploaded to a cloud service, hand holding phone, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/45-send-large-wedding-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding photo album open to a happy couple laughing, soft window light, editorial style, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/46-weddingai-video-review.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a laptop screen showing a price list / invoice, wedding-related line items, soft warm light, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/47-wedding-video-cost-2026.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding videographer with a cinema camera on a gimbal, shooting a couple during golden hour, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/48-skip-wedding-videographer.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a laptop screen showing a price list / invoice, wedding-related line items, soft warm light, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/49-budget-wedding-video.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with weddingai.video, testimonials in the scene, soft warm light, shallow depth of field, editorial wedding photography, Cinematic wedding still photograph, soft golden-hour natural light, shallow depth of field, professional 35mm film look, warm ivory and champagne palette, emotionally evocative, 16:9 aspect ratio, editorial magazine quality, no text no watermark no logos",
+        "output_file_path": "images/blog/hero/50-weddingai-success-stories.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ]
+  ],
+  "inline": [
+    [
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/01-restore-old-wedding-videos-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/01-restore-old-wedding-videos-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "vintage analog magnetic tape cassette on a wooden table, soft window light, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/01-restore-old-wedding-videos-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "vintage analog magnetic tape cassette on a wooden table, soft window light, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/01-restore-old-wedding-videos-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with minidv, hdv in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/01-restore-old-wedding-videos-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a laptop screen showing a price list / invoice, wedding-related line items, soft warm light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/02-vhs-to-digital-wedding-cost-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a laptop screen showing a price list / invoice, wedding-related line items, soft warm light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/02-vhs-to-digital-wedding-cost-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with number, tapes in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/02-vhs-to-digital-wedding-cost-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "vintage analog magnetic tape cassette on a wooden table, soft window light, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/02-vhs-to-digital-wedding-cost-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with level, enhancement in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/02-vhs-to-digital-wedding-cost-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a glowing laptop screen showing AI video generation interface, soft purple and teal ambient light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/03-ai-wedding-video-generator-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/03-ai-wedding-video-generator-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding videographer with a cinema camera on a gimbal, shooting a couple during golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/03-ai-wedding-video-generator-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding videographer with a cinema camera on a gimbal, shooting a couple during golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/03-ai-wedding-video-generator-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an unconventional wedding setup in an industrial loft, dramatic lighting, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/03-ai-wedding-video-generator-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an open wedding photo album on a wooden table, soft window light, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/04-wedding-video-from-photos-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/04-wedding-video-from-photos-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a stack of polaroid wedding photos fanning out on a wooden table, warm light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/04-wedding-video-from-photos-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with step, curate in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/04-wedding-video-from-photos-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with step, arrange in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/04-wedding-video-from-photos-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a wedding couple sharing their first dance, motion-blurred and crisp in same frame, cinematic slow motion still, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/05-wedding-slow-motion-effect-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/05-wedding-slow-motion-effect-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding couple sharing their first dance, motion-blurred and crisp in same frame, cinematic slow motion still, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/05-wedding-slow-motion-effect-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with works in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/05-wedding-slow-motion-effect-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with what's, possible in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/05-wedding-slow-motion-effect-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/06-honor-deceased-parent-wedding-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a softly lit wedding photo frame on a mantle, single warm candle, ethereal glow, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/06-honor-deceased-parent-wedding-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an open wedding photo album on a wooden table, soft window light, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/06-honor-deceased-parent-wedding-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a softly lit wedding photo frame on a mantle, single warm candle, ethereal glow, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/06-honor-deceased-parent-wedding-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a softly lit wedding photo frame on a mantle, single warm candle, ethereal glow, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/06-honor-deceased-parent-wedding-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "wedding couple in dramatic golden-hour backlight, hair blowing, cinematic color grade, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/07-cinematic-wedding-trailer-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with pacing, editing in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/07-cinematic-wedding-trailer-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with color, grading in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/07-cinematic-wedding-trailer-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/07-cinematic-wedding-trailer-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding couple sharing their first dance, motion-blurred and crisp in same frame, cinematic slow motion still, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/07-cinematic-wedding-trailer-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an adorable golden retriever wearing a wedding collar with a bow tie, soft light, shallow DOF, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/08-pet-wedding-videos-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with pets, participating in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/08-pet-wedding-videos-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a small dog carrying a ring pillow down the aisle, candid moment, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/08-pet-wedding-videos-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a small dog carrying a ring pillow down the aisle, candid moment, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/08-pet-wedding-videos-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a softly lit wedding photo frame on a mantle, single warm candle, ethereal glow, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/08-pet-wedding-videos-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with problem, just in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/09-include-remote-family-wedding-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/09-include-remote-family-wedding-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with pre-recorded, video in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/09-include-remote-family-wedding-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a laptop screen showing a live video stream of a wedding ceremony, hand resting next to it, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/09-include-remote-family-wedding-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a laptop screen showing a smiling grandparent, the laptop on a wedding table, warm light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/09-include-remote-family-wedding-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding reception table with multilingual welcome signs, soft bokeh of multi-language scripts, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/10-multilingual-wedding-videos-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding reception table with multilingual welcome signs, soft bokeh of multi-language scripts, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/10-multilingual-wedding-videos-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding reception table with multilingual welcome signs, soft bokeh of multi-language scripts, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/10-multilingual-wedding-videos-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with subtitles, popular in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/10-multilingual-wedding-videos-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with dubbing, maximum in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/10-multilingual-wedding-videos-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with classic, concepts in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/11-unique-wedding-video-ideas-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an open leather-bound wedding planner on a table, with a pen, golden-hour window light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/11-unique-wedding-video-ideas-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with before, intro in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/11-unique-wedding-video-ideas-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with 24-hour, film in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/11-unique-wedding-video-ideas-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an open wedding photo album on a wooden table, soft window light, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/11-unique-wedding-video-ideas-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/12-wedding-video-formats-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/12-wedding-video-formats-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "stacked video tape formats (VHS, MiniDV, SD card) on a table, soft editorial still life, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/12-wedding-video-formats-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "stacked video tape formats (VHS, MiniDV, SD card) on a table, soft editorial still life, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/12-wedding-video-formats-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with avi in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/12-wedding-video-formats-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a vintage film clapperboard on a wedding table, soft bokeh of bride and groom in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/13-how-long-should-wedding-video-be-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "smartphone screen displaying a vertical wedding video, hand holding phone, bokeh wedding reception in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/13-how-long-should-wedding-video-be-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a vintage film clapperboard on a wedding table, soft bokeh of bride and groom in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/13-how-long-should-wedding-video-be-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a vintage film clapperboard on a wedding table, soft bokeh of bride and groom in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/13-how-long-should-wedding-video-be-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with full, ceremony in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/13-how-long-should-wedding-video-be-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/14-wedding-video-vs-photos-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/14-wedding-video-vs-photos-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with case, having in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/14-wedding-video-vs-photos-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with only, have in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/14-wedding-video-vs-photos-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an open wedding photo album on a wooden table, soft window light, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/14-wedding-video-vs-photos-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with understanding, platform in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/15-wedding-video-social-media-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with seconds:, stop in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/15-wedding-video-social-media-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/15-wedding-video-social-media-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/15-wedding-video-social-media-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/15-wedding-video-social-media-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "smartphone screen displaying a vertical wedding video, hand holding phone, bokeh wedding reception in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/16-raw-wedding-footage-ideas-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "smartphone screen displaying a vertical wedding video, hand holding phone, bokeh wedding reception in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/16-raw-wedding-footage-ideas-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a softly lit wedding photo frame on a mantle, single warm candle, ethereal glow, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/16-raw-wedding-footage-ideas-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a couple renewing vows under a flower arch at golden hour, soft intimate moment, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/16-raw-wedding-footage-ideas-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with create, individual in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/16-raw-wedding-footage-ideas-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/17-ai-wedding-video-industry-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with automated, editing in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/17-ai-wedding-video-industry-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with video, generation in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/17-ai-wedding-video-industry-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "split frame: left side faded vintage wedding photo, right side restored color version, soft editorial light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/17-ai-wedding-video-industry-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/17-ai-wedding-video-industry-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with video, editing in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/18-ai-vs-human-wedding-editing-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with human, editor in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/18-ai-vs-human-wedding-editing-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "split frame: left side traditional videographer with shoulder-mounted camera, right side modern AI editing software on a laptop, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/18-ai-vs-human-wedding-editing-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with editing, better in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/18-ai-vs-human-wedding-editing-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a laptop screen showing a price list / invoice, wedding-related line items, soft warm light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/18-ai-vs-human-wedding-editing-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with before, start in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/19-choose-wedding-videographer-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/19-choose-wedding-videographer-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with about, work in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/19-choose-wedding-videographer-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with about, logistics in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/19-choose-wedding-videographer-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with about, final in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/19-choose-wedding-videographer-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "smartphone screen displaying a vertical wedding video, hand holding phone, bokeh wedding reception in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/20-wedding-highlight-reel-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a vintage film clapperboard on a wedding table, soft bokeh of bride and groom in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/20-wedding-highlight-reel-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with opening, 0:00-0:30 in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/20-wedding-highlight-reel-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with build, 0:30-1:15 in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/20-wedding-highlight-reel-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with peak, 1:15-2:00 in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/20-wedding-highlight-reel-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/21-restore-old-wedding-photos-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "split frame: left side faded vintage wedding photo, right side restored color version, soft editorial light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/21-restore-old-wedding-photos-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "split-screen wedding photo: left side vintage black-and-white, right side softly colorized, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/21-restore-old-wedding-photos-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "split frame: left side faded vintage wedding photo, right side restored color version, soft editorial light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/21-restore-old-wedding-photos-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with upscaling, sharpening in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/21-restore-old-wedding-photos-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/22-elopement-video-ideas-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an intimate elopement ceremony on a cliffside at sunset, just the couple and an officiant, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/22-elopement-video-ideas-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with use, smartphone in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/22-elopement-video-ideas-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with set, tripod in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/22-elopement-video-ideas-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with ask, friend in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/22-elopement-video-ideas-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a destination wedding ceremony on a Mediterranean coastal terrace, turquoise sea, golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/23-destination-wedding-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a destination wedding ceremony on a Mediterranean coastal terrace, turquoise sea, golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/23-destination-wedding-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding videographer with a cinema camera on a gimbal, shooting a couple during golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/23-destination-wedding-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with watch, out in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/23-destination-wedding-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding videographer with a cinema camera on a gimbal, shooting a couple during golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/23-destination-wedding-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/24-wedding-video-music-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/24-wedding-video-music-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/24-wedding-video-music-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/24-wedding-video-music-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/24-wedding-video-music-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/25-wedding-video-gift-ideas-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "smartphone screen displaying a vertical wedding video, hand holding phone, bokeh wedding reception in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/25-wedding-video-gift-ideas-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with create in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/25-wedding-video-gift-ideas-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an open leather-bound wedding planner on a table, with a pen, golden-hour window light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/25-wedding-video-gift-ideas-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a couple renewing vows under a flower arch at golden hour, soft intimate moment, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/25-wedding-video-gift-ideas-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding photo album open to a happy couple laughing, soft window light, editorial style, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/26-wedding-anniversary-video-ideas-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with include in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/26-wedding-anniversary-video-ideas-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with make in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/26-wedding-anniversary-video-ideas-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "split frame: left side traditional videographer with shoulder-mounted camera, right side modern AI editing software on a laptop, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/26-wedding-anniversary-video-ideas-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with ideas, comparisons in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/26-wedding-anniversary-video-ideas-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "wedding couple in dramatic golden-hour backlight, hair blowing, cinematic color grade, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/27-spring-wedding-video-trends-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a spring wedding under a tunnel of cherry blossoms, soft pink petals falling, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/27-spring-wedding-video-trends-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with trend, raw in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/27-spring-wedding-video-trends-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with looks, like in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/27-spring-wedding-video-trends-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a spring wedding under a tunnel of cherry blossoms, soft pink petals falling, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/27-spring-wedding-video-trends-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a winter wedding ceremony with snow falling softly, warm fairy lights, evergreen garlands, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/28-christmas-wedding-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with challenge:, low in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/28-christmas-wedding-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with handle, low in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/28-christmas-wedding-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with smartphone, limitations in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/28-christmas-wedding-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a winter wedding ceremony with snow falling softly, warm fairy lights, evergreen garlands, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/28-christmas-wedding-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a bright summer outdoor wedding ceremony, golden grass meadow, lens flare, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/29-summer-wedding-video-tips-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/29-summer-wedding-video-tips-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with golden, hour in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/29-summer-wedding-video-tips-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with ceremony, timing in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/29-summer-wedding-video-tips-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with midday, strategy in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/29-summer-wedding-video-tips-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with week, secure in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/30-what-to-do-with-wedding-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with back, everything in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/30-what-to-do-with-wedding-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with 3-2-1, backup in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/30-what-to-do-with-wedding-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding photo album open to a happy couple laughing, soft window light, editorial style, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/30-what-to-do-with-wedding-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with watch, everything in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/30-what-to-do-with-wedding-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "an intimate elopement ceremony on a cliffside at sunset, just the couple and an officiant, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/31-micro-wedding-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an intimate elopement ceremony on a cliffside at sunset, just the couple and an officiant, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/31-micro-wedding-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a smartphone screen showing a wedding video being uploaded to a cloud service, hand holding phone, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/31-micro-wedding-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with discuss, vibe in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/31-micro-wedding-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with plan, b-roll in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/31-micro-wedding-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a couple sharing a private moment at their wedding, blurred guests in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/32-share-wedding-video-with-family-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a smartphone screen showing a wedding video being uploaded to a cloud service, hand holding phone, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/32-share-wedding-video-with-family-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a couple sharing a private moment at their wedding, blurred guests in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/32-share-wedding-video-with-family-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with method, physical in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/32-share-wedding-video-with-family-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with method, watch in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/32-share-wedding-video-with-family-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "two grooms holding hands at a wedding altar, joyful tears, rainbow confetti, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/33-same-sex-wedding-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with journey, matters in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/33-same-sex-wedding-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with chosen, family in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/33-same-sex-wedding-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with authentic, emotion in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/33-same-sex-wedding-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/33-same-sex-wedding-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/34-vow-renewal-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "bride wiping a tear during vows, intimate close-up, soft window light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/34-vow-renewal-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with stories, richer in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/34-vow-renewal-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with guests, invested in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/34-vow-renewal-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a couple renewing vows under a flower arch at golden hour, soft intimate moment, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/34-vow-renewal-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/35-wedding-video-for-parents-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with numbers, support in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/35-wedding-video-for-parents-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/35-wedding-video-for-parents-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with moments, they'll in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/35-wedding-video-for-parents-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with special, additions in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/35-wedding-video-for-parents-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/36-digitize-parents-wedding-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/36-digitize-parents-wedding-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with equipment, options in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/36-digitize-parents-wedding-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with method, diy in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/36-digitize-parents-wedding-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with step, set in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/36-digitize-parents-wedding-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a wedding videographer with a gimbal-mounted cinema camera, smooth tracking shot composition, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/37-fix-shaky-wedding-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/37-fix-shaky-wedding-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with video, stabilization in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/37-fix-shaky-wedding-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with approach in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/37-fix-shaky-wedding-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "split frame: left side traditional videographer with shoulder-mounted camera, right side modern AI editing software on a laptop, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/37-fix-shaky-wedding-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with golden, rule: in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/38-wedding-photo-slideshow-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding videographer with a cinema camera on a gimbal, shooting a couple during golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/38-wedding-photo-slideshow-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an open wedding photo album on a wooden table, soft window light, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/38-wedding-photo-slideshow-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with three-act, structure in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/38-wedding-photo-slideshow-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with pacing, techniques in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/38-wedding-photo-slideshow-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/39-wedding-video-subtitles-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with accessibility in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/39-wedding-video-subtitles-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding reception table with multilingual welcome signs, soft bokeh of multi-language scripts, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/39-wedding-video-subtitles-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with clarity, even in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/39-wedding-video-subtitles-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "smartphone screen displaying a vertical wedding video, hand holding phone, bokeh wedding reception in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/39-wedding-video-subtitles-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding couple rendered in soft Studio Ghibli-inspired watercolor animation style, cherry blossoms, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/40-cartoon-wedding-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an unconventional wedding setup in an industrial loft, dramatic lighting, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/40-cartoon-wedding-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding photographer holding a vintage film camera, creative composition, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/40-cartoon-wedding-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a couple sharing a private moment at their wedding, blurred guests in background, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/40-cartoon-wedding-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "bride wiping a tear during vows, intimate close-up, soft window light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/40-cartoon-wedding-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/41-wedding-memes-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding guests laughing in slow motion, champagne spray, candid fun moment, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/41-wedding-memes-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with relatable, emotions in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/41-wedding-memes-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with perfect, timing in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/41-wedding-memes-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding video frame with elegant white serif captions at the bottom, cinematic still, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/41-wedding-memes-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/42-wedding-video-music-guide-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/42-wedding-video-music-guide-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with opening in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/42-wedding-video-music-guide-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with getting, ready in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/42-wedding-video-music-guide-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with ceremony in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/42-wedding-video-music-guide-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/43-wedding-video-audio-fix-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with environmental, noise in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/43-wedding-video-audio-fix-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with distance, issues in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/43-wedding-video-audio-fix-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with crowd, noise in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/43-wedding-video-audio-fix-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with equipment, limitations in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/43-wedding-video-audio-fix-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/44-wedding-video-timeline-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with statistics, tell in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/44-wedding-video-timeline-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an open leather-bound wedding planner on a table, with a pen, golden-hour window light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/44-wedding-video-timeline-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/44-wedding-video-timeline-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with pre-ceremony, morning in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/44-wedding-video-timeline-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/45-send-large-wedding-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with file, size in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/45-send-large-wedding-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "wedding planner pointing at a checklist with the couple, soft bokeh, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/45-send-large-wedding-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a smartphone screen showing a wedding video being uploaded to a cloud service, hand holding phone, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/45-send-large-wedding-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with google, drive in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/45-send-large-wedding-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with current, state in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/46-weddingai-video-review-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "split frame: left side traditional videographer with shoulder-mounted camera, right side modern AI editing software on a laptop, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/46-weddingai-video-review-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with traditional, videographers in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/46-weddingai-video-review-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with live, creative in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/46-weddingai-video-review-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "close-up of a wedding microphone against soft stage lights, shallow depth of field, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/46-weddingai-video-review-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/47-wedding-video-cost-2026-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a laptop screen showing a price list / invoice, wedding-related line items, soft warm light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/47-wedding-video-cost-2026-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding videographer with a cinema camera on a tripod at golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/47-wedding-video-cost-2026-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding videographer with a cinema camera on a tripod at golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/47-wedding-video-cost-2026-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding videographer with a cinema camera on a tripod at golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/47-wedding-video-cost-2026-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a bride and groom sharing a quiet moment during a cinematic wedding video shoot, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/48-skip-wedding-videographer-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a laptop screen showing a price list / invoice, wedding-related line items, soft warm light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/48-skip-wedding-videographer-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with alternative in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/48-skip-wedding-videographer-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an intimate elopement ceremony on a cliffside at sunset, just the couple and an officiant, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/48-skip-wedding-videographer-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an intimate elopement ceremony on a cliffside at sunset, just the couple and an officiant, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/48-skip-wedding-videographer-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ],
+    [
+      {
+        "prompt": "a laptop screen showing a price list / invoice, wedding-related line items, soft warm light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/49-budget-wedding-video-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a laptop screen showing a price list / invoice, wedding-related line items, soft warm light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/49-budget-wedding-video-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a laptop screen showing a price list / invoice, wedding-related line items, soft warm light, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/49-budget-wedding-video-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a wedding videographer with a cinema camera on a tripod at golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/49-budget-wedding-video-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with works in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/49-budget-wedding-video-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "an intimate elopement ceremony on a cliffside at sunset, just the couple and an officiant, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/50-weddingai-success-stories-1.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with result in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/50-weddingai-success-stories-2.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with story, rodriguez in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/50-weddingai-success-stories-3.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a cinematic wedding still showing a bride and groom with solution in the scene, soft warm light, shallow depth of field, editorial wedding photography, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/50-weddingai-success-stories-4.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      },
+      {
+        "prompt": "a destination wedding ceremony on a Mediterranean coastal terrace, turquoise sea, golden hour, WeddingAI cinematic still, soft natural light, shallow depth of field, warm film tones, professional cinematography, 16:9 aspect ratio, no text no watermark no logos",
+        "output_file_path": "images/blog/inline/50-weddingai-success-stories-5.jpg",
+        "aspect_ratio": "16:9",
+        "resolution": "1K"
+      }
+    ]
+  ]
+}

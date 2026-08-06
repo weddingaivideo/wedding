@@ -1,0 +1,129 @@
+# WeddingAI.video — robots.txt (v1.1, 2026-08-04)
+#
+# Allows all well-behaved crawlers, blocks internal/recon paths, and
+# declares every sitemap for fast discovery. Cloudflare Pages serves
+# this file at the edge; no middleware touch.
+#
+# === IMPORTANT: Cloudflare Managed Content auto-injection ===
+# Cloudflare's zone-level "Crawler Hints → Add Cloudflare's robots.txt template"
+# feature PREPENDS a managed block to this file at the edge. The managed
+# block contains `User-agent: *` with Content-Signal plus a per-bot
+# `User-agent: ClaudeBot/GPTBot/... Disallow: /` list, which CONFLICTS
+# with the explicit `User-agent: ClaudeBot Allow: /` rules below.
+#
+# Per RFC 9309 §2.2.2, the most-specific User-agent group wins, so our
+# per-bot Allow: / rules in this file should override CF's per-bot
+# Disallow: / from the prepended block. But parser behavior varies —
+# Google uses first-match, Yandex uses longest-match, others use
+# last-match within a specificity tier. This creates a real ambiguity
+# (audit finding, 2026-08-04, "中" risk).
+#
+# RECOMMENDED ACTION (one-time, ~30s, can't be done from code):
+#   Cloudflare Dashboard → weddingai.video → SEO → Crawler Hints
+#     → "Add Cloudflare's robots.txt template to your existing robots.txt"
+#     → Toggle OFF
+# After that, this file becomes the sole source of truth and the
+# ClaudeBot/GPTBot/etc. Disallow: / from CF will no longer appear in
+# the served file. Our explicit per-bot Allow: / rules below then
+# unambiguously apply.
+#
+# Disallow rules mirror _redirects 404 rules + .assetsignore. Single
+# source of truth: this file + _redirects + .assetsignore should never
+# disagree. If you add a new internal directory, update all three.
+#
+# Last reviewed: 2026-08-04 (Mavis audit pass 2)
+
+# ---- Global rules ----------------------------------------------------------
+# Block every internal / recon / tooling path. The site only needs
+# Allow: / + these Disallow carve-outs; everything else crawls freely.
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /docs
+Disallow: /docs/
+Disallow: /qa
+Disallow: /qa/
+Disallow: /tmp
+Disallow: /tmp/
+Disallow: /scripts
+Disallow: /scripts/
+Disallow: /__pycache__
+Disallow: /__pycache__/
+Disallow: /functions
+Disallow: /functions/
+Disallow: /netlify.toml
+Disallow: /AGENTS.md
+Disallow: /CHANGELOG.md
+Disallow: /README.md
+Disallow: /RESEND_SETUP.md
+Disallow: /TESTING-PLAN.md
+Disallow: /_redirects
+Disallow: /_headers.bak
+Disallow: /indexnow-key.txt
+Disallow: /.gitignore
+Disallow: /.assetsignore
+Disallow: /.github
+Disallow: /.github/
+
+# ---- AI / LLM crawlers -----------------------------------------------------
+# We explicitly allow common AI crawlers (GPTBot, Claude, Perplexity, etc.)
+# so the AI engines can cite our content. This is the inverse of the typical
+# "block all AI bots" stance — we WANT to be cited.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# ---- Aggressive SEO scrapers ----------------------------------------------
+# Block bots that ignore rate limits and just resell our content. We
+# disallow site-wide rather than by path — these bots ignore path-level
+# rules anyway and just hit / wholesale.
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# ---- Sitemap discovery -----------------------------------------------------
+# All 10 language sitemaps + the index. Crawlers that respect Sitemap:
+# directives (Google, Bing, Yandex) will fetch these in priority order.
+Sitemap: https://weddingai.video/sitemap.xml
+Sitemap: https://weddingai.video/sitemap-en.xml
+Sitemap: https://weddingai.video/sitemap-zh.xml
+Sitemap: https://weddingai.video/sitemap-es.xml
+Sitemap: https://weddingai.video/sitemap-fr.xml
+Sitemap: https://weddingai.video/sitemap-de.xml
+Sitemap: https://weddingai.video/sitemap-pt.xml
+Sitemap: https://weddingai.video/sitemap-ja.xml
+Sitemap: https://weddingai.video/sitemap-ru.xml
+Sitemap: https://weddingai.video/sitemap-ar.xml
+Sitemap: https://weddingai.video/sitemap-th.xml

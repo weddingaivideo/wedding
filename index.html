@@ -1,0 +1,876 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- Preconnects live in _headers Link header (sent before HTML parses). -->
+    <!-- Hero poster preload (LCP): image shows instantly, video fades in on autoplay -->
+    <link rel="preload" as="image"
+          href="/images/hero-wedding-vineyard-1024.webp"
+          imagesrcset="/images/hero-wedding-vineyard-640.webp 640w, /images/hero-wedding-vineyard-1024.webp 1024w"
+          imagesizes="100vw"
+          fetchpriority="high">
+    <!-- No <link rel=preload> for the hero video: the <video> below starts with
+         preload="none" + data-lazy-video so js/lazy-videos.js triggers the metadata
+         fetch only after window.load. A full preloaded download would defeat
+         that lazy strategy and waste bandwidth. -->
+    <title data-i18n="index.title_text.ai_powered_wedding_video_services_weddin.58583865">AI Wedding Video Services | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/">
+    <link rel="alternate" hreflang="en" href="https://weddingai.video/">
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/">
+    <link rel="alternate" hreflang="es" href="https://weddingai.video/es/">
+    <link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/">
+    <link rel="alternate" hreflang="de" href="https://weddingai.video/de/">
+    <link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/">
+    <link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/">
+    <link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/">
+    <link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/">
+    <link rel="alternate" hreflang="th" href="https://weddingai.video/th/">
+    <link rel="alternate" hreflang="x-default" href="https://weddingai.video/">
+    <!-- Primary og:image: matches the hero video aspect (16:9) so it doubles as a video poster.
+         Falls back gracefully for non-video-aware platforms (Discord, Slack, WhatsApp, etc.).
+         og:image is JPEG, not WebP, because Facebook, LinkedIn and some other
+         social-card scrapers don't decode WebP and silently fall back to a
+         generic icon. Twitter, Slack, Discord, WhatsApp handle WebP fine, but
+         for max compat we serve the JPEG. The WebP version is still used as
+         the in-page poster (faster, smaller) — they're separate concerns.
+         (Audit fix 2026-08-04; og-image-1200x630.jpg is the standard
+         1200x630 social card; see images/og-image-1200x630.jpg.) -->
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="WeddingAI.video — AI-powered wedding video services, trusted by 500+ couples in the US and Europe">
+    <meta property="og:image:type" content="image/jpeg">
+    <!-- Open Graph video: Facebook, LinkedIn, Discord, Slack, etc. surface the player when posted. -->
+    <meta property="og:video" content="https://weddingai.video/images/hero-wedding-loop.mp4">
+    <meta property="og:video:url" content="https://weddingai.video/images/hero-wedding-loop.mp4">
+    <meta property="og:video:secure_url" content="https://weddingai.video/images/hero-wedding-loop.mp4">
+    <meta property="og:video:type" content="video/mp4">
+    <meta property="og:video:width" content="1920">
+    <meta property="og:video:height" content="1080">
+    <meta property="og:video:alt" content="Cinematic AI wedding video: bride and groom under a vineyard arch at golden hour, gentle camera push-in">
+    <meta property="og:video:tag" content="AI wedding video">
+    <meta property="og:video:tag" content="cinematic wedding film">
+    <meta property="og:video:tag" content="wedding trailer">
+    <meta property="og:video:tag" content="vineyard wedding">
+    <meta name="description" data-i18n-attr="content:index.meta_description.ai_powered_wedding_videos_ai_films_multi.40129620" content="AI wedding video services trusted by 500+ couples in the US & Europe. AI films, multilingual dubbing, restoration, slow-mo, and more. From $49, 48h turnaround. Get your free quote →">
+    <meta name="keywords" content="AI wedding video, wedding video enhancement, vintage wedding footage repair, AI wedding film generator, pet wedding video, wedding video editing service, wedding video restoration">
+    <meta property="og:type" content="video.other">
+    <meta property="og:title" content="WeddingAI.video — AI Wedding Video Services">
+    <meta property="og:description" content="AI-powered wedding videos: AI films, multilingual dubbing, restoration, and more. 10+ services. Get a free quote — start today!">
+    <meta property="og:url" content="https://weddingai.video/">
+    <meta name="twitter:card" content="player">
+    <meta name="twitter:title" content="AI-Powered Wedding Video Services | WeddingAI.video">
+    <meta name="twitter:description" content="AI-powered wedding videos: AI films, multilingual dubbing, restoration, and more. 10+ services. Get a free quote — start today!">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <meta name="twitter:player" content="https://weddingai.video/">
+    <meta name="twitter:player:width" content="1920">
+    <meta name="twitter:player:height" content="1080">
+    <meta name="twitter:player:stream" content="https://weddingai.video/images/hero-wedding-loop.mp4">
+    <meta name="twitter:player:stream:content_type" content="video/mp4">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="WeddingAI.video">    <style id="critical-css">:root{--color-primary:#d4af37;--color-primary-dark:#b8962e;--color-secondary:#2c2c2c;--color-accent:#e8d5b7;--color-bg:#fdfbf8;--color-bg-alt:#f5f0ea;--color-text:#2c2c2c;--color-text-light:#6b6b6b;--color-white:#fff;--color-border:#e5e0d8;--font-heading:"Playfair Display",Georgia,serif;--font-body:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;--spacing-xs:0.5rem;--spacing-sm:1rem;--spacing-md:1.5rem;--spacing-lg:2rem;--spacing-xl:3rem;--spacing-2xl:5rem;--radius-sm:4px;--radius-md:8px;--radius-lg:16px;--radius-xl:24px;--shadow-sm:0 2px 8px rgba(0,0,0,.06);--shadow-md:0 4px 20px rgba(0,0,0,.08);--shadow-lg:0 8px 40px rgba(0,0,0,.12);--transition:0.3s ease;--max-width:1200px} html{scroll-behavior:smooth;font-size:16px} body{font-family:var(--font-body);color:var(--color-text);background-color:var(--color-bg);line-height:1.6;-webkit-font-smoothing:antialiased} img,video{max-width:100%;height:auto;display:block} a{color:inherit;text-decoration:none} ol,ul{list-style:none} button{cursor:pointer;border:none;background:none;font-family:inherit} h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);line-height:1.2;font-weight:600} .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--spacing-md)} .btn{display:inline-flex;gap:var(--spacing-xs);padding:.75rem 1.5rem;border-radius:var(--radius-md);font-size:.9375rem;font-weight:600;transition:var(--transition);white-space:nowrap} .btn-primary{background:var(--color-primary);color:#1a1a1a} .btn-primary:hover{background:var(--color-primary-dark);transform:translateY(-1px);box-shadow:var(--shadow-md)} .btn-secondary{background:transparent;color:var(--color-secondary);border:2px solid var(--color-secondary)} .site-header{position:sticky;top:0;z-index:100;background:hsla(36,56%,98%,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--color-border)} .header-inner{justify-content:space-between;height:72px} .logo{display:flex;align-items:center} .logo img{max-height:72px;max-width:400px;width:auto;height:auto;display:block;object-fit:contain} .main-nav{display:block;position:static;top:auto;left:auto;right:auto;background:0 0;border-top:none;box-shadow:none;padding:0} .nav-list{display:flex;align-items:center;gap:var(--spacing-lg)} .mobile-menu-toggle{display:none;flex-direction:column;gap:5px;padding:var(--spacing-xs)} .hero{position:relative;min-height:90vh;display:flex;align-items:center;overflow:hidden} .hero-bg{background:linear-gradient(135deg,#e8d5b7,#c9a96e 50%,#8b6914)} .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(44,44,44,.3) 0,rgba(44,44,44,.5) 50%,rgba(44,44,44,.7))} .hero-content{position:relative;z-index:1;text-align:center;padding-top:var(--spacing-2xl);padding-bottom:var(--spacing-2xl)} .hero-title{font-size:clamp(2rem,5vw,3.5rem);color:var(--color-white);max-width:800px;margin:0 auto var(--spacing-md);text-shadow:0 2px 20px rgba(0,0,0,.3)} .hero-subtitle{font-size:clamp(1rem,2vw,1.25rem);color:hsla(0,0%,100%,.9);max-width:600px;margin:0 auto var(--spacing-lg)} .hero-cta{display:flex;flex-wrap:wrap;gap:var(--spacing-sm);justify-content:center;margin-bottom:var(--spacing-lg)} .hero-trust{font-size:.875rem;color:hsla(0,0%,100%,.75)} .section-dark{background:var(--color-secondary);color:#fff} @media (max-width:768px){.main-nav{display:none;position:absolute;top:72px;left:0;right:0;background:var(--color-white);border-top:1px solid var(--color-border);box-shadow:var(--shadow-md);padding:var(--spacing-md)}.main-nav.active{display:block}.main-nav .nav-list{flex-direction:column;align-items:flex-start;gap:var(--spacing-sm)}.mobile-menu-toggle{display:flex}.hero{min-height:80vh}.hero-bg .hero-video,.hero-bg video.hero-video{display:none}.hero-bg .hero-poster-fallback{z-index:0!important;opacity:1!important}.hero-cta{flex-direction:column;align-items:center}.hero-cta .btn{width:100%;max-width:280px}.section{padding:var(--spacing-xl) 0}.footer-inner{grid-template-columns:1fr}.footer-nav{grid-template-columns:1fr 1fr}} @media (prefers-reduced-motion:reduce){*,:after,:before{transition:none!important;animation:none!important}.hero-bg .hero-video,.hero-bg video.hero-video{display:none}.hero-bg .hero-poster-fallback{z-index:0!important;opacity:1!important}} @media print{.faq-item summary:after,.hero-cta,.mobile-menu-toggle,.site-header{display:none}.hero{min-height:auto;background:var(--color-bg-alt)!important}.hero-bg,.hero-overlay{display:none}.hero-content{color:var(--color-text)}}</style>
+    
+    <link rel="stylesheet" href="/styles.min.css?v=3.28">
+<script nonce="__CSP_NONCE__" defer src="/js/main.min.js?v=3.20"></script>
+    <script nonce="__CSP_NONCE__" defer src="/js/lazy-videos.js?v=1.0"></script>
+    <script nonce="__CSP_NONCE__" src="/js/cookie-consent.js" defer></script>
+    <!-- Google tag (gtag.js) — deferred to first interaction or idle (avoids wasted bytes on bouncers) -->
+    <script nonce="__CSP_NONCE__">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+    window.__loadGtag = function() {
+      if (window.__gtagLoaded) return;
+      window.__gtagLoaded = true;
+      var s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+      s.async = true;
+      s.onload = function() {
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: location.href,
+          page_path: location.pathname + location.search
+        });
+      };
+      s.setAttribute('data-gtag-lazy', '1');
+      document.head.appendChild(s);
+    };
+
+    // Engaged users: load on first interaction.
+    ['scroll','click','touchstart','keydown'].forEach(function(evt){
+      window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+    });
+    // Passive readers / non-interactors: fallback to idle / load+3s.
+    window.addEventListener('load', function() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+      } else {
+        setTimeout(window.__loadGtag, 3000);
+      }
+    });
+    </script>
+    <!-- Google AdSense (lazy-loaded to avoid forced reflow during initial paint) -->
+    <script nonce="__CSP_NONCE__">
+    window.addEventListener('load', function() {
+      var loadAds = function() {
+        var s = document.createElement('script');
+        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1670381960525419';
+        s.async = true;
+        s.crossOrigin = 'anonymous';
+        s.setAttribute('data-ad-lazy', '1');
+        document.head.appendChild(s);
+      };
+      // Prefer requestIdleCallback; fall back to setTimeout for Safari / older browsers
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadAds, { timeout: 4000 });
+      } else {
+        setTimeout(loadAds, 3000);
+      }
+    });
+    </script>
+<script nonce="__CSP_NONCE__" src="/js/langs.js" defer></script>
+<script nonce="__CSP_NONCE__" src="/js/i18n.js?v=4.28" defer></script>
+<script nonce="__CSP_NONCE__">
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link" data-i18n="404.a_text.skip_to_main_content.85143743">Skip to main content</a>
+
+    <!-- ========== HEADER / NAV ========== -->
+                <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video — wedding video services"><picture>
+    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager">
+  </picture></a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Browse our wedding video services" data-i18n="404.a_text.services.84864121" aria-haspopup="true" aria-expanded="false">Services <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.video_enhancement.98039549">Video Enhancement</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/" data-i18n="404.a_text.slow_motion.30129340">Slow Motion</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/" data-i18n="404.a_text.vintage_restoration.91827364">Vintage Restoration</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.personalization.44366515">Personalization</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/" data-i18n="404.a_text.wedding_trailer.04692297">Wedding Trailer</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/" data-i18n="404.a_text.ai_video_generator.39420322">AI Video Generator</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/" data-i18n="404.a_text.pet_wedding.23911820">Pet Wedding</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/" data-i18n="404.a_text.multilingual.74639147">Multilingual</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/" data-i18n="404.a_text.cartoon_style.16664616">Cartoon Style</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/" data-i18n="404.a_text.wedding_memes.22951185">Wedding Memes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.absence_compensation.22965696">Absence Compensation</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/" data-i18n="404.a_text.family_tribute.39408322">Family Tribute</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/" data-i18n="404.a_text.family_message.27013166">Family Message</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/celebrity-message/" data-i18n="404.a_text.celebrity_message.59529435">Celebrity Message</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link" data-i18n="nav.a_text.view_all_services.91827365">View all services &rarr;</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/gallery/" title="View our gallery and case studies" data-i18n="404.a_text.gallery.96646935">Gallery</a></li>
+                    <li><a href="/blog/" title="Read our wedding video blog" data-i18n="404.a_text.blog.95723762">Blog</a></li>
+                    <li><a href="/resources/" title="In-depth wedding video guides" data-i18n="404.a_text.resources.rrrrrrr1">Resources</a></li>
+                    <li><a href="/about/" title="Learn about us" data-i18n="404.a_text.about.69447212">About</a></li>
+                    <li><a href="/pricing/" title="View transparent pricing" data-i18n="404.a_text.pricing.43854765">Pricing</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option></select></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" aria-label="Hero">
+        <div class="hero-bg">
+            <!-- Auto-playing muted loop. playsinline is required for iOS Safari. muted+autoplay+playsinline
+                 are the magic trio for cross-device silent autoplay. preload="metadata" avoids blocking
+                 the initial paint with a full video download; the poster image handles LCP instead. -->
+            <video class="hero-video"
+                   autoplay
+                   muted
+                   loop
+                   playsinline
+                   preload="none"
+                   width="1920"
+                   height="1080"
+                   poster="/images/hero-wedding-vineyard-1024.webp"
+                   aria-hidden="true"
+                   tabindex="-1" data-lazy-video>
+                <source src="/images/hero-wedding-loop.webm" type="video/webm">
+                <source src="/images/hero-wedding-loop.mp4" type="video/mp4">
+            </video>
+            <!-- Static poster fallback for the rare browser that can't autoplay. Hidden when video plays. -->
+            <picture class="hero-poster-fallback">
+                <source srcset="/images/hero-wedding-vineyard-640.avif 640w, /images/hero-wedding-vineyard-1024.avif 1024w" type="image/avif" sizes="100vw">
+                <source srcset="/images/hero-wedding-vineyard-640.webp 640w, /images/hero-wedding-vineyard-1024.webp 1024w" type="image/webp" sizes="100vw">
+                <img src="/images/hero-wedding-vineyard.png" alt="Wedding scene in vineyard at golden hour" width="1920" height="1080" loading="eager" decoding="async" fetchpriority="high">
+            </picture>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container hero-content">
+            <h1 class="hero-title" data-i18n="index.h1_text.make_every_wedding_moment_unforgettable.26538929">AI Wedding Videos — Make Every Moment Unforgettable</h1>
+            <p class="hero-subtitle" data-i18n="index.p_text.from_restoring_30_year_old_vhs_tapes_to.26279813">From restoring 30-year-old VHS tapes to creating cinematic wedding films — we transform your wedding memories into timeless treasures.</p>
+            <div class="hero-cta">
+                <a href="/order/" class="btn btn-primary btn-large btn-hero-primary" title="Get a free quote — start your project" data-i18n="about.a_text.get_a_free_quote.53673839">Get a Free Quote →</a>
+                <a href="#services" class="btn btn-text-link" title="Explore all our wedding video services" data-i18n="index.a_text.explore_our_services.49519743">Explore Our Services</a>
+            </div>
+            <p class="hero-trust" data-i18n="index.p_text.trusted_by_500_couples_in_the_us_europe.32124339">Trusted by 500+ couples · Top-rated 4.9/5 · 48h turnaround</p>
+        </div>
+    </section>
+
+
+        <!-- TRUST BADGES -->
+        <section class="section" style="background: var(--color-bg-alt); padding: 1.5rem 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);" aria-labelledby="trust-badges-heading">
+            <div class="container">
+                <h2 id="trust-badges-heading" class="sr-only" data-i18n="index.h2_text.why_couples_trust_us.a8c7e0d1">Why couples trust us</h2>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem; font-size: 0.875rem; color: var(--color-text-light);">
+                    <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.25rem;" aria-hidden="true">&#128274;</span>
+                        <strong style="color: var(--color-secondary);" data-i18n="index.strong_text.ssl_secured.83997351">SSL Secured</strong>
+                    </span>
+                    <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.25rem;" aria-hidden="true">&#9989;</span>
+                        <strong style="color: var(--color-secondary);" data-i18n="index.strong_text.gdpr_compliant.50319307">GDPR Compliant</strong>
+                    </span>
+                    <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.25rem;" aria-hidden="true">&#128179;</span>
+                        <strong style="color: var(--color-secondary);">Stripe &amp; PayPal</strong>
+                    </span>
+                    <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.25rem;" aria-hidden="true">&#128176;</span>
+                        <strong style="color: var(--color-secondary);" data-i18n="index.strong_text.100%_money-back.44895657">100% Money-Back</strong>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+    <!-- ========== SERVICES OVERVIEW ========== -->
+    <section id="services" class="section services" aria-label="Our Services">
+        <div class="container">
+            <header class="section-header">
+                <h2 data-i18n="index.h2_text.everything_you_need_for_the_perfect_wedd.47351285">Everything You Need for the Perfect Wedding Video</h2>
+                <p class="section-intro" data-i18n="index.p_text.whether_you_want_to_restore_old_footage.76686874">Whether you want to restore old footage, create something entirely new, or add a personal touch — we've got you covered.</p>
+            </header>
+
+            <div class="services-grid services-grid-compact">
+                <article class="service-card service-card-compact">
+                    <a href="/services/video-enhancement/vintage-restoration/" class="service-card-link">
+                        <div class="service-icon" aria-hidden="true">📼</div>
+                        <h3 data-i18n="index.h3_text.vintage_restoration.91827364">Vintage Restoration</h3>
+                        <p data-i18n="index.p_text.recover_30_year_old_tapes_8mm_to_4k.91827364">Recover 30-year-old VHS tapes, upscale 8mm to 4K, color correct and denoise audio.</p>
+                        <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
+                    </a>
+                </article>
+                <article class="service-card service-card-compact">
+                    <a href="/services/video-enhancement/slow-motion/" class="service-card-link">
+                        <div class="service-icon" aria-hidden="true">🎬</div>
+                        <h3 data-i18n="blog.weddingai-video-review.a_text.ai_slow_motion_enhancement.36606060">AI Slow Motion</h3>
+                        <p data-i18n="index.p_text.turn_standard_wedding_footage_into_butte.17722298">Buttery-smooth cinematic slow motion. AI frame interpolation up to 240fps.</p>
+                        <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
+                    </a>
+                </article>
+                <article class="service-card service-card-compact">
+                    <a href="/services/absence-compensation/family-tribute/" class="service-card-link">
+                        <div class="service-icon" aria-hidden="true">💜</div>
+                        <h3 data-i18n="404.a_text.family_tribute.39408322">Family Tribute</h3>
+                        <p data-i18n="index.p_text.tribute_for_a_deceased_loved_one.22222221">Honor a deceased loved one with a beautiful memorial video montage.</p>
+                        <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
+                    </a>
+                </article>
+                <article class="service-card service-card-compact">
+                    <a href="/services/absence-compensation/family-message/" class="service-card-link">
+                        <div class="service-icon" aria-hidden="true">📨</div>
+                        <h3 data-i18n="404.a_text.family_message.27013166">Family Message</h3>
+                        <p data-i18n="index.p_text.remote_family_video_message.22222222">Remote family recorded a message and we embed it seamlessly into your film.</p>
+                        <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
+                    </a>
+                </article>
+                <article class="service-card service-card-compact">
+                    <a href="/services/absence-compensation/celebrity-message/" class="service-card-link">
+                        <div class="service-icon" aria-hidden="true">🌟</div>
+                        <h3 data-i18n="404.a_text.celebrity_message.59529435">Celebrity Message</h3>
+                        <p data-i18n="index.p_text.ai_archetype_wedding_message.22222223">AI-generated celebrity-style message. Surprising, legal, ethical.</p>
+                        <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
+                    </a>
+                </article>
+                <article class="service-card service-card-compact">
+                    <a href="/services/personalization/ai-video-generator/" class="service-card-link">
+                        <div class="service-icon" aria-hidden="true">🎥</div>
+                        <h3 data-i18n="404.a_text.ai_video_generator.39420322">AI Video Generator</h3>
+                        <p data-i18n="index.p_text.turn_photos_into_cinematic_film.22222224">Turn your wedding photos into a cinematic AI-generated film.</p>
+                        <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
+                    </a>
+                </article>
+                <article class="service-card service-card-compact">
+                    <a href="/services/personalization/wedding-trailer/" class="service-card-link">
+                        <div class="service-icon" aria-hidden="true">🎬</div>
+                        <h3 data-i18n="404.a_text.wedding_trailer.04692297">Wedding Trailer</h3>
+                        <p data-i18n="index.p_text.cinematic_1_to_3_minute_trailer.22222225">1-3 minute cinematic trailer for social and reception playback.</p>
+                        <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
+                    </a>
+                </article>
+                <article class="service-card service-card-compact">
+                    <a href="/services/personalization/pet-wedding/" class="service-card-link">
+                        <div class="service-icon" aria-hidden="true">🐾</div>
+                        <h3 data-i18n="404.a_text.pet_wedding.23911820">Pet Wedding</h3>
+                        <p data-i18n="index.p_text.pet_wedding_video.22222226">Starring your pet! Fun opener or save-the-date.</p>
+                        <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
+                    </a>
+                </article>
+                <article class="service-card service-card-compact">
+                    <a href="/services/personalization/multilingual/" class="service-card-link">
+                        <div class="service-icon" aria-hidden="true">🌍</div>
+                        <h3 data-i18n="404.a_text.multilingual.74639147">Multilingual</h3>
+                        <p data-i18n="index.p_text.23_languages_dubbing.22222227">23 languages — AI dubbing and subtitles for international family.</p>
+                        <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
+                    </a>
+                </article>
+                <article class="service-card service-card-compact">
+                    <a href="/services/personalization/cartoon-style/" class="service-card-link">
+                        <div class="service-icon" aria-hidden="true">🎨</div>
+                        <h3 data-i18n="404.a_text.cartoon_style.16664616">Cartoon Style</h3>
+                        <p data-i18n="index.p_text.ghibli_pixar_anime_style.22222228">Ghibli, Pixar, or anime style applied to your footage.</p>
+                        <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
+                    </a>
+                </article>
+                <article class="service-card service-card-compact">
+                    <a href="/services/personalization/meme-generator/" class="service-card-link">
+                        <div class="service-icon" aria-hidden="true">👾</div>
+                        <h3 data-i18n="404.a_text.wedding_memes.22951185">Wedding Memes</h3>
+                        <p data-i18n="index.p_text.shareable_gifs_and_memes.22222229">10 shareable GIFs and memes for social media.</p>
+                        <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== REAL WEDDINGS, REAL STORIES ========== -->
+    <section class="section featured-work" aria-label="Featured Stories" style="background: var(--color-bg-alt);">
+        <div class="container">
+            <header class="section-header">
+                <h2 data-i18n="index.h2_text.real_weddings_real_stories.a1b2c3d4">Featured Stories</h2>
+                <p class="section-intro" data-i18n="index.p_text.real_weddings_intro.e5f6a7b8">A glimpse of the 25 weddings we've helped preserve. Click any story to see the full case study.</p>
+            </header>
+
+            <div class="cases-grid">
+                <a class="case-card" href="/gallery/" style="display:block;text-decoration:none;color:inherit;cursor:pointer;" aria-label="1987 Wedding — Restored from VHS">
+                    <div class="case-img">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-1987-vhs-restoration-poster-640.webp" data-poster-base="case-1987-vhs-restoration-poster" aria-label="1987 wedding video — VHS to 4K restoration, before and after" data-lazy-video>
+                            <source src="/images/case-1987-vhs-restoration.webm" type="video/webm">
+                            <source src="/images/case-1987-vhs-restoration.mp4" type="video/mp4">
+                        </video>
+  </div>
+                        <div class="case-body">
+                            <span class="case-tag" data-i18n="index.span_text.video_restoration.82086102">Video Restoration</span>
+                            <h3 data-i18n="index.h3_text.1987_wedding_restored_from_vhs.82660164">1987 Wedding — Restored from VHS</h3>
+                            <p data-i18n="index.p_text.the_original_tape_was_so_damaged_we_cou.70952932">"The original tape was so damaged we couldn't even make out faces. WeddingAI.video restored it to something we can actually watch and share with our kids."</p>
+                            <cite>— The Williams Family, Ohio, USA</cite>
+                        </div>
+                </a>
+
+                <a class="case-card" href="/gallery/" style="display:block;text-decoration:none;color:inherit;cursor:pointer;" aria-label="Sarah & James — Cinematic Wedding Trailer">
+                    <div class="case-img">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/wedding-trailer-sunset-720.webp" aria-label="Sarah and James cinematic wedding trailer — golden hour vineyard" data-lazy-video>
+                            <source src="/images/case-trailer-sunset-demo.webm" type="video/webm">
+                            <source src="/images/case-trailer-sunset-demo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                        <div class="case-body">
+                            <span class="case-tag" data-i18n="404.a_text.wedding_trailer.04692297">Wedding Trailer</span>
+                            <h3 data-i18n="index.h3_text.sarah_james_cinematic_wedding_trailer.54898990">Sarah & James — Cinematic Wedding Trailer</h3>
+                            <p data-i18n="index.p_text.we_wanted_something_beyond_the_traditio.92702439">"We wanted something beyond the traditional slideshow. They created a Hollywood-style trailer that made our wedding look like a movie premiere."</p>
+                            <cite>— Sarah M., New York, USA</cite>
+                        </div>
+                </a>
+
+                <a class="case-card" href="/gallery/" style="display:block;text-decoration:none;color:inherit;cursor:pointer;" aria-label="Bella & Max — Pet Wedding Special">
+                    <div class="case-img">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-pet-wedding-poster-640.webp" data-poster-base="case-pet-wedding-poster" aria-label="Bella and Max — golden retriever pet wedding ceremony" data-lazy-video>
+                            <source src="/images/case-pet-wedding.webm" type="video/webm">
+                            <source src="/images/case-pet-wedding.mp4" type="video/mp4">
+                        </video>
+  </div>
+                        <div class="case-body">
+                            <span class="case-tag" data-i18n="404.a_text.pet_wedding.23911820">Pet Wedding</span>
+                            <h3 data-i18n="index.h3_text.bella_max_pet_wedding_special.39549540">Bella & Max — Pet Wedding Special</h3>
+                            <p data-i18n="index.p_text.our_dog_is_our_family_the_pet_wedding_v.95851002">"Our dog is our family. The pet wedding video was the highlight of our anniversary party — everyone was in tears laughing and crying at the same time."</p>
+                            <cite>— James & Emily R., London, UK</cite>
+                        </div>
+                </a>
+
+                <a class="case-card" href="/gallery/" style="display:block;text-decoration:none;color:inherit;cursor:pointer;" aria-label="The Kim Family — 5 Formats, 2M TikTok Views">
+                    <div class="case-img">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-kim-family-ai-poster-640.webp" data-poster-base="case-kim-family-ai-poster" aria-label="The Kim Family 5-Format Social Media Pack — AI-enhanced wedding video, Seoul 2024" data-lazy-video>
+                            <source src="/images/case-kim-family-ai.webm" type="video/webm">
+                            <source src="/images/case-kim-family-ai.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                        <div class="case-body">
+                            <span class="case-tag" data-i18n="index.span_text.trailer.96041707">Trailer</span>
+                            <h3 data-i18n="index.h3_text.the_kim_family_5_formats_2m_tiktok_views.25781922">The Kim Family — 5 Formats, 2M TikTok Views</h3>
+                            <p class="case-meta" data-i18n="gallery.p_text.seoul_south_korea_october_2024.71464147">Seoul, South Korea · October 2024</p>
+                            <p data-i18n="index.p_text.one_source_video_5_formats_all_100k_view.70532618">One source video → 5 formats → all 100K+ views across platforms. The vertical TikTok got picked up by a wedding influencer.</p>
+                        </div>
+                </a>
+
+                <a class="case-card" href="/services/absence-compensation/family-tribute/" style="display:block;text-decoration:none;color:inherit;cursor:pointer;" aria-label="Carolina R. — Mom's 1985 Photo Came Alive">
+                    <div class="case-img">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-family-tribute-mom-poster-640.webp" data-poster-base="case-family-tribute-mom-poster" aria-label="Carolina R. — 1985 wedding photo brought to life as a tribute" data-lazy-video>
+                            <source src="/images/case-family-tribute-mom.webm" type="video/webm">
+                            <source src="/images/case-family-tribute-mom.mp4" type="video/mp4">
+                        </video>
+  </div>
+                        <div class="case-body">
+                            <span class="case-tag" data-i18n="404.a_text.family_tribute.39408322">Family Tribute</span>
+                            <h3 data-i18n="index.h3_text.carolina_r_mom_s_1985_photo_came_alive.18153493">Carolina R. — Mom's 1985 Photo Came Alive</h3>
+                            <p class="case-meta" data-i18n="gallery.p_text.austin_tx_march_2024.60472644">Austin, TX · March 2024</p>
+                            <p data-i18n="index.p_text.mam_passed_two_months_before_the_wedding.98008791">Mamá passed two months before the wedding. Her 1985 wedding photo was gently brought to life — and the whole table cried. <span class="case-body-link">Read the full story →</span></p>
+                        </div>
+                </a>
+
+                <a class="case-card" href="/gallery/" style="display:block;text-decoration:none;color:inherit;cursor:pointer;" aria-label="The Williams Family — 30 GIFs, Family Icon">
+                    <div class="case-img">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-williams-family-ai-poster-640.webp" data-poster-base="case-williams-family-ai-poster" aria-label="The Williams Family 30 GIFs — cake cutting moment, AI-enhanced wedding video, Columbus 2024" data-lazy-video>
+                            <source src="/images/case-williams-family-ai.webm" type="video/webm">
+                            <source src="/images/case-williams-family-ai.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                        <div class="case-body">
+                            <span class="case-tag" data-i18n="gallery.button_text.memes_gifs.63540829">Memes & GIFs</span>
+                            <h3 data-i18n="index.h3_text.the_williams_family_30_gifs_family_icon.87414344">The Williams Family — 30 GIFs, Family Icon</h3>
+                            <p class="case-meta" data-i18n="gallery.p_text.columbus_oh_september_2024.54308434">Columbus, OH · September 2024</p>
+                            <p data-i18n="index.p_text.30_wedding_gifs_for_the_family_group_cha.85040609">30 wedding GIFs for the family group chat. Aunt Linda's cake-cutting face became the family's universal response GIF — reused 50+ times.</p>
+                        </div>
+                </a>
+            </div>
+
+            <div class="section-cta" style="text-align: center; margin-top: var(--spacing-xl);">
+                <a href="/gallery/" class="btn btn-primary" title="Browse all 25 real case studies" data-i18n="index.a_text.view_all_25_case_studies.39936733">View All 25 Case Studies →</a>
+            </div>
+        </div>
+    </section>
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="section testimonials" aria-label="Customer Reviews">
+        <div class="container">
+            <header class="section-header">
+                <h2 data-i18n="index.h2_text.what_couples_are_saying.46757273">What Couples Are Saying</h2>
+            </header>
+
+            <div class="testimonials-grid">
+                <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-jennifer-48.avif 48w, /images/avatar-jennifer-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-jennifer-48.webp 48w, /images/avatar-jennifer-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-jennifer.jpeg" alt="Jennifer L." width="1024" height="1024" loading="lazy" srcset="/images/avatar-jennifer-48.jpg 48w, /images/avatar-jennifer-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="index.p_text.i_was_heartbroken_when_my_father_s_1995.62526592">"I was heartbroken when my father's 1995 wedding speech on VHS wouldn't play. WeddingAI restored every word perfectly. I'll treasure this forever."</p>
+                    <footer>
+                        <cite>Jennifer L., Austin TX</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
+
+                <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-priya-arjun-48.avif 48w, /images/avatar-priya-arjun-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-priya-arjun-48.webp 48w, /images/avatar-priya-arjun-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-priya-arjun.jpeg" alt="Priya &amp; Arjun M." width="1024" height="1024" loading="lazy" srcset="/images/avatar-priya-arjun-48.jpg 48w, /images/avatar-priya-arjun-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="index.p_text.we_got_married_in_italy_but_have_family.80995869">"We got married in Italy but have family in India. They created a Hindi version of our wedding video that made everyone feel included. Absolutely magical."</p>
+                    <footer>
+                        <cite>Priya & Arjun M., London</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
+
+                <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-mike-rachel-48.avif 48w, /images/avatar-mike-rachel-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-mike-rachel-48.webp 48w, /images/avatar-mike-rachel-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-mike-rachel.jpeg" alt="Mike &amp; Rachel T." width="1024" height="1024" loading="lazy" srcset="/images/avatar-mike-rachel-48.jpg 48w, /images/avatar-mike-rachel-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="index.p_text.mike_rachel_first_dance_slow_motion.9c0d1e2f">"Watching our first dance at 120fps, the way the veil floated and her face lit up — slow motion caught moments we didn't even know happened. It's our most-watched video."</p>
+                    <footer>
+                        <cite>Mike & Rachel T., Chicago IL</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
+
+                <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-sophie-david-48.avif 48w, /images/avatar-sophie-david-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-sophie-david-48.webp 48w, /images/avatar-sophie-david-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-sophie-david.jpeg" alt="Sophie &amp; David K." width="1024" height="1024" loading="lazy" srcset="/images/avatar-sophie-david-48.jpg 48w, /images/avatar-sophie-david-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="index.p_text.our_wedding_videographer_only_gave_us_a.70828820">"Our wedding videographer only gave us a 10-minute highlight. WeddingAI turned our raw footage into a 45-minute cinematic film we watch every anniversary."</p>
+                    <footer>
+                        <cite>Sophie & David K., Toronto</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
+
+                <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-emma-48.avif 48w, /images/avatar-emma-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-emma-48.webp 48w, /images/avatar-emma-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-emma.jpeg" alt="Emma W." width="1024" height="1024" loading="lazy" srcset="/images/avatar-emma-48.jpg 48w, /images/avatar-emma-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="index.p_text.our_cats_got_married_on_our_5th_anniver.13954977">"Our cats got married on our 5th anniversary and the video they made is genuinely better than our human wedding video. 10/10 would recommend."</p>
+                    <footer>
+                        <cite>Emma W., Seattle WA</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
+
+                <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-carolina-48.avif 48w, /images/avatar-carolina-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-carolina-48.webp 48w, /images/avatar-carolina-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-carolina.jpg" alt="Carolina R." width="1024" height="1024" loading="lazy" srcset="/images/avatar-carolina-48.jpg 48w, /images/avatar-carolina-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="index.p_text.mam_passed_away_two_months_before_our_w.79329689">"When Mamá's 1985 photo came alive in our wedding film, our whole table burst into tears. The most beautiful tribute. <a href="/services/absence-compensation/family-tribute/" style="color:var(--color-primary);font-weight:600;">Read her full story →</a>"</p>
+                    <footer>
+                        <cite>Carolina R., Austin TX</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section class="section faq" aria-label="Frequently Asked Questions">
+        <div class="container">
+            <header class="section-header">
+                <h2 data-i18n="about.h2_text.frequently_asked_questions.84363580">Frequently Asked Questions</h2>
+            </header>
+
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary data-i18n="blog.restore-vhs-wedding-footage.h3_text.how_long_does_it_take_to_restore_an_old.96973368">How long does it take to restore an old wedding video?</summary>
+                    <p data-i18n="index.p_text.standard_turnaround_is_48_72_hours_for_c.57575427">Standard turnaround is 48–72 hours. For complex restorations (heavy damage, multiple tapes), it may take 5–7 business days. Rush delivery is available for an additional fee.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="index.summary_text.what_video_formats_do_you_accept.50403317">What video formats do you accept?</summary>
+                    <p data-i18n="index.p_text.we_accept_vhs_vhs_c_dv_hi8_minidvd_8mm_1.44137621">We accept VHS, VHS-C, DV, Hi8, MiniDVD, 8mm, 16mm film, and all modern digital formats (MP4, MOV, AVI, MKV).</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="index.summary_text.how_do_i_send_my_video_files.71732249">How do I send my video files?</summary>
+                    <p data-i18n="index.p_text.after_submitting_your_request_we_ll_send.55360641">After submitting your request, we'll send you a secure upload link. Files are encrypted and deleted 30 days after delivery.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="index.summary_text.can_you_restore_a_video_with_missing_aud.35452588">Can you restore a video with missing audio?</summary>
+                    <p data-i18n="index.p_text.yes_our_ai_can_reconstruct_audio_from_vi.63435759">Yes. Our AI can reconstruct audio from visual cues and ambient sound.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="index.summary_text.what_s_your_refund_policy.84725217">What's your refund policy?</summary>
+                    <p data-i18n="index.p_text.if_you_re_not_satisfied_with_the_result.62341957">If you're not satisfied with the result, we'll revise it twice at no extra cost. Full refund is available if we can't meet your requirements after revisions.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="index.summary_text.how_do_you_handle_my_personal_footage.99999991">How do you handle my personal footage and privacy?</summary>
+                    <p data-i18n="index.p_text.footage_privacy_answer.99999991">Your footage is stored encrypted on secure US-based servers. Files are automatically deleted 30 days after delivery. You can request earlier deletion at any time by emailing privacy@weddingai.video. We never share your footage with third parties without written consent.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="index.summary_text.what_about_ai_safety_and_bias.99999992">What about AI safety and bias in your processing?</summary>
+                    <p data-i18n="index.p_text.ai_safety_answer.99999992">We use commercial-grade AI models with safety guardrails. A human filmmaker reviews every output before delivery. We do not generate deepfakes of real people, and our Celebrity Style service uses AI archetypes inspired by style, not impersonation.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="index.summary_text.who_owns_the_final_video.99999993">Who owns the final video and can I use it commercially?</summary>
+                    <p data-i18n="index.p_text.ownership_answer.99999993">You own the final video. We retain a non-exclusive license to use anonymized excerpts in our portfolio unless you explicitly opt out in writing. You may use the video for personal, social media, and non-commercial purposes. Commercial use (e.g., selling as part of a wedding planning business) requires written permission.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="index.summary_text.do_you_offer_rush_delivery.99999994">Do you offer rush delivery?</summary>
+                    <p data-i18n="index.p_text.rush_delivery_answer.99999994">Yes. Most services offer 48-hour rush delivery for an additional 30-50% fee, depending on the service. Check the service page or mention it in your quote request and we will confirm availability.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="index.summary_text.how_does_pricing_work.99999995">How does pricing work for multiple services?</summary>
+                    <p data-i18n="index.p_text.bundle_pricing_answer.99999995">Bundle discounts apply when you book 2+ services on the same project: 10% off for 2 services, 15% off for 3 services, 20% off for 5+ services. Discounts are applied automatically. The first-customer discount (mention "FIRST" in your request) gives an extra 20% off your first service, stacking up to a 30% maximum.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT / CTA ========== -->
+    <section class="section cta-section" aria-label="Contact Us">
+        <div class="container">
+            <div class="cta-bg" role="img" aria-label="Wedding stationery and laptop with video editing">
+                <div class="cta-overlay"></div>
+            </div>
+            <div class="cta-content">
+                <h2 data-i18n="index.h2_text.ready_to_get_started.57000224">Ready to Get Started?</h2>
+                <p class="section-intro" data-i18n="index.p_text.tell_us_about_your_project_and_we_ll_get.60791493">Tell us about your project and we'll get back to you within 24 hours with a free quote.</p>
+                <a href="/order/" class="btn btn-primary btn-large" title="Send my request — get a free quote" data-i18n="index.a_text.send_my_request_free_quote.43667102">Get a Free Quote →</a>
+            </div>
+        </div>
+    </section>
+
+    
+</main>
+
+    <script type="application/ld+json" nonce="__CSP_NONCE__">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "WeddingAI.video Services",
+        "description": "AI-powered wedding video restoration, creation, and personalization services",
+        "serviceType": "Wedding Video Production",
+        "provider": {
+            "@type": "Organization",
+            "@id": "https://weddingai.video/#organization",
+            "name": "WeddingAI.video",
+            "url": "https://weddingai.video"
+        },
+        "areaServed": [
+            { "@type": "Place", "name": "Worldwide" }
+        ],
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "WeddingAI.video service catalog",
+            "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Wedding Video Generator" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wedding Video Restoration" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cinematic Wedding Trailer" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pet Wedding Video" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Multilingual Wedding Video" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Slow Motion Enhancement" } }
+            ]
+        }
+    }
+    </script>
+
+
+    <script type="application/ld+json" nonce="__CSP_NONCE__">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How long does it take to restore an old wedding video?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Standard turnaround is 48–72 hours. For complex restorations (heavy damage, multiple tapes), it may take 5–7 business days. Rush delivery is available for an additional fee."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What video formats do you accept?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We accept VHS, VHS-C, DV, Hi8, MiniDVD, 8mm, 16mm film, and all modern digital formats (MP4, MOV, AVI, MKV)."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I send my video files?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "After submitting your request, we'll send you a secure upload link. Files are encrypted and deleted 30 days after delivery."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can you restore a video with missing audio?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Our AI can reconstruct audio from visual cues and ambient sound."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What's your refund policy?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "If you're not satisfied with the result, we'll revise it twice at no extra cost. Full refund is available if we can't meet your requirements after revisions."
+                }
+            }
+        ]
+    }
+    </script>
+
+
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo" title="WeddingAI.video — wedding video services"><picture>
+    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy">
+  </picture></a>
+                <p data-i18n="404.p_text.ai_powered_wedding_video_services_for_co.90691298">AI-powered wedding video services for couples worldwide.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <div class="footer-col">
+                        <h3 data-i18n="404.a_text.services.84864121">Services</h3>
+                        <ul>
+                                                                                    <li><a href="/services/video-enhancement/slow-motion/" title="AI Slow Motion Enhancement" data-i18n="404.a_text.slow_motion.30129340">Slow Motion</a></li>
+                            <li><a href="/services/video-enhancement/vintage-restoration/" title="Vintage Footage Restoration — VHS to 4K" data-i18n="404.a_text.vintage_restoration.91827364">Vintage Restoration</a></li>
+                            <li><a href="/services/absence-compensation/family-tribute/" title="Tribute to Loved Ones" data-i18n="404.a_text.family_tribute.39408322">Family Tribute</a></li>
+                            <li><a href="/services/absence-compensation/family-message/" title="Remote Family Video Message" data-i18n="404.a_text.family_message.27013166">Family Message</a></li>
+                            <li><a href="/services/absence-compensation/celebrity-message/" title="Celebrity-Style Wedding Message" data-i18n="404.a_text.celebrity_message.59529435">Celebrity Message</a></li>
+                            <li><a href="/services/personalization/ai-video-generator/" title="AI Wedding Video Generator" data-i18n="404.a_text.ai_video_generator.39420322">AI Video Generator</a></li>
+                            <li><a href="/services/personalization/wedding-trailer/" title="Cinematic Wedding Trailer" data-i18n="404.a_text.wedding_trailer.04692297">Wedding Trailer</a></li>
+                            <li><a href="/services/personalization/pet-wedding/" title="Pet Wedding Video" data-i18n="404.a_text.pet_wedding.23911820">Pet Wedding</a></li>
+                            <li><a href="/services/personalization/multilingual/" title="Multilingual Wedding Video" data-i18n="404.a_text.multilingual.74639147">Multilingual</a></li>
+                            <li><a href="/services/personalization/cartoon-style/" title="Cartoon / Animated Style" data-i18n="404.a_text.cartoon_style.16664616">Cartoon Style</a></li>
+                            <li><a href="/services/personalization/meme-generator/" title="Wedding GIFs & Memes" data-i18n="404.a_text.wedding_memes.22951185">Wedding Memes</a></li>
+                                                    </ul>
+                    </div>
+                <div class="footer-col">
+                    <h3 data-i18n="404.h3_text.company.16024258">Company</h3>
+                    <ul>
+                        <li><a href="about/" title="Learn about us" data-i18n="404.a_text.about_us.90074652">About Us</a></li>
+                        <li><a href="gallery/" title="View our gallery and case studies" data-i18n="404.a_text.gallery.96646935">Gallery</a></li>
+                        <li><a href="/order/" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
+                        <li><a href="/privacy/" title="Read our privacy policy" data-i18n="404.a_text.privacy_policy.78442268">Privacy Policy</a></li>
+                        <li><a href="/terms/" title="Read our terms of service" data-i18n="404.a_text.terms_of_service.30659181">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="404.h3_text.contact.47569808">Contact</h3>
+                    <ul>
+                        <li><a href="mailto:order@weddingai.video" title="Send us an email at order@weddingai.video">order@weddingai.video</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p data-i18n="404.p_text.2026_weddingai_video_all_rights_reserve.73926096">© 2026 WeddingAI.video. All rights reserved.</p>
+                <div class="footer-featured">
+                    <a class="footer-badge footer-badge-secondary" href="/about/" title="500+ couples served, 4.9/5 rating" data-i18n="about.a_text.couples_served.ddddddd1" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 0.75rem;background:var(--color-bg-alt);border-radius:6px;font-size:0.8125rem;font-weight:600;color:var(--color-secondary);text-decoration:none;border:1px solid var(--color-border);">⭐ 4.9/5 · 500+ couples</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json" nonce="__CSP_NONCE__">{
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "WeddingAI.video — Cinematic AI Wedding Video Demo",
+    "description": "A cinematic sample of AI-enhanced wedding footage: a bride and groom exchanging vows under a vineyard arch at golden hour, with a gentle camera push-in. Showcases the visual quality of WeddingAI.video's AI wedding film service.",
+    "thumbnailUrl": [
+        "https://weddingai.video/images/hero-wedding-vineyard-1920.webp",
+        "https://weddingai.video/images/hero-wedding-vineyard-1280.webp",
+        "https://weddingai.video/images/hero-wedding-vineyard-640.webp"
+    ],
+    "contentUrl": "https://weddingai.video/images/hero-wedding-loop.mp4",
+    "embedUrl": "https://weddingai.video/",
+    "uploadDate": "2026-08-03T08:00:00+00:00",
+    "duration": "PT12S",
+    "width": 1920,
+    "height": 1080,
+    "encodingFormat": "video/mp4",
+    "isFamilyFriendly": true,
+    "inLanguage": "en",
+    "regionsAllowed": "US,CA,GB,AU,NZ,DE,FR,ES,IT,NL,BE,SE,NO,DK,FI,IE,AT,CH,PT,PL,JP,CN,BR,MX,AR,CL,CO,TH,SG,MY,PH,ID,IN,ZA,AE,SA,EG",
+    "genre": ["Wedding", "Cinematic", "Romance"],
+    "keywords": "AI wedding video, cinematic wedding film, wedding trailer, vineyard wedding, golden hour, slow motion, AI film, WeddingAI",
+    "publisher": {
+        "@type": "Organization",
+        "@id": "https://weddingai.video/#organization",
+        "name": "WeddingAI.video",
+        "url": "https://weddingai.video/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://weddingai.video/images/logo-full.jpeg"
+        }
+    },
+    "provider": {
+        "@type": "Organization",
+        "@id": "https://weddingai.video/#organization",
+        "name": "WeddingAI.video"
+    }
+}</script>
+
+    <script type="application/ld+json" nonce="__CSP_NONCE__">{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "WeddingAI.video",
+    "alternateName": "WeddingAI",
+    "url": "https://weddingai.video",
+    "logo": "https://weddingai.video/images/logo-full.jpeg",
+    "description": "AI-powered wedding video services for couples worldwide.",
+    "email": "order@weddingai.video",
+    "foundingDate": "2024",
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "6",
+        "reviewCount": "6"
+    }
+}</script>
+
+    <script type="application/ld+json" nonce="__CSP_NONCE__">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://weddingai.video/#website",
+        "url": "https://weddingai.video",
+        "name": "WeddingAI.video",
+        "description": "AI-powered wedding video services for couples worldwide.",
+        "publisher": {"@id": "https://weddingai.video/#organization"},
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://weddingai.video/search?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+        },
+        "inLanguage": "en-US"
+    }
+    </script>
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" nonce="__CSP_NONCE__" data-cf-beacon='{"version":"2024.11.0","token":"7c37b58c2706411a8d6256718cc4148c","r":1}' crossorigin="anonymous"></script>
+
+<script nonce="__CSP_NONCE__">
+// Adaptive video posters: 1x/1.5x DPR 设备用 640.webp 省字节, 2x+ 移动 (< 600px 视口) 保持 1280.webp 保清晰
+(function(){
+  var dpr = window.devicePixelRatio || 1;
+  var use640 = !(dpr >= 2 && window.innerWidth < 600);
+  var suffix = use640 ? '-640' : '-1280';
+  function apply(){
+    var vs = document.querySelectorAll('video[data-poster-base]');
+    for (var i = 0; i < vs.length; i++) {
+      var base = vs[i].getAttribute('data-poster-base');
+      if (base) vs[i].poster = '/images/' + base + suffix + '.webp';
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', apply);
+  } else {
+    apply();
+  }
+})();
+</script>
+
+</body>
+</html>
+

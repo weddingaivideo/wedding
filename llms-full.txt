@@ -1,0 +1,177 @@
+# WeddingAI.video
+
+> AI-powered wedding video services for couples worldwide. We restore old footage, create cinematic AI films, generate multilingual versions, and personalize videos with cartoon styles, memes, pet weddings, and tributes. Founded 2024, serving 500+ couples across 12+ countries.
+
+Full content of each linked page follows the link list. This file is the 'full' variant of llms.txt per the llmstxt.org spec; use it to give an LLM complete site context in a single fetch.
+
+## Core Services
+
+### [All Services](https://weddingai.video/services/)
+
+# AI Wedding Videos — Make Every Moment Unforgettable
+
+From restoring 30-year-old VHS tapes to creating cinematic wedding films — we transform your wedding memories into timeless treasures.
+
+Trusted by 500+ couples · Top-rated 4.9/5 · 48h turnaround
+
+## Everything You Need for the Perfect Wedding Video
+
+Whether you want to restore old footage, create something entirely new, or add a personal touch — we've got you covered.
+
+## Featured Stories
+
+A glimpse of the 25 weddings we've helped preserve. Click any story to see the full case study.
+
+## What Couples Are Saying
+
+> "I was heartbroken when my father's 1995 wedding speech on VHS wouldn't play. WeddingAI restored every word perfectly. I'll treasure this forever."
+
+> "We got married in Italy but have family in India. They created a Hindi version of our wedding video that made everyone feel included. Absolutely magical."
+
+> "Watching our first dance at 120fps, the way the veil floated and her face lit up — slow motion caught moments we didn't even know happened. It's our most-watched video."
+
+> "Our wedding videographer only gave us a 10-minute highlight. WeddingAI turned our raw footage into a 45-minute cinematic film we watch every anniversary."
+
+> "Our cats got married on our 5th anniversary and the video they made is genuinely better than our human wedding video. 10/10 would recommend."
+
+> "When Mamá's 1985 photo came alive in our wedding film, our whole table burst into tears. The most beautiful tribute. [Read her full story →](https://weddingai.video/services/absence-compensation/family-tribute/)"
+
+## Frequently Asked Questions
+
+**How long does it take to restore an old wedding video?**
+
+Standard turnaround is 48–72 hours. For complex restorations (heavy damage, multiple tapes), it may take 5–7 business days. Rush delivery is available for an additional fee.
+
+**What video formats do you accept?**
+
+We accept VHS, VHS-C, DV, Hi8, MiniDVD, 8mm, 16mm film, and all modern digital formats (MP4, MOV, AVI, MKV).
+
+**How do I send my video files?**
+
+After submitting your request, we'll send you a secure upload link. Files are encrypted and deleted 30 days after delivery.
+
+**Can you restore a video with missing audio?**
+
+Yes. Our AI can reconstruct audio from visual cues and ambient sound.
+
+**What's your refund policy?**
+
+If you're not satisfied with the result, we'll revise it twice at no extra cost. Full refund is available if we can't meet your requirements after revisions.
+
+**How do you handle my personal footage and privacy?**
+
+Your footage is stored encrypted on secure US-based servers. Files are automatically deleted 30 days after delivery. You can request earlier deletion at any time by emailing privacy@weddingai.video. We never share your footage with third parties without written consent.
+
+**What about AI safety and bias in your processing?**
+
+We use commercial-grade AI models with safety guardrails. A human filmmaker reviews every output before delivery. We do not generate deepfakes of real people, and our Celebrity Style service uses AI archetypes inspired by style, not impersonation.
+
+**Who owns the final video and can I use it commercially?**
+
+You own the final video. We retain a non-exclusive license to use anonymized excerpts in our portfolio unless you explicitly opt out in writing. You may use the video for personal, social media, and non-commercial purposes. Commercial use (e.g., selling as part of a wedding planning business) requires written permission.
+
+**Do you offer rush delivery?**
+
+Yes. Most services offer 48-hour rush delivery for an additional 30-50% fee, depending on the service. Check the service page or mention it in your quote request and we will confirm availability.
+
+**How does pricing work for multiple services?**
+
+Bundle discounts apply when you book 2+ services on the same project: 10% off for 2 services, 15% off for 3 services, 20% off for 5+ services. Discounts are applied automatically. The first-customer discount (mention "FIRST" in your request) gives an extra 20% off your first service, stacking up to a 30% maximum.
+
+## Ready to Get Started?
+
+Tell us about your project and we'll get back to you within 24 hours with a free quote.
+
+### [AI Slow Motion](https://weddingai.video/services/video-enhancement/slow-motion.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\video-enhancement\slow-motion.html)_
+
+### [Vintage Footage Restoration](https://weddingai.video/services/video-enhancement/vintage-restoration.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\video-enhancement\vintage-restoration.html)_
+
+### [Wedding Trailer](https://weddingai.video/services/personalization/wedding-trailer.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\personalization\wedding-trailer.html)_
+
+### [AI Video Generator](https://weddingai.video/services/personalization/ai-video-generator.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\personalization\ai-video-generator.html)_
+
+
+## Absence Compensation
+
+### [Family Tribute](https://weddingai.video/services/absence-compensation/family-tribute.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\absence-compensation\family-tribute.html)_
+
+### [Family Message](https://weddingai.video/services/absence-compensation/family-message.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\absence-compensation\family-message.html)_
+
+### [Celebrity Wedding Messages](https://weddingai.video/services/absence-compensation/celebrity-message.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\absence-compensation\celebrity-message.html)_
+
+
+## Personalization
+
+### [Cartoon Style](https://weddingai.video/services/personalization/cartoon-style.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\personalization\cartoon-style.html)_
+
+### [Multilingual](https://weddingai.video/services/personalization/multilingual.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\personalization\multilingual.html)_
+
+### [Pet Wedding](https://weddingai.video/services/personalization/pet-wedding.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\personalization\pet-wedding.html)_
+
+### [Wedding GIFs & Memes](https://weddingai.video/services/personalization/meme-generator.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\personalization\meme-generator.html)_
+
+
+## Pricing & Quotes
+
+### [Get a Free Quote](https://weddingai.video/order.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\order.html)_
+
+
+## Company
+
+### [About Us](https://weddingai.video/about.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\about.html)_
+
+### [Gallery & Case Studies](https://weddingai.video/gallery.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\gallery.html)_
+
+### [Resources & Guides](https://weddingai.video/resources.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\resources.html)_
+
+
+## Legal & Contact
+
+### [Privacy Policy](https://weddingai.video/privacy.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\privacy.html)_
+
+### [Terms of Service](https://weddingai.video/terms.html)
+
+_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\terms.html)_
+
+### [Contact / Email](mailto:order@weddingai.video)
+
+Email: order@weddingai.video
+
+
+## Optional
+
+- [Sitemap](https://weddingai.video/sitemap.xml): Full XML sitemap with image metadata.
+- [Robots.txt](https://weddingai.video/robots.txt): Crawler rules and sitemap reference.
+- [llms.txt](https://weddingai.video/llms.txt): Brief link-only version of this file.

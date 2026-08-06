@@ -1,0 +1,552 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- Preconnects live in _headers Link header (sent before HTML parses). -->
+    
+    
+    
+    <title  data-i18n="services.personalization.meme-generator.title_text.wedding_gifs_memes_share_the_joy_wedding.71540593">Wedding GIFs & Memes: Share the Joy | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/services/personalization/meme-generator/">
+    <link rel="alternate" hreflang="en" href="https://weddingai.video/services/personalization/meme-generator/">
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/services/personalization/meme-generator/">
+    <link rel="alternate" hreflang="es" href="https://weddingai.video/es/services/personalization/meme-generator/">
+    <link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/services/personalization/meme-generator/">
+    <link rel="alternate" hreflang="de" href="https://weddingai.video/de/services/personalization/meme-generator/">
+    <link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/services/personalization/meme-generator/">
+    <link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/services/personalization/meme-generator/">
+    <link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/services/personalization/meme-generator/">
+    <link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/services/personalization/meme-generator/">
+    <link rel="alternate" hreflang="th" href="https://weddingai.video/th/services/personalization/meme-generator/">
+    <link rel="alternate" hreflang="x-default" href="https://weddingai.video/services/personalization/meme-generator/">
+    <meta property="og:image" content="https://weddingai.video/images/meme-generator-gif-collage.png">
+    <meta name="description" data-i18n-attr="content:services.personalization.meme-generator.meta_description.get_custom_wedding_gifs_memes_and_sharea.47941060" content="Get custom wedding GIFs, memes, and shareable clips — perfect for social media, group chats, and thank-you messages to guests!" />
+    <meta name="keywords" content="wedding memes, wedding GIF, shareable wedding content, Instagram wedding GIF, wedding social media clips">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="WeddingAI.video">
+    
+    <link rel="stylesheet" href="/styles.min.css?v=3.28">
+    <link rel="stylesheet" href="/styles/i18n.css">
+<script defer src="/js/main.min.js?v=3.20"></script>
+    <style>
+        .page-hero-bg { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .page-hero-overlay { background: rgba(0,0,0,0.35); }
+        .page-hero-content h1 { font-size: clamp(1.75rem,4vw,2.5rem); color: var(--color-white); margin-bottom: var(--spacing-sm); }
+        .page-hero-content p { font-size: 1.0625rem; color: rgba(255,255,255,0.95); max-width: 600px; }
+        .page-hero-small { min-height: 45vh; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); }
+        .breadcrumb a { color: var(--color-primary); }
+        .breadcrumb span { margin: 0 var(--spacing-xs); }
+        .section-dark { background: var(--color-secondary); }
+        .section-dark h2, .section-dark h3 { color: var(--color-white); }
+        .section-dark p { color: rgba(255,255,255,0.75); }
+        .meme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--spacing-md); margin: var(--spacing-xl) 0; }
+        .meme-card { background: var(--color-white); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-border); }
+        .meme-card-img { aspect-ratio: 1; background: var(--color-bg-alt); display: flex; align-items: center; justify-content: center; font-size: 3rem; overflow: hidden; }
+        .meme-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+        .meme-card:hover .meme-card-img img { transform: scale(1.05); }
+        .meme-card-body { padding: var(--spacing-sm); text-align: center; }
+        .meme-card-body p { font-size: 0.8125rem; color: var(--color-text-light); }
+        .pricing-box { background: var(--color-white); border-radius: var(--radius-xl); padding: var(--spacing-xl); box-shadow: var(--shadow-md); max-width: 600px; margin: 0 auto; }
+        .pricing-row { display: flex; justify-content: space-between; padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--color-border); font-size: 0.9375rem; }
+        .pricing-row:last-child { border-bottom: none; }
+        .pricing-row .label { color: var(--color-text); }
+        .pricing-row .value { font-weight: 700; color: var(--color-secondary); }
+        .pricing-row .value.price { color: var(--color-primary); font-size: 1.125rem; }
+    
+        .hero-price-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--color-primary); color: #1a1a1a; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.9375rem; font-weight: 700; margin-top: var(--spacing-md); box-shadow: 0 4px 14px rgba(212,175,55,0.35); }
+        .hero-trust { color: rgba(255,255,255,0.9); font-size: 0.875rem; margin-top: 0.5rem; max-width: 600px; line-height: 1.5; }
+        .hero-samples-link { color: var(--color-primary); font-weight: 600; text-decoration: none; display: inline-block; }
+        .hero-samples-link:hover { text-decoration: underline; }
+</style>
+    <!-- Google tag (gtag.js) — deferred to first interaction or idle (avoids wasted bytes on bouncers) -->
+    <script nonce="__CSP_NONCE__">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+    window.__loadGtag = function() {
+      if (window.__gtagLoaded) return;
+      window.__gtagLoaded = true;
+      var s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+      s.async = true;
+      s.onload = function() {
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: location.href,
+          page_path: location.pathname + location.search
+        });
+      };
+      s.setAttribute('data-gtag-lazy', '1');
+      document.head.appendChild(s);
+    };
+
+    // Engaged users: load on first interaction.
+    ['scroll','click','touchstart','keydown'].forEach(function(evt){
+      window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+    });
+    // Passive readers / non-interactors: fallback to idle / load+3s.
+    window.addEventListener('load', function() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+      } else {
+        setTimeout(window.__loadGtag, 3000);
+      }
+    });
+    </script>
+    <!-- Google AdSense (lazy-loaded to avoid forced reflow during initial paint) -->
+    <script>
+    window.addEventListener('load', function() {
+      var loadAds = function() {
+        var s = document.createElement('script');
+        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1670381960525419';
+        s.async = true;
+        s.crossOrigin = 'anonymous';
+        s.setAttribute('data-ad-lazy', '1');
+        document.head.appendChild(s);
+      };
+      // Prefer requestIdleCallback; fall back to setTimeout for Safari / older browsers
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadAds, { timeout: 4000 });
+      } else {
+        setTimeout(loadAds, 3000);
+      }
+    });
+    </script>
+    <meta property="og:title" content="Wedding GIFs &amp; Memes: Share the Joy">
+    <meta property="og:description" content="Get custom wedding GIFs, memes, and shareable clips — perfect for social media, group chats, and thank-you messages to guests!">
+    <meta property="og:url" content="https://weddingai.video/services/personalization/meme-generator/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta name="twitter:title" content="Wedding GIFs & Memes: Share the Joy | WeddingAI.video">
+    <meta name="twitter:description" content="Get custom wedding GIFs, memes, and shareable clips — perfect for social media, group chats, and thank-you messages to guests!">
+    <meta name="twitter:image" content="https://weddingai.video/images/meme-generator-gif-collage.png">
+<script src="/js/langs.js" defer></script>
+<script src="/js/i18n.js?v=4.28" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link" data-i18n="404.a_text.skip_to_main_content.85143743">Skip to main content</a>
+
+                <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video — wedding video services"><picture><source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px"><source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px"><img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px"></picture></a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Browse our wedding video services" data-i18n="404.a_text.services.84864121" aria-haspopup="true" aria-expanded="false">Services <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.video_enhancement.98039549">Video Enhancement</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/" data-i18n="404.a_text.slow_motion.30129340">Slow Motion</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/" data-i18n="404.a_text.vintage_restoration.91827364">Vintage Restoration</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.personalization.44366515">Personalization</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/" data-i18n="404.a_text.wedding_trailer.04692297">Wedding Trailer</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/" data-i18n="404.a_text.ai_video_generator.39420322">AI Video Generator</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/" data-i18n="404.a_text.pet_wedding.23911820">Pet Wedding</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/" data-i18n="404.a_text.multilingual.74639147">Multilingual</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/" data-i18n="404.a_text.cartoon_style.16664616">Cartoon Style</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/" data-i18n="404.a_text.wedding_memes.22951185">Wedding Memes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.absence_compensation.22965696">Absence Compensation</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/" data-i18n="404.a_text.family_tribute.39408322">Family Tribute</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/" data-i18n="404.a_text.family_message.27013166">Family Message</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/celebrity-message/" data-i18n="404.a_text.celebrity_message.59529435">Celebrity Message</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link" data-i18n="nav.a_text.view_all_services.91827365">View all services &rarr;</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/gallery/" title="View our gallery and case studies" data-i18n="404.a_text.gallery.96646935">Gallery</a></li>
+                    <li><a href="/blog/" title="Read our wedding video blog" data-i18n="404.a_text.blog.95723762">Blog</a></li>
+                    <li><a href="/resources/" title="In-depth wedding video guides" data-i18n="404.a_text.resources.rrrrrrr1">Resources</a></li>
+                    <li><a href="/about/" title="Learn about us" data-i18n="404.a_text.about.69447212">About</a></li>
+                    <li><a href="/pricing/" title="View transparent pricing" data-i18n="404.a_text.pricing.43854765">Pricing</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option></select></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero page-hero-small">
+            <div class="page-hero-bg cat-personalization" role="img" aria-label="Wedding GIF collage"><picture><source srcset="/images/meme-generator-gif-collage-360.webp 360w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/meme-generator-gif-collage.png" alt="Wedding GIFs and memes" style="width:100%;height:100%;object-fit:cover;" width="720" height="1280" loading="lazy" srcset="/images/meme-generator-gif-collage-360.png 360w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"></picture>
+            </div><div class="page-hero-overlay"></div>
+            <div class="container page-hero-content">
+                <nav class="breadcrumb">
+                    <a href="/" title="Home" title="Home" data-i18n="services.absence-compensation.celebrity-message.a_text.home.90820803">Home</a><span><span>›</span>
+                    <a href="/services/" title="Browse our wedding video services" title="Browse our wedding video services" data-i18n="404.a_text.services.84864121">Services</a><span><span>›</span>
+                    <a href="/services/personalization/" title="Personalization" title="Personalization" data-i18n="search.strong_text.personalization.44366515">Personalization</a><span><span>›</span>
+                    Wedding GIFs & Memes
+                </nav>
+                <h1  data-i18n="services.personalization.meme-generator.h1_text.wedding_gifs_memes_your_guests_will_love.21514979"><span class="service-category-icon" aria-hidden="true">✨</span>Wedding GIFs & Memes Your Guests Will Love</h1>
+                <p  data-i18n="services.personalization.meme-generator.p_text.custom_made_shareable_clips_perfect_for.31228313">Custom-made shareable clips perfect for Instagram, group chats, and thank-you messages.</p>
+                <div class="hero-price-badge" data-i18n="services.common.hero_starting_price.9d9e9d90">💰 Starting at $9.9</div>
+                <div class="hero-trust" data-i18n="services.common.hero_trust.9d9e9d91">✓ Two free revisions · Full refund if not satisfied</div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-white);">
+            <div class="container" style="max-width: 1080px;">
+                <header class="section-header">
+                    <h2 data-i18n="services.personalization.meme-generator.cat_gallery.h2">Meme & GIF Styles</h2>
+                </header>
+                <div class="cat-style-gallery">
+                        <div class="style-card">
+                            <div class="style-thumb" aria-hidden="true">😂</div>
+                            <div class="style-name" data-i18n="services.personalization.meme-generator.cat_gallery.style1">Classic Reaction</div>
+                        </div>
+                        <div class="style-card">
+                            <div class="style-thumb" aria-hidden="true">🎭</div>
+                            <div class="style-name" data-i18n="services.personalization.meme-generator.cat_gallery.style2">Dramatic Reveal</div>
+                        </div>
+                        <div class="style-card">
+                            <div class="style-thumb" aria-hidden="true">💃</div>
+                            <div class="style-name" data-i18n="services.personalization.meme-generator.cat_gallery.style3">Dance Loop</div>
+                        </div>
+                        <div class="style-card">
+                            <div class="style-thumb" aria-hidden="true">🐶</div>
+                            <div class="style-name" data-i18n="services.personalization.meme-generator.cat_gallery.style4">Pet Moment</div>
+                        </div>
+                        <div class="style-card">
+                            <div class="style-thumb" aria-hidden="true">👰</div>
+                            <div class="style-name" data-i18n="services.personalization.meme-generator.cat_gallery.style5">Bride/POV</div>
+                        </div>
+                        <div class="style-card">
+                            <div class="style-thumb" aria-hidden="true">🤵</div>
+                            <div class="style-name" data-i18n="services.personalization.meme-generator.cat_gallery.style6">Groom/POV</div>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REAL STORY -->
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="container" style="max-width: 820px;">
+                <div style="background: var(--color-white); border-radius: var(--radius-lg); padding: var(--spacing-lg); border-left: 4px solid var(--color-primary);">
+                    <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;" data-i18n="services.personalization.meme-generator.span_text.a_real_story.e5f6a7b8">A real story</span>
+                    <h2 style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 1.25rem; margin: 0.5rem 0;" data-i18n="services.personalization.meme-generator.h3_text.testimonial_title.e5f6a7b8">The Williams Family — 30 GIFs, family icon</h2>
+                    <p style="color: var(--color-text); line-height: 1.7; margin: 0 0 0.75rem 0;" data-i18n="services.personalization.meme-generator.p_text.testimonial_quote.e5f6a7b8">"30 wedding GIFs for the family group chat. Aunt Linda’s cake-cutting face became the family’s universal response GIF — reused 50+ times."</p>
+                    <cite style="color: var(--color-text-light); font-size: 0.875rem; font-style: normal;" data-i18n="services.personalization.meme-generator.cite_text.testimonial_cite.e5f6a7b8">— The Williams Family, Columbus OH</cite>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section" style="background: var(--color-white);">
+            <div class="container">
+                <h2  data-i18n="services.personalization.meme-generator.h2_text.what_we_make.83014985">What We Make</h2>
+                <p style="color: var(--color-text-light); max-width: 700px; margin-bottom: var(--spacing-lg); line-height: 1.8;"  data-i18n="services.personalization.meme-generator.p_text.from_the_bride_s_first_look_reaction_to.86357136">From the bride's first-look reaction to your dad's unexpected dance move — we turn the most shareable moments of your day into GIFs and short clips your guests will actually use.</p>
+
+                <div class="meme-grid">
+                    <div class="meme-card">
+                        <div class="meme-card-img"><picture><source srcset="/images/meme-i-do-reaction-360.webp 360w, /images/meme-i-do-reaction-720.webp 720w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/meme-i-do-reaction.jpg" alt="Bride emotional reaction to vows" loading="lazy" width="1024" height="1024" srcset="/images/meme-i-do-reaction-360.jpg 360w, /images/meme-i-do-reaction-720.jpg 720w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"></picture></div>
+<div class="meme-card-body"><p  data-i18n="services.personalization.meme-generator.p_text.the_i_do_reaction_gif.97104748">The "I do" reaction GIF</p></div>
+                    </div>
+                    <div class="meme-card">
+                        <div class="meme-card-img"><picture><source srcset="/images/meme-champagne-toast-360.webp 360w, /images/meme-champagne-toast-720.webp 720w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/meme-champagne-toast.jpg" alt="Wedding guests clinking champagne glasses" loading="lazy" width="1024" height="1024" srcset="/images/meme-champagne-toast-360.jpg 360w, /images/meme-champagne-toast-720.jpg 720w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"></picture></div>
+<div class="meme-card-body"><p  data-i18n="services.personalization.meme-generator.p_text.champagne_toast_loop.21138774">Champagne toast loop</p></div>
+                    </div>
+                    <div class="meme-card">
+                        <div class="meme-card-img"><picture><source srcset="/images/meme-ring-exchange-360.webp 360w, /images/meme-ring-exchange-720.webp 720w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/meme-ring-exchange.jpg" alt="Close-up of wedding ring exchange" loading="lazy" width="1024" height="1024" srcset="/images/meme-ring-exchange-360.jpg 360w, /images/meme-ring-exchange-720.jpg 720w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"></picture></div>
+<div class="meme-card-body"><p  data-i18n="services.personalization.meme-generator.p_text.ring_exchange_close_up.70539776">Ring exchange close-up</p></div>
+                    </div>
+                    <div class="meme-card">
+                        <div class="meme-card-img"><picture><source srcset="/images/meme-bride-entrance-360.webp 360w, /images/meme-bride-entrance-720.webp 720w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/meme-bride-entrance.jpg" alt="Bride walking down the aisle" loading="lazy" width="1024" height="1024" srcset="/images/meme-bride-entrance-360.jpg 360w, /images/meme-bride-entrance-720.jpg 720w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"></picture></div>
+<div class="meme-card-body"><p  data-i18n="services.personalization.meme-generator.p_text.bride_entrance_moment.25049143">Bride entrance moment</p></div>
+                    </div>
+                    <div class="meme-card">
+                        <div class="meme-card-img"><picture><source srcset="/images/meme-cake-cutting-360.webp 360w, /images/meme-cake-cutting-720.webp 720w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/meme-cake-cutting.jpg" alt="Couple cutting wedding cake" loading="lazy" width="1024" height="1024" srcset="/images/meme-cake-cutting-360.jpg 360w, /images/meme-cake-cutting-720.jpg 720w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"></picture></div>
+<div class="meme-card-body"><p  data-i18n="services.personalization.meme-generator.p_text.cake_cutting_reaction.14720106">Cake cutting reaction</p></div>
+                    </div>
+                    <div class="meme-card">
+                        <div class="meme-card-img"><picture><source srcset="/images/meme-first-dance-360.webp 360w, /images/meme-first-dance-720.webp 720w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/meme-first-dance.jpg" alt="First dance at wedding" loading="lazy" width="1024" height="1024" srcset="/images/meme-first-dance-360.jpg 360w, /images/meme-first-dance-720.jpg 720w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"></picture></div>
+<div class="meme-card-body"><p  data-i18n="services.personalization.meme-generator.p_text.first_dance_highlights.59861985">First dance highlights</p></div>
+                    </div>
+                    <div class="meme-card">
+                        <div class="meme-card-img"><picture><source srcset="/images/meme-best-man-speech-360.webp 360w, /images/meme-best-man-speech-720.webp 720w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/meme-best-man-speech.jpg" alt="Best man giving speech at wedding" loading="lazy" width="1024" height="1024" srcset="/images/meme-best-man-speech-360.jpg 360w, /images/meme-best-man-speech-720.jpg 720w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"></picture></div>
+<div class="meme-card-body"><p  data-i18n="services.personalization.meme-generator.p_text.best_man_speech_meme.15232248">"Best man speech" meme</p></div>
+                    </div>
+                    <div class="meme-card">
+                        <div class="meme-card-img"><picture><source srcset="/images/meme-reception-party-360.webp 360w, /images/meme-reception-party-720.webp 720w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/meme-reception-party.jpg" alt="Wedding reception dance floor" loading="lazy" width="1024" height="1024" srcset="/images/meme-reception-party-360.jpg 360w, /images/meme-reception-party-720.jpg 720w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"></picture></div>
+<div class="meme-card-body"><p  data-i18n="services.personalization.meme-generator.p_text.reception_party_loop.57310644">Reception party loop</p></div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: var(--spacing-xl);"  data-i18n="services.personalization.meme-generator.h3_text.three_output_styles_one_goal.70390614">Three output styles, one goal</h3>
+                <p style="color: var(--color-text-light); max-width: 700px; line-height: 1.8;"  data-i18n="services.personalization.meme-generator.p_text.every_gif_or_clip_we_make_falls_into_one.02734093">Every GIF or clip we make falls into one of three styles. You can mix and match across a single order, or pick a single style for the whole pack — most couples go with a mix that covers both reaction GIFs and vertical short-form video.</p>
+
+                <h3 style="margin-top: var(--spacing-lg);"  data-i18n="services.personalization.meme-generator.h3_text.reaction_gifs_3_5_sec_loops.34445720">Reaction GIFs (3–5 sec loops)</h3>
+                <p style="color: var(--color-text-light); max-width: 700px; line-height: 1.8;"  data-i18n="services.personalization.meme-generator.p_text.the_classic_format_small_looping_and_bui.22790855">The classic format. Small, looping, and built for the group chat. We pair these with witty captions where the moment calls for it. Best used for the moments where facial expression carries the joke — the "I do," the cake cutting, the best man's open mouth.</p>
+
+                <h3 style="margin-top: var(--spacing-lg);"  data-i18n="services.personalization.meme-generator.h3_text.meme_templates_caption_driven.37672773">Meme Templates (caption-driven)</h3>
+                <p style="color: var(--color-text-light); max-width: 700px; line-height: 1.8;"  data-i18n="services.personalization.meme-generator.p_text.a_still_or_short_clip_with_a_typed_capti.69773794">A still or short clip with a typed caption — the format you see on Twitter, Reddit, and Instagram meme accounts. We write the captions in your voice, or you provide a list of inside-joke captions from your guest book. Best for: the dance floor, the slow songs, the group toast.</p>
+
+                <h3 style="margin-top: var(--spacing-lg);"  data-i18n="services.personalization.meme-generator.h3_text.vertical_short_clips_tiktok_reels_shorts.61284259">Vertical Short Clips (TikTok / Reels / Shorts)</h3>
+                <p style="color: var(--color-text-light); max-width: 700px; line-height: 1.8;"  data-i18n="services.personalization.meme-generator.p_text.9_16_vertical_video_5_15_seconds_with_op.22539969">9:16 vertical video, 5–15 seconds, with optional trending audio. These are the format that gets reach on social media. Best for: the proposal moment, the first look, the exit at the end of the night. The kind of clips your friends will share and tag you in.</p>
+            </div>
+        </section>
+
+        <section class="section section-dark">
+            <div class="container">
+                <div style="text-align:center; max-width:600px; margin:0 auto;">
+                    <h2  data-i18n="services.personalization.meme-generator.h2_text.get_your_shareable_wedding_moments.38905344">Get Your Shareable Wedding Moments</h2>
+                    <p style="margin: var(--spacing-sm) 0 var(--spacing-lg);"  data-i18n="services.personalization.meme-generator.p_text.tell_us_about_your_day_we_ll_pick_the_be.58335385">Tell us about your day — we'll pick the best moments and turn them into shareables.</p>
+                    <a href="/order/#service=meme-generator" class="btn btn-primary btn-large" title="Get Started"  data-i18n="services.personalization.meme-generator.a_text.get_started.38186077">Get Started →</a>
+                    <div style="margin-top: var(--spacing-md);">
+                        <a href="/gallery/" class="hero-samples-link" data-i18n="services.common.see_samples.9d9e9d92">🎬 See real examples in our gallery →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-white);">
+            <div class="container" style="max-width: 820px;">
+                <header class="section-header" style="text-align: left; margin-bottom: var(--spacing-md);">
+                    <h2 style="text-align: left;"  data-i18n="services.personalization.meme-generator.h2_text.how_our_meme_gif_generator_works.64591378">How Our Meme & GIF Generator Works</h2>
+                </header>
+                <ol style="padding-left: var(--spacing-lg); line-height: 1.8; color: var(--color-text);">
+                        <li><strong  data-i18n="services.personalization.meme-generator.strong_text.upload_your_best_moments.65276963">Upload Your Best Moments</strong> — <span data-i18n="services.personalization.meme-generator.span_text.step1_desc.e5f6a7b8">Send 1-2 hours of raw footage from the wedding. We extract the funniest, cutest, and most shareable moments. Anything that made you laugh or cry happy tears is fair game.</span></li>
+                        <li><strong  data-i18n="services.personalization.meme-generator.strong_text.pick_a_style.38927082">Pick a Style</strong> — <span data-i18n="services.personalization.meme-generator.span_text.step2_desc.e5f6a7b8">Choose from 4 output styles: classic reaction GIFs (with captions), vertical TikTok clips (with trending audio), short Instagram Reels, or full meme packs (10-20 pieces).</span></li>
+                        <li><strong  data-i18n="services.personalization.meme-generator.strong_text.ai_curation_editing.90434996">AI Curation & Editing</strong> — <span data-i18n="services.personalization.meme-generator.span_text.step3_desc.e5f6a7b8">Our AI finds the exact 2-7 second windows that work as standalone content, adds witty captions if needed (or uses your own), and syncs to music for vertical videos.</span></li>
+                        <li><strong  data-i18n="services.personalization.meme-generator.strong_text.delivery_in_every_format.98791919">Delivery in Every Format</strong> — <span data-i18n="services.personalization.meme-generator.span_text.step4_desc.e5f6a7b8">Get GIFs (looping, 5-10 sec), vertical MP4s (9:16, with or without music), and a meme pack with all your best moments in one downloadable zip. Ready to share on any platform.</span></li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="container" style="max-width: 820px;">
+                <header class="section-header" style="text-align: left; margin-bottom: var(--spacing-md);">
+                    <h2 style="text-align: left;"  data-i18n="about.h2_text.frequently_asked_questions.84363580">Frequently Asked Questions</h2>
+                </header>
+                <details class="faq-item">
+                    <summary  data-i18n="services.personalization.meme-generator.summary_text.will_my_guests_see_these_and_be_embarras.12452389">Will my guests see these and be embarrassed?</summary>
+                    <p  data-i18n="services.personalization.meme-generator.p_text.we_carefully_review_every_clip_before_de.08293038">We carefully review every clip before delivery. Anything potentially embarrassing (drunk uncle, wardrobe malfunction) is flagged or removed. The tone is wholesome fun, not roast. You can also request a private review and reject any you don't like.</p>
+                </details>
+                <details class="faq-item">
+                    <summary  data-i18n="services.personalization.meme-generator.summary_text.can_i_use_this_for_a_tiktok_account_i_wa.09722851">Can I use this for a TikTok account I want to start?</summary>
+                    <p  data-i18n="services.personalization.meme-generator.p_text.yes_many_couples_use_our_service_as_a_co.48133697">Yes — many couples use our service as a content library for their new TikTok or Instagram account. The vertical format and trending audio integration make posting effortless. Some couples have gained 10K+ followers from a single meme pack.</p>
+                </details>
+                <details class="faq-item">
+                    <summary  data-i18n="services.personalization.meme-generator.summary_text.do_the_gifs_loop_smoothly.53384964">Do the GIFs loop smoothly?</summary>
+                    <p  data-i18n="services.personalization.meme-generator.p_text.yes_our_ai_detects_the_natural_start_and.22837239">Yes. Our AI detects the natural start and end of an action (a smile, a laugh, a hug) and loops the clip at that boundary. The result is a seamless loop with no visible jump cut, optimized for the platform's autoplay behavior.</p>
+                </details>
+<!-- meme-generator-unique-faq -->                <details class="faq-item">
+                    <summary data-i18n="services.personalization.meme-generator.summary_text.faq1_q.e5f6a7b8">Who owns the memes?</summary>
+                    <p data-i18n="services.personalization.meme-generator.p_text.faq1_a.e5f6a7b8">You do. Once delivered, you can use the GIFs anywhere — family group chat, Instagram, TikTok, Slack, wedding thank-you cards, printed wedding albums. No watermarks, no licensing fees, no expiration.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="services.personalization.meme-generator.summary_text.faq2_q.e5f6a7b8">Can I share them on social media right away?</summary>
+                    <p data-i18n="services.personalization.meme-generator.p_text.faq2_a.e5f6a7b8">Yes. We deliver in standard GIF format and short MP4 loops, both ready for direct upload to Instagram Stories, TikTok, iMessage, and WhatsApp. Each clip is under 10 seconds for fast loading.</p>
+                </details>
+
+            
+                <details class="faq-item">
+                    <summary data-i18n="services.meme-generator.summary_text.delivery_time.932349e9">How long does meme generation take?</summary>
+                    <p data-i18n="services.meme-generator.p_text.delivery_time_answer.7d946ea1">Most packages are delivered in 2–3 business days. Larger sets (20+ GIFs) take 3–5 business days. Same-day rush delivery is available for an additional 50% fee.</p>
+                </details>
+</div>
+        </section>
+
+    
+
+        <!-- RELATED SERVICES -->
+        <section class="section" style="background: var(--color-white);">
+            <div class="container" style="max-width: 980px;">
+                <header class="section-header" style="text-align: left; margin-bottom: var(--spacing-md);">
+                    <h2 style="text-align: left;" data-i18n="services.personalization.meme-generator.h2_text.pair_it_with.e5f6a7b8">Pair It With&hellip;</h2>
+                    <p class="section-intro" style="text-align:left;margin:0;" data-i18n="services.personalization.meme-generator.p_text.pair_it_with_intro.e5f6a7b8">These services combine well with what you&rsquo;re looking at. 2+ services get a 10&ndash;20% bundle discount.</p>
+                </header>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--spacing-md);">
+                    <a href="/services/personalization/pet-wedding/" class="related-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-decoration:none;color:inherit;transition:var(--transition);">
+                        <h3 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.0625rem;margin:0 0 0.4rem 0;" data-i18n="services.personalization.meme-generator.h4_text.card1_title.e5f6a7b8">Pet Wedding Video</h3>
+                        <p style="color:var(--color-text-light);font-size:0.875rem;line-height:1.5;margin:0;" data-i18n="services.personalization.meme-generator.p_text.card1_desc.e5f6a7b8">Mix in pet-reaction GIFs for the family group chat gold.</p>
+                    </a>
+                    <a href="/services/personalization/wedding-trailer/" class="related-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-decoration:none;color:inherit;transition:var(--transition);">
+                        <h3 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.0625rem;margin:0 0 0.4rem 0;" data-i18n="services.personalization.meme-generator.h4_text.card2_title.e5f6a7b8">Cinematic Wedding Trailer</h3>
+                        <p style="color:var(--color-text-light);font-size:0.875rem;line-height:1.5;margin:0;" data-i18n="services.personalization.meme-generator.p_text.card2_desc.e5f6a7b8">Have a serious cinematic trailer plus a fun memes pack — covers every audience.</p>
+                    </a>
+                    <a href="/services/personalization/ai-video-generator/" class="related-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-decoration:none;color:inherit;transition:var(--transition);">
+                        <h3 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.0625rem;margin:0 0 0.4rem 0;" data-i18n="services.meme-generator.h4_text.related_ai_video_generator_title.0f3cbcf0">AI Video Generator</h3>
+                        <p style="color:var(--color-text-light);font-size:0.875rem;line-height:1.5;margin:0;" data-i18n="services.meme-generator.p_text.related_ai_video_generator_desc.77117a83">Build a real film from photos, then carve it into a meme pack for group chats.</p>
+                    </a>
+                    <a href="/services/absence-compensation/celebrity-message/" class="related-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-decoration:none;color:inherit;transition:var(--transition);">
+                        <h3 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.0625rem;margin:0 0 0.4rem 0;" data-i18n="services.meme-generator.h4_text.related_celebrity_message_title.eab3d473">Celebrity Message</h3>
+                        <p style="color:var(--color-text-light);font-size:0.875rem;line-height:1.5;margin:0;" data-i18n="services.meme-generator.p_text.related_celebrity_message_desc.3e02cfac">Pair a celebrity-style opener with meme GIFs scattered through the reception — guests will be talking for months.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://weddingai.video/"},
+            {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://weddingai.video/services/"},
+            {"@type": "ListItem", "position": 3, "name": "Personalization", "item": "https://weddingai.video/services/#personalization"},
+            {"@type": "ListItem", "position": 4, "name": "Wedding Memes & GIFs", "item": "https://weddingai.video/services/personalization/meme-generator"}
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Wedding GIFs & Memes",
+        "name": "Wedding GIFs & Memes",
+        "description": "Custom shareable wedding GIFs and memes for social media and group chats.",
+        "provider": {"@id": "https://weddingai.video/#organization"},
+        "url": "https://weddingai.video/services/personalization/meme-generator",
+        "areaServed": [{"@type": "Country", "name": "US"}, {"@type": "Country", "name": "UK"}, {"@type": "Country", "name": "Germany"}, {"@type": "Country", "name": "France"}, {"@type": "Country", "name": "Italy"}, {"@type": "Country", "name": "Spain"}, {"@type": "Country", "name": "Australia"}, {"@type": "Country", "name": "Canada"}, {"@type": "Country", "name": "India"}, {"@type": "Country", "name": "China"}, {"@type": "Country", "name": "Japan"}],
+        "offers": {
+            "@type": "Offer",
+            "url": "https://weddingai.video/services/personalization/meme-generator",
+            "priceCurrency": "USD",
+            "price": "9.90",
+            "priceSpecification": {"@type": "PriceSpecification", "priceCurrency": "USD", "minPrice": "9.90", "price": "9.90"},
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Will my guests see these and be embarrassed?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We carefully review every clip before delivery. Anything potentially embarrassing (drunk uncle, wardrobe malfunction) is flagged or removed. The tone is wholesome fun, not roast. You can also request a private review and reject any you don't like."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I use this for a TikTok account I want to start?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes — many couples use our service as a content library for their new TikTok or Instagram account. The vertical format and trending audio integration make posting effortless. Some couples have gained 10K+ followers from a single meme pack."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do the GIFs loop smoothly?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Our AI detects the natural start and end of an action (a smile, a laugh, a hug) and loops the clip at that boundary. The result is a seamless loop with no visible jump cut, optimized for the platform's autoplay behavior."
+                }
+            }
+        ,
+            {
+                "@type": "Question",
+                "name": "Who owns the memes?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You do. Once delivered, you can use the GIFs anywhere — family group chat, Instagram, TikTok, Slack, wedding thank-you cards, printed wedding albums. No watermarks, no licensing fees, no expiration."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I share them on social media right away?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. We deliver in standard GIF format and short MP4 loops, both ready for direct upload to Instagram Stories, TikTok, iMessage, and WhatsApp. Each clip is under 10 seconds for fast loading."
+                }
+            }
+        ]
+    }
+    </script>
+
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo" title="WeddingAI.video — wedding video services"><picture><source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px"><source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px"><img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px"></picture></a>
+                <p  data-i18n="404.p_text.ai_powered_wedding_video_services_for_co.90691298">AI-powered wedding video services for couples worldwide.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">                    <div class="footer-col">
+                        <h3  data-i18n="404.a_text.services.84864121">Services</h3>
+                        <ul>
+                                                                                    <li><a href="/services/video-enhancement/slow-motion/" title="AI Slow Motion Enhancement" data-i18n="404.a_text.slow_motion.30129340">Slow Motion</a></li>
+                            <li><a href="/services/absence-compensation/family-tribute/" title="Tribute to Loved Ones" data-i18n="404.a_text.family_tribute.39408322">Family Tribute</a></li>
+                            <li><a href="/services/absence-compensation/family-message/" title="Remote Family Video Message" data-i18n="404.a_text.family_message.27013166">Family Message</a></li>
+                            <li><a href="/services/absence-compensation/celebrity-message/" title="Celebrity-Style Wedding Message" data-i18n="404.a_text.celebrity_message.59529435">Celebrity Message</a></li>
+                            <li><a href="/services/personalization/ai-video-generator/" title="AI Wedding Video Generator" data-i18n="404.a_text.ai_video_generator.39420322">AI Video Generator</a></li>
+                            <li><a href="/services/personalization/wedding-trailer/" title="Cinematic Wedding Trailer" data-i18n="404.a_text.wedding_trailer.04692297">Wedding Trailer</a></li>
+                            <li><a href="/services/personalization/pet-wedding/" title="Pet Wedding Video" data-i18n="404.a_text.pet_wedding.23911820">Pet Wedding</a></li>
+                            <li><a href="/services/personalization/multilingual/" title="Multilingual Wedding Video" data-i18n="404.a_text.multilingual.74639147">Multilingual</a></li>
+                            <li><a href="/services/personalization/cartoon-style/" title="Cartoon / Animated Style" data-i18n="404.a_text.cartoon_style.16664616">Cartoon Style</a></li>
+                            <li><a href="/services/personalization/meme-generator/" title="Wedding GIFs & Memes" title="Wedding GIFs &amp; Memes" data-i18n="404.a_text.wedding_memes.22951185">Wedding Memes</a></li>
+                                                    </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3  data-i18n="404.h3_text.company.16024258">Company</h3>
+                        <ul>
+                            <li><a href="/about/" title="Learn about us" data-i18n="404.a_text.about_us.90074652">About Us</a></li>
+                            <li><a href="/gallery/" title="View our gallery and case studies" data-i18n="404.a_text.gallery.96646935">Gallery</a></li>
+                            <li><a href="/order/" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3  data-i18n="404.h3_text.contact.47569808">Contact</h3>
+                        <ul>
+                            <li><a href="mailto:order@weddingai.video" title="Send us an email at order@weddingai.video">order@weddingai.video</a></li>
+                        </ul>
+                    </div></nav>
+        </div>
+        
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p  data-i18n="404.p_text.2026_weddingai_video_all_rights_reserve.73926096">© 2026 WeddingAI.video. All rights reserved.</p>
+                <div class="footer-featured">
+                    </div>
+                <a href="/privacy/" title="Read our privacy policy" data-i18n="404.a_text.privacy_policy.78442268">Privacy Policy</a> · <a href="/terms/" title="Read our terms of service" title="Read our terms of service" data-i18n="404.a_text.terms_of_service.30659181">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Schema.org Structured Data -->
+    
+    
+    
+
+</body>
+</html>

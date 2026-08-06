@@ -1,0 +1,1522 @@
+﻿<!DOCTYPE html>
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WeddingAI.video · 系统架构总览</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --card: #ffffff;
+    --ink: #14171e;
+    --ink-soft: #3a4256;
+    --muted: #7c7a72;
+    --line: #e9e3d6;
+    --line-soft: #f0eadb;
+    --primary: #2f6f5e;
+    --primary-soft: rgba(47, 111, 94, 0.08);
+    --primary-line: rgba(47, 111, 94, 0.22);
+    --accent: #c97b3f;
+    --accent-soft: rgba(201, 123, 63, 0.10);
+    --rose: #b06367;
+    --rose-soft: rgba(176, 99, 103, 0.10);
+    --slate: #4a5b6e;
+    --slate-soft: rgba(74, 91, 110, 0.10);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(47, 111, 94, 0.05) 0%, transparent 32%),
+      radial-gradient(circle at 88% 92%, rgba(201, 123, 63, 0.05) 0%, transparent 32%);
+    background-attachment: fixed;
+  }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 64px 32px 96px; }
+
+  /* Header */
+  .head { margin-bottom: 64px; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--primary); font-weight: 600; margin-bottom: 12px;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 44px; line-height: 1.1; font-weight: 400;
+    margin: 0 0 16px; letter-spacing: -0.01em;
+  }
+  h1 .accent { color: var(--primary); font-style: italic; }
+  .lede { color: var(--ink-soft); font-size: 17px; max-width: 720px; line-height: 1.55; }
+
+  /* Section */
+  section { margin-top: 72px; scroll-margin-top: 24px; }
+  .sec-num {
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--primary); padding: 4px 10px;
+    background: var(--primary-soft); border-radius: 4px; margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px; line-height: 1.2; font-weight: 400;
+    margin: 0 0 12px; letter-spacing: -0.005em;
+  }
+  h2 .marker { color: var(--primary); }
+  .sec-intro { color: var(--ink-soft); max-width: 720px; margin: 0 0 32px; }
+
+  /* KV cards (header strip) */
+  .stats {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 12px; margin-top: 32px;
+  }
+  .stat {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 16px 18px;
+  }
+  .stat .v {
+    font-family: 'JetBrains Mono', monospace; font-weight: 500;
+    font-size: 22px; color: var(--ink); line-height: 1.1;
+  }
+  .stat .v .u { color: var(--muted); font-size: 14px; }
+  .stat .l { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  /* Architecture diagram canvas */
+  .canvas {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 20px; padding: 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    overflow-x: auto;
+  }
+  .canvas svg { display: block; width: 100%; height: auto; min-width: 880px; }
+
+  /* Layered architecture (Section 3) */
+  .layers { display: flex; flex-direction: column; gap: 8px; }
+  .layer {
+    display: grid; grid-template-columns: 64px 1fr; gap: 16px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 22px;
+    transition: all 0.18s ease;
+  }
+  .layer:hover { transform: translateY(-1px); box-shadow: 0 4px 16px -4px rgba(0,0,0,0.06); }
+  .layer .num {
+    font-family: 'JetBrains Mono', monospace; font-size: 22px;
+    color: var(--primary); font-weight: 500; line-height: 1;
+  }
+  .layer h3 {
+    font-family: 'Outfit', sans-serif; font-weight: 600;
+    font-size: 15px; margin: 0 0 4px; letter-spacing: 0.01em;
+  }
+  .layer .lbl { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .layer .items { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+    padding: 3px 8px; border-radius: 4px;
+    background: var(--line-soft); color: var(--ink-soft);
+    border: 1px solid var(--line); white-space: nowrap;
+  }
+  .chip.primary { background: var(--primary-soft); color: var(--primary); border-color: var(--primary-line); }
+  .chip.accent  { background: var(--accent-soft); color: var(--accent); border-color: rgba(201, 123, 63, 0.22); }
+  .chip.rose    { background: var(--rose-soft); color: var(--rose); border-color: rgba(176, 99, 103, 0.22); }
+  .chip.slate   { background: var(--slate-soft); color: var(--slate); border-color: rgba(74, 91, 110, 0.22); }
+
+  /* Timeline */
+  .timeline { list-style: none; padding: 0; margin: 0; position: relative; }
+  .timeline::before {
+    content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--primary); opacity: 0.3;
+  }
+  .timeline li {
+    position: relative; padding: 0 0 22px 40px;
+  }
+  .timeline li:last-child { padding-bottom: 0; }
+  .timeline li::before {
+    content: ""; position: absolute; left: 4px; top: 4px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: white; border: 2px solid var(--primary);
+  }
+  .timeline .step {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--primary); letter-spacing: 0.05em; margin-bottom: 2px;
+  }
+  .timeline h4 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+  .timeline p { color: var(--ink-soft); font-size: 13.5px; margin: 0; }
+
+  /* KV grid */
+  .kv6 { display: grid; grid-template-columns: 200px 1fr; gap: 0; }
+  .kv6 dt {
+    color: var(--muted); font-size: 13px; padding: 12px 16px 12px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .kv6 dd {
+    margin: 0; padding: 12px 0; font-size: 13.5px; color: var(--ink-soft);
+    border-bottom: 1px dashed var(--line);
+  }
+  .kv6 dl { display: contents; }
+  .kv6 .group { display: contents; }
+  .kv6 .group-title {
+    grid-column: 1 / -1; font-family: 'Outfit', sans-serif; font-weight: 600;
+    font-size: 13px; color: var(--primary); letter-spacing: 0.04em;
+    text-transform: uppercase; padding: 18px 0 8px; border-bottom: 1px solid var(--line);
+  }
+  .kv6 .group-title:first-child { padding-top: 0; }
+
+  /* TOC */
+  .toc {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+    margin: 0 0 72px; padding: 16px 20px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .toc a {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 8px 4px; border-radius: 8px; text-decoration: none;
+    transition: background 0.15s;
+  }
+  .toc a:hover { background: var(--primary-soft); }
+  .toc .n {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--primary); font-weight: 500; letter-spacing: 0.04em;
+  }
+  .toc .t { font-size: 12.5px; color: var(--ink-soft); font-weight: 500; }
+  .toc a:hover .t { color: var(--primary); }
+
+  /* Process flow row (Section 7) */
+  .flow-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .flow-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 22px;
+    transition: all 0.18s;
+  }
+  .flow-card:hover { transform: translateY(-1px); box-shadow: 0 4px 16px -4px rgba(0,0,0,0.06); }
+  .flow-card h3 {
+    font-size: 14px; font-weight: 600; margin: 0 0 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .flow-card .badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+    padding: 2px 6px; border-radius: 3px;
+    background: var(--primary-soft); color: var(--primary);
+  }
+  .flow-card .lead { font-size: 12.5px; color: var(--muted); margin-bottom: 14px; }
+  .flow-card .steps { list-style: none; padding: 0; margin: 0; counter-reset: stp; }
+  .flow-card .steps li {
+    counter-increment: stp; position: relative; padding: 6px 0 6px 28px;
+    font-size: 12.5px; color: var(--ink-soft); border-bottom: 1px dashed var(--line-soft);
+  }
+  .flow-card .steps li:last-child { border-bottom: 0; }
+  .flow-card .steps li::before {
+    content: counter(stp); position: absolute; left: 0; top: 5px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--primary-soft); color: var(--primary);
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .flow-card .steps li b { color: var(--ink); font-weight: 500; }
+
+  /* Sequence diagram wrapper (Section 8) */
+  .seq-wrap {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03); overflow-x: auto;
+  }
+  .seq-wrap svg { display: block; width: 100%; height: auto; min-width: 720px; }
+
+  /* Tag chips in data-flow cards */
+  .tag { display: inline-block; font-size: 11px; padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+  .tag.in   { background: rgba(47, 111, 94, 0.10);  color: #2f6f5e; }
+  .tag.mid  { background: rgba(201, 123, 63, 0.10); color: #c97b3f; }
+  .tag.out  { background: rgba(176, 99, 103, 0.10); color: #b06367; }
+  .tag.meta { background: rgba(74, 91, 110, 0.10);  color: #4a5b6e; }
+
+  /* Topology zones (Section 6) */
+  .topo-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .topo-zone {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 20px;
+  }
+  .topo-zone h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.08em; color: var(--muted);
+    margin: 0 0 4px; font-weight: 500;
+  }
+  .topo-zone .zh { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
+  .topo-zone .nodes { display: flex; flex-direction: column; gap: 8px; }
+  .topo-node {
+    padding: 8px 12px; border-radius: 6px; font-size: 12.5px;
+    background: var(--line-soft); color: var(--ink-soft);
+    border-left: 3px solid var(--primary);
+  }
+  .topo-node.accent { border-left-color: var(--accent); }
+  .topo-node.rose   { border-left-color: var(--rose); }
+  .topo-node.slate  { border-left-color: var(--slate); }
+  .topo-node b { color: var(--ink); font-weight: 500; }
+
+  /* Page tree (Section 9) */
+  .page-tree {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+  }
+  .pt-col {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 12px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .pt-head {
+    padding-bottom: 10px; border-bottom: 1px solid var(--line);
+    margin-bottom: 4px;
+  }
+  .pt-head .url {
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+    color: var(--muted); display: block; margin-bottom: 4px; line-height: 1.3;
+    word-break: break-all;
+  }
+  .pt-head .name { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .pt-head .meta { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+  .pt-block {
+    padding: 6px 8px; border-radius: 5px; font-size: 11.5px;
+    background: var(--line-soft); color: var(--ink-soft);
+    border-left: 3px solid var(--primary);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pt-block.head   { background: #fff; border-left-color: #2f6f5e; }
+  .pt-block.nav    { background: rgba(47, 111, 94, 0.08); border-left-color: #2f6f5e; }
+  .pt-block.hero   { background: rgba(47, 111, 94, 0.10); border-left-color: #2f6f5e; font-weight: 500; }
+  .pt-block.content{ background: rgba(201, 123, 63, 0.06); border-left-color: #c97b3f; }
+  .pt-block.form   { background: rgba(176, 99, 103, 0.08); border-left-color: #b06367; }
+  .pt-block.cta    { background: rgba(176, 99, 103, 0.10); border-left-color: #b06367; font-weight: 500; }
+  .pt-block.footer { background: rgba(74, 91, 110, 0.06); border-left-color: #4a5b6e; }
+  .pt-block .ico {
+    width: 14px; height: 14px; flex: 0 0 14px; color: var(--ink-soft);
+  }
+
+  /* Lifeline roles (Section 10) */
+  .role-pill {
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; padding: 2px 7px; border-radius: 3px;
+    margin-right: 6px; letter-spacing: 0.03em;
+  }
+  .role-pill.ws   { background: rgba(176, 99, 103, 0.10); color: #b06367; }
+  .role-pill.edge { background: rgba(201, 123, 63, 0.10); color: #c97b3f; }
+  .role-pill.br   { background: rgba(47, 111, 94, 0.10);  color: #2f6f5e; }
+
+  /* Footer */
+  .foot {
+    margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 12.5px; display: flex; justify-content: space-between;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .wrap { padding: 40px 20px 64px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 24px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .layer { grid-template-columns: 48px 1fr; padding: 14px 16px; }
+    .kv6 { grid-template-columns: 130px 1fr; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <!-- ============== HEADER ============== -->
+  <header class="head">
+    <div class="eyebrow">WeddingAI.video · Architecture Overview</div>
+    <h1>在 Cloudflare Pages 上 <span class="accent">静态优先</span><br/>搭一个多语言 AI 婚礼视频站</h1>
+    <p class="lede">功能上服务三类客户(新人、家庭、远距亲友),技术上把 80+ HTML 页面推到 CDN 边缘,在 Workers 里加 8 步中间件管线做 i18n 注入、CSP nonce 生成与 SEO 头规范化,再把表单与死信队列写到 KV。下面两张图先讲清楚用户能看到什么,再讲清楚代码是怎么组织的。</p>
+
+    <div class="stats">
+      <div class="stat"><div class="v">10<span class="u"> 种</span></div><div class="l">i18n 语言 (en/zh/es/fr/de/pt/ja/ru/ar/th)</div></div>
+      <div class="stat"><div class="v">~80<span class="u"> 页</span></div><div class="l">静态 HTML 模板 (首页 + 服务 + 博客)</div></div>
+      <div class="stat"><div class="v">50<span class="u">+ 篇</span></div><div class="l">SEO 博客 (articles/*.md → /blog/)</div></div>
+      <div class="stat"><div class="v">5<span class="u"> 个</span></div><div class="l">Workers 函数 (middleware + 4 API)</div></div>
+      <div class="stat"><div class="v">1<span class="u"> KV</span></div><div class="l">LEAD_STORAGE: 限流 + DLQ 复用</div></div>
+    </div>
+  </header>
+
+  <!-- ============== TOC ============== -->
+  <nav class="toc">
+    <a href="#s1"><span class="n">01</span><span class="t">功能架构</span></a>
+    <a href="#s2"><span class="n">02</span><span class="t">代码架构</span></a>
+    <a href="#s3"><span class="n">03</span><span class="t">请求生命周期</span></a>
+    <a href="#s4"><span class="n">04</span><span class="t">关键模块速查</span></a>
+    <a href="#s5"><span class="n">05</span><span class="t">业务数据流</span></a>
+    <a href="#s6"><span class="n">06</span><span class="t">系统组件拓扑</span></a>
+    <a href="#s7"><span class="n">07</span><span class="t">业务流程</span></a>
+    <a href="#s8"><span class="n">08</span><span class="t">跨服务时序</span></a>
+    <a href="#s9"><span class="n">09</span><span class="t">页面区块架构</span></a>
+    <a href="#s10"><span class="n">10</span><span class="t">页面渲染生命周期</span></a>
+  </nav>
+
+  <!-- ============== SECTION 1: 功能架构 ============== -->
+  <section id="s1">
+    <div class="sec-num">01 · 功能架构</div>
+    <h2>访客能看到 <span class="marker">五大模块</span></h2>
+    <p class="sec-intro">从访客视角看,这个站分五块:三组服务(个性化、视频增强、离别补偿)是核心转化点;博客 + 资源中心是 SEO 引流的主入口;定价 + 订购 + 成功页是收口;信任与合规层散落全站。下方是按转化路径梳理的页面树。</p>
+
+    <div class="canvas">
+      <svg viewBox="0 0 1040 760" xmlns="http://www.w3.org/2000/svg" font-family="Outfit, sans-serif">
+        <!-- defs -->
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f6f5e" />
+          </marker>
+          <marker id="arrMute" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7c7a72" />
+          </marker>
+        </defs>
+
+        <!-- Row 1: Entry layer -->
+        <g>
+          <text x="20" y="28" font-size="11" fill="#7c7a72" letter-spacing="0.12em">入口层 · ENTRY</text>
+          <line x1="20" y1="38" x2="1020" y2="38" stroke="#e9e3d6" stroke-dasharray="3 3" />
+
+          <!-- home -->
+          <g transform="translate(20, 50)">
+            <rect width="120" height="56" rx="10" fill="#fff" stroke="#2f6f5e" stroke-width="1.5"/>
+            <text x="60" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#14171e">首页 /</text>
+            <text x="60" y="44" text-anchor="middle" font-size="11" fill="#7c7a72">Hero + 卖点 + 案例</text>
+          </g>
+          <g transform="translate(160, 50)">
+            <rect width="120" height="56" rx="10" fill="#fff" stroke="#c97b3f" stroke-width="1.5"/>
+            <text x="60" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#14171e">博客 /blog/</text>
+            <text x="60" y="44" text-anchor="middle" font-size="11" fill="#7c7a72">50+ SEO 文章</text>
+          </g>
+          <g transform="translate(300, 50)">
+            <rect width="120" height="56" rx="10" fill="#fff" stroke="#c97b3f" stroke-width="1.5"/>
+            <text x="60" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#14171e">资源中心</text>
+            <text x="60" y="44" text-anchor="middle" font-size="11" fill="#7c7a72">/resources/</text>
+          </g>
+          <g transform="translate(440, 50)">
+            <rect width="120" height="56" rx="10" fill="#fff" stroke="#c97b3f" stroke-width="1.5"/>
+            <text x="60" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#14171e">画廊</text>
+            <text x="60" y="44" text-anchor="middle" font-size="11" fill="#7c7a72">/gallery/ 案例视频</text>
+          </g>
+          <g transform="translate(580, 50)">
+            <rect width="120" height="56" rx="10" fill="#fff" stroke="#b06367" stroke-width="1.5"/>
+            <text x="60" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#14171e">价格 /pricing/</text>
+            <text x="60" y="44" text-anchor="middle" font-size="11" fill="#7c7a72">3 档套餐</text>
+          </g>
+          <g transform="translate(720, 50)">
+            <rect width="120" height="56" rx="10" fill="#fff" stroke="#b06367" stroke-width="1.5"/>
+            <text x="60" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#14171e">联系 /about/</text>
+            <text x="60" y="44" text-anchor="middle" font-size="11" fill="#7c7a72">quote API 入口</text>
+          </g>
+          <g transform="translate(860, 50)">
+            <rect width="120" height="56" rx="10" fill="#fff" stroke="#7c7a72" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="60" y="26" text-anchor="middle" font-size="13" font-weight="500" fill="#3a4256">搜索 /search/</text>
+            <text x="60" y="44" text-anchor="middle" font-size="11" fill="#7c7a72">全文检索</text>
+          </g>
+        </g>
+
+        <!-- Row 2: Service layer -->
+        <g transform="translate(0, 130)">
+          <text x="20" y="0" font-size="11" fill="#7c7a72" letter-spacing="0.12em">服务层 · CORE SERVICES  (3 大类 / 9 个 SKU)</text>
+          <line x1="20" y1="10" x2="1020" y2="10" stroke="#e9e3d6" stroke-dasharray="3 3" />
+
+          <!-- personalization group -->
+          <g transform="translate(20, 24)">
+            <rect width="320" height="170" rx="12" fill="rgba(47, 111, 94, 0.04)" stroke="#2f6f5e" stroke-width="1"/>
+            <text x="14" y="20" font-size="11" font-weight="600" fill="#2f6f5e" letter-spacing="0.08em">PERSONALIZATION</text>
+            <text x="14" y="36" font-size="12" fill="#3a4256">个性化创作 · 6 SKU</text>
+            <g font-size="11.5" fill="#14171e">
+              <rect x="14" y="46" width="290" height="20" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="22" y="60">AI Video Generator  /services/personalization/ai-video-generator/</text>
+              <rect x="14" y="70" width="290" height="20" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="22" y="84">Pet Wedding         /services/personalization/pet-wedding/</text>
+              <rect x="14" y="94" width="290" height="20" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="22" y="108">Wedding Trailer     /services/personalization/wedding-trailer/</text>
+              <rect x="14" y="118" width="290" height="20" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="22" y="132">Multilingual        /services/personalization/multilingual/</text>
+              <rect x="14" y="142" width="290" height="20" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="22" y="156">Cartoon Style       /services/personalization/cartoon-style/</text>
+            </g>
+          </g>
+
+          <!-- enhancement group -->
+          <g transform="translate(360, 24)">
+            <rect width="320" height="170" rx="12" fill="rgba(201, 123, 63, 0.05)" stroke="#c97b3f" stroke-width="1"/>
+            <text x="14" y="20" font-size="11" font-weight="600" fill="#c97b3f" letter-spacing="0.08em">VIDEO ENHANCEMENT</text>
+            <text x="14" y="36" font-size="12" fill="#3a4256">视频后期 · 1 SKU</text>
+            <g font-size="11.5" fill="#14171e">
+              <rect x="14" y="46" width="290" height="20" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="22" y="60">Slow Motion         /services/video-enhancement/slow-motion/</text>
+            </g>
+            <text x="14" y="92" font-size="10.5" fill="#7c7a72">更多增强类 SKU 待拓展(色彩、降噪、)</text>
+            <text x="14" y="106" font-size="10.5" fill="#7c7a72">由 _redirects 的 short URL 映射到目录</text>
+            <text x="14" y="138" font-size="11" font-weight="500" fill="#3a4256">短链: /slow-motion/  →  /services/video-enhancement/slow-motion/</text>
+          </g>
+
+          <!-- absence group -->
+          <g transform="translate(700, 24)">
+            <rect width="300" height="170" rx="12" fill="rgba(176, 99, 103, 0.05)" stroke="#b06367" stroke-width="1"/>
+            <text x="14" y="20" font-size="11" font-weight="600" fill="#b06367" letter-spacing="0.08em">ABSENCE COMPENSATION</text>
+            <text x="14" y="36" font-size="12" fill="#3a4256">离别补偿 · 3 SKU</text>
+            <g font-size="11.5" fill="#14171e">
+              <rect x="14" y="46" width="270" height="20" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="22" y="60">Family Message  /family-message/</text>
+              <rect x="14" y="70" width="270" height="20" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="22" y="84">Family Tribute  /family-tribute/</text>
+              <rect x="14" y="94" width="270" height="20" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="22" y="108">Celebrity Msg   /celebrity-message/</text>
+            </g>
+            <text x="14" y="138" font-size="10.5" fill="#7c7a72">用 _redirects 把短链 308 到完整路径</text>
+            <text x="14" y="152" font-size="10.5" fill="#7c7a72">便于社媒分享 + 旧外链回链</text>
+          </g>
+        </g>
+
+        <!-- Row 3: Conversion layer -->
+        <g transform="translate(0, 340)">
+          <text x="20" y="0" font-size="11" fill="#7c7a72" letter-spacing="0.12em">转化层 · CONVERSION</text>
+          <line x1="20" y1="10" x2="1020" y2="10" stroke="#e9e3d6" stroke-dasharray="3 3" />
+
+          <g transform="translate(20, 24)">
+            <rect width="160" height="80" rx="10" fill="rgba(176, 99, 103, 0.06)" stroke="#b06367" stroke-width="1"/>
+            <text x="80" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#14171e">订购 /order/</text>
+            <text x="80" y="48" text-anchor="middle" font-size="11" fill="#3a4256">3 步表单</text>
+            <text x="80" y="64" text-anchor="middle" font-size="10" fill="#7c7a72">套餐 → 资料 → 确认</text>
+          </g>
+          <g transform="translate(200, 24)">
+            <rect width="160" height="80" rx="10" fill="rgba(176, 99, 103, 0.06)" stroke="#b06367" stroke-width="1"/>
+            <text x="80" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#14171e">成功 /success/</text>
+            <text x="80" y="48" text-anchor="middle" font-size="11" fill="#3a4256">noindex, 订单回执</text>
+            <text x="80" y="64" text-anchor="middle" font-size="10" fill="#7c7a72">邮件由 Resend 发送</text>
+          </g>
+          <g transform="translate(380, 24)">
+            <rect width="160" height="80" rx="10" fill="rgba(74, 91, 110, 0.06)" stroke="#4a5b6e" stroke-width="1"/>
+            <text x="80" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#14171e">报价 API</text>
+            <text x="80" y="48" text-anchor="middle" font-size="11" fill="#3a4256">/api/quote (POST)</text>
+            <text x="80" y="64" text-anchor="middle" font-size="10" fill="#7c7a72">限流 5/分/IP, 写 KV</text>
+          </g>
+          <g transform="translate(560, 24)">
+            <rect width="160" height="80" rx="10" fill="rgba(176, 99, 103, 0.06)" stroke="#b06367" stroke-width="1"/>
+            <text x="80" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#14171e">死信 DLQ</text>
+            <text x="80" y="48" text-anchor="middle" font-size="11" fill="#3a4256">/admin/leads/</text>
+            <text x="80" y="64" text-anchor="middle" font-size="10" fill="#7c7a72">管理员重发失败邮件</text>
+          </g>
+          <g transform="translate(740, 24)">
+            <rect width="260" height="80" rx="10" fill="#fff" stroke="#e9e3d6" stroke-dasharray="3 3"/>
+            <text x="130" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#3a4256">信任与合规</text>
+            <text x="130" y="48" text-anchor="middle" font-size="11" fill="#7c7a72">/about/ · /privacy/ · /terms/</text>
+            <text x="130" y="64" text-anchor="middle" font-size="10" fill="#7c7a72">/404 · /offline · /sitemap*.xml</text>
+          </g>
+        </g>
+
+        <!-- Row 4: Cross-cutting i18n + SEO -->
+        <g transform="translate(0, 480)">
+          <text x="20" y="0" font-size="11" fill="#7c7a72" letter-spacing="0.12em">横切关注点 · CROSS-CUTTING</text>
+          <line x1="20" y1="10" x2="1020" y2="10" stroke="#e9e3d6" stroke-dasharray="3 3" />
+
+          <g transform="translate(20, 24)">
+            <rect width="490" height="220" rx="12" fill="rgba(47, 111, 94, 0.04)" stroke="#2f6f5e" stroke-width="1"/>
+            <text x="14" y="20" font-size="11" font-weight="600" fill="#2f6f5e" letter-spacing="0.08em">I18N · 10 种语言</text>
+            <text x="14" y="36" font-size="12" fill="#3a4256">每种语言一份 i18n/xx.json + js/i18n.js 客户端切换 + _middleware.js 边缘注入</text>
+
+            <g font-size="11" fill="#14171e" font-family="JetBrains Mono, monospace">
+              <rect x="14"  y="50" width="42" height="22" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="35" y="65" text-anchor="middle">en</text>
+              <rect x="60"  y="50" width="42" height="22" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="81" y="65" text-anchor="middle">zh</text>
+              <rect x="106" y="50" width="42" height="22" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="127" y="65" text-anchor="middle">es</text>
+              <rect x="152" y="50" width="42" height="22" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="173" y="65" text-anchor="middle">fr</text>
+              <rect x="198" y="50" width="42" height="22" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="219" y="65" text-anchor="middle">de</text>
+              <rect x="244" y="50" width="42" height="22" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="265" y="65" text-anchor="middle">pt</text>
+              <rect x="290" y="50" width="42" height="22" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="311" y="65" text-anchor="middle">ja</text>
+              <rect x="336" y="50" width="42" height="22" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="357" y="65" text-anchor="middle">ru</text>
+              <rect x="382" y="50" width="42" height="22" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="403" y="65" text-anchor="middle">ar*</text>
+              <rect x="428" y="50" width="42" height="22" rx="4" fill="#fff" stroke="#e9e3d6"/><text x="449" y="65" text-anchor="middle">th</text>
+            </g>
+            <text x="14" y="100" font-size="11" fill="#7c7a72">* ar 是 RTL, 中间件自动加 dir="rtl"</text>
+
+            <text x="14" y="128" font-size="11.5" fill="#14171e">📂 i18n/{en,zh,es,fr,de,pt,ja,ru,ar,th}.json</text>
+            <text x="14" y="148" font-size="11.5" fill="#14171e">📂 js/i18n.js · js/langs.js · js/cookie-consent.js</text>
+            <text x="14" y="168" font-size="11.5" fill="#14171e">🔁 _redirects  把 /xx/*  →  /*  (200 内部重写)</text>
+            <text x="14" y="188" font-size="11.5" fill="#14171e">🏷 hreflang + canonical + og:locale  在每页静态写入</text>
+          </g>
+
+          <g transform="translate(530, 24)">
+            <rect width="470" height="220" rx="12" fill="rgba(201, 123, 63, 0.04)" stroke="#c97b3f" stroke-width="1"/>
+            <text x="14" y="20" font-size="11" font-weight="600" fill="#c97b3f" letter-spacing="0.08em">SEO &amp; AI 索引</text>
+            <text x="14" y="36" font-size="12" fill="#3a4256">让 Google、Bing 和 LLM 都能完整读到这个站</text>
+
+            <text x="14" y="64" font-size="11.5" fill="#14171e">📄 sitemap.xml + sitemap-{lang}.xml × 10</text>
+            <text x="14" y="84" font-size="11.5" fill="#14171e">🤖 llms.txt + llms-full.txt (自动生成, scripts/gen_llms.py)</text>
+            <text x="14" y="104" font-size="11.5" fill="#14171e">📋 Schema.org JSON-LD (每页手写, qa/dedup_noscript.py 去重)</text>
+            <text x="14" y="124" font-size="11.5" fill="#14171e">📡 IndexNow  — 改完即推, /indexnow-key.txt 是验证 key</text>
+            <text x="14" y="144" font-size="11.5" fill="#14171e">🔗 manifest.json  PWA, sw.js  离线缓存</text>
+            <text x="14" y="164" font-size="11.5" fill="#14171e">📊 旧 numeric blog 路径 301 → 新 semantic slug (50 条)</text>
+            <text x="14" y="184" font-size="11.5" fill="#14171e">🎯 LCP hero  +  preload  +  AVIF/WebP 多断点</text>
+          </g>
+        </g>
+
+        <!-- arrows from entry → service -->
+        <path d="M 80 110 L 80 130 L 180 130 L 180 154" stroke="#2f6f5e" stroke-width="1.2" fill="none" marker-end="url(#arr)" opacity="0.5"/>
+        <path d="M 220 110 L 220 130 L 520 130 L 520 154" stroke="#c97b3f" stroke-width="1.2" fill="none" marker-end="url(#arr)" opacity="0.5"/>
+        <path d="M 360 110 L 360 130 L 850 130 L 850 154" stroke="#b06367" stroke-width="1.2" fill="none" marker-end="url(#arr)" opacity="0.5"/>
+        <path d="M 640 110 L 640 320 L 100 320 L 100 340" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arrMute)" stroke-dasharray="2 2" opacity="0.6"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============== SECTION 2: 代码架构 ============== -->
+  <section id="s2">
+    <div class="sec-num">02 · 代码架构</div>
+    <h2>技术上分 <span class="marker">六层 + 一条工具链</span></h2>
+    <p class="sec-intro">所有静态 HTML/CSS/JS/图片推到 Cloudflare CDN 边缘,五个 Workers 函数跑中间件和 API,KV 承担限流和死信队列。构建/部署工具全在根目录 Python 脚本和 internal-tools/ PowerShell 里,不进 deploy 包。</p>
+
+    <div class="layers">
+
+      <div class="layer">
+        <div class="num">L1</div>
+        <div>
+          <h3>客户端静态层 · Static Client</h3>
+          <div class="lbl">浏览器直接拿,无 JS 也能看</div>
+          <div class="items">
+            <span class="chip">index.html</span>
+            <span class="chip">about/</span>
+            <span class="chip">blog/&lt;50 篇&gt;/</span>
+            <span class="chip">services/&lt;9 个&gt;/</span>
+            <span class="chip">order/</span>
+            <span class="chip">pricing/</span>
+            <span class="chip">404.html</span>
+            <span class="chip">offline.html</span>
+            <span class="chip primary">styles.css</span>
+            <span class="chip primary">styles.min.css</span>
+            <span class="chip primary">js/main.min.js</span>
+            <span class="chip primary">js/i18n.js</span>
+            <span class="chip primary">js/langs.js</span>
+            <span class="chip primary">js/cookie-consent.js</span>
+            <span class="chip accent">images/&lt;多断点&gt;</span>
+            <span class="chip accent">AVIF · WebP · PNG</span>
+            <span class="chip">manifest.json</span>
+            <span class="chip">sw.js</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="num">L2</div>
+        <div>
+          <h3>边缘计算层 · Cloudflare Workers (functions/)</h3>
+          <div class="lbl">每个请求都在边缘走 8 步管线</div>
+          <div class="items">
+            <span class="chip primary">_middleware.js</span>
+            <span class="chip">① Accept-Language 首次自动重定向 + cookie</span>
+            <span class="chip">② /xx/* 200 内部 rewrite</span>
+            <span class="chip">③ 加载 i18n/xx.json 服务端注入 data-i18n</span>
+            <span class="chip">④ &lt;html lang&gt; + canonical + hreflang 重写</span>
+            <span class="chip">⑤ og:locale + JSON-LD inLanguage 改写</span>
+            <span class="chip">⑥ /success/ 注入 noindex</span>
+            <span class="chip">⑦ per-request CSP nonce 替换 __CSP_NONCE__</span>
+            <span class="chip">⑧ 设置 CSP / HSTS / COOP 响应头</span>
+            <span class="chip slate">api/quote.js  POST 报价 + 限流 + Resend</span>
+            <span class="chip slate">api/dead-letters.js  DLQ viewer (token 鉴权)</span>
+            <span class="chip slate">__csp_report.js  违规上报端点</span>
+            <span class="chip slate">docs/[id].js  文档元数据</span>
+            <span class="chip slate">_lib/langs.js  LANGS / DEFAULT_LANG / RTL 表</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="num">L3</div>
+        <div>
+          <h3>数据层 · Storage Bindings</h3>
+          <div class="lbl">单 KV 命名空间,前缀复用</div>
+          <div class="items">
+            <span class="chip accent">LEAD_STORAGE (KV)</span>
+            <span class="chip">rl:&lt;ip&gt;  限流计数  5/min/IP</span>
+            <span class="chip">dl:&lt;id&gt;   死信队列  Resend 失败回退</span>
+            <span class="chip slate">RATE_LIMIT_KV (alias)  向后兼容</span>
+            <span class="chip">images/ → R2 (未来)</span>
+            <span class="chip">D1 — 暂未使用</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="num">L4</div>
+        <div>
+          <h3>第三方集成 · Third-Party</h3>
+          <div class="lbl">CSP 白名单 + preconnect</div>
+          <div class="items">
+            <span class="chip">GA4 (gtag.js)</span>
+            <span class="chip">Cloudflare Web Analytics (beacon)</span>
+            <span class="chip rose">Google AdSense (lazy 注入)</span>
+            <span class="chip rose">Resend (事务邮件)</span>
+            <span class="chip">IndexNow (URL 推送 API)</span>
+            <span class="chip">Bing Webmaster (sitemaps)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="num">L5</div>
+        <div>
+          <h3>路由 &amp; 安全配置层 · Edge Config</h3>
+          <div class="lbl">Workers 启动前由 Cloudflare Pages 加载</div>
+          <div class="items">
+            <span class="chip primary">wrangler.toml</span>
+            <span class="chip">name · compatibility_date · KV 绑定</span>
+            <span class="chip primary">_redirects</span>
+            <span class="chip">11 类规则: .html→/, 短链→目录, 旧 blog 301, i18n 200, 内部文件 404!</span>
+            <span class="chip primary">_headers</span>
+            <span class="chip">HSTS 2y · X-Frame · Permissions-Policy · COOP · Referrer-Policy · preconnect · 缓存粒度</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="num">L6</div>
+        <div>
+          <h3>构建 &amp; 运维工具链 · Tooling</h3>
+          <div class="lbl">根目录 Python 脚本 + internal-tools/ PowerShell + scripts/</div>
+          <div class="items">
+            <span class="chip accent">图片 pipeline</span>
+            <span class="chip">generate-responsive.py</span>
+            <span class="chip">generate-avif.py</span>
+            <span class="chip">optimize-images.py</span>
+            <span class="chip">recompress-png.py</span>
+            <span class="chip accent">HTML 注入</span>
+            <span class="chip">inject-srcset.py</span>
+            <span class="chip">inject-avif-source.py</span>
+            <span class="chip">inject-dimensions.py</span>
+            <span class="chip">inject-critical-css.py</span>
+            <span class="chip accent">HTML 修复</span>
+            <span class="chip">flatten-avatar-wrapper.py</span>
+            <span class="chip">unwrap-picture.py</span>
+            <span class="chip">fix-*-paths.py × 4</span>
+            <span class="chip accent">内容生成</span>
+            <span class="chip">generate-blog.py</span>
+            <span class="chip">generate-llms-full.py</span>
+            <span class="chip slate">内部 PowerShell (.assetsignore 排除)</span>
+            <span class="chip slate">internal-tools/pre-deploy-check.ps1</span>
+            <span class="chip slate">internal-tools/update-sitemap.ps1</span>
+            <span class="chip slate">internal-tools/deploy.ps1</span>
+            <span class="chip slate">internal-tools/normalize-head-styles.ps1</span>
+            <span class="chip slate">+ 18 个其它 .ps1</span>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin:8px 0 0 80px">根 .py + scripts/*.py 走 .assetsignore 排除,不进 deploy 包。internal-tools/ 同上(额外 _redirects 兜底 404!)</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== SECTION 3: Request lifecycle ============== -->
+  <section id="s3">
+    <div class="sec-num">03 · 请求生命周期</div>
+    <h2>一个 <span class="marker">/zh/services/personalization/pet-wedding/</span> 请求的 8 步</h2>
+    <p class="sec-intro">挑了一个最常见的路径:中文用户访问宠物婚礼服务页。走完这条管线,浏览器拿到的 HTML 已经是完全中文化的、nonce 已注入、CSP 头已下发、hreflang 全套齐全的最终态。</p>
+
+    <ol class="timeline">
+      <li>
+        <div class="step">STEP 01 · EDGE RECEIVE</div>
+        <h4>Cloudflare 边缘节点接收请求</h4>
+        <p>DNS 解析到最近的 PoP,命中 Cache-Control: max-age=60(HTML) 或直接 miss。CDN 缓存未命中,把请求转给同节点的 Workers runtime。</p>
+      </li>
+      <li>
+        <div class="step">STEP 02 · _MIDDLEWARE.JS LANG DETECT</div>
+        <h4>中间件识别 /zh/ 前缀,加载 zh 语言包</h4>
+        <p>从 URL 路径第一段 <code style="font-family:JetBrains Mono,monospace;font-size:12px;background:var(--line-soft);padding:1px 6px;border-radius:3px">/zh/</code> 拿到目标语言 zh,跳过 Accept-Language 自动重定向(已经在 /zh/ 下)。检查 <code style="font-family:JetBrains Mono,monospace;font-size:12px;background:var(--line-soft);padding:1px 6px;border-radius:3px">wa_lang_user</code> cookie 确认是否用户主动切过。</p>
+      </li>
+      <li>
+        <div class="step">STEP 03 · STATIC FILE FETCH</div>
+        <h4>从静态资源拉 /services/personalization/pet-wedding/index.html</h4>
+        <p>中间件内部 fetch 同源 URL(去掉 /zh/ 前缀),拿到英文 HTML 模板。KV 零交互——这一步纯粹是边缘缓存里的静态文件。</p>
+      </li>
+      <li>
+        <div class="step">STEP 04 · I18N INJECTION</div>
+        <h4>加载 i18n/zh.json,把 data-i18n key 替换为译文</h4>
+        <p>正则扫描所有 <code style="font-family:JetBrains Mono,monospace;font-size:12px;background:var(--line-soft);padding:1px 6px;border-radius:3px">data-i18n="architecture.key_placeholder.00000001"</code> 元素,用 zh.json 里的值覆盖 innerText。Googlebot 在这一步就拿到完整中文 HTML,不是英文源 + 客户端 JS 翻。</p>
+      </li>
+      <li>
+        <div class="step">STEP 05 · HEAD NORMALIZATION</div>
+        <h4>改 &lt;html lang="zh"&gt;、canonical、hreflang、og:locale、JSON-LD</h4>
+        <p>五个 head 元素逐个重写。canonical 指向 /zh/services/.../,hreflang 列出全部 10 种语言,og:locale 改 zh_CN,JSON-LD 的 inLanguage 改 zh。这一步让每种语言都拥有独立可索引的 URL。</p>
+      </li>
+      <li>
+        <div class="step">STEP 06 · CSP NONCE GEN</div>
+        <h4>用 crypto.getRandomValues 生成 16 字节 nonce</h4>
+        <p>每个请求独立 nonce,base64 编码后 22 字符。把 HTML 里所有 <code style="font-family:JetBrains Mono,monospace;font-size:12px;background:var(--line-soft);padding:1px 6px;border-radius:3px">__CSP_NONCE__</code> 占位符 + 所有 &lt;script&gt; 标签(没 nonce 的)都注入这个 nonce。</p>
+      </li>
+      <li>
+        <div class="step">STEP 07 · CSP HEADER SET</div>
+        <h4>把 nonce 写入 Content-Security-Policy 响应头</h4>
+        <p>script-src 加 <code style="font-family:JetBrains Mono,monospace;font-size:12px;background:var(--line-soft);padding:1px 6px;border-radius:3px">'nonce-XXX' 'strict-dynamic'</code>,允许 GA4/AdSense/Cloudflare Insights 加载。HTML 里的 nonce 和 CSP 头里的 nonce 必须严格一致——记忆里 2026-07-29 的故障就源于保存了 post-middleware HTML 导致硬编码。</p>
+      </li>
+      <li>
+        <div class="step">STEP 08 · BROWSER RENDER</div>
+        <h4>200 OK, 浏览器解析 + 预连接 + 加载 nonce'd JS</h4>
+        <p>preconnect 已经在 _headers 里 Link: 预热 GA/AdSense/Insights。main.min.js、i18n.js、langs.js 因为带了合法 nonce,被 strict-dynamic 放行。语言切换器、cookie consent banner、GA4 事件全部正常加载——一切就位。</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============== SECTION 4: 关键模块速查 ============== -->
+  <section id="s4">
+    <div class="sec-num">04 · 关键模块速查</div>
+    <h2>找东西 <span class="marker">来这里翻</span></h2>
+    <p class="sec-intro">如果你要改某个功能,先看它落在哪个组、对应哪些文件、有什么坑。memory 里那些反复踩的坑都收在"已踩过的坑"里。</p>
+
+    <div class="canvas" style="padding: 8px 28px;">
+      <dl class="kv6">
+        <div class="group-title">路由 &amp; 国际化</div>
+        <div class="group">
+          <dt>URL 重写</dt><dd>_redirects — 11 类规则;.html 308→目录 / 短链 308→完整路径 / /xx/* 200 内部 rewrite / 旧 blog 301 / 内部文件 404!</dd>
+        </div>
+        <div class="group">
+          <dt>语言切换</dt><dd>_middleware.js 边缘注入 + js/i18n.js 客户端切换器 + js/langs.js 语言元数据 + i18n/{lang}.json 翻译源</dd>
+        </div>
+        <div class="group">
+          <dt>hreflang / canonical</dt><dd>静态写入每页 head;中间件按访问语言重写 canonical + og:locale + JSON-LD inLanguage</dd>
+        </div>
+
+        <div class="group-title">性能 &amp; 资源</div>
+        <div class="group">
+          <dt>图片 pipeline</dt><dd>源图 → generate-responsive.py(WebP/PNG 多断点)→ generate-avif.py(AVIF)→ inject-srcset.py + inject-avif-source.py(写 HTML)→ 手动 fix Windows 反斜杠</dd>
+        </div>
+        <div class="group">
+          <dt>缓存策略</dt><dd>HTML 60s / blog 300s / sitemap 1h / llms.txt 24h / 图片字体 1y;CSS/JS 用 ?v=N 版本号破缓存</dd>
+        </div>
+        <div class="group">
+          <dt>LCP 优化</dt><dd>preload LCP hero, AVIF 优先(浏览器自动协商), fonts subset, 关键 CSS 注入, sw.js 离线</dd>
+        </div>
+
+        <div class="group-title">安全</div>
+        <div class="group">
+          <dt>CSP strict-dynamic + nonce</dt><dd>中间件每请求生成 nonce, 替换 __CSP_NONCE__ + 给 &lt;script&gt; 自动加 nonce。记住:HTML 源里只能放占位符,不能放真 nonce</dd>
+        </div>
+        <div class="group">
+          <dt>Headers 全家桶</dt><dd>HSTS 2y · X-Frame SAMEORIGIN · Permissions-Policy 禁用相机/麦克风/支付等 · COOP same-origin · Referrer-Policy strict-origin-when-cross-origin</dd>
+        </div>
+        <div class="group">
+          <dt>内部文件防泄漏</dt><dd>.assetsignore 排除 + _redirects `404!` 强兜底,应对 wrangler 4.114 目录排除的 bug</dd>
+        </div>
+
+        <div class="group-title">可观测 &amp; 运维</div>
+        <div class="group">
+          <dt>分析</dt><dd>GA4 gtag (lazy 注入) + Cloudflare Web Analytics (beacon, 无 cookie) + AdSense (lazy)</dd>
+        </div>
+        <div class="group">
+          <dt>死信与重发</dt><dd>Resend 失败 → /api/dead-letters 写 KV dl:&lt;id&gt; → /admin/leads/ 用 DLQ_TOKEN 看 + 重发</dd>
+        </div>
+        <div class="group">
+          <dt>CSP 违规上报</dt><dd>__csp_report.js 收 report-uri 端点 + report-to 头,事后扫日志找被 strict-dynamic 误杀的脚本</dd>
+        </div>
+
+        <div class="group-title">已踩过的坑 (来自项目 memory)</div>
+        <div class="group">
+          <dt>硬编码 CSP nonce</dt><dd>曾经保存过 post-middleware HTML 回来,导致 HTML 里的 nonce 不等于响应头 nonce,所有 JS 被 strict-dynamic 静默屏蔽。修复:占位符统一为 __CSP_NONCE__</dd>
+        </div>
+        <div class="group">
+          <dt>Windows 反斜杠</dt><dd>Python 用 str(Path(...)) 拼 URL → \images/foo.avif,浏览器不转,全 404。修复:str 后 replace("\\","/") 或用 PosixPath 起点</dd>
+        </div>
+        <div class="group">
+          <dt>嵌套 &lt;picture&gt; + 相对路径 srcset</dt><dd>flatten-avatar-wrapper.py 没拆干净 + Windows 反斜杠 + dedupe 正则错配,三连击。特征:浏览器收 nested picture 内的相对 srcset 解析为 /foo.avif(不是 /images/foo.avif)</dd>
+        </div>
+        <div class="group">
+          <dt>Cloudflare Pages dir/index 308 自环</dt><dd>zone-level URL Normalization 开关会覆盖 _redirects 200 规则,导致 /foo 308 → /foo 自环。修复:关掉 zone 那个开关,改靠 _redirects 处理</dd>
+        </div>
+        <div class="group">
+          <dt>never-upscale 漏配</dt><dd>srcset 引用了 1280w 但 generate-responsive.py 因为源图只 1280w 跳过了该变体。修复:扩源图到 ≥1920w,手动补 1600/1920w 变体</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============== SECTION 5: 业务数据流 ============== -->
+  <section id="s5">
+    <div class="sec-num">05 · 业务数据流</div>
+    <h2>从用户素材到 <span class="marker">AI 成品</span> 的全链路</h2>
+    <p class="sec-intro">这站本身不"存储"婚礼视频——用户上传的素材由人工/AI 在线下游处理,成品通过邮件 + CDN 回流。这里画的是数据形态在每个节点的变化,以及哪些字节会落进哪些存储。</p>
+
+    <div class="canvas">
+      <svg viewBox="0 0 1040 460" xmlns="http://www.w3.org/2000/svg" font-family="Outfit, sans-serif">
+        <defs>
+          <marker id="arr5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#3a4256" />
+          </marker>
+          <marker id="arr5dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7c7a72" />
+          </marker>
+        </defs>
+
+        <!-- 4 columns: 输入 / 边缘 / 存储&处理 / 输出 -->
+        <text x="20" y="22" font-size="11" fill="#7c7a72" letter-spacing="0.12em">4 个阶段 · 6 种数据形态</text>
+        <line x1="20" y1="32" x2="1020" y2="32" stroke="#e9e3d6" stroke-dasharray="3 3" />
+
+        <!-- column headers -->
+        <g font-size="11" font-family="JetBrains Mono, monospace" letter-spacing="0.05em" fill="#2f6f5e">
+          <text x="140"  y="58" text-anchor="middle">① INPUT</text>
+          <text x="380"  y="58" text-anchor="middle">② EDGE</text>
+          <text x="640"  y="58" text-anchor="middle">③ STORE</text>
+          <text x="880"  y="58" text-anchor="middle">④ DELIVER</text>
+        </g>
+
+        <!-- input col -->
+        <g transform="translate(40, 70)">
+          <rect width="200" height="320" rx="12" fill="rgba(47, 111, 94, 0.05)" stroke="#2f6f5e" stroke-width="1"/>
+          <g font-size="12" fill="#14171e">
+            <rect x="12" y="14" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="30" font-weight="600">用户素材</text>
+            <text x="22" y="46" font-size="10.5" fill="#7c7a72">照片 / 视频 / 文字需求</text>
+
+            <rect x="12" y="68" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="84" font-weight="600">浏览器行为</text>
+            <text x="22" y="100" font-size="10.5" fill="#7c7a72">点击 / 滚动 / 语言切换</text>
+
+            <rect x="12" y="122" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="138" font-weight="600">表单提交</text>
+            <text x="22" y="154" font-size="10.5" fill="#7c7a72">姓名 / 邮箱 / 套餐 / 留言</text>
+
+            <rect x="12" y="176" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="192" font-weight="600">CSP 违规</text>
+            <text x="22" y="208" font-size="10.5" fill="#7c7a72">被拦截的 inline / 外链脚本</text>
+
+            <rect x="12" y="230" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="246" font-weight="600">搜索爬虫</text>
+            <text x="22" y="262" font-size="10.5" fill="#7c7a72">Googlebot / Bingbot / GPTBot</text>
+          </g>
+        </g>
+
+        <!-- edge col -->
+        <g transform="translate(280, 70)">
+          <rect width="200" height="320" rx="12" fill="rgba(201, 123, 63, 0.05)" stroke="#c97b3f" stroke-width="1"/>
+          <g font-size="12" fill="#14171e">
+            <rect x="12" y="14" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="30" font-weight="600">_middleware.js</text>
+            <text x="22" y="46" font-size="10.5" fill="#7c7a72">i18n 注入 + CSP nonce + 头规范化</text>
+
+            <rect x="12" y="68" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="84" font-weight="600">api/quote.js</text>
+            <text x="22" y="100" font-size="10.5" fill="#7c7a72">校验 + 限流 + 转 Resend</text>
+
+            <rect x="12" y="122" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="138" font-weight="600">CDN 缓存</text>
+            <text x="22" y="154" font-size="10.5" fill="#7c7a72">HTML 60s · 静态 1y · llms 24h</text>
+
+            <rect x="12" y="176" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="192" font-weight="600">__csp_report.js</text>
+            <text x="22" y="208" font-size="10.5" fill="#7c7a72">违规聚合 → KV</text>
+
+            <rect x="12" y="230" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="246" font-weight="600">Sitemap 喂给爬虫</text>
+            <text x="22" y="262" font-size="10.5" fill="#7c7a72">IndexNow 推送 + hreflang 全套</text>
+          </g>
+        </g>
+
+        <!-- store col -->
+        <g transform="translate(540, 70)">
+          <rect width="200" height="320" rx="12" fill="rgba(74, 91, 110, 0.05)" stroke="#4a5b6e" stroke-width="1"/>
+          <g font-size="12" fill="#14171e">
+            <rect x="12" y="14" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="30" font-weight="600">KV: rl:&lt;ip&gt;</text>
+            <text x="22" y="46" font-size="10.5" fill="#7c7a72">每 IP 5/min 计数 + 滑动窗口</text>
+
+            <rect x="12" y="68" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="84" font-weight="600">KV: dl:&lt;id&gt;</text>
+            <text x="22" y="100" font-size="10.5" fill="#7c7a72">Resend 失败回退队列</text>
+
+            <rect x="12" y="122" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="138" font-weight="600">R2 / Workers Assets</text>
+            <text x="22" y="154" font-size="10.5" fill="#7c7a72">AVIF / WebP / PNG 源 + 多断点</text>
+
+            <rect x="12" y="176" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="192" font-weight="600">浏览器 LocalStorage</text>
+            <text x="22" y="208" font-size="10.5" fill="#7c7a72">语言选择 / Cookie consent</text>
+
+            <rect x="12" y="230" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="246" font-weight="600">第三方仓</text>
+            <text x="22" y="262" font-size="10.5" fill="#7c7a72">GA4 / AdSense / Resend / IndexNow</text>
+          </g>
+        </g>
+
+        <!-- deliver col -->
+        <g transform="translate(800, 70)">
+          <rect width="200" height="320" rx="12" fill="rgba(176, 99, 103, 0.05)" stroke="#b06367" stroke-width="1"/>
+          <g font-size="12" fill="#14171e">
+            <rect x="12" y="14" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="30" font-weight="600">200 HTML (多语言)</text>
+            <text x="22" y="46" font-size="10.5" fill="#7c7a72">中文用户拿中文 HTML,非 JS 翻</text>
+
+            <rect x="12" y="68" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="84" font-weight="600">邮件回执</text>
+            <text x="22" y="100" font-size="10.5" fill="#7c7a72">Resend 模板 · 双重副本到 admin</text>
+
+            <rect x="12" y="122" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="138" font-weight="600">CDN 上的图片</text>
+            <text x="22" y="154" font-size="10.5" fill="#7c7a72">按 viewport 协商 AVIF→WebP→PNG</text>
+
+            <rect x="12" y="176" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="192" font-weight="600">/success/ 订单回执</text>
+            <text x="22" y="208" font-size="10.5" fill="#7c7a72">订单号 + 后续步骤 + FAQ 链接</text>
+
+            <rect x="12" y="230" width="176" height="44" rx="6" fill="#fff" stroke="#e9e3d6"/>
+            <text x="22" y="246" font-weight="600">GA4 / CF Insights</text>
+            <text x="22" y="262" font-size="10.5" fill="#7c7a72">事件 + beacon 反哺分析</text>
+          </g>
+        </g>
+
+        <!-- arrows across columns -->
+        <path d="M 244 92 L 280 92"  stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr5)"/>
+        <path d="M 244 146 L 280 146" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr5)"/>
+        <path d="M 244 200 L 280 200" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr5)"/>
+        <path d="M 244 254 L 280 254" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr5)"/>
+        <path d="M 244 308 L 280 308" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr5)"/>
+
+        <path d="M 484 92 L 540 92"  stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr5dash)" stroke-dasharray="3 3"/>
+        <path d="M 484 146 L 540 146" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr5dash)" stroke-dasharray="3 3"/>
+        <path d="M 484 200 L 540 200" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr5dash)" stroke-dasharray="3 3"/>
+        <path d="M 484 254 L 540 254" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr5dash)" stroke-dasharray="3 3"/>
+        <path d="M 484 308 L 540 308" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr5dash)" stroke-dasharray="3 3"/>
+
+        <path d="M 744 92 L 800 92"  stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr5)"/>
+        <path d="M 744 146 L 800 146" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr5)"/>
+        <path d="M 744 200 L 800 200" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr5)"/>
+        <path d="M 744 254 L 800 254" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr5)"/>
+        <path d="M 744 308 L 800 308" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr5)"/>
+
+        <!-- legend -->
+        <g transform="translate(20, 408)" font-size="11" font-family="JetBrains Mono, monospace" fill="#3a4256">
+          <text x="0" y="0" fill="#7c7a72">─→ 主链路    ┄→ 旁路(异步/可选)</text>
+          <text x="280" y="0" fill="#7c7a72">数据形态:</text>
+          <text x="350" y="0"><tspan class="tag in">INPUT</tspan> 原始</text>
+          <text x="440" y="0"><tspan class="tag mid">EDGE</tspan> 中间态</text>
+          <text x="540" y="0"><tspan class="tag out">DELIVER</tspan> 成品</text>
+          <text x="650" y="0"><tspan class="tag meta">META</tspan> 元数据</text>
+        </g>
+        <g transform="translate(20, 428)" font-size="11" font-family="JetBrains Mono, monospace" fill="#7c7a72">
+          <text x="0" y="0">注:用户视频/照片本体不上 Cloudflare — 经 /api/quote 转走后,由人工/AI 在线下游处理。边缘只承载 lead 元数据 + 限流计数 + 死信。</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============== SECTION 6: 系统组件拓扑 ============== -->
+  <section id="s6">
+    <div class="sec-num">06 · 系统组件拓扑</div>
+    <h2>三个 zone · <span class="marker">六类节点</span></h2>
+    <p class="sec-intro">把上一节的"逻辑层"翻译成"物理/网络拓扑"。左边是用户和爬虫,中间是 Cloudflare 全球边缘,右边是这台 Windows 工作站 + 第三方 SaaS。所有生产流量都不进工作站,只走 deploy 时一次性把静态包推上去。</p>
+
+    <div class="canvas">
+      <svg viewBox="0 0 1040 540" xmlns="http://www.w3.org/2000/svg" font-family="Outfit, sans-serif">
+        <defs>
+          <marker id="arr6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f6f5e" />
+          </marker>
+          <marker id="arr6red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#b06367" />
+          </marker>
+        </defs>
+
+        <!-- Zone backgrounds -->
+        <rect x="14"  y="20"  width="240" height="500" rx="14" fill="rgba(47, 111, 94, 0.04)" stroke="#2f6f5e" stroke-width="1" stroke-dasharray="4 3"/>
+        <rect x="280" y="20"  width="430" height="500" rx="14" fill="rgba(201, 123, 63, 0.04)" stroke="#c97b3f" stroke-width="1" stroke-dasharray="4 3"/>
+        <rect x="736" y="20"  width="290" height="500" rx="14" fill="rgba(176, 99, 103, 0.04)" stroke="#b06367" stroke-width="1" stroke-dasharray="4 3"/>
+
+        <!-- Zone labels -->
+        <text x="134" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#2f6f5e" letter-spacing="0.08em">CLIENT ZONE</text>
+        <text x="495" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#c97b3f" letter-spacing="0.08em">CLOUDFLARE EDGE</text>
+        <text x="881" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#b06367" letter-spacing="0.08em">EXTERNAL / WORKSTATION</text>
+
+        <!-- Client zone nodes -->
+        <g transform="translate(34, 64)">
+          <rect width="200" height="64" rx="10" fill="#fff" stroke="#2f6f5e"/>
+          <text x="14" y="22" font-size="12" font-weight="600">访客浏览器</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">Chrome / Safari / Firefox</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">PWA: manifest + sw.js 离线</text>
+        </g>
+        <g transform="translate(34, 144)">
+          <rect width="200" height="64" rx="10" fill="#fff" stroke="#2f6f5e"/>
+          <text x="14" y="22" font-size="12" font-weight="600">搜索引擎爬虫</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">Googlebot · Bingbot · GPTBot</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">拿 sitemap.xml + llms-full.txt</text>
+        </g>
+        <g transform="translate(34, 224)">
+          <rect width="200" height="64" rx="10" fill="#fff" stroke="#2f6f5e"/>
+          <text x="14" y="22" font-size="12" font-weight="600">管理员</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">/admin/leads/ + DLQ_TOKEN</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">查死信 / 重发失败邮件</text>
+        </g>
+        <g transform="translate(34, 304)">
+          <rect width="200" height="64" rx="10" fill="#fff" stroke="#2f6f5e"/>
+          <text x="14" y="22" font-size="12" font-weight="600">第三方 SDK</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">gtag · AdSense · CF Insights</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">strict-dynamic 下需被 nonce loader 拉</text>
+        </g>
+        <g transform="translate(34, 384)">
+          <rect width="200" height="64" rx="10" fill="#fff" stroke="#2f6f5e" stroke-dasharray="3 3"/>
+          <text x="14" y="22" font-size="12" font-weight="600">已废弃 PWA 客户端</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">老版本离线缓存(预热)</text>
+        </g>
+
+        <!-- Cloudflare edge nodes -->
+        <g transform="translate(300, 64)">
+          <rect width="200" height="56" rx="10" fill="#fff" stroke="#c97b3f"/>
+          <text x="14" y="22" font-size="12" font-weight="600">CDN PoP (300+ 节点)</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">静态 HTML / CSS / JS / images</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">边缘 cache: HTML 60s, static 1y</text>
+        </g>
+        <g transform="translate(530, 64)">
+          <rect width="170" height="56" rx="10" fill="#fff" stroke="#c97b3f"/>
+          <text x="14" y="22" font-size="12" font-weight="600">Workers runtime</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">V8 isolates · 0ms cold start</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">5 个 functions</text>
+        </g>
+        <g transform="translate(300, 144)">
+          <rect width="400" height="80" rx="10" fill="#fff" stroke="#c97b3f"/>
+          <text x="14" y="22" font-size="12" font-weight="600">5 个 functions</text>
+          <text x="14" y="40" font-size="11" font-family="JetBrains Mono, monospace" fill="#3a4256">_middleware.js (8 步管线) · api/quote.js (POST) · api/dead-letters.js (GET/POST) · __csp_report.js (POST) · docs/[id].js (GET)</text>
+        </g>
+        <g transform="translate(300, 240)">
+          <rect width="195" height="64" rx="10" fill="#fff" stroke="#c97b3f"/>
+          <text x="14" y="22" font-size="12" font-weight="600">KV: LEAD_STORAGE</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">限流 rl:&lt;ip&gt; · 死信 dl:&lt;id&gt;</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">强一致 · 全球 60ms 内可读</text>
+        </g>
+        <g transform="translate(505, 240)">
+          <rect width="195" height="64" rx="10" fill="#fff" stroke="#c97b3f" stroke-dasharray="3 3"/>
+          <text x="14" y="22" font-size="12" font-weight="600">D1 / R2 (预留)</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">未来存成品视频/分析</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">暂未启用</text>
+        </g>
+        <g transform="translate(300, 320)">
+          <rect width="400" height="60" rx="10" fill="#fff" stroke="#c97b3f"/>
+          <text x="14" y="22" font-size="12" font-weight="600">_redirects + _headers + wrangler.toml</text>
+          <text x="14" y="40" font-size="11" font-family="JetBrains Mono, monospace" fill="#3a4256">路由 / 安全头 / KV 绑定 / 环境变量</text>
+        </g>
+        <g transform="translate(300, 396)">
+          <rect width="400" height="100" rx="10" fill="#fff" stroke="#c97b3f"/>
+          <text x="14" y="22" font-size="12" font-weight="600">Workers AI / Pages 部署管线</text>
+          <text x="14" y="40" font-size="10.5" fill="#7c7a72">wrangler 4.114 上传 .assetsignore 过滤后的资产</text>
+          <text x="14" y="56" font-size="10.5" fill="#7c7a72">CI: .github/workflows/ci.yml (本地校验)</text>
+          <text x="14" y="72" font-size="10.5" fill="#7c7a72">回滚: 任意历史 commit 重新 wrangler deploy</text>
+          <text x="14" y="88" font-size="10.5" fill="#7c7a72">部署窗口: 1-3 分钟 (含 KV 同步)</text>
+        </g>
+
+        <!-- External / workstation zone -->
+        <g transform="translate(756, 64)">
+          <rect width="250" height="56" rx="10" fill="#fff" stroke="#b06367"/>
+          <text x="14" y="22" font-size="12" font-weight="600">Windows 工作站 (qiaoshan)</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">C:\Users\qiaoshan\.openclaw\workspace\weddingai\</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">图片 pipeline + content gen + pre-deploy</text>
+        </g>
+        <g transform="translate(756, 144)">
+          <rect width="250" height="80" rx="10" fill="#fff" stroke="#b06367"/>
+          <text x="14" y="22" font-size="12" font-weight="600">本地构建工具链</text>
+          <text x="14" y="40" font-size="11" font-family="JetBrains Mono, monospace" fill="#3a4256">根 *.py  +  internal-tools/*.ps1</text>
+          <text x="14" y="58" font-size="10.5" fill="#7c7a72">.assetsignore 全排除, 不会被打包</text>
+          <text x="14" y="72" font-size="10.5" fill="#7c7a72">scripts/  装 python 工具 + PowerShell 入口</text>
+        </g>
+        <g transform="translate(756, 244)">
+          <rect width="115" height="64" rx="10" fill="#fff" stroke="#b06367"/>
+          <text x="14" y="22" font-size="12" font-weight="600">Pillow / Pillow-AVIF</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">多断点 + AVIF</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">WebP / PNG fallback</text>
+        </g>
+        <g transform="translate(881, 244)">
+          <rect width="125" height="64" rx="10" fill="#fff" stroke="#b06367"/>
+          <text x="14" y="22" font-size="12" font-weight="600">Node 20+</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">functions/ ESM</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">wrangler 4.114</text>
+        </g>
+        <g transform="translate(756, 328)">
+          <rect width="250" height="56" rx="10" fill="#fff" stroke="#b06367" stroke-dasharray="3 3"/>
+          <text x="14" y="22" font-size="12" font-weight="600">Cloudflare Dashboard</text>
+          <text x="14" y="38" font-size="10.5" fill="#7c7a72">查 KV · 看 logs · 回滚部署</text>
+          <text x="14" y="52" font-size="10.5" fill="#7c7a72">日常不登, 故障时介入</text>
+        </g>
+        <g transform="translate(756, 404)">
+          <rect width="250" height="60" rx="10" fill="#fff" stroke="#b06367"/>
+          <text x="14" y="22" font-size="12" font-weight="600">weddingai-private 仓库</text>
+          <text x="14" y="40" font-size="10.5" fill="#7c7a72">AGENTS.md · CHANGELOG.md · 备份</text>
+          <text x="14" y="54" font-size="10.5" fill="#7c7a72">独立 repo, 永远不上 deploy</text>
+        </g>
+
+        <!-- Resend (third-party, in external zone) -->
+        <g transform="translate(756, 478)">
+          <rect width="115" height="40" rx="8" fill="#fff" stroke="#7c7a72" stroke-dasharray="3 3"/>
+          <text x="14" y="18" font-size="11" font-weight="600">Resend (邮件)</text>
+          <text x="14" y="32" font-size="9.5" fill="#7c7a72">api.resend.com</text>
+        </g>
+        <g transform="translate(881, 478)">
+          <rect width="125" height="40" rx="8" fill="#fff" stroke="#7c7a72" stroke-dasharray="3 3"/>
+          <text x="14" y="18" font-size="11" font-weight="600">IndexNow + Bing</text>
+          <text x="14" y="32" font-size="9.5" fill="#7c7a72">api.indexnow.org</text>
+        </g>
+
+        <!-- Inter-zone arrows -->
+        <!-- 1. Browser → CDN PoP -->
+        <path d="M 240 96 C 270 96, 270 92, 300 92" stroke="#2f6f5e" stroke-width="1.4" fill="none" marker-end="url(#arr6)"/>
+        <text x="270" y="84" text-anchor="middle" font-size="10" font-family="JetBrains Mono, monospace" fill="#2f6f5e">HTTPS</text>
+        <!-- 2. Crawler → CDN PoP -->
+        <path d="M 240 176 C 270 176, 270 92, 300 92" stroke="#2f6f5e" stroke-width="1" fill="none" marker-end="url(#arr6)" stroke-dasharray="4 3"/>
+        <text x="270" y="160" font-size="10" font-family="JetBrains Mono, monospace" fill="#2f6f5e">爬 sitemap+html</text>
+        <!-- 3. Admin → Workers (DLQ) -->
+        <path d="M 240 256 C 270 256, 270 184, 300 184" stroke="#b06367" stroke-width="1.2" fill="none" marker-end="url(#arr6red)"/>
+        <text x="262" y="248" text-anchor="middle" font-size="10" font-family="JetBrains Mono, monospace" fill="#b06367">+DLQ_TOKEN</text>
+        <!-- 4. 3rd-party SDK → CDN (preconnect) -->
+        <path d="M 240 336 C 270 336, 270 96, 300 96" stroke="#2f6f5e" stroke-width="1" fill="none" marker-end="url(#arr6)" stroke-dasharray="2 3"/>
+        <text x="270" y="320" font-size="10" font-family="JetBrains Mono, monospace" fill="#2f6f5e">gtag/AdSense/Insights</text>
+        <!-- 5. CDN PoP → Workers (cache miss) -->
+        <path d="M 500 92 L 530 92" stroke="#c97b3f" stroke-width="1.4" fill="none" marker-end="url(#arr6)"/>
+        <text x="515" y="84" text-anchor="middle" font-size="10" font-family="JetBrains Mono, monospace" fill="#c97b3f">miss</text>
+        <!-- 6. Workers → KV -->
+        <path d="M 600 224 C 600 230, 470 230, 470 240" stroke="#c97b3f" stroke-width="1.2" fill="none" marker-end="url(#arr6)"/>
+        <text x="540" y="220" font-size="10" font-family="JetBrains Mono, monospace" fill="#c97b3f">读/写 KV</text>
+        <!-- 7. Workers → Resend -->
+        <path d="M 600 184 C 670 184, 700 498, 760 498" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr6)" stroke-dasharray="3 3"/>
+        <text x="700" y="350" font-size="10" font-family="JetBrains Mono, monospace" fill="#7c7a72"">发邮件</text>
+        <!-- 8. Workers → IndexNow -->
+        <path d="M 600 184 C 690 184, 720 498, 881 498" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr6)" stroke-dasharray="3 3"/>
+        <text x="730" y="430" font-size="10" font-family="JetBrains Mono, monospace" fill="#7c7a72">推 URL</text>
+        <!-- 9. Workstation → CDN PoP (deploy, not traffic) -->
+        <path d="M 750 96 C 720 96, 700 96, 510 96" stroke="#b06367" stroke-width="1.4" fill="none" marker-end="url(#arr6red)" stroke-dasharray="6 3"/>
+        <text x="660" y="84" font-size="10" font-family="JetBrains Mono, monospace" fill="#b06367">wrangler deploy (一次性)</text>
+        <!-- 10. Workstation → Dashboard (manual) -->
+        <path d="M 880 348 C 880 360, 881 388, 881 404" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr6)" stroke-dasharray="2 3"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============== SECTION 7: 业务流程 ============== -->
+  <section id="s7">
+    <div class="sec-num">07 · 业务流程</div>
+    <h2>三个 <span class="marker">端到端</span> 流程</h2>
+    <p class="sec-intro">挑了三个最值钱的闭环:客户询价、内容生产 (SEO 引擎)、管理员救火。每个流程都从用户/操作员的动作开始,到系统状态变化或反馈结束。</p>
+
+    <div class="flow-row">
+
+      <div class="flow-card">
+        <h3><span class="badge">F-01</span> 新客询价</h3>
+        <p class="lead">访客浏览 → 选 SKU → 提交表单 → 邮件回执,平均 4.2 步。</p>
+        <ol class="steps">
+          <li><b>访客</b>  浏览 /services/personalization/*/ 选 SKU</li>
+          <li><b>CTA</b>  → /order/ 三步表单(套餐 / 资料 / 确认)</li>
+          <li><b>POST</b>  /api/quote  (Workers 接收)</li>
+          <li><b>校验</b>  字段完整性 + 邮箱格式 + 反垃圾词</li>
+          <li><b>限流</b>  KV rl:&lt;ip&gt; 5/min/IP, 超 → 429</li>
+          <li><b>Resend</b>  发客户确认 + 副本给 admin</li>
+          <li><b>成功</b>  302 → /success/ (noindex) + GA4 event</li>
+          <li><b>失败</b>  Resend 报错 → 写 KV dl:&lt;id&gt;, 返 200 让客户看到 /success/ (回执异步补发)</li>
+        </ol>
+      </div>
+
+      <div class="flow-card">
+        <h3><span class="badge">F-02</span> 博客 SEO 引流</h3>
+        <p class="lead">articles/*.md → /blog/&lt;slug&gt;/ → IndexNow 推送 → 搜索收录。</p>
+        <ol class="steps">
+          <li><b>作者</b>  在 articles/ 写 .md (含 front matter + body)</li>
+          <li><b>scripts/generate-blog.py</b>  渲染为 /blog/&lt;slug&gt;/index.html</li>
+          <li><b>schema</b>  JSON-LD BlogPosting + Article + 10 语言 hreflang 注入</li>
+          <li><b>内链</b>  qa/dedup_noscript.py 扫 + 修 &lt;noscript&gt; 重复</li>
+          <li><b>图片</b>  走图片 pipeline (源图 → 多断点 + AVIF)</li>
+          <li><b>部署</b>  wrangler deploy, 边缘 60s 缓存</li>
+          <li><b>推送</b>  internal-tools/update-sitemap.ps1 → sitemap-zh.xml + IndexNow</li>
+          <li><b>收录</b>  Googlebot 1-3 天, Bing 1-7 天, GPTBot 数小时</li>
+        </ol>
+      </div>
+
+      <div class="flow-card">
+        <h3><span class="badge">F-03</span> 死信重发</h3>
+        <p class="lead">Resend 失败的 lead 不丢,管理员手动重发,带 token 鉴权。</p>
+        <ol class="steps">
+          <li><b>触发</b>  /api/quote 调 Resend 返回非 2xx</li>
+          <li><b>落 DLQ</b>  KV dl:&lt;leadId&gt; 存 lead 全文 + 错误码</li>
+          <li><b>管理员</b>  访问 /admin/leads/  (页面本身 public)</li>
+          <li><b>鉴权</b>  输 DLQ_TOKEN → POST /api/dead-letters</li>
+          <li><b>列表</b>  拿到 dl:* 全表 (按时间倒序)</li>
+          <li><b>重发</b>  选 lead → POST /api/dead-letters?action=resend</li>
+          <li><b>校验</b>  二次 Resend, 成功 → 删 KV key</li>
+          <li><b>失败</b>  保留 KV key + 累加重试次数, 下次再试</li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== SECTION 8: 跨服务时序 ============== -->
+  <section id="s8">
+    <div class="sec-num">08 · 跨服务时序(极简版)</div>
+    <h2>F-01 的 <span class="marker">5 步时间线</span></h2>
+    <p class="sec-intro">把 F-01 流程压成一张时序图,只看谁打谁、几号返回,极简版不画错码分支。要看完整分支往上看 F-01 卡片。</p>
+
+    <div class="seq-wrap">
+      <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" font-family="Outfit, sans-serif">
+        <defs>
+          <marker id="arr8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#3a4256" />
+          </marker>
+          <marker id="arr8ret" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7c7a72" />
+          </marker>
+        </defs>
+
+        <!-- Lifelines: 5 participants -->
+        <g font-size="12" font-family="JetBrains Mono, monospace" fill="#14171e">
+          <text x="80"  y="28" text-anchor="middle" font-weight="600">浏览器</text>
+          <text x="240" y="28" text-anchor="middle" font-weight="600">/order/</text>
+          <text x="420" y="28" text-anchor="middle" font-weight="600">/api/quote</text>
+          <text x="600" y="28" text-anchor="middle" font-weight="600">KV</text>
+          <text x="780" y="28" text-anchor="middle" font-weight="600">Resend</text>
+        </g>
+
+        <!-- participant boxes -->
+        <rect x="40"  y="14" width="80"  height="22" rx="4" fill="#fff" stroke="#2f6f5e"/>
+        <rect x="200" y="14" width="80"  height="22" rx="4" fill="#fff" stroke="#c97b3f"/>
+        <rect x="380" y="14" width="80"  height="22" rx="4" fill="#fff" stroke="#c97b3f"/>
+        <rect x="560" y="14" width="80"  height="22" rx="4" fill="#fff" stroke="#4a5b6e"/>
+        <rect x="740" y="14" width="80"  height="22" rx="4" fill="#fff" stroke="#b06367"/>
+
+        <!-- lifelines (dashed) -->
+        <g stroke="#c8c2b3" stroke-dasharray="3 4">
+          <line x1="80"  y1="40" x2="80"  y2="340"/>
+          <line x1="240" y1="40" x2="240" y2="340"/>
+          <line x1="420" y1="40" x2="420" y2="340"/>
+          <line x1="600" y1="40" x2="600" y2="340"/>
+          <line x1="780" y1="40" x2="780" y2="340"/>
+        </g>
+
+        <!-- 1. GET /order/ -->
+        <text x="160" y="68" text-anchor="middle" font-size="11" fill="#3a4256">1. GET /order/</text>
+        <path d="M 80 78 L 240 78" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr8)"/>
+        <path d="M 240 86 L 80 86" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr8ret)" stroke-dasharray="3 3"/>
+        <text x="160" y="100" text-anchor="middle" font-size="10" fill="#7c7a72" font-family="JetBrains Mono, monospace">200 HTML</text>
+
+        <!-- 2. POST /api/quote -->
+        <text x="250" y="124" text-anchor="middle" font-size="11" fill="#3a4256">2. POST /api/quote  (formData)</text>
+        <path d="M 240 134 L 420 134" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr8)"/>
+
+        <!-- 3. quote → KV: 限流 check -->
+        <text x="510" y="158" text-anchor="middle" font-size="11" fill="#3a4256">3. get rl:&lt;ip&gt;</text>
+        <path d="M 420 168 L 600 168" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr8)"/>
+        <path d="M 600 178 L 420 178" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr8ret)" stroke-dasharray="3 3"/>
+        <text x="510" y="196" text-anchor="middle" font-size="10" fill="#7c7a72" font-family="JetBrains Mono, monospace">count &lt; 5</text>
+
+        <!-- 4. quote → Resend: send mail -->
+        <text x="600" y="222" text-anchor="middle" font-size="11" fill="#3a4256">4. emails.send()</text>
+        <path d="M 420 232 L 780 232" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr8)"/>
+        <path d="M 780 242 L 420 242" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr8ret)" stroke-dasharray="3 3"/>
+        <text x="600" y="260" text-anchor="middle" font-size="10" fill="#7c7a72" font-family="JetBrains Mono, monospace">202 Accepted</text>
+
+        <!-- 5. quote → KV: count +1 -->
+        <text x="510" y="284" text-anchor="middle" font-size="11" fill="#3a4256">5. put rl:&lt;ip&gt; = count+1</text>
+        <path d="M 420 294 L 600 294" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr8)"/>
+        <path d="M 600 304 L 420 304" stroke="#7c7a72" stroke-width="1" fill="none" marker-end="url(#arr8ret)" stroke-dasharray="3 3"/>
+
+        <!-- 6. 302 /success/ -->
+        <text x="250" y="326" text-anchor="middle" font-size="11" fill="#3a4256">6. 302 → /success/</text>
+        <path d="M 240 332 L 80 332" stroke="#3a4256" stroke-width="1.2" fill="none" marker-end="url(#arr8)"/>
+
+        <!-- 角落标注 -->
+        <g font-size="10" font-family="JetBrains Mono, monospace" fill="#7c7a72">
+          <text x="20"  y="354">⏱ 总耗时 典型 200-450ms (Workers 冷启动 + Resend 往返)</text>
+          <text x="540" y="354">↳ 失败分支: Resend 错 → 写 dl:&lt;id&gt;, 详见 F-03</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============== SECTION 9: 页面区块架构 ============== -->
+  <section id="s9">
+    <div class="sec-num">09 · 页面区块架构</div>
+    <h2>一个 HTML 页 = <span class="marker">head + nav + 8-12 个 section + footer</span></h2>
+    <p class="sec-intro">挑了 5 个典型页面对比:首页(信息密度最高)、服务详情(模板化最强)、博客文章(内容型)、订购(转化型)、404/offline(极简)。每列里 block 的颜色就是它的类型,看图就知道哪些页面结构相似、哪些页面是孤例。</p>
+
+    <div class="canvas" style="padding: 24px;">
+      <div class="page-tree">
+
+        <!-- P1: 首页 -->
+        <div class="pt-col">
+          <div class="pt-head">
+            <span class="url">/index.html</span>
+            <span class="name">首页</span>
+            <div class="meta">信息密度最高 · LCP 关键页</div>
+          </div>
+          <div class="pt-block head"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h6l2-3 4 6 2-3h6"/></svg><head>meta + OG + JSON-LD</div>
+          <div class="pt-block nav"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg><top-nav>logo + 10 lang</div>
+          <div class="pt-block hero"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 17l5-5 4 4 4-4 5 5"/></svg>1. Hero · LCP 图</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2. 卖点 × 3</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>3. 9 SKU 卡片</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>4. 案例视频</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M5 5h11a4 4 0 010 8H8a4 4 0 000 8h11"/></svg>5. 价格预览</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 116 0c0 2-3 2-3 4M12 17h.01"/></svg>6. FAQ (Schema)</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h12l4 4v12H4z"/><path d="M16 4v4h4"/></svg>7. 推荐博客 × 3</div>
+          <div class="pt-block cta"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>8. CTA → /order/</div>
+          <div class="pt-block footer"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9 7 9-7M3 5h18v14H3z"/></svg>footer · 3 列 + 法律</div>
+        </div>
+
+        <!-- P2: 服务详情 -->
+        <div class="pt-col">
+          <div class="pt-head">
+            <span class="url">/services/&lt;cat&gt;/&lt;sku&gt;/</span>
+            <span class="name">服务详情</span>
+            <div class="meta">9 个 SKU 复用同模板</div>
+          </div>
+          <div class="pt-block head"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h6l2-3 4 6 2-3h6"/></svg><head>Product schema</div>
+          <div class="pt-block nav"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg><top-nav></div>
+          <div class="pt-block hero"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 17l5-5 4 4 4-4 5 5"/></svg>1. Hero · 服务名</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>2. 痛点描述</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>3. 流程 3-4 步</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>4. 案例视频</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M5 5h11a4 4 0 010 8H8a4 4 0 000 8h11"/></svg>5. 3 档价格</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 116 0c0 2-3 2-3 4M12 17h.01"/></svg>6. FAQ</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/></svg>7. 关联服务 × 3</div>
+          <div class="pt-block cta"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>8. CTA → /order/</div>
+          <div class="pt-block footer"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9 7 9-7M3 5h18v14H3z"/></svg>footer</div>
+        </div>
+
+        <!-- P3: 博客 -->
+        <div class="pt-col">
+          <div class="pt-head">
+            <span class="url">/blog/&lt;slug&gt;/</span>
+            <span class="name">博客文章</span>
+            <div class="meta">50+ 篇 · articles/*.md</div>
+          </div>
+          <div class="pt-block head"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h6l2-3 4 6 2-3h6"/></svg><head>BlogPosting schema</div>
+          <div class="pt-block nav"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg><top-nav></div>
+          <div class="pt-block hero"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 17l5-5 4 4 4-4 5 5"/></svg>1. Hero · 标题+缩略</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.2 4.2l4.3 4.3M15.5 15.5l4.3 4.3M1 12h6M17 12h6M4.2 19.8l4.3-4.3M15.5 8.5l4.3-4.3"/></svg>2. TOC (sticky)</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>3. 正文 (md 渲染)</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>4. 相关推荐 × 3</div>
+          <div class="pt-block cta"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>5. CTA → 服务</div>
+          <div class="pt-block footer"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9 7 9-7M3 5h18v14H3z"/></svg>footer (轻)</div>
+        </div>
+
+        <!-- P4: 订购 -->
+        <div class="pt-col">
+          <div class="pt-head">
+            <span class="url">/order/</span>
+            <span class="name">订购</span>
+            <div class="meta">3 步表单 · 转化页</div>
+          </div>
+          <div class="pt-block head"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h6l2-3 4 6 2-3h6"/></svg><head>noindex + Order schema</div>
+          <div class="pt-block nav"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg><top-nav></div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>1. 进度条 (1/3 → 3/3)</div>
+          <div class="pt-block form"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>2. 套餐 (3 卡片)</div>
+          <div class="pt-block form"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>3. 资料 (姓名/邮箱/留言)</div>
+          <div class="pt-block form"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>4. 确认 + 提交</div>
+          <div class="pt-block form"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>5. 错误态 (限流/校验)</div>
+          <div class="pt-block cta"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>6. 成功 → /success/</div>
+          <div class="pt-block footer"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9 7 9-7M3 5h18v14H3z"/></svg>footer (极简)</div>
+        </div>
+
+        <!-- P5: 404 + offline -->
+        <div class="pt-col">
+          <div class="pt-head">
+            <span class="url">/404 · /offline</span>
+            <span class="name">404 + 离线</span>
+            <div class="meta">极简 fallback</div>
+          </div>
+          <div class="pt-block head"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h6l2-3 4 6 2-3h6"/></svg><head>noindex + minimal</div>
+          <div class="pt-block nav"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg><top-nav></div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>1. 单段 message</div>
+          <div class="pt-block content"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 3v18"/></svg>2. 跳转链接 (3-5 个)</div>
+          <div class="pt-block footer"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9 7 9-7M3 5h18v14H3z"/></svg>footer</div>
+          <div class="pt-block" style="border-left-color:#7c7a72; background:#fafaf7; font-style:italic; color:#7c7a72;">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>↑ 整个页面就这么多
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 20px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; font-size: 11px; font-family: JetBrains Mono, monospace; color: var(--muted);">
+        <div style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:#fff;border:1px solid #2f6f5e;border-radius:2px;"></span>head 元素</div>
+        <div style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:rgba(47,111,94,0.08);border-radius:2px;"></span>导航</div>
+        <div style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:rgba(47,111,94,0.10);border-radius:2px;"></span>hero / LCP</div>
+        <div style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:rgba(201,123,63,0.06);border-radius:2px;"></span>内容</div>
+        <div style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:rgba(176,99,103,0.08);border-radius:2px;"></span>表单 / CTA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== SECTION 10: 页面渲染生命周期 ============== -->
+  <section id="s10">
+    <div class="sec-num">10 · 页面渲染生命周期</div>
+    <h2>从 <span class="marker">articles/foo.md</span> 到 <span class="marker">用户看见的中文页面</span>,8 步</h2>
+    <p class="sec-intro">一个页面的完整"诞生史":从内容作者写 markdown 开始,经过本地工具链注入,到 wrangler 部署,再到边缘中间件处理,最后被浏览器渲染。中间任意一步挂了,这一篇页面就废。每步都标了"谁负责"和"输入/输出"。</p>
+
+    <ol class="timeline">
+
+      <li>
+        <div class="step"><span class="role-pill ws">WORKSTATION</span> STEP 01 · SOURCE</div>
+        <h4>内容作者写源文件</h4>
+        <p><b>输入:</b> articles/46-weddingai-video-review.md(含 front matter)  ·  原图 source-hero-1920.jpg<br/>
+        <b>输出:</b> 一个 .md + 一组原图,放在 repo 本地<br/>
+        <b>负责:</b> 人(你)。这一步完全离线,没碰任何 deploy 资产。</p>
+      </li>
+
+      <li>
+        <div class="step"><span class="role-pill ws">WORKSTATION</span> STEP 02 · RENDER</div>
+        <h4>渲染为静态 HTML</h4>
+        <p><b>输入:</b> .md + front matter<br/>
+        <b>输出:</b> /blog/weddingai-video-review/index.html(含 Schema.org BlogPosting JSON-LD + 10 语言 hreflang + 内嵌 OG meta)<br/>
+        <b>负责:</b> scripts/generate-blog.py(本地 Python)</p>
+      </li>
+
+      <li>
+        <div class="step"><span class="role-pill ws">WORKSTATION</span> STEP 03 · INJECT</div>
+        <h4>图片 / CSS 注入</h4>
+        <p><b>输入:</b> 上一步的 HTML + images/source-hero-1920.jpg<br/>
+        <b>输出:</b> 同一 HTML,但 hero img 标签被改写成 &lt;picture&gt; + srcset(1600w/1920w)+ AVIF source,带 width/height,带 preload link<br/>
+        <b>负责:</b> 根目录 *.py(inject-srcset / inject-avif-source / inject-dimensions / inject-critical-css)。</p>
+      </li>
+
+      <li>
+        <div class="step"><span class="role-pill ws">WORKSTATION</span> STEP 04 · CHECK</div>
+        <h4>本地 + pre-deploy 校验</h4>
+        <p><b>输入:</b> 完整部署包 (整站 .html + images/ + js/ + functions/)<br/>
+        <b>输出:</b> 1 个内部 tools pre-deploy-check.ps1 通过信号(无 404 srcset / 无硬编码 nonce / 无相对路径 / 无 /xx/ 死链)<br/>
+        <b>负责:</b> internal-tools/pre-deploy-check.ps1(本地 PowerShell,跑 7 类检查)。</p>
+      </li>
+
+      <li>
+        <div class="step"><span class="role-pill ws">WORKSTATION</span> STEP 05 · DEPLOY</div>
+        <h4>wrangler 上传到 Cloudflare</h4>
+        <p><b>输入:</b> 部署包(已 .assetsignore 过滤,private/qa/scripts/internal-tools/ 全排除)<br/>
+        <b>输出:</b> 边缘节点拿到完整静态资产 + functions/_middleware.js 等 5 个函数<br/>
+        <b>负责:</b> wrangler 4.114(本地执行 deploy 命令,1-3 分钟完成,含 KV 同步)。</p>
+      </li>
+
+      <li>
+        <div class="step"><span class="role-pill edge">CLOUDFLARE EDGE</span> STEP 06 · REQUEST</div>
+        <h4>用户浏览器发请求</h4>
+        <p><b>输入:</b> 浏览器 GET https://weddingai.video/blog/weddingai-video-review/  ·  Accept-Language: zh-CN<br/>
+        <b>输出:</b> 请求路由到最近的 Cloudflare PoP,Workers runtime 启动 _middleware.js<br/>
+        <b>负责:</b> Cloudflare 全球 Anycast 网络 + Workers 0ms 冷启动。</p>
+      </li>
+
+      <li>
+        <div class="step"><span class="role-pill edge">CLOUDFLARE EDGE</span> STEP 07 · TRANSFORM</div>
+        <h4>边缘中间件 8 步管线</h4>
+        <p><b>输入:</b> 英文 HTML 模板 + 接受语言 zh-CN<br/>
+        <b>输出:</b> 完全中文化的 HTML(&lt;html lang="zh-CN"&gt;、hreflang 全套、og:locale、JSON-LD inLanguage、data-i18n 全部翻译) + CSP nonce 已注入 + Content-Security-Policy 头已设置<br/>
+        <b>负责:</b> functions/_middleware.js(详细 8 步见 s3 章节)。</p>
+      </li>
+
+      <li>
+        <div class="step"><span class="role-pill br">BROWSER</span> STEP 08 · RENDER</div>
+        <h4>浏览器加载 + 渲染 + hydrate</h4>
+        <p><b>输入:</b> 200 OK 中文 HTML + 已注入 nonce 的 &lt;script&gt; 标签 + styles.min.css?v=N + js/main.min.js<br/>
+        <b>输出:</b> 用户看见完整中文页面,首屏 LCP &lt; 1.8s,语言切换器、cookie banner、GA4 全部活起来<br/>
+        <b>负责:</b> Chrome/Safari/Firefox + PWA service worker(sw.js 处理离线 fallback)。</p>
+      </li>
+
+    </ol>
+
+    <div style="margin-top: 24px; padding: 16px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; font-size: 13px; color: var(--ink-soft);">
+      <b style="color:var(--ink);">关键观察:</b> 这 8 步里只有 <span class="role-pill ws" style="font-size:9.5px;">WORKSTATION</span> 1-5 是你电脑上的本地操作,<span class="role-pill edge" style="font-size:9.5px;">EDGE</span> 6-7 是 Cloudflare 自动跑,<span class="role-pill br" style="font-size:9.5px;">BROWSER</span> 8 是用户侧。<b>任何"页面坏了"先定位在哪一步</b>:源码错了?渲染没跑?图片没注入?pre-deploy 没拦住?上传丢了?中间件崩了?浏览器兼容?三段每段都有专门的 debug 入口。
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>WeddingAI.video · architecture.html · 私有本地视图,deploy 时由 .assetsignore 排除 private/</span>
+    <span>Last updated 2026-07-29</span>
+  </footer>
+
+</main>
+</body>
+</html>
