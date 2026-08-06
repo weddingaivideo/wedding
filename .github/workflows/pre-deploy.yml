@@ -21,9 +21,9 @@ name: Pre-Deploy Check
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main]
   pull_request:
-    branches: [main, dev]
+    branches: [main]
 
 # Don't cancel a running check if a new commit lands on the same branch —
 # we want the result that ran against the actual HEAD.
