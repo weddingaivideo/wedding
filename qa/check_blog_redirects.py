@@ -26,6 +26,14 @@ import sys
 from datetime import date
 from pathlib import Path
 
+# Force UTF-8 stdout — Windows CI runners default to cp1252 which crashes
+# on the → / ✅ / ❌ glyphs we print. Belt-and-suspenders alongside the
+# PYTHONIOENCODING=utf-8 env var set in the workflow.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 REDIRECTS = ROOT / "_redirects"
 BLOG_DIR = ROOT / "blog"

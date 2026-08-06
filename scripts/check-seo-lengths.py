@@ -2,8 +2,17 @@
 """检查所有 HTML 页面的 title 和 meta description 长度。"""
 import os
 import re
+import sys
 from html import unescape
 from pathlib import Path
+
+# Force UTF-8 stdout — Windows CI runners default to cp1252 which crashes
+# on the ✅ / ❌ / ⚠️ status glyphs below. Belt-and-suspenders alongside
+# the PYTHONIOENCODING=utf-8 env var set in the workflow.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.parent)
 TITLE_MAX = 60

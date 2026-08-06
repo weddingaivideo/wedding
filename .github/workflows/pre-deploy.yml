@@ -50,6 +50,14 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Force Python UTF-8 I/O
+        # Windows CI runners default to cp1252 stdout, which crashes on
+        # the ✅ / ❌ / → / ⚠️ glyphs printed by check-seo-lengths.py and
+        # check_blog_redirects.py. Belt-and-suspenders alongside the
+        # sys.stdout.reconfigure calls in each script.
+        shell: pwsh
+        run: 'echo "PYTHONIOENCODING=utf-8" >> $env:GITHUB_ENV'
+
       - name: Run pre-deploy-check.ps1 (PowerShell, ~25 checks)
         # CSP nonces, hN tag mismatch, inline event handlers, GA4 ID,
         # Cloudflare Functions health, relative <script src>, CSS empty
