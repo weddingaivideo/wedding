@@ -52,7 +52,7 @@
         .gallery-card { background: var(--color-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); }
         .gallery-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
         .gallery-card-img { aspect-ratio: 16/9; overflow: hidden; }
-        .gallery-card-img img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-card-img img, .gallery-card-img video { width: 100%; height: 100%; object-fit: cover; }
         .gallery-card-body { padding: var(--spacing-md); }
         .gallery-card-body h3 { font-size: 1.125rem; color: var(--color-secondary); margin-bottom: var(--spacing-xs); }
         .gallery-card-body p { font-size: 0.875rem; color: var(--color-text-light); margin-bottom: var(--spacing-sm); }
@@ -328,8 +328,10 @@ if ('serviceWorker' in navigator) {
                     </article>
                     <article class="gallery-card" data-category="family-message">
                         <div class="gallery-card-img">
-                            <picture><source srcset="/images/hero-wedding-vineyard-640.webp 640w, /images/hero-wedding-vineyard-1024.webp 1024w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 100vw, 100vw"><img src="/images/hero-wedding-vineyard.png" alt="Wedding ceremony with integrated family messages" loading="lazy" width="1280" height="720" srcset="/images/hero-wedding-vineyard-640.png 640w, /images/hero-wedding-vineyard-1024.png 1024w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 100vw, 100vw">
-                        </picture></div>
+                            <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-ahmed-layla-broadcast-poster.webp" aria-label="Ahmed &amp; Layla — full ceremony broadcast with picture-in-picture video blessings from family in Pakistan, London, and Egypt" data-lazy-video>
+                            <source src="/images/case-ahmed-layla-broadcast.webm?v=4.29" type="video/webm">
+                            <source src="/images/case-ahmed-layla-broadcast.mp4?v=4.29" type="video/mp4">
+                        </video></div>
 <div class="gallery-card-body">
                             <span class="meta"  data-i18n="404.a_text.family_message.27013166">Family Message</span>
                             <h3  data-i18n="gallery.h3_text.ahmed_layla_full_ceremony_broadcast_inte.14282768">Ahmed & Layla — Full Ceremony Broadcast Integration</h3>
@@ -340,8 +342,10 @@ if ('serviceWorker' in navigator) {
                     </article>
                     <article class="gallery-card" data-category="celebrity-message">
                         <div class="gallery-card-img">
-                            <picture><source srcset="/images/catalog-celebrity-message-360.webp 360w, /images/catalog-celebrity-message-720.webp 720w, /images/catalog-celebrity-message-1280.webp 1280w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/catalog-celebrity-message.jpg" alt="Glamorous celebrity-style wedding moment" loading="lazy" width="1376" height="768" srcset="/images/catalog-celebrity-message-360.jpg 360w, /images/catalog-celebrity-message-720.jpg 720w, /images/catalog-celebrity-message-1280.jpg 1280w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw">
-                        </picture></div>
+                            <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-rodriguez-glamorous-opener-poster.webp" aria-label="The Rodriguez family — Hollywood-style glamorous wedding opener, charming leading-man and leading-lady walking through a Mediterranean villa at golden hour" data-lazy-video>
+                            <source src="/images/case-rodriguez-glamorous-opener.webm?v=4.29" type="video/webm">
+                            <source src="/images/case-rodriguez-glamorous-opener.mp4?v=4.29" type="video/mp4">
+                        </video></div>
 <div class="gallery-card-body">
                             <span class="meta"  data-i18n="404.a_text.celebrity_message.59529435">Celebrity Message</span>
                             <h3  data-i18n="gallery.h3_text.the_rodriguez_family_2_minute_glamorous.23897827">The Rodriguez Family — 2-Minute Glamorous Opener</h3>
@@ -352,8 +356,10 @@ if ('serviceWorker' in navigator) {
                     </article>
                     <article class="gallery-card" data-category="celebrity-message">
                         <div class="gallery-card-img">
-                            <picture><source srcset="/images/wedding-trailer-sunset-360.webp 360w, /images/wedding-trailer-sunset-720.webp 720w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/wedding-trailer-sunset.png" alt="Multi-style celebrity wedding moment" loading="lazy" width="1280" height="720" srcset="/images/wedding-trailer-sunset-360.png 360w, /images/wedding-trailer-sunset-720.png 720w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw">
-                        </picture></div>
+                            <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-mei-jin-celebrity-package-poster.webp" aria-label="Mei &amp; Jin — multiple celebrity style wedding package, leading-man entrance, comedic cake cutting, glamorous recessional wave" data-lazy-video>
+                            <source src="/images/case-mei-jin-celebrity-package.webm?v=4.29" type="video/webm">
+                            <source src="/images/case-mei-jin-celebrity-package.mp4?v=4.29" type="video/mp4">
+                        </video></div>
 <div class="gallery-card-body">
                             <span class="meta"  data-i18n="404.a_text.celebrity_message.59529435">Celebrity Message</span>
                             <h3  data-i18n="gallery.h3_text.mei_jin_multiple_celebrity_style_package.47117363">Mei & Jin — Multiple Celebrity Style Package</h3>
