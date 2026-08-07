@@ -26,6 +26,7 @@ Changed 2026-07-28 (Mavis SEO audit):
 """
 import re
 import sys
+import json
 from pathlib import Path
 from datetime import date, datetime
 
@@ -100,18 +101,69 @@ def changefreq_for(path: str) -> str:
     return "yearly"
 
 
+def _og_meta(html: str, prop: str) -> str | None:
+    """Extract the content of <meta property="X" content="Y">. Case-insensitive
+    on the property name, supports the optional whitespace after `property=`.
+
+    Returns None if not found.
+    """
+    pat = re.compile(
+        r'<meta\s+property\s*=\s*"' + re.escape(prop) + r'"\s+content\s*=\s*"([^"]+)"',
+        re.IGNORECASE,
+    )
+    m = pat.search(html)
+    return m.group(1) if m else None
+
+
+def _ld_image(html: str) -> str | None:
+    """Look for an Article JSON-LD block with an `image` field. Used as a
+    fallback for blog post pages that don't have a static og:image but
+    do carry an Article JSON-LD with the hero image."""
+    for block in re.findall(
+        r'<script\s+type\s*=\s*"application/ld\+json"\s*>(.*?)</script>',
+        html,
+        re.IGNORECASE | re.DOTALL,
+    ):
+        try:
+            data = json.loads(block)
+        except Exception:
+            continue
+        if isinstance(data, dict) and data.get("@type") == "Article":
+            img = data.get("image")
+            if isinstance(img, str) and img.startswith("http"):
+                return img
+            if isinstance(img, list) and img and isinstance(img[0], str):
+                return img[0]
+    return None
+
+
+def _xml_escape(s: str) -> str:
+    """Minimal XML attribute escaping for sitemap <image:title> content."""
+    return (
+        s.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+        .replace("'", "&apos;")
+    )
+
+
 def image_for(path: str) -> str | None:
     """Return the hero image URL for a given page path, or None if no
     good candidate. Used to inject <image:image> blocks for Google
     Image Search indexing.
 
-    Strategy: every indexable page gets SOME image. Pages without a
-    curated hero fall back to the global hero-wedding-vineyard.webp.
-    We deliberately do NOT return None here — Google Image Search is
-    a meaningful traffic channel for a visual niche, and 100%
-    image-sitemap coverage is a free win.
+    Strategy: every indexable page gets SOME image, but it should be the
+    page's own hero (og:image or Article.image JSON-LD field), not a
+    generic global image.
+
+    Audit fix 2026-08-06: previously every page shared the same
+    hero-wedding-vineyard.webp, which meant Google Image Search couldn't
+    distinguish pages and blog posts lost their visual identity in
+    image SERP. Now each page gets its own image when one is set in the
+    page's <meta property="og:image"> or in an Article JSON-LD `image`
+    field.
     """
-    # Curated page-specific images (highest CTR when shared)
     page_specific = {
         "/gallery/": f"{SITE_ORIGIN}/images/gallery-collage.webp",
         "/order/": f"{SITE_ORIGIN}/images/hero-wedding-vineyard.webp",
@@ -122,13 +174,48 @@ def image_for(path: str) -> str | None:
     }
     if path in page_specific:
         return page_specific[path]
-    # Service and blog post pages share the global hero
-    if path.startswith("/services/") or path.startswith("/blog/"):
-        return f"{SITE_ORIGIN}/images/hero-wedding-vineyard.webp"
-    # Everything else (legal, support, account-style pages) also gets
-    # the global hero — better than no image at all for image-search
-    # discovery.
+
+    file = path_to_file.get(path)
+    if file is not None and file.exists():
+        try:
+            html = file.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            html = ""
+        if html:
+            og = _og_meta(html, "og:image")
+            if og and og.startswith("http"):
+                return og
+            ld = _ld_image(html)
+            if ld:
+                return ld
+
     return f"{SITE_ORIGIN}/images/hero-wedding-vineyard.webp"
+
+
+def image_title_for(path: str, default: str) -> str:
+    """Return the <image:title> for a page's <image:image> entry.
+
+    Uses the page's <meta property="og:title"> when available, otherwise
+    the provided default. The `default` argument is treated as a
+    pre-formed XML-safe string (it may contain numeric character refs
+    like &#8212; for em-dash), and is NOT re-escaped.
+
+    Audit fix 2026-08-06: previously every image had the same generic
+    title.
+    """
+    file = path_to_file.get(path)
+    if file is not None and file.exists():
+        try:
+            html = file.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            html = ""
+        if html:
+            og = _og_meta(html, "og:title")
+            if og:
+                if len(og) > 100:
+                    og = og[:97].rsplit(" ", 1)[0] + "..."
+                return _xml_escape(og)
+    return default
 
 
 def url_mtime_iso(file: Path | None) -> str:
@@ -193,12 +280,10 @@ def write_sitemap(lang: str, urls: list[str]) -> tuple[Path, int]:
         if img:
             lines.append('        <image:image>')
             lines.append(f'            <image:loc>{img}</image:loc>')
-            # Use &#8212; numeric character reference instead of literal em dash
-            # (U+2014). The literal char gets mangled to "â..." somewhere in the
-            # wrangler -> Cloudflare Pages upload path on Windows. Numeric refs
-            # are pure ASCII so the byte stream survives intact, and XML
-            # parsers (GSC, Bing) decode it back to the proper em dash.
-            lines.append('            <image:title>WeddingAI.video &#8212; AI-powered wedding video services</image:title>')
+            # Page-specific image:title (was hard-coded to a generic string
+            # before 2026-08-06). XML-escaped via image_title_for().
+            default_title = "WeddingAI.video &#8212; AI-powered wedding video services"
+            lines.append(f'            <image:title>{image_title_for(path, default_title)}</image:title>')
             lines.append('        </image:image>')
 
         lines.append('    </url>')
