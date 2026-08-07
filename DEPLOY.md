@@ -3,6 +3,12 @@
 How a code change goes from your dev box to https://weddingai.video. Read this
 before pushing anything.
 
+> **Deployment tool: `git push` only.** `wrangler pages deploy` CLI is **deprecated**
+> for this project (set 2026-08-07). Always ship via `git push origin main`; CF Pages
+> auto-builds from the GitHub integration. `wrangler.toml` stays in the repo for KV
+> bindings + function config — it is not a deploy entry point. `scripts/deploy.ps1`
+> (the wrangler wrapper) is kept for legacy reference but should not be used.
+
 ## TL;DR
 
 ```
@@ -240,6 +246,7 @@ CF Pages 会自动 deploy revert 的版本。
 
 ## 9. 切勿做
 
+- ❌ **`wrangler pages deploy`** — 已弃用。用 `git push origin main` 走 CF Pages GitHub 集成。
 - ❌ **`git push origin dev`** — dev 已删除
 - ❌ **Force-push main 跳过 pre-deploy** — 万一代码真有 bug，CF Pages branch control 会挡；没挡就会部署坏代码
 - ❌ **改 `_redirects` 不更新 `ci.yml` path list** — ci/validate 会 fail（见 6.1）
