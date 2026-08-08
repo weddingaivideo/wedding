@@ -784,7 +784,48 @@ export const onRequest = async (context) => {
         const cookies = parseCookies(context.request.headers.get("Cookie") || "");
 
         // Check if URL has explicit lang prefix
-        const match = path.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th)(\/.*|$)/);
+        let match = path.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th)(\/.*|$)/);
+
+        // Detect malformed /blog/(zh|ja|pt)/... URLs and synthesize a lang match
+        // for the canonical /<lang>/blog/... form.
+        //
+        // The blog cross-link generator historically emitted hrefs like
+        // `/blog/ja/ai-photos-to-wedding-video/` (lang code AFTER /blog/) for
+        // ja / zh / pt locales. The canonical URL structure is `/<lang>/blog/...`
+        // (lang code BEFORE /blog/). Without this rewrite, the malformed URL
+        // returns 404 and Google indexes a broken-link 404.
+        //
+        // We rewrite the request internally (200, URL bar preserved) to the
+        // canonical /<lang>/blog/... form. The lang branch below then fetches
+        // the underlying file, applies i18n transforms, and returns the
+        // <lang>-locale HTML — same code path as a direct visit to
+        // /<lang>/blog/..., just with the original URL bar.
+        //
+        // Only ja / zh / pt are affected (audit 2026-08-07: 67 files with this
+        // bug, all in those three locales). Other 7 langs never produced
+        // malformed hrefs so we don't need the rewrite for them.
+        //
+        // The synthesized match object has the same shape as a regex match:
+        // match[1] = lang, match[2] = rest (path after the lang prefix).
+        // The full-string `match[0]` is never used by downstream code.
+        if (!match) {
+            // Capture the leading "/" of the rest path so we can safely
+            // re-attach "/blog/" for the synthesized match. Using `(.+)`
+            // (greedy) instead of `(.+?)/?` avoids the non-greedy
+            // match stopping at the second "/". The "/" between the
+            // lang code and the rest is part of the regex literal, not
+            // captured, so the synthesized rest must prepend "/blog/".
+            const blogLocaleRewrite = path.match(/^\/blog\/(zh|ja|pt)\/(.+)$/);
+            if (blogLocaleRewrite) {
+                const rewriteLang = blogLocaleRewrite[1];
+                const capturedRest = blogLocaleRewrite[2].replace(/\/+$/, ""); // strip trailing /
+                // Synthesized rest: "/blog/<captured>" so the lang branch's
+                // existing fetch of `url.origin + rest` hits the canonical
+                // /blog/<slug>/index.html file.
+                const synthesizedRest = `/blog/${capturedRest}`;
+                match = [null, rewriteLang, synthesizedRest];
+            }
+        }
 
         if (!match) {
             // No lang prefix — try auto-redirect based on Accept-Language
@@ -834,6 +875,40 @@ export const onRequest = async (context) => {
 
         const lang = match[1];
         const rest = match[2] || "/";
+
+        // Reject stacked-locale URLs like /zh/de/blog/... or /fr/ar/blog/...
+        //
+        // Without this guard the i18n rewrite would treat `rest` (= "de/blog/...")
+        // as the path-without-lang and build canonical/hreflang as if the inner
+        // "de" were a normal subdirectory — producing hreflang entries like
+        // /en/de/blog/..., /zh/de/blog/..., etc. for every supported lang, plus
+        // a self-referential canonical pointing at the malformed URL itself.
+        // The page still returns 200 OK (so it doesn't surface as a 5xx), but
+        // the broken hreflang graph poisons the SEO of every blog post that
+        // gets reached this way and makes Google treat the page as duplicate
+        // content. Source: user report 2026-08-07 (e.g. /zh/de/blog/ai-photos-
+        // to-wedding-video/, /fr/ar/blog/weddingai-video-guide/).
+        //
+        // Fix: 301 to the URL with the outer lang prefix stripped. That target
+        // is the user's most likely intent (navigate to the inner-locale
+        // version) and is always a valid URL — the /<lang>/<inner-lang>/...
+        // stacking only exists on requests that mis-constructed the URL.
+        //
+        // No false positives: rest only triggers this branch when its first
+        // segment is one of the 10 supported LANGS, and no non-lang directory
+        // in the repo is exactly 2 letters. /<lang>/<inner-lang>/... where
+        // lang === innerLang (e.g. /zh/zh/blog/...) also redirects, to
+        // /zh/blog/... — which is the right normalization.
+        const stackedLangMatch = rest.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th)(\/|$)/);
+        if (stackedLangMatch) {
+            const innerLang = stackedLangMatch[1];
+            const innerRest = rest.slice(3); // strip "/xx" (slash + 2 letters)
+            const target = `${SITE_ORIGIN}/${innerLang}${innerRest}${url.search}`;
+            return new Response(null, {
+                status: 301,
+                headers: { "Location": target },
+            });
+        }
 
         // Fetch the underlying file. The X-Middleware-Internal: 1 header
         // makes shouldSkip() short-circuit this request on re-entry, so the
