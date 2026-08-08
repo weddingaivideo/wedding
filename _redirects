@@ -36,7 +36,7 @@
 # Placed BELOW the .html 308 rule as a TEST — earlier attempts above the
 # 308 rule were silently bypassed (file order did not take effect in
 # CF Pages 4.114 for multi-segment literal paths).
-*/index.html         /:splat/                200
+*/index.html         /:splat/                200!
 
 # Short URL aliases (v3.9.0) — for marketing / social / easy sharing.
 # Each short slug 308s to its canonical /services/<category>/<service>/ URL.
