@@ -99,7 +99,6 @@
 /index.html          /                       200
 /en/index.html       /en/    301
 /zh/index.html       /zh/    301
-/zh/index.html       /zh/    301
 /es/index.html       /es/    301
 /fr/index.html       /fr/    301
 /de/index.html       /de/    301
@@ -108,6 +107,23 @@
 /ru/index.html       /ru/    301
 /ar/index.html       /ar/    301
 /th/index.html       /th/    301
+
+# Per-language 404 page .html → 301 to canonical /<lang>/.
+# Same root cause as the /<lang>/index.html family: CF Pages' built-in 308 for
+# .html paths fires before _redirects can override for multi-segment paths.
+# Without these, /<lang>/404.html 308s to /<lang>/404/ which 404s — a 1-hop
+# chain to a 404 that GSC flags as "Page automatically redirected". 301 to
+# /<lang>/ is a deliberate permanent move, not "auto" — clears the warning.
+/en/404.html          /en/    301
+/zh/404.html          /zh/    301
+/es/404.html          /es/    301
+/fr/404.html          /fr/    301
+/de/404.html          /de/    301
+/pt/404.html          /pt/    301
+/ja/404.html          /ja/    301
+/ru/404.html          /ru/    301
+/ar/404.html          /ar/    301
+/th/404.html          /th/    301
 
 # .html back-compat: 308 redirect to the directory form for any depth.
 # Both top-level (<page>.html → <page>/) and service pages (/services/*.html
