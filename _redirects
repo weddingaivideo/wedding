@@ -21,6 +21,25 @@
 # to a nonexistent target). MUST be above the `/*.html` rule.
 /google-site-verification.html    /404                            404
 
+# Homepage and per-language homepages — serve 200 directly. Without these,
+# the `/*.html -> /:splat/ 308` rule below would catch /index.html and splat
+# it to /index/ (a non-canonical intermediate that 308s again to /, a 2-hop
+# chain), and /<lang>/index.html to /<lang>/index/ (which 404s for every
+# language). Both chains are flagged by GSC as "Page automatically redirects"
+# and were the root cause of the 2026-08-07 GSC indexing warning.
+# MUST be above the `/*.html` rule.
+/index.html          /                       200
+/en/index.html       /en/                    200
+/zh/index.html       /zh/                    200
+/es/index.html       /es/                    200
+/fr/index.html       /fr/                    200
+/de/index.html       /de/                    200
+/pt/index.html       /pt/                    200
+/ja/index.html       /ja/                    200
+/ru/index.html       /ru/                    200
+/ar/index.html       /ar/                    200
+/th/index.html       /th/                    200
+
 # .html back-compat: 308 redirect to the directory form for any depth.
 # Both top-level (<page>.html → <page>/) and service pages (/services/*.html
 # → /services/<slug>/) flow through this single rule — line 24 of the
