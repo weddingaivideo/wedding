@@ -31,7 +31,10 @@
 # chain), and /<lang>/index.html to /<lang>/index/ (which 404s for every
 # language). Both chains are flagged by GSC as "Page automatically redirects"
 # and were the root cause of the 2026-08-07 GSC indexing warning.
-*/index.html         /:splat/                200
+# TEST: literal no-op rewrite (source=dest)
+# /index.html          /index.html    200
+/en/index.html       /en/index.html  200
+/zh/index.html       /zh/index.html  200
 
 # Short URL aliases (v3.9.0) — for marketing / social / easy sharing.
 # Each short slug 308s to its canonical /services/<category>/<service>/ URL.
