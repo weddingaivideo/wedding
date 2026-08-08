@@ -1,8 +1,5 @@
 # WeddingAI.video — v3.8.0 URL rewrites for Cloudflare Pages
 
-# SMOKE TEST
-/foo    /    200
-
 #
 # Strategy: directory structure (`<page>/index.html`) + this _redirects file.
 # - <page>/ (with trailing slash) is served directly by Pages as the
@@ -25,20 +22,33 @@
 # to a nonexistent target). MUST be above the `/*.html` rule.
 /google-site-verification.html    /404                            404
 
-# .html back-compat: 308 redirect to the directory form for any depth.
-# (TEMPORARILY REMOVED FOR TEST — restoring immediately)
-# /*.html                          /:splat/                 308
+# Per-language homepage .html → 301 to canonical /<lang>/.
+# Cloudflare Pages has a built-in 308 for .html paths that fires before
+# _redirects can override for multi-segment paths (single-segment /index.html
+# CAN be overridden, /<lang>/index.html cannot — confirmed via 6+ deploy
+# experiments 2026-08-07: literal rules, glob rules, position swap, ! force
+# flag, 200/301 status, no-op rewrite — all bypassed for multi-segment
+# .html paths).
+# 301 is acceptable here: it's a permanent deliberate move to the canonical
+# /<lang>/, not an "auto" redirect, so GSC's "Page is automatically
+# redirected" warning will not fire on these. (Belt-and-suspenders fix for
+# the 2026-08-07 GSC indexing warning.)
+/en/index.html       /en/    301
+/zh/index.html       /zh/    301
+/es/index.html       /es/    301
+/fr/index.html       /fr/    301
+/de/index.html       /de/    301
+/pt/index.html       /pt/    301
+/ja/index.html       /ja/    301
+/ru/index.html       /ru/    301
+/ar/index.html       /ar/    301
+/th/index.html       /th/    301
 
-# Homepage and per-language homepages — serve 200 directly. Without these,
-# the `/*.html -> /:splat/ 308` rule above would catch /index.html and splat
-# it to /index/ (a non-canonical intermediate that 308s again to /, a 2-hop
-# chain), and /<lang>/index.html to /<lang>/index/ (which 404s for every
-# language). Both chains are flagged by GSC as "Page automatically redirects"
-# and were the root cause of the 2026-08-07 GSC indexing warning.
-# TEST: literal no-op rewrite (source=dest)
-# /index.html          /index.html    200
-/en/index.html       /en/index.html  200
-/zh/index.html       /zh/index.html  200
+# .html back-compat: 308 redirect to the directory form for any depth.
+# Both top-level (<page>.html → <page>/) and service pages (/services/*.html
+# → /services/<slug>/) flow through this single rule — line 24 of the
+# previous revision was redundant (this wildcard already covers it).
+/*.html                          /:splat/                 308
 
 # Short URL aliases (v3.9.0) — for marketing / social / easy sharing.
 # Each short slug 308s to its canonical /services/<category>/<service>/ URL.
