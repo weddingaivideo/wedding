@@ -29,8 +29,8 @@
   Start wrangler but don't auto-open browser. Useful for headless / CI.
 
 .PARAMETER Clean
-  Wipe .wrangler/state/ before starting. Use this if you changed
-  wrangler.toml KV bindings or want to reset rate-limit counters.
+  Wipe .wrangler/state/ before starting. Use this if you want to reset
+  local rate-limit counters.
 
 .EXAMPLE
   powershell -ExecutionPolicy Bypass -File scripts\dev.ps1
@@ -61,10 +61,6 @@ Set-Location $root
 # --- 0. Sanity checks --------------------------------------------------------
 if (-not (Get-Command npx.cmd -ErrorAction SilentlyContinue)) {
     Write-Host "npx not found. Install Node.js first (https://nodejs.org)." -ForegroundColor Red
-    exit 1
-}
-if (-not (Test-Path wrangler.toml)) {
-    Write-Host "wrangler.toml not found in $root. Run from the project root." -ForegroundColor Red
     exit 1
 }
 

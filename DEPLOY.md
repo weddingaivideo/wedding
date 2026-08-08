@@ -5,9 +5,10 @@ before pushing anything.
 
 > **Deployment tool: `git push` only.** `wrangler pages deploy` CLI is **deprecated**
 > for this project (set 2026-08-07). Always ship via `git push origin main`; CF Pages
-> auto-builds from the GitHub integration. `wrangler.toml` stays in the repo for KV
-> bindings + function config — it is not a deploy entry point. `scripts/deploy.ps1`
-> (the wrangler wrapper) is kept for legacy reference but should not be used.
+> auto-builds from the GitHub integration. KV bindings / cron triggers / secrets
+> are configured in the Cloudflare dashboard — no toml file in the repo is a
+> deploy entry point. `scripts/deploy.ps1` (the wrangler wrapper) is kept for
+> legacy reference but should not be used.
 
 ## TL;DR
 
@@ -235,10 +236,9 @@ CF Pages 会自动 deploy revert 的版本。
 | `qa/check_blog_redirects.py` | Blog 50 条 301 retention check |
 | `scripts/check-seo-lengths.py` | Title/description length check |
 | `scripts/check_langs_sync.py` | Lang list consistency check |
-| `_redirects` | CF Pages redirect rules（含 404 内部文件） |
+| `_redirects` | CF Pages redirect rules（含 404 内部文件，必须 LF 换行） |
 | `sitemap.xml` + `sitemap-*.xml` | 10 语言 sitemap |
-| `wrangler.toml` | CF Pages / Workers / KV 配置 |
-| `.gitattributes` | LFS + line ending 规则 |
+| `.gitattributes` | LFS + line ending 规则（含 `_redirects`/`_headers` 强制 LF） |
 | `.gitignore` | local-only 文件排除 |
 | `.assetsignore` | 部署时排除的内部文件 pattern |
 

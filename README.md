@@ -135,9 +135,8 @@ on the next deploy.
 ├── scripts/                ← build/QA/fix scripts (canonical, not one-offs)
 ├── tools/                  ← ad-hoc utility scripts
 ├── private/                ← internal docs (e.g. architecture overview)
-├── _headers                ← Cloudflare Pages headers (cache, security, MIME)
-├── _redirects              ← Cloudflare Pages redirects
-├── wrangler.toml           ← Cloudflare Pages config (project name, KV bindings)
+├── _headers                ← Cloudflare Pages headers (cache, security, MIME) — LF
+├── _redirects              ← Cloudflare Pages redirects — LF
 └── AGENTS.md               ← agent-facing project notes
 ```
 

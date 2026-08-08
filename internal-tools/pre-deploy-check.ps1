@@ -326,7 +326,6 @@ $critical = @(
     "privacy/index.html",
     "terms/index.html",
     "styles.css",
-    "wrangler.toml",
     "js/main.js"
 )
 foreach ($f in $critical) {
@@ -380,8 +379,12 @@ if ($legacySyncGtag -gt 0) {
 
 # ---------- 7. (REMOVED) Netlify config ----------
 # Project migrated from Netlify to Cloudflare Pages (2026-07-27). netlify.toml
-# was a dead config; the new deployment uses wrangler.toml + _redirects + _headers.
-# The legacy [[redirects]] + [[headers]] blocks lived in netlify.toml only.
+# and wrangler.toml are both dead configs — the current deployment is a pure
+# GitHub → CF Pages git-deploy (push to main triggers auto-build from the
+# GitHub integration). KV bindings / cron triggers / secrets are configured
+# in the Cloudflare dashboard, not in any toml file in the repo.
+# The legacy [[redirects]] + [[headers]] blocks lived in netlify.toml only;
+# current production uses _redirects + _headers (see Step 1 above).
 # Keeping a no-op marker here so the rest of the numbering stays stable.
 
 # ---------- 8. Page count ----------

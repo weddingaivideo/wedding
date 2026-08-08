@@ -43,7 +43,7 @@ __pycache__/
 *.psm1
 *.psd1
 
-# Netlify / Cloudflare deploy config (legacy — switched to wrangler.toml)
+# Netlify legacy deploy config (migrated to Cloudflare Pages git-deploy 2026-07-27)
 netlify.toml
 
 # Local environment / wrangler cache

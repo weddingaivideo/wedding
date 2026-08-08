@@ -1,6 +1,9 @@
 /**
  * Cloudflare Pages Cron Trigger — /scheduled
- * Runs daily at 9am UTC (configured in wrangler.toml under [[env.production.triggers]]).
+ * Runs daily at 9am UTC (configured in the Cloudflare dashboard under
+ * Pages → weddingai-video → Settings → Functions → Cron Triggers).
+ * NOTE: wrangler.toml does NOT configure cron triggers (Pages wrangler.toml
+ * doesn't support [[triggers]]); the schedule is set in the dashboard only.
  *
  * Purpose: re-send any /api/quote submission whose Resend email failed, so a
  * temporary email-service outage doesn't lose leads. Up to 5 retries per lead;

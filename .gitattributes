@@ -26,5 +26,15 @@
 *.yaml  text eol=lf
 *.toml  text eol=lf
 *.py    text eol=lf
+*.ps1   text eol=lf
 *.sh    text eol=lf
 *.txt   text eol=lf
+
+# CF Pages special files — MUST be LF or the entire _redirects / _headers
+# file is silently dropped by the Pages edge parser (CRLF → "unparseable",
+# file becomes a 404 page and zero rules apply). 2026-08-07 caught this the
+# hard way: 9+ `test(redirects)` commits looked deploy-deployed but every
+# one had zero effect on prod because the files came out of the Windows
+# working tree as CRLF and the .gitattributes didn't override.
+_redirects text eol=lf
+_headers   text eol=lf
