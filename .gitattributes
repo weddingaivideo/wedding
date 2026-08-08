@@ -30,11 +30,13 @@
 *.sh    text eol=lf
 *.txt   text eol=lf
 
-# CF Pages special files — MUST be LF or the entire _redirects / _headers
-# file is silently dropped by the Pages edge parser (CRLF → "unparseable",
-# file becomes a 404 page and zero rules apply). 2026-08-07 caught this the
-# hard way: 9+ `test(redirects)` commits looked deploy-deployed but every
-# one had zero effect on prod because the files came out of the Windows
-# working tree as CRLF and the .gitattributes didn't override.
-_redirects text eol=lf
-_headers   text eol=lf
+# CF Pages special files — MUST be UTF-8 LF (NOT UTF-16, NOT CRLF) or the
+# entire _redirects / _headers file is silently dropped by the Pages edge
+# parser and zero rules apply. 2026-08-07 caught this the hard way.
+#
+# Marked as `-text` (binary) to prevent gitattributes' text filter from
+# silently converting the working-tree UTF-8 LF to UTF-16 LE on commit
+# (which would pass local file-size checks but break the deploy). Git
+# stores the bytes as-is, so a manually-written UTF-8 LF file stays UTF-8 LF.
+_redirects -text
+_headers   -text
