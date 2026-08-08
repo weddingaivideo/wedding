@@ -889,21 +889,51 @@ export const onRequest = async (context) => {
         // content. Source: user report 2026-08-07 (e.g. /zh/de/blog/ai-photos-
         // to-wedding-video/, /fr/ar/blog/weddingai-video-guide/).
         //
-        // Fix: 301 to the URL with the outer lang prefix stripped. That target
-        // is the user's most likely intent (navigate to the inner-locale
-        // version) and is always a valid URL — the /<lang>/<inner-lang>/...
-        // stacking only exists on requests that mis-constructed the URL.
+        // Fix (2026-08-08): peel the outer lang prefix off REPEATEDLY until
+        // only one lang segment would remain, then 301 to the URL whose
+        // outer lang is that last segment. This collapses the entire stacked
+        // chain into ONE redirect (the previous version peeled one layer per
+        // hop, so /zh/zh/zh/blog/ took 3 round trips to land on /zh/blog/).
+        //   /zh/de/blog/         -> /de/blog/
+        //   /zh/zh/blog/         -> /zh/blog/
+        //   /zh/zh/zh/blog/      -> /zh/blog/
+        //   /en/zh/about/        -> /zh/about/
+        //   /de/pt/es/blog/      -> /es/blog/
+        //   /zh/                 -> /zh
+        // The target is the user's most likely intent (navigate to the
+        // inner-locale version) and is always a valid URL — the
+        // /<lang>/<inner-lang>/... stacking only exists on requests that
+        // mis-constructed the URL.
         //
         // No false positives: rest only triggers this branch when its first
         // segment is one of the 10 supported LANGS, and no non-lang directory
         // in the repo is exactly 2 letters. /<lang>/<inner-lang>/... where
         // lang === innerLang (e.g. /zh/zh/blog/...) also redirects, to
         // /zh/blog/... — which is the right normalization.
-        const stackedLangMatch = rest.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th)(\/|$)/);
-        if (stackedLangMatch) {
-            const innerLang = stackedLangMatch[1];
-            const innerRest = rest.slice(3); // strip "/xx" (slash + 2 letters)
-            const target = `${SITE_ORIGIN}/${innerLang}${innerRest}${url.search}`;
+        let finalLang = null;
+        let stripped = rest;
+        // 10 iterations covers the worst realistic case (all 10 supported
+        // langs stacked, so 9 outer prefixes to peel before the last lang
+        // becomes the new outer). The 10th iteration is just a safety net
+        // for anything we missed.
+        for (let i = 0; i < 10; i++) {
+            const m = stripped.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th)(\/|$)/);
+            if (!m) break;
+            const innerRest = stripped.slice(3); // strip "/xx" (slash + 2 letters)
+            const wouldStillHaveLang = innerRest.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th)(\/|$)/);
+            if (!wouldStillHaveLang) {
+                // This lang segment is the last one — keep it as the new
+                // outer lang so the redirected target still has a meaningful
+                // primary lang (i18n hreflang/canonical logic downstream
+                // relies on it).
+                finalLang = m[1];
+                stripped = innerRest;
+                break;
+            }
+            stripped = innerRest;
+        }
+        if (finalLang !== null) {
+            const target = `${SITE_ORIGIN}/${finalLang}${stripped}${url.search}`;
             return new Response(null, {
                 status: 301,
                 headers: { "Location": target },
