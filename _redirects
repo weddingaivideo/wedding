@@ -1,4 +1,8 @@
 # WeddingAI.video — v3.8.0 URL rewrites for Cloudflare Pages
+
+# SMOKE TEST
+/foo    /    200
+
 #
 # Strategy: directory structure (`<page>/index.html`) + this _redirects file.
 # - <page>/ (with trailing slash) is served directly by Pages as the
