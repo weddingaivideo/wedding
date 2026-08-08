@@ -14,6 +14,68 @@
 # Why so few rules: more rules = more chances of self-redirects and
 # conflict with Pages' own normalization (which strips trailing slashes
 # before matching rules). Keep this minimal.
+# === Blog 01-50 -> semantic-slug migration (auto-generated) ===
+# When: 2026-07-23 (rename-blog-dirs.py).
+# Purpose: external links / social shares pointing at the old numeric
+#   /blog/01-restore-old-wedding-videos/ URLs still 301 to the new
+#   canonical /blog/restore-vhs-wedding-footage/. 0 deploy cost
+#   (static _redirects file), preserves any SEO value accumulated on
+#   the old paths during pre-rename indexing.
+# Safe to delete: after 2027-01-23 (6-month retention). At that point
+#   all 4xx crawl + 6-month user-share decay should have flushed
+#   external references. Until then, prefer to keep.
+# To regenerate this block after adding a new blog post: re-run
+#   scripts/rename-blog-dirs.py against a fresh rename map.
+/blog/01-restore-old-wedding-videos/  /blog/restore-vhs-wedding-footage/  301
+/blog/02-vhs-to-digital-wedding-cost/  /blog/vhs-to-digital-wedding-cost/  301
+/blog/03-ai-wedding-video-generator/  /blog/ai-wedding-video-generator-guide/  301
+/blog/04-wedding-video-from-photos/  /blog/wedding-video-from-photos/  301
+/blog/05-wedding-slow-motion-effect/  /blog/wedding-slow-motion-effect/  301
+/blog/06-honor-deceased-parent-wedding/  /blog/honor-deceased-parent-wedding/  301
+/blog/07-cinematic-wedding-trailer/  /blog/cinematic-wedding-trailer-guide/  301
+/blog/08-pet-wedding-videos/  /blog/pet-wedding-videos/  301
+/blog/09-include-remote-family-wedding-video/  /blog/include-remote-family-wedding-video/  301
+/blog/10-multilingual-wedding-videos/  /blog/multilingual-wedding-videos/  301
+/blog/11-unique-wedding-video-ideas/  /blog/unique-wedding-video-ideas/  301
+/blog/12-wedding-video-formats/  /blog/wedding-video-formats/  301
+/blog/13-how-long-should-wedding-video-be/  /blog/how-long-should-wedding-video-be/  301
+/blog/14-wedding-video-vs-photos/  /blog/wedding-video-vs-photos/  301
+/blog/15-wedding-video-social-media/  /blog/wedding-video-social-media/  301
+/blog/16-raw-wedding-footage-ideas/  /blog/raw-wedding-footage-ideas/  301
+/blog/17-ai-wedding-video-industry/  /blog/ai-wedding-video-industry/  301
+/blog/18-ai-vs-human-wedding-editing/  /blog/ai-vs-human-wedding-editing/  301
+/blog/19-choose-wedding-videographer/  /blog/choose-wedding-videographer/  301
+/blog/20-wedding-highlight-reel/  /blog/wedding-highlight-reel/  301
+/blog/21-restore-old-wedding-photos/  /blog/restore-old-wedding-photos/  301
+/blog/22-elopement-video-ideas/  /blog/elopement-video-ideas/  301
+/blog/23-destination-wedding-video/  /blog/destination-wedding-video/  301
+/blog/24-wedding-video-music/  /blog/wedding-video-music/  301
+/blog/25-wedding-video-gift-ideas/  /blog/wedding-video-gift-ideas/  301
+/blog/26-wedding-anniversary-video-ideas/  /blog/wedding-anniversary-video-ideas/  301
+/blog/27-spring-wedding-video-trends/  /blog/spring-wedding-video-trends/  301
+/blog/28-christmas-wedding-video/  /blog/christmas-wedding-video/  301
+/blog/29-summer-wedding-video-tips/  /blog/summer-wedding-video-tips/  301
+/blog/30-what-to-do-with-wedding-video/  /blog/what-to-do-with-wedding-video/  301
+/blog/31-micro-wedding-video/  /blog/micro-wedding-video/  301
+/blog/32-share-wedding-video-with-family/  /blog/share-wedding-video-with-family/  301
+/blog/33-same-sex-wedding-video/  /blog/same-sex-wedding-video/  301
+/blog/34-vow-renewal-video/  /blog/vow-renewal-video/  301
+/blog/35-wedding-video-for-parents/  /blog/wedding-video-for-parents/  301
+/blog/36-digitize-parents-wedding-video/  /blog/digitize-parents-wedding-video/  301
+/blog/37-fix-shaky-wedding-video/  /blog/fix-shaky-wedding-video/  301
+/blog/38-wedding-photo-slideshow/  /blog/wedding-photo-slideshow/  301
+/blog/39-wedding-video-subtitles/  /blog/wedding-video-subtitles/  301
+/blog/40-cartoon-wedding-video/  /blog/cartoon-wedding-video/  301
+/blog/41-wedding-memes/  /blog/wedding-memes/  301
+/blog/42-wedding-video-music-guide/  /blog/wedding-video-music-guide/  301
+/blog/43-wedding-video-audio-fix/  /blog/wedding-video-audio-fix/  301
+/blog/44-wedding-video-timeline/  /blog/wedding-video-timeline/  301
+/blog/45-send-large-wedding-video/  /blog/send-large-wedding-video/  301
+/blog/46-weddingai-video-review/  /blog/weddingai-video-review/  301
+/blog/47-wedding-video-cost-2026/  /blog/wedding-video-cost-2026/  301
+/blog/48-skip-wedding-videographer/  /blog/skip-wedding-videographer/  301
+/blog/49-budget-wedding-video/  /blog/budget-wedding-video/  301
+/blog/50-weddingai-success-stories/  /blog/weddingai-success-stories/  301
 
 # Belt-and-suspenders 404 for the legacy GSC verification HTML template
 # (production uses bca20c476d04af209950cbf5921e821d.txt instead; the
@@ -242,65 +304,3 @@
 /th/*    /:splat 200
 
 
-# === Blog 01-50 -> semantic-slug migration (auto-generated) ===
-# When: 2026-07-23 (rename-blog-dirs.py).
-# Purpose: external links / social shares pointing at the old numeric
-#   /blog/01-restore-old-wedding-videos/ URLs still 301 to the new
-#   canonical /blog/restore-vhs-wedding-footage/. 0 deploy cost
-#   (static _redirects file), preserves any SEO value accumulated on
-#   the old paths during pre-rename indexing.
-# Safe to delete: after 2027-01-23 (6-month retention). At that point
-#   all 4xx crawl + 6-month user-share decay should have flushed
-#   external references. Until then, prefer to keep.
-# To regenerate this block after adding a new blog post: re-run
-#   scripts/rename-blog-dirs.py against a fresh rename map.
-/blog/01-restore-old-wedding-videos/  /blog/restore-vhs-wedding-footage/  301
-/blog/02-vhs-to-digital-wedding-cost/  /blog/vhs-to-digital-wedding-cost/  301
-/blog/03-ai-wedding-video-generator/  /blog/ai-wedding-video-generator-guide/  301
-/blog/04-wedding-video-from-photos/  /blog/wedding-video-from-photos/  301
-/blog/05-wedding-slow-motion-effect/  /blog/wedding-slow-motion-effect/  301
-/blog/06-honor-deceased-parent-wedding/  /blog/honor-deceased-parent-wedding/  301
-/blog/07-cinematic-wedding-trailer/  /blog/cinematic-wedding-trailer-guide/  301
-/blog/08-pet-wedding-videos/  /blog/pet-wedding-videos/  301
-/blog/09-include-remote-family-wedding-video/  /blog/include-remote-family-wedding-video/  301
-/blog/10-multilingual-wedding-videos/  /blog/multilingual-wedding-videos/  301
-/blog/11-unique-wedding-video-ideas/  /blog/unique-wedding-video-ideas/  301
-/blog/12-wedding-video-formats/  /blog/wedding-video-formats/  301
-/blog/13-how-long-should-wedding-video-be/  /blog/how-long-should-wedding-video-be/  301
-/blog/14-wedding-video-vs-photos/  /blog/wedding-video-vs-photos/  301
-/blog/15-wedding-video-social-media/  /blog/wedding-video-social-media/  301
-/blog/16-raw-wedding-footage-ideas/  /blog/raw-wedding-footage-ideas/  301
-/blog/17-ai-wedding-video-industry/  /blog/ai-wedding-video-industry/  301
-/blog/18-ai-vs-human-wedding-editing/  /blog/ai-vs-human-wedding-editing/  301
-/blog/19-choose-wedding-videographer/  /blog/choose-wedding-videographer/  301
-/blog/20-wedding-highlight-reel/  /blog/wedding-highlight-reel/  301
-/blog/21-restore-old-wedding-photos/  /blog/restore-old-wedding-photos/  301
-/blog/22-elopement-video-ideas/  /blog/elopement-video-ideas/  301
-/blog/23-destination-wedding-video/  /blog/destination-wedding-video/  301
-/blog/24-wedding-video-music/  /blog/wedding-video-music/  301
-/blog/25-wedding-video-gift-ideas/  /blog/wedding-video-gift-ideas/  301
-/blog/26-wedding-anniversary-video-ideas/  /blog/wedding-anniversary-video-ideas/  301
-/blog/27-spring-wedding-video-trends/  /blog/spring-wedding-video-trends/  301
-/blog/28-christmas-wedding-video/  /blog/christmas-wedding-video/  301
-/blog/29-summer-wedding-video-tips/  /blog/summer-wedding-video-tips/  301
-/blog/30-what-to-do-with-wedding-video/  /blog/what-to-do-with-wedding-video/  301
-/blog/31-micro-wedding-video/  /blog/micro-wedding-video/  301
-/blog/32-share-wedding-video-with-family/  /blog/share-wedding-video-with-family/  301
-/blog/33-same-sex-wedding-video/  /blog/same-sex-wedding-video/  301
-/blog/34-vow-renewal-video/  /blog/vow-renewal-video/  301
-/blog/35-wedding-video-for-parents/  /blog/wedding-video-for-parents/  301
-/blog/36-digitize-parents-wedding-video/  /blog/digitize-parents-wedding-video/  301
-/blog/37-fix-shaky-wedding-video/  /blog/fix-shaky-wedding-video/  301
-/blog/38-wedding-photo-slideshow/  /blog/wedding-photo-slideshow/  301
-/blog/39-wedding-video-subtitles/  /blog/wedding-video-subtitles/  301
-/blog/40-cartoon-wedding-video/  /blog/cartoon-wedding-video/  301
-/blog/41-wedding-memes/  /blog/wedding-memes/  301
-/blog/42-wedding-video-music-guide/  /blog/wedding-video-music-guide/  301
-/blog/43-wedding-video-audio-fix/  /blog/wedding-video-audio-fix/  301
-/blog/44-wedding-video-timeline/  /blog/wedding-video-timeline/  301
-/blog/45-send-large-wedding-video/  /blog/send-large-wedding-video/  301
-/blog/46-weddingai-video-review/  /blog/weddingai-video-review/  301
-/blog/47-wedding-video-cost-2026/  /blog/wedding-video-cost-2026/  301
-/blog/48-skip-wedding-videographer/  /blog/skip-wedding-videographer/  301
-/blog/49-budget-wedding-video/  /blog/budget-wedding-video/  301
-/blog/50-weddingai-success-stories/  /blog/weddingai-success-stories/  301
