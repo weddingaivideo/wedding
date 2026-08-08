@@ -25,15 +25,18 @@
 # Per-language homepage .html → 301 to canonical /<lang>/.
 # Cloudflare Pages has a built-in 308 for .html paths that fires before
 # _redirects can override for multi-segment paths (single-segment /index.html
-# CAN be overridden, /<lang>/index.html cannot — confirmed via 6+ deploy
-# experiments 2026-08-07: literal rules, glob rules, position swap, ! force
-# flag, 200/301 status, no-op rewrite — all bypassed for multi-segment
-# .html paths).
+# CAN be overridden via 200 rewrite below, /<lang>/index.html cannot —
+# confirmed via 6+ deploy experiments 2026-08-07: literal rules, glob rules,
+# position swap, ! force flag, 200/301 status, no-op rewrite — all bypassed
+# for multi-segment .html paths).
 # 301 is acceptable here: it's a permanent deliberate move to the canonical
 # /<lang>/, not an "auto" redirect, so GSC's "Page is automatically
 # redirected" warning will not fire on these. (Belt-and-suspenders fix for
 # the 2026-08-07 GSC indexing warning.)
+# /index.html gets a 200 rewrite (single-segment, CF Pages allows override).
+/index.html          /                       200
 /en/index.html       /en/    301
+/zh/index.html       /zh/    301
 /zh/index.html       /zh/    301
 /es/index.html       /es/    301
 /fr/index.html       /fr/    301
