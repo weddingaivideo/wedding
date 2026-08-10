@@ -669,16 +669,6 @@
 /ar/services/absence-compensation/celebrity-message/  /ar/services/absence-compensation/  301
 /th/services/absence-compensation/celebrity-message/  /th/services/absence-compensation/  301
 
-/zh/*    /:splat 200
-/es/*    /:splat 200
-/fr/*    /:splat 200
-/de/*    /:splat 200
-/pt/*    /:splat 200
-/ja/*    /:splat 200
-/ru/*    /:splat 200
-/ar/*    /:splat 200
-/th/*    /:splat 200
-
 # Belt-and-suspenders 404 for the legacy GSC verification HTML template
 # (production uses bca20c476d04af209950cbf5921e821d.txt instead; the
 # .html template was never filled and was deleted 2026-07-28 but the
@@ -943,3 +933,23 @@
 #  — see commit 102ca1e for the diagnostic.)
 
 
+
+
+# === i18n 200 rewrite globs — moved to END of file 2026-08-10 ===
+# 2026-08-10 diagnostic: with these globs between explicit 301 rules
+# and the rest of the file, HEAD requests to /<lang>/services/.../
+# celebrity-message/ saw the explicit 301 (good), but GET requests
+# saw 404 (bad). The /<lang>/* glob matched BEFORE the explicit 301
+# was evaluated for GET requests. CF Pages 4.x 解析顺序 has glob
+# match win over earlier explicit rules for GET. Moving the globs to
+# the END of the file is the only known fix; explicit 301 rules must
+# come AFTER all earlier globs to win first-match for GET.
+/zh/*    /:splat 200
+/es/*    /:splat 200
+/fr/*    /:splat 200
+/de/*    /:splat 200
+/pt/*    /:splat 200
+/ja/*    /:splat 200
+/ru/*    /:splat 200
+/ar/*    /:splat 200
+/th/*    /:splat 200
