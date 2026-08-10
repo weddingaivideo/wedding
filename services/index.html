@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="/styles.min.css?v=3.28">
     <link rel="stylesheet" href="/styles/i18n.css">
 <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/lazy-videos.js?v=1.0"></script>
     <style>
         .page-hero-bg { background: linear-gradient(135deg, #E8D5B7 0%, #C9A96E 100%); }
         .page-hero-overlay { background: rgba(44,44,44,0.6); }
@@ -280,8 +281,10 @@ if ('serviceWorker' in navigator) {
                         <p  data-i18n="services.p_text.20_language_support_for_international_fa.26489587">20+ language support for international family and friends.</p>
                     </div>
                     <div class="service-sub-card">
-                        <picture><source srcset="/images/catalog-cartoon-style-360.webp 360w, /images/catalog-cartoon-style-720.webp 720w, /images/catalog-cartoon-style-1280.webp 1280w" type="image/webp" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"><img src="/images/catalog-cartoon-style.jpg" alt="Wedding couple in Studio Ghibli anime style" loading="lazy" width="1376" height="768" srcset="/images/catalog-cartoon-style-360.jpg 360w, /images/catalog-cartoon-style-720.jpg 720w, /images/catalog-cartoon-style-1280.jpg 1280w" sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw">
-                        </picture><h3><a href="/services/personalization/cartoon-style/" title="Cartoon / Animated Style" title="Cartoon / Animated Style" data-i18n="order.option_text.cartoon_animated_style.39055971">Cartoon / Animated Style</a></h3>
+                        <video controls autoplay muted loop playsinline preload="none" width="1376" height="768" poster="/images/case-liu-wang-ghibli-wedding-film-poster.webp" aria-label="Liu & Wang — Studio Ghibli style watercolor animation of a Chinese couple under a cherry blossom tree with falling petals at sunset" data-lazy-video>
+                            <source src="/images/case-liu-wang-ghibli-wedding-film.webm?v=4.29" type="video/webm">
+                            <source src="/images/case-liu-wang-ghibli-wedding-film.mp4?v=4.29" type="video/mp4">
+                        </video><h3><a href="/services/personalization/cartoon-style/" title="Cartoon / Animated Style" title="Cartoon / Animated Style" data-i18n="order.option_text.cartoon_animated_style.39055971">Cartoon / Animated Style</a></h3>
                         <p  data-i18n="services.p_text.ghibli_pixar_anime_watercolor_your_weddi.64141418">Ghibli, Pixar, anime, watercolor — your wedding, animated.</p>
                     </div>
                     <div class="service-sub-card">

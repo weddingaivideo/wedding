@@ -107,8 +107,21 @@ GROUPS = {
                 "desc_i18n": "services.p_text.integrate_video_messages_from_family_who.96853389",
                 "price": "From $149",
                 "price_i18n": "services.span_text.from_149.82399004",
-                "img": "catalog-family-message",
-                "alt": "Family video call with wedding on screen",
+                # 1:1 mirror of the gallery case-study video (case-sophie-david-
+                # family-messages-…). Replaces the static catalog-family-message.jpg
+                # so visitors see the actual rendered remote-call grid in motion.
+                # Style attr keeps the video fluid inside the service-sub-card
+                # (16:9 aspect + 100% width, no CLS). Matches hand-edit on
+                # services/index.html exactly.
+                "video": {
+                    "width": 1280,
+                    "height": 720,
+                    "style": "width: 100%; height: auto; display: block; aspect-ratio: 16/9; object-fit: cover;",
+                    "poster": "/images/case-sophie-david-family-messages-poster.webp",
+                    "webm": "/images/case-sophie-david-family-messages.webm?v=4.29",
+                    "mp4": "/images/case-sophie-david-family-messages.mp4?v=4.29",
+                    "aria_label": "Remote Family Video Message — wedding couple watching family video call grid from around the world",
+                },
             },
         ],
     },
@@ -173,8 +186,18 @@ GROUPS = {
                 "desc_i18n": "services.p_text.ghibli_pixar_anime_watercolor_your_weddi.64141418",
                 "price": "From $149",
                 "price_i18n": "services.span_text.from_149.82399004",
-                "img": "catalog-cartoon-style",
-                "alt": "Wedding couple in Studio Ghibli anime style",
+                # 1:1 mirror of the gallery case-study video (case-liu-wang-ghibli-…).
+                # Replaces the static catalog-cartoon-style.jpg so visitors see the
+                # actual rendered cartoon-style output instead of a generic still.
+                # Version ?v=4.29 matches gallery/index.html (cache-bust parity).
+                "video": {
+                    "width": 1376,
+                    "height": 768,
+                    "poster": "/images/case-liu-wang-ghibli-wedding-film-poster.webp",
+                    "webm": "/images/case-liu-wang-ghibli-wedding-film.webm?v=4.29",
+                    "mp4": "/images/case-liu-wang-ghibli-wedding-film.mp4?v=4.29",
+                    "aria_label": "Liu & Wang — Studio Ghibli style watercolor animation of a Chinese couple under a cherry blossom tree with falling petals at sunset",
+                },
             },
             {
                 "href": "/services/personalization/meme-generator/",
@@ -226,8 +249,29 @@ def nav_html() -> str:
 
 
 def service_card(c: dict) -> str:
-    """Render one service-sub-card. Uses the catalog image set if available,
-    falls back to the wedding-restoration image for the 'vintage' card."""
+    """Render one service-sub-card. Default path: <picture> over the catalog image
+    set. Optional `video` block swaps the picture for a 1:1 mirror of the gallery
+    case-study video (same controls/autoplay/muted/loop/playsinline/preload="none"
+    + data-lazy-video so js/lazy-videos.js defers the metadata fetch to window.load).
+    Same `img`/`alt` keys are ignored when `video` is present — callers should drop
+    them from the dict in that case to keep the data clean.
+    """
+    if "video" in c:
+        v = c["video"]
+        # Optional inline style — used by family-message for fluid 16:9 sizing in
+        # narrow service-sub-card containers. Position matches the hand-edited
+        # page (between height and poster) so the verifier's literal-string
+        # comparison stays stable. Omit for entries that don't need it
+        # (cartoon-style keeps gallery's exact no-style markup).
+        style_attr = f' style="{v["style"]}"' if "style" in v else ""
+        return f"""                    <div class="service-sub-card">
+                        <video controls autoplay muted loop playsinline preload="none" width="{v['width']}" height="{v['height']}"{style_attr} poster="{v['poster']}" aria-label="{v['aria_label']}" data-lazy-video>
+                            <source src="{v['webm']}" type="video/webm">
+                            <source src="{v['mp4']}" type="video/mp4">
+                        </video><h3><a href="{c['href']}" title="{c['title']}" data-i18n="{c['title_i18n']}">{c['title']}</a></h3>
+                        <p  data-i18n="{c['desc_i18n']}">{c['desc']}</p>
+                        <span class="price-hint"  data-i18n="{c['price_i18n']}">{c['price']}</span>
+                    </div>"""
     img = c["img"]
     ext = c.get("ext", "jpg")  # most catalog images are .jpg; vintage uses .png
     return f"""                    <div class="service-sub-card">
@@ -267,6 +311,7 @@ def render_page(group: dict) -> str:
     <link rel="stylesheet" href="/styles.min.css?v=3.26">
     <link rel="stylesheet" href="/styles/i18n.css">
 <script defer src="/js/main.min.js?v=3.19"></script>
+<script defer src="/js/lazy-videos.js?v=1.0"></script>
     <style>
         .page-hero-bg {{ background: linear-gradient(135deg, #E8D5B7 0%, #C9A96E 100%); }}
         .page-hero-overlay {{ background: rgba(44,44,44,0.6); }}
