@@ -648,6 +648,26 @@
 # /<lang>/blog/<slug>/ which no rule matches in the localized 301 block, so the
 # glob below fires, strips the lang prefix, and serves the static file.
 # (`/en/*` is omitted — English is the default lang, no rewrite needed.)
+
+# 2026-08-10: /<lang>/services/absence-compensation/celebrity-message/ 1:1
+# 301s to the parent absence-compensation page (per locale). Without these
+# the i18n 200 glob below would strip the lang prefix first and serve a
+# 404, losing SEO equity from the 10-language Google index of the
+# deleted service. The English variant /services/.../celebrity-message/
+# itself returns 200 only from CF Pages edge cache (the static file is
+# gone in HEAD); the 301 short-link /celebrity-message/ → /services/
+# absence-compensation/ at L724 already handles the cached 200 path.
+# No 301 needed for /en (English is the default lang, no rewrite).
+/zh/services/absence-compensation/celebrity-message/  /zh/services/absence-compensation/  301
+/es/services/absence-compensation/celebrity-message/  /es/services/absence-compensation/  301
+/fr/services/absence-compensation/celebrity-message/  /fr/services/absence-compensation/  301
+/de/services/absence-compensation/celebrity-message/  /de/services/absence-compensation/  301
+/pt/services/absence-compensation/celebrity-message/  /pt/services/absence-compensation/  301
+/ja/services/absence-compensation/celebrity-message/  /ja/services/absence-compensation/  301
+/ru/services/absence-compensation/celebrity-message/  /ru/services/absence-compensation/  301
+/ar/services/absence-compensation/celebrity-message/  /ar/services/absence-compensation/  301
+/th/services/absence-compensation/celebrity-message/  /th/services/absence-compensation/  301
+
 /zh/*    /:splat 200
 /es/*    /:splat 200
 /fr/*    /:splat 200
