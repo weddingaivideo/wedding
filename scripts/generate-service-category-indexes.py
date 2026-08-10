@@ -37,7 +37,6 @@ NAV_ITEMS = [
     ("/services/personalization/meme-generator/",    "404.a_text.wedding_memes.22951185",      "Wedding Memes"),
     ("/services/absence-compensation/family-tribute/","404.a_text.family_tribute.39408322",     "Family Tribute"),
     ("/services/absence-compensation/family-message/","404.a_text.family_message.27013166",     "Family Message"),
-    ("/services/absence-compensation/celebrity-message/","404.a_text.celebrity_message.59529435","Celebrity Message"),
 ]
 
 # Service group definitions for the new parent pages.
@@ -110,17 +109,6 @@ GROUPS = {
                 "price_i18n": "services.span_text.from_149.82399004",
                 "img": "catalog-family-message",
                 "alt": "Family video call with wedding on screen",
-            },
-            {
-                "href": "/services/absence-compensation/celebrity-message/",
-                "title": "Celebrity-Style Wedding Message",
-                "title_i18n": "404.a_text.celebrity_message.59529435",
-                "desc": "AI-generated celebrity-style wedding message for fun and shareable content.",
-                "desc_i18n": "services.p_text.ai_generated_celebrity_style_wedding_mes.09663712",
-                "price": "From $499",
-                "price_i18n": "services.span_text.from_499.68608774",
-                "img": "catalog-celebrity-message",
-                "alt": "Glamorous celebrity style wedding moment",
             },
         ],
     },
@@ -466,7 +454,6 @@ if ('serviceWorker' in navigator) {{
                                                                                     <li><a href="/services/video-enhancement/slow-motion/" title="AI Slow Motion Enhancement" data-i18n="404.a_text.slow_motion.30129340">Slow Motion</a></li>
                             <li><a href="/services/absence-compensation/family-tribute/" title="Tribute to Loved Ones" data-i18n="404.a_text.family_tribute.39408322">Family Tribute</a></li>
                             <li><a href="/services/absence-compensation/family-message/" title="Remote Family Video Message" data-i18n="404.a_text.family_message.27013166">Family Message</a></li>
-                            <li><a href="/services/absence-compensation/celebrity-message/" title="Celebrity-Style Wedding Message" data-i18n="404.a_text.celebrity_message.59529435">Celebrity Message</a></li>
                             <li><a href="/services/personalization/ai-video-generator/" title="AI Wedding Video Generator" data-i18n="404.a_text.ai_video_generator.39420322">AI Video Generator</a></li>
                             <li><a href="/services/personalization/wedding-trailer/" title="Cinematic Wedding Trailer" data-i18n="404.a_text.wedding_trailer.04692297">Wedding Trailer</a></li>
                             <li><a href="/services/personalization/pet-wedding/" title="Pet Wedding Video" data-i18n="404.a_text.pet_wedding.23911820">Pet Wedding</a></li>

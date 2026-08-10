@@ -64,7 +64,7 @@ Your footage is stored encrypted on secure US-based servers. Files are automatic
 
 **What about AI safety and bias in your processing?**
 
-We use commercial-grade AI models with safety guardrails. A human filmmaker reviews every output before delivery. We do not generate deepfakes of real people, and our Celebrity Style service uses AI archetypes inspired by style, not impersonation.
+We use commercial-grade AI models with safety guardrails. A human filmmaker reviews every output before delivery. We do not generate deepfakes of real people.
 
 **Who owns the final video and can I use it commercially?**
 
@@ -108,10 +108,6 @@ _(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\absence
 ### [Family Message](https://weddingai.video/services/absence-compensation/family-message.html)
 
 _(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\absence-compensation\family-message.html)_
-
-### [Celebrity Wedding Messages](https://weddingai.video/services/absence-compensation/celebrity-message.html)
-
-_(local source: C:\Users\qiaoshan\.openclaw\workspace\weddingai\services\absence-compensation\celebrity-message.html)_
 
 
 ## Personalization

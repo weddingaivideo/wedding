@@ -41,7 +41,6 @@ const SERVICE_LABELS = {
     "vintage-restoration": "Vintage Footage Restoration",
     "family-tribute": "Family Tribute",
     "family-message": "Family Message",
-    "celebrity-message": "Celebrity Message",
     "ai-video-generator": "AI Wedding Video Generator",
     "wedding-trailer": "Cinematic Wedding Trailer",
     "pet-wedding": "Pet Wedding Video",

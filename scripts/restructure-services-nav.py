@@ -49,7 +49,6 @@ NEW_NAV = '''<ul class="nav-dropdown nav-dropdown-grouped" role="menu">
                                 <ul role="menu">
                                     <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/" data-i18n="404.a_text.family_tribute.39408322">Family Tribute</a></li>
                                     <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/" data-i18n="404.a_text.family_message.27013166">Family Message</a></li>
-                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/celebrity-message/" data-i18n="404.a_text.celebrity_message.59529435">Celebrity Message</a></li>
                                 </ul>
                             </li>
                             <li class="nav-dropdown-all" role="none">

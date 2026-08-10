@@ -17,7 +17,7 @@ i18n strings:
 |---|---|
 | Video Enhancement | Slow Motion, Vintage Restoration |
 | Personalization | Wedding Trailer, AI Video Generator, Pet Wedding, Multilingual, Cartoon Style, Wedding Memes |
-| Absence Compensation | Family Tribute, Family Message, Celebrity Message |
+| Absence Compensation | Family Tribute, Family Message |
 
 Plus a portfolio (gallery), blog (10 languages, ~50 articles each), pricing,
 order form, about, and resources.

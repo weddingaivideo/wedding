@@ -40,7 +40,6 @@ SERVICE_FILES = [
     "services/personalization/meme-generator/index.html",
     "services/absence-compensation/family-tribute/index.html",
     "services/absence-compensation/family-message/index.html",
-    "services/absence-compensation/celebrity-message/index.html",
 ]
 
 # Match href="/gallery/?filter=anything" — capture the filter value for

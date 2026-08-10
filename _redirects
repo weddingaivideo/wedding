@@ -721,7 +721,7 @@
 # hitting this redirect.
 /family-message/                 /services/absence-compensation/family-message/      308
 /family-tribute/                 /services/absence-compensation/family-tribute/      308
-/celebrity-message/              /services/absence-compensation/celebrity-message/   308
+/celebrity-message/           /services/absence-compensation/   301
 /slow-motion/                    /services/video-enhancement/slow-motion/           308
 /vintage-restoration/            /services/video-enhancement/vintage-restoration/  308
 /ai-video-generator/             /services/personalization/ai-video-generator/     308
