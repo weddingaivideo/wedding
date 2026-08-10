@@ -948,24 +948,39 @@ export const onRequest = async (context) => {
         // the inner middleware would inject its own nonce + CSP header,
         // leaving the outer response with two competing policies.
         const underlyingUrl = url.origin + rest + url.search;
-        // Use redirect: "follow" (2026-08-10) so _redirects 301/308 rules
-        // (e.g. /services/absence-compensation/celebrity-message/ → parent)
-        // are transparently followed to the real target. With "manual" the
-        // fetch returned 30x, !response.ok fired, and middleware fell through
-        // to a hard 404 — losing SEO equity for any path whose canonical
-        // target is itself a 301 (deleted services, renames, etc).
-        // X-Middleware-Internal: 1 still prevents the inner target's i18n
-        // re-entry via shouldSkip(), so we still get the raw static HTML.
+        // Use redirect: "manual" (2026-08-10) so a 30x from _redirects is
+        // detected explicitly and FORWARDED to the browser (with the same
+        // status + Location). With "follow" the fetch transparently chased
+        // the 30x to the final target, which gave the browser a 200 with
+        // the target's body on the original URL — duplicate-content / no
+        // SEO equity transfer. We want the browser to see the 30x so the
+        // URL bar updates and Googlebot records a real 301.
         const response = await fetch(underlyingUrl, {
             method: "GET",
             headers: { Accept: "text/html", "X-Middleware-Internal": "1" },
-            redirect: "follow",
+            redirect: "manual",
         });
+
+        // _redirects 30x — forward to the browser verbatim. Strip the
+        // X-Middleware-Internal request header from the Location by leaving
+        // the Location as the absolute target URL CF Pages generated.
+        if (response.status >= 300 && response.status < 400) {
+            return new Response(null, {
+                status: response.status,
+                headers: { Location: response.headers.get("Location") || "/" },
+            });
+        }
 
         if (!response.ok) {
             if (rest !== "/" && !rest.endsWith("/")) {
                 const altUrl = url.origin + rest + "/" + url.search;
-                const altResp = await fetch(altUrl, { redirect: "follow" });
+                const altResp = await fetch(altUrl, { redirect: "manual" });
+                if (altResp.status >= 300 && altResp.status < 400) {
+                    return new Response(null, {
+                        status: altResp.status,
+                        headers: { Location: altResp.headers.get("Location") || "/" },
+                    });
+                }
                 if (altResp.ok) return withCspHeaders(altResp, await altResp.text(), nonce);
             }
             return new Response(`Not found: ${path}`, { status: 404 });
