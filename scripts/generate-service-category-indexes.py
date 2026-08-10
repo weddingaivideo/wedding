@@ -217,18 +217,23 @@ GROUPS = {
                 "desc_i18n": "services.p_text.include_your_furry_family_members_in_the.41918593",
                 "price": "From $149",
                 "price_i18n": "services.span_text.from_149.82399004",
-                # 1:1 mirror of the gallery case-study video (case-bella-max-
-                # golden-retriever-…). Replaces the static catalog-pet-wedding.jpg
-                # so visitors see the actual golden retrievers' anniversary
-                # video. Note: apostrophe in "'married'" stays literal in
-                # gallery source — only & is HTML-escaped.
+                # 1:1 mirror of the gallery case-study video. Gallery was
+                # updated (2026-08-10) to point at the same assets the
+                # homepage's case-card uses (case-pet-wedding-* + the
+                # "Bella and Max — golden retriever pet wedding ceremony"
+                # aria-label). width=1280 (not 1376) — matches the
+                # homepage's intrinsic video dimensions. poster uses
+                # -640.webp + data-poster-base (only case-study video in
+                # gallery that has the responsive poster variant).
+                # No ?v=4.29 on the .webm/.mp4 sources (no cache-bust
+                # on this case-study, like 1987 VHS and Carolina R.).
                 "video": {
-                    "width": 1376,
-                    "height": 768,
-                    "poster": "/images/case-bella-max-golden-retriever-poster.webp",
-                    "webm": "/images/case-bella-max-golden-retriever.webm?v=4.29",
-                    "mp4": "/images/case-bella-max-golden-retriever.mp4?v=4.29",
-                    "aria_label": "Bella &amp; Max — two golden retrievers 'married' in a charming anniversary video that the family watched 100+ times",
+                    "width": 1280,
+                    "height": 720,
+                    "poster": "/images/case-pet-wedding-poster-640.webp",
+                    "webm": "/images/case-pet-wedding.webm",
+                    "mp4": "/images/case-pet-wedding.mp4",
+                    "aria_label": "Bella and Max — golden retriever pet wedding ceremony",
                 },
             },
             {
