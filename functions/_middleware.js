@@ -965,9 +965,20 @@ export const onRequest = async (context) => {
         // X-Middleware-Internal request header from the Location by leaving
         // the Location as the absolute target URL CF Pages generated.
         if (response.status >= 300 && response.status < 400) {
+            let loc = response.headers.get("Location") || "/";
+            // The request had a non-default lang prefix (e.g. /zh/...) and we
+            // stripped it before fetching underlyingUrl, so the _redirects
+            // 30x target is also unprefixed. Re-attach the lang so the
+            // browser lands on the same-locale page.
+            // (Skip if the Location already starts with /<lang>/ to avoid
+            // double-prefixing when an explicit /<lang>/services/.../ 301
+            // fires; that case has its own fully-prefixed target.)
+            if (lang && lang !== DEFAULT_LANG && loc.startsWith("/") && !loc.startsWith(`/${lang}/`)) {
+                loc = `/${lang}${loc}`;
+            }
             return new Response(null, {
                 status: response.status,
-                headers: { Location: response.headers.get("Location") || "/" },
+                headers: { Location: loc },
             });
         }
 
@@ -976,9 +987,13 @@ export const onRequest = async (context) => {
                 const altUrl = url.origin + rest + "/" + url.search;
                 const altResp = await fetch(altUrl, { redirect: "manual" });
                 if (altResp.status >= 300 && altResp.status < 400) {
+                    let loc = altResp.headers.get("Location") || "/";
+                    if (lang && lang !== DEFAULT_LANG && loc.startsWith("/") && !loc.startsWith(`/${lang}/`)) {
+                        loc = `/${lang}${loc}`;
+                    }
                     return new Response(null, {
                         status: altResp.status,
-                        headers: { Location: altResp.headers.get("Location") || "/" },
+                        headers: { Location: loc },
                     });
                 }
                 if (altResp.ok) return withCspHeaders(altResp, await altResp.text(), nonce);
