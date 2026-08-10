@@ -207,8 +207,20 @@ GROUPS = {
                 "desc_i18n": "services.p_text.shareable_clips_for_social_media_and_gro.03144847",
                 "price": "From $79",
                 "price_i18n": "services.span_text.from_79.00659996",
-                "img": "catalog-meme-generator",
-                "alt": "Smartphone showing wedding memes and GIFs",
+                # 1:1 mirror of the gallery case-study video (case-williams-
+                # family-30-gifs-aunt-linda-…). Replaces the static
+                # catalog-meme-generator.jpg so visitors see Aunt Linda's
+                # actual reaction GIF in motion instead of a generic still.
+                # Version ?v=4.29 matches gallery/index.html (cache-bust parity).
+                # No `style` attr — same as cartoon-style, gallery pattern.
+                "video": {
+                    "width": 1376,
+                    "height": 768,
+                    "poster": "/images/case-williams-family-30-gifs-aunt-linda-poster.webp",
+                    "webm": "/images/case-williams-family-30-gifs-aunt-linda.webm?v=4.29",
+                    "mp4": "/images/case-williams-family-30-gifs-aunt-linda.mp4?v=4.29",
+                    "aria_label": "The Williams Family — Aunt Linda's shocked cake-cutting face became the family's universal response GIF, reused 50+ times in the group chat",
+                },
             },
         ],
     },
