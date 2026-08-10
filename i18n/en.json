@@ -5582,8 +5582,6 @@
   "gallery.p_text.mom_passed_two_months_before_the_wedding.13031597": "Mom passed two months before the wedding. Her 1985 wedding photo was AI-activated to blink, smile, and look toward the camera. Played at the reception during a quiet moment.",
   "gallery.p_text.mumbai_india_december_2024.17016717": "Mumbai, India · December 2024",
   "gallery.p_text.mumbai_india_march_2024.38149702": "Mumbai, India · March 2024",
-  "gallery.p_text.my_grandfather_s_1962_wedding_video_was.76378558": "\"My grandfather's 1962 wedding video was 8mm film we thought was lost. WeddingAI restored it to 4K and the colors came back to life. I cried watching it.\"",
-  "gallery.p_text.my_wife_s_family_speaks_mandarin_mine_s.66538595": "\"My wife's family speaks Mandarin, mine speaks Spanish. The multilingual version meant everyone cried in their own language at the reception.\"",
   "gallery.p_text.napa_valley_ca_june_2024.93977119": "Napa Valley, CA · June 2024",
   "gallery.p_text.new_york_ny_may_2024.09787748": "New York, NY · May 2024",
   "gallery.p_text.one_source_video_five_formats_16_9_youtu.11424460": "One source video, five formats: 16:9 YouTube, 9:16 TikTok, 1:1 Instagram, 9:16 Stories, 4:5 Feed. All in 48 hours, all hit 100K+ views across platforms.",
@@ -5601,7 +5599,6 @@
   "gallery.p_text.traditional_tea_ceremony_movements_trans.65183248": "Traditional tea ceremony movements transformed into 60fps slow motion. The pouring of the tea, the bow — every gesture now feels eternal.",
   "gallery.p_text.tuscany_italy_september_2024.64111581": "Tuscany, Italy · September 2024",
   "gallery.p_text.two_golden_retrievers_married_in_an_anni.63191668": "Two golden retrievers 'married' in an anniversary special video. The family watched it 100+ times, sent it to every relative, and made it their Christmas card.",
-  "gallery.p_text.we_had_two_cameras_at_the_wedding_but_t.39989224": "\"We had two cameras at the wedding but the videographer's main file got corrupted. AI Video Generator saved us — they made a film from 200+ guest photos that feels like the real thing.\"",
   "gallery.p_text.wedding_with_spanish_catalan_and_english.30858126": "Wedding with Spanish, Catalan, and English speeches. AI voiceover dubbed all three languages with matching accents. Grandma finally heard vows in her native Catalan.",
   "gallery.p_text.yes_all_our_before_and_after_case_studie.62091008": "Yes. All our before-and-after case studies are public — feel free to share. The testimonial quotes are published with explicit client permission. If you want a private reference call with a past client in a similar situation, we can arrange that.",
   "gallery.span_text.ai_film.33171967": "AI Film",
@@ -15401,5 +15398,12 @@
   "order.option_text.country_cn.zzzzzAK": "China",
   "order.option_text.country_other.zzzzzAL": "Other",
   "services.h1_text.all_wedding_video_services.svcsroot01": "All Wedding Video Services",
-  "services.p_text.intro.svcsroot01": "Browse 10+ AI-powered wedding video services — from cinematic trailers and multilingual dubbing to vintage restoration and family tributes."
+  "services.p_text.intro.svcsroot01": "Browse 10+ AI-powered wedding video services — from cinematic trailers and multilingual dubbing to vintage restoration and family tributes.",
+  "gallery.p_text.every_quote_below_ties_to_a_real_service_we.2a3b4c5d": "Every quote below ties to a real service we offer — see the matching case study above for the visual work.",
+  "gallery.p_text.my_grandfather_passed_years_before_i_met.7f8e9d0c": "“My grandfather passed years before I met my husband. For our father-daughter dance, WeddingAI took eight of his old voicemails and reconstructed a 30-second ‘I love you, kiddo’ that played alongside the song. My dad cried for the first time since Grandpa’s funeral.”",
+  "gallery.p_text.our_photographer_delivered_47_stunning_h.5a4b3c2d": "“Our photographer delivered 47 stunning hero shots and zero video. WeddingAI turned them into a 4-minute cinematic film that feels like we hired a videographer. Our families still can’t tell which shots are stills.”",
+  "gallery.p_text.im_from_madrid_but_married_a_catalan_wo.1e2f3a4b": "“I’m from Madrid but married a Catalan woman in Barcelona. Three languages at our wedding — Spanish, Catalan, and English for her sister’s family. WeddingAI dubbed the vows and speeches in all three. My abuela finally heard our vows in her dialect.”",
+  "gallery.p_text.we_wanted_something_playful_for_our_save_the.7e3b1a2c": "“We wanted something playful for our save-the-dates and WeddingAI turned our engagement photos into a Studio Ghibli–style animated short. Our families cried happy tears and now it’s the most-shared thing from our wedding.”",
+  "gallery.p_text.my_dad_is_in_the_uk_and_couldn_t_fly_to_our_w.5c4d2e1f": "“My dad is in the UK and couldn’t fly to our wedding in Tuscany. He recorded a heartfelt video message and WeddingAI integrated it into the ceremony at the exact moment we’d reserved his seat. He felt like he was there.”",
+  "gallery.p_text.we_commissioned_custom_wedding_memes_for_our.9a8b7c6d": "“We commissioned custom wedding memes for our reception slideshow and they absolutely broke the dance floor. Our grandparents didn’t get the references but everyone under 40 was in tears laughing. 10/10 would meme again.”"
 }

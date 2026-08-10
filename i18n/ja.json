@@ -5585,8 +5585,6 @@
   "gallery.p_text.mom_passed_two_months_before_the_wedding.13031597": "母は結婚式の2か月前に亡くなりました。彼女の 1985 年の結婚式の写真は、AI によって瞬きしたり、微笑んだり、カメラの方を向いたりするように作られていました。レセプションで静かなひとときを過ごしました。",
   "gallery.p_text.mumbai_india_december_2024.17016717": "インド、ムンバイ · 2024 年 12 月",
   "gallery.p_text.mumbai_india_march_2024.38149702": "インド、ムンバイ · 2024 年 3 月",
-  "gallery.p_text.my_grandfather_s_1962_wedding_video_was.76378558": "「祖父の 1962 年の結婚式のビデオは、失われたと思われていた 8mm フィルムでした。WeddingAI がそれを 4K に復元し、色が生き返りました。それを見て泣きました。」",
-  "gallery.p_text.my_wife_s_family_speaks_mandarin_mine_s.66538595": "「妻の家族は中国語を話しますが、私の家族はスペイン語を話します。多言語版のおかげで、レセプションでは全員が自分の言語で泣きました。」",
   "gallery.p_text.napa_valley_ca_june_2024.93977119": "カリフォルニア州ナパバレー · 2024 年 6 月",
   "gallery.p_text.new_york_ny_may_2024.09787748": "ニューヨーク州ニューヨーク · 2024 年 5 月",
   "gallery.p_text.one_source_video_five_formats_16_9_youtu.11424460": "1 つのソースビデオ、5 つのフォーマット: 16:9 YouTube、9:16 TikTok、1:1 Instagram、9:16 ストーリー、4:5 フィード。 48 時間以内に、プラットフォーム全体で 10 万回以上の再生回数を達成しました。",
@@ -5604,7 +5602,6 @@
   "gallery.p_text.traditional_tea_ceremony_movements_trans.65183248": "伝統的な茶道の動作を60fpsのスローモーションに変換しました。お茶を注ぐこと、お辞儀をすること、あらゆる動作が永遠のように感じられます。",
   "gallery.p_text.tuscany_italy_september_2024.64111581": "イタリア、トスカーナ · 2024 年 9 月",
   "gallery.p_text.two_golden_retrievers_married_in_an_anni.63191668": "2頭のゴールデンレトリバーが記念日の特別ビデオで「結婚」した。家族はそれを100回以上見て、親戚全員に送り、クリスマスカードにしました。",
-  "gallery.p_text.we_had_two_cameras_at_the_wedding_but_t.39989224": "「結婚式には2台のカメラがありましたが、ビデオ撮影者のメインファイルが破損してしまいました。AI動画生成が私たちを救ってくれました。200枚以上のゲストの写真から本格的なハイライトフィルムを作成してくれました。」",
   "gallery.p_text.wedding_with_spanish_catalan_and_english.30858126": "スペイン語、カタルーニャ語、英語のスピーチ付きの結婚式。 AI ナレーションは、3 つの言語すべてを一致するアクセントで吹き替えました。おばあちゃんはついに母国のカタルーニャ語で誓いの言葉を聞きました。",
   "gallery.p_text.yes_all_our_before_and_after_case_studie.62091008": "はい。当社のすべての Before/After ケーススタディは公開されています — 自由に共有してください。お客様の声は、お客様の明示的な許可を得て公開しています。同様の状況の過去のお客様との非公開リファレンスコールをご希望の場合は、ご手配できます。",
   "gallery.span_text.ai_film.33171967": "AIフィルム",
@@ -15423,5 +15420,12 @@
   "order.option_text.country_cn.zzzzzAK": "中国",
   "order.option_text.country_other.zzzzzAL": "その他",
   "services.h1_text.all_wedding_video_services.svcsroot01": "すべてのウェディングビデオサービス",
-  "services.p_text.intro.svcsroot01": "映画のような予告編や多言語吹き替えから、古い映像の修復や家族へのトリビュートまで、AI を活用した 10 以上のウェディングビデオサービスをご覧ください。"
+  "services.p_text.intro.svcsroot01": "映画のような予告編や多言語吹き替えから、古い映像の修復や家族へのトリビュートまで、AI を活用した 10 以上のウェディングビデオサービスをご覧ください。",
+  "gallery.p_text.every_quote_below_ties_to_a_real_service_we.2a3b4c5d": "以下のコメントはすべて、私たちが提供する実際のサービスに関連しています——ビジュアル事例は上部の専用ケーススタディをご覧ください。",
+  "gallery.p_text.my_grandfather_passed_years_before_i_met.7f8e9d0c": "“祖父は私が夫と知り合う何年も前に亡くなりました。父娘のダンスで、WeddingAI は祖父の古い留守録メッセージ 8 通を使って 30 秒の「愛しているよ、子ども」というメッセージを再現し、歌と一緒に流しました。父は祖父の葬儀以来初めて泣きました。”",
+  "gallery.p_text.our_photographer_delivered_47_stunning_h.5a4b3c2d": "“私たちの写真家は 47 枚の素晴らしいヒーローショットを渡しましたが動画はゼロ。WeddingAI はそれを 4 分のシネマティックな映画に変え、写真家を雇ったような感じにしてくれました。家族はどのショットが静止画かまだ分かりません。”",
+  "gallery.p_text.im_from_madrid_but_married_a_catalan_wo.1e2f3a4b": "“私はマドリードの出ですが、バルセロナでカタロニア人の女性と結婚しました。結婚式は 3 言語——スペイン語、カタロニア語、姉の家族のための英語。WeddingAI は誓いとスピーチを 3 言語すべてに同期しました。私のお婆は彼女の方言で結婚の誓いをようやく聴けました。”",
+  "gallery.p_text.we_wanted_something_playful_for_our_save_the.7e3b1a2c": "“セーブ・ザ・デートで楽しいものがもらえたらと思い、WeddingAI は私たちの婚約写真をスタジオジブリ風のアニメ短編に変えてくれました。家族は幸せな涙を流し、今では結婚式で一番共有されているものになりました。”",
+  "gallery.p_text.my_dad_is_in_the_uk_and_couldn_t_fly_to_our_w.5c4d2e1f": "“父はイギリスにいて、トスカナでの結婚式に飛ぶことができませんでした。心のこもった動画メッセージを録画し、WeddingAI が席を予約していた瞬間に式に組み込みました。父は現場にいるようだったと言いました。”",
+  "gallery.p_text.we_commissioned_custom_wedding_memes_for_our.9a8b7c6d": "“披露宴スライドショーのためにオリジナルの結婚ミームを作り、会場は大爆笑の渦に包まれました。祖父母の世代はネタを分かりませんでしたが、40 歳以下は涙が出るほど笑いました。 10/10 もう一度やります。”"
 }

@@ -5585,8 +5585,6 @@
   "gallery.p_text.mom_passed_two_months_before_the_wedding.13031597": "妈妈在婚礼前两个月去世了。她 1985 年的结婚照是人工智能激活的，可以眨眼、微笑和看向镜头。在安静的时刻在接待处演奏。",
   "gallery.p_text.mumbai_india_december_2024.17016717": "印度孟买 · 2024 年 12 月",
   "gallery.p_text.mumbai_india_march_2024.38149702": "印度孟买 · 2024 年 3 月",
-  "gallery.p_text.my_grandfather_s_1962_wedding_video_was.76378558": "“我祖父 1962 年的婚礼视频是 8 毫米胶片，我们以为已经丢失了。WeddingAI 将其恢复为 4K，颜色又恢复了活力。我看着它哭了。”",
-  "gallery.p_text.my_wife_s_family_speaks_mandarin_mine_s.66538595": "“我妻子的家人说普通话，我的家人说西班牙语。多语言版本意味着每个人在接待处都用自己的语言哭泣。”",
   "gallery.p_text.napa_valley_ca_june_2024.93977119": "加利福尼亚州纳帕谷 · 2024 年 6 月",
   "gallery.p_text.new_york_ny_may_2024.09787748": "纽约州纽约市 · 2024 年 5 月",
   "gallery.p_text.one_source_video_five_formats_16_9_youtu.11424460": "一个源视频，五种格式：16:9 YouTube、9:16 TikTok、1:1 Instagram、9:16 Stories、4:5 Feed。 48 小时内，全平台浏览量均突破 10 万次。",
@@ -5604,7 +5602,6 @@
   "gallery.p_text.traditional_tea_ceremony_movements_trans.65183248": "传统茶道动作转化为 60fps 慢动作。倒茶、鞠躬——每个手势现在都感觉永恒。",
   "gallery.p_text.tuscany_italy_september_2024.64111581": "意大利托斯卡纳 · 2024 年 9 月",
   "gallery.p_text.two_golden_retrievers_married_in_an_anni.63191668": "两只金毛猎犬在周年纪念特别视频中“结婚”。全家人看了100多次，把它送给每一位亲戚，并把它作为圣诞贺卡。",
-  "gallery.p_text.we_had_two_cameras_at_the_wedding_but_t.39989224": "“我们在婚礼上有两台摄像机，但摄像师的主文件被损坏了。AI 视频生成器拯救了我们——他们用 200 多张宾客照片制作了一部影片，感觉就像真实的东西。”",
   "gallery.p_text.wedding_with_spanish_catalan_and_english.30858126": "婚礼上有西班牙语、加泰罗尼亚语和英语演讲。人工智能配音为所有三种语言配音并具有匹配的口音。奶奶终于用她的母语加泰罗尼亚语听到了誓言。",
   "gallery.p_text.yes_all_our_before_and_after_case_studie.62091008": "可以。我们所有的前后对比案例研究都是公开的 — 欢迎分享。客户评价引文均经客户明确许可后发布。如果您希望与类似情况的过往客户进行私下推荐通话，我们可以安排。",
   "gallery.span_text.ai_film.33171967": "人工智能电影",
@@ -17259,5 +17256,12 @@
   "order.option_text.country_cn.zzzzzAK": "中国",
   "order.option_text.country_other.zzzzzAL": "其他",
   "services.h1_text.all_wedding_video_services.svcsroot01": "全部婚礼视频服务",
-  "services.p_text.intro.svcsroot01": "浏览 10+ 种 AI 驱动的婚礼视频服务 — 从电影感预告片、多语言配音到复古修复和家庭纪念。"
+  "services.p_text.intro.svcsroot01": "浏览 10+ 种 AI 驱动的婚礼视频服务 — 从电影感预告片、多语言配音到复古修复和家庭纪念。",
+  "gallery.p_text.every_quote_below_ties_to_a_real_service_we.2a3b4c5d": "以下每条引用都对应我们提供的真实服务——视觉作品见上方对应的案例研究。",
+  "gallery.p_text.my_grandfather_passed_years_before_i_met.7f8e9d0c": "“我祖父在我认识丈夫前几年就去世了。在我们的父女共舞环节，WeddingAI 把他留下的八条语音留言重建为一段 30 秒的“我爱你，孩子”，与歌曲同步播放。我爸自祖父葬礼后第一次落泪。”",
+  "gallery.p_text.our_photographer_delivered_47_stunning_h.5a4b3c2d": "“我们的摄影师交了 47 张精美的主画面但没有视频。WeddingAI 把它们转为一部 4 分钟的影院级电影，感觉就像我们雇了摄影师。我们的家人仍然分不出哪些是静态照。”",
+  "gallery.p_text.im_from_madrid_but_married_a_catalan_wo.1e2f3a4b": "“我来自马德里，但是在巴塞罗那娶了一位加泰罗尼亚女士。我们婚礼上有三种语言——西班牙语、加泰罗尼亚语和英语（为她姐姐的家人）。WeddingAI 把誓言和致辞配到了三种语言。我的奶奶终于用她的方言听到了我们的誓言。”",
+  "gallery.p_text.we_wanted_something_playful_for_our_save_the.7e3b1a2c": "“我们想要一个有趣的电子请帖，WeddingAI 把我们的订婚照转成了一部吉卜力风格的动画短片。我们的家人都流下了幸福的眼泪，这成了我们婚礼上被分享最多的东西。”",
+  "gallery.p_text.my_dad_is_in_the_uk_and_couldn_t_fly_to_our_w.5c4d2e1f": "“我爸爸在英国，他不能乘飞机参加我们在托斯卡纳的婚礼。他录了一段诚挚的视频消息，WeddingAI 在我们为他预留座位的那一刻将其嵌入了仪式。他感觉就像在现场一样。”",
+  "gallery.p_text.we_commissioned_custom_wedding_memes_for_our.9a8b7c6d": "“我们为欢迎会幻灯片定制了婚礼表情包，它们绝对炸场了。爷爷奶奶不太懂这些梗，但 40 岁以下的人都笑到流泪。 10/10 愿意再来一次。”"
 }

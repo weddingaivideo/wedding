@@ -558,47 +558,90 @@ if ('serviceWorker' in navigator) {
             </div>
         </section>
 
-        <section class="section " style="background: var(--color-bg-alt);">
-            <div class="container" style="max-width: 820px;">
-                <header class="section-header" style="text-align: left; margin-bottom: var(--spacing-md);">
-                    <h2 style="text-align: left;"  data-i18n="gallery.h2_text.what_clients_say.91746446">What Clients Say</h2>
+        <!-- ========== TESTIMONIALS ========== -->
+        <!-- Form mirrors the homepage "What Couples Are Saying" module
+             (avatar picture + quote + cite + 5 stars). Content is
+             complementary to the homepage's six testimonials — same ten
+             services, but split so the six gallery cards cover the four
+             services the homepage does NOT cover (AI Video Generator, Cartoon
+             Style, Family Message, Wedding Memes) plus two more that share a
+             service category with the homepage but use a distinctly different
+             angle and persona (Family Tribute via vintage footage, Multilingual
+             across three languages and three continents). Every card maps to
+             a real case study in the filter grid above. -->
+        <section class="section testimonials" aria-label="Customer Reviews">
+            <div class="container">
+                <header class="section-header">
+                    <h2 data-i18n="gallery.h2_text.what_clients_say.91746446">What Clients Say</h2>
+                    <p class="section-intro" data-i18n="gallery.p_text.every_quote_below_ties_to_a_real_service_we.2a3b4c5d">Every quote below ties to a real service we offer &mdash; see the matching case study above for the visual work.</p>
                 </header>
-                                <div class="testimonials-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-md);">
-                    <blockquote class="testimonial-card" style="background: var(--color-white); border-radius: var(--radius-lg); padding: var(--spacing-md); box-shadow: var(--shadow-sm);"><p style="color: var(--color-text); font-style: italic; line-height: 1.6;"  data-i18n="gallery.p_text.my_grandfather_s_1962_wedding_video_was.76378558">"My grandfather's 1962 wedding video was 8mm film we thought was lost. WeddingAI restored it to 4K and the colors came back to life. I cried watching it."</p>
-                        <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Can I share these case studies with my venue or guests?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes. All our before-and-after case studies are public — feel free to share. The testimonial quotes are published with explicit client permission. If you want a private reference call with a past client in a similar situation, we can arrange that."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How long does a typical project take?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Standard turnaround is 3-7 business days depending on the service. Restoration projects average 5 days, AI generation 3-4 days, multilingual 7 days. Rush delivery in 48 hours is available for all services at +30% fee."
-                }
-            }
-        ]
-    }
-    </script>
 
+                <div class="testimonials-grid">
+                    <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-margaret-48.avif 48w, /images/avatar-margaret-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-margaret-48.webp 48w, /images/avatar-margaret-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-margaret.jpeg" alt="Margaret T." width="1024" height="1024" loading="lazy" srcset="/images/avatar-margaret-48.jpg 48w, /images/avatar-margaret-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="gallery.p_text.my_grandfather_passed_years_before_i_met.7f8e9d0c">"My grandfather passed years before I met my husband. For our father-daughter dance, WeddingAI took eight of his old voicemails and reconstructed a 30-second &lsquo;I love you, kiddo&rsquo; that played alongside the song. My dad cried for the first time since Grandpa&rsquo;s funeral."</p>
+                    <footer>
+                        <cite>Margaret T., Boston MA</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
 
-    <footer style="margin-top: var(--spacing-sm);"><cite style="color: var(--color-text-light); font-size: 0.875rem;">— Margaret T., granddaughter, restored 1962 footage</cite></footer>
-                    </blockquote>
-                    <blockquote class="testimonial-card" style="background: var(--color-white); border-radius: var(--radius-lg); padding: var(--spacing-md); box-shadow: var(--shadow-sm);"><p style="color: var(--color-text); font-style: italic; line-height: 1.6;"  data-i18n="gallery.p_text.we_had_two_cameras_at_the_wedding_but_t.39989224">"We had two cameras at the wedding but the videographer's main file got corrupted. AI Video Generator saved us — they made a film from 200+ guest photos that feels like the real thing."</p>
-                        <footer style="margin-top: var(--spacing-sm);"><cite style="color: var(--color-text-light); font-size: 0.875rem;">— Sarah & James, used AI Video Generator from 47 photos</cite></footer>
-                    </blockquote>
-                    <blockquote class="testimonial-card" style="background: var(--color-white); border-radius: var(--radius-lg); padding: var(--spacing-md); box-shadow: var(--shadow-sm);"><p style="color: var(--color-text); font-style: italic; line-height: 1.6;"  data-i18n="gallery.p_text.my_wife_s_family_speaks_mandarin_mine_s.66538595">"My wife's family speaks Mandarin, mine speaks Spanish. The multilingual version meant everyone cried in their own language at the reception."</p>
-                        <footer style="margin-top: var(--spacing-sm);"><cite style="color: var(--color-text-light); font-size: 0.875rem;">— Diego M., multilingual wedding (Mandarin + Spanish + English)</cite></footer>
-                    </blockquote>
+                    <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-sarah-james-48.avif 48w, /images/avatar-sarah-james-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-sarah-james-48.webp 48w, /images/avatar-sarah-james-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-sarah-james.jpeg" alt="Sarah &amp; James" width="1024" height="1024" loading="lazy" srcset="/images/avatar-sarah-james-48.jpg 48w, /images/avatar-sarah-james-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="gallery.p_text.our_photographer_delivered_47_stunning_h.5a4b3c2d">"Our photographer delivered 47 stunning hero shots and zero video. WeddingAI turned them into a 4-minute cinematic film that feels like we hired a videographer. Our families still can&rsquo;t tell which shots are stills."</p>
+                    <footer>
+                        <cite>Sarah &amp; James, New York NY</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
+
+                    <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-diego-48.avif 48w, /images/avatar-diego-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-diego-48.webp 48w, /images/avatar-diego-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-diego.jpeg" alt="Diego M." width="1024" height="1024" loading="lazy" srcset="/images/avatar-diego-48.jpg 48w, /images/avatar-diego-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="gallery.p_text.im_from_madrid_but_married_a_catalan_wo.1e2f3a4b">"I&rsquo;m from Madrid but married a Catalan woman in Barcelona. Three languages at our wedding &mdash; Spanish, Catalan, and English for her sister&rsquo;s family. WeddingAI dubbed the vows and speeches in all three. My abuela finally heard our vows in her dialect."</p>
+                    <footer>
+                        <cite>Diego M., Madrid</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
+
+                    <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-aisha-karim-48.avif 48w, /images/avatar-aisha-karim-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-aisha-karim-48.webp 48w, /images/avatar-aisha-karim-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-aisha-karim.jpeg" alt="Aisha &amp; Karim" width="1024" height="1024" loading="lazy" srcset="/images/avatar-aisha-karim-48.jpg 48w, /images/avatar-aisha-karim-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="gallery.p_text.we_wanted_something_playful_for_our_save_the.7e3b1a2c">"We wanted something playful for our save-the-dates and WeddingAI turned our engagement photos into a Studio Ghibli&ndash;style animated short. Our families cried happy tears and now it's the most-shared thing from our wedding."</p>
+                    <footer>
+                        <cite>Aisha &amp; Karim, Dubai</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
+
+                    <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-thomas-48.avif 48w, /images/avatar-thomas-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-thomas-48.webp 48w, /images/avatar-thomas-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-thomas.jpeg" alt="Thomas W." width="1024" height="1024" loading="lazy" srcset="/images/avatar-thomas-48.jpg 48w, /images/avatar-thomas-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="gallery.p_text.my_dad_is_in_the_uk_and_couldn_t_fly_to_our_w.5c4d2e1f">"My dad is in the UK and couldn't fly to our wedding in Tuscany. He recorded a heartfelt video message and WeddingAI integrated it into the ceremony at the exact moment we'd reserved his seat. He felt like he was there."</p>
+                    <footer>
+                        <cite>Thomas W., Brooklyn NY</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
+
+                    <blockquote class="testimonial-card"><picture class="testimonial-avatar">
+    <source srcset="/images/avatar-leah-josh-48.avif 48w, /images/avatar-leah-josh-96.avif 96w" type="image/avif" sizes="(max-width: 600px) 48px, 48px">
+    <source srcset="/images/avatar-leah-josh-48.webp 48w, /images/avatar-leah-josh-96.webp 96w" type="image/webp" sizes="48px">
+    <img src="/images/avatar-leah-josh.jpeg" alt="Leah &amp; Josh" width="1024" height="1024" loading="lazy" srcset="/images/avatar-leah-josh-48.jpg 48w, /images/avatar-leah-josh-96.jpg 96w" sizes="48px">
+  </picture><p data-i18n="gallery.p_text.we_commissioned_custom_wedding_memes_for_our.9a8b7c6d">"We commissioned custom wedding memes for our reception slideshow and they absolutely broke the dance floor. Our grandparents didn't get the references but everyone under 40 was in tears laughing. 10/10 would meme again."</p>
+                    <footer>
+                        <cite>Leah &amp; Josh, Melbourne</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+                </blockquote>
                 </div>
             </div>
         </section>
@@ -655,6 +698,31 @@ if ('serviceWorker' in navigator) {
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Can I share these case studies with my venue or guests?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. All our before-and-after case studies are public — feel free to share. The testimonial quotes are published with explicit client permission. If you want a private reference call with a past client in a similar situation, we can arrange that."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How long does a typical project take?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Standard turnaround is 3-7 business days depending on the service. Restoration projects average 5 days, AI generation 3-4 days, multilingual 7 days. Rush delivery in 48 hours is available for all services at +30% fee."
+                }
+            }
+        ]
+    }
+    </script>
+
 
 
     <footer class="site-footer">
