@@ -171,8 +171,21 @@ GROUPS = {
                 "desc_i18n": "services.p_text.turn_your_photos_into_a_cinematic_weddin.02467471",
                 "price": "From $199",
                 "price_i18n": "services.span_text.from_199.94483485",
-                "img": "catalog-ai-video-generator",
-                "alt": "Photos transforming into AI generated wedding film",
+                # 1:1 mirror of the gallery case-study video (case-sarah-james-
+                # super8-…). Replaces the static catalog-ai-video-generator.jpg
+                # so visitors see the actual rendered Super 8mm loop instead of
+                # a generic still. ?v=4.29 matches gallery (cache-bust parity).
+                # aria_label uses &amp; (not literal &) to match gallery source
+                # line 343 — gallery is the one HTML-escaped this one (all the
+                # other case-study videos in gallery use literal & or no &).
+                "video": {
+                    "width": 1376,
+                    "height": 768,
+                    "poster": "/images/case-sarah-james-super8-poster.webp",
+                    "webm": "/images/case-sarah-james-super8.webm?v=4.29",
+                    "mp4": "/images/case-sarah-james-super8.mp4?v=4.29",
+                    "aria_label": "Sarah &amp; James — 47 hero photos animated into a 4-minute Super 8mm-style cinematic film, Brooklyn rooftop at golden hour",
+                },
             },
             {
                 "href": "/services/personalization/wedding-trailer/",
