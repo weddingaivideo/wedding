@@ -246,13 +246,21 @@ if ('serviceWorker' in navigator) {
                 </div>
 
                 <!-- REAL STORY -->
-                <div style="background: var(--color-bg-alt); border-radius: var(--radius-lg); padding: var(--spacing-lg); margin: var(--spacing-xl) 0; border-left: 4px solid var(--color-primary);">
-                    <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;" data-i18n="services.absence-compensation.family-tribute.span_text.a_real_story.f6a7b8c9">A real story &mdash; with permission to share</span>
-                    <h3 style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 1.375rem; margin: 0.5rem 0 0.75rem 0;" data-i18n="services.absence-compensation.family-tribute.h3_text.testimonial_title.f6a7b8c9">Carolina&rsquo;s mom was supposed to be at the wedding. She was two months too early.</h3>
-                    <p style="color: var(--color-text); line-height: 1.8; margin: 0 0 1rem 0;" data-i18n="services.absence-compensation.family-tribute.p_text.testimonial1.f6a7b8c9">When Mam&aacute; passed, Carolina thought about not having a wedding at all. Her mom had been her biggest cheerleader &mdash; the person who&rsquo;d been saving wedding magazine clippings since Carolina was twelve.</p>
-                    <p style="color: var(--color-text); line-height: 1.8; margin: 0 0 1rem 0;" data-i18n="services.absence-compensation.family-tribute.p_text.testimonial2.f6a7b8c9">Carolina sent us a single 1985 wedding photo of her parents &mdash; Mam&aacute; in a white dress, Pap&aacute; laughing at something off-camera, the original print slightly curled at the edges. We activated it: subtle motion, a gentle blink, a soft turn of the head, a look toward camera as if she&rsquo;d just heard the music start.</p>
-                    <p style="color: var(--color-text); line-height: 1.8; margin: 0 0 1rem 0;" data-i18n="services.absence-compensation.family-tribute.p_text.testimonial3.f6a7b8c9">The clip played during a quiet moment of the reception. Carolina says: <em>&ldquo;My whole table burst into tears. She was there, in the most beautiful way. Thank you for giving me that moment with her again.&rdquo;</em></p>
-                    <p style="color: var(--color-text-light); font-size: 0.875rem; margin: 0;" data-i18n="services.absence-compensation.family-tribute.p_text.testimonial_footnote.f6a7b8c9">This kind of work is the most important thing we do. We never use it lightly, and we work closely with you to make sure the result honors exactly what you want to remember.</p>
+                <div class="real-story-card" style="display:flex;flex-wrap:wrap;gap:var(--spacing-lg);align-items:center;background:var(--color-bg-alt);border-radius:var(--radius-lg);padding:var(--spacing-lg);margin:var(--spacing-xl) 0;border-left:4px solid var(--color-primary);">
+                    <div style="flex:1 1 320px;min-width:0;">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" style="width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-md);" poster="/images/case-carolina-r-photo-activated-1985-poster.webp" aria-label="Carolina — 1985 wedding photo of her parents activated into a gentle 6-second memorial clip" data-lazy-video>
+                            <source src="/images/case-carolina-r-photo-activated-1985.webm?v=4.29" type="video/webm">
+                            <source src="/images/case-carolina-r-photo-activated-1985.mp4?v=4.29" type="video/mp4">
+                        </video>
+                    </div>
+                    <div style="flex:1 1 320px;min-width:0;">
+                        <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;" data-i18n="services.absence-compensation.family-tribute.span_text.a_real_story.f6a7b8c9">A real story &mdash; with permission to share</span>
+                        <h3 style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 1.375rem; margin: 0.5rem 0 0.75rem 0;" data-i18n="services.absence-compensation.family-tribute.h3_text.testimonial_title.f6a7b8c9">Carolina&rsquo;s mom was supposed to be at the wedding. She was two months too early.</h3>
+                        <p style="color: var(--color-text); line-height: 1.8; margin: 0 0 1rem 0;" data-i18n="services.absence-compensation.family-tribute.p_text.testimonial1.f6a7b8c9">When Mam&aacute; passed, Carolina thought about not having a wedding at all. Her mom had been her biggest cheerleader &mdash; the person who&rsquo;d been saving wedding magazine clippings since Carolina was twelve.</p>
+                        <p style="color: var(--color-text); line-height: 1.8; margin: 0 0 1rem 0;" data-i18n="services.absence-compensation.family-tribute.p_text.testimonial2.f6a7b8c9">Carolina sent us a single 1985 wedding photo of her parents &mdash; Mam&aacute; in a white dress, Pap&aacute; laughing at something off-camera, the original print slightly curled at the edges. We activated it: subtle motion, a gentle blink, a soft turn of the head, a look toward camera as if she&rsquo;d just heard the music start.</p>
+                        <p style="color: var(--color-text); line-height: 1.8; margin: 0 0 1rem 0;" data-i18n="services.absence-compensation.family-tribute.p_text.testimonial3.f6a7b8c9">The clip played during a quiet moment of the reception. Carolina says: <em>&ldquo;My whole table burst into tears. She was there, in the most beautiful way. Thank you for giving me that moment with her again.&rdquo;</em></p>
+                        <p style="color: var(--color-text-light); font-size: 0.875rem; margin: 0;" data-i18n="services.absence-compensation.family-tribute.p_text.testimonial_footnote.f6a7b8c9">This kind of work is the most important thing we do. We never use it lightly, and we work closely with you to make sure the result honors exactly what you want to remember.</p>
+                    </div>
                 </div>
 
                 <h2  data-i18n="services.absence-compensation.family-tribute.h2_text.what_we_can_create.63339481">What We Can Create</h2>
@@ -357,23 +365,38 @@ if ('serviceWorker' in navigator) {
 
         <!-- RELATED SERVICES -->
         <section class="section" style="background: var(--color-white);">
-            <div class="container" style="max-width: 980px;">
+            <div class="container" style="max-width: 1080px;">
                 <header class="section-header" style="text-align: left; margin-bottom: var(--spacing-md);">
                     <h2 style="text-align: left;" data-i18n="services.absence-compensation.family-tribute.h2_text.pair_it_with.f6a7b8c9">Pair It With&hellip;</h2>
                     <p class="section-intro" style="text-align:left;margin:0;" data-i18n="services.absence-compensation.family-tribute.p_text.pair_it_with_intro.f6a7b8c9">These services combine well with what you&rsquo;re looking at. 2+ services get a 10&ndash;20% bundle discount.</p>
                 </header>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--spacing-md);">
-                    <a href="/services/absence-compensation/family-message/" class="related-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-decoration:none;color:inherit;transition:var(--transition);">
-                        <h4 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.0625rem;margin:0 0 0.4rem 0;" data-i18n="services.absence-compensation.family-tribute.h4_text.card1_title.f6a7b8c9">Remote Family Video Message</h4>
-                        <p style="color:var(--color-text-light);font-size:0.875rem;line-height:1.5;margin:0;" data-i18n="services.absence-compensation.family-tribute.p_text.card1_desc.f6a7b8c9">For loved ones who are absent but still here — record their messages and integrate them into the film.</p>
+                <div class="service-sub-list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--spacing-md);">
+                    <a href="/services/absence-compensation/family-message/" class="service-sub-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--spacing-lg);text-decoration:none;color:inherit;transition:var(--transition);">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-sophie-david-family-messages-poster.webp" aria-label="Sophie & David — wedding couple watching family video call grid from around the world" data-lazy-video>
+                            <source src="/images/case-sophie-david-family-messages.webm?v=4.29" type="video/webm">
+                            <source src="/images/case-sophie-david-family-messages.mp4?v=4.29" type="video/mp4">
+                        </video>
+                        <h3 style="margin-top:var(--spacing-sm);" data-i18n="services.absence-compensation.family-tribute.h4_text.card1_title.f6a7b8c9">Remote Family Video Message</h3>
+                        <p data-i18n="services.absence-compensation.family-tribute.p_text.card1_desc.f6a7b8c9">For loved ones who are absent but still here — record their messages and integrate them into the film.</p>
+                        <span class="price-hint" data-i18n="services.span_text.from_149.82399004">From $149</span>
                     </a>
-                    <a href="/services/video-enhancement/vintage-restoration/" class="related-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-decoration:none;color:inherit;transition:var(--transition);">
-                        <h3 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.0625rem;margin:0 0 0.4rem 0;" data-i18n="services.family-tribute.h4_text.related_vintage_restoration_title.5df669de">Vintage Restoration</h3>
-                        <p style="color:var(--color-text-light);font-size:0.875rem;line-height:1.5;margin:0;" data-i18n="services.family-tribute.p_text.related_vintage_restoration_desc.abfcf4da">Restore 30-year-old footage of the same person and weave it into the tribute — a complete arc.</p>
+                    <a href="/services/video-enhancement/vintage-restoration/" class="service-sub-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--spacing-lg);text-decoration:none;color:inherit;transition:var(--transition);">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-1987-vhs-restoration-poster.webp" aria-label="1987 wedding — VHS to 4K restoration, before and after" data-lazy-video>
+                            <source src="/images/case-1987-vhs-restoration.webm" type="video/webm">
+                            <source src="/images/case-1987-vhs-restoration.mp4" type="video/mp4">
+                        </video>
+                        <h3 style="margin-top:var(--spacing-sm);" data-i18n="services.family-tribute.h4_text.related_vintage_restoration_title.5df669de">Vintage Restoration</h3>
+                        <p data-i18n="services.family-tribute.p_text.related_vintage_restoration_desc.abfcf4da">Restore 30-year-old footage of the same person and weave it into the tribute — a complete arc.</p>
+                        <span class="price-hint" data-i18n="services.span_text.from_149.82399004">From $149</span>
                     </a>
-                    <a href="/services/personalization/multilingual/" class="related-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-decoration:none;color:inherit;transition:var(--transition);">
-                        <h3 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.0625rem;margin:0 0 0.4rem 0;" data-i18n="services.family-tribute.h4_text.related_multilingual_title.6ca141a5">Multilingual</h3>
-                        <p style="color:var(--color-text-light);font-size:0.875rem;line-height:1.5;margin:0;" data-i18n="services.family-tribute.p_text.related_multilingual_desc.1e18ff37">Translate the tribute for relatives who live abroad — they get to feel included in the moment.</p>
+                    <a href="/services/personalization/multilingual/" class="service-sub-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--spacing-lg);text-decoration:none;color:inherit;transition:var(--transition);">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-carlos-sofia-3-language-poster.webp" aria-label="Carlos & Sofia — Barcelona wedding with Spanish, Catalan, and English speeches" data-lazy-video>
+                            <source src="/images/case-carlos-sofia-3-language.webm?v=4.29" type="video/webm">
+                            <source src="/images/case-carlos-sofia-3-language.mp4?v=4.29" type="video/mp4">
+                        </video>
+                        <h3 style="margin-top:var(--spacing-sm);" data-i18n="services.family-tribute.h4_text.related_multilingual_title.6ca141a5">Multilingual</h3>
+                        <p data-i18n="services.family-tribute.p_text.related_multilingual_desc.1e18ff37">Translate the tribute for relatives who live abroad — they get to feel included in the moment.</p>
+                        <span class="price-hint" data-i18n="services.span_text.from_99.96638139">From $99</span>
                     </a>
                 </div>
             </div>

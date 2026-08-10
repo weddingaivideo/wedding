@@ -261,12 +261,20 @@ if ('serviceWorker' in navigator) {
 
         <!-- REAL STORY -->
         <section class="section" style="background: var(--color-bg-alt);">
-            <div class="container" style="max-width: 820px;">
-                <div style="background: var(--color-white); border-radius: var(--radius-lg); padding: var(--spacing-lg); border-left: 4px solid var(--color-primary);">
-                    <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;" data-i18n="services.personalization.wedding-trailer.span_text.a_real_story.1a2b3c4d">A real story</span>
-                    <h2 style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 1.25rem; margin: 0.5rem 0;" data-i18n="services.personalization.wedding-trailer.h3_text.kim_family_testimonial.2b3c4d5e">The Kim Family, Seoul — 5 formats, 2M TikTok views</h2>
-                    <p style="color: var(--color-text); line-height: 1.7; margin: 0 0 0.75rem 0;" data-i18n="services.personalization.wedding-trailer.p_text.kim_family_quote.3c4d5e6f">"One source video → 5 formats → all 100K+ views across platforms. The vertical TikTok got picked up by a wedding influencer and broke 2 million views."</p>
-                    <cite style="color: var(--color-text-light); font-size: 0.875rem; font-style: normal;" data-i18n="services.personalization.wedding-trailer.cite_text.kim_family.4d5e6f70">— The Kim Family, Seoul, South Korea</cite>
+            <div class="container" style="max-width: 1080px;">
+                <div class="real-story-card" style="display:flex;flex-wrap:wrap;gap:var(--spacing-lg);align-items:center;background:var(--color-white);border-radius:var(--radius-lg);padding:var(--spacing-lg);border-left:4px solid var(--color-primary);">
+                    <div style="flex:1 1 320px;min-width:0;order:2;">
+                        <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;" data-i18n="services.personalization.wedding-trailer.span_text.a_real_story.1a2b3c4d">A real story</span>
+                        <h2 style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 1.375rem; margin: 0.5rem 0 0.75rem 0;" data-i18n="services.personalization.wedding-trailer.h3_text.kim_family_testimonial.2b3c4d5e">The Kim Family, Seoul — 5 formats, 2M TikTok views</h2>
+                        <p style="color: var(--color-text); line-height: 1.7; margin: 0 0 0.75rem 0;" data-i18n="services.personalization.wedding-trailer.p_text.kim_family_quote.3c4d5e6f">"One source video → 5 formats → all 100K+ views across platforms. The vertical TikTok got picked up by a wedding influencer and broke 2 million views."</p>
+                        <cite style="color: var(--color-text-light); font-size: 0.875rem; font-style: normal;" data-i18n="services.personalization.wedding-trailer.cite_text.kim_family.4d5e6f70">— The Kim Family, Seoul, South Korea</cite>
+                    </div>
+                    <div style="flex:1 1 320px;min-width:0;order:1;">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" style="width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-md);" poster="/images/case-kim-family-5-format-social-poster.webp" aria-label="The Kim Family, Seoul — one wedding video cut into 5 platform formats, vertical TikTok hit 2M views" data-lazy-video>
+                            <source src="/images/case-kim-family-5-format-social.webm?v=4.29" type="video/webm">
+                            <source src="/images/case-kim-family-5-format-social.mp4?v=4.29" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
             </div>
         </section>
@@ -431,27 +439,38 @@ if ('serviceWorker' in navigator) {
 
         <!-- RELATED SERVICES -->
         <section class="section" style="background: var(--color-white);">
-            <div class="container" style="max-width: 980px;">
+            <div class="container" style="max-width: 1080px;">
                 <header class="section-header" style="text-align: left; margin-bottom: var(--spacing-md);">
                     <h2 style="text-align: left;" data-i18n="services.personalization.wedding-trailer.h2_text.pair_it_with.5e6f7081">Pair It With&hellip;</h2>
                     <p class="section-intro" style="text-align:left;margin:0;" data-i18n="services.personalization.wedding-trailer.p_text.pair_it_with_intro.6f708192">These services combine well with what you&rsquo;re looking at. 2+ services get a 10&ndash;20% bundle discount.</p>
                 </header>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--spacing-md);">
-                    <a href="/services/personalization/ai-video-generator/" class="related-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-decoration:none;color:inherit;transition:var(--transition);">
-                        <h3 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.0625rem;margin:0 0 0.4rem 0;" data-i18n="services.personalิization.wedding-trailer.h4_text.ai_video_generator.708192a3">AI Wedding Video Generator</h3>
-                        <p style="color:var(--color-text-light);font-size:0.875rem;line-height:1.5;margin:0;" data-i18n="services.personalization.wedding-trailer.p_text.ai_generator_desc.8192a3b4">Build the main film from photos, then cut a 60-second trailer for social.</p>
+                <div class="service-sub-list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--spacing-md);">
+                    <a href="/services/personalization/ai-video-generator/" class="service-sub-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--spacing-lg);text-decoration:none;color:inherit;transition:var(--transition);">
+                        <video controls autoplay muted loop playsinline preload="none" width="1376" height="768" poster="/images/case-sarah-james-super8-poster.webp" aria-label="Sarah & James — 47 hero photos animated into a 4-minute cinematic film" data-lazy-video>
+                            <source src="/images/case-sarah-james-super8.webm?v=4.29" type="video/webm">
+                            <source src="/images/case-sarah-james-super8.mp4?v=4.29" type="video/mp4">
+                        </video>
+                        <h3 style="margin-top:var(--spacing-sm);" data-i18n="services.wedding-trailer.h4_text.related_ai_video_generator_title.7c8d9e0f">AI Wedding Video Generator</h3>
+                        <p data-i18n="services.wedding-trailer.p_text.related_ai_video_generator_desc.8d9e0f1a">Build the main film from photos, then cut a 60-second trailer for social.</p>
+                        <span class="price-hint" data-i18n="services.span_text.from_199.94483485">From $199</span>
                     </a>
-                    <a href="/services/personalization/meme-generator/" class="related-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-decoration:none;color:inherit;transition:var(--transition);">
-                        <h3 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.0625rem;margin:0 0 0.4rem 0;" data-i18n="services.personalization.wedding-trailer.h4_text.wedding_gifs_memes.92a3b4c5">Wedding GIFs &amp; Memes</h3>
-                        <p style="color:var(--color-text-light);font-size:0.875rem;line-height:1.5;margin:0;" data-i18n="services.personalization.wedding-trailer.p_text.gifs_memes_desc.a3b4c5d6">Add a few shareable GIFs in the same art direction as the trailer.</p>
+                    <a href="/services/video-enhancement/slow-motion/" class="service-sub-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--spacing-lg);text-decoration:none;color:inherit;transition:var(--transition);">
+                        <video controls autoplay muted loop playsinline preload="none" width="1280" height="720" poster="/images/case-slow-motion-dance-poster.webp" aria-label="Maria & David — first dance dip in cinematic 120fps slow motion" data-lazy-video>
+                            <source src="/images/case-slow-motion-dance.webm?v=4.29" type="video/webm">
+                            <source src="/images/case-slow-motion-dance.mp4?v=4.29" type="video/mp4">
+                        </video>
+                        <h3 style="margin-top:var(--spacing-sm);" data-i18n="services.wedding-trailer.h4_text.related_slow_motion_title.c0b7fba0">Slow Motion</h3>
+                        <p data-i18n="services.wedding-trailer.p_text.related_slow_motion_desc.6227a9cc">Drop in 2–3 slow-mo accents to give your trailer that cinematic final beat.</p>
+                        <span class="price-hint" data-i18n="services.span_text.from_99.96638139">From $99</span>
                     </a>
-                    <a href="/services/video-enhancement/slow-motion/" class="related-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-decoration:none;color:inherit;transition:var(--transition);">
-                        <h3 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.0625rem;margin:0 0 0.4rem 0;" data-i18n="services.wedding-trailer.h4_text.related_slow_motion_title.c0b7fba0">Slow Motion</h3>
-                        <p style="color:var(--color-text-light);font-size:0.875rem;line-height:1.5;margin:0;" data-i18n="services.wedding-trailer.p_text.related_slow_motion_desc.6227a9cc">Drop in 2–3 slow-mo accents to give your trailer that cinematic final beat.</p>
-                    </a>
-                    <a href="/services/personalization/cartoon-style/" class="related-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);text-decoration:none;color:inherit;transition:var(--transition);">
-                        <h3 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.0625rem;margin:0 0 0.4rem 0;" data-i18n="services.wedding-trailer.h4_text.related_cartoon_style_title.7499619d">Cartoon Style</h3>
-                        <p style="color:var(--color-text-light);font-size:0.875rem;line-height:1.5;margin:0;" data-i18n="services.wedding-trailer.p_text.related_cartoon_style_desc.812d7241">Render an alternate animated version of your trailer — great for rehearsal dinner or save-the-date.</p>
+                    <a href="/services/personalization/cartoon-style/" class="service-sub-card" style="display:block;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--spacing-lg);text-decoration:none;color:inherit;transition:var(--transition);">
+                        <video controls autoplay muted loop playsinline preload="none" width="1376" height="768" poster="/images/case-liu-wang-ghibli-wedding-film-poster.webp" aria-label="Liu & Wang — Studio Ghibli style watercolor animation of a wedding" data-lazy-video>
+                            <source src="/images/case-liu-wang-ghibli-wedding-film.webm?v=4.29" type="video/webm">
+                            <source src="/images/case-liu-wang-ghibli-wedding-film.mp4?v=4.29" type="video/mp4">
+                        </video>
+                        <h3 style="margin-top:var(--spacing-sm);" data-i18n="services.wedding-trailer.h4_text.related_cartoon_style_title.7499619d">Cartoon Style</h3>
+                        <p data-i18n="services.wedding-trailer.p_text.related_cartoon_style_desc.812d7241">Render an alternate animated version of your trailer — great for rehearsal dinner or save-the-date.</p>
+                        <span class="price-hint" data-i18n="services.span_text.from_149.82399004">From $149</span>
                     </a>
                 </div>
             </div>
