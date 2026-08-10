@@ -58,8 +58,18 @@ GROUPS = {
                 "desc_i18n": "services.p_text.transform_standard_footage_into_smooth_6.78468195",
                 "price": "From $99",
                 "price_i18n": "services.span_text.from_99.96638139",
-                "img": "catalog-slow-motion",
-                "alt": "Wedding first dance in slow motion",
+                # 1:1 mirror of the gallery case-study video (case-slow-motion-
+                # dance-…). Replaces the static catalog-slow-motion.jpg so
+                # visitors see the actual rendered slow-motion dip in motion.
+                # ?v=4.29 matches gallery/index.html (cache-bust parity).
+                "video": {
+                    "width": 1376,
+                    "height": 768,
+                    "poster": "/images/case-slow-motion-dance-poster.webp",
+                    "webm": "/images/case-slow-motion-dance.webm?v=4.29",
+                    "mp4": "/images/case-slow-motion-dance.mp4?v=4.29",
+                    "aria_label": "Maria & David — first dance dip in cinematic 120fps slow motion",
+                },
             },
             {
                 "href": "/services/video-enhancement/vintage-restoration/",
@@ -69,13 +79,22 @@ GROUPS = {
                 "desc_i18n": "services.video-enhancement.p_text.vintage_desc.enh00002",
                 "price": "From $149",
                 "price_i18n": "services.span_text.from_149.82399004",
-                # NOTE: no catalog-* .jpg set exists for vintage-restoration.
-                # Use the wedding-restoration-before-after.{png,webp} pair that
-                # the actual service page (services/video-enhancement/vintage-restoration/)
-                # already uses. ext="png" because there's no .jpg fallback.
-                "img": "wedding-restoration-before-after",
-                "ext": "png",
-                "alt": "Vintage wedding video before and after AI restoration",
+                # 1:1 mirror of the gallery case-study video (case-1987-vhs-
+                # restoration-…). Replaces the static wedding-restoration-
+                # before-after.png + catalog-vintage-restoration.jpg (which
+                # was on the hand-edited main page, not the script) so both
+                # pages show the actual 1987 VHS-to-4K before/after loop.
+                # NOTE: NO `?v=4.29` query string here — gallery/index.html
+                # line 372-373 omits the cache-bust on this video (the only
+                # case-study video in gallery that does). Match exactly.
+                "video": {
+                    "width": 1280,
+                    "height": 720,
+                    "poster": "/images/case-1987-vhs-restoration-poster.webp",
+                    "webm": "/images/case-1987-vhs-restoration.webm",
+                    "mp4": "/images/case-1987-vhs-restoration.mp4",
+                    "aria_label": "1987 wedding video — VHS to 4K restoration, before and after",
+                },
             },
         ],
     },
@@ -96,8 +115,18 @@ GROUPS = {
                 "desc_i18n": "services.p_text.respectfully_include_deceased_family_mem.14848440",
                 "price": "From $149",
                 "price_i18n": "services.span_text.from_149.82399004",
-                "img": "catalog-family-tribute",
-                "alt": "Vintage wedding photo tribute with candles",
+                # 1:1 mirror of the gallery case-study video (case-johnson-
+                # grandpa-voice-…). Replaces the static catalog-family-tribute.jpg
+                # so visitors see the actual rendered father-daughter dance +
+                # reconstructed-voice moment in motion. ?v=4.29 matches gallery.
+                "video": {
+                    "width": 1280,
+                    "height": 720,
+                    "poster": "/images/case-johnson-grandpa-voice-poster.webp",
+                    "webm": "/images/case-johnson-grandpa-voice.webm?v=4.29",
+                    "mp4": "/images/case-johnson-grandpa-voice.mp4?v=4.29",
+                    "aria_label": "The Johnson Family — bride listening to grandfather's reconstructed voice message during father-daughter dance, tears of joy",
+                },
             },
             {
                 "href": "/services/absence-compensation/family-message/",

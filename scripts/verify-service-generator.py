@@ -31,6 +31,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
+# Match one full <div class="service-sub-card">...</div> block. Non-greedy
+# (.*?) + DOTALL: service-sub-card has no nested <div>, so the first </div>
+# closes the card. Used to iterate every card on a page and pick the one
+# whose contents include the service title (avoids the nav-also-has-the-
+# title false positive).
+CARD_BLOCK_RE = re.compile(r'<div class="service-sub-card">.*?</div>', re.DOTALL)
+
 
 def load_generator():
     spec = importlib.util.spec_from_file_location(
@@ -83,39 +90,56 @@ def main() -> int:
                 if not page.exists():
                     continue
                 text = page.read_text(encoding="utf-8")
-                idx = text.find(f">{svc['title']}<")
-                if idx < 0:
-                    # Title not in this page (e.g. absence-compensation sub-pages
-                    # show the feature cards, not the service-sub-cards)
+                # Find the service-sub-card block that ACTUALLY contains the
+                # title text. We previously used `text.rfind(f">{title}<")` +
+                # `text.rfind('<div class="service-sub-card">', 0, idx)`,
+                # which broke when the title also appeared in the nav menu:
+                # the nav title is the last occurrence, and the closest card
+                # div before the nav is the LAST card on the page, not the
+                # one with this title. Result: we compared the wrong card
+                # against the expected markup and reported bogus drifts.
+                #
+                # The robust fix is to iterate every service-sub-card block
+                # in the page and check which one contains `>title<`. Cards
+                # have no nested <div>, so the non-greedy regex is safe.
+                title_marker = f">{svc['title']}<"
+                matched = False
+                for card_match in CARD_BLOCK_RE.finditer(text):
+                    if title_marker not in card_match.group(0):
+                        continue
+                    matched = True
+                    actual_media = re.search(
+                        r"<(picture|video)\b[^>]*>.*?</\1>",
+                        card_match.group(0),
+                        re.DOTALL,
+                    )
+                    if not actual_media:
+                        # Card with this title exists but has no media
+                        # block — treat as drift (we expected one).
+                        total_checks += 1
+                        drifts += 1
+                        page_label = page.parent.relative_to(ROOT)
+                        print(f"DRIFT [{page_label}] {svc['title']!r} ({group_slug}) — card present, no media")
+                        if args.verbose:
+                            print(f"  card:    {card_match.group(0)[:200]!r}")
+                            print(f"  expected: {rendered_media.group(0)[:200]!r}")
+                        break
+                    total_checks += 1
+                    if actual_media.group(0) == rendered_media.group(0):
+                        break
+                    drifts += 1
+                    page_label = page.parent.relative_to(ROOT)
+                    print(f"DRIFT [{page_label}] {svc['title']!r} ({group_slug})")
+                    if args.verbose:
+                        print(f"  actual:    {actual_media.group(0)[:300]!r}")
+                        print(f"  generated: {rendered_media.group(0)[:300]!r}")
+                    break
+                if not matched:
+                    # Title is in this page (nav/footer/breadcrumb) but no
+                    # service-sub-card has it. That's normal for pages that
+                    # list a different group's services (e.g. video-enhancement
+                    # title appearing in absence-compensation nav). Skip.
                     continue
-                # Pin `start` to the service-sub-card opening div, not any div.
-                # The previous `<div ` rfind matched the header/footer/nav-dropdown
-                # wrapper for titles that ALSO appear in the nav menu — e.g. on
-                # /services/absence-compensation/ the "Vintage Restoration" nav
-                # link is the first hit for that title, but the actual service
-                # card is in the (different) video-enhancement group. A loose
-                # rfind grabbed `<div class="container header-inner">` and the
-                # verifier reported a false-positive drift on every run.
-                start = text.rfind('<div class="service-sub-card">', 0, idx)
-                if start < 0:
-                    # Title is in this page but not as a service-sub-card
-                    # (it's the nav link, footer link, breadcrumb, etc.).
-                    # Skip — it's not a card to compare.
-                    continue
-                end = text.find("</div>", idx) + len("</div>")
-                actual = text[start:end]
-                actual_media = re.search(r"<(picture|video)\b[^>]*>.*?</\1>", actual, re.DOTALL)
-                if not actual_media:
-                    continue
-                total_checks += 1
-                if actual_media.group(0) == rendered_media.group(0):
-                    continue
-                drifts += 1
-                page_label = page.parent.relative_to(ROOT)
-                print(f"DRIFT [{page_label}] {svc['title']!r} ({group_slug})")
-                if args.verbose:
-                    print(f"  actual:    {actual_media.group(0)[:300]!r}")
-                    print(f"  generated: {rendered_media.group(0)[:300]!r}")
 
     print(f"\nChecked {total_checks} service-card <media> blocks; {drifts} drift(s).")
     return 0 if drifts == 0 else 1
