@@ -948,16 +948,24 @@ export const onRequest = async (context) => {
         // the inner middleware would inject its own nonce + CSP header,
         // leaving the outer response with two competing policies.
         const underlyingUrl = url.origin + rest + url.search;
+        // Use redirect: "follow" (2026-08-10) so _redirects 301/308 rules
+        // (e.g. /services/absence-compensation/celebrity-message/ → parent)
+        // are transparently followed to the real target. With "manual" the
+        // fetch returned 30x, !response.ok fired, and middleware fell through
+        // to a hard 404 — losing SEO equity for any path whose canonical
+        // target is itself a 301 (deleted services, renames, etc).
+        // X-Middleware-Internal: 1 still prevents the inner target's i18n
+        // re-entry via shouldSkip(), so we still get the raw static HTML.
         const response = await fetch(underlyingUrl, {
             method: "GET",
             headers: { Accept: "text/html", "X-Middleware-Internal": "1" },
-            redirect: "manual",
+            redirect: "follow",
         });
 
         if (!response.ok) {
             if (rest !== "/" && !rest.endsWith("/")) {
                 const altUrl = url.origin + rest + "/" + url.search;
-                const altResp = await fetch(altUrl, { redirect: "manual" });
+                const altResp = await fetch(altUrl, { redirect: "follow" });
                 if (altResp.ok) return withCspHeaders(altResp, await altResp.text(), nonce);
             }
             return new Response(`Not found: ${path}`, { status: 404 });
