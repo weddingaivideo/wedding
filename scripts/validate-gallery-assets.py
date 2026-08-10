@@ -33,7 +33,8 @@ ok = []
 for url in sorted(all_refs):
     if not url.startswith("/images/"):
         continue
-    rel = url.lstrip("/")
+    # Strip ?v=4.29 cache-buster and any #fragment before path check.
+    rel = url.split("?", 1)[0].split("#", 1)[0].lstrip("/")
     fp = ROOT / rel
     if fp.exists():
         ok.append(url)
