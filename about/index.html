@@ -35,11 +35,6 @@
     <link rel="stylesheet" href="/styles/i18n.css">
 <script defer src="/js/main.min.js?v=3.20"></script>
     <style>
-        .page-hero-bg { background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%); }
-        .page-hero-overlay { background: rgba(0,0,0,0.5); }
-        .page-hero-content h1 { font-size: clamp(1.75rem,4vw,2.5rem); color: var(--color-white); margin-bottom: var(--spacing-sm); }
-        .page-hero-content p { font-size: 1.0625rem; color: rgba(255,255,255,0.85); max-width: 600px; }
-        .page-hero-small { min-height: 45vh; }
         .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--spacing-lg); margin-top: var(--spacing-xl); }
         .team-member { text-align: center; }
         .team-member img { aspect-ratio: 1; object-fit: cover; border-radius: var(--radius-lg); margin-bottom: var(--spacing-sm); }
@@ -184,18 +179,16 @@ if ('serviceWorker' in navigator) {
     </header>
 
     <main id="main-content">
-        <section class="page-hero page-hero-small">
-            <div class="page-hero-bg"></div>
-            <div class="page-hero-overlay"></div>
-            <div class="container page-hero-content">
+        <header class="page-header" style="background: var(--color-bg-alt); padding: var(--spacing-2xl) 0 var(--spacing-xl);">
+            <div class="container" style="text-align: center;">
                 <nav class="breadcrumb" style="padding: 0 0 var(--spacing-md); font-size: 0.875rem; color: var(--color-text-light);">
                     <a href="/" title="Home" data-i18n="services.absence-compensation.celebrity-message.a_text.home.90820803">Home</a><span style="margin: 0 var(--spacing-xs);">›</span>
                     About
                 </nav>
-                <h1  data-i18n="about.h1_text.about_weddingai_video_filmmakers_ai_engi.25551995">About WeddingAI.video: A small studio that cares about your story</h1>
-                <p  data-i18n="about.p_text.weddingai_video_is_a_small_dedicated_stu.67421471">WeddingAI.video is a small, dedicated studio combining professional filmmaking with cutting-edge AI to make beautiful wedding video accessible to every couple.</p>
+                <h1 style="margin: 0 0 var(--spacing-sm); font-size: clamp(1.75rem, 4vw, 2.5rem); color: var(--color-text);" data-i18n="about.h1_text.about_weddingai_video_filmmakers_ai_engi.25551995">About WeddingAI.video: A small studio that cares about your story</h1>
+                <p style="margin: 0 auto; max-width: 700px; font-size: 1.0625rem; color: var(--color-text-light);" data-i18n="about.p_text.weddingai_video_is_a_small_dedicated_stu.67421471">WeddingAI.video is a small, dedicated studio combining professional filmmaking with cutting-edge AI to make beautiful wedding video accessible to every couple.</p>
             </div>
-        </section>
+        </header>
 
         <section class="section" style="background: var(--color-white);">
             <div class="container" style="max-width: 760px;">

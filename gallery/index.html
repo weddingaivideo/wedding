@@ -40,11 +40,6 @@
 <script defer src="/js/main.min.js?v=3.20"></script>
     <script defer src="/js/lazy-videos.js?v=1.0"></script>
     <style>
-        .page-hero-bg { background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%); }
-        .page-hero-overlay { background: rgba(0,0,0,0.5); }
-        .page-hero-content h1 { font-size: clamp(1.75rem,4vw,2.5rem); color: var(--color-white); margin-bottom: var(--spacing-sm); }
-        .page-hero-content p { font-size: 1.0625rem; color: rgba(255,255,255,0.85); max-width: 600px; }
-        .page-hero-small { min-height: 45vh; }
         .filter-bar { display: flex; flex-wrap: wrap; gap: var(--spacing-xs); margin-bottom: var(--spacing-lg); justify-content: center; }
         .filter-btn { padding: 0.5rem 1rem; border: 1px solid var(--color-border); border-radius: 999px; background: var(--color-white); cursor: pointer; font-size: 0.875rem; transition: var(--transition); }
         .filter-btn.active, .filter-btn:hover { background: var(--color-primary); color: var(--color-white); border-color: var(--color-primary); }
@@ -192,18 +187,16 @@ if ('serviceWorker' in navigator) {
     </header>
 
     <main id="main-content">
-        <section class="page-hero page-hero-small">
-            <div class="page-hero-bg"></div>
-            <div class="page-hero-overlay"></div>
-            <div class="container page-hero-content">
+        <header class="page-header" style="background: var(--color-bg-alt); padding: var(--spacing-2xl) 0 var(--spacing-xl);">
+            <div class="container" style="text-align: center;">
                 <nav class="breadcrumb" style="padding: 0 0 var(--spacing-md); font-size: 0.875rem; color: var(--color-text-light);">
                     <a href="/" title="Home" data-i18n="services.absence-compensation.celebrity-message.a_text.home.90820803">Home</a><span style="margin: 0 var(--spacing-xs);">›</span>
                     Gallery
                 </nav>
-                <h1  data-i18n="gallery.h1_text.wedding_video_portfolio_real_case_studie.08168789">Wedding Video Portfolio: Real Case Studies & Before/After</h1>
-                <p  data-i18n="gallery.p_text.browse_real_before_and_after_examples_of.01368342">Browse real before-and-after examples of our wedding video restoration, AI film generation, and personalization work.</p>
+                <h1 style="margin: 0 0 var(--spacing-sm); font-size: clamp(1.75rem, 4vw, 2.5rem); color: var(--color-text);" data-i18n="gallery.h1_text.wedding_video_portfolio_real_case_studie.08168789">Wedding Video Portfolio: Real Case Studies & Before/After</h1>
+                <p style="margin: 0 auto; max-width: 700px; font-size: 1.0625rem; color: var(--color-text-light);" data-i18n="gallery.p_text.browse_real_before_and_after_examples_of.01368342">Browse real before-and-after examples of our wedding video restoration, AI film generation, and personalization work.</p>
             </div>
-        </section>
+        </header>
 
         <section class="section" style="background: var(--color-white);">
             <div class="container">

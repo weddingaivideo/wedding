@@ -29,11 +29,6 @@
     <link rel="stylesheet" href="/styles/i18n.css">
 <script defer src="/js/main.min.js?v=3.20"></script>
     <style>
-        .page-hero-bg { background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%); }
-        .page-hero-overlay { background: rgba(0,0,0,0.5); }
-        .page-hero-content h1 { color: var(--color-white); }
-        .page-hero-content p { color: rgba(255,255,255,0.9); }
-
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-md); margin: var(--spacing-xl) 0; }
         .pricing-tier { background: var(--color-white); border: 2px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-lg); display: flex; flex-direction: column; }
         .pricing-tier.featured { border-color: var(--color-primary); box-shadow: 0 8px 32px rgba(212,175,55,0.18); position: relative; }
@@ -193,21 +188,14 @@ if ('serviceWorker' in navigator) {
 
     <main id="main-content">
 
-    <section class="page-hero page-hero-small">
-        <div class="page-hero-bg"></div>
-        <div class="page-hero-overlay"></div>
-        <div class="container page-hero-content">
-            
-        <!-- P0 ADD: Starting at $9.9 callout -->
-        <div class="container" style="text-align:center;margin:0 auto var(--spacing-md);">
-            <div class="hero-price-badge" data-i18n="services.common.hero_starting_price.9d9e9d90" style="display:inline-flex;">💰 Starting at $9.9</div>
-            <p class="hero-trust" data-i18n="services.common.hero_trust.9d9e9d91" style="color:var(--color-text-light);font-size:0.9375rem;margin-top:0.5rem;">✓ Two free revisions · Full refund if not satisfied</p>
-        </div>
-        
-        <h1 data-i18n="pricing.h1_text.transparent_pricing_for_every_wedding_vi.4a395ccc">Transparent Pricing for Every Wedding Video Service</h1>
-            <p data-i18n="pricing.p_text.no_hourly_billing_no_surprise_fees_the_p.9ad017c8">No hourly billing. No surprise fees. The price you see is the price you pay &mdash; and every project includes 2 free revisions, 24-hour quote response, and 100% satisfaction guarantee.</p>
-        </div>
-    </section>
+        <header class="page-header" style="background: var(--color-bg-alt); padding: var(--spacing-2xl) 0 var(--spacing-xl);">
+            <div class="container" style="text-align: center;">
+                <div class="hero-price-badge" data-i18n="services.common.hero_starting_price.9d9e9d90" style="display: inline-flex; margin-bottom: var(--spacing-sm);">💰 Starting at $9.9</div>
+                <p class="hero-trust" data-i18n="services.common.hero_trust.9d9e9d91" style="color: var(--color-text-light); font-size: 0.9375rem; margin: 0 0 var(--spacing-md);">✓ Two free revisions · Full refund if not satisfied</p>
+                <h1 style="margin: 0 0 var(--spacing-sm); font-size: clamp(1.75rem, 4vw, 2.5rem); color: var(--color-text);" data-i18n="pricing.h1_text.transparent_pricing_for_every_wedding_vi.4a395ccc">Transparent Pricing for Every Wedding Video Service</h1>
+                <p style="margin: 0 auto; max-width: 700px; font-size: 1.0625rem; color: var(--color-text-light);" data-i18n="pricing.p_text.no_hourly_billing_no_surprise_fees_the_p.9ad017c8">No hourly billing. No surprise fees. The price you see is the price you pay &mdash; and every project includes 2 free revisions, 24-hour quote response, and 100% satisfaction guarantee.</p>
+            </div>
+        </header>
 
     <!-- FULL PRICING TABLE -->
     <section class="section" style="background: var(--color-bg-alt);">

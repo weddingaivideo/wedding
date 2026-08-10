@@ -40,12 +40,6 @@
 <script defer src="/js/main.min.js?v=3.20"></script>
     <script defer src="/js/lazy-videos.js?v=1.0"></script>
     <style>
-        .page-hero-bg { background: linear-gradient(135deg, #E8D5B7 0%, #C9A96E 100%); }
-        .page-hero-overlay { background: rgba(44,44,44,0.6); }
-        .page-hero-content h1 { font-size: clamp(1.75rem,4vw,2.5rem); color: var(--color-white); margin-bottom: var(--spacing-sm); }
-        .page-hero-content p { font-size: 1.0625rem; color: rgba(255,255,255,0.85); max-width: 600px; }
-        .page-hero-small { min-height: 40vh; }
-
         .service-group { padding: var(--spacing-2xl) 0; border-bottom: 1px solid var(--color-border); scroll-margin-top: 80px; }
         .service-group:last-child { border-bottom: none; }
         .service-group-header { text-align: center; margin-bottom: var(--spacing-xl); }
@@ -193,18 +187,16 @@ if ('serviceWorker' in navigator) {
     </header>
 
     <main id="main-content">
-        <section class="page-hero page-hero-small">
-            <div class="page-hero-bg"></div>
-            <div class="page-hero-overlay"></div>
-            <div class="container page-hero-content">
-                <nav class="breadcrumb">
-                    <a href="/" title="Home" data-i18n="services.absence-compensation.celebrity-message.a_text.home.90820803">Home</a><span><span>›</span>
+        <header class="page-header" style="background: var(--color-bg-alt); padding: var(--spacing-2xl) 0 var(--spacing-xl);">
+            <div class="container" style="text-align: center;">
+                <nav class="breadcrumb" style="padding: 0 0 var(--spacing-md); font-size: 0.875rem; color: var(--color-text-light);">
+                    <a href="/" title="Home" data-i18n="services.absence-compensation.celebrity-message.a_text.home.90820803">Home</a><span style="margin: 0 var(--spacing-xs);">›</span>
                     Services
                 </nav>
-                <h1  data-i18n="services.h1_text.all_wedding_video_services.svcsroot01">All Wedding Video Services</h1>
-                <p  data-i18n="services.p_text.intro.svcsroot01">Browse 10+ AI-powered wedding video services — from cinematic trailers and multilingual dubbing to vintage restoration and family tributes.</p>
+                <h1 style="margin: 0 0 var(--spacing-sm); font-size: clamp(1.75rem, 4vw, 2.5rem); color: var(--color-text);" data-i18n="services.h1_text.all_wedding_video_services.svcsroot01">All Wedding Video Services</h1>
+                <p style="margin: 0 auto; max-width: 700px; font-size: 1.0625rem; color: var(--color-text-light);" data-i18n="services.p_text.intro.svcsroot01">Browse 10+ AI-powered wedding video services — from cinematic trailers and multilingual dubbing to vintage restoration and family tributes.</p>
             </div>
-        </section>
+        </header>
 
         <!-- VIDEO ENHANCEMENT -->
         <section id="video-enhancement" class="service-group" style="background: var(--color-white);">
