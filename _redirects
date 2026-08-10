@@ -537,24 +537,6 @@
 /th/blog/50-weddingai-success-stories/    /th/blog/weddingai-success-stories/    301
 
 # i18n 200 rewrite globs — placed AFTER the 500 localized 301 rules above so the
-# explicit /<lang>/blog/<num>-<slug>/ 301 entries win first-match (CF Pages 200
-# rewrite is one-shot and does NOT re-traverse _redirects; if these globs were
-# above the 301 block, /<lang>/blog/01-.../ would rewrite to /blog/01-.../ which
-# has no static file → 404 instead of 301 → /<lang>/blog/<slug>/ → 200 glob →
-# /blog/<slug>/ → static). After the 301 fires, the browser follows to
-# /<lang>/blog/<slug>/ which no rule matches in the localized 301 block, so the
-# glob below fires, strips the lang prefix, and serves the static file.
-# (`/en/*` is omitted — English is the default lang, no rewrite needed.)
-/zh/*    /:splat 200
-/es/*    /:splat 200
-/fr/*    /:splat 200
-/de/*    /:splat 200
-/pt/*    /:splat 200
-/ja/*    /:splat 200
-/ru/*    /:splat 200
-/ar/*    /:splat 200
-/th/*    /:splat 200
-
 /blog/01-restore-old-wedding-videos/  /blog/restore-vhs-wedding-footage/  301
 /blog/02-vhs-to-digital-wedding-cost/  /blog/vhs-to-digital-wedding-cost/  301
 /blog/03-ai-wedding-video-generator/  /blog/ai-wedding-video-generator-guide/  301
@@ -657,6 +639,24 @@
 /blog/49-budget-wedding-video    /blog/budget-wedding-video/    301
 /blog/50-weddingai-success-stories    /blog/weddingai-success-stories/    301
 
+
+# explicit /<lang>/blog/<num>-<slug>/ 301 entries win first-match (CF Pages 200
+# rewrite is one-shot and does NOT re-traverse _redirects; if these globs were
+# above the 301 block, /<lang>/blog/01-.../ would rewrite to /blog/01-.../ which
+# has no static file → 404 instead of 301 → /<lang>/blog/<slug>/ → 200 glob →
+# /blog/<slug>/ → static). After the 301 fires, the browser follows to
+# /<lang>/blog/<slug>/ which no rule matches in the localized 301 block, so the
+# glob below fires, strips the lang prefix, and serves the static file.
+# (`/en/*` is omitted — English is the default lang, no rewrite needed.)
+/zh/*    /:splat 200
+/es/*    /:splat 200
+/fr/*    /:splat 200
+/de/*    /:splat 200
+/pt/*    /:splat 200
+/ja/*    /:splat 200
+/ru/*    /:splat 200
+/ar/*    /:splat 200
+/th/*    /:splat 200
 
 # Belt-and-suspenders 404 for the legacy GSC verification HTML template
 # (production uses bca20c476d04af209950cbf5921e821d.txt instead; the
