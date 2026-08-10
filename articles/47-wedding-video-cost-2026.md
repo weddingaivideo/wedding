@@ -117,7 +117,6 @@ AI services like WeddingAI.video offer a fundamentally different pricing model. 
 | Wedding Trailer | $149-$299 | Cinematic 1-3 minute trailer |
 | Family Tribute Video | $149-$499 | Memorial video for deceased loved ones |
 | Family Message Integration | $99-$249 | Remote guest video messages compiled |
-| Celebrity/Influencer Message | $199-$499 | Personalized video messages |
 | Multilingual Dubbing | $99-$249 | Subtitles or voiceover in multiple languages |
 | Cartoon/Animated Style | $149-$399 | Animated transformation of footage |
 | Pet Wedding Video | $99-$199 | Dedicated pet-focused wedding video |
@@ -274,7 +273,6 @@ Use this template to plan your wedding video budget:
 
 **Premium budget ($5,000+):**
 - Hire a premium videographer ($5,000-$8,000)
-- Use WeddingAI.video for unique add-ons (cartoon style, pet video, celebrity message) ($300-$1,000)
 - **Total: $5,300-$9,000**
 
 ## Frequently Asked Questions

@@ -33,7 +33,6 @@ CARD_KEYWORDS = ["service", "catalog", "preset", "cartoon-", "meme-",
                  "testimonial-", "order-form", "pricing-cards", "live-comments",
                  "multilingual-split", "ai-video-generator-workspace",
                  "family-tribute-frame", "family-message-videocall",
-                 "celebrity-message-screen", "meme-generator-gif-collage",
                  "cartoon-ghibli-style", "cartoon-realistic-combo",
                  "pet-wedding-golden-retrievers", "wedding-restoration-vhs-tv",
                  "gallery-collage"]

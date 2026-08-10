@@ -24,7 +24,6 @@ PAGES = [
     ("ai-video-generator", "/services/personalization/ai-video-generator.html", "AI Video Generator"),
     ("family-tribute", "/services/absence-compensation/family-tribute.html", "Family Tribute"),
     ("family-message", "/services/absence-compensation/family-message.html", "Family Message"),
-    ("celebrity-message", "/services/absence-compensation/celebrity-message.html", "Celebrity Messages"),
     ("cartoon-style",  "/services/personalization/cartoon-style.html",      "Cartoon Style"),
     ("multilingual",   "/services/personalization/multilingual.html",        "Multilingual"),
     ("pet-wedding",    "/services/personalization/pet-wedding.html",         "Pet Wedding"),
@@ -176,7 +175,6 @@ SECTIONS = {
     "Absence Compensation": [
         ("/services/absence-compensation/family-tribute.html",                      "Family Tribute"),
         ("/services/absence-compensation/family-message.html",                      "Family Message"),
-        ("/services/absence-compensation/celebrity-message.html",                   "Celebrity Wedding Messages"),
     ],
     "Personalization": [
         ("/services/personalization/cartoon-style.html",                            "Cartoon Style"),
@@ -207,7 +205,6 @@ URL_TO_LOCAL = {
     "/services/personalization/ai-video-generator.html":       ROOT / "services" / "personalization" / "ai-video-generator.html",
     "/services/absence-compensation/family-tribute.html":      ROOT / "services" / "absence-compensation" / "family-tribute.html",
     "/services/absence-compensation/family-message.html":      ROOT / "services" / "absence-compensation" / "family-message.html",
-    "/services/absence-compensation/celebrity-message.html":   ROOT / "services" / "absence-compensation" / "celebrity-message.html",
     "/services/personalization/cartoon-style.html":            ROOT / "services" / "personalization" / "cartoon-style.html",
     "/services/personalization/multilingual.html":             ROOT / "services" / "personalization" / "multilingual.html",
     "/services/personalization/pet-wedding.html":              ROOT / "services" / "personalization" / "pet-wedding.html",
