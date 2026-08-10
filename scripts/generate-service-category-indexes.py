@@ -195,8 +195,19 @@ GROUPS = {
                 "desc_i18n": "services.p_text.hollywood_style_1_3_minute_trailer_with.72173438",
                 "price": "From $399",
                 "price_i18n": "services.span_text.from_399.31596268",
-                "img": "catalog-wedding-trailer",
-                "alt": "Hollywood premiere style wedding trailer moment",
+                # 1:1 mirror of the gallery case-study video (case-isabella-
+                # marcus-tuscan-4k-trailer-…). Replaces the static
+                # catalog-wedding-trailer.jpg so visitors see the actual
+                # rendered Tuscan drone-shot trailer in motion. ?v=4.29
+                # matches gallery. aria-label uses &amp; to match gallery source.
+                "video": {
+                    "width": 1376,
+                    "height": 768,
+                    "poster": "/images/case-isabella-marcus-tuscan-4k-trailer-poster.webp",
+                    "webm": "/images/case-isabella-marcus-tuscan-4k-trailer.webm?v=4.29",
+                    "mp4": "/images/case-isabella-marcus-tuscan-4k-trailer.mp4?v=4.29",
+                    "aria_label": "Isabella &amp; Marcus — Tuscan countryside 4K anamorphic wedding trailer with drone shots of the villa, golden-hour couple portraits, and an emotional first-look moment",
+                },
             },
             {
                 "href": "/services/personalization/pet-wedding/",
@@ -206,8 +217,19 @@ GROUPS = {
                 "desc_i18n": "services.p_text.include_your_furry_family_members_in_the.41918593",
                 "price": "From $149",
                 "price_i18n": "services.span_text.from_149.82399004",
-                "img": "catalog-pet-wedding",
-                "alt": "Pet in wedding tuxedo with flower crown",
+                # 1:1 mirror of the gallery case-study video (case-bella-max-
+                # golden-retriever-…). Replaces the static catalog-pet-wedding.jpg
+                # so visitors see the actual golden retrievers' anniversary
+                # video. Note: apostrophe in "'married'" stays literal in
+                # gallery source — only & is HTML-escaped.
+                "video": {
+                    "width": 1376,
+                    "height": 768,
+                    "poster": "/images/case-bella-max-golden-retriever-poster.webp",
+                    "webm": "/images/case-bella-max-golden-retriever.webm?v=4.29",
+                    "mp4": "/images/case-bella-max-golden-retriever.mp4?v=4.29",
+                    "aria_label": "Bella &amp; Max — two golden retrievers 'married' in a charming anniversary video that the family watched 100+ times",
+                },
             },
             {
                 "href": "/services/personalization/multilingual/",
@@ -217,8 +239,19 @@ GROUPS = {
                 "desc_i18n": "services.p_text.20_language_support_for_international_fa.26489587",
                 "price": "From $99",
                 "price_i18n": "services.span_text.from_99.96638139",
-                "img": "catalog-multilingual",
-                "alt": "Wedding video with multiple language subtitles",
+                # 1:1 mirror of the gallery case-study video (case-carlos-sofia-
+                # 3-language-…). Replaces the static catalog-multilingual.jpg
+                # so visitors see the actual 3-language dubbed Barcelona wedding
+                # loop. width=1280 (not 1376) — matches gallery's intrinsic
+                # video dimensions.
+                "video": {
+                    "width": 1280,
+                    "height": 720,
+                    "poster": "/images/case-carlos-sofia-3-language-poster.webp",
+                    "webm": "/images/case-carlos-sofia-3-language.webm?v=4.29",
+                    "mp4": "/images/case-carlos-sofia-3-language.mp4?v=4.29",
+                    "aria_label": "Carlos &amp; Sofia — Barcelona wedding with Spanish, Catalan, and English speeches, AI voiceover dubbed all three languages with matching accents so the grandma finally heard vows in her native Catalan",
+                },
             },
             {
                 "href": "/services/personalization/cartoon-style/",
