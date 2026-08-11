@@ -581,6 +581,44 @@ function diversifyArticleDates(html, requestUrl) {
     );
 }
 
+// Mirror the diversified dates into og:article:* meta tags so social-media
+// crawlers (Facebook, LinkedIn, Slack, etc.) see per-post unique dates
+// consistent with the JSON-LD Article schema. We only rewrite
+// og:article:published_time and og:article:modified_time here; the author
+// tag is static in the source HTML and doesn't need diversification.
+function diversifyOgArticleDates(html, requestUrl) {
+    // Same hash and window as diversifyArticleDates (above).
+    const now = Date.now();
+    const todayMs = now - (now % 86400000);
+    const SIXTY_DAYS_MS = 60 * 86400000;
+    const oldest = todayMs - SIXTY_DAYS_MS;
+    const path = (() => { try { return new URL(requestUrl).pathname; } catch (e) { return ""; } })();
+    let h = 0;
+    for (let i = 0; i < path.length; i++) {
+        h = (h * 31 + path.charCodeAt(i)) | 0;
+    }
+    const seed = Math.abs(h) % 10000;
+    const fraction = seed / 10000;
+    const newDateMs = Math.min(oldest + Math.floor(fraction * SIXTY_DAYS_MS), todayMs);
+    const newDateStr = new Date(newDateMs).toISOString().slice(0, 10);
+    const modOffset = 1 + (Math.abs(h * 7) % 3);
+    const newModMs = Math.min(newDateMs + modOffset * 86400000, todayMs);
+    const newModDateStr = new Date(newModMs).toISOString().slice(0, 10);
+
+    // Match and rewrite each tag. We use the content="..." capture so we
+    // can replace it with the diversified date while preserving the rest of
+    // the tag.
+    return html
+        .replace(
+            /(<meta\s+property="og:article:published_time"\s+content=")[^"]*(")/i,
+            `$1${newDateStr}$2`
+        )
+        .replace(
+            /(<meta\s+property="og:article:modified_time"\s+content=")[^"]*(")/i,
+            `$1${newModDateStr}$2`
+        );
+}
+
 // Refresh the visible "Updated YYYY-MM-DD" text on blog posts so it matches
 // the JSON-LD dateModified we set. The source HTML has a hardcoded
 // "Updated 2025-09-14" string on each post, which is fine for static
@@ -928,6 +966,9 @@ export const onRequest = async (context) => {
             if (text.includes('"@type": "Article"') || text.includes('"@type":"Article"')) {
                 text = diversifyArticleDates(text, context.request.url);
                 text = rewriteArticleAuthor(text);
+                // Mirror the diversified dates into og:article:* so social crawlers
+                // see per-post unique dates consistent with the JSON-LD schema.
+                text = diversifyOgArticleDates(text, context.request.url);
             }
             // Refresh visible "Updated" date to match JSON-LD dateModified.
             // Note: `lang` is not yet defined here (only available in the
@@ -1107,6 +1148,10 @@ export const onRequest = async (context) => {
             text = diversifyArticleDates(text, context.request.url);
             // 6.6. Rewrite Article author Organization → Person for E-E-A-T.
             text = rewriteArticleAuthor(text);
+            // 6.6.1. Mirror diversified dates into og:article:* meta tags so
+            //        social-media crawlers (FB, LinkedIn, Slack) see per-post
+            //        unique dates consistent with the JSON-LD schema.
+            text = diversifyOgArticleDates(text, context.request.url);
         }
         // 6.7. Refresh the visible "Updated YYYY-MM-DD" text on blog posts
         //      so the body matches the JSON-LD dateModified. This is most
