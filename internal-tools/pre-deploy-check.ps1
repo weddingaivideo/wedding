@@ -422,6 +422,44 @@ if (Test-Path $seoScript) {
     Warn "scripts\check-seo-lengths.py not found; skipping SEO length check"
 }
 
+# ---------- 9a. JSON-LD schema consistency (FAQPage vs visible FAQ) ----------
+# Catches the silent drift between visible <details class="faq-item"> blocks
+# and the FAQPage JSON-LD mainEntity. They MUST match in count: when they
+# diverge, Google either surfaces stale rich results or never indexes the
+# extra visible questions, both of which hurt SEO. The script also catches
+# JSON parse errors in any schema block (would have failed silently in prod
+# before this check existed).
+#
+# On mismatch: run `python scripts/sync-faq-schema.py --apply` to auto-fix.
+# This step is FATAL — the deploy aborts until the schema is consistent.
+Write-Host "[9a/9] JSON-LD schema consistency"
+$schemaScript = "$root\scripts\verify-schemas.py"
+if (Test-Path $schemaScript) {
+    $py = $null
+    foreach ($candidate in @("python", "python3", "py")) {
+        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($cmd) { $py = $candidate; break }
+    }
+    if ($py) {
+        # --quiet trims the per-block @type listing; we only need the
+        # summary lines (files / parse failures / FAQ mismatches).
+        $schemaOutput = & $py $schemaScript --quiet 2>&1
+        $schemaExit = $LASTEXITCODE
+        # Show the 4 lines the operator needs to diagnose.
+        $key = $schemaOutput | Select-String -Pattern 'HTML files with JSON-LD|Total JSON-LD|JSON parse failures|FAQ consistency|^\s+- ' | Select-Object -First 10
+        foreach ($line in $key) { Write-Host "  $($line -replace '^\s*','')" }
+        if ($schemaExit -eq 0) {
+            Pass "All JSON-LD blocks parse and FAQ counts match visible FAQ"
+        } else {
+            Fail "JSON-LD schema is inconsistent. See lines above. Run 'python scripts/sync-faq-schema.py --apply' to auto-align FAQPage, then re-run this check."
+        }
+    } else {
+        Warn "Python not found in PATH; skipping JSON-LD schema check. Install Python or run 'python scripts/verify-schemas.py --quiet' manually."
+    }
+} else {
+    Warn "scripts\verify-schemas.py not found; skipping JSON-LD schema check"
+}
+
 # ---------- Cloudflare Pages Functions ----------
 $fnPath = "$root\functions"
 if (Test-Path $fnPath) {

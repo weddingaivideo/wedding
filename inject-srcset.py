@@ -39,6 +39,11 @@ CARD_KEYWORDS = ["service", "catalog", "preset", "cartoon-", "meme-",
                  "cartoon-ghibli-style", "cartoon-realistic-combo",
                  "pet-wedding-golden-retrievers", "wedding-restoration-vhs-tv",
                  "gallery-collage"]
+# Whitelist of all known variant sizes. Used to decide whether a `<img src>`
+# that already ends in -NNN is a true variant (skip rewriting) or a
+# year/slug (rewrite and add srcset). 2026-08-10.
+KNOWN_SIZES = {178, 256, 360, 480, 512, 640, 720, 960, 1024, 1280, 1536, 1600, 1920, 2048, 2560}
+
 KIND_SIZES_ATTR = {
     "avatar":       "(max-width: 600px) 48px, 48px",
     "logo":         "(max-width: 600px) 178px, 356px",
@@ -60,11 +65,21 @@ def classify(filename: str) -> str:
     return "generic"
 
 # Build a {stem: [variants]} index
+# IMPORTANT: rglob, not iterdir. 2026-08-10 bug: iterdir() only indexed the
+# top-level images/ directory, which silently skipped every variant living
+# under images/<subdir>/ (e.g. all 600+ blog/hero/-360/-720/-1280 variants).
+# find_variants() returned {} for those stems, so fix_plain bailed out and
+# no srcset was injected for blog hero images. Recurse the whole tree.
 VARIANT_INDEX = {}
-for p in IMG_DIR.iterdir():
+for p in IMG_DIR.rglob("*"):
     if not p.is_file():
         continue
-    m = re.match(r"^(.+)-(\d+)(?:\.(jpg|jpeg|png|webp))$", p.name, re.IGNORECASE)
+    # Non-greedy base + 3-4 digit size + lookbehind to prevent the "stem ends in
+    # -NNNN" case (e.g. "...-2026") from being mis-parsed as base="...-202",
+    # size=6. Also bound size to {3,4} digits to skip 1-2 digit tokens that
+    # occasionally appear in real stems. Verified 2026-08-10 against all 3,886
+    # images: 0 false matches on original (no -NNN) images.
+    m = re.match(r"^(.+?)(?<!-\d)-(\d{3,4})\.(jpg|jpeg|png|webp)$", p.name, re.IGNORECASE)
     if not m:
         continue
     base, size_str, ext = m.group(1), m.group(2), m.group(3).lower()
@@ -150,9 +165,13 @@ def process_html(html_path: Path):
         after_src = m.group(3)
         self_close = m.group(4)
 
-        # Skip if this <img> is inside a <picture> we already rewrote
-        # (look at the last 300 chars before the match for an unclosed <picture>)
-        start = max(0, m.start() - 300)
+        # Skip if this <img> is inside a <picture> we already rewrote.
+        # Look back ~2 KB for an unclosed <picture>. A 300-char window was
+        # too small: an avif+webp double-source <picture> with 712w/1280w
+        # srcsets can be ~500-1000 chars, so the <picture> tag itself
+        # landed outside the window and the inside-img got re-processed.
+        # Fixed 2026-08-10.
+        start = max(0, m.start() - 2000)
         prefix = text[start:m.start()]
         last_picture_open = prefix.rfind("<picture>")
         last_picture_close = prefix.rfind("</picture>")
@@ -169,9 +188,15 @@ def process_html(html_path: Path):
         # Skip favicon/logo-icon (special)
         if stem in ("favicon", "logo-icon"):
             return m.group(0)
-        # If the src already points to a -NNN variant, don't double-wrap
-        if re.match(r"^(.+)-(\d+)$", stem):
-            return m.group(0)
+        # If the src already points to a -NNN variant, don't double-wrap.
+        # The old greedy regex `^(.+)-(\d+)$` mis-matched real stems ending
+        # in -YYYY like "47-wedding-video-cost-2026" as base="...-202",
+        # size=6 — so the check below would skip a bare src we DO want to
+        # wrap. Use a KNOWN_SIZES whitelist instead. 2026-08-10.
+        if "-" in stem:
+            tail = stem.rsplit("-", 1)[1]
+            if tail.isdigit() and int(tail) in KNOWN_SIZES:
+                return m.group(0)
         variants = find_variants(stem)
         if not variants:
             return m.group(0)
@@ -207,7 +232,24 @@ def process_html(html_path: Path):
     return False
 
 def main():
-    html_files = [p for p in ROOT.rglob("*.html") if p.name != "google-site-verification.html"]
+    # Skip backup/scratch directories. 2026-08-10: added after the script
+    # accidentally rewrote private/.archive/_en_blog_backup/ (a pre-deploy
+    # snapshot) and tmp/baseline-*.html (a manual reference copy), neither
+    # of which should ever be touched by a build-time image optimizer.
+    SKIP_DIRS = {"private", "tmp", "node_modules", ".git", ".github"}
+    SKIP_FILE_TOKENS = (".bak.", ".pre-", "baseline-")
+
+    def keep(p: Path) -> bool:
+        if p.name == "google-site-verification.html":
+            return False
+        rel_parts = p.relative_to(ROOT).parts
+        if any(part in SKIP_DIRS for part in rel_parts):
+            return False
+        if any(tok in p.name for tok in SKIP_FILE_TOKENS):
+            return False
+        return True
+
+    html_files = [p for p in ROOT.rglob("*.html") if keep(p)]
     n = 0
     for p in sorted(html_files):
         if process_html(p):

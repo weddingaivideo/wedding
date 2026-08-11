@@ -23,6 +23,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SKIP = ("tmp", "private", "scripts", "tests", "qa", "internal-tools", "tools")
 SCRIPT_RE = re.compile(r'<script type="application/ld\+json"[^>]*>(.*?)</script>', re.DOTALL)
+# Visible FAQ questions — source of truth for the FAQPage vs visible count check.
+DETAILS_RE = re.compile(r'<details class="faq-item">')
+HAS_FAQ = re.compile(r'"@type"\s*:\s*"FAQPage"')
 
 KEY_PAGES = [
     "index.html",
@@ -61,6 +64,7 @@ def main():
     type_counter = Counter()
     field_counter = Counter()
     parse_failures = []
+    faq_mismatches = []  # (rel_path, visible_count, jsonld_count)
     file_blocks = 0
     file_count = 0
 
@@ -74,6 +78,31 @@ def main():
         if not blocks:
             continue
         file_count += 1
+
+        # --- FAQPage vs visible FAQ consistency check -------------------------
+        # Only pages that have at least one of (visible FAQ, FAQPage JSON-LD)
+        # are checked. Pages with neither are out of scope — the site has
+        # hundreds of blog posts / i18n pages without a FAQ section, and
+        # reporting them as "mismatches" is noise.
+        n_visible = len(DETAILS_RE.findall(text))
+        n_jsonld = None
+        for body in blocks:
+            try:
+                _d = json.loads(body)
+            except json.JSONDecodeError:
+                continue
+            if isinstance(_d, dict) and _d.get("@type") == "FAQPage":
+                n_jsonld = len(_d.get("mainEntity", []) or [])
+                break
+        if n_visible > 0 or n_jsonld is not None:
+            # Mismatch: counts differ. Triggers when one side has FAQ and
+            # the other doesn't, or when both have FAQ but the count differs.
+            if n_visible != n_jsonld:
+                faq_mismatches.append(
+                    (p.relative_to(ROOT), n_visible, n_jsonld)
+                )
+        # ---------------------------------------------------------------------
+
         for body in blocks:
             file_blocks += 1
             try:
@@ -130,6 +159,14 @@ def main():
     if parse_failures:
         for p, err in parse_failures[:10]:
             print(f"  - {p.relative_to(ROOT)}: {err}")
+    print(f"FAQ consistency:         {len(faq_mismatches)} mismatches")
+    if faq_mismatches:
+        # One row per offending page. visible=number of
+        # <details class="faq-item">, jsonld=mainEntity size of the
+        # FAQPage block. Re-run scripts/sync-faq-schema.py --apply to fix.
+        for rel, vis, jl in faq_mismatches:
+            print(f"  - {rel}: visible={vis}, json-ld={jl}  "
+                  f"(run scripts/sync-faq-schema.py --apply)")
     print()
     print("=== @type distribution (top 30) ===")
     for t, n in type_counter.most_common(30):
@@ -166,6 +203,12 @@ def main():
             for t in uniq:
                 print(f"      - {t}")
 
+    # Treat FAQ mismatches and JSON parse failures as fatal so this script
+    # can gate deploys. Pass --quiet in CI if you only want the summary.
+    if parse_failures or faq_mismatches:
+        return 1
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
