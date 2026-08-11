@@ -98,11 +98,18 @@ def find_variants(stem: str):
         out[k].sort()
     return out
 
-def build_srcset(variants):
-    """Build srcset string from a list of (size, filename) pairs."""
+def build_srcset(variants, prefix=""):
+    """Build srcset string from a list of (size, filename) pairs.
+
+    The `prefix` is prepended to every filename so the output is
+    absolute (e.g. "/images/blog/hero/") instead of just the bare
+    filename. This is the fix for the 2026-08-10 incident where
+    blog hero srcsets ended up with paths like "51-foo-360.webp"
+    and 404'd on any page deeper than the repo root.
+    """
     if not variants:
         return None
-    return ", ".join(f"{fname} {w}w" for w, fname in variants)
+    return ", ".join(f"{prefix}{fname} {w}w" for w, fname in variants)
 
 def process_html(html_path: Path):
     text = html_path.read_text(encoding="utf-8")
@@ -129,12 +136,26 @@ def process_html(html_path: Path):
         if not variants:
             return m.group(0)  # leave alone
 
+        # Determine the directory prefix to use for srcset tokens. Use the
+        # <img src> directory if it's absolute; otherwise fall back to the
+        # old_webp_src's directory. 2026-08-10: previously the prefix was
+        # implicit-empty, so the new srcset was just "foo-360.webp 360w" —
+        # which 404'd on every page that wasn't the repo root.
+        if img_src.startswith("/"):
+            srcset_prefix = str(Path(img_src).parent).replace("\\", "/") + "/"
+        else:
+            srcset_prefix = str(Path(old_webp_src).parent).replace("\\", "/")
+            if srcset_prefix and not srcset_prefix.endswith("/"):
+                srcset_prefix += "/"
+            if srcset_prefix == "./":
+                srcset_prefix = ""
+
         # Build webp srcset (if .webp variants exist)
-        webp_srcset = build_srcset(variants.get(".webp", []))
+        webp_srcset = build_srcset(variants.get(".webp", []), prefix=srcset_prefix)
         # Build fallback srcset (use original format)
         # Choose .jpg if any jpg variant exists, else .png
         fallback_ext = ".jpg" if ".jpg" in variants else (".png" if ".png" in variants else None)
-        fallback_srcset = build_srcset(variants.get(fallback_ext, [])) if fallback_ext else None
+        fallback_srcset = build_srcset(variants.get(fallback_ext, []), prefix=srcset_prefix) if fallback_ext else None
 
         kind = classify(stem)
         sizes_attr = KIND_SIZES_ATTR.get(kind, KIND_SIZES_ATTR["generic"])
@@ -201,9 +222,18 @@ def process_html(html_path: Path):
         if not variants:
             return m.group(0)
 
-        webp_srcset = build_srcset(variants.get(".webp", []))
+        # Use the <img src> directory as the srcset prefix so the
+        # generated srcset is absolute, not bare. 2026-08-10 fix —
+        # previously the script emitted tokens like "51-foo-360.webp"
+        # with no path, breaking on any non-root page.
+        if img_src.startswith("/"):
+            srcset_prefix = str(Path(img_src).parent).replace("\\", "/") + "/"
+        else:
+            srcset_prefix = ""
+
+        webp_srcset = build_srcset(variants.get(".webp", []), prefix=srcset_prefix)
         fallback_ext = ".jpg" if ".jpg" in variants else ".png"
-        fallback_srcset = build_srcset(variants.get(fallback_ext, []))
+        fallback_srcset = build_srcset(variants.get(fallback_ext, []), prefix=srcset_prefix)
 
         kind = classify(stem)
         sizes_attr = KIND_SIZES_ATTR.get(kind, KIND_SIZES_ATTR["generic"])

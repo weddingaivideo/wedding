@@ -791,12 +791,51 @@ function addNoindexIfSuccess(html, rest) {
     );
 }
 
+// 308 redirect for uppercase URLs to lowercase equivalents.
+// Cloudflare Pages serves static assets case-sensitively, so /About/ and
+// /BLOG/ return 404 even though the canonical files are /about/ and /blog/.
+// Static-site convention is all-lowercase URLs, so a path with any uppercase
+// character is by definition a typo / broken link / case-insensitive
+// framework generating bad hrefs → safely redirect to lowercase.
+//
+// Skipped:
+//   - Non-GET (POST / PUT / DELETE must hit the exact path; the CSRF check in
+//     /api/quote.js does an Origin comparison and would 403 a /API/QUOTE
+//     redirect target).
+//   - /api/ and /functions/ (POST endpoints, API base — must be exact).
+//   - /i18n/ (we never have uppercase JSON file names; redirect would mask
+//     a real bug if a future deploy ever did).
+//   - /admin/ (lowercase convention not enforced; case-sensitivity may be
+//     load-bearing for tooling).
+// 308 is permanent + cacheable; the browser caches the redirect, so the
+// extra hop is paid once per URL per browser, then never again.
+function maybeLowercaseRedirect(path, url) {
+    if (path === path.toLowerCase()) return null;
+    // Case-insensitive prefix check: /API/QUOTE should also be skipped, not
+    // lowercased to /api/quote. The 308 would change the URL the client hits,
+    // and even though 308 preserves the method, we don't want a behavioral
+    // change for an API client that may be relying on the exact case path.
+    const lower = path.toLowerCase();
+    if (lower.startsWith("/api/") || lower.startsWith("/functions/")) return null;
+    if (lower.startsWith("/i18n/") || lower.startsWith("/admin/")) return null;
+    return new Response(null, {
+        status: 308,
+        headers: { "Location": path.toLowerCase() + url.search },
+    });
+}
+
 export const onRequest = async (context) => {
     try {
         const url = new URL(context.request.url);
         const path = url.pathname;
 
         if (context.request.method !== "GET") return context.next();
+        // Lowercase redirect runs BEFORE shouldSkip so that /FAVICON.ICO,
+        // /STYLES.MIN.CSS, etc. also normalize (shouldSkip bypasses
+        // middleware for static assets, which is fine for our lowercase
+        // asset paths, but uppercase asset paths would 404 without this).
+        const lcRedirect = maybeLowercaseRedirect(path, url);
+        if (lcRedirect) return lcRedirect;
         if (shouldSkip(path, context.request)) return context.next();
 
         // Per-request CSP nonce. Generated up-front so all response paths

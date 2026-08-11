@@ -1883,6 +1883,24 @@ a.case-img-link {
     border-radius: var(--radius-md);
 }
 
+/* Inline form error region (role=alert, asserted on submit failure).
+   Same visual style as .form-status-error for consistency. */
+.form-error:not(:empty) {
+    margin: 0 0 1.25rem;
+    padding: 0.75rem 1rem;
+    background: #FCE8E6;
+    color: #A50E0E;
+    border-left: 3px solid #D93025;
+    border-radius: var(--radius-md);
+    font-size: 0.9375rem;
+}
+
+/* Highlight invalid fields. Combined with aria-invalid="true" set by JS. */
+[aria-invalid="true"] {
+    border-color: #D93025 !important;
+    box-shadow: 0 0 0 3px rgba(217, 48, 37, 0.15) !important;
+}
+
 /* ---------- CONTACT (order.html) ---------- */
 .direct-contact {
     margin-top: 3rem;

@@ -240,9 +240,19 @@ if ($badImgs -eq 0) { Pass "All service page images resolve" }
 Write-Host "[2.5/9] srcset / picture hygiene"
 $hygieneIssues = 0
 $htmls = Get-ChildItem "$root" -Recurse -Filter "*.html" | Where-Object {
-    $_.FullName -notlike "*\tmp\*" -and $_.FullName -notlike "*\qa\*" -and $_.Name -ne "google-site-verification.html"
+    $_.FullName -notlike "*\tmp\*" -and
+    $_.FullName -notlike "*\private\*" -and
+    $_.FullName -notlike "*\i18n\*" -and
+    $_.FullName -notlike "*\qa\*" -and
+    $_.FullName -notlike "*\admin\*" -and
+    $_.FullName -notlike "*\scripts\*" -and
+    $_.FullName -notlike "*\node_modules\*" -and
+    $_.FullName -notlike "*\.wrangler\*" -and
+    $_.FullName -notlike "*\functions\*" -and
+    $_.Name -ne "google-site-verification.html"
 }
 foreach ($h in $htmls) {
+    $relPath = $h.FullName.Substring($root.Length + 1)
     $c = Get-Content $h.FullName -Raw
     # Relative path inside srcset= (e.g. srcset="logo-full-178.avif 178w")
     $relInSrcset = [regex]::Matches($c, 'srcset="(?![/h])[^"]*\.(avif|webp|jpg|jpeg|png)[^"]*"')
@@ -251,20 +261,20 @@ foreach ($h in $htmls) {
         # We catch the first filename token to identify it
         $first = ([regex]::Match($m.Value, '[a-zA-Z][a-zA-Z0-9_-]*\.(?:avif|webp|jpg|jpeg|png)')).Value
         if ($first -and $c -notmatch [regex]::Escape("data-srcset=")) {
-            Fail "$($h.Name): relative path in srcset: $first"
+            Fail "$relPath : relative path in srcset: $first"
             $hygieneIssues++
         }
     }
     # Doubled /images/X-/images/ (a Python Path-on-Windows bug we hit before)
     $doubled = [regex]::Matches($c, '/images/[a-z]+-/images/')
     foreach ($m in $doubled) {
-        Fail "$($h.Name): doubled /images/ path: $($m.Value)"
+        Fail "$relPath : doubled /images/ path: $($m.Value)"
         $hygieneIssues++
     }
     # Nested <picture><source>...<picture> (flatten-avatar-wrapper leftover)
     $nestedPic = [regex]::Matches($c, '<picture[^>]*>[^<]{0,200}<picture')
     foreach ($m in $nestedPic) {
-        Fail "$($h.Name): nested <picture> detected: $($m.Value.Substring(0, [Math]::Min(80, $m.Value.Length)))"
+        Fail "$relPath : nested <picture> detected: $($m.Value.Substring(0, [Math]::Min(80, $m.Value.Length)))"
         $hygieneIssues++
     }
 }

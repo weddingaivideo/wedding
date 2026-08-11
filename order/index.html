@@ -86,7 +86,7 @@
     });
     </script>
     
-    <link rel="stylesheet" href="/styles.min.css?v=3.28">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
     <link rel="stylesheet" href="/styles/i18n.css">
 <script defer src="/js/main.min.js?v=3.20"></script>
     <style>
@@ -232,6 +232,7 @@ if ('serviceWorker' in navigator) {
                 <form class="order-form" name="wedding-quote" method="POST" action="/api/quote" novalidate>
 
                     <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+                    <div id="form-error" class="form-error" role="alert" aria-live="assertive"></div>
 
                     <div class="form-row">
                         <div class="form-group">
@@ -333,6 +334,53 @@ if ('serviceWorker' in navigator) {
                     </div>
 
                 </form>
+
+                <script>
+                (function() {
+                    // Client-side validation feedback. The form uses novalidate (server
+                    // is the source of truth) but the browser's native required-validation
+                    // popups are bad UX and inaccessible. This script:
+                    //   - Sets aria-invalid="true" on empty required fields
+                    //   - Writes a single-line summary to #form-error (role=alert)
+                    //   - Moves focus to the first invalid field for keyboard users
+                    //   - Clears both on input (so the error vanishes as the user types)
+                    // Form still submits normally on pass; we never preventDefault on success.
+                    var form = document.querySelector('form.order-form');
+                    if (!form) return;
+                    var errorEl = document.getElementById('form-error');
+                    function clearAria() {
+                        form.querySelectorAll('[aria-invalid="true"]').forEach(function(el) {
+                            el.removeAttribute('aria-invalid');
+                        });
+                        if (errorEl) errorEl.textContent = '';
+                    }
+                    // Clear errors as the user fixes them
+                    form.addEventListener('input', clearAria);
+                    form.addEventListener('change', clearAria);
+                    form.addEventListener('submit', function(e) {
+                        clearAria();
+                        var invalid = [];
+                        form.querySelectorAll('[required]').forEach(function(el) {
+                            if (!el.value || !String(el.value).trim()) {
+                                el.setAttribute('aria-invalid', 'true');
+                                var label = form.querySelector('label[for="' + el.id + '"]');
+                                var name = label
+                                    ? label.textContent.replace(/[*\s]+$/, '').trim()
+                                    : (el.name || el.id || 'field');
+                                invalid.push(name);
+                            }
+                        });
+                        if (invalid.length > 0) {
+                            e.preventDefault();
+                            if (errorEl) {
+                                errorEl.textContent = 'Please fill in: ' + invalid.join(', ');
+                            }
+                            var first = form.querySelector('[aria-invalid="true"]');
+                            if (first) first.focus();
+                        }
+                    });
+                })();
+                </script>
 
                 <script>
                 (function() {
