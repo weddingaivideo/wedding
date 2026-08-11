@@ -99,6 +99,30 @@ function injectScriptNonce(html, nonce) {
 // browsers (per CSP3) IGNORE 'unsafe-inline' when a nonce is present in
 // ANY of the active policies, so the effective script-src becomes
 // nonce-only — exactly the security posture we want.
+// Inject the GDPR cookie consent banner script on every HTML page.
+// js/cookie-consent.js is the source of truth (renders banner on first
+// visit only, persists choice in localStorage for 180 days). It was
+// only loaded on 2/509 pages via manual <script> tags — middleware
+// injection gives 100% coverage in one place, no 507-file sweep.
+// Idempotency: if the page already has the tag, do nothing (so the
+// 2 manually-instrumented pages don't double-inject).
+// Order matters: this MUST run BEFORE injectScriptNonce so the regex
+// in injectScriptNonce picks up the new tag and adds a nonce —
+// without the nonce, the meta CSP's script-src would block the load.
+// (Fix 2026-08-10: 507 of 509 pages were missing the cookie consent
+// script tag — banner never appeared.)
+function injectCookieConsent(html) {
+    if (/<script\b[^>]*src=["']\/js\/cookie-consent\.js["'][^>]*><\/script>/i.test(html)) return html;
+    const tag = '<script src="/js/cookie-consent.js" defer></script>';
+    if (/<\/head>/i.test(html)) {
+        return html.replace(/(<\/head>)/i, `    ${tag}\n$1`);
+    }
+    if (/<head[^>]*>/i.test(html)) {
+        return html.replace(/(<head[^>]*>)/i, `$1\n    ${tag}`);
+    }
+    return tag + html;
+}
+
 function injectMetaCsp(html, cspContent) {
     // Escape any " in the content attribute. buildCsp output contains
     // base64 (nonce) and hostnames — no " in practice, but escape anyway
@@ -146,7 +170,8 @@ function withCspHeaders(response, text, nonce) {
     // 3) Inject <meta http-equiv="Content-Security-Policy"> with the
     //    per-request nonce. This is the active CSP for HTML pages —
     //    browsers honor meta-delivered CSP identically to header CSP.
-    let newText = injectScriptNonce(text, nonce).split(CSP_PLACEHOLDER).join(nonce);
+    let newText = injectCookieConsent(text);
+    newText = injectScriptNonce(newText, nonce).split(CSP_PLACEHOLDER).join(nonce);
     newText = injectMetaCsp(newText, buildCsp(nonce));
     // Wrap the transformed body in a new Response with the same status.
     // We intentionally don't copy other headers — the static _headers
