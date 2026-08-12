@@ -107,3 +107,7 @@ build/
 # *.ai
 # *.sketch
 # *.fig
+# i18n maintenance scratch (created by cleanup-i18n-orphans.py / translate-i18n-batch.py)
+.en-backup/
+private/.translate-progress/
+private/.reverse-progress/
