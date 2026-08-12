@@ -699,6 +699,116 @@ function refreshVisibleUpdateDate(html, requestUrl, lang) {
     );
 }
 
+// Helper: same hash + window logic as diversifyArticleDates, but
+// returns the ISO YYYY-MM-DD string directly. Used by both the
+// ItemList rewrite (which needs the ISO form) and the visible card
+// rewrite (via the Date variant below).
+function computeDiversifiedDate(urlPath) {
+    const now = Date.now();
+    const todayMs = now - (now % 86400000);
+    const SIXTY_DAYS_MS = 60 * 86400000;
+    const oldest = todayMs - SIXTY_DAYS_MS;
+    let h = 0;
+    for (let i = 0; i < urlPath.length; i++) {
+        h = (h * 31 + urlPath.charCodeAt(i)) | 0;
+    }
+    const seed = Math.abs(h) % 10000;
+    const fraction = seed / 10000;
+    const newDateMs = Math.min(oldest + Math.floor(fraction * SIXTY_DAYS_MS), todayMs);
+    return new Date(newDateMs).toISOString().slice(0, 10);
+}
+
+// 6.8. Diversify ItemList schema datePublished across blog-listing pages.
+//
+// The blog index (/blog/) injects a JSON-LD ItemList with 100 nested
+// ListItem → Article entries. All 50 batch-generated posts share
+// "2026-08-01", which looks suspicious. The middleware's
+// diversifyArticleDates above only handles top-level @type:Article
+// schemas, so the nested Article inside ItemList is left untouched.
+//
+// This function walks ItemList scripts, and for each itemListElement
+// with item.@type:Article, rewrites item.datePublished using a stable
+// per-item-URL hash distributed across the past 60 days. Other
+// items in the ItemList (the 50 organic 2025 posts) are also
+// rewritten, but to fresh dates in the past 60 days — this is the
+// same trade-off the per-post diversification makes (organic dates
+// get refreshed), so the listing shows a uniform "recent activity"
+// range that reads as natural to Google.
+//
+// Added 2026-08-11 after user reported 50 /blog/ posts stamped
+// "2026-08-01" looked unrealistic in view-source and GSC. See
+// private/diversify-blog-dates.py for the source-side mirror of
+// this fix.
+function diversifyItemListDates(html) {
+    return html.replace(
+        /<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi,
+        (m, body) => {
+            try {
+                const obj = JSON.parse(body);
+                if (!obj || obj["@type"] !== "ItemList" || !Array.isArray(obj.itemListElement)) {
+                    return m;
+                }
+                let changed = false;
+                for (const li of obj.itemListElement) {
+                    const item = li && li.item;
+                    if (!item || item["@type"] !== "Article") continue;
+                    if (!item.url || typeof item.url !== "string") continue;
+                    let path;
+                    try { path = new URL(item.url).pathname; } catch (e) { continue; }
+                    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(item.datePublished || ""))) continue;
+                    const newPub = computeDiversifiedDate(path);
+                    if (newPub && newPub !== item.datePublished) {
+                        item.datePublished = newPub;
+                        changed = true;
+                    }
+                }
+                if (!changed) return m;
+                return m.replace(body, JSON.stringify(obj));
+            } catch (e) {
+                return m;
+            }
+        }
+    );
+}
+
+// 6.9. Refresh the visible card date on the blog index page so it
+// matches the diversified ItemList datePublished for the same post.
+//
+// Source HTML has 50 cards with hardcoded "11 min read · Aug 1, 2026"
+// inside <article class="case-card"> blocks. The JS at runtime strips
+// the date part via data-i18n, but crawlers and view-source still
+// see the fallback text. We rewrite the visible "Aug 1, 2026" /
+// "Aug D, 2026" pattern on each card using the card's own href as
+// the hash input, mirroring the ItemList rewrite above.
+function refreshBlogIndexCardDates(html) {
+    return html.replace(
+        /<article\s+class="case-card">[\s\S]*?<\/article>/gi,
+        (block) => {
+            const hrefMatch = block.match(/href="(\/blog\/[^/]+\/)"/);
+            if (!hrefMatch) return block;
+            const path = hrefMatch[1];
+            const now = Date.now();
+            const todayMs = now - (now % 86400000);
+            const SIXTY_DAYS_MS = 60 * 86400000;
+            const oldest = todayMs - SIXTY_DAYS_MS;
+            let h = 0;
+            for (let i = 0; i < path.length; i++) {
+                h = (h * 31 + path.charCodeAt(i)) | 0;
+            }
+            const seed = Math.abs(h) % 10000;
+            const fraction = seed / 10000;
+            const newDateMs = Math.min(oldest + Math.floor(fraction * SIXTY_DAYS_MS), todayMs);
+            const dt = new Date(newDateMs);
+            const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+            const formatted = `${months[dt.getUTCMonth()]} ${dt.getUTCDate()}, ${dt.getUTCFullYear()}`;
+            return block.replace(
+                /(\d+ min read · )Aug (1|[1-9]), 2026(<\/p>)/g,
+                (m, prefix, day, suffix) => `${prefix}${formatted}${suffix}`,
+            );
+        }
+    );
+}
+
 // Currency localization: convert "$X" / "From $X" to the local equivalent
 // for non-EN/USD locales. We don't actually re-quote in local currency (the
 // business is priced in USD); instead we ADD a "Local equivalent: XXX" line
@@ -970,6 +1080,18 @@ export const onRequest = async (context) => {
                 // see per-post unique dates consistent with the JSON-LD schema.
                 text = diversifyOgArticleDates(text, context.request.url);
             }
+            // ItemList + blog-index card date diversification. The 100-entry
+            // ItemList on /blog/ has 50 entries stamped "2026-08-01" (the
+            // same batch-generate date that the per-post diversification
+            // already handles). Mirror the same hash logic so the listing
+            // and visible card text also get unique dates. (Added 2026-08-11
+            // when user reported the Aug 1 cluster in view-source / GSC.)
+            if (text.includes('"@type": "ItemList"') || text.includes('"@type":"ItemList"')) {
+                text = diversifyItemListDates(text);
+            }
+            if (text.includes('Aug 1, 2026')) {
+                text = refreshBlogIndexCardDates(text);
+            }
             // Refresh visible "Updated" date to match JSON-LD dateModified.
             // Note: `lang` is not yet defined here (only available in the
             // match branch below). Pass null so refreshVisibleUpdateDate
@@ -1157,6 +1279,17 @@ export const onRequest = async (context) => {
         //      so the body matches the JSON-LD dateModified. This is most
         //      important for seasonal content (christmas/spring/summer).
         text = refreshVisibleUpdateDate(text, context.request.url, lang);
+        // 6.7.1. ItemList + blog-index card date diversification (same logic
+        //        as the EN branch). The 100-entry ItemList on /blog/ has
+        //        50 entries stamped "2026-08-01" that need per-URL hash
+        //        diversification. Added 2026-08-11 to fix the same-day
+        //        cluster on the listing page.
+        if (text.includes('"@type": "ItemList"') || text.includes('"@type":"ItemList"')) {
+            text = diversifyItemListDates(text);
+        }
+        if (text.includes('Aug 1, 2026')) {
+            text = refreshBlogIndexCardDates(text);
+        }
 
         // 7. Server-side i18n: load translation JSON and apply data-i18n
         //    attributes so Googlebot sees the translated HTML, not the
