@@ -72,13 +72,12 @@ tmp/
 _*.bak
 *.bak
 
-# IndexNow key (private — the full key stored locally for reference)
+# IndexNow private key (the actual API key string — never deployed).
+# The PUBLIC counterpart is the file whose name == key and whose content
+# == key, e.g. /5067b1e4382cb39d55b68727db7c4011.txt for the current key
+# "5067b1e4382cb39d55b68727db7c4011". That public file MUST be deployed
+# (do NOT list it here) because Bing IndexNow GETs https://<host>/<key>.txt
+# to verify site ownership before accepting URL submissions. The public
+# file is regenerated/renamed by scripts/submit-indexnow.ps1 whenever
+# the key rotates.
 indexnow-key.txt
-
-# NOTE: /bca20c476d04af209950cbf5921e821d.txt is the IndexNow *public* verification
-# file. It is INTENTIONALLY deployed — Bing IndexNow crawls the URL
-# /<key>.txt to confirm site ownership before accepting URL submissions.
-# The file's name IS the key, and its content is the key string itself.
-# Do not delete, rename, or move this file.
-# (Added 2026-07-28 — the file was missing from the repo root, breaking
-# IndexNow submissions; verification was previously 404.)

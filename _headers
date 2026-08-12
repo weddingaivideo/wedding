@@ -141,5 +141,10 @@
   Accept-Ranges: bytes
 
 # ---------- IndexNow verification key (no cache) ----------
-/bca20c476d04af209950cbf5921e821d.txt
+# Public file served at /5067b1e4382cb39d55b68727db7c4011.txt. The key in
+# indexnow-key.txt is "5067b1e4382cb39d55b68727db7c4011"; the file's name
+# MUST match that key. IndexNow crawls this URL to verify site ownership
+# before accepting URL submissions — keep aligned with indexnow-key.txt
+# and submit-indexnow.ps1.
+/5067b1e4382cb39d55b68727db7c4011.txt
   Cache-Control: no-store, must-revalidate
