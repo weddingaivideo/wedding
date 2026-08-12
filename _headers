@@ -37,7 +37,7 @@
   # in deployed HTML, so dropping 'unsafe-inline' from the static
   # policy is now safe; only do it after auditing the meta path works
   # in production for at least one deploy cycle).
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://*.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://*.cloudflareinsights.com https://*.analytics.google.com; frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://*.analytics.google.com; frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net; form-action 'self'
   #
   # Reporting-Endpoints: required for the meta-delivered CSP's
   # `report-to csp-endpoint` directive to actually deliver violation
