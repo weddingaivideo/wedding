@@ -42,7 +42,7 @@ ROOT = Path(r"C:\Users\qiaoshan\.openclaw\workspace\weddingai")
 I18N = ROOT / "i18n"
 PROGRESS_DIR = ROOT / "private" / ".translate-progress"
 
-LANGS = ["zh", "ja", "ru", "ar", "de", "es", "fr", "pt", "th"]
+LANGS = ["zh", "ja", "ru", "ar", "de", "es", "fr", "pt", "th", "hi"]
 LANG_TO_GOOGLE = {
     "zh": "zh-CN",
     "ja": "ja",
@@ -53,6 +53,7 @@ LANG_TO_GOOGLE = {
     "fr": "fr",
     "pt": "pt",
     "th": "th",
+    "hi": "hi",
 }
 
 # HTML entity and tag placeholders. The keys must NOT contain text that

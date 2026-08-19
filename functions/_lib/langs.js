@@ -8,9 +8,9 @@
  *
  * To add/remove a language, see /js/langs.js for the full procedure.
  */
-export const LANGS = ["en", "zh", "es", "fr", "de", "pt", "ja", "ru", "ar", "th"];
+export const LANGS = ["en", "zh", "es", "fr", "de", "pt", "ja", "ru", "ar", "th", "hi"];
 export const DEFAULT_LANG = "en";
-export const RTL = { ar: true };
+export const RTL = { ar: true, hi: false };
 export const LANG_LABELS = {
     en: "English",
     zh: "中文",
@@ -22,6 +22,7 @@ export const LANG_LABELS = {
     ru: "Русский",
     ar: "العربية",
     th: "ไทย",
+    hi: "हिन्दी",
 };
 export const LANG_SHORT = {
     en: "EN",
@@ -34,4 +35,5 @@ export const LANG_SHORT = {
     ru: "RU",
     ar: "AR",
     th: "TH",
+    hi: "HI",
 };

@@ -127,3 +127,4 @@ Sitemap: https://weddingai.video/sitemap-ja.xml
 Sitemap: https://weddingai.video/sitemap-ru.xml
 Sitemap: https://weddingai.video/sitemap-ar.xml
 Sitemap: https://weddingai.video/sitemap-th.xml
+Sitemap: https://weddingai.video/sitemap-hi.xml

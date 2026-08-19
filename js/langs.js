@@ -18,9 +18,9 @@
  *   3. Run: python scripts/sync_langs_redirects.py   (regenerates _redirects)
  *   4. Run: pre-deploy-check.ps1                       (verifies sync)
  */
-window.WA_LANGS = ["en", "zh", "es", "fr", "de", "pt", "ja", "ru", "ar", "th"];
+window.WA_LANGS = ["en", "zh", "es", "fr", "de", "pt", "ja", "ru", "ar", "th", "hi"];
 window.WA_DEFAULT_LANG = "en";
-window.WA_RTL = { ar: true };
+window.WA_RTL = { ar: true, hi: false };
 window.WA_LANG_LABELS = {
     en: "English",
     zh: "中文",
@@ -32,6 +32,7 @@ window.WA_LANG_LABELS = {
     ru: "Русский",
     ar: "العربية",
     th: "ไทย",
+    hi: "हिन्दी",
 };
 window.WA_LANG_SHORT = {
     en: "EN",
@@ -44,4 +45,5 @@ window.WA_LANG_SHORT = {
     ru: "RU",
     ar: "AR",
     th: "TH",
+    hi: "HI",
 };

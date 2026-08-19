@@ -81,3 +81,6 @@ _*.bak
 # file is regenerated/renamed by scripts/submit-indexnow.ps1 whenever
 # the key rotates.
 indexnow-key.txt
+
+# Cleanup 2026-08-11: orphan indexnow key from 7/28, kept on CF edge (CF Pages 4.x does not auto-delete git-removed assets). After next deploy this file stops being served.
+bca20c476d04af209950cbf5921e821d.txt
