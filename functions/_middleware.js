@@ -996,7 +996,7 @@ export const onRequest = async (context) => {
         const cookies = parseCookies(context.request.headers.get("Cookie") || "");
 
         // Check if URL has explicit lang prefix
-        let match = path.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th)(\/.*|$)/);
+        let match = path.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th|hi)(\/.*|$)/);
 
         // Detect malformed /blog/(zh|ja|pt)/... URLs and synthesize a lang match
         // for the canonical /<lang>/blog/... form.
@@ -1144,10 +1144,10 @@ export const onRequest = async (context) => {
         // becomes the new outer). The 10th iteration is just a safety net
         // for anything we missed.
         for (let i = 0; i < 10; i++) {
-            const m = stripped.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th)(\/|$)/);
+            const m = stripped.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th|hi)(\/|$)/);
             if (!m) break;
             const innerRest = stripped.slice(3); // strip "/xx" (slash + 2 letters)
-            const wouldStillHaveLang = innerRest.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th)(\/|$)/);
+            const wouldStillHaveLang = innerRest.match(/^\/(en|zh|es|fr|de|pt|ja|ru|ar|th|hi)(\/|$)/);
             if (!wouldStillHaveLang) {
                 // This lang segment is the last one — keep it as the new
                 // outer lang so the redirected target still has a meaningful
