@@ -1,0 +1,27 @@
+HTTP/1.1 200 OK
+Date: Wed, 12 Aug 2026 03:29:00 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 32
+Connection: keep-alive
+x-xss-protection: 0
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=UHwvtaW%2FWeWTkW89Vb7QyFJKQRpyKtjUexQKZnTHl%2FwpJ9z2ML189%2Bbw7hWoZPDCgXvMdkETNMSOAK1YyO4WTZrsj9ULImXBp2I0qOCdNoe2YltuEpHQLwUQhi9Srye7ntVQGS%2FortQyFgluMi4%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Access-Control-Allow-Origin: *
+Cache-Control: no-store, must-revalidate
+ETag: "562c90a6059c2dff141f299ca92014b1"
+Link: <https://pagead2.googlesyndication.com>; rel=preconnect; crossorigin, <https://static.cloudflareinsights.com>; rel=preconnect; crossorigin
+Strict-Transport-Security: max-age=63072000; includeSubDomains
+content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://*.analytics.google.com; frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net; form-action 'self'
+cross-origin-embedder-policy: credentialless
+cross-origin-opener-policy: same-origin
+permissions-policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+referrer-policy: strict-origin-when-cross-origin
+reporting-endpoints: csp-endpoint="https://weddingai.video/__csp_report"
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+Server: cloudflare
+cf-cache-status: DYNAMIC
+CF-RAY: a29c64acac14daa5-SIN
+alt-svc: h3=":443"; ma=86400
+
+5067b1e4382cb39d55b68727db7c4011

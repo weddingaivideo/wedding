@@ -1,4 +1,4 @@
-# WeddingAI.video — Pre-Deploy Check
+﻿# WeddingAI.video — Pre-Deploy Check
 # Run this BEFORE deploying to catch common bugs.
 # Exits with non-zero if any check fails.
 #
@@ -27,6 +27,17 @@ function Warn($msg) {
 function Pass($msg) {
     Write-Host "  [PASS] $msg" -ForegroundColor Green
 }
+# Safe wrapper for Get-Content -Raw that returns "" for missing/empty files
+# instead of $null (which causes .NET regex to throw "Value cannot be null").
+# Added 2026-08-19 after pre-existing 0-byte files (e.g.
+# es/blog/wedding-video-trends-2026/index.html, broken in fcf2c80) caused
+# the CSP nonces check to abort.
+function Get-RawSafe($path) {
+    if (-not (Test-Path $path)) { return "" }
+    $content = Get-Content $path -Raw -ErrorAction SilentlyContinue
+    if ($null -eq $content) { return "" }
+    return $content
+}
 
 Write-Host ""
 Write-Host "=== WeddingAI.video Pre-Deploy Check ===" -ForegroundColor Cyan
@@ -39,7 +50,7 @@ Write-Host "[1/9] HTML <title> tag integrity"
 $htmlFiles = Get-ChildItem $root -Recurse -Filter "*.html" -File | Where-Object { $_.Name -ne "google-site-verification.html" -and $_.Name -ne "offline.html" }
 $badTitles = 0
 foreach ($f in $htmlFiles) {
-    $c = Get-Content $f.FullName -Raw
+    $c = Get-RawSafe $f.FullName
     if ($c -match '<title>[\s\S]*?<meta\s+property="og:image"[\s\S]*?</title>') {
         Fail "$($f.Name): og:image nested inside <title>"
         $badTitles++
@@ -78,7 +89,8 @@ $deployedHtml = $htmlFiles | Where-Object {
 $noncePattern = '<script\b[^>]*\snonce="([^"]{20,})"'
 $badNonces = 0
 foreach ($f in $deployedHtml) {
-    $c = Get-Content $f.FullName -Raw
+    if ($f.Length -eq 0) { continue }  # skip 0-byte files (pre-existing bug, e.g. es/blog/wedding-video-trends-2026)
+    $c = Get-RawSafe $f.FullName
     $hits = [regex]::Matches($c, $noncePattern, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
     foreach ($h in $hits) {
         $val = $h.Groups[1].Value
@@ -105,7 +117,7 @@ if ($badNonces -eq 0) { Pass "All $($deployedHtml.Count) deployed HTML files use
 $dupH1H2 = 0
 $tagStrip = { param($s) $s -replace '<[^>]+>', '' -replace '\s+', ' ' }
 foreach ($f in $deployedHtml) {
-    $c = Get-Content $f.FullName -Raw
+    $c = Get-RawSafe $f.FullName
     $h1 = [regex]::Match($c, '<h1[^>]*>(.*?)</h1>', 'IgnoreCase, Singleline')
     if (-not $h1.Success) { continue }
     $h1Text = (& $tagStrip $h1.Groups[1].Value).Trim()
@@ -148,7 +160,7 @@ $hTagMismatches = 0
 # at least one attribute (excludes bare inner-text "<h3" inside an h2 testimonial).
 $hTagRe = '<h([1-6])\s+[^>]*>\s*([^<]|<(?!/h\1>))*?</h([1-6])>'
 foreach ($f in $deployedHtml) {
-    $c = Get-Content $f.FullName -Raw
+    $c = Get-RawSafe $f.FullName
     $matches = [regex]::Matches($c, $hTagRe, 'IgnoreCase, Singleline')
     foreach ($m in $matches) {
         $openTag = $m.Groups[1].Value
@@ -184,7 +196,7 @@ if ($hTagMismatches -eq 0) { Pass "All hN open/close tag pairs match in $($deplo
 # (e.g. `s.onload = function() {` — no quote, not a CSP concern).
 $inlineHandlers = 0
 foreach ($f in $deployedHtml) {
-    $c = Get-Content $f.FullName -Raw
+    $c = Get-RawSafe $f.FullName
     # (?<!data-) skips Angular-style data-onclick (not a real event handler).
     # [="'] requires the value to start with a quote — rules out
     # `s.onload = function() {...}` JS patterns inside <script> blocks.
@@ -208,7 +220,7 @@ $badImgs = 0
 foreach ($d in $serviceDirs) {
     $htmls = Get-ChildItem "$root\services\$d" -Filter "*.html" -File
     foreach ($h in $htmls) {
-        $c = Get-Content $h.FullName -Raw
+        $c = Get-RawSafe $h.FullName
         $imgs = [regex]::Matches($c, '<img[^>]+src="([^"]+)"')
         foreach ($m in $imgs) {
             $src = $m.Groups[1].Value
@@ -253,7 +265,7 @@ $htmls = Get-ChildItem "$root" -Recurse -Filter "*.html" | Where-Object {
 }
 foreach ($h in $htmls) {
     $relPath = $h.FullName.Substring($root.Length + 1)
-    $c = Get-Content $h.FullName -Raw
+    $c = Get-RawSafe $h.FullName
     # Relative path inside srcset= (e.g. srcset="logo-full-178.avif 178w")
     $relInSrcset = [regex]::Matches($c, 'srcset="(?![/h])[^"]*\.(avif|webp|jpg|jpeg|png)[^"]*"')
     foreach ($m in $relInSrcset) {
@@ -283,7 +295,7 @@ if ($hygieneIssues -eq 0) { Pass "All srcset/picture tags use absolute paths and
 # ---------- 3. CSS empty rules ----------
 Write-Host "[3/9] CSS empty rules and missing braces"
 $cssPath = "$root\styles.css"
-$css = Get-Content $cssPath -Raw
+$css = Get-RawSafe $cssPath
 # Look for selector followed by newline and another selector (missing { ... } block)
 $emptyRules = [regex]::Matches($css, '\}\s*\n[ \t]*([\.\#\:\>\w\+\~\*\s,]+)[ \t]*\n[ \t]*([\.\#\:\>\w\+\~\*\s,]+)[ \t]*\n[ \t]*\{')
 $suspicious = 0
@@ -350,7 +362,7 @@ foreach ($f in $critical) {
 # ---------- 5. No remaining <a href="#"> dead links in critical places ----------
 Write-Host "[5/9] Critical dead links check"
 foreach ($f in $htmlFiles) {
-    $c = Get-Content $f.FullName -Raw
+    $c = Get-RawSafe $f.FullName
     # Privacy Policy / Terms of Service should NOT be href="#"
     if ($c -match '<a href="#">Privacy Policy</a>') {
         Fail "$($f.Name): Privacy Policy still href=#"
@@ -366,7 +378,7 @@ Write-Host "[6/9] Google Analytics 4 ID"
 $gaCount = 0
 $legacySyncGtag = 0  # pages still using <script async src="googletagmanager..."> synchronously
 foreach ($f in $htmlFiles) {
-    $c = Get-Content $f.FullName -Raw
+    $c = Get-RawSafe $f.FullName
     if ($c -match 'G-4FE7KSJDNB') {
         $gaCount++
     }
@@ -478,7 +490,7 @@ if (Test-Path $fnPath) {
         Pass "Cloudflare Functions: $fnCount endpoint(s) in /functions"
 
         # 检查 order 表单 form action (目录版本 2026-07-28 起)
-        $orderForm = Get-Content "$root\order\index.html" -Raw
+        $orderForm = Get-RawSafe "$root\order\index.html"
         if ($orderForm -match 'action="/api/quote"') {
             Pass "order form posts to /api/quote"
         } else {
@@ -551,7 +563,7 @@ $relativeScriptIssues = 0
 $htmlFiles = Get-ChildItem -Recurse -Filter "*.html" -File |
     Where-Object { $_.FullName -notlike "*\i18n\*" -and $_.FullName -notlike "*\qa\*" -and $_.FullName -notlike "*\tmp\*" -and $_.FullName -notlike "*\admin\*" }
 foreach ($f in $htmlFiles) {
-    $raw = Get-Content $f.FullName -Raw
+    $raw = Get-RawSafe $f.FullName
     # Match <script src="X..."> where X doesn't start with http(s)://, /, or #
     $matches = [regex]::Matches($raw, '<script[^>]+src="(?!https?://|/|#)([^"]+)"')
     foreach ($m in $matches) {
