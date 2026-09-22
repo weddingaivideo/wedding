@@ -288,6 +288,7 @@ const LANG_TO_OG_LOCALE = {
     ru: "ru_RU",
     ar: "ar_SA",
     th: "th_TH",
+    hi: "hi_IN",
 };
 
 // Map our 2-letter lang code → JSON-LD inLanguage (BCP-47 with hyphen).
@@ -303,6 +304,7 @@ const LANG_TO_INLANGUAGE = {
     ru: "ru-RU",
     ar: "ar-SA",
     th: "th-TH",
+    hi: "hi-IN",
 };
 
 // =========================================================================
