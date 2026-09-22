@@ -474,6 +474,76 @@ function setOgLocale(html, lang) {
     );
 }
 
+// Escape a string for safe insertion into an HTML attribute value (between
+// double quotes). Order matters — replace & first so we don't double-encode
+// the &s we add for the other entities.
+function escapeHtmlAttr(s) {
+    return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
+
+// Replace the 4 social-card meta tags (og:title / og:description /
+// twitter:title / twitter:description) using values from the i18n dict for
+// the page's language. EN pages have all keys already in HTML so this is a
+// no-op for EN; non-EN pages get translated social-card copy. Falls through
+// silently when a key is missing or the corresponding meta tag is absent.
+function replaceOgTwitterMeta(html, dict, lang) {
+    if (!dict || lang === DEFAULT_LANG) return html;
+    const pairs = [
+        { prop: "og:title",       key: "index.og_title" },
+        { prop: "og:description", key: "index.og_description" },
+        { prop: "twitter:title",  key: "index.twitter_title" },
+        { prop: "twitter:description", key: "index.twitter_description" },
+    ];
+    for (const { prop, key } of pairs) {
+        const val = dict[key];
+        if (typeof val !== "string") continue;
+        const safe = escapeHtmlAttr(val);
+        const re = new RegExp(
+            `<meta\\s+(?:property|name)=["']${prop}["']\\s+content=["'][^"']*["']\\s*\\/?>`,
+            "i"
+        );
+        if (re.test(html)) {
+            html = html.replace(re,
+                `<meta ${prop.startsWith("og:") ? "property" : "name"}="${prop}" content="${safe}">`
+            );
+        }
+    }
+    return html;
+}
+
+// Replace pricing-page meta description (and pricing-page og:title /
+// og:description if present) using i18n dict. Called for any URL whose
+// rest-of-language path is exactly "/pricing/" or "pricing/".
+function replacePricingMeta(html, dict, lang) {
+    if (!dict || lang === DEFAULT_LANG) return html;
+    const pairs = [
+        { selector: /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i,
+          attr: "name", name: "description",
+          key: "pricing.meta_description" },
+        { selector: /<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/i,
+          attr: "property", name: "og:title",
+          key: "pricing.og_title" },
+        { selector: /<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/i,
+          attr: "property", name: "og:description",
+          key: "pricing.og_description" },
+    ];
+    for (const { selector, attr, name, key } of pairs) {
+        const val = dict[key];
+        if (typeof val !== "string") continue;
+        const safe = escapeHtmlAttr(val);
+        if (selector.test(html)) {
+            html = html.replace(selector,
+                `<meta ${attr}="${name}" content="${safe}">`
+            );
+        }
+    }
+    return html;
+}
+
 // Rewrite inLanguage inside all JSON-LD <script type="application/ld+json">
 // blocks. Only updates en-US → target; leaves other inLanguage values alone
 // so we don't trample non-English articles that may have a different value.
@@ -1305,6 +1375,19 @@ export const onRequest = async (context) => {
                     text = applyDataI18nAttr(text, dict);
         // #I18N-5: add local currency equivalents for non-EN/USD locales
         text = localizeCurrencyForLang(text, lang);
+                    // #I18N-PHASE1: replace og:title / og:description / twitter:title
+                    //   / twitter:description with language-localized values so
+                    //   social-card previews (FB / WhatsApp / LinkedIn / Slack) and
+                    //   Google SERP cards stop being English-only on /xx/ pages.
+                    text = replaceOgTwitterMeta(text, dict, lang);
+                    // #I18N-PRICING: same idea but scoped to the /pricing/ page.
+                    //   rest is the path-without-lang (e.g. "/pricing/" for
+                    //   /zh/pricing/), so any of these spellings trigger the
+                    //   pricing-specific override.
+                    const restNorm = (rest || "/").replace(/\/+$/, "") || "/";
+                    if (restNorm === "/pricing" || restNorm === "/pricing/") {
+                        text = replacePricingMeta(text, dict, lang);
+                    }
                 }
             } catch (e) {
                 // If i18n fails for any reason, fall through and serve the
