@@ -544,6 +544,75 @@ function replacePricingMeta(html, dict, lang) {
     return html;
 }
 
+// Localize the FAQ JSON-LD blocks (FAQPage @type) using i18n dict.
+//
+// Two scopes:
+//   homepage_faq.q1.{name,text} ... homepage_faq.q10.{name,text}   (home page)
+//   pricing_faq.q1.{name,text} ... pricing_faq.q6.{name,text}      (pricing page)
+//
+// We auto-detect which scope by trying the first key of each in the dict.
+// Within one FAQPage block, we walk mainEntity in source order and rewrite
+// the i-th Question's `name` and `acceptedAnswer.text` from
+// <scope>.q<i+1>.{name,text}. Untranslated entries (key missing or empty)
+// are left untouched, so partial coverage degrades gracefully.
+//
+// The output is re-serialised with JSON.stringify and `</script>` characters
+// escaped to `<\u002fscript>` (and `<` to `\u003c`) so the embedded JSON
+// cannot break out of the <script> tag (defensive — original HTML doesn't
+// escape either, but this future-proofs the content).
+function replaceFaqJsonLd(html, dict, lang) {
+    if (!dict || lang === DEFAULT_LANG) return html;
+
+    // Determine which i18n prefix applies to this page.
+    let prefix = null;
+    if (dict["homepage_faq.q1.name"] && dict["homepage_faq.q1.text"]) {
+        prefix = "homepage_faq";
+    } else if (dict["pricing_faq.q1.name"] && dict["pricing_faq.q1.text"]) {
+        prefix = "pricing_faq";
+    }
+    if (!prefix) return html;
+
+    return html.replace(
+        /<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi,
+        (m, body) => {
+            try {
+                const obj = JSON.parse(body);
+                if (!obj || obj["@type"] !== "FAQPage" || !Array.isArray(obj.mainEntity)) {
+                    return m;
+                }
+                let touched = false;
+                obj.mainEntity.forEach((q, idx) => {
+                    if (!q || q["@type"] !== "Question") return;
+                    const n = idx + 1;
+                    const nameI18n = dict[`${prefix}.q${n}.name`];
+                    const textI18n = dict[`${prefix}.q${n}.text`];
+                    if (nameI18n && typeof q.name === "string" && q.name !== nameI18n) {
+                        q.name = nameI18n;
+                        touched = true;
+                    }
+                    if (textI18n && q.acceptedAnswer && typeof q.acceptedAnswer.text === "string"
+                        && q.acceptedAnswer.text !== textI18n) {
+                        q.acceptedAnswer.text = textI18n;
+                        touched = true;
+                    }
+                });
+                if (!touched) return m;
+                // Re-serialise. Escape `</` and `<` so the JSON can't break out
+                // of the <script> tag if a translation contains HTML-like text.
+                const json = JSON.stringify(obj)
+                    .replace(/</g, "\\u003c")
+                    .replace(/>/g, "\\u003e")
+                    .replace(/\u2028/g, "\\u2028")
+                    .replace(/\u2029/g, "\\u2029");
+                return `<script type="application/ld+json">${json}</script>`;
+            } catch (e) {
+                // If JSON parse fails for any reason, leave the original block alone.
+                return m;
+            }
+        }
+    );
+}
+
 // Rewrite inLanguage inside all JSON-LD <script type="application/ld+json">
 // blocks. Only updates en-US → target; leaves other inLanguage values alone
 // so we don't trample non-English articles that may have a different value.
@@ -1388,6 +1457,13 @@ export const onRequest = async (context) => {
                     if (restNorm === "/pricing" || restNorm === "/pricing/") {
                         text = replacePricingMeta(text, dict, lang);
                     }
+                    // #I18N-PHASE2: localise FAQ JSON-LD blocks. Auto-detects
+                    //   homepage_faq vs pricing_faq by checking which prefix
+                    //   the dict actually carries; within the matched scope,
+                    //   each Question in mainEntity gets its name + acceptedAnswer.text
+                    //   rewritten from <scope>.q<i+1>.{name,text}. Missing keys
+                    //   pass through unchanged.
+                    text = replaceFaqJsonLd(text, dict, lang);
                 }
             } catch (e) {
                 // If i18n fails for any reason, fall through and serve the
