@@ -550,9 +550,13 @@ function replacePricingMeta(html, dict, lang) {
 //   homepage_faq.q1.{name,text} ... homepage_faq.q10.{name,text}   (home page)
 //   pricing_faq.q1.{name,text} ... pricing_faq.q6.{name,text}      (pricing page)
 //
-// We auto-detect which scope by trying the first key of each in the dict.
-// Within one FAQPage block, we walk mainEntity in source order and rewrite
-// the i-th Question's `name` and `acceptedAnswer.text` from
+// Scope detection: each FAQPage block in the HTML carries either 10
+// Question nodes (home page) or 6 (pricing page). We pick the prefix
+// whose q1 key exists in the dict AND whose entry count matches the
+// Question count we see in the block.
+//
+// Within the matched scope, we walk mainEntity in source order and
+// rewrite the i-th Question's `name` and `acceptedAnswer.text` from
 // <scope>.q<i+1>.{name,text}. Untranslated entries (key missing or empty)
 // are left untouched, so partial coverage degrades gracefully.
 //
@@ -563,15 +567,6 @@ function replacePricingMeta(html, dict, lang) {
 function replaceFaqJsonLd(html, dict, lang) {
     if (!dict || lang === DEFAULT_LANG) return html;
 
-    // Determine which i18n prefix applies to this page.
-    let prefix = null;
-    if (dict["homepage_faq.q1.name"] && dict["homepage_faq.q1.text"]) {
-        prefix = "homepage_faq";
-    } else if (dict["pricing_faq.q1.name"] && dict["pricing_faq.q1.text"]) {
-        prefix = "pricing_faq";
-    }
-    if (!prefix) return html;
-
     return html.replace(
         /<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi,
         (m, body) => {
@@ -580,10 +575,43 @@ function replaceFaqJsonLd(html, dict, lang) {
                 if (!obj || obj["@type"] !== "FAQPage" || !Array.isArray(obj.mainEntity)) {
                     return m;
                 }
+                // Count Question nodes in this block.
+                const qCount = obj.mainEntity.filter(q => q && q["@type"] === "Question").length;
+                if (qCount === 0) return m;
+
+                // Pick the i18n scope whose q1 keys exist AND whose canonical
+                // count matches qCount. Canonical counts: homepage_faq=10,
+                // pricing_faq=6. If neither matches exactly, fall back to the
+                // prefix whose q1 key exists.
+                const scopes = [
+                    { name: "homepage_faq", expected: 10 },
+                    { name: "pricing_faq",  expected: 6  },
+                ];
+                let prefix = null;
+                for (const s of scopes) {
+                    if (qCount === s.expected
+                        && dict[`${s.name}.q1.name`]
+                        && dict[`${s.name}.q1.text`]) {
+                        prefix = s.name;
+                        break;
+                    }
+                }
+                if (!prefix) {
+                    for (const s of scopes) {
+                        if (dict[`${s.name}.q1.name`] && dict[`${s.name}.q1.text`]) {
+                            prefix = s.name;
+                            break;
+                        }
+                    }
+                }
+                if (!prefix) return m;
+
                 let touched = false;
-                obj.mainEntity.forEach((q, idx) => {
+                let qIdx = 0;
+                obj.mainEntity.forEach((q) => {
                     if (!q || q["@type"] !== "Question") return;
-                    const n = idx + 1;
+                    qIdx += 1;
+                    const n = qIdx;
                     const nameI18n = dict[`${prefix}.q${n}.name`];
                     const textI18n = dict[`${prefix}.q${n}.text`];
                     if (nameI18n && typeof q.name === "string" && q.name !== nameI18n) {
@@ -597,8 +625,8 @@ function replaceFaqJsonLd(html, dict, lang) {
                     }
                 });
                 if (!touched) return m;
-                // Re-serialise. Escape `</` and `<` so the JSON can't break out
-                // of the <script> tag if a translation contains HTML-like text.
+                // Re-serialise. Escape `<`, `>`, U+2028, U+2029 so a translation
+                // containing HTML-like text can't break out of <script>.
                 const json = JSON.stringify(obj)
                     .replace(/</g, "\\u003c")
                     .replace(/>/g, "\\u003e")
