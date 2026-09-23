@@ -570,73 +570,145 @@ function replaceFaqJsonLd(html, dict, lang) {
     return html.replace(
         /<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi,
         (m, body) => {
-            try {
-                const obj = JSON.parse(body);
-                if (!obj || obj["@type"] !== "FAQPage" || !Array.isArray(obj.mainEntity)) {
-                    return m;
-                }
-                // Count Question nodes in this block.
-                const qCount = obj.mainEntity.filter(q => q && q["@type"] === "Question").length;
-                if (qCount === 0) return m;
+            // Bail if this isn't a FAQPage block.
+            if (!/"@type"\s*:\s*"FAQPage"/.test(body)) return m;
 
-                // Pick the i18n scope whose q1 keys exist AND whose canonical
-                // count matches qCount. Canonical counts: homepage_faq=10,
-                // pricing_faq=6. If neither matches exactly, fall back to the
-                // prefix whose q1 key exists.
-                const scopes = [
-                    { name: "homepage_faq", expected: 10 },
-                    { name: "pricing_faq",  expected: 6  },
-                ];
-                let prefix = null;
+            // Count Question nodes in this block to pick the right scope.
+            const qCount = (body.match(/"@type"\s*:\s*"Question"/g) || []).length;
+            if (qCount === 0) return m;
+
+            // Pick the i18n scope whose q1 keys exist AND whose canonical
+            // count matches qCount. Canonical counts: homepage_faq=10,
+            // pricing_faq=6. If neither matches exactly, fall back to the
+            // prefix whose q1 key exists.
+            const scopes = [
+                { name: "homepage_faq", expected: 10 },
+                { name: "pricing_faq",  expected: 6  },
+            ];
+            let prefix = null;
+            for (const s of scopes) {
+                if (qCount === s.expected
+                    && dict[`${s.name}.q1.name`]
+                    && dict[`${s.name}.q1.text`]) {
+                    prefix = s.name;
+                    break;
+                }
+            }
+            if (!prefix) {
                 for (const s of scopes) {
-                    if (qCount === s.expected
-                        && dict[`${s.name}.q1.name`]
-                        && dict[`${s.name}.q1.text`]) {
+                    if (dict[`${s.name}.q1.name`] && dict[`${s.name}.q1.text`]) {
                         prefix = s.name;
                         break;
                     }
                 }
-                if (!prefix) {
-                    for (const s of scopes) {
-                        if (dict[`${s.name}.q1.name`] && dict[`${s.name}.q1.text`]) {
-                            prefix = s.name;
-                            break;
-                        }
-                    }
-                }
-                if (!prefix) return m;
-
-                let touched = false;
-                let qIdx = 0;
-                obj.mainEntity.forEach((q) => {
-                    if (!q || q["@type"] !== "Question") return;
-                    qIdx += 1;
-                    const n = qIdx;
-                    const nameI18n = dict[`${prefix}.q${n}.name`];
-                    const textI18n = dict[`${prefix}.q${n}.text`];
-                    if (nameI18n && typeof q.name === "string" && q.name !== nameI18n) {
-                        q.name = nameI18n;
-                        touched = true;
-                    }
-                    if (textI18n && q.acceptedAnswer && typeof q.acceptedAnswer.text === "string"
-                        && q.acceptedAnswer.text !== textI18n) {
-                        q.acceptedAnswer.text = textI18n;
-                        touched = true;
-                    }
-                });
-                if (!touched) return m;
-                // Re-serialise. Escape `<`, `>`, U+2028, U+2029 so a translation
-                // containing HTML-like text can't break out of <script>.
-                const json = JSON.stringify(obj)
-                    .replace(/</g, "\\u003c")
-                    .replace(/>/g, "\\u003e")
-                    .replace(/\u2028/g, "\\u2028")
-                    .replace(/\u2029/g, "\\u2029");
-                return `<script type="application/ld+json">${json}</script>`;
-            } catch (e) {
-                // If JSON parse fails for any reason, leave the original block alone.
-                return m;
             }
+            if (!prefix) return m;
+
+            // localizeCurrencyForLang runs BEFORE this function and may have
+            // injected inline HTML markup like
+            //   <span class="wa-local-price" data-i18n="...">(≈ ¥71)</span>
+            // inside an Answer's text field. That markup is not legal JSON,
+            // so JSON.parse would throw and we'd silently bail.
+            //
+            // Stash each <span>...</span> as a numbered placeholder, AND
+            // remember the immediate dollar-amount anchor that preceded it
+            // (e.g. "$9.9 " or "$1,000 "). After we replace the EN text with
+            // the i18n text, we re-inject the span by re-finding the same
+            // dollar amount in the new body. This works because MyMemory
+            // preserves "$9.9" / "$1,000" verbatim in every language.
+            //
+            // Only <span>...</span> sequences are stashed — that's the only
+            // inline HTML we inject into JSON-LD fields today.
+            const SPAN_RE = /<span\b[^>]*>(?:[^<]|<(?!\/span\b))*<\/span>/g;
+            const stashes = []; // [{ span, anchor }, ...]
+            const bodySafe = body.replace(SPAN_RE, (s, offset) => {
+                const before = body.slice(Math.max(0, offset - 12), offset);
+                const m2 = before.match(/\$[\d,]+(?:\.\d+)?\s*$/);
+                stashes.push({ span: s, anchor: m2 ? m2[0] : "" });
+                return `__WA_LOCAL_SPAN_${stashes.length - 1}__`;
+            });
+
+            let obj;
+            try { obj = JSON.parse(bodySafe); } catch (e) { return m; }
+            if (!obj || obj["@type"] !== "FAQPage" || !Array.isArray(obj.mainEntity)) return m;
+
+            let touched = false;
+            let qIdx = 0;
+            obj.mainEntity.forEach((q) => {
+                if (!q || q["@type"] !== "Question") return;
+                qIdx += 1;
+                const nameI18n = dict[`${prefix}.q${qIdx}.name`];
+                const textI18n = dict[`${prefix}.q${qIdx}.text`];
+                if (nameI18n && typeof q.name === "string" && q.name !== nameI18n) {
+                    q.name = nameI18n;
+                    touched = true;
+                }
+                if (textI18n && q.acceptedAnswer && typeof q.acceptedAnswer.text === "string"
+                    && q.acceptedAnswer.text !== textI18n) {
+                    q.acceptedAnswer.text = textI18n;
+                    touched = true;
+                }
+            });
+            if (!touched) return m;
+
+            // Re-serialise. Escape `<`, `>`, U+2028, U+2029 so a translation
+            // containing HTML-like text can't break out of <script>.
+            let json = JSON.stringify(obj)
+                .replace(/</g, "\\u003c")
+                .replace(/>/g, "\\u003e")
+                .replace(/\u2028/g, "\\u2028")
+                .replace(/\u2029/g, "\\u2029");
+
+            // Restore stashed <span> markup.
+            //
+            // The placeholder lived inside an Answer text string in the parsed
+            // object. After we replaced that text with the i18n version, the
+            // placeholder is gone (the i18n text doesn't contain it).
+            //
+            // Strategy: try two passes for each stash.
+            //   (1) If the placeholder survived (rare — only if the i18n text
+            //       happens to retain the original EN text verbatim), strip
+            //       its quotes and inline the span at the original position.
+            //   (2) If we captured an anchor (e.g. "9.9" from "$9.9") and the
+            //       new JSON still contains `$\s?<amount>`, inject the span
+            //       right after the first match. MyMemory preserves dollar
+            //       amounts verbatim across languages (sometimes with
+            //       whitespace), so `$\s?9\.9` matches both `$9.9` and
+            //       `$ 9.9`. We inject exactly one span per stash — if the
+            //       same amount appears in another Q, the first match wins.
+            for (let i = 0; i < stashes.length; i++) {
+                const { span, anchor } = stashes[i];
+                const quoted = `"__WA_LOCAL_SPAN_${i}__"`;
+                const spanInline = span
+                    .replace(/\\/g, "\\\\")
+                    .replace(/"/g, "\\\"")
+                    .replace(/</g, "\\u003c")
+                    .replace(/>/g, "\\u003e");
+
+                if (json.includes(quoted)) {
+                    // (1) i18n text retained original EN verbatim — inline span in place
+                    json = json.replace(quoted, spanInline);
+                    continue;
+                }
+
+                // (2) re-anchor on the dollar amount captured from the original text.
+                //     anchor looks like "$9.9 " or "$1,000 "; we capture the bare
+                //     amount (e.g. "9.9", "1,000") so we can match with optional
+                //     whitespace before the digits.
+                const amountMatch = (anchor || "").match(/\$[\s]?([\d,]+(?:\.\d+)?)/);
+                if (!amountMatch) continue;
+                const amount = amountMatch[1];
+                const amountEsc = amount.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                // Match `$9.9` or `$ 9.9` (no lookahead — first match wins via injected flag).
+                const anchorRe = new RegExp(`\\$\\s?${amountEsc}`, 'g');
+                let injected = false;
+                json = json.replace(anchorRe, (m) => {
+                    if (injected) return m;
+                    injected = true;
+                    return m + spanInline;
+                });
+            }
+            return `<script type="application/ld+json">${json}</script>`;
         }
     );
 }
