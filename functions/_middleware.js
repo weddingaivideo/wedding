@@ -1415,7 +1415,29 @@ export const onRequest = async (context) => {
         // to substitute the OUTER nonce consistently. Without the marker,
         // the inner middleware would inject its own nonce + CSP header,
         // leaving the outer response with two competing policies.
-        const underlyingUrl = url.origin + rest + url.search;
+        //
+        // 2026-09-24 patch: try /<lang><rest> before /rest so that
+        // /es/tools/<slug>/index.html (and 9 other langs) serve their
+        // pre-translated body content instead of being masked by the English
+        // /tools/<slug>/index.html fetched via the unprefixed path. If the
+        // prefixed URL is 404, fall back to the unprefixed source.
+        const prefixedUrl = (lang && lang !== DEFAULT_LANG)
+            ? `${url.origin}/${lang}${rest}${url.search}`
+            : null;
+        let underlyingUrl = url.origin + rest + url.search;
+        let prefixedProbe = null;
+        if (prefixedUrl) {
+            prefixedProbe = await fetch(prefixedUrl, {
+                method: "GET",
+                headers: { Accept: "text/html", "X-Middleware-Internal": "1" },
+                redirect: "manual",
+            });
+            if (prefixedProbe.status === 200) {
+                underlyingUrl = prefixedUrl;
+            } else {
+                prefixedProbe = null; // signal to fall back below
+            }
+        }
         // Use redirect: "manual" (2026-08-10) so a 30x from _redirects is
         // detected explicitly and FORWARDED to the browser (with the same
         // status + Location). With "follow" the fetch transparently chased
@@ -1423,7 +1445,7 @@ export const onRequest = async (context) => {
         // the target's body on the original URL — duplicate-content / no
         // SEO equity transfer. We want the browser to see the 30x so the
         // URL bar updates and Googlebot records a real 301.
-        const response = await fetch(underlyingUrl, {
+        const response = prefixedProbe || await fetch(underlyingUrl, {
             method: "GET",
             headers: { Accept: "text/html", "X-Middleware-Internal": "1" },
             redirect: "manual",
