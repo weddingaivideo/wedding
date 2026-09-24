@@ -1,0 +1,924 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Коллаж свадебных фото — создатель онлайн | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/ru/tools/wedding-photo-collage/">
+    <link rel="alternate" hreflang="en" href="https://weddingai.video/tools/wedding-photo-collage/">
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/wedding-photo-collage/">
+    <link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/wedding-photo-collage/">
+    <link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/wedding-photo-collage/">
+    <meta name="description" content="Сделайте коллаж из свадебных фото в браузере. 2–12 фото, несколько макетов, своя подпись, готовый к печати PNG. Без загрузки, без регистрации." />
+    <meta name="keywords" content="создатель коллажа свадебных фото, бесплатный онлайн-свадебный коллаж, коллаж save the date, коллаж для свадебного альбома, генератор фото-сетки для свадьбы">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Создатель коллажа свадебных фото — бесплатно, в браузере | WeddingAI.video</title>
+    <meta property="og:description" content="Сделайте коллаж из свадебных фото в браузере. 2–12 фото, несколько макетов, своя подпись, готовый к печати PNG. Без загрузки, без регистрации.">
+    <meta property="og:url" content="https://weddingai.video/ru/tools/wedding-photo-collage/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Создатель коллажа свадебных фото — бесплатный браузерный инструмент">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Создатель коллажа свадебных фото — бесплатно, в браузере | WeddingAI.video">
+    <meta name="twitter:description" content="Сделайте коллаж из свадебных фото в браузере. 2–12 фото, несколько макетов, готово к печати.">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Инструменты WeddingAI">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <!-- Caption fonts used on the rendered canvas. Loaded via Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap">
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+
+        /* Layout preview chips (visual aid inside the layout select). */
+        .wa-collage-layout-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: var(--spacing-sm); margin-top: 0.5rem; }
+        .wa-collage-layout-chip { border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.5rem; background: var(--color-bg-alt); text-align: center; cursor: pointer; transition: border-color .15s ease, background .15s ease; font-size: 0.8125rem; color: var(--color-secondary); }
+        .wa-collage-layout-chip:hover { border-color: var(--color-primary); background: #fff7e6; }
+        .wa-collage-layout-chip[aria-pressed="true"] { border-color: var(--color-primary); background: #fff7e6; box-shadow: inset 0 0 0 2px var(--color-primary); }
+        .wa-collage-layout-chip svg { width: 100%; height: 56px; display: block; }
+        .wa-collage-layout-chip-name { display: block; margin-top: 0.35rem; font-weight: 600; }
+        .wa-collage-layout-chip-sub { display: block; color: var(--color-text-light); font-size: 0.75rem; margin-top: 0.1rem; }
+
+        /* Inline color & caption preview controls. */
+        .wa-collage-caption-row { display: grid; grid-template-columns: 1fr 160px; gap: var(--spacing-sm); }
+        @media (max-width: 600px) { .wa-collage-caption-row { grid-template-columns: 1fr; } }
+        .wa-collage-color-row { display: flex; align-items: center; gap: var(--spacing-sm); }
+        .wa-collage-color-row input[type="color"] { width: 48px; height: 36px; padding: 0; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: #fff; cursor: pointer; }
+
+        /* Live preview canvas. */
+        .wa-collage-preview { display: block; max-width: 100%; margin: var(--spacing-md) auto 0; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-bg-alt); padding: var(--spacing-sm); }
+        .wa-collage-preview canvas { display: block; max-width: 100%; height: auto; margin: 0 auto; box-shadow: var(--shadow-sm); border-radius: var(--radius-sm); }
+        .wa-collage-preview-empty { color: var(--color-text-light); text-align: center; padding: var(--spacing-xl) var(--spacing-md); font-size: 0.9375rem; }
+
+        /* Counters and validation hints. */
+        .wa-collage-meta { font-size: 0.8125rem; color: var(--color-text-light); margin-top: 0.4rem; }
+        .wa-collage-meta.is-short { color: #b00020; }
+
+        /* Layout select options for those who want the dropdown instead of chips. */
+        .wa-collage-hidden { display: none; }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Главная","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"Бесплатные инструменты для свадебных фото","item":"https://weddingai.video/ru/tools/"},
+        {"@type":"ListItem","position":3,"name":"Создатель коллажа свадебных фото","item":"https://weddingai.video/ru/tools/wedding-photo-collage/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Создатель коллажа свадебных фото","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"Требуется современный браузер с поддержкой Canvas API и Google Fonts","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Бесплатный браузерный инструмент, который собирает 2–12 свадебных фото в один коллаж с 6 макетами (2×2, 3×3, 2×3, 3×4, горизонтальная полоса, вертикальная полоса), 4 соотношениями сторон (1:1, 4:5, 16:9, 4:3), настраиваемыми отступами, цветом фона, своей подписью с 5 свадебными шрифтами и готовым к печати PNG. Без загрузки, без регистрации.","url":"https://weddingai.video/ru/tools/wedding-photo-collage/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["Перетаскивание нескольких файлов","6 макетов: 2×2, 3×3, 2×3, 3×4, горизонтальная полоса, вертикальная полоса","4 соотношения: 1:1, 4:5, 16:9, 4:3","Регулируемые отступы (0–40 px) между фото","Выбор цвета фона","Подпись одним из 5 свадебных шрифтов: Playfair Display, Georgia, Inter, Cormorant Garamond, Great Vibes","Готовый к печати PNG на выходе","100% обработка на стороне клиента","Без загрузки, без регистрации"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Как собрать коллаж из свадебных фото в браузере","step":[
+        {"@type":"HowToStep","position":1,"name":"Перетащите или выберите 2–12 фото","text":"Перетащите JPG, PNG или WebP в зону перетаскивания или нажмите, чтобы выбрать. Максимум 12 — точное число определяет выбранный макет."},
+        {"@type":"HowToStep","position":2,"name":"Выберите макет и соотношение сторон","text":"Выберите 2×2, 3×3, 2×3, 3×4, горизонтальную полосу или вертикальную полосу. Затем — 1:1 (квадрат Instagram), 4:5 (портрет Instagram), 16:9 (презентация) или 4:3 (печать)."},
+        {"@type":"HowToStep","position":3,"name":"Настройте отступы, фон и подпись","text":"Сдвиньте регулятор отступов 0–40 px между фото, выберите цвет фона, введите подпись (дата, цитата, имена) и шрифт."},
+        {"@type":"HowToStep","position":4,"name":"Нажмите «Собрать коллаж»","text":"Страница отрисует живой предпросмотр через Canvas API. Обрезка с заполнением сохраняет лица и фигуры в кадре даже при смешанных вертикальных и горизонтальных исходниках."},
+        {"@type":"HowToStep","position":5,"name":"Скачайте","text":"Нажмите «Скачать», чтобы сохранить единый готовый к печати PNG (без ZIP, без лишних файлов)."}
+    ]}</script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/ru/" class="logo" title="WeddingAI.video — свадебные видео-услуги">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="Главная навигация">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Изучить свадебные видео-услуги" aria-haspopup="true" aria-expanded="false">Услуги <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Улучшение видео</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">Замедленная съёмка</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">Восстановление старых записей</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Персонализация</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">Свадебный трейлер</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI-генератор видео</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">Свадьба с питомцем</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">Многоязычное видео</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">Стиль мультфильма</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">Свадебные мемы</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Замена отсутствующих</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">Семейное посвящение</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">Семейное послание</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link">Все услуги →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/ru/tools/" title="Бесплатные инструменты для свадебных фото" style="color: var(--color-primary);">Бесплатные инструменты</a></li>
+                    <li><a href="/gallery/" title="Посмотреть наши работы и примеры">Галерея</a></li>
+                    <li><a href="/blog/" title="Читать блог о свадебных видео">Блог</a></li>
+                    <li><a href="/pricing/" title="Прозрачные цены">Цены</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Бесплатный расчёт — начать проект">Получить расчёт</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n>
+                        <select id="wa-lang-select" aria-label="Язык">
+                            <option value="en">EN</option>
+                            <option value="zh">中文</option>
+                            <option value="ru" selected>RU</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Переключить мобильное меню" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>Создатель коллажа свадебных фото</h1>
+                <p>Перетащите 2–12 свадебных фото, выберите макет, добавьте подпись — получите готовый к печати PNG за 30 секунд.</p>
+                <p class="wa-tool-privacy">Все файлы обрабатываются локально. Ничего не загружается.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="Навигационная цепочка">
+            <a href="/ru/">Главная</a> <span>›</span> <a href="/ru/tools/">Бесплатные инструменты</a> <span>›</span> <span>Создатель коллажа свадебных фото</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. Перетащите фото сюда</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="Перетащите свадебные фото или нажмите, чтобы выбрать">
+                    <div class="wa-tool-dropzone-title">Перетащите фото сюда или нажмите, чтобы выбрать</div>
+                    <div class="wa-tool-dropzone-hint">JPG, PNG, WebP • от 2 до 12 фото на коллаж</div>
+                    <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
+                </div>
+                <div class="wa-tool-empty" id="empty-state">Фото ещё нет — перетащите несколько, чтобы начать.</div>
+                <div class="wa-tool-file-list" id="file-list" hidden></div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. Макет и пропорции</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label id="layout-label">Макет</label>
+                        <div class="wa-collage-layout-grid" id="layout-grid" role="radiogroup" aria-labelledby="layout-label">
+                            <button type="button" class="wa-collage-layout-chip" role="radio" data-layout="grid-2x2" aria-checked="true" aria-pressed="true">
+                                <svg viewBox="0 0 60 56" preserveAspectRatio="none" aria-hidden="true">
+                                    <rect x="1" y="1" width="28" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="31" y="1" width="28" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="1" y="29" width="28" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="31" y="29" width="28" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span class="wa-collage-layout-chip-name">2 × 2</span>
+                                <span class="wa-collage-layout-chip-sub">4 фото</span>
+                            </button>
+                            <button type="button" class="wa-collage-layout-chip" role="radio" data-layout="grid-2x3" aria-checked="false" aria-pressed="false">
+                                <svg viewBox="0 0 60 56" preserveAspectRatio="none" aria-hidden="true">
+                                    <rect x="1" y="1" width="18" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="21" y="1" width="18" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="41" y="1" width="18" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="1" y="29" width="18" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="21" y="29" width="18" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="41" y="29" width="18" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span class="wa-collage-layout-chip-name">2 × 3</span>
+                                <span class="wa-collage-layout-chip-sub">6 фото</span>
+                            </button>
+                            <button type="button" class="wa-collage-layout-chip" role="radio" data-layout="grid-3x3" aria-checked="false" aria-pressed="false">
+                                <svg viewBox="0 0 60 56" preserveAspectRatio="none" aria-hidden="true">
+                                    <rect x="1" y="1" width="18" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="21" y="1" width="18" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="41" y="1" width="18" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="1" y="19" width="18" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="21" y="19" width="18" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="41" y="19" width="18" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="1" y="37" width="18" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="21" y="37" width="18" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="41" y="37" width="18" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span class="wa-collage-layout-chip-name">3 × 3</span>
+                                <span class="wa-collage-layout-chip-sub">9 фото</span>
+                            </button>
+                            <button type="button" class="wa-collage-layout-chip" role="radio" data-layout="grid-3x4" aria-checked="false" aria-pressed="false">
+                                <svg viewBox="0 0 60 56" preserveAspectRatio="none" aria-hidden="true">
+                                    <rect x="1" y="1" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="16" y="1" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="31" y="1" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="46" y="1" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="1" y="19" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="16" y="19" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="31" y="19" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="46" y="19" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="1" y="37" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="16" y="37" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="31" y="37" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="46" y="37" width="13" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span class="wa-collage-layout-chip-name">3 × 4</span>
+                                <span class="wa-collage-layout-chip-sub">12 фото</span>
+                            </button>
+                            <button type="button" class="wa-collage-layout-chip" role="radio" data-layout="strip-h" aria-checked="false" aria-pressed="false">
+                                <svg viewBox="0 0 60 56" preserveAspectRatio="none" aria-hidden="true">
+                                    <rect x="1" y="1" width="10.5" height="54" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="13.7" y="1" width="10.5" height="54" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="26.4" y="1" width="10.5" height="54" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="39.1" y="1" width="10.5" height="54" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="51.8" y="1" width="7.2" height="54" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span class="wa-collage-layout-chip-name">Полоса H</span>
+                                <span class="wa-collage-layout-chip-sub">5 в ряд</span>
+                            </button>
+                            <button type="button" class="wa-collage-layout-chip" role="radio" data-layout="strip-v" aria-checked="false" aria-pressed="false">
+                                <svg viewBox="0 0 60 56" preserveAspectRatio="none" aria-hidden="true">
+                                    <rect x="1" y="1" width="58" height="10.5" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="1" y="13.7" width="58" height="10.5" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="1" y="26.4" width="58" height="10.5" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="1" y="39.1" width="58" height="10.5" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="1" y="51.8" width="58" height="3.2" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span class="wa-collage-layout-chip-name">Полоса V</span>
+                                <span class="wa-collage-layout-chip-sub">5 в столбец</span>
+                            </button>
+                        </div>
+                        <input type="hidden" id="layout" value="grid-2x2">
+                        <small id="layout-help" class="wa-collage-meta">2 × 2 — 4 фото. Лучше всего для: save the date, квадратов в соцсетях.</small>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="aspect">Соотношение сторон</label>
+                        <select id="aspect">
+                            <option value="1:1" selected>1:1 — квадрат Instagram</option>
+                            <option value="4:5">4:5 — вертикаль Instagram</option>
+                            <option value="16:9">16:9 — презентация / десктоп</option>
+                            <option value="4:3">4:3 — печать 6×4 / 8×6</option>
+                        </select>
+                        <small>Задаёт размер холста. Выбирайте ту же форму, в которой будете публиковать или печатать.</small>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="padding">Отступ между фото: <span id="padding-val">8</span> px</label>
+                        <input type="range" id="padding" min="0" max="40" step="1" value="8">
+                        <small>Внешний отступ равен половине внутреннего. Больше — свободнее дыхание.</small>
+                    </div>
+                    <div class="wa-tool-control wa-collage-color-row">
+                        <label for="bg-color" style="flex: 1;">Цвет фона</label>
+                        <input type="color" id="bg-color" value="#FFFFFF" aria-label="Цвет фона коллажа">
+                    </div>
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>3. Подпись</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <div class="wa-collage-caption-row">
+                            <div>
+                                <label for="caption">Текст подписи (необязательно)</label>
+                                <input type="text" id="caption" maxlength="80" placeholder="например: Анна и Михаил — 14 июня 2026">
+                                <small class="wa-collage-meta">Одна строка. Рисуется внизу холста с мягкой тенью.</small>
+                            </div>
+                            <div>
+                                <label for="caption-font">Шрифт подписи</label>
+                                <select id="caption-font">
+                                    <option value="Playfair Display" selected>Playfair Display (по умолчанию)</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Inter">Inter</option>
+                                    <option value="Cormorant Garamond">Cormorant Garamond</option>
+                                    <option value="Great Vibes">Great Vibes (рукописный)</option>
+                                </select>
+                                <small class="wa-collage-meta">Все пять хорошо подходят для свадебного стиля.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled>Собрать коллаж</button>
+                    <button type="button" class="btn btn-primary" id="download-btn" disabled>Скачать PNG</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn">Очистить</button>
+                </div>
+                <div class="wa-tool-summary" id="summary" hidden></div>
+                <div class="wa-tool-banner">
+                    <strong>Конфиденциальность:</strong> каждое фото отрисовывается на Canvas в вашем браузере. Ничего не загружается на сервер — сервера просто нет. Вкладка браузера — единственное место, где происходит работа.
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>4. Предпросмотр</h2>
+                <div class="wa-collage-preview" id="preview-host">
+                    <div class="wa-collage-preview-empty" id="preview-empty">Добавьте фото, выберите макет, затем нажмите <strong>«Собрать коллаж»</strong>. Предпросмотр появится ниже.</div>
+                    <canvas id="preview-canvas" hidden></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>Когда пригодится коллаж из свадебных фото</h2>
+                <p>Коллаж — невероятно практичный визуальный актив свадебного оформления: одна тщательно скомпонованная раскладка служит сразу и приглашением, и внутренним разворотом благодарственной открытки, и обложкой альбома, и подарком родителям, и итоговым постом в Instagram. Хитрость в том, чтобы выбрать макет, подходящий носителю: Instagram не любит лиц по краям, фотопечать не терпит неравномерных белых полей, родительский альбом требует воздуха, чтобы фото не «давили» друг на друга.</p>
+
+                <h3>Приглашения (бумажные или электронные)</h3>
+                <ol>
+                    <li><strong>2 × 2 квадрат (1:1).</strong> Компактно, отлично смотрится на открытке 5×5, четыре ячейки могут обрамлять центральный текст с деталями.</li>
+                    <li><strong>Горизонтальная полоса (16:9).</strong> Одна панорамная помолвочная фотография как центральный образ, окружённая тремя деталями (кольца, цветы, место).</li>
+                    <li><strong>Вертикальная полоса (4:5).</strong> Журнальное удлинённое приглашение — хорошо смотрится и в Instagram DM, и при печати 5×7 с тонкой рамкой.</li>
+                </ol>
+
+                <h3>Благодарственные открытки (и печатные подарки родителям)</h3>
+                <ol>
+                    <li><strong>2 × 3 (4:5).</strong> 6 фото — «магическое число» для благодарственных открыток: достаточно содержательно, но без ощущения тесноты. Вертикальная пропорция подходит под американские 4×6 и 5×7.</li>
+                    <li><strong>3 × 3 (1:1).</strong> Классический квадрат девять-в-одном, не устаревает. Хорошо печатается 5×5 и выглядит в Instagram.</li>
+                    <li><strong>3 × 4 (4:5).</strong> Для разворотов родительского альбома — 12 самых важных кадров дня на одной странице. Можно совместить с нашим <a href="/ru/tools/add-text-to-wedding-photo/">инструментом «Добавить текст»</a>, чтобы подписать каждую ячейку.</li>
+                </ol>
+
+                <h3>Социальные итоги (Instagram, Facebook, ВКонтакте)</h3>
+                <ol>
+                    <li><strong>3 × 3 (1:1).</strong> Дружелюбный девятичный квадрат. В ленте квадратный, каждая страница карусели — тоже квадратная.</li>
+                    <li><strong>2 × 3 (4:5).</strong> Вертикальная шестёрка Instagram — занимает на 60% больше вертикального пространства в алгоритмическом превью, чем квадрат, и сильнее «ловит» скролл.</li>
+                    <li><strong>Горизонтальная полоса (16:9).</strong> Для обложки Facebook, заголовка LinkedIn или верха свадебного блога. Широкая пропорция хороша и для горизонтальной обрезки в Instagram-сетке.</li>
+                </ol>
+
+                <h2>Почему мы сделали это браузерным инструментом</h2>
+                <p>Почти все онлайн-сервисы коллажей загружают ваши фото на сервер, обрабатывают и отправляют обратно. В большинстве случаев это нормально, но свадебные снимки имеют особую приватность — часто на них моменты «только для своих», случайные кадры за кулисами, гости, которые не давали согласия на загрузку в чужое облако. Мы спроектировали этот инструмент так, чтобы он <strong>никогда не загружался на сервер</strong>: Canvas API собирает коллаж в вашей вкладке, PNG сохраняется сразу на устройство. Никакого анализа ваших фото, никакого сбора обучающих данных, никаких аккаунтов.</p>
+                <p>Эта же логика снимает нам проблему хостинга шрифтов. Большинство онлайн-инструментов вынуждены встраивать шрифты в страницу, чтобы они применялись при рендеринге, — их часто блокируют CDN, агрессивные блокировщики рекламы или лицензионные ограничения. Мы используем стратегию Google Fonts <code>font-display: swap</code>: Canvas даёт шрифту небольшое время на загрузку перед рендерингом, и только потом рисует подпись. В финальном коллаже не будет «тофу» или неожиданных резервных шрифтов.</p>
+
+                <h2>Доступность и чего этот инструмент <em>не</em> делает</h2>
+                <p>Коллаж — это визуальный продукт. Версия с подписью несёт одну строку текста, отрисованную поверх цвета фона с мягкой тенью, и текст остаётся читаемым как на светлых, так и на тёмных фото. Если нужно разместить длинные подписи в каждой ячейке — сначала воспользуйтесь нашим инструментом <a href="/ru/tools/add-text-to-wedding-photo/">«Добавить текст»</a>, чтобы подписать каждое исходное фото отдельно, а уже затем собирайте коллаж. Мы намеренно не делаем «текстовый коллаж» — скринридеры не могут прочесть текст из JPG, а сожжённый в изображение текст закрывает вашу свадебную историю для незрячих друзей. Для текстовой версии используйте исходные альбомы с подписями рядом.</p>
+
+                <h2>Пошаговое руководство</h2>
+                <ol>
+                    <li><strong>Сначала выберите фото.</strong> Откройте любимую папку альбома и отберите 4, 6, 9 или 12 снимков. Заранее расположите их мысленно в нужном порядке: слева направо, сверху вниз.</li>
+                    <li><strong>Перетащите фото.</strong> Бросьте их в зону перетаскивания или нажмите, чтобы выбрать из папки. Сразу появятся миниатюры — проверьте ориентацию.</li>
+                    <li><strong>Выберите макет.</strong> Нажмите на одну из шести миниатюр макета. Подсказка «Лучше всего для…» подскажет, к чему подходит выбор — используйте её как самопроверку.</li>
+                    <li><strong>Выберите пропорции.</strong> 1:1 — для Instagram, 4:5 — для вертикальной ленты и большинства видов печати, 16:9 — для широкоэкранного десктопа, 4:3 — для классической печати 6×4.</li>
+                    <li><strong>Настройте отступы, фон и подпись.</strong> Сдвиньте регулятор отступов; выберите цвет фона, который контрастирует с основными тонами; введите одну строку подписи и задайте шрифт.</li>
+                    <li><strong>Соберите коллаж.</strong> Нажмите <strong>«Собрать коллаж»</strong>. Canvas API компонует каждое фото по принципу «обрезки с заполнением» — лица не вытягиваются, а у горизонтальных снимков не возникает неловкого «растягивания по длинной стороне».</li>
+                    <li><strong>Скачайте.</strong> Кнопка <strong>«Скачать PNG»</strong> остаётся доступной после сборки — удобно пересобирать с разными настройками и экспортировать.</li>
+                </ol>
+
+                <h2>Частые вопросы</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>Сколько фото максимум можно положить в коллаж?</summary>
+                        <p>От 2 до 12. У каждого макета фиксированное число: 2 × 2 = 4, 2 × 3 = 6, 3 × 3 = 9, 3 × 4 = 12, горизонтальная полоса = 5, вертикальная полоса = 5. Если загружено меньше фото, чем требует макет, пустые ячейки закрашиваются цветом фона; если больше — берутся первые <em>n</em> снимков (остальные отмечаются в списке файлов).</p>
+                    </details>
+                    <details>
+                        <summary>Фото будут растянуты?</summary>
+                        <p>Нет. Каждое фото рисуется по принципу <code>object-fit: cover</code> — масштабируется по центру, чтобы заполнить ячейку, лишнее симметрично обрезается. Даже при смеси вертикальных и горизонтальных снимков в одном коллаже лица и фигуры остаются в композиции.</p>
+                    </details>
+                    <details>
+                        <summary>Что за формат на выходе?</summary>
+                        <p>Единый PNG в полиграфическом разрешении. Размер холста соответствует выбранным пропорциям — например, 1:1 даёт 1500 × 1500 px, 4:5 — 1500 × 1875 px, 16:9 — 1920 × 1080 px, 4:3 — 1600 × 1200 px. PNG — без потерь, поэтому файл крупнее JPG, но качество ровно то, что вы видели в предпросмотре.</p>
+                    </details>
+                    <details>
+                        <summary>Работает ли на iPhone и Android?</summary>
+                        <p>Да. iOS Safari и современный Android Chrome поддерживают Canvas API и Google Fonts. На телефоне нажмите на зону перетаскивания — откроется выбор из галереи.</p>
+                    </details>
+                    <details>
+                        <summary>Почему подпись только одна строка? Можно ли несколько?</summary>
+                        <p>Одна строка остаётся читаемой при уменьшении коллажа — Instagram-превью, миниатюра электронной открытки, печать 5×5. Нужна более длинная подпись или метки в каждой ячейке — сначала подпишите каждое исходное фото отдельно через <a href="/ru/tools/add-text-to-wedding-photo/">инструмент «Добавить текст»</a>.</p>
+                    </details>
+                    <details>
+                        <summary>Мои фото будут куда-то загружены?</summary>
+                        <p>Нет. Каждый пиксель собирается Canvas API в вашем браузере локально. Никакого сервера. Можете даже отключить Wi-Fi после загрузки — инструмент продолжит работать.</p>
+                    </details>
+                </div>
+
+                <h2>Другие бесплатные инструменты для свадебных фото</h2>
+                <p>Коллаж — финальный шаг рабочего процесса. Сначала подготовьте фото с помощью других инструментов набора:</p>
+                <div class="sibling-tools">
+                    <a href="/ru/tools/compress-wedding-photos/">Сжать фото</a>
+                    <a href="/ru/tools/heic-to-jpg-wedding-photos/">HEIC в JPG</a>
+                    <a href="/ru/tools/crop-wedding-photo-for-reels/">Кадрирование под вертикаль</a>
+                    <a href="/ru/tools/remove-background-wedding-portrait/">Удалить фон</a>
+                    <a href="/ru/tools/add-text-to-wedding-photo/">Добавить текст</a>
+                    <a href="/ru/tools/">Все инструменты</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>Похожие руководства</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-photo-slideshow/">
+                        <h4>Сделайте запоминающееся слайд-шоу из свадебных фото</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>Как сделать свадебное видео из фото (руководство по AI)</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/ai-tools-for-photographers/">
+                        <h4>AI-инструменты для фотографов — практическое руководство 2026</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-photo-checklist/">
+                        <h4>Чек-лист свадебных фото: что уточнить перед передачей видеографу</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Коллаж готов? Время для свадебного видео!</h2>
+                <p>Передайте фото нашему AI-генератору свадебного видео — через 48 часов получите кинематографичный ролик.</p>
+                <a href="/order/" class="btn btn-primary btn-large" title="Бесплатный расчёт — начать проект">Получить бесплатный расчёт →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/ru/" class="logo" title="WeddingAI.video — свадебные видео-услуги">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>AI-сервис свадебных видео для пар по всему миру.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Навигация в подвале">
+                <div class="footer-col">
+                    <h3>Ресурсы</h3>
+                    <ul>
+                        <li><a href="/blog/">Блог</a></li>
+                        <li><a href="/gallery/">Галерея</a></li>
+                        <li><a href="/about/">О нас</a></li>
+                        <li><a href="/ru/tools/">Бесплатные инструменты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Услуги</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">Замедленная съёмка</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI-генератор видео</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">Свадебный трейлер</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">Семейное посвящение</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="/order/">Получить расчёт</a></li>
+                        <li><a href="/pricing/">Цены</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. Все права защищены.</p>
+                <a href="/privacy/">Политика конфиденциальности</a> · <a href="/terms/">Условия использования</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+      var dropzone = document.getElementById('dropzone');
+      var input = document.getElementById('file-input');
+      var list = document.getElementById('file-list');
+      var empty = document.getElementById('empty-state');
+      var runBtn = document.getElementById('run-btn');
+      var downloadBtn = document.getElementById('download-btn');
+      var clearBtn = document.getElementById('clear-btn');
+      var layoutGrid = document.getElementById('layout-grid');
+      var layoutInput = document.getElementById('layout');
+      var layoutHelp = document.getElementById('layout-help');
+      var aspectEl = document.getElementById('aspect');
+      var paddingEl = document.getElementById('padding');
+      var paddingVal = document.getElementById('padding-val');
+      var bgEl = document.getElementById('bg-color');
+      var captionEl = document.getElementById('caption');
+      var captionFontEl = document.getElementById('caption-font');
+      var summaryEl = document.getElementById('summary');
+      var previewHost = document.getElementById('preview-host');
+      var previewEmpty = document.getElementById('preview-empty');
+      var previewCanvas = document.getElementById('preview-canvas');
+
+      // Layout definitions — rows × cols + count expected for each.
+      var LAYOUTS = {
+        'grid-2x2':  { rows: 2, cols: 2, count: 4,  help: '2 × 2 — 4 фото. Лучше всего для: save the date, квадратов в соцсетях.' },
+        'grid-2x3':  { rows: 2, cols: 3, count: 6,  help: '2 × 3 — 6 фото. Лучше всего для: благодарственных открыток, подарков родителям.' },
+        'grid-3x3':  { rows: 3, cols: 3, count: 9,  help: '3 × 3 — 9 фото. Лучше всего для: Instagram-каруселей, классической печати 5×5.' },
+        'grid-3x4':  { rows: 3, cols: 4, count: 12, help: '3 × 4 — 12 фото. Лучше всего для: разворотов родительского альбома, итогов дня.' },
+        'strip-h':   { rows: 1, cols: 5, count: 5,  help: 'Горизонтальная полоса — 5 в ряд. Лучше всего для: заголовков блога, обложек Facebook, панорамных рамок.' },
+        'strip-v':   { rows: 5, cols: 1, count: 5,  help: 'Вертикальная полоса — 5 в столбец. Лучше всего для: вертикальных каруселей Instagram, save the date в DM.' }
+      };
+
+      // Aspect ratio → canvas pixel dimensions (long edge ~1440 px max for print quality).
+      var ASPECTS = {
+        '1:1':  { w: 1500, h: 1500 },
+        '4:5':  { w: 1500, h: 1875 },
+        '16:9': { w: 1920, h: 1080 },
+        '4:3':  { w: 1600, h: 1200 }
+      };
+
+      var FONT_FAMILY = {
+        'Playfair Display':    "'Playfair Display', Georgia, serif",
+        'Georgia':             "Georgia, 'Times New Roman', serif",
+        'Inter':               "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        'Cormorant Garamond':  "'Cormorant Garamond', Georgia, serif",
+        'Great Vibes':         "'Great Vibes', cursive"
+      };
+
+      // Caption color: pure white reads against any background when paired with a shadow.
+      // We choose this automatically and don't expose it to avoid surprising users.
+      var CAPTION_COLOR = '#FFFFFF';
+
+      var files = [];
+      var lastBlob = null;
+      var lastOutputName = 'wedding-collage.png';
+
+      function refreshUI() {
+        empty.hidden = files.length > 0;
+        list.hidden = files.length === 0;
+        runBtn.disabled = files.length < 2;
+        // Download is only enabled once we've built at least one collage successfully.
+        downloadBtn.disabled = !lastBlob;
+        if (window.weddingAITool && window.weddingAITool.renderFileList) {
+          window.weddingAITool.renderFileList(list, files, function () {});
+          Array.prototype.forEach.call(list.children, function (row, i) {
+            window.weddingAITool.updateFileRow(row, files[i]);
+          });
+        }
+      }
+
+      function addFiles(picked) {
+        var before = files.length;
+        picked.forEach(function (f) {
+          if (!f) return;
+          var okType = f.type && /^image\/(jpeg|png|webp)$/.test(f.type);
+          var okExt = /\.(jpe?g|png|webp)$/i.test(f.name || '');
+          if (!okType && !okExt) return;
+          files.push({
+            status: 'queued',
+            name: f.name,
+            inputFile: f,
+            img: null,
+            previewUrl: URL.createObjectURL(f),
+            sizes: { orig: f.size, out: 0 },
+            error: null
+          });
+        });
+        if (files.length === before) {
+          window.weddingAITool.toast('Нет подходящих файлов. Попробуйте JPG, PNG или WebP.', 'error');
+          return;
+        }
+        refreshUI();
+      }
+
+      function clearAll() {
+        files.forEach(function (f) {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+        });
+        files = [];
+        lastBlob = null;
+        lastOutputName = 'wedding-collage.png';
+        summaryEl.hidden = true;
+        previewCanvas.hidden = true;
+        previewEmpty.hidden = false;
+        if (previewCanvas.getContext) {
+          var ctx = previewCanvas.getContext('2d');
+          if (ctx) ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+        }
+        refreshUI();
+      }
+
+      function loadAllImages() {
+        var promises = files.map(function (entry, i) {
+          if (entry.img && entry.img.complete) return Promise.resolve(i);
+          return window.weddingAITool.fileToImage(entry.inputFile)
+            .then(function (loaded) {
+              entry.img = loaded.img;
+            })
+            .catch(function (err) {
+              entry.status = 'error';
+              entry.error = err && err.message ? err.message : String(err);
+            });
+        });
+        return Promise.all(promises);
+      }
+
+      function computeCells(canvasW, canvasH, padding, rows, cols) {
+        var edgePad = Math.round(padding / 2);
+        var innerW = canvasW - edgePad * 2;
+        var innerH = canvasH - edgePad * 2;
+        var totalGapX = padding * (cols - 1);
+        var totalGapY = padding * (rows - 1);
+        var cellW = Math.floor((innerW - totalGapX) / cols);
+        var cellH = Math.floor((innerH - totalGapY) / rows);
+        var cells = [];
+        for (var r = 0; r < rows; r++) {
+          for (var c = 0; c < cols; c++) {
+            cells.push({
+              x: edgePad + c * (cellW + padding),
+              y: edgePad + r * (cellH + padding),
+              w: cellW,
+              h: cellH
+            });
+          }
+        }
+        return cells;
+      }
+
+      function drawCover(ctx, img, dx, dy, dw, dh) {
+        var iw = img.naturalWidth, ih = img.naturalHeight;
+        if (!iw || !ih) return;
+        var scale = Math.max(dw / iw, dh / ih);
+        var sw = dw / scale;
+        var sh = dh / scale;
+        var sx = (iw - sw) / 2;
+        var sy = (ih - sh) / 2;
+        ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+      }
+
+      function ensureFontLoaded(fontFamily) {
+        try {
+          if (!document.fonts || !document.fonts.load) return Promise.resolve();
+          return document.fonts.load("600 64px " + fontFamily).then(function () { return null; }).catch(function () { return null; });
+        } catch (_) { return Promise.resolve(); }
+      }
+
+      function wrapCaption(ctx, text, maxWidth) {
+        var words = text.split(/\s+/);
+        var lines = [];
+        var cur = '';
+        for (var i = 0; i < words.length; i++) {
+          var trial = cur ? (cur + ' ' + words[i]) : words[i];
+          if (ctx.measureText(trial).width > maxWidth && cur) {
+            lines.push(cur);
+            cur = words[i];
+          } else {
+            cur = trial;
+          }
+        }
+        if (cur) lines.push(cur);
+        return lines;
+      }
+
+      function drawCollage(canvas, images, layoutKey, aspectKey, padding, bgColor, caption, captionFontKey) {
+        var aspect = ASPECTS[aspectKey] || ASPECTS['1:1'];
+        var layout = LAYOUTS[layoutKey] || LAYOUTS['grid-2x2'];
+        canvas.width = aspect.w;
+        canvas.height = aspect.h;
+        var ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.fillStyle = bgColor || '#FFFFFF';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        var cells = computeCells(canvas.width, canvas.height, padding, layout.rows, layout.cols);
+        var used = Math.min(images.length, cells.length);
+        for (var i = 0; i < used; i++) {
+          drawCover(ctx, images[i], cells[i].x, cells[i].y, cells[i].w, cells[i].h);
+        }
+        for (var j = used; j < cells.length; j++) {
+          ctx.fillStyle = bgColor || '#FFFFFF';
+          ctx.fillRect(cells[j].x, cells[j].y, cells[j].w, cells[j].h);
+        }
+
+        if (caption && used > 0) {
+          var familyCss = FONT_FAMILY[captionFontKey] || FONT_FAMILY['Playfair Display'];
+          var fontSize = Math.max(28, Math.min(96, Math.round(canvas.height * 0.055)));
+          ctx.font = '600 ' + fontSize + 'px ' + familyCss;
+          ctx.textBaseline = 'middle';
+          ctx.textAlign = 'center';
+
+          var maxLineW = Math.floor(canvas.width * 0.9);
+          var lines = wrapCaption(ctx, caption, maxLineW);
+          if (lines.length > 2) lines = [lines[0], lines.slice(1).join(' ')];
+
+          var bandH = Math.round(fontSize * 1.6 * lines.length + fontSize);
+          var bandY = canvas.height - bandH;
+          ctx.fillStyle = 'rgba(0,0,0,0.35)';
+          ctx.fillRect(0, bandY, canvas.width, bandH);
+
+          ctx.shadowColor = 'rgba(0,0,0,0.65)';
+          ctx.shadowBlur = Math.max(4, Math.round(fontSize / 8));
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = Math.max(2, Math.round(fontSize / 14));
+          ctx.fillStyle = CAPTION_COLOR;
+
+          var lineGap = fontSize * 1.4;
+          var firstLineY = bandY + bandH / 2 - ((lines.length - 1) * lineGap) / 2;
+          for (var k = 0; k < lines.length; k++) {
+            ctx.fillText(lines[k], canvas.width / 2, firstLineY + k * lineGap);
+          }
+          ctx.shadowColor = 'transparent';
+          ctx.shadowBlur = 0;
+          ctx.shadowOffsetY = 0;
+        }
+      }
+
+      function updateLayoutHelp() {
+        var key = layoutInput.value;
+        if (LAYOUTS[key]) layoutHelp.textContent = LAYOUTS[key].help;
+      }
+
+      async function runBuild() {
+        if (files.length < 2) {
+          window.weddingAITool.toast('Добавьте хотя бы 2 фото, чтобы собрать коллаж.', 'error');
+          return;
+        }
+        runBtn.disabled = true;
+        runBtn.textContent = 'Собираем…';
+
+        try {
+          await loadAllImages();
+          var okFiles = files.filter(function (f) { return f.status !== 'error' && f.img; });
+          var errCount = files.length - okFiles.length;
+          if (okFiles.length < 2) {
+            window.weddingAITool.toast('Нужно хотя бы 2 читаемых фото.', 'error');
+            return;
+          }
+
+          var images = okFiles.map(function (f) { return f.img; });
+          var key = layoutInput.value;
+          var layout = LAYOUTS[key];
+          var used = Math.min(images.length, layout.count);
+          if (images.length > layout.count) {
+            window.weddingAITool.toast('Макет использует ' + layout.count + ' фото — ' + (images.length - layout.count) + ' лишних проигнорировано.', 'info');
+          }
+
+          await ensureFontLoaded(captionFontEl.value);
+
+          drawCollage(
+            previewCanvas,
+            images,
+            key,
+            aspectEl.value,
+            parseInt(paddingEl.value, 10),
+            bgEl.value,
+            (captionEl.value || '').trim(),
+            captionFontEl.value
+          );
+
+          previewCanvas.hidden = false;
+          previewEmpty.hidden = true;
+
+          var blob = await window.weddingAITool.canvasToBlob(previewCanvas, 'image/png');
+          if (!blob || blob.size === 0) throw new Error('Не удалось закодировать PNG на выходе.');
+          lastBlob = blob;
+          var layoutSlug = key.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+          var aspectSlug = aspectEl.value.replace(':', 'x');
+          lastOutputName = 'wedding-collage-' + layoutSlug + '-' + aspectSlug + '.png';
+
+          summaryEl.hidden = false;
+          summaryEl.innerHTML =
+            '<div><strong>' + used + '</strong> фото использовано</div>' +
+            '<div><strong>Макет:</strong> ' + layout.count + ' ячеек · ' + aspectEl.value + '</div>' +
+            '<div><strong>Размер:</strong> ' + previewCanvas.width + ' × ' + previewCanvas.height + ' px · ' +
+              window.weddingAITool.formatBytes(blob.size) + ' (PNG)</div>' +
+            (errCount ? '<div style="color:#b00020"><strong>' + errCount + '</strong> пропущено (не удалось декодировать).</div>' : '');
+
+          window.weddingAITool.toast('Коллаж собран. Нажмите «Скачать PNG».');
+        } catch (err) {
+          window.weddingAITool.toast((err && err.message) ? err.message : 'Не удалось собрать коллаж.', 'error');
+        } finally {
+          runBtn.disabled = false;
+          runBtn.textContent = 'Собрать коллаж';
+          refreshUI();
+        }
+      }
+
+      function downloadCollage() {
+        if (!lastBlob) return;
+        window.weddingAITool.download(lastBlob, lastOutputName);
+        window.weddingAITool.toast('Сохраняем ' + lastOutputName + '…');
+      }
+
+      window.weddingAITool.bindDropZone({
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
+        onFiles: addFiles
+      });
+
+      Array.prototype.forEach.call(layoutGrid.querySelectorAll('.wa-collage-layout-chip'), function (chip) {
+        chip.addEventListener('click', function () {
+          var key = chip.getAttribute('data-layout');
+          layoutInput.value = key;
+          Array.prototype.forEach.call(layoutGrid.querySelectorAll('.wa-collage-layout-chip'), function (c) {
+            var active = c === chip;
+            c.setAttribute('aria-pressed', active ? 'true' : 'false');
+            c.setAttribute('aria-checked', active ? 'true' : 'false');
+          });
+          updateLayoutHelp();
+        });
+      });
+
+      paddingEl.addEventListener('input', function () { paddingVal.textContent = paddingEl.value; });
+      runBtn.addEventListener('click', runBuild);
+      downloadBtn.addEventListener('click', downloadCollage);
+      clearBtn.addEventListener('click', clearAll);
+
+      list.addEventListener('wa-row-remove', function (e) {
+        var idx = parseInt((e.detail || '0'), 10);
+        if (isNaN(idx)) return;
+        var f = files[idx];
+        if (!f) return;
+        if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+        files.splice(idx, 1);
+        refreshUI();
+      });
+
+      updateLayoutHelp();
+      refreshUI();
+    })();
+    </script>
+</body>
+</html>

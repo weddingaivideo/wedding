@@ -1,0 +1,683 @@
+﻿﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>قص الصورة لـ Reels وإنستغرام — مجاني</title>
+    <link rel="canonical" href="https://weddingai.video/zh/tools/crop-wedding-photo-for-reels/">
+    
+    
+    
+    <meta name="description" content="قص صور الزفاف لـ Reels أو Stories أو مربع أو 16:9 — مع منطقة آمنة لإبقاء الوجه ظاهراً." />
+    <meta name="keywords" content="婚纱照裁剪 Reels, 婚纱照裁剪 Instagram, 9:16 裁剪, 1:1 裁剪婚纱照, Instagram 安全框 照片">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="قص صور الزفاف لـ Reels وإنستغرام — مجاني">
+    <meta property="og:description" content="为 Reels、Story、九宫格、16:9 裁剪婚纱照，带安全框预览，脸部居中不会裁掉。免费、浏览器内完成。">
+    <meta property="og:url" content="https://weddingai.video/zh/tools/crop-wedding-photo-for-reels/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="婚纱照裁剪 Reels/Instagram 比例 — 免费浏览器工具">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="婚纱照裁剪 Reels/Instagram 比例 — 免费 | WeddingAI.video">
+    <meta name="twitter:description" content="为 Reels、Story、九宫格、16:9 裁剪婚纱照。智能人脸安全偏移裁剪，100% 浏览器内完成。">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="WeddingAI 工具">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+        .wa-tool-toggle { display: flex; align-items: flex-start; gap: 0.55rem; font-weight: 600; font-size: 0.9375rem; color: var(--color-secondary); cursor: pointer; }
+        .wa-tool-toggle input[type="checkbox"] { margin-top: 0.18rem; accent-color: var(--color-primary); width: 18px; height: 18px; }
+        .wa-tool-toggle small { display: block; font-weight: 400; color: var(--color-text-light); font-size: 0.8125rem; margin-top: 0.2rem; }
+        .wa-tool-ratio-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--spacing-sm); align-items: end; }
+        @media (max-width: 600px) {
+            .wa-tool-ratio-row { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"首页","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"免费婚纱照工具","item":"https://weddingai.video/tools/"},
+        {"@type":"ListItem","position":3,"name":"婚纱照裁剪 Reels 比例","item":"https://weddingai.video/zh/tools/crop-wedding-photo-for-reels/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"婚纱照裁剪 Reels/Instagram 比例","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"需要支持 Canvas API 的现代浏览器","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"免费浏览器内工具，将婚纱照裁剪为 9:16 Reels、1:1 Instagram 九宫格、4:5 竖版、16:9 宽银幕、4:3 印刷或 9:16 Story 比例，带智能人脸安全偏移裁剪启发式。文件从不离开用户设备。","url":"https://weddingai.video/zh/tools/crop-wedding-photo-for-reels/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["9:16 Reels / TikTok (1080x1920)","1:1 Instagram 九宫格 (1080x1080)","4:5 竖版 (1080x1350)","16:9 宽银幕 (1920x1080)","4:3 印刷 (1600x1200)","9:16 Story (1080x1920)","智能人脸安全偏移裁剪","JPG 质量可调 (60-95)","Instagram 原生分辨率或原始最大输出","安全框 UI 叠层感知","100% 客户端运行","无需上传、无需注册"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"如何为 Reels 和 Instagram 裁剪婚纱照","step":[
+        {"@type":"HowToStep","position":1,"name":"拖入婚纱照","text":"拖入或点击浏览照片。支持 JPG、PNG、WebP，可批量处理。"},
+        {"@type":"HowToStep","position":2,"name":"选择目标平台","text":"9:16 用于 Reels/Tiktok 或 TikTok，1:1 用于九宫格帖子，4:5 用于竖版信息流，16:9 用于宽银幕，4:3 用于印刷，9:16 用于 Story。"},
+        {"@type":"HowToStep","position":3,"name":"开启智能人脸安全偏移（建议开启）","text":"开启后，裁剪窗口会偏向婚纱人像常见的人物位置，让新娘脸部留在画面内，而不是把背景放到正中央。"},
+        {"@type":"HowToStep","position":4,"name":"选择输出分辨率和 JPG 质量","text":"Instagram (1080xX) 直接上传，或 原始最大保留源像素。默认质量 85 是分享场景的甜点档。"},
+        {"@type":"HowToStep","position":5,"name":"点击裁剪并下载","text":"文件在浏览器内逐张处理。每张裁剪后的照片都有独立的下载按钮，或使用 全部保存 一键打包。"}
+    ]}</script>
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/crop-wedding-photo-for-reels/"><link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/crop-wedding-photo-for-reels/"><link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/tools/crop-wedding-photo-for-reels/"><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/crop-wedding-photo-for-reels/"></head>
+<body>
+    <a href="#main-content" class="skip-link">跳到主要内容</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video — 婚礼视频服务">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="主导航">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="浏览我们的婚礼视频服务" aria-haspopup="true" aria-expanded="false">服务 <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">视频增强</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">慢动作</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">老片修复</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">个性化</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">婚礼预告片</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI 视频生成器</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">宠物婚礼</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">多语言版本</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">卡通风格</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">婚礼表情包</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">缺席补偿</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">家族致敬</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">家人寄语</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link">查看全部服务 →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/tools/" title="免费婚纱照工具" style="color: var(--color-primary);">免费工具</a></li>
+                    <li><a href="/gallery/" title="查看我们的作品集与案例">作品集</a></li>
+                    <li><a href="/blog/" title="阅读我们的婚礼视频博客">博客</a></li>
+                    <li><a href="/pricing/" title="查看透明定价">定价</a></li>
+                    <li><a href="/order/" class="btn-nav" title="免费报价 — 开启你的项目">获取报价</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n>
+                        <select id="wa-lang-select" aria-label="语言">
+                            <option value="en">EN</option>
+                            <option value="zh" selected>中文</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="切换移动菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>أقلم صور الزفاف لمنصة Reels وإنستغرام</h1>
+                <p>أقلم لقطات الزفاف الأفقية لمنصة Reels والقصص والمنشورات المربعة والتغذية العمودية أو ١٦:٩ السينمائي — مع اقتصاص ذكي آمن للوجه يحافظ على مركز العروس. الإخراج بدقة أصلية لإنستغرام.</p>
+                <p class="wa-tool-privacy">تُعالَج الملفات محلياً. لا شيء يُرفع.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="面包屑导航">
+            <a href="/">首页</a> <span>›</span> <a href="/tools/">免费工具</a> <span>›</span> <span>婚纱照裁剪 Reels</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. 把照片拖到这里</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="拖入婚纱照或点击浏览">
+                    <div class="wa-tool-dropzone-title">拖照片到此处，或点击浏览</div>
+                    <div class="wa-tool-dropzone-hint">支持 JPG、PNG、WebP · 可批量处理 · 上限取决于浏览器内存</div>
+                    <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
+                </div>
+                <div class="wa-tool-empty" id="empty-state">还没有照片 — 把照片拖到上面开始。</div>
+                <div class="wa-tool-file-list" id="file-list" hidden></div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. 选择比例与设置</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control">
+                        <label for="aspect">目标长宽比</label>
+                        <select id="aspect">
+                            <option value='{"w":9,"h":16,"outW":1080,"outH":1920,"slug":"reels"}' selected>9:16 Reels / TikTok（1080×1920）</option>
+                            <option value='{"w":1,"h":1,"outW":1080,"outH":1080,"slug":"square"}'>1:1 Instagram 九宫格（1080×1080）</option>
+                            <option value='{"w":4,"h":5,"outW":1080,"outH":1350,"slug":"portrait"}'>4:5 竖版（1080×1350）</option>
+                            <option value='{"w":16,"h":9,"outW":1920,"outH":1080,"slug":"cinematic"}'>16:9 宽银幕（1920×1080）</option>
+                            <option value='{"w":4,"h":3,"outW":1600,"outH":1200,"slug":"print"}'>4:3 印刷（1600×1200）</option>
+                            <option value='{"w":9,"h":16,"outW":1080,"outH":1920,"slug":"story"}'>9:16 Story（1080×1920）</option>
+                        </select>
+                        <small>在你的照片内取最大能容纳此比例的矩形，浏览器再缩放到 Instagram 原生像素。</small>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label class="wa-tool-toggle">
+                            <input type="checkbox" id="smart-offset" checked>
+                            <span>
+                                智能人脸安全偏移
+                                <small>裁剪窗口偏向婚纱人像常见的人物位置。新娘的脸会留在画面内，而不是把背景放到正中央。横版素材开启选此项，若源图已是紧凑的竖版构图则可关闭。</small>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="output-res">裁剪输出分辨率</label>
+                        <select id="output-res">
+                            <option value="instagram" selected>Instagram（1080×X）— 直接上传</option>
+                            <option value="max">原始最大 — 保留源分辨率</option>
+                        </select>
+                        <small>Instagram 预设按平台原生像素输出。原始最大保留源像素数，适合归档。</small>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="quality">输出 JPG 质量：<span id="quality-val">85</span></label>
+                        <input type="range" id="quality" min="60" max="95" step="1" value="85">
+                        <small>数值越小文件越小。85 在大多数婚纱照上与原图几乎无差别。</small>
+                    </div>
+                </div>
+
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled>裁剪</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>全部保存</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn">清空</button>
+                </div>
+
+                <div class="wa-tool-summary" id="summary" hidden></div>
+
+                <div class="wa-tool-banner">
+                    <strong>隐私：</strong>所有照片都在你的设备上通过 Canvas API 本地处理。浏览器标签页是唯一发生处理的地方 — 不上传、不分析你的照片、无需账号。
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>3. 下载</h2>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的照片都会显示独立的下载按钮。点击 <strong>全部保存</strong> 一键打包整批文件。文件名会附加比例标签（例如 <code>-reels</code>、<code>-square</code>、<code>-story</code>），原图保持不变。</p>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>لماذا أقلم صور الزفاف على الإطلاق؟</h2>
+                <p>صورة الزفاف تُصوَّر تقريباً دائماً بـ ٣:٢ (DSLR) أو ٤:٣ (mirrorless) — كلاهما أفقي، كلاهما مُحسّن للطباعة على ورق قياسي. المنصات الاجتماعية تريد العكس. إنستغرام Reels وTikTok وإنستغرام Stories هي ٩:١٦ (عمودي طويل). الصورة المربعة في الخلاصة هي ١:١. التغذية العمودية هي ٤:٥. السينمائي عريض ١٦:٩ هو في الغالب لأغطية الفيديو ويوتيوب. لا شيء من هذه يتطابق مع الشكل الذي سلّمه المصور.</p>
+                <p>إذا رفعت صورة زفاف أفقية مباشرة إلى Reels ٩:١٦، تفعل المنصة أحد شيئين غير مفيدين: تضيف أشرطة سوداء فوق وتحت، أو ت ECONOM icrop تلقائياً. الاقتصادادي عادةً افتراضياً لمركز الصورة — وبالنسبة لصور الزفاف، هذا تقريباً دائماً الفجوة فوق رؤوس الزوجين (السماء، سقف المكان، قوس الباب) بدلاً من القبلة أو الحجاب أو إطار أول رقصة. صورتك تبدو عامة واللحظة تشعر بالنسبية.</p>
+
+                <h2>اصطلاحات اقتصاص إنستغرام التي تحتاجها فعلياً</h2>
+                <ul>
+                    <li>Reels / TikTok (٩:١٦، ١٠٨٠×١٩٢٠). ملء كامل عمودي. يُستخدم لمحتوى فيديو قصير الآن لمنشورات صور الكاروسيل في الخلاصة. الجزء السفلي ~٢٥٠ بكسل مغطى بشريط التعليق وإسناد الصوت؛ الحافة اليمنى بها سكة أزرار إجراء مكدسة. يجب أن تكون الوجوه في "المنطقة الآمنة" العلوية الوسطى.</li>
+                    <li>قصة إنستغرام (٩:١٦، ١٠٨٠×١٩٢٠). نفس شكل Reels، لكن الجزء العلوي ~٢٥٠ بكسل يستهلكه اسم ملف الناشر والإغلاق-X؛ الجزء السفلي ~٢٥٠ بكسل بصندوق الرد. منطقة المحتوى الآمن هي الحزمة العمودية الوسطى.</li>
+                    <li>منشور مربع (١:١، ١٠٨٠×١٠٨٠). اقتصاص الشبكة على معاينات الملف الشخصي يأكل ~١٠٪ من كل حافة. أبعد الوجوه المهمة بمسافة مريحة من كل الحافات الأربع.</li>
+                    <li>تغذية عمودية (٤:٥، ١٠٨٠×١٣٥٠). نسبة الصورة الأكثر موصى بها في التغذية في ٢٠٢٦ — تحصل على معظم مساحة الشاشة على الهواتف. لا واجهات رئيسية كبيرة، لكن اقتصاص الشبكة لا يزال يحدث.</li>
+                    <li>سينمائي (١٦:٩، ١٩٢٠×١٠٨٠). لإطارات سينمائية صور وبناة مدونات واطار الغلاف لأي فيديو زفاف بالذكاء الاصطناعي تصنعه. لا واجهة للتحميل تقلق.</li>
+                    <li>طباعة (٤:٣، ١٦٠٠×١٢٠٠). لكتب الصور وبطاقات الشكر والدعوات. أقرب لنسبة مستشعر الكاميرا الفعلية.</li>
+                </ul>
+
+                <h2>كيفية الأقلم دون فقدان القبلة</h2>
+                <p>أقرب نهج يدوي آمن هو تحديد أين في صورتك الموضوعات الأهم — الوجوه واليدان والقبلة والباقة — ثم اختيار نسبة عرض ارتفاع نافذة اقتصاصها تحتويهم جميعاً. الخطأ الكلاسيكي: اقتصاص "حيث تبدو الصورة متوازنة"، والذي على صورة زفاف أفقية عادةً يعني ترك ٦٠٪ من الإطار كسقف للمكان.</p>
+                <p>أداتنا ت AUTOM ate this with a simple bias: لصور الزفاف الأفقية (٣:٢ أو ١٦:٩)، منطقة الموضوع الأكثر احتمالاً هي قليلاً أسفل الوسط — حيث يقف الزوجان أثناء الصورة الشخصية وحيث يكون المذبح وحيث تحدث إطارات أول رقصة. نحن نحيز مركز نافذة الاقتصاص نحو الجزء السفلي الأوسط من الصورة (٦٠٪ للأسفل على محور Y). للصور المصدر العمودية، الزوجان عادةً أقرب للوسط العمودي، لذا نستخدم المتوسط الحقيقي.</p>
+
+                <h3>متى تقلب المفتاح لإيقافه</h3>
+                <p>إذا كانت صورتك بالفعل عمودية ومؤطرة بإحكام، المتوسط الحقيقي جيد — التحيز لأسفل سيدفع وجوه الزوجين خارج الإطار. بدّل الإقفال التلقائي الآمن للوجه لإيقافه عندما يكون المصدر عمودياً AND الرؤوس بالفعل قرب المركز العمودي. لكل شيء آخر، اتركه مفعّلاً.</p>
+
+                <h2>رياضيات المنطقة الآمنة (الخطوط المتقطعة)</h2>
+                <p>كل منصة تضع واجهة مستخدم فوق صورتك. Reels: شريط التعليق/الصوت في الأسفل (~١٣٪ عمودي). القصة: شريط الملف الشخصي العلوي plus صندوق الرسائل السفلي (~٢٦٪ عمودي مجتمعة). المنشورات المربعة: واجهة قليلة، لكن معاينة شبكة الملف الشخصي تقتصص كل حافة. أداتنا تحسب أكبر مستطيل داخل صورتك المصدر الذي يتطابق مع النسبة المستهدفة، منحاز نحو الموضوع، وتُخرج بدقة أصلية للمنصة. بهذه الطريقة، عند الرفع، تغطي الواجهة مساحة فارغة (خلفية، أرضية) وليس الزوجين.</p>
+
+                <h2>لماذا المنحرف أفضل من المتوسط الساذج</h2>
+                <p>صورة الزفاف نادراً ما تكون "موضوع في المتوسط الدقيق". قواعد التكوين (قاعدة الأثلاث، خطوط القيادة) تحيز الموضوع Away from center — عادةً قليلاً أسفل المتوسط على إطار أفقي. نظام اقتصاص متوسط ساذج يشطر الصورة عمياً ويشحنها، غالباً يقص وجه العروس تماماً. المنحرف التلقائي المستخدم هنا بسيط بشكل متعمد (لا كشف وجه، لا تعلّم آلي)، لكنه يطابق اصطلاح التصوير جيداً بما يكفي لمعالجة ~٨٥٪ من لقطات الزفاف بشكل صحيح من المحاولة الأولى.</p>
+
+                <h2>ماذا تفعل بصور الزفاف المقلمية</h2>
+                <p>بمجرد أن تحصل على دفعة نظيفة جاهزة للمنصة، إليك أكثر الاستخدامات شيوعاً:</p>
+                <ul>
+                    <li>حوّلها إلى فيلم زفاف سينمائي بالذكاء الاصطناعي — خدمتنا الأكثر شعبية. ارفع مفضلاتك، صف المزاج، احصل على فيلم ٦٠–٩٠ ثانية في حوالي ٤٨ ساعة. يبدأ من ٩.٩ دولار.</li>
+                    <li>اصنع فيديو زفاف من صورك — دليل خطوة بخطوة للذهاب من معرض ثابت إلى فيلم قابل للمشاركة، بما في ذلك نصائح نسبة العرض للارتفاع لـ Reels والقصص.</li>
+                    <li>اقرن بفكرة فيديو زفاف فريدة — Reels القصيرة تحصل على أكبر وصول، لذا الأقلم لـ ٩:١٦ أولاً هو مضاعف لأي مفهوم تختاره.</li>
+                    <li>استخدم سير العمل الاجتماعي أولاً — أقلم واضغط وانشر في ليلة واحدة.</li>
+                </ul>
+
+                <h2>الأسئلة الشائعة</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>هل هذا يحافظ على جودة الصورة؟</summary>
+                        <p>نعم. نرسم المستطيل المقلم من الصورة المصدر على كانفاس جديدة بدقة الإخراج المختارة ونُعيد ترميزه كـ JPG. التغيير الج единственный في الجودة هو إعادة الضغط القياسية JPG بالجودة التي تختارها (افتراضي ٨٥ — مطابقة بصرياً للمصدر تقريباً لكل لقطة زفاف). لا يُلمس أصلياتك أبداً؛ نحفظ نسخاً مع إضافة إلى اسم الملف.</p>
+                    </details>
+                    <details>
+                        <summary>ماذا لو كان مصدري أصغر من الإخراج المستهدف؟</summary>
+                        <p>الكانفاس ستكبر. للإعدادات المسبقة لإنستغرام (١٠٨٠×X) هذا نادراً ما مشكلة — صور الهواتف الحديثة ١٢+ ميغابيكسل و١٠٨٠ بكسل هو الحافة القصيرة. إذا كان مصدرك أصغر بكثير (لنقل صورة مصغرة ٦٠٠×٤٠٠) واخترت الإعداد المسبق السينمائي ١٦:٩، ستبدو النتيجة المكبرة طرية. استخدم خيار الإخراج "الأصلي الأقصى" بدلاً من ذلك في هذه الحالة.</p>
+                    </details>
+                    <details>
+                        <summary>ماذا عن صور المصدر العمودية؟</summary>
+                        <p>رياضيات الاقتصاص تتعامل معها — تختار أكبر مستطيل داخل الصورة يتطابق مع النسبة المستهدفة. إذا كان مصدرك بالفعل عمودياً واخترت هدفاً عمودياً (٩:١٦، ٤:٥)، يظل نقطة التحيز عند المتوسط الحقيقي لأن هذا حيث تضع صور الزفاف العمودية الموضوعات. بدّل الإقفال التلقائي الآمن للوجه لإيقافه إذا كان مصدرك العمودي له رؤوس قرب المركز العمودي وتريد نافذة الاقتصاص تخطي التحيز.</p>
+                    </details>
+                    <details>
+                        <summary>لماذا يبدو اقتصاص Reels مختلفاً عن اقتصاص القصة، رغم أن كلاهما ٩:١٦؟</summary>
+                        <p>إنهما نفس الشكل لكن المناطق الآمنة تختلف. Reels تضع التعليق وشرائح الصوت في الأسفل (~٢٥٠ بكسل)، لذا يجب أن تكون الوجوه في الجزء العلوي الأوسط. القصة تضع ملف الناشر في الأعلى وصندوق الرد في الأسفل (~٥٠٠ بكسل مجتمعة)، لذا يجب أن تكون الوجوه في الحزمة العمودية الوسطى. الأداة تُخرج نفس الصورة ١٠٨٠×١٩٢٠ لكلا النموذجين — عدّل أين تضع الزوجين قبل الرفع.</p>
+                    </details>
+                    <details>
+                        <summary>هل هناك طريقة لضبط الاقتصاص يدوياً؟</summary>
+                        <p>لا في هذه الأداة — إنها مقلم بنقرة واحدة للدفعة مصممة للحالة الشائعة. لتحكم يدوي كامل مع صناديق اقتصاص قابلة للسحب، نوصي باستخدام محرر صور المصدر (Lightroom، Photoshop، Snapseed) وتصدير المنطقة المختارة. المنحرف الآمن للوجه الذكي هنا يعالج ~٨٥٪ من لقطات الزفاف بشكل صحيح من المحاولة الأولى.</p>
+                    </details>
+                </div>
+
+                <h2>更多免费婚纱照工具</h2>
+                <p>裁剪只是工作流中的一步。结合本套件的其他工具继续：</p>
+                <div class="sibling-tools">
+                    <a href="/zh/tools/compress-wedding-photos/">压缩婚纱照</a>
+                    <a href="/zh/tools/heic-to-jpg-wedding-photos/">HEIC إلى JPG</a>
+                    <a href="/zh/tools/wedding-photo-collage/">照片拼图</a>
+                    <a href="/zh/tools/remove-background-wedding-portrait/">一键抠图</a>
+                    <a href="/zh/tools/add-text-to-wedding-photo/">添加文字</a>
+                    <a href="/zh/tools/">全部工具</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>相关文章</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>如何用照片做婚礼视频（AI 指南）</h4>
+                        <span>阅读文章 →</span>
+                    </a>
+                    <a class="related-card" href="/blog/unique-wedding-video-ideas/">
+                        <h4>真正让人想看完的独特婚礼视频创意</h4>
+                        <span>阅读文章 →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-social-media/">
+                        <h4>社交媒体婚礼视频：2026 年实操手册</h4>
+                        <span>阅读文章 →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-captions/">
+                        <h4>给婚礼视频加字幕、文案和话题标签的正确姿势</h4>
+                        <span>阅读文章 →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>裁剪完照片？准备做婚礼短片了？</h2>
+                <p>把它们交给我们的 AI 婚礼视频生成器，48 小时拿到一支电影感短片 — 适配 Reels、Story 和大屏。</p>
+                <a href="/order/" class="btn btn-primary btn-large" title="免费报价 — 开启你的项目">获取免费报价 →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo" title="WeddingAI.video — 婚礼视频服务">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>面向全球新人的 AI 婚礼视频服务。</p>
+            </div>
+            <nav class="footer-nav" aria-label="页脚导航">
+                <div class="footer-col">
+                    <h3>资源</h3>
+                    <ul>
+                        <li><a href="/blog/">博客</a></li>
+                        <li><a href="/gallery/">作品集</a></li>
+                        <li><a href="/about/">关于我们</a></li>
+                        <li><a href="/tools/">免费工具</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>服务</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">慢动作</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI 视频生成器</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">婚礼预告片</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">家族致敬</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>联系</h3>
+                    <ul>
+                        <li><a href="/order/">获取报价</a></li>
+                        <li><a href="/pricing/">定价</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. 版权所有。</p>
+                <a href="/privacy/">隐私政策</a> · <a href="/terms/">服务条款</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+      var dropzone = document.getElementById('dropzone');
+      var input = document.getElementById('file-input');
+      var list = document.getElementById('file-list');
+      var empty = document.getElementById('empty-state');
+      var runBtn = document.getElementById('run-btn');
+      var saveAllBtn = document.getElementById('save-all-btn');
+      var clearBtn = document.getElementById('clear-btn');
+      var aspectEl = document.getElementById('aspect');
+      var smartEl = document.getElementById('smart-offset');
+      var outputResEl = document.getElementById('output-res');
+      var qualityEl = document.getElementById('quality');
+      var qualityVal = document.getElementById('quality-val');
+      var summaryEl = document.getElementById('summary');
+
+      var files = [];
+
+      function refreshUI() {
+        empty.hidden = files.length > 0;
+        list.hidden = files.length === 0;
+        runBtn.disabled = files.length === 0 || files.every(function (f) { return f.status === 'done' || f.status === 'working'; });
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        if (window.weddingAITool && window.weddingAITool.renderFileList) {
+          window.weddingAITool.renderFileList(list, files, function () {});
+          Array.prototype.forEach.call(list.children, function (row, i) {
+            window.weddingAITool.updateFileRow(row, files[i]);
+          });
+        }
+      }
+
+      function addFiles(picked) {
+        picked.forEach(function (f) {
+          if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
+            return;
+          }
+          files.push({
+            status: 'queued',
+            name: f.name,
+            inputFile: f,
+            sizes: { orig: f.size, out: 0 },
+            output: null,
+            previewUrl: null,
+            error: null,
+          });
+        });
+        if (files.length === 0) { window.weddingAITool.toast('没有支持的文件。请使用 JPG、PNG 或 WebP。', 'error'); return; }
+        files.forEach(function (entry, idx) {
+          if (entry.previewUrl) return;
+          entry.previewUrl = URL.createObjectURL(entry.inputFile);
+        });
+        refreshUI();
+      }
+
+      function clearAll() {
+        files.forEach(function (f) {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+        });
+        files = [];
+        summaryEl.hidden = true;
+        refreshUI();
+      }
+
+      function getCurrentSettings() {
+        var aspect;
+        try {
+          aspect = JSON.parse(aspectEl.value);
+        } catch (e) {
+          aspect = { w: 9, h: 16, outW: 1080, outH: 1920, slug: 'reels' };
+        }
+        return {
+          aspect: aspect,
+          smart: !!smartEl.checked,
+          resolution: outputResEl.value,
+          quality: parseInt(qualityEl.value, 10) / 100,
+        };
+      }
+
+      // Compute the largest rectangle inside W x H that matches targetW:targetH,
+      // biased toward the off-center "subject centroid" when smart === true.
+      // Returns integer {cropX, cropY, cropW, cropH} clamped inside the source.
+      function computeCrop(W, H, targetW, targetH, smart) {
+        var srcAR = W / H;
+        var tgtAR = targetW / targetH;
+        var cropW, cropH;
+        if (srcAR > tgtAR) {
+          // Source is wider than target — use full H, narrow the width.
+          cropH = H;
+          cropW = H * tgtAR;
+        } else {
+          // Source is taller (or equal) — use full W, reduce the height.
+          cropW = W;
+          cropH = W / tgtAR;
+        }
+        // Choose the subject centroid per the smart face-safe heuristic.
+        var biasX, biasY;
+        if (smart) {
+          if (W >= H) {
+            // Landscape source — wedding subjects typically sit lower-center.
+            biasX = W * 0.5;
+            biasY = H * 0.6;
+          } else {
+            // Portrait source — vertical center is the convention.
+            biasX = W * 0.5;
+            biasY = H * 0.5;
+          }
+        } else {
+          biasX = W * 0.5;
+          biasY = H * 0.5;
+        }
+        // Clamp the crop's center to the bias point so the window stays inside the source.
+        var minCenterX = cropW / 2;
+        var maxCenterX = W - cropW / 2;
+        var minCenterY = cropH / 2;
+        var maxCenterY = H - cropH / 2;
+        var centerX = Math.max(minCenterX, Math.min(biasX, maxCenterX));
+        var centerY = Math.max(minCenterY, Math.min(biasY, maxCenterY));
+        var cropX = Math.round(centerX - cropW / 2);
+        var cropY = Math.round(centerY - cropH / 2);
+        cropW = Math.round(cropW);
+        cropH = Math.round(cropH);
+        // Final safety clamp to integer pixel bounds.
+        if (cropX < 0) cropX = 0;
+        if (cropY < 0) cropY = 0;
+        if (cropX + cropW > W) cropW = W - cropX;
+        if (cropY + cropH > H) cropH = H - cropY;
+        return { cropX: cropX, cropY: cropY, cropW: cropW, cropH: cropH };
+      }
+
+      async function processOne(entry, settings) {
+        entry.status = 'working';
+        entry.error = null;
+        refreshUI();
+
+        try {
+          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          var img = loaded.img;
+          var W = img.naturalWidth;
+          var H = img.naturalHeight;
+          if (!W || !H) throw new Error('图片没有尺寸，请换一个文件。');
+
+          var crop = computeCrop(W, H, settings.aspect.w, settings.aspect.h, settings.smart);
+
+          var outW, outH;
+          if (settings.resolution === 'instagram') {
+            outW = settings.aspect.outW;
+            outH = settings.aspect.outH;
+          } else {
+            outW = crop.cropW;
+            outH = crop.cropH;
+          }
+          if (outW < 1 || outH < 1) throw new Error('计算出的输出尺寸无效。');
+
+          var canvas = document.createElement('canvas');
+          canvas.width = outW;
+          canvas.height = outH;
+          var ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.fillStyle = '#000';
+          ctx.fillRect(0, 0, outW, outH);
+          ctx.drawImage(img, crop.cropX, crop.cropY, crop.cropW, crop.cropH, 0, 0, outW, outH);
+
+          var blob = await window.weddingAITool.canvasToBlob(canvas, 'image/jpeg', settings.quality);
+          if (!blob || blob.size === 0) throw new Error('裁剪返回空文件，请换一张图片。');
+
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
+          var ext = '.jpg';
+          var slug = (settings.aspect && settings.aspect.slug) ? settings.aspect.slug : 'crop';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-' + slug + ext);
+          URL.revokeObjectURL(loaded.url);
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
+        }
+        refreshUI();
+      }
+
+      async function runAll() {
+        var settings = getCurrentSettings();
+        runBtn.disabled = true;
+        for (var i = 0; i < files.length; i++) {
+          var f = files[i];
+          if (f.status === 'done') continue;
+          await processOne(f, settings);
+        }
+        runBtn.disabled = false;
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        renderSummary();
+        window.weddingAITool.toast('裁剪完成。');
+      }
+
+      function renderSummary() {
+        var done = files.filter(function (f) { return f.status === 'done' && f.output; });
+        var errs = files.filter(function (f) { return f.status === 'error'; });
+        if (done.length === 0) { summaryEl.hidden = true; return; }
+        var origTotal = done.reduce(function (s, f) { return s + f.sizes.orig; }, 0);
+        var outTotal = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
+        var ratio = origTotal > 0 ? ((origTotal - outTotal) / origTotal * 100) : 0;
+        summaryEl.hidden = false;
+        summaryEl.innerHTML =
+          '<div><strong>' + done.length + '</strong> 张已裁剪</div>' +
+          '<div><strong>输出合计：</strong> ' + window.weddingAITool.formatBytes(outTotal) +
+          '（原 ' + window.weddingAITool.formatBytes(origTotal) + '，' + (ratio >= 0 ? '−' : '+') + Math.abs(ratio).toFixed(1) + '%）</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' 张失败</strong> — 删除后重试。</div>' : '');
+      }
+
+      function saveAll() {
+        var outputs = files
+          .filter(function (f) { return f.status === 'done' && f.output; })
+          .map(function (f) { return { name: f.outputName, blob: f.output }; });
+        if (outputs.length === 0) return;
+        window.weddingAITool.downloadZip(outputs, 'cropped');
+        window.weddingAITool.toast('正在保存 ' + outputs.length + ' 个文件…');
+      }
+
+      // wire up
+      window.weddingAITool.bindDropZone({
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
+        onFiles: addFiles,
+      });
+
+      qualityEl.addEventListener('input', function () { qualityVal.textContent = qualityEl.value; });
+      runBtn.addEventListener('click', runAll);
+      saveAllBtn.addEventListener('click', saveAll);
+      clearBtn.addEventListener('click', clearAll);
+
+      list.addEventListener('wa-row-remove', function (e) {
+        var idx = parseInt((e.detail || '0'), 10);
+        if (!isNaN(idx)) {
+          var f = files[idx];
+          if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          files.splice(idx, 1);
+          refreshUI();
+        }
+      });
+
+      refreshUI();
+    })();
+    </script>
+</body>
+</html>

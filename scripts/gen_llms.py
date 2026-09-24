@@ -80,6 +80,8 @@ def section_for(p: Path) -> str:
         return "Services"
     if top.startswith("blog"):
         return "Blog"
+    if top.startswith("tools"):
+        return "Free Tools"
     if top in {"about", "gallery", "pricing", "resources", "order",
                "success", "privacy", "terms"}:
         return top.capitalize()
@@ -106,8 +108,8 @@ for p in all_html():
     sec = section_for(p)
     by_section.setdefault(sec, []).append((url, title, desc))
 
-SECTION_ORDER = ["Home", "Services", "Blog", "About", "Gallery", "Pricing",
-                 "Resources", "Order", "Success", "Privacy", "Terms", "Other"]
+SECTION_ORDER = ["Home", "Services", "Blog", "Free Tools", "About", "Gallery",
+                 "Pricing", "Resources", "Order", "Success", "Privacy", "Terms", "Other"]
 for sec in SECTION_ORDER:
     if sec not in by_section:
         continue

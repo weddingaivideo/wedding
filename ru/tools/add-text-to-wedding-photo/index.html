@@ -1,0 +1,1013 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Добавить текст на свадебное фото | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/ru/tools/add-text-to-wedding-photo/">
+    <link rel="alternate" hreflang="en" href="https://weddingai.video/tools/add-text-to-wedding-photo/">
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/add-text-to-wedding-photo/">
+    <link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/add-text-to-wedding-photo/">
+    <link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/add-text-to-wedding-photo/">
+    <meta name="description" content="Добавьте на свадебное фото дату, имена, посвящение или цитату. 14 шрифтов, полный контроль цвета и прозрачности, PNG на выходе. Бесплатно, без загрузки." />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Добавить текст на свадебное фото — бесплатный браузерный инструмент | WeddingAI.video">
+    <meta property="og:description" content="Добавьте на свадебное фото дату, имена, посвящение или цитату. 14 шрифтов, полный контроль цвета и прозрачности, PNG на выходе. 100% в браузере.">
+    <meta property="og:url" content="https://weddingai.video/ru/tools/add-text-to-wedding-photo/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Добавить текст на свадебное фото — бесплатный браузерный инструмент">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Добавить текст на свадебное фото — бесплатный браузерный инструмент | WeddingAI.video">
+    <meta name="twitter:description" content="Добавьте на свадебное фото дату, имена, посвящение или цитату. 14 шрифтов, полный контроль цвета и прозрачности, PNG на выходе.">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Инструменты WeddingAI">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+
+        /* Text-on-photo tool — page-local styles only */
+        .wa-text-preview-wrap {
+            position: relative;
+            width: 100%;
+            background: repeating-conic-gradient(#f3f3f3 0% 25%, #ffffff 0% 50%) 50% / 16px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wa-text-preview-canvas {
+            max-width: 100%;
+            max-height: 420px;
+            display: block;
+        }
+        .wa-text-preview-empty {
+            color: var(--color-text-light);
+            font-size: 0.9375rem;
+            padding: var(--spacing-lg);
+            text-align: center;
+        }
+        .wa-text-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+        .wa-text-color-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+        .wa-text-color-row input[type="color"] {
+            width: 44px;
+            height: 36px;
+            padding: 2px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            background: #fff;
+            cursor: pointer;
+        }
+        .wa-text-swatch-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.3rem;
+        }
+        .wa-text-swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 999px;
+            border: 2px solid var(--color-border);
+            cursor: pointer;
+            transition: transform 0.12s ease, border-color 0.12s ease;
+        }
+        .wa-text-swatch:hover { transform: scale(1.08); }
+        .wa-text-swatch.is-active { border-color: var(--color-primary); transform: scale(1.1); }
+        .wa-text-toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .wa-text-toggle-row label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9375rem;
+            color: var(--color-secondary);
+            cursor: pointer;
+        }
+        .wa-text-toggle-row input[type="checkbox"] { accent-color: var(--color-primary); }
+        @media (max-width: 720px) {
+            .wa-text-grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Главная","item":"https://weddingai.video/ru/"},
+        {"@type":"ListItem","position":2,"name":"Бесплатные инструменты для свадебных фото","item":"https://weddingai.video/ru/tools/"},
+        {"@type":"ListItem","position":3,"name":"Добавить текст на свадебное фото","item":"https://weddingai.video/ru/tools/add-text-to-wedding-photo/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Добавить текст на свадебное фото","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"Требуется современный браузер с поддержкой Canvas API","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Бесплатный браузерный инструмент для добавления на свадебное фото дат, имён, посвящений или цитат. 14 отобранных шрифтов, 5 положений текста, опциональная тень, полный контроль цвета, поддержка прозрачного PNG. Файлы остаются на устройстве.","url":"https://weddingai.video/ru/tools/add-text-to-wedding-photo/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["14 свадебных шрифтов","5 положений текста","Полный контроль цвета","Живой предпросмотр","Экспорт в прозрачный PNG"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Как добавить текст на свадебное фото в браузере","step":[
+        {"@type":"HowToStep","position":1,"name":"Загрузите свадебное фото","text":"Перетащите один или несколько снимков либо нажмите, чтобы выбрать. Поддерживаются JPG, PNG, WebP."},
+        {"@type":"HowToStep","position":2,"name":"Введите текст и выберите шрифт","text":"Заполните основной заголовок (например, «Save the Date · 14.06.2026») и при желании подзаголовок. Выберите один из 14 шрифтов, задайте размер, цвет, положение, смещение тени."},
+        {"@type":"HowToStep","position":3,"name":"Живой предпросмотр","text":"Предпросмотр обновляется мгновенно. Если фон пёстрый — включите тень, чтобы текст лучше читался."},
+        {"@type":"HowToStep","position":4,"name":"Скачайте PNG или JPG","text":"Нажмите «Применить ко всем», чтобы отрисовать все фото в очереди с текущими настройками. PNG пригодится для дальнейшей вёрстки, JPG — для прямой отправки. «Сохранить всё» скачивает всю партию за раз."}
+    ]}</script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/ru/" class="logo" title="WeddingAI.video — свадебные видео-услуги">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="Главная навигация">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Изучить свадебные видео-услуги" aria-haspopup="true" aria-expanded="false">Услуги <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Улучшение видео</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">Замедленная съёмка</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">Восстановление старых записей</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Персонализация</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">Свадебный трейлер</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI-генератор видео</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">Свадьба с питомцем</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">Многоязычное видео</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">Стиль мультфильма</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">Свадебные мемы</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Замена отсутствующих</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">Семейное посвящение</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">Семейное послание</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link">Все услуги →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/ru/tools/" title="Бесплатные инструменты для свадебных фото" style="color: var(--color-primary);">Бесплатные инструменты</a></li>
+                    <li><a href="/gallery/" title="Посмотреть наши работы и примеры">Галерея</a></li>
+                    <li><a href="/blog/" title="Читать блог о свадебных видео">Блог</a></li>
+                    <li><a href="/pricing/" title="Прозрачные цены">Цены</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Бесплатный расчёт — начать проект">Получить расчёт</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n>
+                        <select id="wa-lang-select" aria-label="Язык">
+                            <option value="en">EN</option>
+                            <option value="zh">中文</option>
+                            <option value="ru" selected>RU</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Переключить мобильное меню" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>Добавить текст на свадебное фото</h1>
+                <p>Подпишите дату свадьбы, имена, посвящение или памятную фразу прямо на фото. 14 отобранных шрифтов, полный контроль цвета и прозрачности, живой предпросмотр — всё в браузере.</p>
+                <p class="wa-tool-privacy">Файлы обрабатываются локально, на сервер ничего не загружается.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="Хлебные крошки">
+            <a href="/ru/">Главная</a> <span>›</span> <a href="/ru/tools/">Бесплатные инструменты</a> <span>›</span> <span>Добавить текст на свадебное фото</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. Загрузите свадебное фото</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="Перетащите свадебное фото или нажмите, чтобы выбрать">
+                    <div class="wa-tool-dropzone-title">Перетащите фото сюда или нажмите, чтобы выбрать</div>
+                    <div class="wa-tool-dropzone-hint">JPG, PNG, WebP • Можно несколько (один текст применится ко всем) • Лимит — память браузера</div>
+                    <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
+                </div>
+                <div class="wa-tool-empty" id="empty-state">Фото ещё нет — перетащите одно, чтобы начать.</div>
+                <div class="wa-tool-file-list" id="file-list" hidden></div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. Текст и стиль</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="primary-text">Основной заголовок</label>
+                        <input type="text" id="primary-text" maxlength="120" value="Save the Date · 14.06.2026" placeholder="например: Save the Date · 14.06.2026">
+                        <small>Текст основного заголовка, до 120 символов. При длинном тексте размер шрифта автоматически уменьшается.</small>
+                    </div>
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="secondary-text">Подзаголовок (необязательно)</label>
+                        <input type="text" id="secondary-text" maxlength="120" value="Анна и Михаил" placeholder="например: Анна и Михаил">
+                        <small>Для имён, места или короткой памятной фразы.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="font">Шрифт</label>
+                        <select id="font">
+                            <option value="Playfair Display" selected>Playfair Display (изящный с засечками)</option>
+                            <option value="Cormorant Garamond">Cormorant Garamond (утончённый с засечками)</option>
+                            <option value="Bodoni Moda">Bodoni Moda (контрастный с засечками)</option>
+                            <option value="DM Serif Display">DM Serif Display (заметный с засечками)</option>
+                            <option value="Cinzel">Cinzel (классические прописные)</option>
+                            <option value="Libre Baskerville">Libre Baskerville (переходный с засечками)</option>
+                            <option value="Lora">Lora (тёплый с засечками)</option>
+                            <option value="Abril Fatface">Abril Fatface (акцидентный с засечками)</option>
+                            <option value="Montserrat">Montserrat (чистый без засечек)</option>
+                            <option value="Inter">Inter (современный без засечек)</option>
+                            <option value="Great Vibes">Great Vibes (романтический рукописный)</option>
+                            <option value="Sacramento">Sacramento (каллиграфический рукописный)</option>
+                            <option value="Pacifico">Pacifico (плавный рукописный)</option>
+                            <option value="Dancing Script">Dancing Script (игривый рукописный)</option>
+                        </select>
+                        <small>14 шрифтов: с засечками, без засечек и рукописные.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="position">Положение</label>
+                        <select id="position">
+                            <option value="top">Сверху</option>
+                            <option value="top-center" selected>Сверху по центру</option>
+                            <option value="center">По центру</option>
+                            <option value="bottom-center">Снизу по центру</option>
+                            <option value="bottom">Снизу</option>
+                        </select>
+                        <small>«Снизу по центру» — классический формат save the date.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="primary-size">Размер основного заголовка: <span id="primary-size-val">56</span> px</label>
+                        <input type="range" id="primary-size" min="24" max="200" step="1" value="56">
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="secondary-size">Размер подзаголовка: <span id="secondary-size-val">24</span> px</label>
+                        <input type="range" id="secondary-size" min="16" max="120" step="1" value="24">
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="text-color">Цвет текста</label>
+                        <div class="wa-text-color-row">
+                            <input type="color" id="text-color" value="#FFFFFF">
+                            <div class="wa-text-swatch-row" id="swatch-row" aria-label="Быстрый выбор цвета">
+                                <button type="button" class="wa-text-swatch" data-color="#FFFFFF" style="background:#FFFFFF" aria-label="Белый"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#F4E4C1" style="background:#F4E4C1" aria-label="Шампань"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#D4AF37" style="background:#D4AF37" aria-label="Золотой"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#1A1A1A" style="background:#1A1A1A" aria-label="Чёрный"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#7A1F2B" style="background:#7A1F2B" aria-label="Бордовый"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#2C5F5D" style="background:#2C5F5D" aria-label="Шалфейный зелёный"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label>Тень</label>
+                        <div class="wa-text-toggle-row">
+                            <label><input type="checkbox" id="shadow-toggle" checked> Включить</label>
+                            <label for="shadow-offset" style="font-weight:400;color:var(--color-text-light);">Смещение: <span id="shadow-offset-val">2</span> px</label>
+                            <input type="range" id="shadow-offset" min="0" max="10" step="1" value="2" style="max-width:140px;">
+                        </div>
+                        <small>Полупрозрачная чёрная тень — текст читается на любом фоне.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="format">Формат вывода</label>
+                        <select id="format">
+                            <option value="image/png" selected>PNG (с поддержкой прозрачности, рекомендуется)</option>
+                            <option value="image/jpeg">JPG (компактнее, удобнее для отправки)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>3. Предпросмотр и скачивание</h2>
+                <div class="wa-text-preview-wrap" id="preview-wrap" aria-live="polite">
+                    <div class="wa-text-preview-empty" id="preview-empty">Перетащите фото, и появится живой предпросмотр.</div>
+                    <canvas id="preview-canvas" class="wa-text-preview-canvas" hidden></canvas>
+                </div>
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled>Применить ко всем</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>Сохранить всё</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn">Очистить</button>
+                </div>
+
+                <div class="wa-tool-summary" id="summary" hidden></div>
+
+                <div class="wa-tool-banner">
+                    <strong>Конфиденциальность:</strong> каждое фото обрабатывается локально через Canvas API в вашем браузере. Всё происходит только в вашей вкладке — без загрузки, без аналитики ваших фото, без аккаунта.
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>Зачем добавлять текст на свадебное фото?</h2>
+                <p>Прекрасный свадебный снимок замораживает мгновение — улыбку, платье, свет. А одна небольшая надпись превращает его в памятный сувенир, который гости действительно посмотрят: в приглашение, которое не выбросят, в искреннюю благодарственную открытку, в открывающий кадр годовщинного видео. Этот инструмент создан именно для таких «маленьких, но сильных» наложений. Всё в браузере, фото и текст остаются на вашем устройстве.</p>
+
+                <h3>Пять сценариев с текстом для молодожёнов</h3>
+                <ol>
+                    <li><strong>Save the Date.</strong> На помолвочной фотографии или first-look снимке напишите «Save the Date · 14.06.2026». Заголовок делает основную работу — увеличьте его и поставьте по центру (сверху по центру или снизу по центру — оба варианта хорошо работают).</li>
+                    <li><strong>Благодарственная открытка с фото.</strong> Короткая строка благодарности («Спасибо, что отпраздновали этот день с нами — Анна и Михаил»), рукописным шрифтом в углу, белая с лёгкой тенью.</li>
+                    <li><strong>Пост к годовщине в соцсетях.</strong> «Три года вместе» или «Десять лет», 120–160 px, одна большая надпись. Каллиграфические шрифты (Great Vibes, Sacramento) сохраняют романтичность даже в миниатюре.</li>
+                    <li><strong>Альбом для родителей и бабушек.</strong> Подпишите дату и место («Банф · 03.09.1994»), чтобы старшие могли привязать снимок ко времени. Классический шрифт с засечками — Playfair Display или Libre Baskerville — и оставьте тень по умолчанию.</li>
+                    <li><strong>Заголовок слайд-шоу из фото.</strong> Первый кадр <a href="/blog/wedding-photo-slideshow/">свадебного слайд-шоу</a> обычно несёт дату и имена. Отрисуйте этот кадр здесь и подайте его как первый слайд в монтаж.</li>
+                </ol>
+
+                <h3>Как выбрать шрифт</h3>
+                <p>Выбор шрифта несёт половину смысла «надписи». 14 шрифтов делятся на три группы, и у каждой свой идеальный сценарий:</p>
+                <ul>
+                    <li><strong>Каллиграфические рукописные</strong> (Great Vibes, Sacramento, Pacifico, Dancing Script) — романтичные, рукописные. Лучший выбор для приглашений, благодарственных открыток, годовщинных постов. Желательно с лёгкой тенью для читаемости на любом фоне.</li>
+                    <li><strong>С засечками</strong> (Playfair Display, Cormorant Garamond, Bodoni Moda, DM Serif Display, Cinzel, Libre Baskerville, Lora, Abril Fatface) — элегантные, сбалансированные, традиционные. Лучший выбор для save the date, формальных объявлений, родительских альбомов, заголовков слайд-шоу.</li>
+                    <li><strong>Без засечек</strong> (Montserrat, Inter) — современные, чистые, минималистичные. Подходят для современных свадеб, лаконичных альбомов, ненавязчивых подписей.</li>
+                </ul>
+                <p>Если сомневаетесь — <strong>Playfair Display</strong> (по умолчанию) — очень безопасный и элегантный шрифт с засечками, который одинаково хорошо выглядит почти на любом фото. Нужна более личная нота — переключайтесь на каллиграфический; нужно современнее — на шрифт без засечек.</p>
+
+                <h3>Тень, контраст и читаемость</h3>
+                <p>Тумблер тени добавляет под текстом мягкую полупрозрачную чёрную подложку со смещением. По умолчанию включена, смещение 2 px — почти не увеличивает файл, но сильно помогает на пёстром или засвеченном фоне: белый текст на фоне пляжного солнца или тёмного платья без тени может потеряться, а с тенью остаётся читаемым.</p>
+                <p>Если фон ровный и спокойный (студийный портрет, однотонная стена) — тень можно выключить и взять цвет, который и так контрастирует с фоном. На пёстрых и ярких фонах — оставляйте тень.</p>
+
+                <h2>От фото с подписью — к свадебному ролику</h2>
+                <p>Когда save the date выглядит как надо, то же фото с текстом становится открывающим кадром <a href="/blog/wedding-video-from-photos/">свадебного ролика</a>. <a href="/services/personalization/ai-video-generator/">AI-генератор свадебного видео</a> берёт первую надпись как название ролика и дальше оживляет остальные фото в ритме музыки. Многие пары делают так: сначала здесь отрисовывают первое фото с подписью, потом <a href="/ru/tools/compress-wedding-photos/">сжимают остальные</a> и отдают всё генератору.</p>
+                <p>Для альбома или <a href="/ru/tools/wedding-photo-collage/">коллажа</a> фото с текстом можно вставить в макет как заглавную ячейку — коллаж из 12 фото, где одна обложка идёт с подписью, готов как save the date целиком.</p>
+
+                <h2>Частые вопросы</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>Что если текст не помещается?</summary>
+                        <p>Холст при каждом предпросмотре заново измеряет ширину надписи. Если главный заголовок вылезает за край, размер автоматически уменьшается по 2 px за шаг до минимальных 24 px. Если при 24 px всё ещё широко — холст обрежет по краю; в этом случае укоротите текст или разнесите его на основной заголовок + подзаголовок в две строки.</p>
+                    </details>
+                    <details>
+                        <summary>Почему по умолчанию PNG?</summary>
+                        <p>PNG сохраняет нетронутыми пиксели оригинала за пределами текста и поддерживает прозрачность — это удобно, если файл потом пойдёт в вёрстку. JPG компактнее, и подходит сразу к отправке. В выпадающем списке формата можно переключиться на JPG, и рендер сразу переключится.</p>
+                    </details>
+                    <details>
+                        <summary>Можно подписать сразу несколько фото?</summary>
+                        <p>Да. Перетащите несколько фото сразу — настройки текста применятся ко всем. У каждой строки своя кнопка скачивания; «Сохранить всё» скачивает всю партию по порядку.</p>
+                    </details>
+                    <details>
+                        <summary>Подойдёт ли фото с подписью для AI-генератора свадебного видео?</summary>
+                        <p>Да. <a href="/services/personalization/ai-video-generator/">AI-генератор свадебного видео</a> использует фото с подписью как заглавный кадр. Отрисуйте здесь первое фото с текстом, затем загрузите весь набор — и получите ролик на 60–90 секунд.</p>
+                    </details>
+                    <details>
+                        <summary>Не будет ли текст размытым на печати?</summary>
+                        <p>При 300 DPI основной заголовок 56 px на фото шириной 2048 px — примерно 41 pt — отлично читается на 5×7 с расстояния вытянутой руки. Для крупных форматов (8×10 и больше) сначала поднимите основной заголовок до 80–100 px и только потом отрисуйте.</p>
+                    </details>
+                </div>
+
+                <h2>Другие бесплатные инструменты для свадебных фото</h2>
+                <p>«Добавить текст» — лишь шаг в рабочем процессе. Остальные инструменты набора закрывают всё остальное:</p>
+                <div class="sibling-tools">
+                    <a href="/ru/tools/compress-wedding-photos/">Сжать свадебные фото</a>
+                    <a href="/ru/tools/heic-to-jpg-wedding-photos/">HEIC → JPG</a>
+                    <a href="/ru/tools/wedding-photo-collage/">Коллаж из свадебных фото</a>
+                    <a href="/ru/tools/crop-wedding-photo-for-reels/">Кадрирование под Reels</a>
+                    <a href="/ru/tools/remove-background-wedding-portrait/">Удалить фон</a>
+                    <a href="/ru/tools/">Все инструменты</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>Похожие материалы</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-photo-slideshow/">
+                        <h4>Как сделать увлекательное слайд-шоу из свадебных фото</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>От фото к свадебному видео: полное руководство по AI</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-captions/">
+                        <h4>Субтитры для свадебного видео: практическое руководство по оформлению</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-invitation-video-guide/">
+                        <h4>Полное руководство по созданию видеоприглашения на свадьбу</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Текст на фото готов? Пора делать свадебный ролик</h2>
+                <p>Передайте фото AI-генератору свадебного видео — через 48 часов получите кинематографичный ролик.</p>
+                <a href="/order/" class="btn btn-primary btn-large" title="Бесплатный расчёт — начать проект">Получить бесплатный расчёт →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/ru/" class="logo" title="WeddingAI.video — свадебные видео-услуги">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>AI-сервис свадебных видео для пар по всему миру.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Навигация в подвале">
+                <div class="footer-col">
+                    <h3>Ресурсы</h3>
+                    <ul>
+                        <li><a href="/blog/">Блог</a></li>
+                        <li><a href="/gallery/">Галерея</a></li>
+                        <li><a href="/about/">О нас</a></li>
+                        <li><a href="/ru/tools/">Бесплатные инструменты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Услуги</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">Замедленная съёмка</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI-генератор видео</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">Свадебный трейлер</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">Семейное посвящение</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="/order/">Получить расчёт</a></li>
+                        <li><a href="/pricing/">Цены</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. Все права защищены.</p>
+                <a href="/privacy/">Политика конфиденциальности</a> · <a href="/terms/">Условия использования</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+
+      // ---------- font mapping (Google Font name → canvas stack) ------------------
+      // Per project policy: system-font fallbacks only. Names in the dropdown are
+      // the well-known Google Font names so couples recognize them; the actual
+      // canvas render uses the closest local stack in the same family.
+      var FONT_STACKS = {
+        'Playfair Display': "'Playfair Display', Georgia, serif",
+        'Cormorant Garamond': "'Cormorant Garamond', Georgia, serif",
+        'Bodoni Moda': "'Bodoni Moda', Georgia, serif",
+        'DM Serif Display': "'DM Serif Display', Georgia, serif",
+        'Cinzel': "'Cinzel', Georgia, serif",
+        'Libre Baskerville': "'Libre Baskerville', Georgia, serif",
+        'Lora': "'Lora', Georgia, serif",
+        'Abril Fatface': "'Abril Fatface', Georgia, serif",
+        'Montserrat': "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        'Inter': "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        'Great Vibes': "'Great Vibes', 'Apple Chancery', 'Snell Roundhand', cursive",
+        'Sacramento': "'Sacramento', 'Apple Chancery', cursive",
+        'Pacifico': "'Pacifico', 'Apple Chancery', cursive",
+        'Dancing Script': "'Dancing Script', 'Apple Chancery', cursive"
+      };
+      function fontStack(name) { return FONT_STACKS[name] || FONT_STACKS['Playfair Display']; }
+
+      // ---------- DOM --------------------------------------------------------------
+      var dropzone = document.getElementById('dropzone');
+      var input = document.getElementById('file-input');
+      var list = document.getElementById('file-list');
+      var empty = document.getElementById('empty-state');
+      var runBtn = document.getElementById('run-btn');
+      var saveAllBtn = document.getElementById('save-all-btn');
+      var clearBtn = document.getElementById('clear-btn');
+      var summaryEl = document.getElementById('summary');
+
+      var primaryTextEl = document.getElementById('primary-text');
+      var secondaryTextEl = document.getElementById('secondary-text');
+      var fontEl = document.getElementById('font');
+      var positionEl = document.getElementById('position');
+      var primarySizeEl = document.getElementById('primary-size');
+      var primarySizeVal = document.getElementById('primary-size-val');
+      var secondarySizeEl = document.getElementById('secondary-size');
+      var secondarySizeVal = document.getElementById('secondary-size-val');
+      var colorEl = document.getElementById('text-color');
+      var shadowToggleEl = document.getElementById('shadow-toggle');
+      var shadowOffsetEl = document.getElementById('shadow-offset');
+      var shadowOffsetVal = document.getElementById('shadow-offset-val');
+      var formatEl = document.getElementById('format');
+      var swatchRow = document.getElementById('swatch-row');
+
+      var previewCanvas = document.getElementById('preview-canvas');
+      var previewEmpty = document.getElementById('preview-empty');
+      var previewWrap = document.getElementById('preview-wrap');
+
+      var files = [];
+      var activeIndex = 0;
+      var renderTimer = null;
+
+      // ---------- helpers ----------------------------------------------------------
+      function getSettings() {
+        return {
+          primary: primaryTextEl.value || '',
+          secondary: secondaryTextEl.value || '',
+          fontName: fontEl.value || 'Playfair Display',
+          position: positionEl.value || 'bottom-center',
+          primarySize: parseInt(primarySizeEl.value, 10),
+          secondarySize: parseInt(secondarySizeEl.value, 10),
+          color: colorEl.value || '#FFFFFF',
+          shadow: !!shadowToggleEl.checked,
+          shadowOffset: parseInt(shadowOffsetEl.value, 10) || 0,
+          format: formatEl.value || 'image/png'
+        };
+      }
+
+      function swatchButtons() {
+        return swatchRow ? swatchRow.querySelectorAll('.wa-text-swatch') : [];
+      }
+      function refreshSwatchActive(c) {
+        var lower = (c || '').toLowerCase();
+        swatchButtons().forEach(function (b) {
+          if ((b.getAttribute('data-color') || '').toLowerCase() === lower) {
+            b.classList.add('is-active');
+          } else {
+            b.classList.remove('is-active');
+          }
+        });
+      }
+      swatchButtons().forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var c = btn.getAttribute('data-color');
+          colorEl.value = c;
+          refreshSwatchActive(c);
+          scheduleRender();
+        });
+      });
+      colorEl.addEventListener('input', function () {
+        refreshSwatchActive(colorEl.value);
+        scheduleRender();
+      });
+
+      function drawTextOnCanvas(ctx, img, settings) {
+        var w = img.naturalWidth, h = img.naturalHeight;
+        ctx.clearRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
+
+        var family = fontStack(settings.fontName);
+        var color = settings.color || '#FFFFFF';
+
+        // positions
+        var padX = Math.round(w * 0.06);
+        var padY = Math.round(h * 0.06);
+
+        function place(size, lines, isPrimary) {
+          if (!lines || !lines.length) return;
+          var totalH = 0;
+          for (var i = 0; i < lines.length; i++) totalH += size * 1.2;
+          var startY;
+          switch (settings.position) {
+            case 'top': startY = padY + size; break;
+            case 'top-center': startY = padY + size; break;
+            case 'center': startY = (h - totalH) / 2 + size; break;
+            case 'bottom': startY = h - padY - totalH + size; break;
+            case 'bottom-center':
+            default: startY = h - padY - totalH + size; break;
+          }
+          var align = (settings.position === 'top' || settings.position === 'bottom') ? 'left' : 'center';
+          for (var k = 0; k < lines.length; k++) {
+            var line = lines[k];
+            var fs = size;
+            // Auto-shrink on overflow
+            var maxW = w - padX * 2;
+            for (var tries = 0; tries < 20; tries++) {
+              ctx.font = '600 ' + fs + 'px ' + family;
+              var metrics = ctx.measureText(line);
+              if (metrics.width <= maxW || fs <= 14) break;
+              fs -= 2;
+            }
+            ctx.font = '600 ' + fs + 'px ' + family;
+            ctx.textBaseline = 'alphabetic';
+            ctx.fillStyle = color;
+            ctx.shadowColor = settings.shadow ? 'rgba(0,0,0,0.55)' : 'transparent';
+            ctx.shadowBlur = settings.shadow ? Math.max(2, settings.shadowOffset * 1.5) : 0;
+            ctx.shadowOffsetX = settings.shadow ? settings.shadowOffset : 0;
+            ctx.shadowOffsetY = settings.shadow ? settings.shadowOffset : 0;
+            var x;
+            if (align === 'center') {
+              ctx.textAlign = 'center';
+              x = w / 2;
+            } else {
+              ctx.textAlign = 'left';
+              x = padX;
+            }
+            var y = startY + k * (fs * 1.2);
+            ctx.fillText(line, x, y);
+          }
+          ctx.shadowColor = 'transparent';
+          ctx.shadowBlur = 0;
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = 0;
+          return totalH;
+        }
+
+        // Split by newline first, then wrap by chars for Russian/CJK as needed
+        function split(text, size) {
+          if (!text) return [];
+          var rawLines = String(text).split(/\n/);
+          var out = [];
+          for (var i = 0; i < rawLines.length; i++) {
+            var line = rawLines[i];
+            if (!line) { out.push(''); continue; }
+            ctx.font = '600 ' + size + 'px ' + family;
+            var maxW = w - padX * 2;
+            var words = line.split(/\s+/);
+            var current = '';
+            for (var j = 0; j < words.length; j++) {
+              var trial = current ? (current + ' ' + words[j]) : words[j];
+              if (ctx.measureText(trial).width <= maxW || !current) {
+                current = trial;
+              } else {
+                out.push(current);
+                current = words[j];
+              }
+            }
+            if (current) out.push(current);
+          }
+          return out;
+        }
+
+        if (settings.position === 'top' || settings.position === 'top-center') {
+          place(settings.primarySize, split(settings.primary, settings.primarySize), true);
+          // Secondary below primary
+          var startY2 = (function () {
+            switch (settings.position) {
+              case 'top': return padY + settings.primarySize * 1.4 + settings.secondarySize * 1.2;
+              case 'top-center': return padY + settings.primarySize * 1.4 + settings.secondarySize * 1.2;
+              default: return h - padY - settings.secondarySize * 1.2;
+            }
+          })();
+          if (settings.secondary) {
+            var sec = split(settings.secondary, settings.secondarySize);
+            ctx.font = '400 ' + settings.secondarySize + 'px ' + family;
+            ctx.fillStyle = color;
+            ctx.shadowColor = settings.shadow ? 'rgba(0,0,0,0.55)' : 'transparent';
+            ctx.shadowBlur = settings.shadow ? Math.max(2, settings.shadowOffset * 1.5) : 0;
+            ctx.shadowOffsetX = settings.shadow ? settings.shadowOffset : 0;
+            ctx.shadowOffsetY = settings.shadow ? settings.shadowOffset : 0;
+            for (var m = 0; m < sec.length; m++) {
+              ctx.textAlign = settings.position === 'top' ? 'left' : 'center';
+              ctx.fillText(sec[m], settings.position === 'top' ? padX : w / 2, startY2 + m * (settings.secondarySize * 1.2));
+            }
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+          }
+        } else {
+          if (settings.secondary) {
+            var linesSec = split(settings.secondary, settings.secondarySize);
+            var totalSec = linesSec.length * settings.secondarySize * 1.2;
+            place(settings.secondarySize, linesSec, false);
+            // primary above secondary, anchored to bottom
+            var primaryLines = split(settings.primary, settings.primarySize);
+            var totalPri = primaryLines.length * settings.primarySize * 1.2;
+            var startY3 = h - padY - totalPri - totalSec - settings.primarySize * 0.2;
+            ctx.shadowColor = settings.shadow ? 'rgba(0,0,0,0.55)' : 'transparent';
+            ctx.shadowBlur = settings.shadow ? Math.max(2, settings.shadowOffset * 1.5) : 0;
+            ctx.shadowOffsetX = settings.shadow ? settings.shadowOffset : 0;
+            ctx.shadowOffsetY = settings.shadow ? settings.shadowOffset : 0;
+            ctx.fillStyle = color;
+            ctx.font = '600 ' + settings.primarySize + 'px ' + family;
+            for (var n = 0; n < primaryLines.length; n++) {
+              ctx.textAlign = settings.position === 'bottom' ? 'left' : 'center';
+              ctx.fillText(primaryLines[n], settings.position === 'bottom' ? padX : w / 2, startY3 + n * (settings.primarySize * 1.2));
+            }
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+          } else {
+            place(settings.primarySize, split(settings.primary, settings.primarySize), true);
+          }
+        }
+      }
+
+      function scheduleRender() {
+        if (renderTimer) clearTimeout(renderTimer);
+        renderTimer = setTimeout(renderPreview, 80);
+      }
+
+      async function loadActive() {
+        if (files.length === 0) return null;
+        var entry = files[activeIndex] || files[0];
+        if (!entry || !entry.inputFile) return null;
+        var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+        entry.img = loaded.img;
+        return loaded;
+      }
+
+      async function renderPreview() {
+        if (files.length === 0) {
+          previewCanvas.hidden = true;
+          previewEmpty.hidden = false;
+          return;
+        }
+        try {
+          var loaded = await loadActive();
+          if (!loaded) return;
+          var img = loaded.img;
+          var w = img.naturalWidth, h = img.naturalHeight;
+          // Cap preview for big images
+          var maxSide = 1200;
+          var scale = Math.min(1, maxSide / Math.max(w, h));
+          previewCanvas.width = Math.round(w * scale);
+          previewCanvas.height = Math.round(h * scale);
+          var ctx = previewCanvas.getContext('2d');
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+          ctx.drawImage(img, 0, 0, previewCanvas.width, previewCanvas.height);
+          // Draw text on scaled canvas — settings font sizes interpreted as % of original
+          var settings = getSettings();
+          var pScale = previewCanvas.width / w;
+          var scaledSettings = {
+            primary: settings.primary,
+            secondary: settings.secondary,
+            fontName: settings.fontName,
+            position: settings.position,
+            primarySize: Math.max(12, Math.round(settings.primarySize * pScale)),
+            secondarySize: Math.max(10, Math.round(settings.secondarySize * pScale)),
+            color: settings.color,
+            shadow: settings.shadow,
+            shadowOffset: Math.max(0, Math.round(settings.shadowOffset * pScale))
+          };
+          drawTextOnCanvas(ctx, img, scaledSettings);
+          previewCanvas.hidden = false;
+          previewEmpty.hidden = true;
+          URL.revokeObjectURL(loaded.url);
+        } catch (err) {
+          previewCanvas.hidden = true;
+          previewEmpty.hidden = false;
+        }
+      }
+
+      function refreshUI() {
+        empty.hidden = files.length > 0;
+        list.hidden = files.length === 0;
+        runBtn.disabled = files.length === 0;
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        if (window.weddingAITool && window.weddingAITool.renderFileList) {
+          window.weddingAITool.renderFileList(list, files, function (i) { activeIndex = i; renderPreview(); });
+          Array.prototype.forEach.call(list.children, function (row, i) {
+            window.weddingAITool.updateFileRow(row, files[i]);
+          });
+        }
+      }
+
+      function addFiles(picked) {
+        picked.forEach(function (f) {
+          if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
+            return;
+          }
+          files.push({
+            status: 'queued',
+            name: f.name,
+            inputFile: f,
+            img: null,
+            sizes: { orig: f.size, out: 0 },
+            output: null,
+            previewUrl: URL.createObjectURL(f),
+            error: null
+          });
+        });
+        if (files.length === 0) { window.weddingAITool.toast('Нет подходящих файлов. Используйте JPG, PNG или WebP.', 'error'); return; }
+        refreshUI();
+        renderPreview();
+      }
+
+      function clearAll() {
+        files.forEach(function (f) {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+        });
+        files = [];
+        summaryEl.hidden = true;
+        previewCanvas.hidden = true;
+        previewEmpty.hidden = false;
+        refreshUI();
+      }
+
+      async function processOne(entry, settings) {
+        entry.status = 'working';
+        entry.error = null;
+        refreshUI();
+        try {
+          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          var img = loaded.img;
+          var w = img.naturalWidth, h = img.naturalHeight;
+          if (!w || !h) throw new Error('У изображения нет размеров — попробуйте другой файл.');
+
+          var canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          drawTextOnCanvas(ctx, img, settings);
+
+          var mime = settings.format;
+          var quality = (mime === 'image/jpeg') ? 0.92 : undefined;
+          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('Не удалось сохранить результат — попробуйте другой формат.');
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
+          var ext = (mime === 'image/png') ? 'png' : 'jpg';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-text.' + ext);
+          URL.revokeObjectURL(loaded.url);
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
+        }
+        refreshUI();
+      }
+
+      async function runAll() {
+        if (files.length === 0) return;
+        var settings = getSettings();
+        runBtn.disabled = true;
+        runBtn.textContent = 'Обработка…';
+        for (var i = 0; i < files.length; i++) {
+          var f = files[i];
+          if (f.status === 'done') continue;
+          await processOne(f, settings);
+        }
+        runBtn.disabled = false;
+        runBtn.textContent = 'Применить ко всем';
+        renderSummary();
+        window.weddingAITool.toast('Готово. Можно скачивать.');
+      }
+
+      function renderSummary() {
+        var done = files.filter(function (f) { return f.status === 'done' && f.output; });
+        var errs = files.filter(function (f) { return f.status === 'error'; });
+        if (done.length === 0) { summaryEl.hidden = true; return; }
+        var total = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
+        summaryEl.hidden = false;
+        summaryEl.innerHTML =
+          '<div><strong>' + done.length + '</strong> файлов обработано</div>' +
+          '<div><strong>Итог:</strong> ' + window.weddingAITool.formatBytes(total) + '</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + '</strong> с ошибкой.</div>' : '');
+      }
+
+      function saveAll() {
+        var outputs = files
+          .filter(function (f) { return f.status === 'done' && f.output; })
+          .map(function (f) { return { name: f.outputName, blob: f.output }; });
+        if (outputs.length === 0) return;
+        window.weddingAITool.downloadZip(outputs, 'with-text');
+        window.weddingAITool.toast('Сохраняем ' + outputs.length + ' файлов…');
+      }
+
+      window.weddingAITool.bindDropZone({
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
+        onFiles: addFiles
+      });
+
+      primaryTextEl.addEventListener('input', scheduleRender);
+      secondaryTextEl.addEventListener('input', scheduleRender);
+      fontEl.addEventListener('change', scheduleRender);
+      positionEl.addEventListener('change', scheduleRender);
+      primarySizeEl.addEventListener('input', function () { primarySizeVal.textContent = primarySizeEl.value; scheduleRender(); });
+      secondarySizeEl.addEventListener('input', function () { secondarySizeVal.textContent = secondarySizeEl.value; scheduleRender(); });
+      shadowToggleEl.addEventListener('change', scheduleRender);
+      shadowOffsetEl.addEventListener('input', function () { shadowOffsetVal.textContent = shadowOffsetEl.value; scheduleRender(); });
+
+      runBtn.addEventListener('click', runAll);
+      saveAllBtn.addEventListener('click', saveAll);
+      clearBtn.addEventListener('click', clearAll);
+
+      list.addEventListener('wa-row-remove', function (e) {
+        var idx = parseInt((e.detail || '0'), 10);
+        if (!isNaN(idx)) {
+          var f = files[idx];
+          if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          files.splice(idx, 1);
+          if (activeIndex >= files.length) activeIndex = Math.max(0, files.length - 1);
+          refreshUI();
+          renderPreview();
+        }
+      });
+
+      refreshSwatchActive(colorEl.value);
+      refreshUI();
+    })();
+    </script>
+</body>
+</html>

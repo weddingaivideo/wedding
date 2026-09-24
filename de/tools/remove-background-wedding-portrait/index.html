@@ -1,0 +1,693 @@
+﻿﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Hintergrund vom Hochzeitsporträt entfernen — Kostenlos</title>
+    <link rel="canonical" href="https://weddingai.video/zh/tools/remove-background-wedding-portrait/">
+    
+    
+    
+    <meta name="description" content="Entferne den einfarbigen Hintergrund (weiß, schwarz, grau) vom Porträt — perfekt für Einladungskarten." />
+    <meta name="keywords" content="婚纱照去背景, 去除白色背景婚纱照, 抠图婚纱照, 透明背景婚纱照, 婚纱请柬人像">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Hintergrundentferner für Hochzeitsporträts — Kostenlos">
+    <meta property="og:description" content="一键去除婚纱照中的纯色背景（白/灰/黑）—— 适合请柬、公告海报。免费、浏览器内完成，无需上传。">
+    <meta property="og:url" content="https://weddingai.video/zh/tools/remove-background-wedding-portrait/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="婚纱照人像去背景 — 浏览器内免费工具">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="婚纱照人像去背景 — 免费 | WeddingAI.video">
+    <meta name="twitter:description" content="一键去除婚纱照中的纯色背景 — 适合请柬、海报。免费、浏览器内完成。">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="WeddingAI 工具">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+        .wa-tool-color-row { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+        .wa-tool-color-row input[type="color"] { width: 48px; height: 36px; padding: 2px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-white); cursor: pointer; }
+        .wa-tool-color-row input[type="text"] { width: 110px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+        .wa-tool-color-presets { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem; }
+        .wa-tool-color-presets button { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--color-border); cursor: pointer; padding: 0; background-clip: content-box; }
+        .wa-tool-color-presets button:hover { border-color: var(--color-primary); transform: scale(1.08); }
+        .wa-tool-color-presets button[aria-pressed="true"] { border-color: var(--color-primary); box-shadow: 0 0 0 2px var(--color-primary); }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"首页","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"免费婚礼照片工具","item":"https://weddingai.video/zh/tools/"},
+        {"@type":"ListItem","position":3,"name":"婚纱照人像去背景","item":"https://weddingai.video/zh/tools/remove-background-wedding-portrait/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"婚纱照人像去背景","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"需要支持 Canvas API 和 Uint8ClampedArray 的现代浏览器","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"免费浏览器内工具，去除婚纱照中的纯色影楼背景（白/灰/黑），输出透明 PNG 或白底 JPG。可调颜色容差与边缘羽化，文件不离开用户设备。","url":"https://weddingai.video/zh/tools/remove-background-wedding-portrait/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["任意背景色选取（默认白色）","容差滑块 0–150","边缘羽化 0–8 px","输出：透明 PNG 或白底 JPG","100% 客户端处理","无需上传，无需注册"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"如何去除婚纱照的影楼背景","step":[
+        {"@type":"HowToStep","position":1,"name":"拖入照片","text":"将婚纱照（JPG、PNG、WebP）拖到投放区，或点击浏览选择文件。"},
+        {"@type":"HowToStep","position":2,"name":"选择背景颜色","text":"使用颜色选择器 — 默认白色（影楼最常见）。根据需要切换为灰、米、黑色。"},
+        {"@type":"HowToStep","position":3,"name":"设置容差（默认 50）","text":"从 50 起步。如果背景去不干净就调高，如果皮肤或头发被误吃就调低。"},
+        {"@type":"HowToStep","position":4,"name":"设置边缘羽化（默认 3 px）","text":"较窄的羽化带可以消除头发和肩膀边缘的硬光环。值越大越柔和，越小越锐利。"},
+        {"@type":"HowToStep","position":5,"name":"选择输出：透明 PNG 或白底 JPG","text":"PNG 保留透明，方便贴在彩色请柬上。JPG 用白底填充，方便直接打印或发布。"},
+        {"@type":"HowToStep","position":6,"name":"运行并下载","text":"点击「去除背景」，再点击每行的下载按钮，或用「全部保存」一次性下载所有结果。"}
+    ]}</script>
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/remove-background-wedding-portrait/"><link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/remove-background-wedding-portrait/"><link rel="alternate" hreflang="de" href="https://weddingai.video/de/tools/remove-background-wedding-portrait/"><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/remove-background-wedding-portrait/"></head>
+<body>
+    <a href="#main-content" class="skip-link">跳到主要内容</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video — Hochzeitsvideodienste">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="主导航">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="浏览我们的婚礼视频服务" aria-haspopup="true" aria-expanded="false">服务 <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">视频增强</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">慢动作</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">老片修复</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">个性化</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">婚礼预告片</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI 视频生成</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">宠物婚礼</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">多语言</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">卡通风格</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">婚礼表情包</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">缺席补偿</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">家人致敬</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">家人留言</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link">查看全部服务 →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/tools/" title="免费婚礼照片工具" style="color: var(--color-primary);">免费工具</a></li>
+                    <li><a href="/gallery/" title="查看我们的作品与案例">作品</a></li>
+                    <li><a href="/blog/" title="阅读我们的婚礼视频博客">博客</a></li>
+                    <li><a href="/pricing/" title="查看透明定价">定价</a></li>
+                    <li><a href="/order/" class="btn-nav" title="免费报价 — 开始你的项目">立即咨询</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n>
+                        <select id="wa-lang-select" aria-label="语言">
+                            <option value="en">EN</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="切换移动菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>Hintergrund aus Hochzeitsporträt entfernen</h1>
+                <p>Entfernen Sie einen sauberen Studio-Hintergrund – weiß, grau, schwarz oder jede einheitliche Farbe – aus dem Porträt eines Paares und setzen Sie es in einen Weinberg, eine Kathedrale oder ein individuelles Einladungsdesign ein.</p>
+                <p class="wa-tool-privacy">Dateien werden lokal verarbeitet. Nichts wird hochgeladen.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="面包屑导航">
+            <a href="/zh/">首页</a> <span>›</span> <a href="/zh/tools/">免费工具</a> <span>›</span> <span>婚纱照人像去背景</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. 把婚纱照拖到这里</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="将婚纱照拖到这里或点击浏览">
+                    <div class="wa-tool-dropzone-title">将人像拖到此处，或点击浏览</div>
+                    <div class="wa-tool-dropzone-hint">JPG、PNG、WebP • 单张人像效果最佳 • 上限取决于浏览器内存</div>
+                    <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
+                </div>
+                <div class="wa-tool-empty" id="empty-state">还没有照片 — 把上面的文件拖进来开始吧。</div>
+                <div class="wa-tool-file-list" id="file-list" hidden></div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. 背景颜色与控制</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control">
+                        <label for="bg-color">背景颜色</label>
+                        <div class="wa-tool-color-row">
+                            <input type="color" id="bg-color" value="#FFFFFF">
+                            <input type="text" id="bg-color-hex" value="#FFFFFF" maxlength="7" pattern="#?[0-9A-Fa-f]{6}" aria-label="背景颜色十六进制值">
+                        </div>
+                        <div class="wa-tool-color-presets" role="group" aria-label="常见背景预设">
+                            <button type="button" data-color="#FFFFFF" aria-pressed="true" title="白色" style="background:#FFFFFF;"></button>
+                            <button type="button" data-color="#F5F5F5" aria-pressed="false" title="米白" style="background:#F5F5F5;"></button>
+                            <button type="button" data-color="#808080" aria-pressed="false" title="灰色" style="background:#808080;"></button>
+                            <button type="button" data-color="#000000" aria-pressed="false" title="黑色" style="background:#000000;"></button>
+                            <button type="button" data-color="#E8DCC4" aria-pressed="false" title="米色" style="background:#E8DCC4;"></button>
+                            <button type="button" data-color="#1E3A5F" aria-pressed="false" title="深蓝" style="background:#1E3A5F;"></button>
+                        </div>
+                        <small>选取与实际影楼背景一致的颜色。传统影楼默认是白色。</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="tolerance">容差：<span id="tolerance-val">50</span></label>
+                        <input type="range" id="tolerance" min="0" max="150" step="1" value="50">
+                        <small>数值越大，去掉的像素越多。如果皮肤或头发也被吃掉了，就调小一点。</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="feather">边缘羽化：<span id="feather-val">3</span> 像素</label>
+                        <input type="range" id="feather" min="0" max="8" step="1" value="3">
+                        <small>让裁剪边缘变柔和，避免头发和肩部出现硬光环。</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="output-mode">输出格式</label>
+                        <select id="output-mode">
+                            <option value="png" selected>PNG（透明背景 — 可贴到任意底色上）</option>
+                            <option value="jpg">JPG（白色填充 — 直接打印或发布）</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled>去除背景</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>全部保存</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn">清空</button>
+                </div>
+
+                <div class="wa-tool-banner">
+                    <strong>提示：</strong>最适合平整、光线均匀的背景 — 影楼照、绿幕照、证件照风格。户外场景和带纹理墙面无法用「背景色去除」工具彻底清除，这类情况需要真正的 AI 语义分割模型。
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>3. 下载</h2>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的人像都有自己的下载按钮。用<strong>全部保存</strong>可以一次性获取整批照片。文件会以 <code>-nobg</code> 后缀追加到原文件名，原文件不会被修改。</p>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>Warum Hochzeitsporträts fast immer einen entfernbaren Hintergrund haben</h2>
+                <p>Wenn Sie sich jemals gefragt haben, warum so viele Paarporträts aussehen, als wären sie "vor einer Wand aus nichts" aufgenommen worden, dann是因为 sie wurden. Porträtstudios – und die meisten angesehenen Hochzeitsfotografen, die in Innenräumen arbeiten – verwenden eine nahtlose Papier- oder Stoffbahn als Hintergrund in einer einzigen, flachen Farbe. Weiß ist am häufigsten, weil es Hauttöne schmeichelt und zum Brautkleid passt, aber Sie werden auch Grau sehen (für hochkey-redaktionelle Looks), Schwarz (für Dramatik), Marineblau (für Vintage-Porträts) und zunehmend Beige oder Hellrosa.</p>
+                <p>Diese flache Farbe ist der Grund, warum dieses Tool funktioniert. Ein Studio-Hintergrund ist von Design her eine Farbe, die das Paar nicht hat. Ein Pixel, das "sehr nah an der Hintergrundfarbe" ist, ist mit ziemlicher Sicherheit Hintergrund. Ein Pixel, das "sehr weit von der Hintergrundfarbe" entfernt ist, ist mit ziemlicher Sicherheit das Paar. Der Trick liegt darin, die richtige Hintergrundfarbe zu wählen und zu entscheiden, wie streng der "nahe genug"-Schwellenwert ist – das ist, was der Toleranz-Regler tut.</p>
+
+                <h3>So funktioniert der Entferner tatsächlich</h3>
+                <p>Für jedes Pixel in Ihrem Foto messen wir den euklidischen Abstand im RGB-Farbraum zwischen der Farbe dieses Pixels und der von Ihnen gewählten Hintergrundfarbe. Liegt der Abstand unterhalb der von Ihnen eingestellten Toleranz, wird dieses Pixel als transparent (PNG) markiert oder mit Weiß gefüllt (JPG). Liegt der Abstand zwischen Toleranz und Toleranz + Ausblendung, wird der Alphawert des Pixels sanft ausgeblendet – das ist es, was den harten Ring vermeidet, den man manchmal um Haare und Schultern sieht. Liegt der Abstand weit über der Toleranz, bleibt das Pixel unverändert.</p>
+                <p>Die vollständige Berechnung läuft in einem einzigen Durchlauf über ein Uint8ClampedArray, was bedeutet, dass es für 4K-Bilder auf einem modernen Laptop schnell genug ist (ca. 2–5 Sekunden). Der Browser-Tab ist der einzige Ort, an dem diese Arbeit stattfindet – nichts wird auf einen Server hochgeladen.</p>
+
+                <h3>Hintergrund-Entferner vs. vollständiger KI-semantischer Segmentierer</h3>
+                <p>Dies ist der Teil, in dem Ehrlichkeit zählt. Dieses Tool ist keine KI. Es ist ein Farbabstand-Schnitt. Das ist genau das, was Sie für ein Studio-Porträt wollen, aber nicht das, was Sie für, sagen wir, ein Paar am Strand mit Palmen im Hintergrund wollen. Wenn Sie echte semantische Segmentierung benötigen – "sagen Sie mir, wo die Personen sind, unabhängig vom Hintergrund" – würden Sie zu einem cloudbasierten Modell wie rembg, Segment Anything oder dem kostenpflichtigen remove.bg-Service greifen. Diese sind langsamer, schwerer und erfordern typischerweise das Hochladen Ihres Fotos.</p>
+                <p>Der Grund, warum dieses Tool existiert, ist, dass der Hochzeitsporträt-Fall fast immer der Fall mit sauberem Hintergrund ist. Das Paar geht ins Studio, erhält 30 Fotos vor demselben grauen Nahtlospapier und möchte sie in einen Weinberg-Sonnenuntergang für die Save-the-Date-Karte setzen. Das ist ein Hintergrundfarben-Problem, kein Segmentierungsproblem – und es kann im Browser in Sekunden ohne Upload, ohne Konto, ohne Wasserzeichen gelöst werden.</p>
+
+                <h3>Wann Toleranz = 50 funktioniert (und wann man sie hochschrauben sollte)</h3>
+                <p>Der Standardwert von 50 ist kalibriert für einen perfekt gleichmäßigen weißen Hintergrund, der unter Studio-Blitzen aufgenommen wurde. Das deckt die Mehrheit der Fälle ab. Sie müssen den Regler erhöhen, wenn:</p>
+                <ul>
+                    <li>Der Hintergrund hat ungleichmäßige Beleuchtung. Auch "flache" Hintergründe haben Farbverläufe von oben (heller) nach unten (dunkler) bei Fensterlicht. Ein Hintergrund, der oben weiß und unten 220-Grau ist, benötigt eine Toleranz im Bereich 80–100.</li>
+                    <li>Es gibt einen leichten Farbstich. Einige Studios verwenden warmweiße Glühbirnen (Wolfram oder 3200K), die den Hintergrund zu einem cremigen 240-245-235 verschieben, anstatt reines 255-255-255. Toleranz 60–80 bewältigt es.</li>
+                    <li>Der Hintergrund ist von Natur aus grau oder beige. Graues Nahtlospapier (RGB ca. 128-128-128) hat mehr "Abstand" zwischen sich und einem normalen Hautton als Weiß, aber dieselbe Logik gilt. Toleranz 50–60 ist usually fine; 70–90 wenn es ungleichmäßig ist.</li>
+                </ul>
+                <p>Sie sollten die Toleranz senken, wenn Sie sehen, dass Haut, Haare oder Schleier zusammen mit dem Hintergrund ausblassen. Wenn Ihre Toleranz bei 100 liegt und das weiße Brautkleid verschluckt wird, senken Sie auf 60–70.</p>
+
+                <h3>Kantenausblendung: Das Geheimnis für saubere Haare</h3>
+                <p>Die Toleranzgrenze ist eine einzelne harte Linie – jedes Pixel entspricht entweder oder nicht. Ohne Ausblendung wird Haar vor einem weißen Hintergrund entweder zu einem scharfen Schnitt (niedrige Toleranz) oder zu einem durchscheinenden Geist (hohe Toleranz). Kantenausblendung löst dies, indem eine weiche Zone über die Toleranzschwelle hinaus hinzugefügt wird, wo Alpha gleichmäßig von 0 (transparent) auf 255 (deckend) übergeht. Drei Pixel ist der Standardwert und funktioniert für die meisten Porträts. Erhöhen Sie ihn auf 5–6 für lockiges Haar oder feinen Schleierspitze. Senken Sie ihn auf 0 für scharfkantige Grafiken wie gescannte Silhouetten.</p>
+
+                <h2>Was mit einem hintergrundfreien Porträt machen</h2>
+                <p>Ein transparentes PNG des Paares ist die universelle Eingabe für Hochzeitsdesign-Arbeiten. Die häufigsten nächsten Schritte:</p>
+                <ul>
+                    <li>Gestalten Sie eine Save-the-Date- oder Einladungskarte – setzen Sie das Paar in einen Weinberg zur goldenen Stunde, eine Kathedrale, einen Art-déco-Bogen oder einen individuell illustrierten Hintergrund ein. Canva, Photoshop und Figma verarbeiten transparente PNGs nativ.</li>
+                    <li>Verwandeln Sie das Porträt in einen 60-Sekunden-KI-Hochzeitsfilm – unser beliebtester Service. Laden Sie einige Ihrer Lieblings-Hintergründe hoch, fügen Sie Bewegungsanweisungen hinzu und erhalten Sie in ca. 48 Stunden einen kinematografischen Film.</li>
+                    <li>Erstellen Sie eine Fotor collace für Dankeskarten oder Gästebücher. Verwenden Sie dieses Tool zuerst, um Porträts vorzubereiten, und mischen Sie sie dann mit Schnappschüssen im Collage-Ersteller.</li>
+                    <li>Zuschneiden für Reels – sobald der Hintergrund weg ist, können Sie das Porträt enger für vertikale Formate zuschneiden, ohne die Komposition zu verlieren.</li>
+                </ul>
+                <p>Wenn Ihr Endziel ein Video ist, ist der KI-Hochzeitsvideo-Generator der natürliche nächste Schritt. Es ist dieselbe Philosophie wie im Browser, erstklassig beim Datenschutz: Hochladen, Stimmung beschreiben, Film erhalten. Ab 9,9 $ ohne Abonnement.</p>
+
+                <h2>Häufig gestellte Fragen</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>Funktioniert es auch bei Fotos, die im Freien oder auf strukturierten Wänden aufgenommen wurden?</summary>
+                        <p>Nein – dieses Tool zielt nur auf einfarbige Hintergründe. Außenszenen, Backsteinwände, Gärten oder Hintergründe mit gemischten Farben lassen sich nicht sauber entfernen, weil es keine "Hintergrundfarbe" zum Abgleichen gibt. Für diese benötigen Sie einen echten semantischen KI-Segmentierer (der das Hochladen Ihres Fotos zu einem Cloud-Dienst erfordert). Für den Studio-Porträt-Fall, den die meisten Paare tatsächlich haben, erledigt dieses Tool ihn jedoch sofort.</p>
+                    </details>
+                    <details>
+                        <summary>Wie unterscheidet sich dies von remove.bg oder Photoshop's "Motiv auswählen"?</summary>
+                        <p>Dies sind vollständige semantische Segmentierer, die das Motiv unabhängig vom Hintergrund identifizieren. Dieses Tool gleicht nur gegen eine Hintergrundfarbe ab, die Sie wählen. Für Studioaufnahmen ist das Ergebnis vergleichbar – und dieses läuft vollständig in Ihrem Browser, ohne Upload, ohne Wasserzeichen und ohne Konto. Für Außen- oder komplexe Szenen verwenden Sie stattdessen ein semantisches Tool.</p>
+                    </details>
+                    <details>
+                        <summary>Was ist, wenn der Hintergrund nicht rein weiß ist?</summary>
+                        <p>Verwenden Sie die Farbauswahl (oder eine der Preset-Schaltflächen: Off-White, Grau, Beige, Marineblau), um den tatsächlichen Hintergrund abzugleichen. Wenn Ihr Foto ungleichmäßige Beleuchtung auf dem Hintergrund hat, erhöhen Sie die Toleranz auf 80–100, um auch die dunkleren Bereiche zu erfassen.</p>
+                    </details>
+                    <details>
+                        <summary>Warum ist mein PNG größer als das JPG, von dem es stammt?</summary>
+                        <p>PNG mit einem Alphakanal speichert Pixel-für-Pixel-Transparenzdaten. Für die meisten Hochzeitsfotos sind das 30–80% mehr Bytes als dasselbe Bild als JPG mit weißer Füllung. Das ist der Kompromiss: PNG gibt Ihnen einen transparenten Hintergrund (Sie können das Paar auf alles setzen), JPG gibt Ihnen eine kleinere Datei (Sie können sie direkt posten). Wählen Sie den Ausgabemodus, der zu Ihrem Anwendungsfall passt.</p>
+                    </details>
+                    <details>
+                        <summary>Beeinflusst die Ausblendung die Dateigröße oder -qualität?</summary>
+                        <p>Nein. Ausblendung ändert nur, auf welcher Seite der Alpha-Grenze jedes Pixel landet; das Dateiformat und die Bittiefe bleiben unverändert. Der einzige sichtbare Unterschied ist, dass Kanten weicher aussehen.</p>
+                    </details>
+                    <details>
+                        <summary>Gibt es eine Begrenzung der Dateigröße oder -anzahl?</summary>
+                        <p>Keine harte Begrenzung. Die praktische Grenze ist der Speicher Ihres Geräts – ein einzelnes 4K-Porträt verwendet ca. 64 MB Arbeitsspeicher, und zehn davon ca. 640 MB. Wenn der Browser-Tab bei einer großen Stapelverarbeitung abstürzt, laden Sie neu und verarbeiten Sie weniger auf einmal.</p>
+                    </details>
+                </div>
+
+                <h2>更多免费婚礼照片工具</h2>
+                <p>一旦你的婚纱照有了透明背景，整个设计流程就打开了：</p>
+                <div class="sibling-tools">
+                    <a href="/zh/tools/compress-wedding-photos/">照片压缩</a>
+                    <a href="/zh/tools/wedding-photo-collage/">照片拼图</a>
+                    <a href="/zh/tools/crop-wedding-photo-for-reels/">竖屏裁剪</a>
+                    <a href="/zh/tools/add-text-to-wedding-photo/">加文字</a>
+                    <a href="/zh/tools/heic-to-jpg-wedding-photos/">HEIC → JPG</a>
+                    <a href="/zh/tools/">全部工具</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>相关文章</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/zh/blog/wedding-video-from-photos/">
+                        <h4>如何用照片制作婚礼视频（AI 指南）</h4>
+                        <span>阅读全文 →</span>
+                    </a>
+                    <a class="related-card" href="/zh/blog/wedding-invitation-video-guide/">
+                        <h4>婚礼请柬视频：2026 完整指南</h4>
+                        <span>阅读全文 →</span>
+                    </a>
+                    <a class="related-card" href="/zh/blog/ai-photos-to-wedding-video/">
+                        <h4>从婚纱照到电影感 AI 短片</h4>
+                        <span>阅读全文 →</span>
+                    </a>
+                    <a class="related-card" href="/zh/blog/wedding-slideshow-guide/">
+                        <h4>做出让人回味的婚礼照片轮播</h4>
+                        <span>阅读全文 →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>已经拿到去背景的人像？准备好做婚礼短片了吗？</h2>
+                <p>把你最喜欢的照片交给我们的 AI 婚礼视频生成器，48 小时内拿到电影感短片。</p>
+                <a href="/order/" class="btn btn-primary btn-large" title="免费报价 — 开始你的项目">免费报价 →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo" title="WeddingAI.video — wedding video services">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>为全球新人提供 AI 驱动的婚礼视频服务。</p>
+            </div>
+            <nav class="footer-nav" aria-label="页脚导航">
+                <div class="footer-col">
+                    <h3>资源</h3>
+                    <ul>
+                        <li><a href="/zh/blog/">博客</a></li>
+                        <li><a href="/gallery/">作品</a></li>
+                        <li><a href="/about/">关于我们</a></li>
+                        <li><a href="/zh/tools/">免费工具</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>服务</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">慢动作</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI 视频生成</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">婚礼预告片</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">家人致敬</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>联系</h3>
+                    <ul>
+                        <li><a href="/order/">立即咨询</a></li>
+                        <li><a href="/pricing/">定价</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. 保留所有权利。</p>
+                <a href="/privacy/">隐私政策</a> · <a href="/terms/">服务条款</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+      var dropzone = document.getElementById('dropzone');
+      var input = document.getElementById('file-input');
+      var list = document.getElementById('file-list');
+      var empty = document.getElementById('empty-state');
+      var runBtn = document.getElementById('run-btn');
+      var saveAllBtn = document.getElementById('save-all-btn');
+      var clearBtn = document.getElementById('clear-btn');
+      var bgColorEl = document.getElementById('bg-color');
+      var bgColorHex = document.getElementById('bg-color-hex');
+      var toleranceEl = document.getElementById('tolerance');
+      var toleranceVal = document.getElementById('tolerance-val');
+      var featherEl = document.getElementById('feather');
+      var featherVal = document.getElementById('feather-val');
+      var outputModeEl = document.getElementById('output-mode');
+
+      var files = [];
+
+      function refreshUI() {
+        empty.hidden = files.length > 0;
+        list.hidden = files.length === 0;
+        runBtn.disabled = files.length === 0 || files.every(function (f) { return f.status === 'done' || f.status === 'working'; });
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        if (window.weddingAITool && window.weddingAITool.renderFileList) {
+          window.weddingAITool.renderFileList(list, files, function () {});
+          Array.prototype.forEach.call(list.children, function (row, i) {
+            window.weddingAITool.updateFileRow(row, files[i]);
+          });
+        }
+      }
+
+      function addFiles(picked) {
+        picked.forEach(function (f) {
+          if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
+            return;
+          }
+          files.push({
+            status: 'queued',
+            name: f.name,
+            inputFile: f,
+            sizes: { orig: f.size, out: 0 },
+            output: null,
+            previewUrl: null,
+            error: null,
+          });
+        });
+        if (files.length === 0) { window.weddingAITool.toast('没有支持的文件。请用 JPG、PNG 或 WebP。', 'error'); return; }
+        files.forEach(function (entry) {
+          if (entry.previewUrl) return;
+          entry.previewUrl = URL.createObjectURL(entry.inputFile);
+        });
+        refreshUI();
+      }
+
+      function clearAll() {
+        files.forEach(function (f) {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          if (f.outputUrl) URL.revokeObjectURL(f.outputUrl);
+        });
+        files = [];
+        refreshUI();
+      }
+
+      function hexToRgb(hex) {
+        var s = (hex || '').replace('#', '');
+        if (s.length === 3) s = s.split('').map(function (c) { return c + c; }).join('');
+        if (!/^[0-9A-Fa-f]{6}$/.test(s)) return { r: 255, g: 255, b: 255 };
+        return {
+          r: parseInt(s.slice(0, 2), 16),
+          g: parseInt(s.slice(2, 4), 16),
+          b: parseInt(s.slice(4, 6), 16)
+        };
+      }
+
+      function getCurrentSettings() {
+        var bg = hexToRgb(bgColorEl.value);
+        return {
+          bg: bg,
+          tolerance: parseInt(toleranceEl.value, 10),
+          feather: parseInt(featherEl.value, 10),
+          mode: outputModeEl.value, // 'png' or 'jpg'
+        };
+      }
+
+      async function processOne(entry, settings) {
+        entry.status = 'working';
+        entry.error = null;
+        refreshUI();
+
+        try {
+          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          var img = loaded.img;
+          var w = img.naturalWidth, h = img.naturalHeight;
+
+          // Paint the original image (with its own alpha) onto the working canvas
+          var canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d', { willReadFrequently: true });
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.clearRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0);
+
+          var imageData = ctx.getImageData(0, 0, w, h);
+          var data = imageData.data;
+          var bgR = settings.bg.r, bgG = settings.bg.g, bgB = settings.bg.b;
+          var tol = settings.tolerance;
+          var feather = settings.feather;
+          var innerT = tol;
+          // Feather band width: ~8 RGB units per 1 px of feathering (tunable constant)
+          var outerT = tol + feather * 8;
+          var bandWidth = outerT - innerT;
+          var mode = settings.mode;
+
+          // Single-pass pixel loop. Math.sqrt is the only expensive op here.
+          for (var i = 0; i < data.length; i += 4) {
+            var dr = data[i]     - bgR;
+            var dg = data[i + 1] - bgG;
+            var db = data[i + 2] - bgB;
+            var dist = Math.sqrt(dr * dr + dg * dg + db * db);
+            var alpha;
+            if (dist <= innerT) {
+              alpha = 0;
+            } else if (dist < outerT) {
+              alpha = Math.round(((dist - innerT) / bandWidth) * 255);
+            } else {
+              alpha = 255;
+            }
+            if (mode === 'png') {
+              // Multiply alpha into existing alpha (preserve any pre-existing transparency in source)
+              var prevA = data[i + 3];
+              data[i + 3] = Math.round((prevA / 255) * alpha);
+            } else {
+              // JPG mode: where we'd be transparent, fill with white
+              if (alpha < 255) {
+                // partial fade: blend toward white by (1 - alpha/255)
+                var k = 1 - (alpha / 255);
+                data[i]     = Math.round(data[i]     * (1 - k) + 255 * k);
+                data[i + 1] = Math.round(data[i + 1] * (1 - k) + 255 * k);
+                data[i + 2] = Math.round(data[i + 2] * (1 - k) + 255 * k);
+              }
+              data[i + 3] = 255;
+            }
+          }
+
+          ctx.putImageData(imageData, 0, 0);
+
+          var mime = (mode === 'jpg') ? 'image/jpeg' : 'image/png';
+          var quality = (mode === 'jpg') ? 0.92 : undefined;
+          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('背景去除返回了空文件。请尝试其他输出格式。');
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
+          var ext = (mode === 'jpg') ? 'jpg' : 'png';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-nobg.' + ext);
+          URL.revokeObjectURL(loaded.url);
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
+        }
+        refreshUI();
+      }
+
+      async function runAll() {
+        var settings = getCurrentSettings();
+        runBtn.disabled = true;
+        for (var i = 0; i < files.length; i++) {
+          var f = files[i];
+          if (f.status === 'done') continue;
+          await processOne(f, settings);
+        }
+        runBtn.disabled = false;
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        window.weddingAITool.toast('背景去除完成。');
+      }
+
+      function saveAllDownloads() {
+        var outputs = files
+          .filter(function (f) { return f.status === 'done' && f.output; })
+          .map(function (f) { return { name: f.outputName, blob: f.output }; });
+        if (outputs.length === 0) return;
+        window.weddingAITool.downloadZip(outputs, 'nobg');
+        window.weddingAITool.toast('正在保存 ' + outputs.length + ' 个文件…');
+      }
+
+      // ---------- wire up ---------------------------------------------------------
+
+      window.weddingAITool.bindDropZone({
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
+        onFiles: addFiles,
+      });
+
+      toleranceEl.addEventListener('input', function () { toleranceVal.textContent = toleranceEl.value; });
+      featherEl.addEventListener('input', function () { featherVal.textContent = featherEl.value; });
+
+      // Keep color picker and hex input in sync
+      bgColorEl.addEventListener('input', function () {
+        bgColorHex.value = bgColorEl.value.toUpperCase();
+        syncPresetButtons(bgColorEl.value);
+      });
+      bgColorHex.addEventListener('input', function () {
+        var v = bgColorHex.value.trim();
+        if (v.charAt(0) !== '#') v = '#' + v;
+        if (/^#[0-9A-Fa-f]{6}$/.test(v)) {
+          bgColorEl.value = v.toLowerCase();
+          syncPresetButtons(v);
+        }
+      });
+
+      function syncPresetButtons(color) {
+        var hex = color.toUpperCase();
+        var btns = document.querySelectorAll('.wa-tool-color-presets button');
+        Array.prototype.forEach.call(btns, function (b) {
+          var pressed = b.getAttribute('data-color').toUpperCase() === hex;
+          b.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+        });
+      }
+
+      var presetButtons = document.querySelectorAll('.wa-tool-color-presets button');
+      Array.prototype.forEach.call(presetButtons, function (btn) {
+        btn.addEventListener('click', function () {
+          var c = btn.getAttribute('data-color');
+          bgColorEl.value = c;
+          bgColorHex.value = c.toUpperCase();
+          syncPresetButtons(c);
+        });
+      });
+
+      runBtn.addEventListener('click', runAll);
+      saveAllBtn.addEventListener('click', saveAllDownloads);
+      clearBtn.addEventListener('click', clearAll);
+
+      list.addEventListener('wa-row-remove', function (e) {
+        var idx = parseInt((e.detail || '0'), 10);
+        if (!isNaN(idx)) {
+          var f = files[idx];
+          if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          if (f && f.outputUrl) URL.revokeObjectURL(f.outputUrl);
+          files.splice(idx, 1);
+          refreshUI();
+        }
+      });
+
+      refreshUI();
+    })();
+    </script>
+</body>
+</html>

@@ -88,6 +88,8 @@ def priority_for(path: str) -> str:
     if "/services" in path and path.count("/") <= 2: return "0.9"
     if "/blog" in path: return "0.7" if path.count("/") >= 3 else "0.8"
     if "/about" in path: return "0.7"
+    if path.startswith("/tools/") and path.count("/") <= 2: return "0.8"
+    if "/tools/" in path: return "0.7"
     if "/success" in path: return "0.5"
     if "/terms" in path or "/privacy" in path: return "0.3"
     if "/resources" in path or "/search" in path: return "0.5"
@@ -95,9 +97,10 @@ def priority_for(path: str) -> str:
 
 
 def changefreq_for(path: str) -> str:
-    if path in ("/", "/order/", "/gallery/", "/services/", "/blog/"): return "weekly"
+    if path in ("/", "/order/", "/gallery/", "/services/", "/blog/", "/tools/"): return "weekly"
     if "/blog/" in path: return "monthly"
     if "/services/" in path: return "monthly"
+    if "/tools/" in path: return "monthly"
     return "yearly"
 
 
@@ -233,6 +236,48 @@ def url_mtime_iso(file: Path | None) -> str:
         return date.today().isoformat()
 
 
+def hreflang_langs_for(path: str) -> list[str]:
+    """Return the languages to include in the hreflang graph for a URL.
+
+    Most pages have full 11-language coverage (en + 10 alternates).
+    /tools/ paths are tools-specific: each language has its own static
+    HTML file, so the hreflang graph expands dynamically with what's
+    actually deployed — never points Google at 404 paths.
+
+    For /tools/<slug>/ and /<lang>/tools/<slug>/, we look up which
+    languages have an index.html file at the canonical /tools/<slug>/
+    location and use those. Falls back to ['en', 'zh'] if no localized
+    files are present (matches the original MVP behavior).
+    """
+    if path.startswith('/tools/') or re.match(r'^/[a-z]{2,3}/tools/', path):
+        canonical = canonical_path(path)
+        languages = ['en']  # default-lang always included
+        for lang in LANGS[1:]:
+            localized = ROOT / lang / canonical.strip('/') / 'index.html'
+            if localized.exists():
+                languages.append(lang)
+        if len(languages) == 1:
+            return ['en', 'zh']
+        return languages
+    return LANGS
+
+
+def canonical_path(path: str) -> str:
+    """Return the canonical (en) form of a path, stripping any leading
+    /<lang>/ prefix. Used so hreflang + x-default always reference the
+    en canonical, regardless of which sitemap we're emitting.
+
+    Fixes a latent bug (introduced by the full-graph hreflang work
+    2026-07-28): for a path like /zh/tools/... stored in `urls`, the
+    previous logic computed href href=".../zh/tools/..." for the
+    'en' alternates, which would 404 in practice and confuse crawlers.
+    """
+    m = re.match(r'^/([a-z]{2,3})(/.*)$', path)
+    if m and m.group(1) in LANGS:
+        return m.group(2)
+    return path
+
+
 def write_sitemap(lang: str, urls: list[str]) -> tuple[Path, int]:
     """Write a per-language sitemap.
 
@@ -247,6 +292,10 @@ def write_sitemap(lang: str, urls: list[str]) -> tuple[Path, int]:
     hreflang cluster from any single URL in any single sitemap, with
     no cross-sitemap dependency.
 
+    Exception: /tools/ paths use a restricted hreflang graph of
+    [en, zh, x-default] because tools are not yet translated to other
+    languages. See hreflang_langs_for().
+
     We also emit <image:image> for any URL with a known hero image, so
     Google Image Search can discover our visual content.
     """
@@ -257,21 +306,22 @@ def write_sitemap(lang: str, urls: list[str]) -> tuple[Path, int]:
         'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'
     )
     for path in urls:
-        loc = f"{SITE_ORIGIN}{path if lang == DEFAULT_LANG else '/' + lang + path}"
+        canonical = canonical_path(path)
+        loc = f"{SITE_ORIGIN}{canonical if lang == DEFAULT_LANG else '/' + lang + canonical}"
         lines.append('    <url>')
         lines.append(f'        <loc>{loc}</loc>')
         lines.append(f'        <lastmod>{url_mtime_iso(path_to_file.get(path))}</lastmod>')
         lines.append(f'        <changefreq>{changefreq_for(path)}</changefreq>')
         lines.append(f'        <priority>{priority_for(path)}</priority>')
 
-        # Full hreflang graph: every language's alternate + x-default
-        # pointing at the canonical (en) form of this path. This is the
-        # same graph in every language's sitemap, so all sitemaps are
-        # mutually consistent.
-        for l in LANGS:
-            alt_loc = f"{SITE_ORIGIN}{path if l == DEFAULT_LANG else '/' + l + path}"
+        # Restricted or full hreflang graph based on path.
+        # x-default always points at the EN canonical (never the
+        # /<lang>/-prefixed version of the same path).
+        hreflang_langs = hreflang_langs_for(path)
+        for l in hreflang_langs:
+            alt_loc = f"{SITE_ORIGIN}{canonical if l == DEFAULT_LANG else '/' + l + canonical}"
             lines.append(f'        <xhtml:link rel="alternate" hreflang="{l}" href="{alt_loc}"/>')
-        lines.append(f'        <xhtml:link rel="alternate" hreflang="x-default" href="{SITE_ORIGIN}{path}"/>')
+        lines.append(f'        <xhtml:link rel="alternate" hreflang="x-default" href="{SITE_ORIGIN}{canonical}"/>')
 
         # Image sitemap entry: helps Google Image Search index our
         # visual content. Wedding video is a visual niche, so this is

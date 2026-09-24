@@ -1,0 +1,696 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Удалить фон со свадебного портрета | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/ru/tools/remove-background-wedding-portrait/">
+    <link rel="alternate" hreflang="en" href="https://weddingai.video/tools/remove-background-wedding-portrait/">
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/remove-background-wedding-portrait/">
+    <link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/remove-background-wedding-portrait/">
+    <link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/remove-background-wedding-portrait/">
+    <meta name="description" content="Удалите однотонный фон (белый, серый или чёрный) со свадебных портретов одним кликом. Для приглашений и постеров. Бесплатно, в браузере, без загрузки." />
+    <meta name="keywords" content="удалить фон со свадебного фото, убрать белый фон со свадебного фото, вырезать свадебный портрет, прозрачный фон свадебного фото, свадебное приглашение с портретом">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Удалить фон со свадебного портрета — бесплатно | WeddingAI.video">
+    <meta property="og:description" content="Удалите однотонный фон (белый/серый/чёрный) со свадебных портретов одним кликом — для приглашений и постеров. Бесплатно, прямо в браузере.">
+    <meta property="og:url" content="https://weddingai.video/ru/tools/remove-background-wedding-portrait/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Удалить фон со свадебного портрета — бесплатный браузерный инструмент">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Удалить фон со свадебного портрета — бесплатно | WeddingAI.video">
+    <meta name="twitter:description" content="Удалите однотонный фон со свадебных портретов одним кликом — для приглашений и постеров. Бесплатно, в браузере.">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Инструменты WeddingAI">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+        .wa-tool-color-row { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+        .wa-tool-color-row input[type="color"] { width: 48px; height: 36px; padding: 2px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-white); cursor: pointer; }
+        .wa-tool-color-row input[type="text"] { width: 110px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+        .wa-tool-color-presets { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem; }
+        .wa-tool-color-presets button { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--color-border); cursor: pointer; padding: 0; background-clip: content-box; }
+        .wa-tool-color-presets button:hover { border-color: var(--color-primary); transform: scale(1.08); }
+        .wa-tool-color-presets button[aria-pressed="true"] { border-color: var(--color-primary); box-shadow: 0 0 0 2px var(--color-primary); }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Главная","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"Бесплатные инструменты для свадебных фото","item":"https://weddingai.video/ru/tools/"},
+        {"@type":"ListItem","position":3,"name":"Удалить фон со свадебного портрета","item":"https://weddingai.video/ru/tools/remove-background-wedding-portrait/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Удалить фон со свадебного портрета","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"Требуется современный браузер с поддержкой Canvas API и Uint8ClampedArray","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Бесплатный браузерный инструмент, удаляющий однотонный студийный фон (белый, серый, чёрный) со свадебных портретов и выдающий прозрачный PNG или JPG с белой заливкой. Регулируемые допуск и смягчение краёв. Файлы не покидают устройство пользователя.","url":"https://weddingai.video/ru/tools/remove-background-wedding-portrait/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["Выбор произвольного цвета фона (по умолчанию белый)","Регулятор допуска 0–150","Смягчение краёв 0–8 px","Вывод: прозрачный PNG или JPG с белой заливкой","100% обработка на стороне клиента","Без загрузки, без регистрации"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Как убрать студийный фон со свадебного фото","step":[
+        {"@type":"HowToStep","position":1,"name":"Перетащите фото","text":"Перетащите свадебный снимок (JPG, PNG, WebP) в зону перетаскивания или нажмите, чтобы выбрать файл."},
+        {"@type":"HowToStep","position":2,"name":"Выберите цвет фона","text":"Воспользуйтесь палитрой — по умолчанию белый (самый частый в студии). При необходимости переключитесь на серый, бежевый или чёрный."},
+        {"@type":"HowToStep","position":3,"name":"Задайте допуск (по умолчанию 50)","text":"Начните с 50. Если фон остаётся — увеличьте; если «съедается» кожа или волосы — уменьшите."},
+        {"@type":"HowToStep","position":4,"name":"Задайте смягчение краёв (по умолчанию 3 px)","text":"Узкая полоса смягчения убирает жёсткий ореол на краях волос и плеч. Больше — мягче, меньше — резче."},
+        {"@type":"HowToStep","position":5,"name":"Выберите выход: прозрачный PNG или JPG с белой заливкой","text":"PNG сохраняет прозрачность — можно ставить на цветные приглашения. JPG заливает белым — готов к печати или публикации."},
+        {"@type":"HowToStep","position":6,"name":"Запустите и скачайте","text":"Нажмите «Удалить фон», затем кнопку «Скачать» у каждой строки или «Сохранить всё» для всей партии."}
+    ]}</script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/ru/" class="logo" title="WeddingAI.video — свадебные видео-услуги">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="Главная навигация">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Изучить свадебные видео-услуги" aria-haspopup="true" aria-expanded="false">Услуги <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Улучшение видео</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">Замедленная съёмка</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">Восстановление старых записей</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Персонализация</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">Свадебный трейлер</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI-генератор видео</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">Свадьба с питомцем</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">Многоязычное видео</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">Стиль мультфильма</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">Свадебные мемы</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Замена отсутствующих</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">Семейное посвящение</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">Семейное послание</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link">Все услуги →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/ru/tools/" title="Бесплатные инструменты для свадебных фото" style="color: var(--color-primary);">Бесплатные инструменты</a></li>
+                    <li><a href="/gallery/" title="Посмотреть наши работы и примеры">Галерея</a></li>
+                    <li><a href="/blog/" title="Читать блог о свадебных видео">Блог</a></li>
+                    <li><a href="/pricing/" title="Прозрачные цены">Цены</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Бесплатный расчёт — начать проект">Получить расчёт</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n>
+                        <select id="wa-lang-select" aria-label="Язык">
+                            <option value="en">EN</option>
+                            <option value="zh">中文</option>
+                            <option value="ru" selected>RU</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Переключить мобильное меню" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>Удалить фон со свадебного портрета</h1>
+                <p>Уберите однотонный студийный фон со свадебного снимка одним кликом — белый, серый, чёрный или любой другой однородный цвет — и поместите молодожёнов на закатный виноградник, в интерьер собора или на собственный дизайн приглашения.</p>
+                <p class="wa-tool-privacy">Файлы обрабатываются локально, на сервер ничего не загружается.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="Навигационная цепочка">
+            <a href="/ru/">Главная</a> <span>›</span> <a href="/ru/tools/">Бесплатные инструменты</a> <span>›</span> <span>Удалить фон со свадебного портрета</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. Перетащите свадебное фото сюда</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="Перетащите свадебное фото или нажмите, чтобы выбрать">
+                    <div class="wa-tool-dropzone-title">Перетащите портрет сюда или нажмите, чтобы выбрать</div>
+                    <div class="wa-tool-dropzone-hint">JPG, PNG, WebP • Лучше всего для одиночных портретов • Лимит — память браузера</div>
+                    <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
+                </div>
+                <div class="wa-tool-empty" id="empty-state">Фото ещё нет — перетащите файлы выше, чтобы начать.</div>
+                <div class="wa-tool-file-list" id="file-list" hidden></div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. Цвет фона и параметры</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control">
+                        <label for="bg-color">Цвет фона</label>
+                        <div class="wa-tool-color-row">
+                            <input type="color" id="bg-color" value="#FFFFFF">
+                            <input type="text" id="bg-color-hex" value="#FFFFFF" maxlength="7" pattern="#?[0-9A-Fa-f]{6}" aria-label="HEX-значение цвета фона">
+                        </div>
+                        <div class="wa-tool-color-presets" role="group" aria-label="Типовые пресеты фона">
+                            <button type="button" data-color="#FFFFFF" aria-pressed="true" title="Белый" style="background:#FFFFFF;"></button>
+                            <button type="button" data-color="#F5F5F5" aria-pressed="false" title="Слоновая кость" style="background:#F5F5F5;"></button>
+                            <button type="button" data-color="#808080" aria-pressed="false" title="Серый" style="background:#808080;"></button>
+                            <button type="button" data-color="#000000" aria-pressed="false" title="Чёрный" style="background:#000000;"></button>
+                            <button type="button" data-color="#E8DCC4" aria-pressed="false" title="Бежевый" style="background:#E8DCC4;"></button>
+                            <button type="button" data-color="#1E3A5F" aria-pressed="false" title="Тёмно-синий" style="background:#1E3A5F;"></button>
+                        </div>
+                        <small>Подберите цвет, совпадающий с реальным студийным фоном. По умолчанию в студиях ставят белый.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="tolerance">Допуск: <span id="tolerance-val">50</span></label>
+                        <input type="range" id="tolerance" min="0" max="150" step="1" value="50">
+                        <small>Чем больше, тем больше пикселей попадает в удаление. Если «съедается» кожа или волосы — уменьшите.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="feather">Смягчение краёв: <span id="feather-val">3</span> px</label>
+                        <input type="range" id="feather" min="0" max="8" step="1" value="3">
+                        <small>Смягчает край обрезки — чтобы на волосах и плечах не появлялся жёсткий ореол.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="output-mode">Формат вывода</label>
+                        <select id="output-mode">
+                            <option value="png" selected>PNG (прозрачный фон — можно ставить на любой цвет)</option>
+                            <option value="jpg">JPG (белая заливка — сразу к печати или публикации)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled>Удалить фон</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>Сохранить всё</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn">Очистить</button>
+                </div>
+
+                <div class="wa-tool-summary" id="summary" hidden></div>
+
+                <div class="wa-tool-banner">
+                    <strong>Подсказка:</strong> лучше всего работает на ровных, равномерно освещённых фонах — студийных снимках, «зелёном экране», кадрах в стиле ID-документа. Уличные сцены и стены с текстурой инструмент «по цвету» не вычистит полностью — для таких случаев нужны настоящие модели семантической сегментации на основе AI.
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>3. Скачивание</h2>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">У каждого готового портрета — своя кнопка скачивания. <strong>«Сохранить всё»</strong> собирает всю партию одним кликом. К именам файлов добавляется суффикс <code>-nobg</code>; исходные файлы остаются нетронутыми.</p>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>Почему на свадебных портретах почти всегда можно убрать фон?</h2>
+                <p>Если вам интересно, почему так много свадебных портретов выглядят как «снятые на пустой стене» — так и есть. В студиях — и у большинства серьёзных свадебных фотографов в помещении — используется <strong>бесшовный бумажный или тканевый фон</strong>, сплошной одного цвета. Белый — самый частый, потому что он подчёркивает кожу и свадебное платье; встречаются также серый (для стилистики high-key), чёрный (для драматизма), тёмно-синий (для винтажного портрета), бежевый и бледно-розовый.</p>
+                <p>Именно такой ровный цвет и делает возможной работу этого инструмента. Студийный фон по замыслу — это «цвет, которого на молодожёнах быть не может». Если пиксель «очень близок к фону по цвету» — это почти наверняка фон; если «очень далёк» — почти наверняка фигура. Суть — правильно выбрать цвет фона и порог «достаточно близко». Регулятор допуска отвечает именно за это.</p>
+
+                <h3>Как инструмент реально убирает фон</h3>
+                <p>Для каждого пикселя фото мы измеряем <strong>евклидово расстояние</strong> в <code>RGB</code>-пространстве между его цветом и выбранным цветом фона. Если расстояние меньше установленного допуска — пиксель помечается как прозрачный (PNG) или заливается белым (JPG). Если расстояние между допуском и «допуск + смягчение» — альфа пикселя плавно интерполируется: именно это убирает жёсткий ореол, иногда появляющийся по краям волос и плеч. Если расстояние сильно больше допуска — пиксель остаётся без изменений.</p>
+                <p>Вся обработка идёт за один проход по <code>Uint8ClampedArray</code> — на современном ноутбуке 4K-кадр обрабатывается за 2–5 секунд. Исключительно во вкладке браузера: ни на какой сервер ничего не отправляется.</p>
+
+                <h3>Удаление «по цвету» против полной AI-сегментации</h3>
+                <p>Здесь стоит быть честным: <strong>этот инструмент — не AI.</strong> Это обрезка по цветовому расстоянию. Для свадебного сценария — это именно то, что нужно, но он не решит задачу «двое на пляже среди пальм». Если нужна настоящая семантическая сегментация — «неважно какой фон, найди человека» — потребуются облачные модели вроде rembg, Segment Anything или платный remove.bg. Они медленнее, тяжелее и обычно требуют загрузить фото.</p>
+                <p>Причина существования этого инструмента проста: свадебный сценарий <em>почти всегда</em> — это однотонный фон. Молодожёны приходят в студию, отрабатывают серию поз на одном и том же сером бесшовном полотне, а потом хотят поставить себя на закатный виноградник для приглашения. Это задача про цвет фона, а не про сегментацию — и она решается в браузере за секунды: без загрузки, без аккаунта, без водяных знаков.</p>
+
+                <h3>Когда допуска 50 хватает (и когда нужно крутить)</h3>
+                <p>По умолчанию 50 откалиброван под «идеально ровный белый фон в свете студийной вспышки» — это покрывает большинство случаев. Следующие ситуации требуют увеличения допуска:</p>
+                <ul>
+                    <li><strong>Неравномерный свет фона.</strong> Даже «ровная» бесшовка при свете из окна чуть градиентом светлее сверху и темнее снизу. Когда вверху фон белый, а внизу — серый 220, нужен допуск 80–100.</li>
+                    <li><strong>Лёгкий цветовой сдвиг фона.</strong> Некоторые студии используют тёплые лампы (накаливания или 3200K), и фон уходит в кремовый 240-245-235 вместо чистого 255-255-255. Допуск 60–80 справляется.</li>
+                    <li><strong>Фон серый или бежевый.</strong> Серый бесшовный (~128-128-128) дальше от обычной кожи, чем белый, но логика та же. Обычно 50–60 хватает; 70–90 — для неравномерного освещения.</li>
+                </ul>
+                <p>Если кожа, волосы или фата «съедаются» вместе с фоном — <strong>уменьшите</strong> допуск. Если при допуске 100 белое платье невесты стало прозрачным, опуститесь до 60–70.</p>
+
+                <h3>Смягчение краёв: маленький секрет чистых волос</h3>
+                <p>Граница допуска — это одна жёсткая линия: каждый пиксель либо попал, либо нет. Без смягчения белые волосы либо срезаются резко (при низком допуске), либо становятся полупрозрачным призраком (при высоком). Смягчение добавляет за границей допуска <strong>мягкую полосу</strong>, в которой альфа плавно растёт от 0 (прозрачно) до 255 (непрозрачно). 3 пикселя — значение по умолчанию; этого хватает на большинство свадебных снимков. Поднимите до 5–6 для пушистых волос или тонкого кружева фаты; опустите до 0 для жёстких контурных силуэтов.</p>
+
+                <h2>Что делать с портретом без фона?</h2>
+                <p>Прозрачный PNG с парой молодожёнов — это универсальный материал для свадебного дизайна. Самые частые следующие шаги:</p>
+                <ul>
+                    <li><a href="/blog/wedding-invitation-video-guide/">Сделать save-the-date или приглашение</a> — поставить пару на виноградник в золотой час, в интерьер собора, на ар-деко арку или на собственный рисованный фон. Canva, Photoshop и Figma изначально работают с прозрачными PNG.</li>
+                    <li><a href="/services/personalization/ai-video-generator/">Сделать 60-секундный AI-свадебный ролик</a> — наша самая популярная услуга. Загрузите несколько любимых портретов без фона, добавьте промпт — через 48 часов получите кинематографичный ролик.</li>
+                    <li><a href="/tools/wedding-photo-collage/">Собрать коллаж</a> для благодарственных открыток или книги пожеланий. Сначала подготовьте портреты этим инструментом, затем смешивайте с репортажными снимками в коллаже.</li>
+                    <li><a href="/tools/crop-wedding-photo-for-reels/">Обрезать под вертикальный формат</a> — после удаления фона можно плотнее кадрировать портрет, не ломая композиции.</li>
+                </ul>
+                <p>Если итоговая цель — видео, следующий шаг логичен: AI-генератор свадебного видео. Тот же принцип «браузер прежде всего, приватность прежде всего» — загрузить, описать атмосферу, получить готовый ролик. От 9,9 $, без подписки.</p>
+
+                <h2>Частые вопросы</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>Подойдут ли уличные фото или стена с текстурой?</summary>
+                        <p>Нет — инструмент работает только с однотонным фоном. Улица, кирпичная стена, сад — слишком пёстрые фоны, и единого «цвета фона» для них нет. Для таких сценариев нужна настоящая AI-семантическая сегментация (с загрузкой в облако). Но для большинства реальных студийных свадебных снимков этот инструмент справляется.</p>
+                    </details>
+                    <details>
+                        <summary>Чем это отличается от remove.bg или «Select Subject» в Photoshop?</summary>
+                        <p>Те — настоящая семантическая сегментация, которая распознаёт объект независимо от фона. Этот инструмент просто сопоставляет выбранный цвет фона. На студийных снимках результат сопоставим — при этом здесь всё работает локально в браузере, без загрузки, без водяных знаков, без аккаунта. Для уличных и сложных сцен — пользуйтесь семантическими инструментами.</p>
+                    </details>
+                    <details>
+                        <summary>Что если фон не идеально белый?</summary>
+                        <p>Подберите реальный цвет фона палитрой (или одной из пресет-кнопок: слоновая кость, серый, бежевый, тёмно-синий). Если свет на фото неравномерный, поднимите допуск до 80–100, чтобы покрыть более тёмные участки.</p>
+                    </details>
+                    <details>
+                        <summary>Почему мой PNG весит больше исходного JPG?</summary>
+                        <p>PNG с альфа-каналом сохраняет прозрачность попиксельно. На большинстве свадебных фото это даёт на 30–80% больше байт, чем тот же кадр в JPG с белым фоном. Это и есть компромисс: PNG даёт прозрачность (можно ставить куда угодно), JPG — меньший файл (сразу к отправке). Выбирайте режим под задачу.</p>
+                    </details>
+                    <details>
+                        <summary>Влияет ли смягчение на размер или качество файла?</summary>
+                        <p>Нет. Смягчение лишь меняет, по какую сторону от альфа-границы оказывается каждый пиксель; формат файла и битность не меняются. Единственное видимое отличие — край выглядит мягче.</p>
+                    </details>
+                    <details>
+                        <summary>Есть ли лимит по размеру или числу файлов?</summary>
+                        <p>Жёсткого лимита нет. Реальный лимит — память устройства. Один 4K-свадебный кадр занимает около 64 МБ рабочей памяти, десять — около 640 МБ. Если вкладка падает на большой партии, перезагрузите страницу и обработайте порциями.</p>
+                    </details>
+                </div>
+
+                <h2>Другие бесплатные инструменты для свадебных фото</h2>
+                <p>Когда портрет уже на прозрачном фоне, открывается весь дизайнерский рабочий процесс:</p>
+                <div class="sibling-tools">
+                    <a href="/ru/tools/compress-wedding-photos/">Сжать фото</a>
+                    <a href="/ru/tools/wedding-photo-collage/">Коллаж из фото</a>
+                    <a href="/ru/tools/crop-wedding-photo-for-reels/">Кадрирование под вертикаль</a>
+                    <a href="/ru/tools/add-text-to-wedding-photo/">Добавить текст</a>
+                    <a href="/ru/tools/heic-to-jpg-wedding-photos/">HEIC → JPG</a>
+                    <a href="/ru/tools/">Все инструменты</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>Похожие материалы</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>Как сделать свадебное видео из фото (руководство по AI)</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-invitation-video-guide/">
+                        <h4>Видеоприглашение на свадьбу: полное руководство 2026</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/ai-photos-to-wedding-video/">
+                        <h4>От свадебных фото к кинематографичному AI-ролику</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-slideshow-guide/">
+                        <h4>Создайте запоминающееся свадебное слайд-шоу</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Портрет без фона уже на руках — пора делать свадебный ролик?</h2>
+                <p>Передайте любимые фото нашему AI-генератору свадебного видео — через 48 часов получите кинематографичный ролик.</p>
+                <a href="/order/" class="btn btn-primary btn-large" title="Бесплатный расчёт — начать проект">Получить бесплатный расчёт →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/ru/" class="logo" title="WeddingAI.video — свадебные видео-услуги">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>AI-сервис свадебных видео для пар по всему миру.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Навигация в подвале">
+                <div class="footer-col">
+                    <h3>Ресурсы</h3>
+                    <ul>
+                        <li><a href="/blog/">Блог</a></li>
+                        <li><a href="/gallery/">Галерея</a></li>
+                        <li><a href="/about/">О нас</a></li>
+                        <li><a href="/ru/tools/">Бесплатные инструменты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Услуги</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">Замедленная съёмка</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI-генератор видео</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">Свадебный трейлер</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">Семейное посвящение</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="/order/">Получить расчёт</a></li>
+                        <li><a href="/pricing/">Цены</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. Все права защищены.</p>
+                <a href="/privacy/">Политика конфиденциальности</a> · <a href="/terms/">Условия использования</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+      var dropzone = document.getElementById('dropzone');
+      var input = document.getElementById('file-input');
+      var list = document.getElementById('file-list');
+      var empty = document.getElementById('empty-state');
+      var runBtn = document.getElementById('run-btn');
+      var saveAllBtn = document.getElementById('save-all-btn');
+      var clearBtn = document.getElementById('clear-btn');
+      var bgColorEl = document.getElementById('bg-color');
+      var bgColorHex = document.getElementById('bg-color-hex');
+      var toleranceEl = document.getElementById('tolerance');
+      var toleranceVal = document.getElementById('tolerance-val');
+      var featherEl = document.getElementById('feather');
+      var featherVal = document.getElementById('feather-val');
+      var outputModeEl = document.getElementById('output-mode');
+
+      var files = [];
+
+      function refreshUI() {
+        empty.hidden = files.length > 0;
+        list.hidden = files.length === 0;
+        runBtn.disabled = files.length === 0 || files.every(function (f) { return f.status === 'done' || f.status === 'working'; });
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        if (window.weddingAITool && window.weddingAITool.renderFileList) {
+          window.weddingAITool.renderFileList(list, files, function () {});
+          Array.prototype.forEach.call(list.children, function (row, i) {
+            window.weddingAITool.updateFileRow(row, files[i]);
+          });
+        }
+      }
+
+      function addFiles(picked) {
+        picked.forEach(function (f) {
+          if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
+            return;
+          }
+          files.push({
+            status: 'queued',
+            name: f.name,
+            inputFile: f,
+            sizes: { orig: f.size, out: 0 },
+            output: null,
+            previewUrl: null,
+            error: null,
+          });
+        });
+        if (files.length === 0) { window.weddingAITool.toast('Нет подходящих файлов. Используйте JPG, PNG или WebP.', 'error'); return; }
+        files.forEach(function (entry) {
+          if (entry.previewUrl) return;
+          entry.previewUrl = URL.createObjectURL(entry.inputFile);
+        });
+        refreshUI();
+      }
+
+      function clearAll() {
+        files.forEach(function (f) {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          if (f.outputUrl) URL.revokeObjectURL(f.outputUrl);
+        });
+        files = [];
+        refreshUI();
+      }
+
+      function hexToRgb(hex) {
+        var s = (hex || '').replace('#', '');
+        if (s.length === 3) s = s.split('').map(function (c) { return c + c; }).join('');
+        if (!/^[0-9A-Fa-f]{6}$/.test(s)) return { r: 255, g: 255, b: 255 };
+        return {
+          r: parseInt(s.slice(0, 2), 16),
+          g: parseInt(s.slice(2, 4), 16),
+          b: parseInt(s.slice(4, 6), 16)
+        };
+      }
+
+      function getCurrentSettings() {
+        var bg = hexToRgb(bgColorEl.value);
+        return {
+          bg: bg,
+          tolerance: parseInt(toleranceEl.value, 10),
+          feather: parseInt(featherEl.value, 10),
+          mode: outputModeEl.value,
+        };
+      }
+
+      async function processOne(entry, settings) {
+        entry.status = 'working';
+        entry.error = null;
+        refreshUI();
+
+        try {
+          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          var img = loaded.img;
+          var w = img.naturalWidth, h = img.naturalHeight;
+
+          var canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d', { willReadFrequently: true });
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.clearRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0);
+
+          var imageData = ctx.getImageData(0, 0, w, h);
+          var data = imageData.data;
+          var bgR = settings.bg.r, bgG = settings.bg.g, bgB = settings.bg.b;
+          var tol = settings.tolerance;
+          var feather = settings.feather;
+          var innerT = tol;
+          var outerT = tol + feather * 8;
+          var bandWidth = outerT - innerT;
+          var mode = settings.mode;
+
+          for (var i = 0; i < data.length; i += 4) {
+            var dr = data[i]     - bgR;
+            var dg = data[i + 1] - bgG;
+            var db = data[i + 2] - bgB;
+            var dist = Math.sqrt(dr * dr + dg * dg + db * db);
+            var alpha;
+            if (dist <= innerT) {
+              alpha = 0;
+            } else if (dist < outerT) {
+              alpha = Math.round(((dist - innerT) / bandWidth) * 255);
+            } else {
+              alpha = 255;
+            }
+            if (mode === 'png') {
+              var prevA = data[i + 3];
+              data[i + 3] = Math.round((prevA / 255) * alpha);
+            } else {
+              if (alpha < 255) {
+                var k = 1 - (alpha / 255);
+                data[i]     = Math.round(data[i]     * (1 - k) + 255 * k);
+                data[i + 1] = Math.round(data[i + 1] * (1 - k) + 255 * k);
+                data[i + 2] = Math.round(data[i + 2] * (1 - k) + 255 * k);
+              }
+              data[i + 3] = 255;
+            }
+          }
+
+          ctx.putImageData(imageData, 0, 0);
+
+          var mime = (mode === 'jpg') ? 'image/jpeg' : 'image/png';
+          var quality = (mode === 'jpg') ? 0.92 : undefined;
+          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('Удаление фона вернуло пустой файл. Попробуйте другой выходной формат.');
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
+          var ext = (mode === 'jpg') ? 'jpg' : 'png';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-nobg.' + ext);
+          URL.revokeObjectURL(loaded.url);
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
+        }
+        refreshUI();
+      }
+
+      async function runAll() {
+        var settings = getCurrentSettings();
+        runBtn.disabled = true;
+        for (var i = 0; i < files.length; i++) {
+          var f = files[i];
+          if (f.status === 'done') continue;
+          await processOne(f, settings);
+        }
+        runBtn.disabled = false;
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        renderSummary();
+        window.weddingAITool.toast('Удаление фона завершено.');
+      }
+
+      function renderSummary() {
+        var done = files.filter(function (f) { return f.status === 'done' && f.output; });
+        var errs = files.filter(function (f) { return f.status === 'error'; });
+        if (done.length === 0) { summaryEl.hidden = true; return; }
+        var origTotal = done.reduce(function (s, f) { return s + f.sizes.orig; }, 0);
+        var outTotal = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
+        var ratio = origTotal > 0 ? ((origTotal - outTotal) / origTotal * 100) : 0;
+        summaryEl.hidden = false;
+        summaryEl.innerHTML =
+          '<div><strong>' + done.length + '</strong> обработано</div>' +
+          '<div><strong>Итог на выходе:</strong> ' + window.weddingAITool.formatBytes(outTotal) +
+          ' (было ' + window.weddingAITool.formatBytes(origTotal) + ', ' + (ratio >= 0 ? '−' : '+') + Math.abs(ratio).toFixed(1) + '%)</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' с ошибкой</strong> — удалите и попробуйте снова.</div>' : '');
+      }
+
+      function saveAll() {
+        var outputs = files
+          .filter(function (f) { return f.status === 'done' && f.output; })
+          .map(function (f) { return { name: f.outputName, blob: f.output }; });
+        if (outputs.length === 0) return;
+        window.weddingAITool.downloadZip(outputs, 'no-bg');
+        window.weddingAITool.toast('Сохраняем ' + outputs.length + ' файлов…');
+      }
+
+      // Preset color buttons sync
+      Array.prototype.forEach.call(document.querySelectorAll('.wa-tool-color-presets button'), function (btn) {
+        btn.addEventListener('click', function () {
+          var c = btn.getAttribute('data-color');
+          bgColorEl.value = c;
+          bgColorHex.value = c;
+          Array.prototype.forEach.call(document.querySelectorAll('.wa-tool-color-presets button'), function (b) {
+            b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+          });
+        });
+      });
+      bgColorEl.addEventListener('input', function () {
+        bgColorHex.value = bgColorEl.value;
+        Array.prototype.forEach.call(document.querySelectorAll('.wa-tool-color-presets button'), function (b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-color').toLowerCase() === bgColorEl.value.toLowerCase() ? 'true' : 'false');
+        });
+      });
+      bgColorHex.addEventListener('change', function () {
+        var v = (bgColorHex.value || '').trim();
+        if (v && /#[0-9A-Fa-f]{6}/.test(v)) {
+          bgColorEl.value = v;
+        }
+      });
+
+      toleranceEl.addEventListener('input', function () { toleranceVal.textContent = toleranceEl.value; });
+      featherEl.addEventListener('input', function () { featherVal.textContent = featherEl.value; });
+
+      // wire up
+      window.weddingAITool.bindDropZone({
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
+        onFiles: addFiles,
+      });
+
+      runBtn.addEventListener('click', runAll);
+      saveAllBtn.addEventListener('click', saveAll);
+      clearBtn.addEventListener('click', clearAll);
+
+      list.addEventListener('wa-row-remove', function (e) {
+        var idx = parseInt((e.detail || '0'), 10);
+        if (!isNaN(idx)) {
+          var f = files[idx];
+          if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          files.splice(idx, 1);
+          refreshUI();
+        }
+      });
+
+      refreshUI();
+    })();
+    </script>
+</body>
+</html>

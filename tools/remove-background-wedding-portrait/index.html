@@ -1,0 +1,693 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Remove Background from Wedding Portrait | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/tools/remove-background-wedding-portrait/">
+    
+    
+    
+    <meta name="description" content="Strip a clean studio backdrop (white, gray, black) from wedding portraits — perfect for invitations and announcements. Free, in-browser, no upload." />
+    <meta name="keywords" content="remove background wedding portrait, strip white background wedding photo, cut out subject wedding, transparent background wedding photo, wedding invitation portrait">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Remove Background from Wedding Portrait — Free | WeddingAI.video">
+    <meta property="og:description" content="Strip a clean studio backdrop (white, gray, black) from wedding portraits — perfect for invitations and announcements. Free, in-browser, no upload.">
+    <meta property="og:url" content="https://weddingai.video/tools/remove-background-wedding-portrait/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Remove Background from Wedding Portrait — Free in-browser tool">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Remove Background from Wedding Portrait — Free | WeddingAI.video">
+    <meta name="twitter:description" content="Strip a clean studio backdrop from wedding portraits — perfect for invitations. Free, in-browser, no upload.">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="WeddingAI Tools">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+        .wa-tool-color-row { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+        .wa-tool-color-row input[type="color"] { width: 48px; height: 36px; padding: 2px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-white); cursor: pointer; }
+        .wa-tool-color-row input[type="text"] { width: 110px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+        .wa-tool-color-presets { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem; }
+        .wa-tool-color-presets button { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--color-border); cursor: pointer; padding: 0; background-clip: content-box; }
+        .wa-tool-color-presets button:hover { border-color: var(--color-primary); transform: scale(1.08); }
+        .wa-tool-color-presets button[aria-pressed="true"] { border-color: var(--color-primary); box-shadow: 0 0 0 2px var(--color-primary); }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"Free Wedding Photo Tools","item":"https://weddingai.video/tools/"},
+        {"@type":"ListItem","position":3,"name":"Remove Background from Wedding Portrait","item":"https://weddingai.video/tools/remove-background-wedding-portrait/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Remove Background from Wedding Portrait","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"Requires modern browser with Canvas API and Uint8ClampedArray","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free in-browser tool that strips a clean studio backdrop (white, gray, black) from wedding portraits and outputs a transparent PNG or a white-filled JPG. Configurable color tolerance and edge feathering. Files never leave the user's device.","url":"https://weddingai.video/tools/remove-background-wedding-portrait/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["Pick any backdrop color (default white)","Tolerance slider 0–150","Edge feathering 0–8 px","Output: transparent PNG or white-filled JPG","100% client-side","No upload, no signup"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to remove the studio backdrop from a wedding portrait","step":[
+        {"@type":"HowToStep","position":1,"name":"Drop your portrait","text":"Drag a couple's portrait (JPG, PNG, or WebP) into the dropzone, or click to browse."},
+        {"@type":"HowToStep","position":2,"name":"Pick the backdrop color","text":"Use the color picker — white is the default for studio backdrops. Match gray, beige, or black as needed."},
+        {"@type":"HowToStep","position":3,"name":"Set tolerance (default 50)","text":"Start at 50. If the backdrop isn't fully stripped, raise it. If skin or hair is fading, lower it."},
+        {"@type":"HowToStep","position":4,"name":"Set edge feathering (default 3 px)","text":"A small soft band kills the halo around hair and shoulders. Higher = softer, lower = sharper."},
+        {"@type":"HowToStep","position":5,"name":"Choose output: transparent PNG or white-fill JPG","text":"PNG keeps transparency for invitations on colored backgrounds. JPG fills with white for direct printing."},
+        {"@type":"HowToStep","position":6,"name":"Run and download","text":"Click Remove Background, then use Download on each row or Save all to grab the batch."}
+    ]}</script>
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/remove-background-wedding-portrait/"><link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/remove-background-wedding-portrait/"><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/remove-background-wedding-portrait/"></head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video — wedding video services">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Browse our wedding video services" aria-haspopup="true" aria-expanded="false">Services <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Video Enhancement</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">Slow Motion</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">Vintage Restoration</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Personalization</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">Wedding Trailer</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI Video Generator</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">Pet Wedding</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">Multilingual</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">Cartoon Style</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">Wedding Memes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Absence Compensation</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">Family Tribute</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">Family Message</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link">View all services →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/tools/" title="Free wedding photo tools" style="color: var(--color-primary);">Free Tools</a></li>
+                    <li><a href="/gallery/" title="View our gallery and case studies">Gallery</a></li>
+                    <li><a href="/blog/" title="Read our wedding video blog">Blog</a></li>
+                    <li><a href="/pricing/" title="View transparent pricing">Pricing</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Get a free quote — start your project">Get a Quote</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n>
+                        <select id="wa-lang-select" aria-label="Language">
+                            <option value="en">EN</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>Remove Background from Wedding Portrait</h1>
+                <p>Strip a clean studio backdrop — white, gray, black, or any solid color — from a couple's portrait and drop them onto a vineyard, a cathedral, or a custom invitation design.</p>
+                <p class="wa-tool-privacy">Files are processed locally. Nothing is uploaded.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a> <span>›</span> <a href="/tools/">Free Tools</a> <span>›</span> <span>Remove Background from Wedding Portrait</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. Drop your portrait here</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="Drop a wedding portrait here or click to browse">
+                    <div class="wa-tool-dropzone-title">Drag a portrait here or click to browse</div>
+                    <div class="wa-tool-dropzone-hint">JPG, PNG, WebP • Single portrait works best • Up to your browser's memory</div>
+                    <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
+                </div>
+                <div class="wa-tool-empty" id="empty-state">No portrait yet — drop one above to start.</div>
+                <div class="wa-tool-file-list" id="file-list" hidden></div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. Backdrop color & controls</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control">
+                        <label for="bg-color">Backdrop color</label>
+                        <div class="wa-tool-color-row">
+                            <input type="color" id="bg-color" value="#FFFFFF">
+                            <input type="text" id="bg-color-hex" value="#FFFFFF" maxlength="7" pattern="#?[0-9A-Fa-f]{6}" aria-label="Backdrop color hex value">
+                        </div>
+                        <div class="wa-tool-color-presets" role="group" aria-label="Common backdrop presets">
+                            <button type="button" data-color="#FFFFFF" aria-pressed="true" title="White" style="background:#FFFFFF;"></button>
+                            <button type="button" data-color="#F5F5F5" aria-pressed="false" title="Off-white" style="background:#F5F5F5;"></button>
+                            <button type="button" data-color="#808080" aria-pressed="false" title="Gray" style="background:#808080;"></button>
+                            <button type="button" data-color="#000000" aria-pressed="false" title="Black" style="background:#000000;"></button>
+                            <button type="button" data-color="#E8DCC4" aria-pressed="false" title="Beige" style="background:#E8DCC4;"></button>
+                            <button type="button" data-color="#1E3A5F" aria-pressed="false" title="Navy" style="background:#1E3A5F;"></button>
+                        </div>
+                        <small>Pick the color of the actual studio backdrop. White is the default for traditional portrait studios.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="tolerance">Tolerance: <span id="tolerance-val">50</span></label>
+                        <input type="range" id="tolerance" min="0" max="150" step="1" value="50">
+                        <small>Higher = more pixels are stripped. If skin or hair fades, lower it.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="feather">Edge feathering: <span id="feather-val">3</span> px</label>
+                        <input type="range" id="feather" min="0" max="8" step="1" value="3">
+                        <small>Softens the cut edge so hair and shoulders don't show a hard halo.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="output-mode">Output format</label>
+                        <select id="output-mode">
+                            <option value="png" selected>PNG (transparent — drop onto any background)</option>
+                            <option value="jpg">JPG (white fill — print or post directly)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled>Remove background</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>Save all</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn">Clear</button>
+                </div>
+
+                <div class="wa-tool-banner">
+                    <strong>Tip:</strong> Best on flat, evenly-lit backdrops — studio shots, green-screen shoots, and ID-style portraits. Outdoor scenes and textured walls won't strip cleanly with a backdrop-color remover; those need a full AI semantic segmentor.
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>3. Download</h2>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">Each completed portrait shows its own Download button. Use <strong>Save all</strong> to grab the whole batch. Files are appended with <code>-nobg</code> to the original name so originals are untouched.</p>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>Why wedding portraits almost always have a removable backdrop</h2>
+                <p>If you've ever wondered why so many couple portraits look like they were "shot against a wall of nothing," that's because they were. Portrait studios — and most reputable wedding photographers shooting indoors — use a <strong>seamless paper or fabric backdrop</strong> in a single, flat color. White is the most common because it flatters skin tones and matches the bride's dress, but you'll also see gray (for high-key editorial looks), black (for drama), navy (for vintage portraits), and increasingly beige or pale pink.</p>
+                <p>That flat color is the reason this tool works. A studio backdrop is, by design, a color that the couple is not. A pixel that's "very close to backdrop color" is almost certainly backdrop. A pixel that's "very far from backdrop color" is almost certainly the couple. The trick is picking the right backdrop color and choosing how strict the "close enough" threshold is — that's what the tolerance slider does.</p>
+
+                <h3>How the remover actually works</h3>
+                <p>For every pixel in your photo, we measure the <strong>Euclidean distance in RGB space</strong> between that pixel's color and the backdrop color you picked. If the distance is below the tolerance you set, that pixel is marked transparent (PNG) or filled with white (JPG). If the distance is between tolerance and tolerance + feather, the pixel's alpha is smoothly faded — that's what avoids the hard ring you sometimes see around hair and shoulders. If the distance is far above tolerance, the pixel is left untouched.</p>
+                <p>The full calculation runs in a single pass over a <code>Uint8ClampedArray</code>, which means it's fast enough for 4K images on a modern laptop (roughly 2–5 seconds). The browser tab is the only place this work happens — nothing is uploaded to any server.</p>
+
+                <h3>Clean-backdrop remover vs. full AI semantic segmentor</h3>
+                <p>This is the part where being honest matters. <strong>This tool is not an AI.</strong> It's a color-distance cut. That's exactly what you want for a studio portrait, but it's not what you want for, say, a couple on a beach with palm trees behind them. If you need true semantic segmentation — "tell me where the people are regardless of background" — you'd reach for a cloud-based model like rembg, Segment Anything, or the paid remove.bg service. Those are slower, heavier, and typically require uploading your photo.</p>
+                <p>The reason this tool exists is that the wedding portrait case is <em>almost always</em> the clean-backdrop case. The couple goes to the studio, gets back 30 photos against the same gray seamless paper, and wants to drop them onto a vineyard sunset for the save-the-date. That's a backdrop-color problem, not a segmentation problem — and it can be solved in-browser in seconds with no upload, no account, no watermark.</p>
+
+                <h3>When tolerance = 50 works (and when to crank it up)</h3>
+                <p>The default of 50 is calibrated for a perfectly even white backdrop shot under studio strobes. That covers the majority of cases. You'll need to raise the slider when:</p>
+                <ul>
+                    <li><strong>The backdrop has uneven lighting.</strong> Even "flat" backdrops have gradients from top (brighter) to bottom (darker) under window light. A backdrop that's white at the top and 220-gray at the bottom wants tolerance in the 80–100 range.</li>
+                    <li><strong>There's a slight color cast.</strong> Some studios use warm-white bulbs (tungsten or 3200K) which shift the backdrop to a creamy 240-245-235 rather than pure 255-255-255. Tolerance 60–80 handles it.</li>
+                    <li><strong>The backdrop is gray or beige to start with.</strong> Gray seamless paper (RGB ~128-128-128) has more "distance" between itself and a normal skin tone than white does, but the same logic applies. Tolerance 50–60 is usually fine; 70–90 if it's uneven.</li>
+                </ul>
+                <p>You'll want to <strong>lower</strong> the tolerance when you're seeing skin, hair, or veil fade out along with the backdrop. If your tolerance is at 100 and the bride's white dress is getting eaten, drop to 60–70.</p>
+
+                <h3>Edge feathering: the secret to clean hair</h3>
+                <p>The tolerance boundary is a single hard line — every pixel either matches or doesn't. Without feathering, hair against a white backdrop turns into either a sharp cut (low tolerance) or a translucent ghost (high tolerance). Edge feathering solves this by adding a <strong>soft band</strong> beyond the tolerance threshold where alpha fades smoothly from 0 (transparent) to 255 (opaque). Three pixels is the default and works for most portraits. Crank it to 5–6 for frizzy hair or fine veil lace. Drop it to 0 for hard-edged graphics like scanned silhouettes.</p>
+
+                <h2>What to do with a backdrop-free portrait</h2>
+                <p>A transparent PNG of the couple is the universal input for wedding design work. The most common next steps:</p>
+                <ul>
+                    <li><a href="/blog/wedding-invitation-video-guide/">Design a save-the-date or invitation</a> — drop the couple onto a vineyard at golden hour, a cathedral interior, an art-deco arch, or a custom illustrated backdrop. Canva, Photoshop, and Figma all handle transparent PNGs natively.</li>
+                    <li><a href="/services/personalization/ai-video-generator/">Turn the portrait into a 60-second AI wedding film</a> — our most popular service. Upload a few of your favorite backdrops, add motion prompts, and get a cinematic film in about 48 hours.</li>
+                    <li><a href="/tools/wedding-photo-collage/">Build a photo collage</a> for thank-you cards or guest books. Use this tool first to prep portraits, then mix them with candids using the collage maker.</li>
+                    <li><a href="/tools/crop-wedding-photo-for-reels/">Crop for Reels</a> — once the backdrop is gone, you can crop the portrait tighter for vertical formats without losing the framing.</li>
+                </ul>
+                <p>If your end goal is a video, the AI Wedding Video Generator is the natural next step. It's the same in-browser, privacy-first philosophy: upload, describe the mood, get a film. Starting at $9.9 with no subscription.</p>
+
+                <h2>Frequently asked questions</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>Will it work on photos taken outdoors or on textured walls?</summary>
+                        <p>No — this tool targets solid-color backdrops only. Outdoor scenes, brick walls, gardens, or any background with mixed colors won't strip cleanly because there isn't one "backdrop color" to match against. For those, you need a true semantic AI segmentor (which requires uploading your photo to a cloud service). For the studio-portrait case that most couples actually have, though, this tool handles it instantly.</p>
+                    </details>
+                    <details>
+                        <summary>How is this different from remove.bg or Photoshop's "Select Subject"?</summary>
+                        <p>Those are full semantic segmentors that identify the subject regardless of background. This tool only matches against a backdrop color you pick. For studio shots, the result is comparable — and this one runs entirely in your browser, with no upload, no watermark, and no account. For outdoor or complex scenes, use a semantic tool instead.</p>
+                    </details>
+                    <details>
+                        <summary>What if the backdrop isn't pure white?</summary>
+                        <p>Use the color picker (or one of the preset buttons: off-white, gray, beige, navy) to match the actual backdrop. If your photo has uneven lighting on the backdrop, raise the tolerance to 80–100 to capture the darker areas too.</p>
+                    </details>
+                    <details>
+                        <summary>Why is my PNG larger than the JPG it came from?</summary>
+                        <p>PNG with an alpha channel stores per-pixel transparency data. For most wedding photos, that's 30–80% more bytes than the same image as JPG with a white fill. That's the trade-off: PNG gives you a transparent background (you can drop the couple onto anything), JPG gives you a smaller file (you can post it directly). Pick the output mode that matches your use case.</p>
+                    </details>
+                    <details>
+                        <summary>Does feathering affect file size or quality?</summary>
+                        <p>No. Feathering only changes which side of the alpha boundary each pixel lands on; the file format and bit depth are unchanged. The only visible difference is that edges look softer.</p>
+                    </details>
+                    <details>
+                        <summary>Is there a file size or count limit?</summary>
+                        <p>No hard limit. The practical limit is your device's memory — a single 4K portrait uses ~64 MB of working memory, and ten of them take ~640 MB. If the browser tab crashes on a huge batch, re-load and process fewer at a time.</p>
+                    </details>
+                </div>
+
+                <h2>More free wedding photo tools</h2>
+                <p>Once your portrait has a transparent background, the rest of the design workflow opens up:</p>
+                <div class="sibling-tools">
+                    <a href="/tools/compress-wedding-photos/">Compress Photos</a>
+                    <a href="/tools/wedding-photo-collage/">Photo Collage</a>
+                    <a href="/tools/crop-wedding-photo-for-reels/">Crop for Reels</a>
+                    <a href="/tools/add-text-to-wedding-photo/">Add Text</a>
+                    <a href="/tools/heic-to-jpg-wedding-photos/">HEIC → JPG</a>
+                    <a href="/tools/">All Tools</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>Related guides</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>How to Make a Wedding Video From Your Photos (AI Guide)</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-invitation-video-guide/">
+                        <h4>Wedding Invitation Video: The Complete 2026 Guide</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/ai-photos-to-wedding-video/">
+                        <h4>From Wedding Photos to a Cinematic AI Film</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-slideshow-guide/">
+                        <h4>Build a Wedding Photo Slideshow That Captivates</h4>
+                        <span>Read article →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Got your backdrop-free portrait? Ready for a wedding film?</h2>
+                <p>Hand your favorite photos to our AI Wedding Video Generator and get a cinematic film in 48 hours.</p>
+                <a href="/order/" class="btn btn-primary btn-large" title="Get a free quote — start your project">Get a Free Quote →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo" title="WeddingAI.video — wedding video services">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>AI-powered wedding video services for couples worldwide.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/gallery/">Gallery</a></li>
+                        <li><a href="/about/">About Us</a></li>
+                        <li><a href="/tools/">Free Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">Slow Motion</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI Video Generator</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">Wedding Trailer</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">Family Tribute</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="/order/">Get a Quote</a></li>
+                        <li><a href="/pricing/">Pricing</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. All rights reserved.</p>
+                <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+      var dropzone = document.getElementById('dropzone');
+      var input = document.getElementById('file-input');
+      var list = document.getElementById('file-list');
+      var empty = document.getElementById('empty-state');
+      var runBtn = document.getElementById('run-btn');
+      var saveAllBtn = document.getElementById('save-all-btn');
+      var clearBtn = document.getElementById('clear-btn');
+      var bgColorEl = document.getElementById('bg-color');
+      var bgColorHex = document.getElementById('bg-color-hex');
+      var toleranceEl = document.getElementById('tolerance');
+      var toleranceVal = document.getElementById('tolerance-val');
+      var featherEl = document.getElementById('feather');
+      var featherVal = document.getElementById('feather-val');
+      var outputModeEl = document.getElementById('output-mode');
+
+      var files = [];
+
+      function refreshUI() {
+        empty.hidden = files.length > 0;
+        list.hidden = files.length === 0;
+        runBtn.disabled = files.length === 0 || files.every(function (f) { return f.status === 'done' || f.status === 'working'; });
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        if (window.weddingAITool && window.weddingAITool.renderFileList) {
+          window.weddingAITool.renderFileList(list, files, function () {});
+          Array.prototype.forEach.call(list.children, function (row, i) {
+            window.weddingAITool.updateFileRow(row, files[i]);
+          });
+        }
+      }
+
+      function addFiles(picked) {
+        picked.forEach(function (f) {
+          if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
+            return;
+          }
+          files.push({
+            status: 'queued',
+            name: f.name,
+            inputFile: f,
+            sizes: { orig: f.size, out: 0 },
+            output: null,
+            previewUrl: null,
+            error: null,
+          });
+        });
+        if (files.length === 0) { window.weddingAITool.toast('No supported files. Try a JPG, PNG, or WebP.', 'error'); return; }
+        files.forEach(function (entry) {
+          if (entry.previewUrl) return;
+          entry.previewUrl = URL.createObjectURL(entry.inputFile);
+        });
+        refreshUI();
+      }
+
+      function clearAll() {
+        files.forEach(function (f) {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          if (f.outputUrl) URL.revokeObjectURL(f.outputUrl);
+        });
+        files = [];
+        refreshUI();
+      }
+
+      function hexToRgb(hex) {
+        var s = (hex || '').replace('#', '');
+        if (s.length === 3) s = s.split('').map(function (c) { return c + c; }).join('');
+        if (!/^[0-9A-Fa-f]{6}$/.test(s)) return { r: 255, g: 255, b: 255 };
+        return {
+          r: parseInt(s.slice(0, 2), 16),
+          g: parseInt(s.slice(2, 4), 16),
+          b: parseInt(s.slice(4, 6), 16)
+        };
+      }
+
+      function getCurrentSettings() {
+        var bg = hexToRgb(bgColorEl.value);
+        return {
+          bg: bg,
+          tolerance: parseInt(toleranceEl.value, 10),
+          feather: parseInt(featherEl.value, 10),
+          mode: outputModeEl.value, // 'png' or 'jpg'
+        };
+      }
+
+      async function processOne(entry, settings) {
+        entry.status = 'working';
+        entry.error = null;
+        refreshUI();
+
+        try {
+          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          var img = loaded.img;
+          var w = img.naturalWidth, h = img.naturalHeight;
+
+          // Paint the original image (with its own alpha) onto the working canvas
+          var canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d', { willReadFrequently: true });
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.clearRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0);
+
+          var imageData = ctx.getImageData(0, 0, w, h);
+          var data = imageData.data;
+          var bgR = settings.bg.r, bgG = settings.bg.g, bgB = settings.bg.b;
+          var tol = settings.tolerance;
+          var feather = settings.feather;
+          var innerT = tol;
+          // Feather band width: ~8 RGB units per 1 px of feathering (tunable constant)
+          var outerT = tol + feather * 8;
+          var bandWidth = outerT - innerT;
+          var mode = settings.mode;
+
+          // Single-pass pixel loop. Math.sqrt is the only expensive op here.
+          for (var i = 0; i < data.length; i += 4) {
+            var dr = data[i]     - bgR;
+            var dg = data[i + 1] - bgG;
+            var db = data[i + 2] - bgB;
+            var dist = Math.sqrt(dr * dr + dg * dg + db * db);
+            var alpha;
+            if (dist <= innerT) {
+              alpha = 0;
+            } else if (dist < outerT) {
+              alpha = Math.round(((dist - innerT) / bandWidth) * 255);
+            } else {
+              alpha = 255;
+            }
+            if (mode === 'png') {
+              // Multiply alpha into existing alpha (preserve any pre-existing transparency in source)
+              var prevA = data[i + 3];
+              data[i + 3] = Math.round((prevA / 255) * alpha);
+            } else {
+              // JPG mode: where we'd be transparent, fill with white
+              if (alpha < 255) {
+                // partial fade: blend toward white by (1 - alpha/255)
+                var k = 1 - (alpha / 255);
+                data[i]     = Math.round(data[i]     * (1 - k) + 255 * k);
+                data[i + 1] = Math.round(data[i + 1] * (1 - k) + 255 * k);
+                data[i + 2] = Math.round(data[i + 2] * (1 - k) + 255 * k);
+              }
+              data[i + 3] = 255;
+            }
+          }
+
+          ctx.putImageData(imageData, 0, 0);
+
+          var mime = (mode === 'jpg') ? 'image/jpeg' : 'image/png';
+          var quality = (mode === 'jpg') ? 0.92 : undefined;
+          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('Background removal returned an empty file. Try a different mode.');
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
+          var ext = (mode === 'jpg') ? 'jpg' : 'png';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-nobg.' + ext);
+          URL.revokeObjectURL(loaded.url);
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
+        }
+        refreshUI();
+      }
+
+      async function runAll() {
+        var settings = getCurrentSettings();
+        runBtn.disabled = true;
+        for (var i = 0; i < files.length; i++) {
+          var f = files[i];
+          if (f.status === 'done') continue;
+          await processOne(f, settings);
+        }
+        runBtn.disabled = false;
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        window.weddingAITool.toast('Background removal complete.');
+      }
+
+      function saveAllDownloads() {
+        var outputs = files
+          .filter(function (f) { return f.status === 'done' && f.output; })
+          .map(function (f) { return { name: f.outputName, blob: f.output }; });
+        if (outputs.length === 0) return;
+        window.weddingAITool.downloadZip(outputs, 'nobg');
+        window.weddingAITool.toast('Saving ' + outputs.length + ' file' + (outputs.length === 1 ? '' : 's') + '…');
+      }
+
+      // ---------- wire up ---------------------------------------------------------
+
+      window.weddingAITool.bindDropZone({
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
+        onFiles: addFiles,
+      });
+
+      toleranceEl.addEventListener('input', function () { toleranceVal.textContent = toleranceEl.value; });
+      featherEl.addEventListener('input', function () { featherVal.textContent = featherEl.value; });
+
+      // Keep color picker and hex input in sync
+      bgColorEl.addEventListener('input', function () {
+        bgColorHex.value = bgColorEl.value.toUpperCase();
+        syncPresetButtons(bgColorEl.value);
+      });
+      bgColorHex.addEventListener('input', function () {
+        var v = bgColorHex.value.trim();
+        if (v.charAt(0) !== '#') v = '#' + v;
+        if (/^#[0-9A-Fa-f]{6}$/.test(v)) {
+          bgColorEl.value = v.toLowerCase();
+          syncPresetButtons(v);
+        }
+      });
+
+      function syncPresetButtons(color) {
+        var hex = color.toUpperCase();
+        var btns = document.querySelectorAll('.wa-tool-color-presets button');
+        Array.prototype.forEach.call(btns, function (b) {
+          var pressed = b.getAttribute('data-color').toUpperCase() === hex;
+          b.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+        });
+      }
+
+      var presetButtons = document.querySelectorAll('.wa-tool-color-presets button');
+      Array.prototype.forEach.call(presetButtons, function (btn) {
+        btn.addEventListener('click', function () {
+          var c = btn.getAttribute('data-color');
+          bgColorEl.value = c;
+          bgColorHex.value = c.toUpperCase();
+          syncPresetButtons(c);
+        });
+      });
+
+      runBtn.addEventListener('click', runAll);
+      saveAllBtn.addEventListener('click', saveAllDownloads);
+      clearBtn.addEventListener('click', clearAll);
+
+      list.addEventListener('wa-row-remove', function (e) {
+        var idx = parseInt((e.detail || '0'), 10);
+        if (!isNaN(idx)) {
+          var f = files[idx];
+          if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          if (f && f.outputUrl) URL.revokeObjectURL(f.outputUrl);
+          files.splice(idx, 1);
+          refreshUI();
+        }
+      });
+
+      refreshUI();
+    })();
+    </script>
+</body>
+</html>

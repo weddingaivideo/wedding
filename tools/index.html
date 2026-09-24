@@ -1,0 +1,435 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Free Wedding Photo Tools | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/tools/">
+    
+    
+    
+    <meta name="description" content="6 free, browser-side wedding photo tools: JPG compress, HEIC to JPG, collage, Reels crop, remove background, add text. Files never leave your device. No signup." />
+    <meta name="keywords" content="free wedding photo tools, compress wedding photos, HEIC to JPG converter, wedding photo collage, crop photo for Instagram Reels, remove background wedding portrait, add text to photo">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Free Wedding Photo Tools | WeddingAI.video">
+    <meta property="og:description" content="6 free, in-browser wedding photo tools. No upload, no signup. Files never leave your device.">
+    <meta property="og:url" content="https://weddingai.video/tools/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="WeddingAI.video Free Wedding Photo Tools">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Wedding Photo Tools | WeddingAI.video">
+    <meta name="twitter:description" content="6 free, in-browser tools for prepping wedding photos. No upload, no signup.">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="WeddingAI Tools">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <style>
+        .page-hero { position: relative; min-height: 38vh; display: flex; align-items: center; color: #fff; text-align: center; padding: var(--spacing-xl) 0; background: linear-gradient(135deg, #d4af37 0%, #b8962e 60%, #2c2c2c 100%); overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top, rgba(255,255,255,0.18), transparent 60%); pointer-events: none; }
+        .page-hero h1 { color: #fff; font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: var(--spacing-sm); }
+        .page-hero p { color: rgba(255,255,255,0.9); font-size: 1.0625rem; max-width: 720px; margin: 0 auto; }
+        .page-hero-eyebrow { display: inline-block; padding: 0.4rem 0.85rem; border-radius: 999px; background: rgba(0,0,0,0.18); color: #fff; font-size: 0.8125rem; font-weight: 600; margin-bottom: var(--spacing-sm); letter-spacing: 0.04em; text-transform: uppercase; }
+        .section { padding: var(--spacing-xl) 0; }
+        .section-bg-alt { background: var(--color-bg-alt); }
+        .container-narrow { max-width: 880px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section-header { text-align: center; margin-bottom: var(--spacing-xl); }
+        .section-header h2 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--color-secondary); }
+        .section-header p { color: var(--color-text-light); margin-top: 0.5rem; max-width: 640px; margin-left: auto; margin-right: auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--spacing-md); margin-top: var(--spacing-lg); }
+        .why-card { background: var(--color-white); border-left: 4px solid var(--color-primary); padding: var(--spacing-md); border-radius: var(--radius-sm); }
+        .why-card h3 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--color-secondary); }
+        .why-card p { color: var(--color-text-light); font-size: 0.9375rem; }
+
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+
+        .hub-tag-row { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-light); margin-bottom: var(--spacing-sm); }
+
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Free Wedding Photo Tools","description":"Six free, in-browser wedding photo processing tools. No upload, no signup, no tracking — files never leave the user's device.","url":"https://weddingai.video/tools/","itemListElement":[
+        {"@type":"ListItem","position":1,"url":"https://weddingai.video/tools/compress-wedding-photos/","name":"Compress Wedding Photos"},
+        {"@type":"ListItem","position":2,"url":"https://weddingai.video/tools/heic-to-jpg-wedding-photos/","name":"HEIC to JPG Converter"},
+        {"@type":"ListItem","position":3,"url":"https://weddingai.video/tools/wedding-photo-collage/","name":"Wedding Photo Collage Maker"},
+        {"@type":"ListItem","position":4,"url":"https://weddingai.video/tools/crop-wedding-photo-for-reels/","name":"Crop Wedding Photo for Reels & Instagram"},
+        {"@type":"ListItem","position":5,"url":"https://weddingai.video/tools/remove-background-wedding-portrait/","name":"Remove Background from Wedding Portrait"},
+        {"@type":"ListItem","position":6,"url":"https://weddingai.video/tools/add-text-to-wedding-photo/","name":"Add Text to Wedding Photo"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"Free Wedding Photo Tools","item":"https://weddingai.video/tools/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Free Wedding Photo Tools","description":"Six free, in-browser wedding photo processing tools.","url":"https://weddingai.video/tools/","inLanguage":"en-US","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"mainEntity":{"@type":"ItemList","name":"Free Wedding Photo Tools","url":"https://weddingai.video/tools/"}}</script>
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/"><link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/"><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/"></head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video — wedding video services">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Browse our wedding video services" aria-haspopup="true" aria-expanded="false">Services <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Video Enhancement</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">Slow Motion</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">Vintage Restoration</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Personalization</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">Wedding Trailer</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI Video Generator</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">Pet Wedding</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">Multilingual</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">Cartoon Style</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">Wedding Memes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Absence Compensation</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">Family Tribute</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">Family Message</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link">View all services →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/tools/" title="Free wedding photo tools" style="color: var(--color-primary);">Free Tools</a></li>
+                    <li><a href="/gallery/" title="View our gallery and case studies">Gallery</a></li>
+                    <li><a href="/blog/" title="Read our wedding video blog">Blog</a></li>
+                    <li><a href="/pricing/" title="View transparent pricing">Pricing</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Get a free quote — start your project">Get a Quote</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n>
+                        <select id="wa-lang-select" aria-label="Language">
+                            <option value="en">EN</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero">
+            <div class="container page-hero-content">
+                <span class="page-hero-eyebrow">100% in your browser — no upload, no signup</span>
+                <h1>Free Wedding Photo Tools</h1>
+                <p>Six pure-frontend utilities for prepping, sharing, and printing your wedding photos. We never see a single pixel — every byte stays on your device.</p>
+                <p class="wa-tool-privacy">Files are processed locally. Nothing is uploaded.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a> <span>›</span> <span>Free Tools</span>
+        </nav>
+
+        <section class="section" style="background: var(--color-bg-alt); padding-top: var(--spacing-xl);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="hub-tag-row">All tools</span>
+                    <h2>Pick the wedding photo tool you need</h2>
+                    <p>Each tool opens with a single page — drop your photos, tweak the setting, download. Average task: under 30 seconds.</p>
+                </div>
+
+                <div class="wa-tool-hub-grid">
+                    <a class="wa-tool-hub-card" href="/tools/compress-wedding-photos/" title="Compress Wedding Photos">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">🗜️</span>
+                        <h3>Compress Wedding Photos</h3>
+                        <p>Shrink huge JPGs by 60–85% before uploading to your album, sharing with family, or handing off to your videographer.</p>
+                        <span class="wa-tool-hub-tag">Open tool →</span>
+                    </a>
+                    <a class="wa-tool-hub-card" href="/tools/heic-to-jpg-wedding-photos/" title="HEIC to JPG Converter">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">🔁</span>
+                        <h3>HEIC to JPG Converter</h3>
+                        <p>iPhone photos in HEIC format break wedding albums, venues, and printers. Convert to JPG in one click.</p>
+                        <span class="wa-tool-hub-tag">Open tool →</span>
+                    </a>
+                    <a class="wa-tool-hub-card" href="/tools/wedding-photo-collage/" title="Wedding Photo Collage Maker">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">🧩</span>
+                        <h3>Wedding Photo Collage Maker</h3>
+                        <p>Drop 2–12 photos, pick a layout, drop in text — perfect for save-the-dates, thank-you cards, and gift prints.</p>
+                        <span class="wa-tool-hub-tag">Open tool →</span>
+                    </a>
+                    <a class="wa-tool-hub-card" href="/tools/crop-wedding-photo-for-reels/" title="Crop Wedding Photo for Reels">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">📱</span>
+                        <h3>Crop Wedding Photo for Reels</h3>
+                        <p>Instantly crop to 9:16 Reels, 1:1 Instagram square, 16:9 cinematic, or 4:5 portrait. Smart center-weighted framing.</p>
+                        <span class="wa-tool-hub-tag">Open tool →</span>
+                    </a>
+                    <a class="wa-tool-hub-card" href="/tools/remove-background-wedding-portrait/" title="Remove Background from Wedding Portrait">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">✂️</span>
+                        <h3>Remove Background from Portrait</h3>
+                        <p>Strip a clean studio backdrop (white, black, gray) from a couple's portrait — ideal for invitations and announcements.</p>
+                        <span class="wa-tool-hub-tag">Open tool →</span>
+                    </a>
+                    <a class="wa-tool-hub-card" href="/tools/add-text-to-wedding-photo/" title="Add Text to Wedding Photo">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">🖋️</span>
+                        <h3>Add Text to Wedding Photo</h3>
+                        <p>Add captions, dates, quotes, names, or save-the-date callouts. 14 fonts, full color and opacity control.</p>
+                        <span class="wa-tool-hub-tag">Open tool →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container-narrow">
+                <div class="section-header">
+                    <span class="hub-tag-row">Why these tools</span>
+                    <h2>Built by the wedding video team — for the prep work that comes before the film</h2>
+                </div>
+                <p style="color: var(--color-text-light); text-align: center; max-width: 720px; margin: 0 auto var(--spacing-lg);">
+                    Most of our paying customers hand us <strong>hundreds of photos</strong> as raw footage for an AI wedding film. We've watched those collections choke on file size, mismatched formats, and worst of all: missing engagement shots because nobody could find them in the upload. These tools solve the same frustrations we saw in our own pipeline — and we made them free because the wedding industry needed them too.
+                </p>
+                <div class="why-grid">
+                    <div class="why-card">
+                        <h3>🔒 Nothing leaves your device</h3>
+                        <p>Strictly in-browser. No server uploads, no analytics tied to your photos, no scan-for-babies. Wedding photos are private — the tool respects that.</p>
+                    </div>
+                    <div class="why-card">
+                        <h3>⚡ Made for the wedding timeline</h3>
+                        <p>Drag in 200 photos, set "high compression", and download a zip in the time it takes to refill your coffee. We don't make you sign up.</p>
+                    </div>
+                    <div class="why-card">
+                        <h3>🎯 Tightly focused on wedding photos</h3>
+                        <p>Each tool is tuned for the actual formats couples deal with: iPhone HEIC, RAW exports, oversized prints, square vs vertical social needs.</p>
+                    </div>
+                    <div class="why-card">
+                        <h3>🎁 The hand-off to your wedding video</h3>
+                        <p>After prepping photos here, you can hand them to our <a href="/services/personalization/ai-video-generator/" style="color: var(--color-primary);">AI Wedding Video Generator</a> and we'll turn them into a cinematic film.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-bg-alt">
+            <div class="article-body">
+                <span class="hub-tag-row">Wedding photo prep</span>
+                <h2>The complete prep workflow for your wedding photo collection</h2>
+                <p>Most couples walk away from the wedding with thousands of photos scattered across cameras, phones, hard drives, and group chats. By the time you want to make a film, a printed album, or a thank-you slideshow, the photos are usually in the wrong format, way too large to share, or trapped inside a single iPhone's HEIC encoding.</p>
+                <p>This page collects six no-cost tools that solve each of those steps without uploading your personal photos to anyone. Run them in the order below, or jump straight to the one you need.</p>
+
+                <h3>1. Convert HEIC to JPG (if your photographer used iPhones)</h3>
+                <p>iPhones shoot in HEIC by default. It's an excellent format for storage, but it confuses most album printers, online submission forms, and any software older than 2020. <a href="/tools/heic-to-jpg-wedding-photos/">Convert HEIC to JPG</a> before you do anything else. The tool keeps every bit of quality and renames the files for you.</p>
+
+                <h3>2. Compress the JPGs to free up space</h3>
+                <p>A modern DSLR shot in RAW uncompressed can run 25–40 MB per image. Once you've converted and downsized for sharing, <a href="/tools/compress-wedding-photos/">compressing</a> is the fastest way to fit hundreds of photos into one email, one upload, or one cloud-storage folder. The visual difference is invisible at normal viewing sizes — usually a 70–80% file size reduction with no perceptible quality loss.</p>
+
+                <h3>3. Crop the hero shots for social</h3>
+                <p>Your photographer delivered 3:2 landscape photos — gorgeous for prints, awkward for Instagram. <a href="/tools/crop-wedding-photo-for-reels/">Crop for Reels, square, or portrait</a> with smart center-weighted framing so the bride's face stays on screen. Great for save-the-date reels, Instagram grid posts, and TikTok teasers.</p>
+
+                <h3>4. Strip the studio backdrop from formal portraits</h3>
+                <p>Most couple portraits come with a clean white, gray, or beige studio backdrop. The <a href="/tools/remove-background-wedding-portrait/">background remover</a> cuts that backdrop out so you can drop the portrait over a vineyard, a sunset, or a custom wedding invitation design. Works best on traditional studio shots with even lighting.</p>
+
+                <h3>5. Build collages for save-the-dates and print gifts</h3>
+                <p>Once your favorites are pre-cropped and clean, the <a href="/tools/wedding-photo-collage/">collage maker</a> arranges 2–12 photos into gift prints, invitation inserts, parent albums, and thank-you cards. Pick a layout, type a caption, download as a print-ready PNG.</p>
+
+                <h3>6. Add names, dates, and captions</h3>
+                <p>Save-the-dates need names and dates. Thank-you cards need thank-yous. Album spreads need dates and locations. <a href="/tools/add-text-to-wedding-photo/">Add text to a wedding photo</a> with full font, color, and shadow control.</p>
+
+                <h2>Once your photos are ready: turn them into a wedding film</h2>
+                <p>Prepping photos is step one. Step two is turning your favorites into a cinematic wedding film. Our <a href="/services/personalization/ai-video-generator/">AI Wedding Video Generator</a> takes a photo collection and a short description and produces a 60–90 second film in about 48 hours — no editing skills required, starting at $9.9. We've made films for over 500 couples across the US and Europe.</p>
+                <p>Want to see what one looks like? Watch a few examples in our <a href="/gallery/">gallery</a> or read the <a href="/blog/wedding-video-from-photos/">full guide to AI wedding videos from photos</a>.</p>
+
+                <h2>Frequently asked questions</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>Do these tools send my photos anywhere?</summary>
+                        <p>No. Every tool runs entirely in your browser via the Canvas API. The photos never touch a server, are never analyzed, and never appear in any analytics event. You can verify this by opening the page, opening your browser's Network tab, and watching the only requests are for the HTML/CSS/JS files of the page itself.</p>
+                    </details>
+                    <details>
+                        <summary>Are they really free? What's the catch?</summary>
+                        <p>Yes, free. The catch — if you can call it that — is that after prepping your photos, we'd love it if you consider our paid <a href="/services/personalization/ai-video-generator/">AI Wedding Video Generator</a> to turn those photos into a film. No email required to use the free tools, and no nudge to upgrade.</p>
+                    </details>
+                    <details>
+                        <summary>Which image formats are supported?</summary>
+                        <p>JPG, PNG, and WebP across all tools. HEIC is supported on the dedicated <a href="/tools/heic-to-jpg-wedding-photos/">HEIC converter</a>. GIF and BMP are converted via the standard image loaders but are not the focus.</p>
+                    </details>
+                    <details>
+                        <summary>Can I use these on my phone?</summary>
+                        <p>Yes. All six tools work on iOS Safari and modern Android Chrome. The drop-zone responds to tap-to-pick from your camera roll. Output download is handled by the same browser save flow you use for any other file.</p>
+                    </details>
+                    <details>
+                        <summary>What about the photo files I already uploaded to your paid service?</summary>
+                        <p>Anything you upload via our <a href="/order/">order form</a> is encrypted in transit and at rest, deleted within 30 days of project completion (sooner on request), and never used for model training. Full details are in our <a href="/privacy/">privacy policy</a>.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <span class="hub-tag-row">From the blog</span>
+                    <h2>Related guides</h2>
+                    <p>Each of these guides pairs with one or more of the tools above.</p>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>How to Make a Wedding Video From Your Photos (AI Guide)</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/restore-old-wedding-photos/">
+                        <h4>Restore Old Wedding Photos With AI (2026 Guide)</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-photo-slideshow/">
+                        <h4>Build a Wedding Photo Slideshow That Captivates</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/ai-wedding-video-generator-guide/">
+                        <h4>AI Wedding Video Generator: Photos to Cinematic Film</h4>
+                        <span>Read article →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to turn those wedding photos into a cinematic film?</h2>
+                <p>Once your photos are prepped, send them to our AI Wedding Video Generator. Films from $9.9, delivered in 48 hours.</p>
+                <a href="/order/" class="btn btn-primary btn-large" title="Get a free quote — start your project">Get a Free Quote →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo" title="WeddingAI.video — wedding video services">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>AI-powered wedding video services for couples worldwide.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/gallery/">Gallery</a></li>
+                        <li><a href="/about/">About Us</a></li>
+                        <li><a href="/tools/">Free Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">Slow Motion</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI Video Generator</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">Wedding Trailer</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">Family Tribute</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="/order/">Get a Quote</a></li>
+                        <li><a href="/pricing/">Pricing</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. All rights reserved.</p>
+                <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

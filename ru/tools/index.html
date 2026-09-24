@@ -1,0 +1,437 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Бесплатные инструменты для свадебных фото | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/ru/tools/">
+    <link rel="alternate" hreflang="en" href="https://weddingai.video/tools/">
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/">
+    <link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/">
+    <link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/">
+    <meta name="description" content="6 бесплатных браузерных инструментов для свадебных фото: сжатие JPG, HEIC, коллаж, обрезка под Reels, удаление фона, текст. Без загрузки, без регистрации." />
+    <meta name="keywords" content="бесплатные инструменты для свадебных фото, сжатие свадебных фото, HEIC в JPG, коллаж свадебных фото, обрезка под Reels, удаление фона с портрета, добавить текст на фото">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Бесплатные инструменты для свадебных фото | WeddingAI.video">
+    <meta property="og:description" content="6 бесплатных браузерных инструментов для свадебных фото. Без загрузки, без регистрации. Файлы не покидают ваше устройство.">
+    <meta property="og:url" content="https://weddingai.video/ru/tools/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="WeddingAI.video — бесплатные инструменты для свадебных фото">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Бесплатные инструменты для свадебных фото | WeddingAI.video">
+    <meta name="twitter:description" content="6 бесплатных браузерных инструментов для подготовки свадебных фото. Без загрузки, без регистрации.">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Инструменты WeddingAI">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <style>
+        .page-hero { position: relative; min-height: 38vh; display: flex; align-items: center; color: #fff; text-align: center; padding: var(--spacing-xl) 0; background: linear-gradient(135deg, #d4af37 0%, #b8962e 60%, #2c2c2c 100%); overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top, rgba(255,255,255,0.18), transparent 60%); pointer-events: none; }
+        .page-hero h1 { color: #fff; font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: var(--spacing-sm); }
+        .page-hero p { color: rgba(255,255,255,0.9); font-size: 1.0625rem; max-width: 720px; margin: 0 auto; }
+        .page-hero-eyebrow { display: inline-block; padding: 0.4rem 0.85rem; border-radius: 999px; background: rgba(0,0,0,0.18); color: #fff; font-size: 0.8125rem; font-weight: 600; margin-bottom: var(--spacing-sm); letter-spacing: 0.04em; text-transform: uppercase; }
+        .section { padding: var(--spacing-xl) 0; }
+        .section-bg-alt { background: var(--color-bg-alt); }
+        .container-narrow { max-width: 880px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section-header { text-align: center; margin-bottom: var(--spacing-xl); }
+        .section-header h2 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--color-secondary); }
+        .section-header p { color: var(--color-text-light); margin-top: 0.5rem; max-width: 640px; margin-left: auto; margin-right: auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--spacing-md); margin-top: var(--spacing-lg); }
+        .why-card { background: var(--color-white); border-left: 4px solid var(--color-primary); padding: var(--spacing-md); border-radius: var(--radius-sm); }
+        .why-card h3 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--color-secondary); }
+        .why-card p { color: var(--color-text-light); font-size: 0.9375rem; }
+
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+
+        .hub-tag-row { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-light); margin-bottom: var(--spacing-sm); }
+
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Бесплатные инструменты для свадебных фото","description":"Шесть бесплатных браузерных инструментов для обработки свадебных фотографий. Без загрузки на сервер, без регистрации, без аналитики — файлы никогда не покидают устройство пользователя.","url":"https://weddingai.video/ru/tools/","itemListElement":[
+        {"@type":"ListItem","position":1,"url":"https://weddingai.video/ru/tools/compress-wedding-photos/","name":"Сжать свадебные фото"},
+        {"@type":"ListItem","position":2,"url":"https://weddingai.video/ru/tools/heic-to-jpg-wedding-photos/","name":"Конвертер HEIC в JPG"},
+        {"@type":"ListItem","position":3,"url":"https://weddingai.video/ru/tools/wedding-photo-collage/","name":"Создатель коллажа свадебных фото"},
+        {"@type":"ListItem","position":4,"url":"https://weddingai.video/ru/tools/crop-wedding-photo-for-reels/","name":"Обрезка свадебных фото под Reels и Instagram"},
+        {"@type":"ListItem","position":5,"url":"https://weddingai.video/ru/tools/remove-background-wedding-portrait/","name":"Удалить фон со свадебного портрета"},
+        {"@type":"ListItem","position":6,"url":"https://weddingai.video/ru/tools/add-text-to-wedding-photo/","name":"Добавить текст на свадебное фото"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Главная","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"Бесплатные инструменты для свадебных фото","item":"https://weddingai.video/ru/tools/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Бесплатные инструменты для свадебных фото","description":"Шесть бесплатных браузерных инструментов для обработки свадебных фотографий.","url":"https://weddingai.video/ru/tools/","inLanguage":"ru-RU","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"mainEntity":{"@type":"ItemList","name":"Бесплатные инструменты для свадебных фото","url":"https://weddingai.video/ru/tools/"}}</script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/ru/" class="logo" title="WeddingAI.video — свадебные видео-услуги">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="Главная навигация">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Изучить свадебные видео-услуги" aria-haspopup="true" aria-expanded="false">Услуги <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Улучшение видео</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">Замедленная съёмка</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">Восстановление старых записей</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Персонализация</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">Свадебный трейлер</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI-генератор видео</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">Свадьба с питомцем</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">Многоязычное видео</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">Стиль мультфильма</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">Свадебные мемы</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Замена отсутствующих</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">Семейное посвящение</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">Семейное послание</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link">Все услуги →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/ru/tools/" title="Бесплатные инструменты для свадебных фото" style="color: var(--color-primary);">Бесплатные инструменты</a></li>
+                    <li><a href="/gallery/" title="Посмотреть наши работы и примеры">Галерея</a></li>
+                    <li><a href="/blog/" title="Читать блог о свадебных видео">Блог</a></li>
+                    <li><a href="/pricing/" title="Прозрачные цены">Цены</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Бесплатный расчёт — начать проект">Получить расчёт</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n>
+                        <select id="wa-lang-select" aria-label="Язык">
+                            <option value="en">EN</option>
+                            <option value="zh">中文</option>
+                            <option value="ru" selected>RU</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Переключить мобильное меню" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero">
+            <div class="container page-hero-content">
+                <span class="page-hero-eyebrow">100% в браузере — без загрузки, без регистрации</span>
+                <h1>Бесплатные инструменты для свадебных фото</h1>
+                <p>Шесть полностью клиентских утилит, которые помогут подготовить, отправить и напечатать свадебные фото. Мы не видим ни одного пикселя — все байты остаются на вашем устройстве.</p>
+                <p class="wa-tool-privacy">Файлы обрабатываются локально. Ничего не загружается.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="Навигационная цепочка">
+            <a href="/ru/">Главная</a> <span>›</span> <span>Бесплатные инструменты</span>
+        </nav>
+
+        <section class="section" style="background: var(--color-bg-alt); padding-top: var(--spacing-xl);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="hub-tag-row">Все инструменты</span>
+                    <h2>Выберите нужный инструмент для свадебных фото</h2>
+                    <p>Каждый инструмент — отдельная страница: перетащите фото, настройте параметры и скачайте результат. Среднее время выполнения — не более 30 секунд.</p>
+                </div>
+
+                <div class="wa-tool-hub-grid">
+                    <a class="wa-tool-hub-card" href="/ru/tools/compress-wedding-photos/" title="Сжать свадебные фото">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">🗜️</span>
+                        <h3>Сжать свадебные фото</h3>
+                        <p>Уменьшите большие JPG на 60–85% для загрузки в альбом, отправки родственникам или передачи видеографу.</p>
+                        <span class="wa-tool-hub-tag">Открыть инструмент →</span>
+                    </a>
+                    <a class="wa-tool-hub-card" href="/ru/tools/heic-to-jpg-wedding-photos/" title="Конвертер HEIC в JPG">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">🔁</span>
+                        <h3>Конвертер HEIC в JPG</h3>
+                        <p>Формат HEIC с iPhone часто не открывается в фотоальбомах, фотолабораториях и типографиях. Конвертируйте в JPG одним кликом.</p>
+                        <span class="wa-tool-hub-tag">Открыть инструмент →</span>
+                    </a>
+                    <a class="wa-tool-hub-card" href="/ru/tools/wedding-photo-collage/" title="Создатель коллажа свадебных фото">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">🧩</span>
+                        <h3>Создатель коллажа свадебных фото</h3>
+                        <p>Перетащите 2–12 фото, выберите макет, добавьте подпись — идеально для приглашений, благодарственных открыток и памятных подарков.</p>
+                        <span class="wa-tool-hub-tag">Открыть инструмент →</span>
+                    </a>
+                    <a class="wa-tool-hub-card" href="/ru/tools/crop-wedding-photo-for-reels/" title="Обрезка свадебных фото под Reels">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">📱</span>
+                        <h3>Обрезка под форматы Reels</h3>
+                        <p>Одним кликом обрежьте под 9:16 Reels, квадрат 1:1 Instagram, широкоэкранный 16:9 или портрет 4:5. Умная центровка с привязкой к лицу.</p>
+                        <span class="wa-tool-hub-tag">Открыть инструмент →</span>
+                    </a>
+                    <a class="wa-tool-hub-card" href="/ru/tools/remove-background-wedding-portrait/" title="Удалить фон со свадебного портрета">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">✂️</span>
+                        <h3>Удалить фон с портрета</h3>
+                        <p>Удалите чистый студийный фон (белый, чёрный, серый) со свадебных портретов — идеально для приглашений и объявлений.</p>
+                        <span class="wa-tool-hub-tag">Открыть инструмент →</span>
+                    </a>
+                    <a class="wa-tool-hub-card" href="/ru/tools/add-text-to-wedding-photo/" title="Добавить текст на свадебное фото">
+                        <span class="wa-tool-hub-card-icon" aria-hidden="true">🖋️</span>
+                        <h3>Добавить текст на свадебное фото</h3>
+                        <p>Добавьте подписи, даты, цитаты, имена или текст приглашения. 14 шрифтов, полный контроль цвета и прозрачности.</p>
+                        <span class="wa-tool-hub-tag">Открыть инструмент →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container-narrow">
+                <div class="section-header">
+                    <span class="hub-tag-row">Зачем эти инструменты</span>
+                    <h2>От команды, которая делает свадебные фильмы — для всех подготовительных шагов</h2>
+                </div>
+                <p style="color: var(--color-text-light); text-align: center; max-width: 720px; margin: 0 auto var(--spacing-lg);">
+                    Большинство наших платных клиентов передают нам <strong>сотни фотографий</strong> как исходный материал для AI-свадебного видео. Мы видели, как эти коллекции упираются в размер файлов, застревают на форматах, и — самое обидное — свадебные фото теряются просто потому, что их никто не может найти. Эти инструменты решают те же задачи, с которыми мы сталкиваемся в собственной работе, — и мы сделали их бесплатными, потому что они нужны всей свадебной индустрии.
+                </p>
+                <div class="why-grid">
+                    <div class="why-card">
+                        <h3>🔒 Ваши данные не покидают устройство</h3>
+                        <p>Строго в браузере. Никаких загрузок на сервер, никакой аналитики ваших фото, никакого сканирования содержимого. Свадебные фото — это личное, и инструмент это уважает.</p>
+                    </div>
+                    <div class="why-card">
+                        <h3>⚡ Вписывается в свадебное расписание</h3>
+                        <p>Перетащите 200 фото, выберите «сильное сжатие», пока вы наливаете себе кофе — к вашему возвращению всё готово. Без регистрации.</p>
+                    </div>
+                    <div class="why-card">
+                        <h3>🎯 Заточено под свадебные фото</h3>
+                        <p>Каждый инструмент оптимизирован под форматы, с которыми реально сталкиваются молодожёны: iPhone HEIC, RAW-исходники, крупноформатная печать, квадратные и вертикальные соцсети.</p>
+                    </div>
+                    <div class="why-card">
+                        <h3>🎁 Стыкуется со свадебным видео</h3>
+                        <p>После подготовки фото здесь вы можете передать их нашему <a href="/services/personalization/ai-video-generator/" style="color: var(--color-primary);">AI-генератору свадебного видео</a>, и мы превратим их в кинематографичный фильм.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-bg-alt">
+            <div class="article-body">
+                <span class="hub-tag-row">Подготовка свадебных фото</span>
+                <h2>Полный рабочий процесс подготовки свадебных фото</h2>
+                <p>После свадьбы у большинства пар скапливаются тысячи фотографий — в камерах, телефонах, облаках и групповых чатах. Когда дело доходит до создания видео, фотокниги или слайдшоу, эти фотографии часто оказываются в неправильном формате, слишком велики для отправки или заперты в HEIC-кодеке чьего-то iPhone.</p>
+                <p>Здесь собраны шесть бесплатных инструментов, каждый из которых решает один из этих шагов, без необходимости загружать ваши личные фото. Используйте их в указанном порядке или переходите сразу к нужному шагу.</p>
+
+                <h3>1. Конвертируйте HEIC в JPG (если фотограф снимал на iPhone)</h3>
+                <p>iPhone по умолчанию сохраняет снимки в формате HEIC. Формат очень эффективный, но большинство фотолабораторий, форм загрузки онлайн-альбомов и программ, выпущенных до 2020 года, с ним не справляются. <a href="/ru/tools/heic-to-jpg-wedding-photos/">Сконвертируйте HEIC в JPG</a> до других операций. Качество полностью сохраняется, файлы автоматически переименовываются.</p>
+
+                <h3>2. Сожмите JPG, чтобы освободить место</h3>
+                <p>Современные зеркальные камеры выдают 25–40 МБ на кадр в RAW без сжатия. После конвертации и уменьшения для отправки <a href="/ru/tools/compress-wedding-photos/">сжатие</a> — самый быстрый способ уместить несколько сотен снимков в одно письмо, одну загрузку или одну облачную папку. На обычных экранах разницу в качестве не видно — обычно удаётся сэкономить 70–80% без визуальных потерь.</p>
+
+                <h3>3. Обрежьте главные снимки под форматы соцсетей</h3>
+                <p>Фотограф обычно передаёт вам снимки в горизонтальном формате 3:2 — они отлично выглядят на печати, но плохо подходят для Instagram. <a href="/ru/tools/crop-wedding-photo-for-reels/">Обрежьте под Reels, квадрат или портрет</a> с умной центровкой, чтобы лицо невесты всегда оставалось в кадре. Идеально для приглашений в Reels, квадратов в Instagram и тизеров в TikTok.</p>
+
+                <h3>4. Удалите студийный фон с формального портрета</h3>
+                <p>Большинство парных портретов снимают на чистом белом, сером или бежевом фоне в студии. <a href="/ru/tools/remove-background-wedding-portrait/">Удаление фона</a> помогает убрать этот фон, чтобы можно было поместить пару на закатный виноградник, в интерьер собора или в собственный дизайн приглашения. Лучше всего работает с равномерно освещёнными студийными снимками.</p>
+
+                <h3>5. Сделайте коллаж для приглашений и подарков</h3>
+                <p>Подготовьте любимые снимки — обрежьте, уберите лишнее — и <a href="/ru/tools/wedding-photo-collage/">создатель коллажа</a> соберёт 2–12 фото в подарочную печать, разворот приглашения, родительский альбом или благодарственную открытку. Выберите макет, добавьте подпись и скачайте PNG в полиграфическом качестве.</p>
+
+                <h3>6. Добавьте имена, даты и подписи</h3>
+                <p>На приглашении нужны имена и дата; на благодарственной открытке — слова благодарности; на развороте альбома — дата и место. <a href="/ru/tools/add-text-to-wedding-photo/">Добавление текста на свадебное фото</a> даёт полный контроль над шрифтом, цветом и тенью.</p>
+
+                <h2>Когда фото готовы: превратите их в свадебный фильм</h2>
+                <p>Подготовка фото — лишь первый шаг. Второй — превратить несколько любимых снимков в кинематографичный свадебный ролик. Наш <a href="/services/personalization/ai-video-generator/">AI-генератор свадебного видео</a> принимает набор фото и краткое описание и за 48 часов выдаёт ролик на 60–90 секунд — без навыков монтажа, от 9,9 $. Уже более 500 пар из США и Европы получили свои фильмы.</p>
+                <p>Хотите увидеть, как это выглядит? Загляните в нашу <a href="/gallery/">галерею</a>, чтобы посмотреть несколько примеров, или прочтите <a href="/blog/wedding-video-from-photos/">полное руководство по AI-свадебным видео из фотографий</a>.</p>
+
+                <h2>Частые вопросы</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>Эти инструменты куда-то отправляют мои фото?</summary>
+                        <p>Нет. Каждый инструмент работает полностью в браузере через Canvas API. Фото не загружаются на сервер, не анализируются и не появляются в аналитических событиях. Можете сами убедиться: откройте в DevTools вкладку Network — вы увидите только запросы за самой страницей HTML/CSS/JS.</p>
+                    </details>
+                    <details>
+                        <summary>Это правда бесплатно? В чём подвох?</summary>
+                        <p>Действительно бесплатно. «Подвох» (если это так назвать) — лишь в том, что после подготовки фото вы, при желании, можете попробовать нашу платную услугу <a href="/services/personalization/ai-video-generator/">AI-генератор свадебного видео</a> — превратить эти снимки в фильм. Использование бесплатных инструментов не требует email и не сопровождается всплывающими окнами с предложением перейти на платную версию.</p>
+                    </details>
+                    <details>
+                        <summary>Какие форматы изображений поддерживаются?</summary>
+                        <p>Все инструменты работают с JPG, PNG и WebP. Для HEIC есть отдельный <a href="/ru/tools/heic-to-jpg-wedding-photos/">конвертер HEIC</a>. GIF и BMP тоже читаются универсальным загрузчиком, но это не основное назначение инструментов.</p>
+                    </details>
+                    <details>
+                        <summary>Работает ли на телефоне?</summary>
+                        <p>Да. Все шесть инструментов работают в iOS Safari и современном Android Chrome. Зона перетаскивания реагирует на нажатие и открывает выбор из галереи; при скачивании используется стандартный механизм сохранения браузера.</p>
+                    </details>
+                    <details>
+                        <summary>Что с фото, которые я уже загружал в ваш платный сервис?</summary>
+                        <p>Всё, что вы передаёте через <a href="/order/">форму заказа</a>, шифруется при передаче и хранении, удаляется в течение 30 дней после сдачи проекта (раньше — по запросу) и никогда не используется для обучения моделей. Подробности — в нашей <a href="/privacy/">политике конфиденциальности</a>.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <span class="hub-tag-row">Из блога</span>
+                    <h2>Похожие материалы</h2>
+                    <p>Каждая статья связана с одним или несколькими инструментами выше.</p>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>AI превращает свадебные фото в свадебное видео (полное руководство)</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/restore-old-wedding-photos/">
+                        <h4>Восстановление старых свадебных фото с помощью AI (руководство 2026)</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-photo-slideshow/">
+                        <h4>Сделайте запоминающийся свадебный слайд-шоу</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/ai-wedding-video-generator-guide/">
+                        <h4>AI-генератор свадебного видео: от фото к кинематографичному ролику</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Готовы превратить эти свадебные фото в кинематографичный ролик?</h2>
+                <p>Когда фото подготовлены, отправьте их в наш AI-генератор свадебного видео. Фильмы от 9,9 $, готовы через 48 часов.</p>
+                <a href="/order/" class="btn btn-primary btn-large" title="Бесплатный расчёт — начать проект">Бесплатный расчёт →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/ru/" class="logo" title="WeddingAI.video — свадебные видео-услуги">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>AI-сервис свадебных видео для пар по всему миру.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Навигация в подвале">
+                <div class="footer-col">
+                    <h3>Ресурсы</h3>
+                    <ul>
+                        <li><a href="/blog/">Блог</a></li>
+                        <li><a href="/gallery/">Галерея</a></li>
+                        <li><a href="/about/">О нас</a></li>
+                        <li><a href="/ru/tools/">Бесплатные инструменты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Услуги</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">Замедленная съёмка</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI-генератор видео</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">Свадебный трейлер</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">Семейное посвящение</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="/order/">Получить расчёт</a></li>
+                        <li><a href="/pricing/">Цены</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. Все права защищены.</p>
+                <a href="/privacy/">Политика конфиденциальности</a> · <a href="/terms/">Условия использования</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

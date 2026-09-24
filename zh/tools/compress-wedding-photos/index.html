@@ -1,0 +1,603 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>压缩婚纱照 — 浏览器内免费 JPG 压缩器 | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/zh/tools/compress-wedding-photos/">
+    
+    
+    
+    <meta name="description" content="免费压缩婚纱照：在浏览器内把 JPG 体积缩小 60–85%，再上传到相册或分享给家人。无需上传，无需注册，支持批量。" />
+    <meta name="keywords" content="压缩婚纱照, 压缩 JPG 婚纱照, 缩小婚纱照分享体积, 批量照片压缩 婚礼, 免费在线 JPG 压缩 婚礼, 减少照片文件大小 婚纱相册">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="压缩婚纱照 — 免费、浏览器内完成 | WeddingAI.video">
+    <meta property="og:description" content="上传到相册前，把 JPG 体积缩小 60–85%。完全在浏览器内运行，文件不会离开您的设备。">
+    <meta property="og:url" content="https://weddingai.video/zh/tools/compress-wedding-photos/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="压缩婚纱照 — 免费浏览器内工具">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="压缩婚纱照 — 免费、浏览器内完成 | WeddingAI.video">
+    <meta name="twitter:description" content="上传前把 JPG 体积缩小 60–85%。100% 在浏览器内运行。">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="WeddingAI 工具">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"首页","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"免费婚礼图片工具","item":"https://weddingai.video/zh/tools/"},
+        {"@type":"ListItem","position":3,"name":"压缩婚纱照","item":"https://weddingai.video/zh/tools/compress-wedding-photos/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"压缩婚纱照","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"需要支持 Canvas API 的现代浏览器","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"免费浏览器内工具，将婚纱 JPG 与 PNG 体积压缩 60–85%，无需上传。可调节画质与可选的最长边缩放。文件始终留在用户设备上。","url":"https://weddingai.video/zh/tools/compress-wedding-photos/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["拖拽批量上传","可调节 JPG 画质（30–95）","可选最长边缩放","100% 客户端处理","无需上传，无需注册","批量下载"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"如何在浏览器内压缩婚纱照","step":[
+        {"@type":"HowToStep","position":1,"name":"拖入或选择照片","text":"拖入照片或点击浏览。支持 JPG、PNG、WebP。"},
+        {"@type":"HowToStep","position":2,"name":"设置 JPG 画质（默认 75）","text":"数值越小，文件越小；数值越大，画质越好。75 在多数婚礼场景下肉眼无差。"},
+        {"@type":"HowToStep","position":3,"name":"可选：限制最长边","text":"上传到上限 2048px 的相册时非常有用。"},
+        {"@type":"HowToStep","position":4,"name":"点击压缩","text":"文件在浏览器内逐张处理，实时显示每张照片节省的体积。"},
+        {"@type":"HowToStep","position":5,"name":"下载","text":"点击每张的下载按钮，或使用「全部保存」一次性导出整批。"}
+    ]}</script>
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/compress-wedding-photos/"><link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/compress-wedding-photos/"><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/compress-wedding-photos/"></head>
+<body>
+    <a href="#main-content" class="skip-link">跳到主内容</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/zh/" class="logo" title="WeddingAI.video — 婚礼视频服务">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="主导航">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/zh/#services" title="浏览婚礼视频服务" aria-haspopup="true" aria-expanded="false">服务 <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">视频增强</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/zh/services/video-enhancement/slow-motion/">慢动作</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/video-enhancement/vintage-restoration/">老片修复</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">个性化</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/wedding-trailer/">婚礼预告片</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/ai-video-generator/">AI 视频生成器</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/pet-wedding/">宠物婚礼</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/multilingual/">多语言</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/cartoon-style/">卡通风格</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/meme-generator/">婚礼表情包</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">缺席补位</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/zh/services/absence-compensation/family-tribute/">家族致敬</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/absence-compensation/family-message/">家族留言</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/zh/services/" class="nav-dropdown-all-link">查看全部服务 →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/zh/tools/" title="免费婚礼图片工具" style="color: var(--color-primary);">免费工具</a></li>
+                    <li><a href="/zh/gallery/" title="查看作品集与案例">作品集</a></li>
+                    <li><a href="/zh/blog/" title="阅读婚礼视频博客">博客</a></li>
+                    <li><a href="/zh/pricing/" title="查看透明定价">价格</a></li>
+                    <li><a href="/zh/order/" class="btn-nav" title="获取免费报价 — 开启您的项目">获取报价</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n>
+                        <select id="wa-lang-select" aria-label="语言">
+                            <option value="en">EN</option>
+                            <option value="zh" selected>中文</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="切换移动菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>压缩婚纱照</h1>
+                <p>在上传到相册、分享家人或交给视频师之前，先把 JPG、PNG、WebP 婚纱照体积缩小 60–85%。</p>
+                <p class="wa-tool-privacy">所有处理均在本地完成。文件不会被上传。</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="面包屑导航">
+            <a href="/zh/">首页</a> <span>›</span> <a href="/zh/tools/">免费工具</a> <span>›</span> <span>压缩婚纱照</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. 把照片拖到这里</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="拖入婚纱照或点击浏览">
+                    <div class="wa-tool-dropzone-title">将照片拖到此处，或点击浏览</div>
+                    <div class="wa-tool-dropzone-hint">JPG、PNG、WebP • 支持批量 • 上限取决于浏览器内存</div>
+                    <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
+                </div>
+                <div class="wa-tool-empty" id="empty-state">还没有照片 — 在上方拖入一些开始压缩。</div>
+                <div class="wa-tool-file-list" id="file-list" hidden></div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. 画质与尺寸</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control">
+                        <label for="quality">输出 JPG 画质：<span id="quality-val">75</span></label>
+                        <input type="range" id="quality" min="30" max="95" step="1" value="75">
+                        <small>数值越小，文件越小。75 在多数婚礼场景下与原图视觉无差别。</small>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="max-dim">最长边限制（像素） — 可选</label>
+                        <select id="max-dim">
+                            <option value="0">不缩放</option>
+                            <option value="4096">4096（印刷母版）</option>
+                            <option value="2048" selected>2048（相册上传）</option>
+                            <option value="1600">1600（邮件附件）</option>
+                            <option value="1080">1080（屏幕/社交）</option>
+                            <option value="720">720（即时消息）</option>
+                        </select>
+                        <small>先缩放，再重新编码。</small>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="format">输出格式</label>
+                        <select id="format">
+                            <option value="image/jpeg" selected>JPG（体积更小，推荐用于分享）</option>
+                            <option value="image/webp">WebP（体积更小，现代浏览器）</option>
+                            <option value="image/png">PNG（无损，文件最大）</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled>压缩</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>全部保存</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn">清空</button>
+                </div>
+
+                <div class="wa-tool-summary" id="summary" hidden></div>
+
+                <div class="wa-tool-banner">
+                    <strong>隐私：</strong>每张照片都在设备本地通过 Canvas API 完成处理。浏览器标签页是唯一的工作场所 — 没有上传、不会对您的照片做统计、不会留账号。
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>3. 下载</h2>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的照片都会显示独立的下载按钮。使用 <strong>全部保存</strong> 一键获取整批文件。文件名会追加 <code>-min</code>，原文件保持不动。</p>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>为什么要压缩婚纱照？</h2>
+                <p>现代相机和手机产出的照片越来越庞大。一张单反 RAW 导出在 25–40 MB；iPhone HEIC 照片略小但仍有 3–6 MB；高分辨率微单 JPG 一般在 8–14 MB。乘以婚礼当天的 1000 张照片，就是一份 10–40 GB 的素材库 — 其中大部分体量对于在线分享来说纯属浪费。</p>
+                <p>压缩的目的就是让这些照片用得起来，同时保留真正重要的视觉质量。我们默认 JPG 画质 75 — 在这个水平下，普通观众在手机或笔记本屏幕上完全分不出压缩版和原版的差别，但文件体积通常能缩小 60–80%。</p>
+
+                <h3>三个立刻受益的压缩场景</h3>
+                <ol>
+                    <li><strong>上传到婚庆相册服务。</strong>大多数消费级相册服务最长边上限是 2048 像素，再大就是浪费。先压缩意味着上传更快、按 GB 计费时账单也更便宜。</li>
+                    <li><strong>把婚礼文件夹分享给家人。</strong>压缩后的 50 张照片邮件附件约 25 MB；不压缩就是 250 MB+，大多数邮箱会直接拒收后者。</li>
+                    <li><strong>把照片交给视频师。</strong>如果您使用的是我们的 <a href="/zh/services/personalization/ai-video-generator/">AI 婚礼视频生成器</a>或别的 AI 短片服务，上传步骤会更快，底层 AI 在较小的 JPG 上也跑得更稳。</li>
+                </ol>
+
+                <h3>本工具做了什么（没做什么）</h3>
+                <p>压缩器使用浏览器内置的 <strong>Canvas API</strong>，按您设定的画质重新编码每张拖入的图片。支持 JPG、PNG、WebP 输入，输出 JPG、WebP 或 PNG。可选的「最长边限制」会把最长边限制在您设定的尺寸 — 当您已知目标用途的尺寸上限时非常方便。</p>
+                <p>不做的事：默认不会剥离 EXIF 元数据（浏览器这样重新编码时通常会保留 EXIF；要剥离元数据需要单独的工具）；也不会把整批打成 ZIP — 我们使用浏览器的逐张下载，好处是文件名更可控，也避免引入 ZIP 库。</p>
+
+                <h3>推荐的画质设置</h3>
+                <ul>
+                    <li><strong>相册上传 / 家人分享：</strong>画质 75，最长边 2048（默认）。最适合大多数人。</li>
+                    <li><strong>在家打印（A4 / US Letter）：</strong>画质 85，不缩放。保留纸面印刷所需的细节。</li>
+                    <li><strong>即时消息 / WhatsApp：</strong>画质 60，最长边 1600。文件极小，仍然清晰。</li>
+                    <li><strong>永久归档：</strong>不压缩。使用 TIFF 或原始 RAW。</li>
+                </ul>
+
+                <h2>压缩后的婚纱照可以做什么？</h2>
+                <p>拿到一批紧凑、格式整齐的照片后，最常见的用途：</p>
+                <ul>
+                    <li><a href="/zh/services/personalization/ai-video-generator/">把它们做成电影感 AI 婚礼短片</a> — 我们最受欢迎的服务。上传您最喜欢的几张，描述想要的氛围，约 48 小时后拿到 60–90 秒的成片。起价 $9.9。</li>
+                    <li><a href="/blog/wedding-photo-slideshow/">制作婚礼照片轮播</a> 用于彩排晚宴或周年纪念。压缩后的批次正好适合视频时间线。</li>
+                    <li><a href="/zh/tools/wedding-photo-collage/">做一张照片拼图</a> 用于感谢卡、请柬或相册封面页。</li>
+                    <li><a href="/blog/restore-old-wedding-photos/">与 AI 老片修复搭配使用</a> — 修复完成后再压缩。</li>
+                </ul>
+
+                <h2>常见问题</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>压缩后体积能缩小多少？</summary>
+                        <p>取决于原图。12 MB 的单反 JPG 在画质 75 下通常会变成 2–3 MB。iPhone HEIC（先转成 JPG）通常会变成 700 KB–1.5 MB。带透明通道的 PNG 压缩最少，因为是无损格式 — 只能通过设置最长边或转为 JPG 来缩小。</p>
+                    </details>
+                    <details>
+                        <summary>用 75 重新压缩会不会损伤原图？</summary>
+                        <p>本工具不会碰您的原图。它对副本重新编码，文件名追加 <code>-min</code>。多次重新编码<em>会</em>累积损失，所以把原图妥善保存，以后想换画质就从原图重新压缩。</p>
+                    </details>
+                    <details>
+                        <summary>iPhone / Android 上能用吗？</summary>
+                        <p>可以。iOS Safari 和现代 Android Chrome 都支持 Canvas API 和文件选择器。手机上点击投放区即可打开相册选择。</p>
+                    </details>
+                    <details>
+                        <summary>有文件数量或大小限制吗？</summary>
+                        <p>页面本身没有硬性限制 — 实际限制是设备内存。每张照片依次处理，500 张 4 MP 婚纱照通常占用 1–2 GB 工作内存。如果浏览器标签页崩溃，重新加载页面并分批处理即可。</p>
+                    </details>
+                    <details>
+                        <summary>EXIF（相机信息、日期）会保留吗？</summary>
+                        <p>Canvas API 保留大部分 EXIF，但不同浏览器可能丢失几个字段。对我们的 AI 婚礼视频生成器来说，EXIF 会再从原始文件读取，所以这个问题不影响。若要归档级保留元数据，请使用专门的 EXIF 保留工具。</p>
+                    </details>
+                </div>
+
+                <h2>更多免费婚礼照片工具</h2>
+                <p>压缩是工作流的第一步。继续使用本套件的其他工具：</p>
+                <div class="sibling-tools">
+                    <a href="/zh/tools/heic-to-jpg-wedding-photos/">HEIC 转 JPG</a>
+                    <a href="/zh/tools/wedding-photo-collage/">照片拼图</a>
+                    <a href="/zh/tools/crop-wedding-photo-for-reels/">竖版裁剪</a>
+                    <a href="/zh/tools/remove-background-wedding-portrait/">移除背景</a>
+                    <a href="/zh/tools/add-text-to-wedding-photo/">添加文字</a>
+                    <a href="/zh/tools/">全部工具</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>相关文章</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>如何用照片制作婚礼视频（AI 指南）</h4>
+                        <span>阅读文章 →</span>
+                    </a>
+                    <a class="related-card" href="/blog/send-large-wedding-video/">
+                        <h4>如何把大型婚礼视频文件发给家人</h4>
+                        <span>阅读文章 →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-photo-slideshow/">
+                        <h4>做出让人回味的婚礼照片轮播</h4>
+                        <span>阅读文章 →</span>
+                    </a>
+                    <a class="related-card" href="/blog/restore-old-wedding-photos/">
+                        <h4>用 AI 修复老婚纱照（2026 指南）</h4>
+                        <span>阅读文章 →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>照片已经压缩好？准备做一部婚礼电影吗？</h2>
+                <p>把它们交给我们的 AI 婚礼视频生成器，48 小时内拿到一部电影感短片。</p>
+                <a href="/zh/order/" class="btn btn-primary btn-large" title="获取免费报价 — 开启您的项目">获取免费报价 →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/zh/" class="logo" title="WeddingAI.video — 婚礼视频服务">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>面向全球情侣的 AI 婚礼视频服务。</p>
+            </div>
+            <nav class="footer-nav" aria-label="页脚导航">
+                <div class="footer-col">
+                    <h3>资源</h3>
+                    <ul>
+                        <li><a href="/zh/blog/">博客</a></li>
+                        <li><a href="/zh/gallery/">作品集</a></li>
+                        <li><a href="/zh/about/">关于我们</a></li>
+                        <li><a href="/zh/tools/">免费工具</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>服务</h3>
+                    <ul>
+                        <li><a href="/zh/services/video-enhancement/slow-motion/">慢动作</a></li>
+                        <li><a href="/zh/services/personalization/ai-video-generator/">AI 视频生成器</a></li>
+                        <li><a href="/zh/services/personalization/wedding-trailer/">婚礼预告片</a></li>
+                        <li><a href="/zh/services/absence-compensation/family-tribute/">家族致敬</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>联系</h3>
+                    <ul>
+                        <li><a href="/zh/order/">获取报价</a></li>
+                        <li><a href="/zh/pricing/">价格</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. 保留所有权利。</p>
+                <a href="/zh/privacy/">隐私政策</a> · <a href="/zh/terms/">服务条款</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+      var dropzone = document.getElementById('dropzone');
+      var input = document.getElementById('file-input');
+      var list = document.getElementById('file-list');
+      var empty = document.getElementById('empty-state');
+      var runBtn = document.getElementById('run-btn');
+      var saveAllBtn = document.getElementById('save-all-btn');
+      var clearBtn = document.getElementById('clear-btn');
+      var qualityEl = document.getElementById('quality');
+      var qualityVal = document.getElementById('quality-val');
+      var maxDimEl = document.getElementById('max-dim');
+      var formatEl = document.getElementById('format');
+      var summaryEl = document.getElementById('summary');
+
+      var files = [];
+
+      function refreshUI() {
+        empty.hidden = files.length > 0;
+        list.hidden = files.length === 0;
+        runBtn.disabled = files.length === 0 || files.every(function (f) { return f.status === 'done' || f.status === 'working'; });
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        if (window.weddingAITool && window.weddingAITool.renderFileList) {
+          window.weddingAITool.renderFileList(list, files, function () {});
+          // Re-render each row state into the new DOM
+          Array.prototype.forEach.call(list.children, function (row, i) {
+            window.weddingAITool.updateFileRow(row, files[i]);
+          });
+        }
+      }
+
+      function addFiles(picked) {
+        picked.forEach(function (f) {
+          if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
+            return;
+          }
+          files.push({
+            status: 'queued',
+            name: f.name,
+            inputFile: f,
+            sizes: { orig: f.size, out: 0 },
+            output: null,
+            previewUrl: null,
+            error: null,
+          });
+        });
+        if (files.length === 0) { window.weddingAITool.toast('没有可处理的文件。请尝试 JPG、PNG 或 WebP。', 'error'); return; }
+        // Generate preview thumbnails (best-effort, run async)
+        files.forEach(function (entry, idx) {
+          if (entry.previewUrl) return;
+          URL.createObjectURL(entry.inputFile);
+          entry.previewUrl = URL.createObjectURL(entry.inputFile);
+        });
+        refreshUI();
+      }
+
+      function clearAll() {
+        files.forEach(function (f) {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+        });
+        files = [];
+        summaryEl.hidden = true;
+        refreshUI();
+      }
+
+      function getCurrentSettings() {
+        return {
+          quality: parseInt(qualityEl.value, 10) / 100,
+          maxDim: parseInt(maxDimEl.value, 10) || 0,
+          format: formatEl.value,
+        };
+      }
+
+      async function processOne(entry, settings) {
+        entry.status = 'working';
+        entry.error = null;
+        refreshUI();
+
+        try {
+          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          var img = loaded.img;
+          var w = img.naturalWidth, h = img.naturalHeight;
+          var tw = w, th = h;
+          if (settings.maxDim > 0 && Math.max(w, h) > settings.maxDim) {
+            if (w >= h) {
+              tw = settings.maxDim;
+              th = Math.round(h * (settings.maxDim / w));
+            } else {
+              th = settings.maxDim;
+              tw = Math.round(w * (settings.maxDim / h));
+            }
+          }
+          var canvas = document.createElement('canvas');
+          canvas.width = tw;
+          canvas.height = th;
+          var ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.drawImage(img, 0, 0, tw, th);
+          var mime = settings.format;
+          var quality = settings.quality;
+          // PNG is lossless, quality is ignored
+          if (mime === 'image/png') quality = undefined;
+          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('压缩结果为空文件。请尝试其他格式。');
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-min.' + (mime === 'image/png' ? 'png' : mime === 'image/webp' ? 'webp' : 'jpg'));
+          // free the loaded image
+          URL.revokeObjectURL(loaded.url);
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
+        }
+        refreshUI();
+      }
+
+      async function runAll() {
+        var settings = getCurrentSettings();
+        runBtn.disabled = true;
+        // Sequential: easier on memory for huge batches
+        for (var i = 0; i < files.length; i++) {
+          var f = files[i];
+          if (f.status === 'done') continue;
+          await processOne(f, settings);
+        }
+        runBtn.disabled = false;
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        renderSummary();
+        window.weddingAITool.toast('压缩完成。');
+      }
+
+      function renderSummary() {
+        var done = files.filter(function (f) { return f.status === 'done' && f.output; });
+        var errs = files.filter(function (f) { return f.status === 'error'; });
+        if (done.length === 0) { summaryEl.hidden = true; return; }
+        var origTotal = done.reduce(function (s, f) { return s + f.sizes.orig; }, 0);
+        var outTotal = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
+        var saved = origTotal - outTotal;
+        var ratio = origTotal > 0 ? (saved / origTotal * 100) : 0;
+        summaryEl.hidden = false;
+        summaryEl.innerHTML =
+          '<div><strong>' + done.length + '</strong> 张已压缩</div>' +
+          '<div><strong>共节省：</strong> ' + window.weddingAITool.formatBytes(saved) + '（-' + ratio.toFixed(1) + '%）</div>' +
+          '<div><strong>现总大小：</strong> ' + window.weddingAITool.formatBytes(outTotal) + '（原 ' + window.weddingAITool.formatBytes(origTotal) + '）</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' 张失败</strong> — 请移除后重试。</div>' : '');
+      }
+
+      function saveAll() {
+        var outputs = files
+          .filter(function (f) { return f.status === 'done' && f.output; })
+          .map(function (f) { return { name: f.outputName, blob: f.output }; });
+        if (outputs.length === 0) return;
+        window.weddingAITool.downloadZip(outputs, 'compressed');
+        window.weddingAITool.toast('正在保存 ' + outputs.length + ' 个文件…');
+      }
+
+      // wire up
+      window.weddingAITool.bindDropZone({
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
+        onFiles: addFiles,
+      });
+
+      qualityEl.addEventListener('input', function () { qualityVal.textContent = qualityEl.value; });
+      runBtn.addEventListener('click', runAll);
+      saveAllBtn.addEventListener('click', saveAll);
+      clearBtn.addEventListener('click', clearAll);
+
+      list.addEventListener('wa-row-remove', function (e) {
+        var idx = parseInt((e.detail || '0'), 10);
+        if (!isNaN(idx)) {
+          var f = files[idx];
+          if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          files.splice(idx, 1);
+          refreshUI();
+        }
+      });
+
+      refreshUI();
+    })();
+    </script>
+</body>
+</html>

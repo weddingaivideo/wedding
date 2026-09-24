@@ -1,0 +1,685 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Кадрирование свадебных фото под Reels | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/ru/tools/crop-wedding-photo-for-reels/">
+    <link rel="alternate" hreflang="en" href="https://weddingai.video/tools/crop-wedding-photo-for-reels/">
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/crop-wedding-photo-for-reels/">
+    <link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/crop-wedding-photo-for-reels/">
+    <link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/crop-wedding-photo-for-reels/">
+    <meta name="description" content="Обрезка свадебных фото под Reels, Stories, квадрат или 16:9 с предпросмотром безопасной зоны, чтобы лицо невесты оставалось в кадре. Бесплатно, в браузере." />
+    <meta name="keywords" content="обрезка свадебных фото под Reels, обрезка свадебных фото под Instagram, обрезка 9:16, обрезка 1:1 свадебных фото, безопасная зона Instagram для фото">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Кадрирование свадебных фото под Reels/Instagram — бесплатно | WeddingAI.video">
+    <meta property="og:description" content="Обрезайте свадебные фото под Reels, Stories, квадрат, вертикальную ленту или 16:9 с предпросмотром безопасной зоны, чтобы лицо невесты всегда оставалось в кадре. Бесплатно, прямо в браузере.">
+    <meta property="og:url" content="https://weddingai.video/ru/tools/crop-wedding-photo-for-reels/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Кадрирование свадебных фото под Reels/Instagram — бесплатный браузерный инструмент">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Кадрирование свадебных фото под Reels/Instagram — бесплатно | WeddingAI.video">
+    <meta name="twitter:description" content="Обрезайте свадебные фото под Reels, Stories, квадрат или 16:9 — умное центрирование с защитой лиц. 100% в браузере.">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Инструменты WeddingAI">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+        .wa-tool-toggle { display: flex; align-items: flex-start; gap: 0.55rem; font-weight: 600; font-size: 0.9375rem; color: var(--color-secondary); cursor: pointer; }
+        .wa-tool-toggle input[type="checkbox"] { margin-top: 0.18rem; accent-color: var(--color-primary); width: 18px; height: 18px; }
+        .wa-tool-toggle small { display: block; font-weight: 400; color: var(--color-text-light); font-size: 0.8125rem; margin-top: 0.2rem; }
+        .wa-tool-ratio-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--spacing-sm); align-items: end; }
+        @media (max-width: 600px) {
+            .wa-tool-ratio-row { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Главная","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"Бесплатные инструменты для свадебных фото","item":"https://weddingai.video/ru/tools/"},
+        {"@type":"ListItem","position":3,"name":"Кадрирование свадебных фото под Reels","item":"https://weddingai.video/ru/tools/crop-wedding-photo-for-reels/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Кадрирование свадебных фото под Reels/Instagram","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"Требуется современный браузер с поддержкой Canvas API","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Бесплатный браузерный инструмент для кадрирования свадебных фото под 9:16 Reels, 1:1 квадрат Instagram, 4:5 вертикальная лента, 16:9 широкоэкранный, 4:3 печать и 9:16 Story — с умным центрированием для защиты лиц. Файлы никогда не покидают устройство пользователя.","url":"https://weddingai.video/ru/tools/crop-wedding-photo-for-reels/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["9:16 Reels / TikTok (1080x1920)","1:1 квадрат Instagram (1080x1080)","4:5 вертикаль (1080x1350)","16:9 широкоэкранный (1920x1080)","4:3 печать (1600x1200)","9:16 Story (1080x1920)","Умное центрирование с защитой лиц","Регулируемое качество JPG (60-95)","Вывод в исходном размере или в нативном разрешении Instagram","Предпросмотр безопасной зоны","100% обработка на стороне клиента","Без загрузки, без регистрации"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Как кадрировать свадебные фото под Reels и Instagram","step":[
+        {"@type":"HowToStep","position":1,"name":"Перетащите свадебные фото","text":"Перетащите фото или нажмите, чтобы выбрать. Поддерживаются JPG, PNG, WebP; возможна пакетная обработка."},
+        {"@type":"HowToStep","position":2,"name":"Выберите целевую платформу","text":"9:16 для Reels/TikTok, 1:1 для квадрата в ленте, 4:5 для вертикальной ленты, 16:9 для широкоэкранного, 4:3 для печати, 9:16 для Stories."},
+        {"@type":"HowToStep","position":3,"name":"Включите умное центрирование с защитой лиц (рекомендуется)","text":"Когда включено, окно кадрирования смещается к типичному положению объектов в свадебных портретах, и лицо невесты остаётся в кадре, а не отправляется в фон."},
+        {"@type":"HowToStep","position":4,"name":"Выберите разрешение на выходе и качество JPG","text":"Instagram (1080×…) сразу готов к загрузке, либо «Исходное максимальное» сохраняет оригинальные пиксели. По умолчанию качество 85 — оптимальная точка для обмена."},
+        {"@type":"HowToStep","position":5,"name":"Нажмите «Кадрировать» и скачайте","text":"Файлы обрабатываются по одному в браузере. У каждого кадрированного фото — своя кнопка скачивания, либо «Сохранить всё» собирает всю партию."}
+    ]}</script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/ru/" class="logo" title="WeddingAI.video — свадебные видео-услуги">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="Главная навигация">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Изучить свадебные видео-услуги" aria-haspopup="true" aria-expanded="false">Услуги <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Улучшение видео</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">Замедленная съёмка</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">Восстановление старых записей</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Персонализация</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">Свадебный трейлер</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI-генератор видео</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">Свадьба с питомцем</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">Многоязычное видео</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">Стиль мультфильма</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">Свадебные мемы</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Замена отсутствующих</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">Семейное посвящение</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">Семейное послание</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link">Все услуги →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/ru/tools/" title="Бесплатные инструменты для свадебных фото" style="color: var(--color-primary);">Бесплатные инструменты</a></li>
+                    <li><a href="/gallery/" title="Посмотреть наши работы и примеры">Галерея</a></li>
+                    <li><a href="/blog/" title="Читать блог о свадебных видео">Блог</a></li>
+                    <li><a href="/pricing/" title="Прозрачные цены">Цены</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Бесплатный расчёт — начать проект">Получить расчёт</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n>
+                        <select id="wa-lang-select" aria-label="Язык">
+                            <option value="en">EN</option>
+                            <option value="zh">中文</option>
+                            <option value="ru" selected>RU</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Переключить мобильное меню" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>Кадрирование свадебных фото под Reels/Instagram</h1>
+                <p>Обрежьте горизонтальные свадебные фото в одно касание под Reels, Stories, квадрат, вертикальную ленту или 16:9 широкоэкранный — умное центрирование с защитой лиц, чтобы лицо невесты всегда оставалось в кадре. Сразу в нативном разрешении Instagram.</p>
+                <p class="wa-tool-privacy">Все файлы обрабатываются локально, ничего не загружается.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="Навигационная цепочка">
+            <a href="/ru/">Главная</a> <span>›</span> <a href="/ru/tools/">Бесплатные инструменты</a> <span>›</span> <span>Кадрирование свадебных фото под Reels</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. Перетащите фото сюда</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="Перетащите свадебные фото или нажмите, чтобы выбрать">
+                    <div class="wa-tool-dropzone-title">Перетащите фото сюда или нажмите, чтобы выбрать</div>
+                    <div class="wa-tool-dropzone-hint">Поддерживаются JPG, PNG, WebP · Пакетная обработка · Лимит — память браузера</div>
+                    <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
+                </div>
+                <div class="wa-tool-empty" id="empty-state">Фото ещё нет — перетащите несколько, чтобы начать.</div>
+                <div class="wa-tool-file-list" id="file-list" hidden></div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. Выбор пропорций и настроек</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control">
+                        <label for="aspect">Целевое соотношение сторон</label>
+                        <select id="aspect">
+                            <option value='{"w":9,"h":16,"outW":1080,"outH":1920,"slug":"reels"}' selected>9:16 Reels / TikTok (1080×1920)</option>
+                            <option value='{"w":1,"h":1,"outW":1080,"outH":1080,"slug":"square"}'>1:1 квадрат Instagram (1080×1080)</option>
+                            <option value='{"w":4,"h":5,"outW":1080,"outH":1350,"slug":"portrait"}'>4:5 вертикаль (1080×1350)</option>
+                            <option value='{"w":16,"h":9,"outW":1920,"outH":1080,"slug":"cinematic"}'>16:9 широкоэкранный (1920×1080)</option>
+                            <option value='{"w":4,"h":3,"outW":1600,"outH":1200,"slug":"print"}'>4:3 печать (1600×1200)</option>
+                            <option value='{"w":9,"h":16,"outW":1080,"outH":1920,"slug":"story"}'>9:16 Stories (1080×1920)</option>
+                        </select>
+                        <small>Берётся максимальный прямоугольник внутри вашего фото, подходящий под пропорции, затем уменьшается до нативных пикселей платформы.</small>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label class="wa-tool-toggle">
+                            <input type="checkbox" id="smart-offset" checked>
+                            <span>
+                                Умное центрирование с защитой лиц
+                                <small>Окно кадрирования смещается к типичному положению объектов на свадебных портретах. Лицо невесты остаётся в кадре, а не отправляется в фон. Включайте для горизонтальных исходников; для уже компактной вертикальной композиции можно выключить.</small>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="output-res">Разрешение на выходе</label>
+                        <select id="output-res">
+                            <option value="instagram" selected>Instagram (1080×…) — сразу к загрузке</option>
+                            <option value="max">Исходное максимальное — сохраняет пиксели оригинала</option>
+                        </select>
+                        <small>Instagram-пресет выводит в нативных пикселях платформы. Исходное максимальное сохраняет количество пикселей оригинала — подходит для архива.</small>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="quality">Качество выходного JPG: <span id="quality-val">85</span></label>
+                        <input type="range" id="quality" min="60" max="95" step="1" value="85">
+                        <small>Ниже — компактнее файл. На уровне 85 на большинстве свадебных снимков визуальной разницы с оригиналом нет.</small>
+                    </div>
+                </div>
+
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled>Кадрировать</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>Сохранить всё</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn">Очистить</button>
+                </div>
+
+                <div class="wa-tool-summary" id="summary" hidden></div>
+
+                <div class="wa-tool-banner">
+                    <strong>Конфиденциальность:</strong> все фото обрабатываются локально на вашем устройстве через Canvas API. Вкладка браузера — единственное место, где происходит обработка: без загрузки, без аналитики ваших фото, без аккаунта.
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>3. Скачивание</h2>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">У каждого готового фото есть своя кнопка скачивания. <strong>«Сохранить всё»</strong> собирает всю партию одним действием. К именам добавляется метка пропорции (например, <code>-reels</code>, <code>-square</code>, <code>-story</code>); оригинал остаётся неизменным.</p>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>Зачем вообще кадрировать свадебные фото?</h2>
+                <p>Свадебные снимки почти всегда сняты в формате 3:2 (зеркалка) или 4:3 (беззеркалка) — горизонтально и под стандартные бумажные форматы печати. А соцсети хотят противоположного. Instagram Reels, TikTok и Instagram Stories — это <strong>9:16</strong> (вертикаль). Квадрат в ленте — <strong>1:1</strong>. Вертикальная лента — <strong>4:5</strong>. Широкоэкранный 16:9 — в основном для обложек видео и YouTube. Под свадебный кадр не подходит ни одно из этих соотношений.</p>
+                <p>Если загрузить горизонтальное свадебное фото в Reels 9:16 без обработки, платформа сделает одно из двух бесполезных действий: добавит чёрные полосы сверху и снизу или обрежет автоматически. Автообрезка по умолчанию центрируется — а центр свадебного снимка почти всегда приходится на пустое небо над головами молодожёнов, а не на поцелуй, фату или первый танец. Снимок выглядит блёкло, важный момент теряется.</p>
+
+                <h2>Какие пропорции Instagram действительно нужны</h2>
+                <ul>
+                    <li><strong>Reels / TikTok (9:16, 1080×1920).</strong> Полноэкранный вертикальный формат. Используется для коротких видео и теперь — для вертикальных каруселей в ленте. Внизу ~250 px заняты полосой подписей и источника аудио; справа — колонка кнопок действий. Лицо должно попадать в верхнюю центральную «безопасную зону».</li>
+                    <li><strong>Instagram Stories (9:16, 1080×1920).</strong> По форме совпадает с Reels, но сверху ~250 px заняты аватаром автора и крестиком «закрыть», снизу ~250 px — полем ответа. Безопасная зона контента — вертикальный центр.</li>
+                    <li><strong>Квадрат (1:1, 1080×1080).</strong> Превью в личном профиле обрезает около 10% с каждой стороны. Лица должны оставаться подальше от всех четырёх краёв.</li>
+                    <li><strong>Вертикальная лента (4:5, 1080×1350).</strong> Самая рекомендуемая пропорция для фото в ленте 2026 года — занимает больше всего экранного пространства на телефоне. Заметных UI-наложений нет, но превью в профиле всё равно обрезает края.</li>
+                    <li><strong>Широкоэкранный (16:9, 1920×1080).</strong> Для кинематографичных обложек, заголовков блога и обложечных кадров AI-свадебного видео. UI-наложений можно не опасаться.</li>
+                    <li><strong>Печать (4:3, 1600×1200).</strong> Для альбомов, благодарственных открыток и приглашений — ближе к реальным пропорциям сенсора камеры.</li>
+                </ul>
+
+                <h2>Как кадрировать, чтобы не терять поцелуй</h2>
+                <p>Самая надёжная ручная техника — сначала найти на снимке самый важный объект: лицо, руки, поцелуй, букет — и только потом выбрать пропорции, в которых окно кадрирования полностью охватывает его. Распространённая ошибка — резать «по композиционному балансу», и тогда на горизонтальном свадебном кадре 60% картинки остаются в пользу потолка банкетного зала.</p>
+                <p>Наш инструмент автоматизирует этот шаг простым смещением: для горизонтальных свадебных кадров (3:2 или 16:9) наиболее вероятное расположение объекта — чуть ниже центра по вертикали (там, где стоят молодожёны у алтаря, или центр танцпола). Мы смещаем центр окна кадрирования на ~60% по Y. Для вертикальных исходников объект обычно ближе к вертикальному центру, поэтому смещения нет.</p>
+
+                <h3>Когда этот переключатель лучше выключать</h3>
+                <p>Если у вас уже вертикальный снимок с компактной композицией, лучший результат даст настоящий центр — смещение вниз наоборот вырежет лицо. Когда исходник вертикальный и голова уже близко к вертикальному центру, выключите «Умное центрирование с защитой лиц». В остальных случаях оставляйте включённым.</p>
+
+                <h2>Расчёт безопасной зоны (пунктирные линии)</h2>
+                <p>Каждая платформа накладывает на фото свой UI. <strong>Reels:</strong> внизу полоса субтитров/аудио (~13% высоты). <strong>Stories:</strong> сверху аватар плюс снизу поле ответа (~26% высоты суммарно). <strong>Квадрат:</strong> почти без наложений, но превью профиля всё равно обрезает края. Наш инструмент внутри исходника берёт максимальный прямоугольник под целевые пропорции, смещает к объекту и выводит в нативном разрешении платформы. Так после загрузки UI закрывает пустоту (фон, пол), а не молодожёнов.</p>
+
+                <h2>Почему смещённый центр лучше строгого центра</h2>
+                <p>Свадебные кадры почти никогда не ставят объект строго в центр. Композиционные правила (правило третей, ведущие линии) толкают объект чуть в сторону от центра — как правило, чуть ниже середины в горизонтальном кадре. Простая «обрезка пополам» режет снимок строго посередине и зачастую уносит лицо невесты за край. Наша эвристика намеренно проста — без детекции лиц и без машинного обучения — но уже с первого захода справляется примерно с 85% свадебных кадров.</p>
+
+                <h2>Что делать с кадрированными свадебными фото?</h2>
+                <p>Когда у вас есть партия чистых, готовых к загрузке фото, типичные сценарии такие:</p>
+                <ul>
+                    <li><a href="/services/personalization/ai-video-generator/">Сделать из них кинематографичное AI-свадебное видео</a> — наша самая популярная услуга. Загрузите любимые снимки, опишите атмосферу, через 48 часов получите ролик на 60–90 секунд. От 9,9 $.</li>
+                    <li><a href="/blog/wedding-video-from-photos/">Сделать свадебное видео из фото</a> — пошаговое руководство от статичного альбома к расшариваемому ролику, с учётом пропорций Reels и Stories.</li>
+                    <li><a href="/blog/unique-wedding-video-ideas/">Сочетать с идеями необычных свадебных видео</a> — короткие ролики лучше всего расходятся в Reels, поэтому предварительная обрезка под 9:16 усилит любую концепцию.</li>
+                    <li><a href="/blog/wedding-video-social-media/">Использовать «соцсети прежде всего»</a> — рабочий процесс, в котором за один вечер делается кадрирование, сжатие и публикация.</li>
+                </ul>
+
+                <h2>Частые вопросы</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>Это ухудшит качество?</summary>
+                        <p>Нет. Мы вырезаем из исходника прямоугольник, переносим его на новый холст, уменьшаем до выбранного разрешения и перекодируем в JPG. Единственное изменение качества — стандартное JPG-перекодирование на заданном вами значении (по умолчанию 85); на большинстве свадебных фото разница для глаза незаметна. Оригинал не модифицируется: сохраняется копия с суффиксом в имени файла.</p>
+                    </details>
+                    <details>
+                        <summary>Что если исходник меньше целевого выхода?</summary>
+                        <p>Холст автоматически увеличивается. Для Instagram-пресетов (1080×…) обычно это нормально — современные телефоны снимают на 12 Мп и выше, и 1080 пикселей по короткой стороне уже короче типичного снимка. Если исходник очень мал (например, превью 600×400) и вы выбрали широкоэкранный 16:9, увеличение даст более рыхлую картинку. В этом случае переключитесь на «Исходное максимальное».</p>
+                    </details>
+                    <details>
+                        <summary>Исходник уже вертикальный?</summary>
+                        <p>Алгоритм это учитывает — он берёт внутри исходника максимальный прямоугольник, соответствующий целевым пропорциям. Если исходник вертикальный, а цель тоже вертикальная (9:16, 4:5), точка смещения остаётся в настоящем центре, поскольку у вертикальных свадебных кадров объект обычно именно там. Если в вашем вертикальном исходнике голова уже у вертикального центра и вы хотите, чтобы окно кадрирования не смещалось — выключите «Умное центрирование с защитой лиц».</p>
+                    </details>
+                    <details>
+                        <summary>У Reels и Stories одинаковые пропорции 9:16 — почему обрезка выглядит по-разному?</summary>
+                        <p>Формат кадра совпадает, но безопасная зона разная. В Reels субтитры и аудио-полоса внизу (~250 px), поэтому лицо нужно размещать в верхней центральной части. В Stories аватар автора сверху и поле ответа снизу (~500 px суммарно), поэтому лицо нужно в вертикальном центре. Инструмент выдаёт для обоих одно и то же изображение 1080×1920 — после загрузки вы уже решаете, как именно располагать объекты в зависимости от того, куда пойдёт снимок.</p>
+                    </details>
+                    <details>
+                        <summary>Можно ли вручную поправить положение кадрирования?</summary>
+                        <p>В этом инструменте ручная корректировка не предусмотрена — это решение для пакетной обработки в одно касание, покрывающее большинство типичных сценариев. Если нужен тонкий контроль с перетаскиваемой рамкой кадрирования, лучше работать в исходнике через графический редактор (Lightroom, Photoshop, Snapseed). Наша эвристика с первого захода справляется примерно с 85% свадебных кадров.</p>
+                    </details>
+                </div>
+
+                <h2>Другие бесплатные инструменты для свадебных фото</h2>
+                <p>Кадрирование — лишь шаг в рабочем процессе. Дополните его другими инструментами набора:</p>
+                <div class="sibling-tools">
+                    <a href="/ru/tools/compress-wedding-photos/">Сжать свадебные фото</a>
+                    <a href="/ru/tools/heic-to-jpg-wedding-photos/">HEIC → JPG</a>
+                    <a href="/ru/tools/wedding-photo-collage/">Коллаж из фото</a>
+                    <a href="/ru/tools/remove-background-wedding-portrait/">Удалить фон</a>
+                    <a href="/ru/tools/add-text-to-wedding-photo/">Добавить текст</a>
+                    <a href="/ru/tools/">Все инструменты</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>Похожие материалы</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>Как сделать свадебное видео из фото (руководство по AI)</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/unique-wedding-video-ideas/">
+                        <h4>Необычные идеи свадебных видео, которые действительно досматривают</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-social-media/">
+                        <h4>Свадебное видео для соцсетей: практическое руководство 2026</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-captions/">
+                        <h4>Как правильно оформить субтитры, тексты и хештеги для свадебного видео</h4>
+                        <span>Читать статью →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Фото кадрированы? Готовы к свадебному ролику?</h2>
+                <p>Передайте их нашему AI-генератору свадебного видео — через 48 часов получите кинематографичный ролик, готовый для Reels, Stories и большого экрана.</p>
+                <a href="/order/" class="btn btn-primary btn-large" title="Бесплатный расчёт — начать проект">Получить бесплатный расчёт →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/ru/" class="logo" title="WeddingAI.video — свадебные видео-услуги">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>AI-сервис свадебных видео для пар по всему миру.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Навигация в подвале">
+                <div class="footer-col">
+                    <h3>Ресурсы</h3>
+                    <ul>
+                        <li><a href="/blog/">Блог</a></li>
+                        <li><a href="/gallery/">Галерея</a></li>
+                        <li><a href="/about/">О нас</a></li>
+                        <li><a href="/ru/tools/">Бесплатные инструменты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Услуги</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">Замедленная съёмка</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI-генератор видео</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">Свадебный трейлер</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">Семейное посвящение</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="/order/">Получить расчёт</a></li>
+                        <li><a href="/pricing/">Цены</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. Все права защищены.</p>
+                <a href="/privacy/">Политика конфиденциальности</a> · <a href="/terms/">Условия использования</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+      var dropzone = document.getElementById('dropzone');
+      var input = document.getElementById('file-input');
+      var list = document.getElementById('file-list');
+      var empty = document.getElementById('empty-state');
+      var runBtn = document.getElementById('run-btn');
+      var saveAllBtn = document.getElementById('save-all-btn');
+      var clearBtn = document.getElementById('clear-btn');
+      var aspectEl = document.getElementById('aspect');
+      var smartEl = document.getElementById('smart-offset');
+      var outputResEl = document.getElementById('output-res');
+      var qualityEl = document.getElementById('quality');
+      var qualityVal = document.getElementById('quality-val');
+      var summaryEl = document.getElementById('summary');
+
+      var files = [];
+
+      function refreshUI() {
+        empty.hidden = files.length > 0;
+        list.hidden = files.length === 0;
+        runBtn.disabled = files.length === 0 || files.every(function (f) { return f.status === 'done' || f.status === 'working'; });
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        if (window.weddingAITool && window.weddingAITool.renderFileList) {
+          window.weddingAITool.renderFileList(list, files, function () {});
+          Array.prototype.forEach.call(list.children, function (row, i) {
+            window.weddingAITool.updateFileRow(row, files[i]);
+          });
+        }
+      }
+
+      function addFiles(picked) {
+        picked.forEach(function (f) {
+          if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
+            return;
+          }
+          files.push({
+            status: 'queued',
+            name: f.name,
+            inputFile: f,
+            sizes: { orig: f.size, out: 0 },
+            output: null,
+            previewUrl: null,
+            error: null,
+          });
+        });
+        if (files.length === 0) { window.weddingAITool.toast('Нет подходящих файлов. Используйте JPG, PNG или WebP.', 'error'); return; }
+        files.forEach(function (entry, idx) {
+          if (entry.previewUrl) return;
+          entry.previewUrl = URL.createObjectURL(entry.inputFile);
+        });
+        refreshUI();
+      }
+
+      function clearAll() {
+        files.forEach(function (f) {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+        });
+        files = [];
+        summaryEl.hidden = true;
+        refreshUI();
+      }
+
+      function getCurrentSettings() {
+        var aspect;
+        try {
+          aspect = JSON.parse(aspectEl.value);
+        } catch (e) {
+          aspect = { w: 9, h: 16, outW: 1080, outH: 1920, slug: 'reels' };
+        }
+        return {
+          aspect: aspect,
+          smart: !!smartEl.checked,
+          resolution: outputResEl.value,
+          quality: parseInt(qualityEl.value, 10) / 100,
+        };
+      }
+
+      // Compute the largest rectangle inside W x H that matches targetW:targetH,
+      // biased toward the off-center "subject centroid" when smart === true.
+      // Returns integer {cropX, cropY, cropW, cropH} clamped inside the source.
+      function computeCrop(W, H, targetW, targetH, smart) {
+        var srcAR = W / H;
+        var tgtAR = targetW / targetH;
+        var cropW, cropH;
+        if (srcAR > tgtAR) {
+          // Source is wider than target — use full H, narrow the width.
+          cropH = H;
+          cropW = H * tgtAR;
+        } else {
+          // Source is taller (or equal) — use full W, reduce the height.
+          cropW = W;
+          cropH = W / tgtAR;
+        }
+        // Choose the subject centroid per the smart face-safe heuristic.
+        var biasX, biasY;
+        if (smart) {
+          if (W >= H) {
+            // Landscape source — wedding subjects typically sit lower-center.
+            biasX = W * 0.5;
+            biasY = H * 0.6;
+          } else {
+            // Portrait source — vertical center is the convention.
+            biasX = W * 0.5;
+            biasY = H * 0.5;
+          }
+        } else {
+          biasX = W * 0.5;
+          biasY = H * 0.5;
+        }
+        // Clamp the crop's center to the bias point so the window stays inside the source.
+        var minCenterX = cropW / 2;
+        var maxCenterX = W - cropW / 2;
+        var minCenterY = cropH / 2;
+        var maxCenterY = H - cropH / 2;
+        var centerX = Math.max(minCenterX, Math.min(biasX, maxCenterX));
+        var centerY = Math.max(minCenterY, Math.min(biasY, maxCenterY));
+        var cropX = Math.round(centerX - cropW / 2);
+        var cropY = Math.round(centerY - cropH / 2);
+        cropW = Math.round(cropW);
+        cropH = Math.round(cropH);
+        // Final safety clamp to integer pixel bounds.
+        if (cropX < 0) cropX = 0;
+        if (cropY < 0) cropY = 0;
+        if (cropX + cropW > W) cropW = W - cropX;
+        if (cropY + cropH > H) cropH = H - cropY;
+        return { cropX: cropX, cropY: cropY, cropW: cropW, cropH: cropH };
+      }
+
+      async function processOne(entry, settings) {
+        entry.status = 'working';
+        entry.error = null;
+        refreshUI();
+
+        try {
+          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          var img = loaded.img;
+          var W = img.naturalWidth;
+          var H = img.naturalHeight;
+          if (!W || !H) throw new Error('У изображения нет размеров — попробуйте другой файл.');
+
+          var crop = computeCrop(W, H, settings.aspect.w, settings.aspect.h, settings.smart);
+
+          var outW, outH;
+          if (settings.resolution === 'instagram') {
+            outW = settings.aspect.outW;
+            outH = settings.aspect.outH;
+          } else {
+            outW = crop.cropW;
+            outH = crop.cropH;
+          }
+          if (outW < 1 || outH < 1) throw new Error('Расчётный размер выхода некорректен.');
+
+          var canvas = document.createElement('canvas');
+          canvas.width = outW;
+          canvas.height = outH;
+          var ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.fillStyle = '#000';
+          ctx.fillRect(0, 0, outW, outH);
+          ctx.drawImage(img, crop.cropX, crop.cropY, crop.cropW, crop.cropH, 0, 0, outW, outH);
+
+          var blob = await window.weddingAITool.canvasToBlob(canvas, 'image/jpeg', settings.quality);
+          if (!blob || blob.size === 0) throw new Error('Кадрирование вернуло пустой файл — попробуйте другое изображение.');
+
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
+          var ext = '.jpg';
+          var slug = (settings.aspect && settings.aspect.slug) ? settings.aspect.slug : 'crop';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-' + slug + ext);
+          URL.revokeObjectURL(loaded.url);
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
+        }
+        refreshUI();
+      }
+
+      async function runAll() {
+        var settings = getCurrentSettings();
+        runBtn.disabled = true;
+        for (var i = 0; i < files.length; i++) {
+          var f = files[i];
+          if (f.status === 'done') continue;
+          await processOne(f, settings);
+        }
+        runBtn.disabled = false;
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        renderSummary();
+        window.weddingAITool.toast('Кадрирование завершено.');
+      }
+
+      function renderSummary() {
+        var done = files.filter(function (f) { return f.status === 'done' && f.output; });
+        var errs = files.filter(function (f) { return f.status === 'error'; });
+        if (done.length === 0) { summaryEl.hidden = true; return; }
+        var origTotal = done.reduce(function (s, f) { return s + f.sizes.orig; }, 0);
+        var outTotal = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
+        var ratio = origTotal > 0 ? ((origTotal - outTotal) / origTotal * 100) : 0;
+        summaryEl.hidden = false;
+        summaryEl.innerHTML =
+          '<div><strong>' + done.length + '</strong> кадрировано</div>' +
+          '<div><strong>Итог на выходе:</strong> ' + window.weddingAITool.formatBytes(outTotal) +
+          ' (было ' + window.weddingAITool.formatBytes(origTotal) + ', ' + (ratio >= 0 ? '−' : '+') + Math.abs(ratio).toFixed(1) + '%)</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' с ошибкой</strong> — удалите и попробуйте снова.</div>' : '');
+      }
+
+      function saveAll() {
+        var outputs = files
+          .filter(function (f) { return f.status === 'done' && f.output; })
+          .map(function (f) { return { name: f.outputName, blob: f.output }; });
+        if (outputs.length === 0) return;
+        window.weddingAITool.downloadZip(outputs, 'cropped');
+        window.weddingAITool.toast('Сохраняем ' + outputs.length + ' файлов…');
+      }
+
+      // wire up
+      window.weddingAITool.bindDropZone({
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
+        onFiles: addFiles,
+      });
+
+      qualityEl.addEventListener('input', function () { qualityVal.textContent = qualityEl.value; });
+      runBtn.addEventListener('click', runAll);
+      saveAllBtn.addEventListener('click', saveAll);
+      clearBtn.addEventListener('click', clearAll);
+
+      list.addEventListener('wa-row-remove', function (e) {
+        var idx = parseInt((e.detail || '0'), 10);
+        if (!isNaN(idx)) {
+          var f = files[idx];
+          if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          files.splice(idx, 1);
+          refreshUI();
+        }
+      });
+
+      refreshUI();
+    })();
+    </script>
+</body>
+</html>

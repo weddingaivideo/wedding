@@ -111,3 +111,9 @@ build/
 .en-backup/
 private/.translate-progress/
 private/.reverse-progress/
+
+# ---- i18n body-translation pipeline scratch (intermediate work, not deliverable) ----
+.translate-*.py
+.verify*.py
+jobs/
+/0

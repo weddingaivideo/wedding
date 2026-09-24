@@ -1,0 +1,979 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Adicionar Texto à Foto de Casamento | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/pt/tools/add-text-to-wedding-photo/">
+    <link rel="alternate" hreflang="en" href="https://weddingai.video/tools/add-text-to-wedding-photo/">
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/add-text-to-wedding-photo/">
+    <link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/tools/add-text-to-wedding-photo/">
+    <link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/add-text-to-wedding-photo/">
+    <meta name="description" content="Adicione legendas, datas, nomes ou frases a fotos de casamento. 14 fontes, controle de cor e opacidade. PNG. Grátis e no navegador — sem upload." />
+    <meta name="keywords" content="adicionar texto à foto de casamento, legenda foto de casamento, texto save the date foto, texto convite foto, legenda online grátis foto casamento">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Adicionar Texto à Foto de Casamento — Grátis no Navegador | WeddingAI.video">
+    <meta property="og:description" content="Adicione legendas, datas, nomes ou frases a fotos de casamento. 14 fontes, controle total de cor e opacidade. Download em PNG. 100% no navegador.">
+    <meta property="og:url" content="https://weddingai.video/pt/tools/add-text-to-wedding-photo/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Adicionar Texto à Foto de Casamento — ferramenta grátis no navegador">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Adicionar Texto à Foto de Casamento — Grátis, no Navegador | WeddingAI.video">
+    <meta name="twitter:description" content="Adicione legendas, datas, nomes ou frases a fotos de casamento. 14 fontes, controle total de cor e opacidade. Download em PNG.">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Ferramentas WeddingAI">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+
+        /* Text-on-photo tool — page-local styles only */
+        .wa-text-preview-wrap {
+            position: relative;
+            width: 100%;
+            background: repeating-conic-gradient(#f3f3f3 0% 25%, #ffffff 0% 50%) 50% / 16px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wa-text-preview-canvas {
+            max-width: 100%;
+            max-height: 420px;
+            display: block;
+        }
+        .wa-text-preview-empty {
+            color: var(--color-text-light);
+            font-size: 0.9375rem;
+            padding: var(--spacing-lg);
+            text-align: center;
+        }
+        .wa-text-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+        .wa-text-color-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+        .wa-text-color-row input[type="color"] {
+            width: 44px;
+            height: 36px;
+            padding: 2px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            background: #fff;
+            cursor: pointer;
+        }
+        .wa-text-swatch-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.3rem;
+        }
+        .wa-text-swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 999px;
+            border: 2px solid var(--color-border);
+            cursor: pointer;
+            transition: transform 0.12s ease, border-color 0.12s ease;
+        }
+        .wa-text-swatch:hover { transform: scale(1.08); }
+        .wa-text-swatch.is-active { border-color: var(--color-primary); transform: scale(1.1); }
+        .wa-text-toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .wa-text-toggle-row label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9375rem;
+            color: var(--color-secondary);
+            cursor: pointer;
+        }
+        .wa-text-toggle-row input[type="checkbox"] { accent-color: var(--color-primary); }
+        @media (max-width: 720px) {
+            .wa-text-grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Início","item":"https://weddingai.video/pt/"},
+        {"@type":"ListItem","position":2,"name":"Ferramentas Grátis para Fotos de Casamento","item":"https://weddingai.video/pt/tools/"},
+        {"@type":"ListItem","position":3,"name":"Adicionar Texto à Foto de Casamento","item":"https://weddingai.video/pt/tools/add-text-to-wedding-photo/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Adicionar Texto à Foto de Casamento","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"Requer navegador moderno com suporte à Canvas API","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Ferramenta gratuita no navegador para adicionar legendas, datas, nomes ou frases a fotos de casamento. 14 fontes selecionadas, 5 posições de texto, sombra opcional, controle total de cor e exportação em PNG amigável à transparência. Os arquivos nunca saem do dispositivo do usuário.","url":"https://weddingai.video/pt/tools/add-text-to-wedding-photo/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["14 fontes de casamento","5 posições de texto","Cores personalizadas","Prévia ao vivo","Exportação em PNG transparente"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Como adicionar texto a uma foto de casamento no navegador","step":[
+        {"@type":"HowToStep","position":1,"name":"Solte sua foto de casamento","text":"Arraste uma (ou várias) fotos para dentro ou clique para procurar. São suportados JPG, PNG e WebP."},
+        {"@type":"HowToStep","position":2,"name":"Digite a legenda e escolha uma fonte","text":"Insira a linha principal (por exemplo \"Save the Date · 14 de junho de 2026\") e uma segunda linha opcional. Escolha entre 14 fontes, defina tamanho, cor, posição e deslocamento."},
+        {"@type":"HowToStep","position":3,"name":"Veja a prévia ao vivo e ajuste","text":"A prévia re-renderiza em tempo real. Ative ou desative a sombra para melhorar a legibilidade em fundos movimentados."},
+        {"@type":"HowToStep","position":4,"name":"Baixe em PNG ou JPG","text":"Clique em Aplicar a todas para renderizar cada foto da fila com as configurações atuais. PNG mantém uma exportação amigável à transparência; JPG é melhor para compartilhar. Salvar tudo baixa o lote inteiro."}
+    ]}</script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/pt/" class="logo" title="WeddingAI.video — serviços de vídeo de casamento">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="Navegação principal">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/pt/#services" title="Conheça nossos serviços de vídeo de casamento" aria-haspopup="true" aria-expanded="false">Serviços <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Aprimoramento de Vídeo</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/pt/services/video-enhancement/slow-motion/">Câmera Lenta</a></li>
+                                    <li role="none"><a role="menuitem" href="/pt/services/video-enhancement/vintage-restoration/">Restauração de Vídeos Antigos</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Personalização</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/pt/services/personalization/wedding-trailer/">Trailer de Casamento</a></li>
+                                    <li role="none"><a role="menuitem" href="/pt/services/personalization/ai-video-generator/">Gerador de Vídeo com IA</a></li>
+                                    <li role="none"><a role="menuitem" href="/pt/services/personalization/pet-wedding/">Casamento com Pets</a></li>
+                                    <li role="none"><a role="menuitem" href="/pt/services/personalization/multilingual/">Multilíngue</a></li>
+                                    <li role="none"><a role="menuitem" href="/pt/services/personalization/cartoon-style/">Estilo Cartoon</a></li>
+                                    <li role="none"><a role="menuitem" href="/pt/services/personalization/meme-generator/">Memes de Casamento</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Superação de Ausências</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/pt/services/absence-compensation/family-tribute/">Homenagem à Família</a></li>
+                                    <li role="none"><a role="menuitem" href="/pt/services/absence-compensation/family-message/">Mensagem da Família</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/pt/services/" class="nav-dropdown-all-link">Ver todos os serviços →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/pt/tools/" title="Ferramentas gratuitas para fotos de casamento" style="color: var(--color-primary);">Ferramentas Grátis</a></li>
+                    <li><a href="/pt/gallery/" title="Veja nossa galeria e cases">Galeria</a></li>
+                    <li><a href="/pt/blog/" title="Leia nosso blog sobre vídeo de casamento">Blog</a></li>
+                    <li><a href="/pt/pricing/" title="Consulte preços transparentes">Preços</a></li>
+                    <li><a href="/pt/order/" class="btn-nav" title="Receba um orçamento gratuito — comece seu projeto">Orçamento Grátis</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n>
+                        <select id="wa-lang-select" aria-label="Idioma">
+                            <option value="en">EN</option>
+                            <option value="zh">中文</option>
+                            <option value="pt" selected>PT</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Alternar menu mobile" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>Adicionar Texto à Foto de Casamento</h1>
+                <p>Digite seu save-the-date, nomes, frases ou legendas de aniversário diretamente na foto. 14 fontes selecionadas, controle total de cor e opacidade, e prévia ao vivo — tudo no seu navegador.</p>
+                <p class="wa-tool-privacy">Os arquivos são processados localmente. Nada é enviado.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="Trilha de navegação">
+            <a href="/pt/">Início</a> <span>›</span> <a href="/pt/tools/">Ferramentas Grátis</a> <span>›</span> <span>Adicionar Texto à Foto de Casamento</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. Solte sua foto de casamento</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="Solte fotos de casamento aqui ou clique para procurar">
+                    <div class="wa-tool-dropzone-title">Arraste uma foto aqui ou clique para procurar</div>
+                    <div class="wa-tool-dropzone-hint">JPG, PNG, WebP • Várias OK (o mesmo texto se aplica a todas) • Até o limite da memória do navegador</div>
+                    <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
+                </div>
+                <div class="wa-tool-empty" id="empty-state">Sem fotos ainda — solte uma acima para começar.</div>
+                <div class="wa-tool-file-list" id="file-list" hidden></div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. Legenda e estilo</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="primary-text">Texto principal</label>
+                        <input type="text" id="primary-text" maxlength="120" value="Save the Date · 14 de junho de 2026" placeholder="ex. Save the Date · 14 de junho de 2026">
+                        <small>O título principal. Até 120 caracteres. A fonte diminui automaticamente se transbordar.</small>
+                    </div>
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="secondary-text">Texto secundário (opcional)</label>
+                        <input type="text" id="secondary-text" maxlength="120" value="Emma &amp; Liam" placeholder="ex. Emma &amp; Liam">
+                        <small>Uma segunda linha para nomes, local ou uma frase curta.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="font">Fonte</label>
+                        <select id="font">
+                            <option value="Playfair Display" selected>Playfair Display (serifa elegante)</option>
+                            <option value="Cormorant Garamond">Cormorant Garamond (serifa refinada)</option>
+                            <option value="Bodoni Moda">Bodoni Moda (serifa de alto contraste)</option>
+                            <option value="DM Serif Display">DM Serif Display (serifa de destaque)</option>
+                            <option value="Cinzel">Cinzel (caixa-alta clássica)</option>
+                            <option value="Libre Baskerville">Libre Baskerville (serifa transicional)</option>
+                            <option value="Lora">Lora (serifa calorosa)</option>
+                            <option value="Abril Fatface">Abril Fatface (serifa display)</option>
+                            <option value="Montserrat">Montserrat (sans limpa)</option>
+                            <option value="Inter">Inter (sans moderna)</option>
+                            <option value="Great Vibes">Great Vibes (script romântico)</option>
+                            <option value="Sacramento">Sacramento (script manuscrito)</option>
+                            <option value="Pacifico">Pacifico (script fluido)</option>
+                            <option value="Dancing Script">Dancing Script (script saltitante)</option>
+                        </select>
+                        <small>14 fontes agrupadas em serifa / sans / script.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="position">Posição</label>
+                        <select id="position">
+                            <option value="top">Topo</option>
+                            <option value="top-center" selected>Centro no topo</option>
+                            <option value="center">Centro</option>
+                            <option value="bottom-center">Centro embaixo</option>
+                            <option value="bottom">Embaixo</option>
+                        </select>
+                        <small>Centro embaixo é o lugar clássico do save-the-date.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="primary-size">Tamanho da fonte principal: <span id="primary-size-val">56</span>px</label>
+                        <input type="range" id="primary-size" min="24" max="200" step="1" value="56">
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="secondary-size">Tamanho da fonte secundária: <span id="secondary-size-val">24</span>px</label>
+                        <input type="range" id="secondary-size" min="16" max="120" step="1" value="24">
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="text-color">Cor do texto</label>
+                        <div class="wa-text-color-row">
+                            <input type="color" id="text-color" value="#FFFFFF">
+                            <div class="wa-text-swatch-row" id="swatch-row" aria-label="Predefinições rápidas de cor">
+                                <button type="button" class="wa-text-swatch" data-color="#FFFFFF" style="background:#FFFFFF" aria-label="Branco"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#F4E4C1" style="background:#F4E4C1" aria-label="Champanhe"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#D4AF37" style="background:#D4AF37" aria-label="Dourado"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#1A1A1A" style="background:#1A1A1A" aria-label="Preto"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#7A1F2B" style="background:#7A1F2B" aria-label="Vinho"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#2C5F5D" style="background:#2C5F5D" aria-label="Sálvia"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label>Sombra</label>
+                        <div class="wa-text-toggle-row">
+                            <label><input type="checkbox" id="shadow-toggle" checked> Ativar</label>
+                            <label for="shadow-offset" style="font-weight:400;color:var(--color-text-light);">Deslocamento: <span id="shadow-offset-val">2</span>px</label>
+                            <input type="range" id="shadow-offset" min="0" max="10" step="1" value="2" style="max-width:140px;">
+                        </div>
+                        <small>Preto semitransparente — mantém o texto legível em fundos movimentados.</small>
+                    </div>
+
+                    <div class="wa-tool-control">
+                        <label for="format">Formato de saída</label>
+                        <select id="format">
+                            <option value="image/png" selected>PNG (amigável à transparência, recomendado)</option>
+                            <option value="image/jpeg">JPG (arquivo menor, para compartilhar)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>3. Prévia e download</h2>
+                <div class="wa-text-preview-wrap" id="preview-wrap" aria-live="polite">
+                    <div class="wa-text-preview-empty" id="preview-empty">Solte uma foto para ver a prévia ao vivo.</div>
+                    <canvas id="preview-canvas" class="wa-text-preview-canvas" hidden></canvas>
+                </div>
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled>Aplicar a todas</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>Salvar tudo</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn">Limpar</button>
+                </div>
+
+                <div class="wa-tool-summary" id="summary" hidden></div>
+
+                <div class="wa-tool-banner">
+                    <strong>Privacidade:</strong> cada foto é processada localmente no seu dispositivo usando a Canvas API. A aba do navegador é o único lugar onde esse trabalho acontece — sem upload, sem análise das suas fotos, sem conta.
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>Por que adicionar texto a uma foto de casamento?</h2>
+                <p>Uma ótima foto de casamento carrega o momento — o sorriso, o vestido, a iluminação. Uma legenda pequena transforma essa foto em uma lembrança: um cartão save-the-date que seus convidados realmente leem, um cartão de agradecimento que toca, um slide em um vídeo de aniversário. Esta ferramenta existe para essa sobreposição pequena, mas poderosa.</p>
+
+                <h3>As cinco legendas que os casais realmente precisam</h3>
+                <ol>
+                    <li><strong>Cartões save-the-date.</strong> "Save the Date · 14 de junho de 2026" sobre uma foto de noivado ou first look. A fonte do título faz o trabalho pesado; mantenha grande e centralizada (centro no topo ou centro embaixo).</li>
+                    <li><strong>Cartões de agradecimento com foto.</strong> Uma pequena linha de gratidão ("Obrigado por celebrarem com a gente — Emma &amp; Liam") em fonte script, no canto inferior, branca com sombra suave.</li>
+                    <li><strong>Posts de aniversário em redes sociais.</strong> "Três anos" ou "Dez anos" a 120–160 px em uma foto principal. Fontes script (Great Vibes, Sacramento) passam um ar romântico em qualquer miniatura.</li>
+                    <li><strong>Álbuns para pais e avós.</strong> Uma data e um local ("Banff · 3 de setembro de 1994") ajudam parentes mais velhos a situar a foto no tempo. Use uma serifa clássica — Playfair Display ou Libre Baskerville — com a sombra padrão ativada.</li>
+                    <li><strong>Títulos de abertura de slideshow.</strong> O primeiro quadro de uma <a href="/pt/blog/wedding-slideshow-guide/">slideshow de fotos de casamento</a> costuma trazer uma data e um nome. Renderize esse quadro aqui, coloque na sequência e depois passe para a sequência de fotos.</li>
+                </ol>
+
+                <h3>Escolhendo a fonte certa</h3>
+                <p>A escolha da fonte carrega metade do significado de uma foto legendada. As 14 fontes desta ferramenta estão divididas em três famílias — e cada família tem uma função.</p>
+                <ul>
+                    <li><strong>Script</strong> (Great Vibes, Sacramento, Pacifico, Dancing Script) — romântico, manuscrito. Melhor para convites, cartões de agradecimento, posts de aniversário. Combine com uma sombra discreta para que leia em qualquer fundo.</li>
+                    <li><strong>Serifa</strong> (Playfair Display, Cormorant Garamond, Bodoni Moda, DM Serif Display, Cinzel, Libre Baskerville, Lora, Abril Fatface) — elegante, equilibrada, tradicional. Melhor para save-the-dates, comunicados formais, álbuns para pais, títulos de slideshow.</li>
+                    <li><strong>Sans</strong> (Montserrat, Inter) — moderna, limpa, minimalista. Melhor para casamentos contemporâneos, legendas neutras, álbuns modernos e minimalistas.</li>
+                </ul>
+                <p>Na dúvida, o padrão <strong>Playfair Display</strong> é uma serifa elegante e segura que funciona em quase qualquer foto. Troque por uma script para um toque mais pessoal, ou por uma sans para um visual moderno.</p>
+
+                <h3>Sombra, contraste e legibilidade</h3>
+                <p>O toggle de sombra adiciona um deslocamento preto semitransparente e suave atrás do texto. Padrão ativado, 2 px. Custa quase nada no tamanho do arquivo e melhora muito a legibilidade em fundos movimentados ou brilhantes — texto branco em uma praia sob luz forte ou em um vestido escuro ainda lê claramente com a sombra ativada.</p>
+                <p>Se sua foto tem um fundo suave e uniforme (um retrato de estúdio, parede neutra), desligue a sombra e escolha uma cor que já contraste — vinho escuro <code>#7A1F2B</code> sobre creme, ou branco puro sobre escuro.</p>
+
+                <h2>De uma foto legendada a um filme de casamento</h2>
+                <p>Quando o save-the-date fica bom, a foto legendada vira o quadro de abertura de um <a href="/blog/wedding-video-from-photos/">filme de casamento</a>. O <a href="/pt/services/personalization/ai-video-generator/">Gerador de Vídeo de Casamento com IA</a> lê as legendas do primeiro quadro como o título do filme e anima o resto da sequência de fotos em cima de uma música. Muitos casais renderizam o quadro principal legendado aqui, comprimem o resto com o <a href="/pt/tools/compress-wedding-photos/">compressor de fotos de casamento</a> e entregam os dois para o gerador.</p>
+                <p>Para uma impressão de presente ou uma <a href="/pt/tools/wedding-photo-collage/">colagem de fotos</a>, a foto legendada entra direto no layout como a célula de título — um save-the-date inteiro em um único PNG.</p>
+
+                <h2>Perguntas frequentes</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>E se minha legenda for longa demais para caber?</summary>
+                        <p>A tela mede o texto renderizado a cada atualização da prévia. Se a linha principal for transbordar, a fonte é reduzida automaticamente em passos de 2 px até um mínimo de 24 px. Se 24 px ainda ficar largo demais, a tela clipa nas bordas — encurte a legenda ou divida em duas usando o campo de texto secundário.</p>
+                    </details>
+                    <details>
+                        <summary>Por que PNG é o formato padrão?</summary>
+                        <p>O PNG mantém os pixels originais da foto intactos onde o texto não é desenhado e suporta transparência — útil se você pretende colocar a imagem legendada em um layout depois. JPG é menor para compartilhar direto; troque o menu de formato para JPG e o mesmo render usa JPG.</p>
+                    </details>
+                    <details>
+                        <summary>Posso legendar várias fotos de uma vez?</summary>
+                        <p>Sim. Solte um lote e as mesmas configurações de texto se aplicam a todas as fotos. Cada linha tem seu próprio botão Baixar; Salvar tudo baixa o lote inteiro com atrasos sequenciais para evitar bloqueio do navegador.</p>
+                    </details>
+                    <details>
+                        <summary>O texto funciona no Gerador de Vídeo de Casamento com IA?</summary>
+                        <p>O PNG legendado é exatamente o formato que o <a href="/pt/services/personalization/ai-video-generator/">Gerador de Vídeo de Casamento com IA</a> lê como quadro de título. Use esta ferramenta para renderizar a primeira foto legendada e depois envie o conjunto completo de fotos para o gerador para um filme de 60–90 segundos.</p>
+                    </details>
+                    <details>
+                        <summary>O texto fica perfeito em pixels quando impresso?</summary>
+                        <p>A 300 DPI, uma legenda principal de 56 px em uma foto de 2048 px de largura renderiza em aproximadamente 41 pt — legível à distância de um braço em uma impressão de 13×18 cm. Para impressões maiores (20×25 cm ou mais), aumente o tamanho principal para 80–100 px antes de renderizar.</p>
+                    </details>
+                </div>
+
+                <h2>Mais ferramentas grátis para fotos de casamento</h2>
+                <p>Adicionar legendas é uma etapa no fluxo de fotos de casamento. As outras ferramentas deste pacote cobrem o resto:</p>
+                <div class="sibling-tools">
+                    <a href="/pt/tools/compress-wedding-photos/">Comprimir Fotos</a>
+                    <a href="/pt/tools/heic-to-jpg-wedding-photos/">HEIC → JPG</a>
+                    <a href="/pt/tools/wedding-photo-collage/">Colagem de Fotos</a>
+                    <a href="/pt/tools/crop-wedding-photo-for-reels/">Recorte para Reels</a>
+                    <a href="/pt/tools/remove-background-wedding-portrait/">Remover Fundo</a>
+                    <a href="/pt/tools/">Todas as Ferramentas</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>Guias relacionados</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/pt/blog/wedding-slideshow-guide/">
+                        <h4>Monte uma Slideshow de Fotos de Casamento que Encanta</h4>
+                        <span>Ler artigo →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>Como Fazer um Vídeo de Casamento a partir das Suas Fotos (Guia com IA)</h4>
+                        <span>Ler artigo →</span>
+                    </a>
+                    <a class="related-card" href="/pt/blog/wedding-video-captions/">
+                        <h4>Legendas de Vídeo de Casamento: Como Criar Texto que Funciona</h4>
+                        <span>Ler artigo →</span>
+                    </a>
+                    <a class="related-card" href="/pt/blog/wedding-invitation-video-guide/">
+                        <h4>O Guia Completo de Vídeo de Convite de Casamento</h4>
+                        <span>Ler artigo →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Legendou suas fotos? Pronto para um filme de casamento?</h2>
+                <p>Entregue-as ao nosso Gerador de Vídeo de Casamento com IA e receba um filme cinematográfico em 48 horas.</p>
+                <a href="/pt/order/" class="btn btn-primary btn-large" title="Receba um orçamento gratuito — comece seu projeto">Orçamento Grátis →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/pt/" class="logo" title="WeddingAI.video — serviços de vídeo de casamento">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>Serviços de vídeo de casamento com IA para casais do mundo todo.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Navegação do rodapé">
+                <div class="footer-col">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="/pt/blog/">Blog</a></li>
+                        <li><a href="/pt/gallery/">Galeria</a></li>
+                        <li><a href="/pt/about/">Sobre Nós</a></li>
+                        <li><a href="/pt/tools/">Ferramentas Grátis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Serviços</h3>
+                    <ul>
+                        <li><a href="/pt/services/video-enhancement/slow-motion/">Câmera Lenta</a></li>
+                        <li><a href="/pt/services/personalization/ai-video-generator/">Gerador de Vídeo com IA</a></li>
+                        <li><a href="/pt/services/personalization/wedding-trailer/">Trailer de Casamento</a></li>
+                        <li><a href="/pt/services/absence-compensation/family-tribute/">Homenagem à Família</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><a href="/pt/order/">Solicitar Orçamento</a></li>
+                        <li><a href="/pt/pricing/">Preços</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. Todos os direitos reservados.</p>
+                <a href="/pt/privacy/">Política de Privacidade</a> · <a href="/pt/terms/">Termos de Serviço</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+
+      // ---------- font mapping (Google Font name → canvas stack) ------------------
+      // Per project policy: system-font fallbacks only. Names in the dropdown are
+      // the well-known Google Font names so couples recognize them; the actual
+      // canvas render uses the closest local stack in the same family.
+      var FONT_STACKS = {
+        'Playfair Display': "'Playfair Display', Georgia, serif",
+        'Cormorant Garamond': "'Cormorant Garamond', Georgia, serif",
+        'Bodoni Moda': "'Bodoni Moda', Georgia, serif",
+        'DM Serif Display': "'DM Serif Display', Georgia, serif",
+        'Cinzel': "'Cinzel', Georgia, serif",
+        'Libre Baskerville': "'Libre Baskerville', Georgia, serif",
+        'Lora': "'Lora', Georgia, serif",
+        'Abril Fatface': "'Abril Fatface', Georgia, serif",
+        'Montserrat': "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        'Inter': "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        'Great Vibes': "'Great Vibes', 'Apple Chancery', 'Snell Roundhand', cursive",
+        'Sacramento': "'Sacramento', 'Apple Chancery', cursive",
+        'Pacifico': "'Pacifico', 'Apple Chancery', cursive",
+        'Dancing Script': "'Dancing Script', 'Apple Chancery', cursive"
+      };
+      function fontStack(name) { return FONT_STACKS[name] || FONT_STACKS['Playfair Display']; }
+
+      // ---------- DOM --------------------------------------------------------------
+      var dropzone = document.getElementById('dropzone');
+      var input = document.getElementById('file-input');
+      var list = document.getElementById('file-list');
+      var empty = document.getElementById('empty-state');
+      var runBtn = document.getElementById('run-btn');
+      var saveAllBtn = document.getElementById('save-all-btn');
+      var clearBtn = document.getElementById('clear-btn');
+      var summaryEl = document.getElementById('summary');
+
+      var primaryTextEl = document.getElementById('primary-text');
+      var secondaryTextEl = document.getElementById('secondary-text');
+      var fontEl = document.getElementById('font');
+      var positionEl = document.getElementById('position');
+      var primarySizeEl = document.getElementById('primary-size');
+      var primarySizeVal = document.getElementById('primary-size-val');
+      var secondarySizeEl = document.getElementById('secondary-size');
+      var secondarySizeVal = document.getElementById('secondary-size-val');
+      var colorEl = document.getElementById('text-color');
+      var shadowToggleEl = document.getElementById('shadow-toggle');
+      var shadowOffsetEl = document.getElementById('shadow-offset');
+      var shadowOffsetVal = document.getElementById('shadow-offset-val');
+      var formatEl = document.getElementById('format');
+      var swatchRow = document.getElementById('swatch-row');
+
+      var previewCanvas = document.getElementById('preview-canvas');
+      var previewEmpty = document.getElementById('preview-empty');
+      var previewWrap = document.getElementById('preview-wrap');
+
+      var files = [];           // [{ status, name, inputFile, sizes, output, outputName, previewUrl, img }]
+      var activeIndex = 0;        // which photo drives the live preview
+      var renderTimer = null;
+
+      // ---------- helpers ----------------------------------------------------------
+      function getSettings() {
+        return {
+          primary: primaryTextEl.value || '',
+          secondary: secondaryTextEl.value || '',
+          fontName: fontEl.value || 'Playfair Display',
+          position: positionEl.value || 'bottom-center',
+          primarySize: parseInt(primarySizeEl.value, 10),
+          secondarySize: parseInt(secondarySizeEl.value, 10),
+          color: colorEl.value || '#FFFFFF',
+          shadow: !!shadowToggleEl.checked,
+          shadowOffset: parseInt(shadowOffsetEl.value, 10) || 0,
+          format: formatEl.value || 'image/png'
+        };
+      }
+
+      // Position the (primary, secondary) pair as a block. Returns baseline Y for primary.
+      function measureText(ctx, text, size, family) {
+        ctx.font = size + 'px ' + family;
+        var w = 0;
+        if (text) {
+          w = ctx.measureText(text).width;
+        }
+        return { width: w, ascent: size, lineHeight: Math.round(size * 1.18) };
+      }
+
+      // Auto-shrink primary size so the rendered width fits the canvas with 8% padding.
+      function fitSize(ctx, text, requestedSize, family, maxWidth) {
+        var size = requestedSize;
+        var minSize = 24;
+        while (size > minSize) {
+          var m = measureText(ctx, text, size, family);
+          if (m.width <= maxWidth) return size;
+          size -= 2;
+        }
+        return minSize;
+      }
+
+      // Draw text block onto ctx at the requested position. Returns nothing.
+      function drawTextBlock(ctx, settings, canvasW, canvasH) {
+        var family = fontStack(settings.fontName);
+        var primary = settings.primary.trim();
+        var secondary = settings.secondary.trim();
+        if (!primary && !secondary) return;
+
+        var maxW = Math.round(canvasW * 0.84);
+        var primarySize = primary ? fitSize(ctx, primary, settings.primarySize, family, maxW) : 0;
+        var secondarySize = secondary ? Math.min(settings.secondarySize, primarySize ? Math.round(primarySize * 0.55) : settings.secondarySize) : 0;
+
+        var lineH = (primarySize || 1) * 1.18;
+        var secLineH = secondarySize * 1.25;
+        var blockH = (primary ? lineH : 0) + (secondary ? secLineH : 0);
+        var padY = Math.round(canvasH * 0.05);
+
+        var primaryY, secondaryY;
+        if (settings.position === 'top') {
+          primaryY = padY + primarySize;
+          secondaryY = primaryY + secLineH;
+        } else if (settings.position === 'top-center' || settings.position === 'center') {
+          var centerY = Math.round(canvasH / 2);
+          var topY = centerY - Math.round(blockH / 2);
+          primaryY = topY + primarySize;
+          secondaryY = primaryY + secLineH;
+        } else if (settings.position === 'bottom') {
+          if (primary && secondary) {
+            secondaryY = canvasH - padY;
+            primaryY = secondaryY - secLineH - Math.round(primarySize * 0.2);
+          } else if (primary) {
+            primaryY = canvasH - padY + Math.round(primarySize * 0.1);
+          } else {
+            secondaryY = canvasH - padY;
+          }
+        } else {
+          // bottom-center (default)
+          var gap = Math.round(canvasH * 0.04);
+          if (primary && secondary) {
+            secondaryY = canvasH - padY;
+            primaryY = secondaryY - secLineH - gap;
+            primaryY = primaryY + primarySize - lineH * 0.0;
+          } else if (primary) {
+            primaryY = canvasH - padY + primarySize - lineH * 0.1;
+          } else {
+            secondaryY = canvasH - padY;
+          }
+        }
+
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'alphabetic';
+        if (settings.shadow) {
+          ctx.shadowColor = 'rgba(0,0,0,0.5)';
+          ctx.shadowBlur = 4;
+          ctx.shadowOffsetX = settings.shadowOffset;
+          ctx.shadowOffsetY = settings.shadowOffset;
+        }
+
+        if (primary) {
+          ctx.font = primarySize + 'px ' + family;
+          ctx.fillStyle = settings.color;
+          ctx.fillText(primary, Math.round(canvasW / 2), primaryY);
+        }
+        if (secondary) {
+          ctx.font = secondarySize + 'px ' + family;
+          ctx.fillStyle = settings.color;
+          ctx.fillText(secondary, Math.round(canvasW / 2), secondaryY);
+        }
+        ctx.restore();
+      }
+
+      // ---------- preview ----------------------------------------------------------
+      function renderPreview() {
+        var entry = files[activeIndex];
+        if (!entry || !entry.img) {
+          previewEmpty.hidden = false;
+          previewCanvas.hidden = true;
+          return;
+        }
+        previewEmpty.hidden = true;
+        previewCanvas.hidden = false;
+
+        var img = entry.img;
+        // Cap preview display size to 720px longest edge; canvas pixels = image full size
+        var maxEdge = 720;
+        var scale = 1;
+        if (Math.max(img.naturalWidth, img.naturalHeight) > maxEdge) {
+          scale = maxEdge / Math.max(img.naturalWidth, img.naturalHeight);
+        }
+        var dispW = Math.round(img.naturalWidth * scale);
+        var dispH = Math.round(img.naturalHeight * scale);
+        previewCanvas.width = img.naturalWidth;
+        previewCanvas.height = img.naturalHeight;
+        previewCanvas.style.width = dispW + 'px';
+        previewCanvas.style.height = dispH + 'px';
+        var ctx = previewCanvas.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+        ctx.drawImage(img, 0, 0, previewCanvas.width, previewCanvas.height);
+        drawTextBlock(ctx, getSettings(), previewCanvas.width, previewCanvas.height);
+      }
+
+      function schedulePreview() {
+        if (renderTimer) clearTimeout(renderTimer);
+        renderTimer = setTimeout(renderPreview, 100);
+      }
+
+      // ---------- file list -------------------------------------------------------
+      function refreshUI() {
+        empty.hidden = files.length > 0;
+        list.hidden = files.length === 0;
+        var hasRenderable = files.some(function (f) { return f.img; });
+        runBtn.disabled = !hasRenderable;
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        if (window.weddingAITool && window.weddingAITool.renderFileList) {
+          window.weddingAITool.renderFileList(list, files, function () {});
+          Array.prototype.forEach.call(list.children, function (row, i) {
+            // tag the active row for the preview
+            if (i === activeIndex) row.classList.add('is-active');
+            window.weddingAITool.updateFileRow(row, files[i]);
+            // wire click on the row (not the action button) to switch preview
+            if (i !== activeIndex) {
+              row.addEventListener('click', function (ev) {
+                if (ev.target.closest('button')) return;
+                activeIndex = i;
+                Array.prototype.forEach.call(list.children, function (r) { r.classList.remove('is-active'); });
+                row.classList.add('is-active');
+                renderPreview();
+              });
+            }
+          });
+        }
+      }
+
+      function addFiles(picked) {
+        var added = 0;
+        picked.forEach(function (f) {
+          if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
+            return;
+          }
+          files.push({
+            status: 'queued',
+            name: f.name,
+            inputFile: f,
+            img: null,
+            sizes: { orig: f.size, out: 0 },
+            output: null,
+            outputName: null,
+            previewUrl: URL.createObjectURL(f)
+          });
+          added++;
+        });
+        if (added === 0) { window.weddingAITool.toast('Nenhum arquivo compatível. Tente JPG, PNG ou WebP.', 'error'); return; }
+        // Async-decode all newly added entries (do not block addFiles)
+        var newStartIdx = files.length - added;
+        for (var i = newStartIdx; i < files.length; i++) {
+          (function (idx) {
+            window.weddingAITool.fileToImage(files[idx].inputFile).then(function (loaded) {
+              files[idx].img = loaded.img;
+              URL.revokeObjectURL(loaded.url);
+              if (idx === activeIndex || activeIndex >= files.length - added) {
+                // first decoded becomes the active preview
+                if (idx === 0 || !files[activeIndex] || !files[activeIndex].img) {
+                  activeIndex = idx;
+                }
+                renderPreview();
+              }
+              refreshUI();
+            }).catch(function (err) {
+              files[idx].status = 'error';
+              files[idx].error = err && err.message ? err.message : String(err);
+              refreshUI();
+            });
+          })(i);
+        }
+        refreshUI();
+      }
+
+      function clearAll() {
+        files.forEach(function (f) {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+        });
+        files = [];
+        activeIndex = 0;
+        summaryEl.hidden = true;
+        previewEmpty.hidden = false;
+        previewCanvas.hidden = true;
+        refreshUI();
+      }
+
+      // ---------- batch render ----------------------------------------------------
+      async function processOne(entry, settings) {
+        entry.status = 'working';
+        entry.error = null;
+        refreshUI();
+        try {
+          if (!entry.img) {
+            var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+            entry.img = loaded.img;
+            URL.revokeObjectURL(loaded.url);
+          }
+          var img = entry.img;
+          var w = img.naturalWidth, h = img.naturalHeight;
+          var canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.drawImage(img, 0, 0, w, h);
+          drawTextBlock(ctx, settings, w, h);
+          var mime = settings.format;
+          var quality = (mime === 'image/png' || mime === 'image/webp') ? undefined : 0.92;
+          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('A renderização retornou um arquivo vazio. Tente outro formato.');
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
+          var ext = (mime === 'image/png') ? 'png' : (mime === 'image/webp') ? 'webp' : 'jpg';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-legendada.' + ext);
+          // refresh row preview thumbnail to the new rendered image
+          if (entry.output) {
+            entry.previewUrl = URL.createObjectURL(entry.output);
+          }
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
+        }
+        refreshUI();
+      }
+
+      async function runAll() {
+        var settings = getSettings();
+        runBtn.disabled = true;
+        for (var i = 0; i < files.length; i++) {
+          var f = files[i];
+          if (f.status === 'done') continue;
+          if (!f.img) continue; // decode failed earlier; skip silently
+          await processOne(f, settings);
+        }
+        runBtn.disabled = false;
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        renderSummary();
+        window.weddingAITool.toast('Renderização concluída.');
+      }
+
+      function renderSummary() {
+        var done = files.filter(function (f) { return f.status === 'done' && f.output; });
+        var errs = files.filter(function (f) { return f.status === 'error'; });
+        if (done.length === 0) { summaryEl.hidden = true; return; }
+        var origTotal = done.reduce(function (s, f) { return s + f.sizes.orig; }, 0);
+        var outTotal = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
+        summaryEl.hidden = false;
+        summaryEl.innerHTML =
+          '<div><strong>' + done.length + '</strong> legendadas</div>' +
+          '<div><strong>Total original:</strong> ' + window.weddingAITool.formatBytes(origTotal) + '</div>' +
+          '<div><strong>Total de saída:</strong> ' + window.weddingAITool.formatBytes(outTotal) + '</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' com erro</strong> — remova e tente novamente.</div>' : '');
+      }
+
+      function saveAll() {
+        var outputs = files
+          .filter(function (f) { return f.status === 'done' && f.output; })
+          .map(function (f) { return { name: f.outputName, blob: f.output }; });
+        if (outputs.length === 0) return;
+        window.weddingAITool.downloadZip(outputs, 'legendadas');
+        window.weddingAITool.toast('Salvando ' + outputs.length + ' arquivo' + (outputs.length === 1 ? '' : 's') + '…');
+      }
+
+      // ---------- wire up ---------------------------------------------------------
+      window.weddingAITool.bindDropZone({
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
+        onFiles: addFiles
+      });
+
+      // live-preview triggers
+      [primaryTextEl, secondaryTextEl, fontEl, positionEl, primarySizeEl, secondarySizeEl,
+       colorEl, shadowToggleEl, shadowOffsetEl, formatEl].forEach(function (el) {
+        el.addEventListener('input', function () {
+          if (el === primarySizeEl) primarySizeVal.textContent = primarySizeEl.value;
+          if (el === secondarySizeEl) secondarySizeVal.textContent = secondarySizeEl.value;
+          if (el === shadowOffsetEl) shadowOffsetVal.textContent = shadowOffsetEl.value;
+          schedulePreview();
+        });
+        el.addEventListener('change', schedulePreview);
+      });
+
+      // color swatches
+      Array.prototype.forEach.call(swatchRow.querySelectorAll('.wa-text-swatch'), function (sw) {
+        sw.addEventListener('click', function () {
+          var c = sw.getAttribute('data-color');
+          if (!c) return;
+          colorEl.value = c;
+          Array.prototype.forEach.call(swatchRow.querySelectorAll('.wa-text-swatch'), function (x) {
+            x.classList.toggle('is-active', x === sw);
+          });
+          schedulePreview();
+        });
+      });
+      // mark default swatch active on first paint
+      var defaultSwatch = swatchRow.querySelector('.wa-text-swatch[data-color="' + colorEl.value + '"]');
+      if (defaultSwatch) defaultSwatch.classList.add('is-active');
+
+      runBtn.addEventListener('click', runAll);
+      saveAllBtn.addEventListener('click', saveAll);
+      clearBtn.addEventListener('click', clearAll);
+
+      list.addEventListener('wa-row-remove', function (e) {
+        var idx = parseInt((e.detail || '0'), 10);
+        if (!isNaN(idx)) {
+          var f = files[idx];
+          if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          files.splice(idx, 1);
+          if (activeIndex >= files.length) activeIndex = Math.max(0, files.length - 1);
+          refreshUI();
+          renderPreview();
+        }
+      });
+
+      refreshUI();
+    })();
+    </script>
+</body>
+</html>

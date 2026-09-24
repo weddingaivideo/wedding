@@ -1,0 +1,334 @@
+/*!
+ * WeddingAI Free Tools — shared UI styles (v1.0.0)
+ * Loaded via <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+ * on every /tools/* page. Keeps inline CSS inside each tool page minimal:
+ * only tool-specific controls live in the page-local <style> block.
+ *
+ * Naming convention: every class here is prefixed wa-tool- to avoid colliding
+ * with the main site styles at /styles.min.css.
+ */
+
+.wa-tool-shell {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.wa-tool-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.wa-tool-card h2 {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.wa-tool-dropzone {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: center;
+  cursor: pointer;
+  background: var(--color-bg-alt);
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.wa-tool-dropzone:hover,
+.wa-tool-dropzone:focus-visible,
+.wa-tool-dropzone.is-drag-over {
+  background: #fff7e6;
+  border-color: var(--color-primary);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.wa-tool-dropzone-title {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  margin-bottom: 0.4rem;
+  color: var(--color-secondary);
+}
+
+.wa-tool-dropzone-hint {
+  color: var(--color-text-light);
+  font-size: 0.9375rem;
+}
+
+.wa-tool-dropzone input[type="file"] {
+  display: none;
+}
+
+.wa-tool-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.wa-tool-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.wa-tool-control label {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--color-secondary);
+}
+
+.wa-tool-control select,
+.wa-tool-control input[type="number"],
+.wa-tool-control input[type="text"] {
+  font-family: inherit;
+  font-size: 0.9375rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--color-text);
+}
+
+.wa-tool-control input[type="range"] {
+  width: 100%;
+  accent-color: var(--color-primary);
+}
+
+.wa-tool-control small {
+  color: var(--color-text-light);
+  font-size: 0.8125rem;
+}
+
+.wa-tool-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.wa-tool-file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: var(--spacing-md);
+}
+
+.wa-tool-file-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color 0.15s ease;
+}
+
+.wa-tool-file-row.wa-tool-status-working { border-color: var(--color-primary); }
+.wa-tool-file-row.wa-tool-status-done { border-color: #c5e1a5; background: #f7fbf0; }
+.wa-tool-file-row.wa-tool-status-error { border-color: #ef9a9a; background: #fff5f5; }
+
+.wa-tool-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--color-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-light);
+  font-size: 1.25rem;
+}
+
+.wa-tool-thumb-ph { font-weight: 700; }
+
+.wa-tool-meta { min-width: 0; }
+
+.wa-tool-name {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-secondary);
+}
+
+.wa-tool-sub {
+  font-size: 0.8125rem;
+  color: var(--color-text-light);
+  margin-top: 0.2rem;
+}
+
+.wa-tool-err {
+  font-size: 0.8125rem;
+  color: #b00020;
+  margin-top: 0.4rem;
+}
+
+.wa-tool-actions-row { justify-content: flex-end; }
+
+.wa-tool-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: wa-tool-spin 0.8s linear infinite;
+}
+
+@keyframes wa-tool-spin {
+  to { transform: rotate(360deg); }
+}
+
+.wa-tool-empty {
+  text-align: center;
+  padding: var(--spacing-md);
+  color: var(--color-text-light);
+  font-size: 0.9375rem;
+}
+
+.wa-tool-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+}
+
+.wa-tool-summary strong {
+  color: var(--color-secondary);
+  margin-right: 0.3rem;
+}
+
+.wa-tool-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.wa-tool-preview figure {
+  margin: 0;
+  text-align: center;
+}
+
+.wa-tool-preview img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+
+.wa-tool-preview figcaption {
+  font-size: 0.8125rem;
+  color: var(--color-text-light);
+  margin-top: 0.4rem;
+}
+
+.wa-tool-banner {
+  background: linear-gradient(135deg, #fff7e6 0%, #fdfbf8 100%);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+  margin-top: var(--spacing-md);
+}
+
+.wa-tool-banner strong { color: var(--color-secondary); }
+
+.btn-small {
+  padding: 0.4rem 0.85rem !important;
+  font-size: 0.8125rem !important;
+}
+
+/* Privacy strip — appears once per tool, explains "runs in your browser". */
+.wa-tool-privacy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-light);
+  margin-top: var(--spacing-sm);
+}
+
+.wa-tool-privacy::before {
+  content: '🔒';
+  font-size: 0.9rem;
+}
+
+/* Hub (tools/index) layout */
+.wa-tool-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.wa-tool-hub-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.wa-tool-hub-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.wa-tool-hub-card-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.wa-tool-hub-card h3 {
+  font-size: 1.0625rem;
+  color: var(--color-secondary);
+  margin: 0;
+}
+
+.wa-tool-hub-card p {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+.wa-tool-hub-card .wa-tool-hub-tag {
+  display: inline-block;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+@media (max-width: 600px) {
+  .wa-tool-file-row {
+    grid-template-columns: 56px 1fr;
+    grid-template-rows: auto auto;
+  }
+  .wa-tool-thumb { width: 56px; height: 56px; }
+  .wa-tool-actions-row {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+}
