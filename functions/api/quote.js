@@ -409,7 +409,7 @@ export async function onRequestPost({ request, env }) {
             },
             body: JSON.stringify({
                 from: FROM_ADDRESS,
-                to: [TO_EMAIL_DEFAULT]  // DEBUG: forced default to bypass env var,
+                to: [env.TO_EMAIL || TO_EMAIL_DEFAULT],
                 reply_to: email,
                 subject,
                 html: buildHtmlEmail(formData),
