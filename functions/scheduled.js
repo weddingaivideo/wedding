@@ -21,8 +21,7 @@
  * (The HTTP entry point is gated by CRON_TOKEN. The cron entry point is
  *  internal — only Cloudflare can invoke it.)
  *
- * Notifications: reuses the same TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID /
- * ALERT_WEBHOOK_URL env vars as /api/quote, so setup is one-shot.
+ * Notifications: removed 2026-10-12. Results are only in function logs and KV.
  */
 
 const FROM_ADDRESS = "WeddingAI Quote <noreply@weddingai.video>";
@@ -187,34 +186,8 @@ async function tryResend(env, apiKey, record) {
     }
 }
 
+// 告警已移除（2026-10-12）：不再推送 Telegram / Slack / Discord。
+// cron 重试结果写进 function 日志，操作员需要时手动 GET /api/dead-letters?token=&status=failed。
 async function notifyCronResult(env, summary, counts) {
-    // Telegram
-    if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
-        const lines = ["⏰ WeddingAI 死信重试报告", summary];
-        if (counts.succeeded > 0) lines.push(`✅ 自动恢复: ${counts.succeeded}`);
-        if (counts.failed > 0) lines.push(`❌ 仍失败: ${counts.failed}`);
-        if (counts.abandoned > 0) lines.push(`🚫 已放弃 (≥${MAX_RETRIES} 次): ${counts.abandoned}`);
-        if (counts.truncated) lines.push(`⚠️ 列表被截断 (>${KV_LIST_LIMIT} 条)，可能还有未处理的`);
-        const text = lines.join("\n");
-        try {
-            await fetch(
-                `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ chat_id: env.TELEGRAM_CHAT_ID, text }),
-                }
-            ).catch(() => null);
-        } catch (_) { /* never block on alert */ }
-    }
-    // Slack/Discord webhook
-    if (env.ALERT_WEBHOOK_URL) {
-        try {
-            await fetch(env.ALERT_WEBHOOK_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text: `⏰ WeddingAI cron retry: ${summary}` }),
-            }).catch(() => null);
-        } catch (_) { /* never block on alert */ }
-    }
+    // no-op
 }

@@ -232,65 +232,9 @@ async function updateLeadStatus(env, key, emailStatus, resendStatus, resendError
     }
 }
 
-// 失败告警：Telegram（首选，手机 push 即时）+ Slack/Discord webhook（保留兼容）。
-// fire-and-forget：告警自身失败不影响主流程，也不延迟用户响应。
-// 配置：
-//   TELEGRAM_BOT_TOKEN  — 找 @BotFather 创建机器人拿到
-//   TELEGRAM_CHAT_ID    — 给机器人发条消息后访问
-//                         https://api.telegram.org/bot<TOKEN>/getUpdates 拿到
-//   ALERT_WEBHOOK_URL   — Slack/Discord incoming webhook URL（可选，向后兼容）
-async function alertAdmin(env, failLog, ctx) {
-    const safe = (v) => (v == null ? "—" : String(v).slice(0, 200));
-    // Telegram
-    if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
-        const text = [
-            "🚨 WeddingAI 新死信",
-            `ref:     ${safe(ctx && ctx.ref)}`,
-            `姓名:   ${safe(ctx && ctx.name)}`,
-            `邮箱:   ${safe(ctx && ctx.email)}`,
-            `国家:   ${safe(ctx && ctx.country)}`,
-            `服务:   ${safe(ctx && ctx.service)}`,
-            `错误:   ${safe(failLog)}`,
-        ].join("\n");
-        try {
-            await fetch(
-                `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ chat_id: env.TELEGRAM_CHAT_ID, text }),
-                }
-            ).catch(() => null);
-        } catch (_) { /* never block on alert */ }
-    }
-    // Slack / Discord webhook
-    if (env.ALERT_WEBHOOK_URL) {
-        try {
-            await fetch(env.ALERT_WEBHOOK_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    text: failLog,
-                    attachments: [{
-                        color: "danger",
-                        text: failLog,
-                        ts: Math.floor(Date.now() / 1000),
-                    }],
-                }),
-            }).catch(() => null);
-        } catch (_) { /* never block on alert */ }
-    }
-}
-
-function leadCtx(formData, refId) {
-    return {
-        ref: refId || null,
-        name: formData.get("name") || null,
-        email: formData.get("email") || null,
-        country: formData.get("country") || null,
-        service: formData.get("service") || null,
-    };
-}
+// 失败告警已移除（2026-10-12）：不再推送 Telegram / Slack / Discord。
+// 所有失败仍然写进 KV（lead 状态字段 resend_status / resend_error / email_status=failed），
+// 巡检靠：(1) daily cron 重试；(2) 操作员手动 GET /api/dead-letters?token=&status=failed。
 
 export async function onRequestPost({ request, env }) {
     const reqUrl = new URL(request.url);
@@ -383,12 +327,12 @@ export async function onRequestPost({ request, env }) {
     const apiKey = (env.RESEND_API_KEY || "").replace(/^\ufeff+/, "").trim();
     if (!apiKey) {
         // Misconfiguration: lead is already safe in KV, but email can't go out.
-        // Mark this lead failed + alert the operator (push) so they fix the secret.
+        // Mark this lead failed so the operator can audit it via /api/dead-letters.
+        // No push alerts — failure visibility is via KV + daily cron retry.
         const failLog = `[QUOTE FAIL] ref=${refId || "—"} reason=missing_api_key name=${formData.get("name")} email=${formData.get("email")} ` +
             "Configure RESEND_API_KEY in Cloudflare Pages → Settings → Environment variables.";
         console.error(failLog);
         await updateLeadStatus(env, leadKey, "failed", 0, "missing_api_key");
-        await alertAdmin(env, failLog, leadCtx(formData, refId));
         return new Response(
             "Server is not configured to send email. Please email order@weddingai.video directly.",
             {
@@ -438,8 +382,7 @@ export async function onRequestPost({ request, env }) {
             // 这里把状态翻成 "failed" 并记录 Resend 错误码 + 错误体。
             await updateLeadStatus(env, leadKey, "failed", res.status, errBody);
             console.log(`[LEAD STATUS] ref=${refId || "—"} key=${leadKey || "—"} → failed (resend_status=${res.status})`);
-            // 主动告警：Telegram（手机 push）+ Slack/Discord webhook（向后兼容）
-            await alertAdmin(env, failLog, leadCtx(formData, refId));
+            // 告警已移除 — 失败信息留在 KV + console，巡检靠 cron + 操作员查 /api/dead-letters
             // Redirect with status=pending so the success page can warn the user
             return redirect303(origin_base, successUrl("pending"));
         }
@@ -449,13 +392,12 @@ export async function onRequestPost({ request, env }) {
         console.log(`[QUOTE OK] ref=${refId || "—"} name=${formData.get("name")} email=${formData.get("email")} country=${formData.get("country")} service=${formData.get("service")} lead=${leadKey || "—"}`);
         return redirect303(origin_base, successUrl(null));
     } catch (e) {
-        // 网络层失败（fetch throw）——告诉用户 + 保留 lead + 告警
+        // 网络层失败（fetch throw）——告诉用户 + 保留 lead
         const errMsg = String(e && e.message ? e.message : e);
         const failLog = `[QUOTE FAIL] ref=${refId || "—"} reason=exception name=${formData.get("name")} email=${formData.get("email")} err=${errMsg}`;
         console.error(failLog);
         await updateLeadStatus(env, leadKey, "failed", 0, errMsg);
         console.log(`[LEAD STATUS] ref=${refId || "—"} key=${leadKey || "—"} → failed (resend_status=0 / network)`);
-        await alertAdmin(env, failLog, leadCtx(formData, refId));
         return redirect303(origin_base, successUrl("pending"));
     }
 }
