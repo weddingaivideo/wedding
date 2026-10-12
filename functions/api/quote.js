@@ -409,7 +409,7 @@ export async function onRequestPost({ request, env }) {
             },
             body: JSON.stringify({
                 from: FROM_ADDRESS,
-                to: [TO_EMAIL_DEFAULT]  // DEBUG: env.TO_EMAIL 一直 422，先用默认的,
+                to: [TO_EMAIL_DEFAULT],  // DEBUG: use pure default to bypass env pollution,
                 reply_to: email,
                 subject,
                 html: buildHtmlEmail(formData),
