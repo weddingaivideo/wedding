@@ -4508,6 +4508,28 @@
             <image:loc>https://weddingai.video/images/og-image-1200x630.jpg</image:loc>
             <image:title>Wedding Video Invitation Maker</image:title>
         </image:image>
+    </url>    <url>
+        <loc>https://weddingai.video/fr/tools/wedding-invitation-maker/</loc>
+        <lastmod>2026-10-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://weddingai.video/tools/wedding-invitation-maker/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/wedding-invitation-maker/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://weddingai.video/es/tools/wedding-invitation-maker/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/tools/wedding-invitation-maker/"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://weddingai.video/de/tools/wedding-invitation-maker/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/tools/wedding-invitation-maker/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/tools/wedding-invitation-maker/"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/wedding-invitation-maker/"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/tools/wedding-invitation-maker/"/>
+        <xhtml:link rel="alternate" hreflang="th" href="https://weddingai.video/th/tools/wedding-invitation-maker/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/tools/wedding-invitation-maker/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/wedding-invitation-maker/"/>
+        <image:image>
+            <image:loc>https://weddingai.video/images/og-image-1200x630.jpg</image:loc>
+            <image:title>Wedding Invitation Maker</image:title>
+        </image:image>
     </url>
+
 
 </urlset>
