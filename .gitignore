@@ -90,6 +90,15 @@ known_hosts
 secrets.*
 credentials.*
 
+# ---- CF / Resend / project-specific token caches (NEVER commit) ----
+# Plain-text API keys and tokens used by wrangler / debug scripts.
+# Re-create by running the same wrangler commands; no canonical copy exists.
+.cf-tokens.txt
+Custom Token key.txt
+# Worker source trees (deployed via wrangler, not Pages — kept as local-only
+# scratch since the deployed code lives in CF, not in this repo).
+workers/
+
 # ---- Build / generated artifacts (project has none today; keep this section for the future) ----
 dist/
 build/
