@@ -1313,6 +1313,22 @@ export const onRequest = async (context) => {
             // and en-US), so no rewrite needed for the default lang.
             // /success/ noindex for EN too.
             text = addNoindexIfSuccess(text, path);
+            // P2 (2026-10-12): Inject the FULL 11-lang + x-default hreflang graph
+            // for EN pages too. Until now the EN pages kept whatever the HTML
+            // author hand-wrote — typically only 3 alternate links (en + a single
+            // other lang + x-default), leaving Google with an incomplete hreflang
+            // graph for the 9 other languages. Building the same block here
+            // mirrors the non-EN branch so every page exposes all 12 alternates.
+            // (2026-10-12 first surfaced on /tools/<slug>/ — those hand-written
+            // hreflang blocks predate the November 2026 Hindi launch.)
+            const enCanonicalBlock = buildCanonicalAndAlternates(path, DEFAULT_LANG);
+            text = text.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*>\n?\s*/gi, "");
+            text = text.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*>\n?\s*/gi, "");
+            if (/<title[\s>][\s\S]*?<\/title>/i.test(text)) {
+                text = text.replace(/(<\/title>)/i, `$1\n    ${enCanonicalBlock}`);
+            } else if (/<head>/i.test(text)) {
+                text = text.replace(/(<head>)/i, `$1\n    ${enCanonicalBlock}`);
+            }
             // Article schema date diversification (matches the non-EN path).
             if (text.includes('"@type": "Article"') || text.includes('"@type":"Article"')) {
                 text = diversifyArticleDates(text, context.request.url);

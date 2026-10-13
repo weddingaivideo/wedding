@@ -9,7 +9,7 @@
 
     var SUPPORTED = (window.WA_LANGS && window.WA_LANGS.length)
         ? window.WA_LANGS
-        : ["en", "zh", "es", "fr", "de", "pt", "ja", "ru", "ar", "th"];
+        : ["en", "zh", "es", "fr", "de", "pt", "ja", "ru", "ar", "th", "hi"];
     var RTL = (window.WA_RTL && Object.keys(window.WA_RTL).length)
         ? window.WA_RTL
         : { ar: true };

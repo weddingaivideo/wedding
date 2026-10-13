@@ -944,6 +944,34 @@
 # match win over earlier explicit rules for GET. Moving the globs to
 # the END of the file is the only known fix; explicit 301 rules must
 # come AFTER all earlier globs to win first-match for GET.
+
+# === 2026-10-12 — exclude tool paths from the catch-all /<lang>/* rewrite ===
+# Without these specific exclusions, /zh/tools/<slug>/ would be 200-rewritten
+# to /tools/<slug>/ by the catch-alls BELOW, and the middleware would then
+# fetch the EN source. We want /zh/tools/<slug>/ to reach the prefixed
+# /zh/tools/<slug>/index.html file so the middleware can serve the
+# pre-translated body and apply only metadata rewrites (<html lang>,
+# canonical, hreflang, og:locale). Identity-path 200 rewrites are the
+# lightest way to "consume" the rule so the broader catch-all does not
+# apply — CF Pages 4.x globs match in file order on GET, so these
+# more-specific globs above win first-match.
+# Pre-deploy check should still validate total rule count is under cap.
+# These 10 rules replace the need for any later code change in
+# functions/_middleware.js — the existing prefixedProbe logic in
+# _middleware.js (added 2026-09-24 to prefer /<lang><rest> over /rest)
+# correctly serves the Chinese/Japanese/etc body when it actually
+# reaches the prefixed file.
+/zh/tools/*    /zh/tools/:splat 200
+/es/tools/*    /es/tools/:splat 200
+/fr/tools/*    /fr/tools/:splat 200
+/de/tools/*    /de/tools/:splat 200
+/pt/tools/*    /pt/tools/:splat 200
+/ja/tools/*    /ja/tools/:splat 200
+/ru/tools/*    /ru/tools/:splat 200
+/ar/tools/*    /ar/tools/:splat 200
+/th/tools/*    /th/tools/:splat 200
+/hi/tools/*    /hi/tools/:splat 200
+
 /zh/*    /:splat 200
 /es/*    /:splat 200
 /fr/*    /:splat 200
