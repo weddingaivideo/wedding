@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Бесплатный инструмент для создания свадебных видеоприглашений — анимированная открытка | СвадьбаAI.видео</title>
+    <link rel="canonical" href="https://weddingai.video/ru/tools/wedding-video-invitation-maker/">
+    <meta name="description" content="Бесплатное онлайн-создатель свадебных видеоприглашений — анимированная открытка в формате 9:16 с вашими именами, датой, фотографией, музыкальным сопровождением и 5 шаблонами. Создано для роликов Instagram, статуса WhatsApp и TikTok. 100% в браузере." />
+    <meta name="keywords" content="wedding video invitation maker, free wedding invitation video, animated wedding invitation, wedding video card, save the date video, wedding reel invitation, WhatsApp wedding invitation, wedding video template" />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Бесплатный инструмент для создания свадебных видеоприглашений — анимированная открытка 9:16 | СвадьбаAI.видео">
+    <meta property="og:description" content="5 templates, photo + text + music note. Output 9:16 MP4-ready PNG sequence for Instagram Reels, WhatsApp status, TikTok. 100% in-browser.">
+    <meta property="og:url" content="https://weddingai.video/ru/tools/wedding-video-invitation-maker/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:alt" content="Создатель свадебных видеоприглашений">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Создатель свадебных видеоприглашений">
+    <meta name="twitter:description" content="5 animated 9:16 templates with your names, date, photo, music hint. Free, in-browser.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Wedding Video Invitation">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <script defer src="/js/i18n.js?v=4.28"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+
+        /* Video-invitation tool — page-local */
+        .wa-vim-templates {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: 0.5rem;
+        }
+        .wa-vim-template {
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--color-border);
+            overflow: hidden;
+            background: #fff;
+            transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+            padding: 0;
+            text-align: center;
+        }
+        .wa-vim-template:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+        .wa-vim-template.is-active { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(212,175,55,0.18); }
+        .wa-vim-template-thumb {
+            aspect-ratio: 9 / 16;
+            display: block;
+            background: #f3f3f3;
+            overflow: hidden;
+        }
+        .wa-vim-template-thumb svg { width: 100%; height: 100%; display: block; }
+        .wa-vim-template-label {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--color-secondary);
+            padding: 0.5rem 0.4rem 0.6rem;
+            line-height: 1.2;
+        }
+        .wa-vim-stage {
+            position: relative;
+            width: 100%;
+            background: #111;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wa-vim-stage-canvas-wrap {
+            width: 360px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .wa-vim-stage-canvas-wrap canvas {
+            width: 100%;
+            display: block;
+            aspect-ratio: 9 / 16;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+        }
+        .wa-vim-play-row {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+        .wa-vim-play-row label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9375rem;
+        }
+        .wa-vim-banner {
+            background: #fff7e6;
+            border-left: 4px solid var(--color-primary);
+            padding: 0.75rem 1rem;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 0.9375rem;
+            color: var(--color-secondary);
+            margin-top: var(--spacing-md);
+        }
+        .wa-vim-frame-strip {
+            display: flex;
+            gap: 0.4rem;
+            overflow-x: auto;
+            padding: 0.6rem 0;
+            background: rgba(255,255,255,0.06);
+            border-radius: var(--radius-sm);
+            margin-top: var(--spacing-sm);
+        }
+        .wa-vim-frame-strip canvas {
+            width: 50px;
+            height: 88px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.1);
+            flex: 0 0 auto;
+        }
+        .wa-vim-frame-strip canvas.is-active { border-color: var(--color-primary); box-shadow: 0 0 0 2px rgba(212,175,55,0.5); }
+    </style>
+
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', { page_title: document.title, page_location: location.href, page_path: location.pathname + location.search });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){ window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true }); });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"Free Wedding Photo Tools","item":"https://weddingai.video/tools/"},
+        {"@type":"ListItem","position":3,"name":"Создатель свадебных видеоприглашений","item":"https://weddingai.video/tools/wedding-video-invitation-maker/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Создатель свадебных видеоприглашений","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"Requires modern browser with Canvas API","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Бесплатное средство создания свадебных видеоприглашений в браузере с 5 анимированными шаблонами формата 9:16. Предварительный просмотр в реальном времени воспроизводит 5 секунд движения (зум фото, затухание текста, изменение акцента). Загрузите каждый кадр в формате PNG 1080x1920 для сборки в CapCut/iMovie/Canva или передайте дизайн AI Wedding Video Generator для получения полного фильма.","url":"https://weddingai.video/tools/wedding-video-invitation-maker/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["5 animated templates","9:16 vertical","Optional engagement photo","5-frame PNG sequence download","Tells users which royalty-free music mood fits each template"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Как сделать свадебное видеоприглашение в браузере","step":[
+        {"@type":"HowToStep","position":1,"name":"Выберите шаблон","text":"Выбирайте из 5 шаблонов — Классический, Романтический, Современный, Жирный, Фото вперед. Каждый шаблон повторяет 5-секундную анимацию."},
+        {"@type":"HowToStep","position":2,"name":"Добавить детали","text":"Введите имена пары, дату свадьбы, город или место проведения, необязательную метку года, необязательный хэштег и необязательную фотографию помолвки."},
+        {"@type":"HowToStep","position":3,"name":"Предварительный просмотр цикла","text":"Предварительный просмотр воспроизводится автоматически. Сделайте паузу или прокрутите временную шкалу. Каждый кадр отображается с разрешением 1080x1920."},
+        {"@type":"HowToStep","position":4,"name":"Скачать рамки","text":"Нажмите «Загрузить 5 кадров», чтобы загрузить последовательность PNG. Используйте CapCut, iMovie, Canva или наш генератор свадебных видео с искусственным интеллектом, чтобы превратить их в MP4."}
+    ]}</script>
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/wedding-video-invitation-maker/"><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/wedding-video-invitation-maker/">
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?784c824843f328ed5f8254991ef8b2f4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ywxiu97hg8");
+    </script>
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/wedding-video-invitation-maker/"/><link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/wedding-video-invitation-maker/"/><link rel="alternate" hreflang="es" href="https://weddingai.video/es/tools/wedding-video-invitation-maker/"/><link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/tools/wedding-video-invitation-maker/"/><link rel="alternate" hreflang="de" href="https://weddingai.video/de/tools/wedding-video-invitation-maker/"/><link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/tools/wedding-video-invitation-maker/"/><link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/tools/wedding-video-invitation-maker/"/><link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/wedding-video-invitation-maker/"/><link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/tools/wedding-video-invitation-maker/"/><link rel="alternate" hreflang="th" href="https://weddingai.video/th/tools/wedding-video-invitation-maker/"/><link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/tools/wedding-video-invitation-maker/"/><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/wedding-video-invitation-maker/"/></head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services">Services <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none"><div class="nav-dropdown-heading">Video Enhancement</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">Slow Motion</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">Vintage Restoration</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none"><div class="nav-dropdown-heading">Personalization</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">Wedding Trailer</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI Video Generator</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">Pet Wedding</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">Multilingual</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">Cartoon Style</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">Wedding Memes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none"><div class="nav-dropdown-heading">Absence Compensation</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">Family Tribute</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">Family Message</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none"><a role="menuitem" href="/services/" class="nav-dropdown-all-link">View all services →</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/tools/" title="Free wedding photo tools" style="color: var(--color-primary);">Free Tools</a></li>
+                    <li><a href="/gallery/">Gallery</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/pricing/">Pricing</a></li>
+                    <li><a href="/order/" class="btn-nav">Get a Quote</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en" selected>EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option><option value="hi">HI</option></select></li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>Создатель свадебных видеоприглашений</h1>
+                <p>Создайте анимированное приглашение в формате 9:16 в своем браузере. Выберите шаблон, добавьте имена и дату, добавьте фотографию помолвки и загрузите 5-кадровую последовательность PNG — зайдите в CapCut или iMovie, чтобы создать 5-секундный ролик, или передайте дизайн нашему генератору свадебного видео с искусственным интеллектом для кинематографического фильма.</p>
+                <p class="wa-tool-privacy">Файлы обрабатываются локально. Ничего не загружается.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a> <span>›</span> <a href="/tools/">Free Tools</a> <span>›</span> <span>Создатель свадебных видеоприглашений</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. Выберите шаблон</h2>
+                <div class="wa-vim-templates" id="template-grid" role="radiogroup" aria-label="Video invitation template"></div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. Добавьте свои данные</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="couple-names">Имена пар</label>
+                        <input type="text" id="couple-names" maxlength="60" value="Emma &amp; Liam" placeholder="e.g. Emma &amp; Liam">
+                    </div>
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="wedding-date">Дата свадьбы</label>
+                        <input type="text" id="wedding-date" maxlength="60" value="June 14, 2026" placeholder="e.g. June 14, 2026">
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="city">Город или место проведения</label>
+                        <input type="text" id="city" maxlength="60" value="Banff, Canada">
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="year-tag">Год (необязательно)</label>
+                        <input type="text" id="year-tag" maxlength="20" value="2026">
+                    </div>
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="hashtag">Хэштег (необязательно)</label>
+                        <input type="text" id="hashtag" maxlength="60" value="#EmmaAndLiam2026">
+                    </div>
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="music-mood">Музыкальное настроение (показано на последнем кадре в качестве подсказки)</label>
+                        <select id="music-mood">
+                            <option value="indie acoustic">Indie acoustic</option>
+                            <option value="classic piano" selected>Classic piano</option>
+                            <option value="orchestral">Orchestral</option>
+                            <option value="modern lo-fi">Modern lo-fi</option>
+                            <option value="acoustic guitar">Acoustic guitar</option>
+                            <option value="slow pop">Slow pop</option>
+                        </select>
+                    </div>
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="photo-input">Фотография помолвки (необязательно — требуется для пересылки фотографий)</label>
+                        <div class="wa-tool-dropzone" id="photo-zone" aria-label="Drop an engagement photo here or click to browse">
+                            <div class="wa-tool-dropzone-title" id="photo-zone-title">Drop a photo here or click to browse</div>
+                            <div class="wa-tool-dropzone-hint">JPG, PNG, WebP — stays on your device</div>
+                            <input type="file" id="photo-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>3. Предварительный просмотр и загрузка кадров</h2>
+                <div class="wa-vim-stage">
+                    <div class="wa-vim-stage-canvas-wrap">
+                        <canvas id="preview-canvas" width="540" height="960" aria-label="Wedding video invitation preview"></canvas>
+                    </div>
+                </div>
+                <div class="wa-vim-play-row">
+                    <button type="button" class="btn btn-secondary" id="play-btn">⏵ Play loop</button>
+                    <button type="button" class="btn btn-secondary" id="pause-btn">⏸ Pause</button>
+                    <label for="frame-slider">Frame</label>
+                    <input type="range" id="frame-slider" min="0" max="4" step="1" value="0" style="flex: 1; min-width: 140px;">
+                    <span id="frame-label" style="font-size: 0.9375rem; color: var(--color-secondary);">1 / 5</span>
+                </div>
+                <div class="wa-vim-frame-strip" id="frame-strip"></div>
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="download-btn">Скачать 5 рамок PNG (1080×1920)</button>
+                    <button type="button" class="btn btn-secondary" id="reset-btn">Перезагрузить</button>
+                </div>
+                <div class="wa-vim-banner">
+                    <strong>Tip:</strong> drop the 5 frames into <a href="/blog/wedding-video-music-guide/" target="_blank" rel="noopener">CapCut or iMovie</a>, set each frame to 1&nbsp;second, add a song, and you've got a 5-second Reel. Or hand the same photos to our <a href="/services/personalization/ai-video-generator/">AI Wedding Video Generator</a> for the full 60–90 second film.
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>Why 5 frames and not a "real" video?</h2>
+                <p>A "real" video renderer in the browser is heavy: ffmpeg.wasm is ~30&nbsp;MB, takes 10–30 seconds to compile, and pushes browsers hard on phones. Most wedding couples don't need that — they need a clean 5-second motion card they can post today.</p>
+                <p>So this tool renders <strong>5 frames spaced 1 second apart</strong> (1080×1920, 9:16) and lets your existing video editor do the assembly. CapCut, iMovie, Canva, and InShot all accept a PNG sequence. Drop the five frames, set each to 1 second, add music — done. Total wall time: about 3 minutes.</p>
+
+                <h2>The 5 templates</h2>
+                <h3>1. Classic — formal invites, traditional weddings</h3>
+                <p>Champagne background with a slow text fade. Best for hotel ballrooms, country clubs, parent-organized events. Music suggestion: classic piano.</p>
+                <h3>2. Romantic — script fonts and floral motifs</h3>
+                <p>Pink watercolor with floral accents and a slow zoom. Best for garden weddings and ceremonies where the venue has greenery. Music suggestion: indie acoustic.</p>
+                <h3>3. Modern — minimal block-color, animated overlay</h3>
+                <p>Off-white with bold sans-serif type and a sweeping accent line. Best for urban and contemporary weddings. Music suggestion: modern lo-fi.</p>
+                <h3>4. Bold — black background, large display type</h3>
+                <p>High-contrast black with dramatic reveal animation. Best for evening weddings, art-gallery receptions, and couples who want a poster-style invite. Music suggestion: orchestral.</p>
+                <h3>5. Photo Forward — engagement photo drives the motion</h3>
+                <p>Your photo is the background; type fades in over it. Requires a photo. Best when you have a strong engagement portrait. Music suggestion: acoustic guitar.</p>
+
+                <h2>What to do with the 5 frames</h2>
+                <ol>
+                    <li>Download — you get 5 numbered PNGs (frame_1.png through frame_5.png).</li>
+                    <li>Open CapCut (free mobile app) or iMovie.</li>
+                    <li>Create a new 9:16 project, drop in the 5 frames in order, set each to 1 second.</li>
+                    <li>Pick a song from your music library — the "music mood" dropdown suggests one vibe; you choose the actual track.</li>
+                    <li>Export as MP4. Share via WhatsApp status, Instagram Reels, or your private guest WhatsApp group.</li>
+                </ol>
+
+                <h2>Frequently asked questions</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>Why 1080×1920?</summary>
+                        <p>That's Instagram Reels / TikTok / WhatsApp Status / YouTube Shorts at native resolution. It's also fine for older phones — CapCut and iMovie handle it without re-encoding. If you need horizontal 1920×1080, that's a future feature.</p>
+                    </details>
+                    <details>
+                        <summary>Why not just give me the MP4 directly?</summary>
+                        <p>Because in-browser MP4 encoding requires either ffmpeg.wasm (≈ 30&nbsp;MB cold-start cost) or a server round-trip (which would break our no-upload promise). PNG-sequence + your existing video editor is the lightest path that works on every phone. The whole flow is under 3 minutes once you've used CapCut once.</p>
+                    </details>
+                    <details>
+                        <summary>Why PNG and not JPEG?</summary>
+                        <p>PNG keeps sharp text edges and crisp lines at 1080×1920. JPEG introduces banding around small white type on dark backgrounds, which is exactly what wedding invites have. File size cost is minor at this resolution — expect ~500&nbsp;KB to 1&nbsp;MB per frame.</p>
+                    </details>
+                    <details>
+                        <summary>Can I download more than 5 frames?</summary>
+                        <p>Not in this version. Five frames cover a clean 5-second loop, which is the most useful length for Reels/Status. For longer videos, the <a href="/services/personalization/ai-video-generator/">AI Wedding Video Generator</a> builds 60–90 second films with motion, music, and captions.</p>
+                    </details>
+                    <details>
+                        <summary>Does the animation match across frames?</summary>
+                        <p>Yes — each template runs the same motion choreography on each frame render. Frame 1 holds the opening pose; frames 2–4 interpolate zoom, text position, or accent sweeps; frame 5 lands on the final composition. They sequence cleanly as a 1-second-each loop in CapCut.</p>
+                    </details>
+                </div>
+
+                <h2>More free wedding tools</h2>
+                <div class="sibling-tools">
+                    <a href="/tools/save-the-date-maker/">Save the Date Maker</a>
+                    <a href="/tools/wedding-hashtag-generator/">Hashtag Generator</a>
+                    <a href="/tools/wedding-photo-collage/">Photo Collage</a>
+                    <a href="/tools/compress-wedding-photos/">Compress Photos</a>
+                    <a href="/tools/add-text-to-wedding-photo/">Add Text to Photo</a>
+                    <a href="/tools/crop-wedding-photo-for-reels/">Crop for Reels</a>
+                    <a href="/tools/remove-background-wedding-portrait/">Remove Background</a>
+                    <a href="/tools/heic-to-jpg-wedding-photos/">HEIC → JPG</a>
+                    <a href="/tools/">All Tools</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>Related guides</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-invitation-video-guide/">
+                        <h4>Wedding Invitation Video Guide</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-music-guide/">
+                        <h4>Wedding Video Music Guide</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>AI Wedding Video From Photos</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-photo-slideshow/">
+                        <h4>Build a Wedding Photo Slideshow</h4>
+                        <span>Read article →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Сделали клип-приглашение? Хотите полный фильм?</h2>
+                <p>Те же помолвочные фотографии, 60–90-секундный кинематографический свадебный фильм, снятый за 48 часов. От 9,9 долларов.</p>
+                <a href="/order/" class="btn btn-primary btn-large">Get a Free Quote →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo"><picture><source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px"><source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp" type="image/webp" sizes="(max-width: 600px) 178px, 356px"><img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px"></picture></a>
+                <p>AI-powered wedding video services for couples worldwide.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/gallery/">Gallery</a></li>
+                        <li><a href="/about/">About Us</a></li>
+                        <li><a href="/tools/">Free Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">Slow Motion</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI Video Generator</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">Wedding Trailer</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">Family Tribute</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="/order/">Get a Quote</a></li>
+                        <li><a href="/pricing/">Pricing</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. All rights reserved.</p>
+                <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+
+      // 1080x1920 is the master size; we downscale to 540x960 canvas for preview
+      var BASE_W = 540, BASE_H = 960;
+      var NUM_FRAMES = 5;
+      // Choreography functions return 0..1 progress for frame index 0..4
+      function interp(t) { return t; }
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+      function easeInOut(t) { return t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2; }
+
+      var TEMPLATES = [
+        { id: 'classic',  label: 'Classic',     music: 'Classic piano',
+          bg: ['#f4ead5', '#e9d8b8'], accent: '#D4AF37', primary: '#1A1A1A', secondary: '#7a6230',
+          fontStack: "'Playfair Display', Georgia, serif", scriptStack: "'Great Vibes', cursive" },
+        { id: 'romantic', label: 'Romantic',    music: 'Indie acoustic',
+          bg: ['#fbeae8', '#f3d2d4'], accent: '#c97a8a', primary: '#3e2a30', secondary: '#8b4a5a',
+          fontStack: "'Great Vibes', cursive", scriptStack: "'Playfair Display', serif" },
+        { id: 'modern',   label: 'Modern',      music: 'Modern lo-fi',
+          bg: ['#f7f7f4', '#ffffff'], accent: '#1A1A1A', primary: '#1A1A1A', secondary: '#444444',
+          fontStack: "'Montserrat', sans-serif", scriptStack: "'Montserrat', sans-serif" },
+        { id: 'bold',     label: 'Bold',        music: 'Orchestral',
+          bg: ['#0e0e0e', '#1c1c1c'], accent: '#D4AF37', primary: '#ffffff', secondary: '#cccccc',
+          fontStack: "'Montserrat', sans-serif", scriptStack: "'Playfair Display', serif" },
+        { id: 'photo',    label: 'Photo Forward', music: 'Acoustic guitar',
+          bg: ['#2c2c2c', '#3a3a3a'], accent: '#D4AF37', primary: '#ffffff', secondary: '#e0e0e0',
+          fontStack: "'Playfair Display', Georgia, serif", scriptStack: "'Great Vibes', cursive" }
+      ];
+
+      // ---------- DOM
+      var templateGrid = document.getElementById('template-grid');
+      var previewCanvas = document.getElementById('preview-canvas');
+      var playBtn = document.getElementById('play-btn');
+      var pauseBtn = document.getElementById('pause-btn');
+      var frameSlider = document.getElementById('frame-slider');
+      var frameLabel = document.getElementById('frame-label');
+      var frameStrip = document.getElementById('frame-strip');
+      var downloadBtn = document.getElementById('download-btn');
+      var resetBtn = document.getElementById('reset-btn');
+      var coupleInput = document.getElementById('couple-names');
+      var dateInput = document.getElementById('wedding-date');
+      var cityInput = document.getElementById('city');
+      var yearInput = document.getElementById('year-tag');
+      var hashtagInput = document.getElementById('hashtag');
+      var musicInput = document.getElementById('music-mood');
+      var photoInput = document.getElementById('photo-input');
+      var photoZone = document.getElementById('photo-zone');
+      var photoZoneTitle = document.getElementById('photo-zone-title');
+
+      var state = {
+        templateId: 'classic',
+        img: null,
+        imgName: '',
+        frame: 0,
+        playing: false,
+        timer: null
+      };
+
+      // ---------- template thumbnails
+      function renderTemplateGrid() {
+        templateGrid.innerHTML = '';
+        TEMPLATES.forEach(function (t) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'wa-vim-template' + (t.id === state.templateId ? ' is-active' : '');
+          btn.setAttribute('role', 'radio');
+          btn.setAttribute('aria-checked', String(t.id === state.templateId));
+          btn.innerHTML =
+            '<span class="wa-vim-template-thumb">' + thumbSvg(t, 0.5) + '</span>' +
+            '<span class="wa-vim-template-label">' + t.label + '</span>';
+          btn.addEventListener('click', function () {
+            state.templateId = t.id;
+            templateGrid.querySelectorAll('.wa-vim-template').forEach(function (el) {
+              el.classList.remove('is-active'); el.setAttribute('aria-checked', 'false');
+            });
+            btn.classList.add('is-active'); btn.setAttribute('aria-checked', 'true');
+            render();
+          });
+          templateGrid.appendChild(btn);
+        });
+      }
+
+      function thumbSvg(t, frame) {
+        // Quick stack of basic shapes for thumbnail — keeps template tiles small
+        var c = [t.bg[0], t.accent, t.primary];
+        var sw = 60, sh = 107;
+        return '<svg viewBox="0 0 ' + sw + ' ' + sh + '" xmlns="http://www.w3.org/2000/svg">' +
+          '<rect width="' + sw + '" height="' + sh + '" fill="' + c[0] + '"/>' +
+          (t.id === 'photo' ? '<rect x="6" y="6" width="' + (sw-12) + '" height="' + Math.round(sh*0.6) + '" fill="#888"/>' : '') +
+          '<rect x="' + (sw*0.18) + '" y="' + Math.round(sh*0.62) + '" width="' + (sw*0.64) + '" height="2" fill="' + c[1] + '"/>' +
+          '<text x="' + (sw/2) + '" y="' + Math.round(sh*0.55) + '" font-family="sans-serif" font-size="' + (t.id === 'romantic' ? '10' : '8') + '" font-weight="700" fill="' + c[2] + '" text-anchor="middle">A &amp; B</text>' +
+          '<text x="' + (sw/2) + '" y="' + Math.round(sh*0.78) + '" font-family="sans-serif" font-size="5" fill="' + c[2] + '" text-anchor="middle">14 · 06 · 2026</text>' +
+          '</svg>';
+      }
+
+      // ---------- photo input
+      function bindPhoto() {
+        var T = window.weddingAITool;
+        if (!T) return;
+        T.bindDropZone({
+          dropEl: photoZone, inputEl: photoInput,
+          accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+          multiple: false,
+          onFiles: function (files) {
+            var f = files[0]; if (!f) return;
+            T.fileToImage(f).then(function (res) {
+              if (state.img && state.img._objectUrl) URL.revokeObjectURL(state.img._objectUrl);
+              res.img._objectUrl = res.url;
+              state.img = res.img;
+              state.imgName = f.name || 'photo';
+              photoZoneTitle.textContent = '✓ ' + state.imgName + ' · click to swap';
+              render();
+            }).catch(function (err) {
+              T.toast(err.message || 'Could not load photo', 'error');
+            });
+          }
+        });
+      }
+
+      // ---------- text fitting
+      function fitSize(ctx, text, requested, stack, maxW, minSize) {
+        var size = requested; minSize = minSize || 16;
+        while (size > minSize) {
+          ctx.font = '700 ' + size + 'px ' + stack;
+          if (ctx.measureText(text).width <= maxW) return size;
+          size -= 2;
+        }
+        return minSize;
+      }
+
+      // ---------- canvas helpers
+      function fillGradient(ctx, w, h, c1, c2) {
+        var g = ctx.createLinearGradient(0, 0, 0, h);
+        g.addColorStop(0, c1); g.addColorStop(1, c2);
+        ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+      }
+      function drawCover(ctx, img, x, y, w, h, zoom) {
+        if (!img) return;
+        zoom = zoom || 1;
+        var ir = img.naturalWidth / img.naturalHeight;
+        var tr = w / h;
+        var sw, sh, sx, sy;
+        if (ir > tr) {
+          sh = img.naturalHeight;
+          sw = sh * tr * zoom;
+          sx = (img.naturalWidth - sw) / 2;
+          sy = 0;
+        } else {
+          sw = img.naturalWidth;
+          sh = (sw / tr) / zoom;
+          sx = 0;
+          sy = (img.naturalHeight - sh) / 2;
+        }
+        // clamp so that we don't blow past available image
+        if (sw > img.naturalWidth) { sw = img.naturalWidth; sh = sw / tr; sx = 0; sy = 0; }
+        if (sh > img.naturalHeight) { sh = img.naturalHeight; sw = sh * tr; sx = 0; sy = 0; }
+        ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+      }
+
+      // ---------- template renders, parameterized by progress 0..1
+      function getTemplate(id) { for (var i=0; i<TEMPLATES.length; i++) if (TEMPLATES[i].id===id) return TEMPLATES[i]; return TEMPLATES[0]; }
+
+      function renderFrameAt(ctx, t, frame, txt) {
+        // frame: 0..4
+        // choreograph
+        var p = frame / (NUM_FRAMES - 1); // 0..1
+        ctx.clearRect(0, 0, BASE_W, BASE_H);
+        fillGradient(ctx, BASE_W, BASE_H, t.bg[0], t.bg[1]);
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'alphabetic';
+
+        if (t.id === 'classic') {
+          // Eyebrow "Save the Date" fades in
+          var eyebrowAlpha = easeOut(Math.min(p * 2, 1));
+          ctx.fillStyle = 'rgba(122,98,48,' + eyebrowAlpha + ')';
+          ctx.font = 'italic 18px ' + t.fontStack;
+          ctx.fillText('Save the Date', BASE_W/2, 360);
+          // Divider width grows
+          ctx.fillStyle = t.accent;
+          var dw = 100 * easeOut(p);
+          ctx.fillRect(BASE_W/2 - dw/2, 380, dw, 2);
+          // Names rise + fade
+          var nameY = 360 + 70 + (1-easeOut(p))*30;
+          var coupleSize = fitSize(ctx, txt.couple || 'Emma & Liam', 56, t.fontStack, BASE_W*0.84, 24);
+          ctx.fillStyle = 'rgba(26,26,26,' + easeOut(p) + ')';
+          ctx.font = '700 ' + coupleSize + 'px ' + t.fontStack;
+          ctx.fillText(txt.couple || 'Emma & Liam', BASE_W/2, nameY);
+          // Date appears mid-way
+          if (p > 0.3) {
+            var dp = (p - 0.3) / 0.7;
+            ctx.fillStyle = 'rgba(122,98,48,' + easeOut(dp) + ')';
+            ctx.font = '26px ' + t.fontStack;
+            ctx.fillText(txt.date || 'June 14, 2026', BASE_W/2, nameY + 60);
+          }
+          // City near end
+          if (p > 0.6) {
+            var cp = (p - 0.6) / 0.4;
+            ctx.fillStyle = 'rgba(122,98,48,' + easeOut(cp) + ')';
+            ctx.font = '18px ' + t.fontStack;
+            ctx.fillText(txt.city || 'Banff, Canada', BASE_W/2, nameY + 100);
+          }
+          // Music hint on last frame
+          if (frame === NUM_FRAMES-1) {
+            ctx.fillStyle = '#7a6230';
+            ctx.font = '14px sans-serif';
+            ctx.fillText('🎵 ' + (txt.music || 'Classic piano'), BASE_W/2, BASE_H - 60);
+          }
+        }
+        else if (t.id === 'romantic') {
+          // Photo on bottom if any — but template here is text-first
+          ctx.fillStyle = t.accent;
+          // Heart-flower flourish at top
+          var op = easeOut(Math.min(p*2, 1));
+          ctx.save(); ctx.globalAlpha = op * 0.55;
+          for (var k=0; k<5; k++) {
+            ctx.beginPath();
+            var cx = 70 + k * 100;
+            var cy = 70 + (k%2)*10;
+            ctx.ellipse(cx, cy, 14, 6, 0.4, 0, Math.PI*2);
+            ctx.fill();
+          }
+          ctx.restore();
+          var coupleSize = fitSize(ctx, txt.couple || 'Emma & Liam', 70, t.scriptStack, BASE_W*0.86, 24);
+          ctx.fillStyle = 'rgba(62,42,48,' + easeOut(p) + ')';
+          ctx.font = coupleSize + 'px ' + t.scriptStack;
+          ctx.fillText(txt.couple || 'Emma & Liam', BASE_W/2, 480);
+          // Save the date label fades
+          if (p > 0.2) {
+            ctx.fillStyle = 'rgba(139,74,90,' + easeOut((p-0.2)/0.8) + ')';
+            ctx.font = 'italic 16px ' + t.fontStack;
+            ctx.fillText('— save the date —', BASE_W/2, 540);
+          }
+          // Date
+          if (p > 0.4) {
+            var dp = (p-0.4)/0.6;
+            ctx.fillStyle = 'rgba(62,42,48,' + easeOut(dp) + ')';
+            ctx.font = '32px ' + t.fontStack;
+            ctx.fillText(txt.date || 'June 14, 2026', BASE_W/2, 620);
+          }
+          if (p > 0.6) {
+            var cp = (p-0.6)/0.4;
+            ctx.fillStyle = 'rgba(139,74,90,' + easeOut(cp) + ')';
+            ctx.font = 'italic 20px ' + t.fontStack;
+            ctx.fillText(txt.city || 'Banff, Canada', BASE_W/2, 670);
+          }
+          if (frame === NUM_FRAMES-1) {
+            ctx.fillStyle = '#8b4a5a';
+            ctx.font = '13px sans-serif';
+            ctx.fillText('🎵 ' + (txt.music || 'Indie acoustic'), BASE_W/2, BASE_H - 60);
+          }
+        }
+        else if (t.id === 'modern') {
+          // Top tag fades
+          ctx.fillStyle = 'rgba(26,26,26,' + easeOut(p) + ')';
+          ctx.font = '300 18px ' + t.fontStack;
+          ctx.fillText('SAVE THE DATE', BASE_W/2, 320);
+          // Top bar growing
+          ctx.fillStyle = t.accent;
+          var bw = 30 * easeOut(p);
+          ctx.fillRect(BASE_W/2 - bw/2, 350, bw, 2);
+          // Имена пар — heavy
+          var coupleSize = fitSize(ctx, txt.couple || 'Emma & Liam', 60, t.fontStack, BASE_W*0.86, 24);
+          ctx.fillStyle = t.primary;
+          ctx.font = '800 ' + coupleSize + 'px ' + t.fontStack;
+          ctx.fillText(txt.couple || 'Emma & Liam', BASE_W/2, 580);
+          // Bottom hairline + year, drawn together
+          var t2 = (p > 0.5) ? (p-0.5)/0.5 : 0;
+          ctx.fillStyle = t.accent;
+          var hw = 100 * easeOut(t2);
+          ctx.fillRect(BASE_W/2 - hw/2, 720, hw, 1);
+          // Date
+          if (p > 0.5) {
+            ctx.fillStyle = t.primary;
+            ctx.font = '400 38px ' + t.fontStack;
+            ctx.fillText(txt.date || 'June 14, 2026', BASE_W/2, 680);
+          }
+          if (p > 0.7) {
+            ctx.fillStyle = t.secondary;
+            ctx.font = '20px ' + t.fontStack;
+            ctx.fillText(txt.city || 'Banff, Canada', BASE_W/2, 770);
+          }
+          if (frame === NUM_FRAMES-1) {
+            ctx.fillStyle = '#888';
+            ctx.font = '13px sans-serif';
+            ctx.fillText('🎵 ' + (txt.music || 'Modern lo-fi'), BASE_W/2, BASE_H - 60);
+          }
+        }
+        else if (t.id === 'bold') {
+          // Yellow accent line sweeping from top
+          var op = easeOut(p);
+          ctx.fillStyle = 'rgba(212,175,55,' + op + ')';
+          ctx.fillRect(0, 90 + (1-op)*40, BASE_W, 2);
+          // Big white headline with reveal animation
+          ctx.fillStyle = '#ffffff';
+          var coupleSize = fitSize(ctx, txt.couple || 'Emma & Liam', 70, t.fontStack, BASE_W*0.86, 28);
+          ctx.save();
+          // clip-reveal from left
+          ctx.beginPath();
+          ctx.rect(0, 0, BASE_W * easeOut(p), BASE_H);
+          ctx.clip();
+          ctx.font = '700 ' + coupleSize + 'px ' + t.fontStack;
+          ctx.fillText(txt.couple || 'Emma & Liam', BASE_W/2, 540);
+          ctx.restore();
+          // Date reveals after
+          if (p > 0.4) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(0, 0, BASE_W * easeOut((p-0.4)/0.6), BASE_H);
+            ctx.clip();
+            ctx.fillStyle = '#cccccc';
+            ctx.font = '32px ' + t.fontStack;
+            ctx.fillText(txt.date || 'June 14, 2026', BASE_W/2, 620);
+            ctx.restore();
+          }
+          if (p > 0.6) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(0, 0, BASE_W * easeOut((p-0.6)/0.4), BASE_H);
+            ctx.clip();
+            ctx.fillStyle = '#cccccc';
+            ctx.font = '20px ' + t.fontStack;
+            ctx.fillText(txt.city || 'Banff, Canada', BASE_W/2, 680);
+            ctx.restore();
+          }
+          if (frame === NUM_FRAMES-1) {
+            ctx.fillStyle = '#D4AF37';
+            ctx.font = '13px sans-serif';
+            ctx.fillText('🎵 ' + (txt.music || 'Orchestral'), BASE_W/2, BASE_H - 60);
+          }
+        }
+        else if (t.id === 'photo') {
+          // Photo as background; if no photo, dark gradient + prompt
+          if (state.img) {
+            drawCover(ctx, state.img, 0, 0, BASE_W, BASE_H, 1 + 0.06 * p);
+            // dark overlay for text legibility
+            ctx.fillStyle = 'rgba(0,0,0,' + (0.2 + 0.1*p) + ')';
+            ctx.fillRect(0, 0, BASE_W, BASE_H);
+          } else {
+            ctx.fillStyle = 'rgba(255,255,255,0.05)';
+            ctx.fillRect(40, 200, BASE_W-80, BASE_H*0.5);
+            ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+            ctx.setLineDash([6, 5]);
+            ctx.strokeRect(40, 200, BASE_W-80, BASE_H*0.5);
+            ctx.setLineDash([]);
+            ctx.fillStyle = 'rgba(255,255,255,0.55)';
+            ctx.font = 'italic 16px ' + t.fontStack;
+            ctx.fillText('Drop a photo', BASE_W/2, BASE_H/2 - 10);
+            ctx.font = '14px ' + t.fontStack;
+            ctx.fillText('to see it as the backdrop', BASE_W/2, BASE_H/2 + 14);
+          }
+          // Save the Date at top
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'italic 18px ' + t.fontStack;
+          ctx.fillText('Save the Date', BASE_W/2, 240);
+          ctx.fillStyle = t.accent;
+          var dw = 60 * easeOut(p);
+          ctx.fillRect(BASE_W/2 - dw/2, 260, dw, 1);
+          // Имена пар — rise + fade
+          var coupleSize = fitSize(ctx, txt.couple || 'Emma & Liam', 50, t.fontStack, BASE_W*0.86, 22);
+          ctx.fillStyle = 'rgba(255,255,255,' + easeOut(p) + ')';
+          ctx.font = '700 ' + coupleSize + 'px ' + t.fontStack;
+          ctx.fillText(txt.couple || 'Emma & Liam', BASE_W/2, 580);
+          if (p > 0.4) {
+            ctx.fillStyle = 'rgba(255,255,255,0.85)';
+            ctx.font = '26px ' + t.fontStack;
+            ctx.fillText(txt.date || 'June 14, 2026', BASE_W/2, 640);
+          }
+          if (p > 0.6) {
+            ctx.fillStyle = 'rgba(255,255,255,0.7)';
+            ctx.font = 'italic 20px ' + t.fontStack;
+            ctx.fillText(txt.city || 'Banff, Canada', BASE_W/2, 690);
+          }
+          if (frame === NUM_FRAMES-1) {
+            ctx.fillStyle = t.accent;
+            ctx.font = '13px sans-serif';
+            ctx.fillText('🎵 ' + (txt.music || 'Acoustic guitar'), BASE_W/2, BASE_H - 60);
+          }
+        }
+      }
+
+      function getText() {
+        return {
+          couple: (coupleInput.value || '').trim(),
+          date: (dateInput.value || '').trim(),
+          city: (cityInput.value || '').trim(),
+          year: (yearInput.value || '').trim(),
+          hashtag: (hashtagInput.value || '').trim(),
+          music: (musicInput.value || '').trim()
+        };
+      }
+
+      function render() {
+        var ctx = previewCanvas.getContext('2d');
+        var t = getTemplate(state.templateId);
+        var txt = getText();
+        renderFrameAt(ctx, t, state.frame, txt);
+        frameLabel.textContent = (state.frame + 1) + ' / ' + NUM_FRAMES;
+        updateStrip(t, txt);
+      }
+
+      // ---------- frame strip
+      var stripCanvases = [];
+      function buildStrip() {
+        frameStrip.innerHTML = '';
+        stripCanvases = [];
+        for (var i = 0; i < NUM_FRAMES; i++) {
+          (function (idx) {
+            var c = document.createElement('canvas');
+            c.width = 50; c.height = 88;
+            c.title = 'Frame ' + (idx+1);
+            c.addEventListener('click', function () {
+              stopLoop();
+              state.frame = idx;
+              frameSlider.value = String(idx);
+              render();
+            });
+            frameStrip.appendChild(c);
+            stripCanvases.push(c);
+          })(i);
+        }
+      }
+      function updateStrip(t, txt) {
+        stripCanvases.forEach(function (c, i) {
+          var sctx = c.getContext('2d');
+          renderFrameAt(sctx, t, i, txt);
+          c.classList.toggle('is-active', i === state.frame);
+        });
+      }
+
+      // ---------- playback loop
+      function startLoop() {
+        stopLoop();
+        state.playing = true;
+        state.frame = 0;
+        frameSlider.value = '0';
+        state.timer = setInterval(function () {
+          state.frame = (state.frame + 1) % NUM_FRAMES;
+          frameSlider.value = String(state.frame);
+          render();
+        }, 800);
+      }
+      function stopLoop() {
+        state.playing = false;
+        if (state.timer) { clearInterval(state.timer); state.timer = null; }
+      }
+
+      // ---------- download 5 frames at 1080x1920
+      function downloadFrames() {
+        var T = window.weddingAITool;
+        var off = document.createElement('canvas');
+        off.width = 1080; off.height = 1920;
+        var t = getTemplate(state.templateId);
+        var txt = getText();
+        // Render at offscreen canvas (CSS scales preview down to 540x960).
+        // The offscreen needs to scale up — copy the preview aspect 1:2 to 1080x1920, then manually re-render via upscale.
+        // Simplest: re-run renderFrameAt on a 1080x1920 canvas with the same code by setting a global scale factor.
+        // For now, draw the preview canvas at full size with a 2x scale; this may look slightly blurry on text but is acceptable for v1.
+        // Better: write a scaled-down version of renderFrameAt that renders to 1080x1920 — but we already coded BASE_W=540.
+        // We'll handle by setting BASE_W and BASE_H up temporarily.
+        var origW = BASE_W, origH = BASE_H;
+        BASE_W = 1080; BASE_H = 1920;
+        var octx = off.getContext('2d');
+        var i = 0;
+        function next() {
+          if (i >= NUM_FRAMES) {
+            BASE_W = origW; BASE_H = origH;
+            T.toast('Saved 5 frames — assemble in CapCut / iMovie', 'success');
+            return;
+          }
+          renderFrameAt(octx, t, i, txt);
+          var baseName = 'wedding-invitation-' + (txt.couple || 'card').replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase().slice(0, 40);
+          var blobPromise = T.canvasToBlob(off, 'image/png', 1.0);
+          blobPromise.then(function (blob) {
+            T.download(blob, baseName + '_frame_' + (i+1) + '.png');
+            i++;
+            setTimeout(next, 120);
+          });
+        }
+        next();
+      }
+
+      // ---------- wire
+      renderTemplateGrid();
+      buildStrip();
+      bindPhoto();
+
+      [coupleInput, dateInput, cityInput, yearInput, hashtagInput, musicInput].forEach(function (el) {
+        el.addEventListener('input', render);
+      });
+
+      frameSlider.addEventListener('input', function () {
+        stopLoop();
+        state.frame = parseInt(frameSlider.value, 10);
+        render();
+      });
+
+      playBtn.addEventListener('click', startLoop);
+      pauseBtn.addEventListener('click', function () { stopLoop(); });
+
+      downloadBtn.addEventListener('click', downloadFrames);
+      resetBtn.addEventListener('click', function () {
+        coupleInput.value = 'Emma & Liam';
+        dateInput.value = 'June 14, 2026';
+        cityInput.value = 'Banff, Canada';
+        yearInput.value = '2026';
+        hashtagInput.value = '#EmmaAndLiam2026';
+        musicInput.value = 'classic piano';
+        if (state.img && state.img._objectUrl) URL.revokeObjectURL(state.img._objectUrl);
+        state.img = null; state.imgName = '';
+        photoZoneTitle.textContent = 'Drop a photo here or click to browse';
+        render();
+      });
+
+      render();
+    })();
+    </script>
+</body>
+</html>

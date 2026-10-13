@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>مولد هاشتاج الزفاف المجاني - أفكار الذكاء الاصطناعي | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/ar/tools/wedding-hashtag-generator/">
+    <meta name="description" content="مولد هاشتاج الزفاف المجاني. أدخل أسماء الزوجين واحصل على أكثر من 16 علامة تصنيف زفاف فريدة وجاهزة للاستخدام بأساليب كلاسيكية ومضحكة ورومانسية وحديثة. نسخة بنقرة واحدة. في المتصفح، لا يوجد اشتراك." />
+    <meta name="keywords" content="wedding hashtag generator, wedding hashtag ideas, unique wedding hashtag, AI wedding hashtag, wedding hashtag maker, free wedding hashtag, hashtag generator for wedding, wedding hashtag from names" />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="مولد هاشتاج مجاني لحفلات الزفاف - أكثر من 16 فكرة فريدة | WeddingAI.video">
+    <meta property="og:description" content="اكتب اسمين + سنة، واحصل على أكثر من 16 فكرة هاشتاج زفاف بأنماط كلاسيكية / مضحكة / رومانسية / حديثة. نسخة بنقرة واحدة. مجاني، في المتصفح، بدون اشتراك.">
+    <meta property="og:url" content="https://weddingai.video/ar/tools/wedding-hashtag-generator/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="ar_AR">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="مولد الهاشتاج الزفاف مجانا">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="مولد الهاشتاج الزفاف مجانا — 16+ Unique Ideas">
+    <meta name="twitter:description" content="Type two names + year, get 16+ wedding hashtag ideas. Free, in-browser, no signup.">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="مولد هاشتاج الزفاف">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <script defer src="/js/i18n.js?v=4.28"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+
+        /* Hashtag-generator — page-local */
+        .wa-hashtag-style-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.3rem;
+        }
+        .wa-hashtag-style-chip {
+            border: 1px solid var(--color-border);
+            background: var(--color-bg-alt);
+            border-radius: 999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.8125rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--color-text-light);
+            transition: background .12s, color .12s, border-color .12s;
+        }
+        .wa-hashtag-style-chip:hover { border-color: var(--color-primary); color: var(--color-secondary); }
+        .wa-hashtag-style-chip.is-active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: #fff;
+        }
+        .wa-hashtag-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: var(--spacing-sm);
+        }
+        .wa-hashtag-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 0.7rem 0.9rem;
+            font-family: var(--font-heading);
+            transition: border-color .12s, background .12s;
+            cursor: pointer;
+        }
+        .wa-hashtag-card:hover { border-color: var(--color-primary); background: #fff7e6; }
+        .wa-hashtag-card.is-copied { background: #e8f5e9; border-color: #4caf50; }
+        .wa-hashtag-card-text {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--color-secondary);
+            word-break: break-word;
+            padding-right: 0.6rem;
+        }
+        .wa-hashtag-card-length {
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            margin-left: auto;
+            padding: 0.1rem 0.4rem;
+            border-radius: 6px;
+            background: #fff;
+            border: 1px solid var(--color-border);
+        }
+        .wa-hashtag-card-length.is-long { background: #ffe1e1; border-color: #d33; color: #b00020; }
+        .wa-hashtag-card-copy {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            background: #fff;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-light);
+            margin-left: 0.4rem;
+            white-space: nowrap;
+        }
+        .wa-hashtag-empty {
+            text-align: center;
+            padding: var(--spacing-lg);
+            color: var(--color-text-light);
+        }
+        .wa-hashtag-summary {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+            padding: 0.6rem 0.9rem;
+            background: var(--color-bg-alt);
+            border-radius: var(--radius-sm);
+            font-size: 0.9375rem;
+            color: var(--color-secondary);
+        }
+        .wa-hashtag-banner {
+            background: #fff7e6;
+            border-left: 4px solid var(--color-primary);
+            padding: 0.75rem 1rem;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 0.9375rem;
+            color: var(--color-secondary);
+            margin-top: var(--spacing-md);
+        }
+    </style>
+
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', { page_title: document.title, page_location: location.href, page_path: location.pathname + location.search });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){ window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true }); });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"Free Wedding Photo Tools","item":"https://weddingai.video/tools/"},
+        {"@type":"ListItem","position":3,"name":"مولد هاشتاج الزفاف","item":"https://weddingai.video/tools/wedding-hashtag-generator/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"مولد هاشتاج الزفاف","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"Requires modern browser","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"مولد هاشتاج زفاف مجاني في المتصفح. يقوم الأزواج بإدخال أسمائهم، والسنة الاختيارية، والمدينة الاختيارية. يُرجع المولد أكثر من 16 فكرة فريدة لوسوم الزفاف مجمعة حسب الأنماط الكلاسيكية والمضحكة والرومانسية والحديثة. يتم حساب كل علامة تصنيف محليًا - ولا يتم تحميل أي شيء.","url":"https://weddingai.video/tools/wedding-hashtag-generator/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["16+ unique ideas from 2 names","4 styles: classic / funny / romantic / modern","One-click copy and copy-all","Length warnings","In-browser, no signup, no AI server call"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"كيفية إنشاء علامات تصنيف الزفاف من الأسماء","step":[
+        {"@type":"HowToStep","position":1,"name":"أدخل أسماء الزوجين","text":"اكتب كلا الاسمين الأولين. يمكنك اختياريًا إضافة الاسم الأخير وسنة الزفاف والمدينة."},
+        {"@type":"HowToStep","position":2,"name":"اختيار الأنماط","text":"قم بتبديل شرائح الأنماط الأربعة - كلاسيكي، ومضحك، ورومانسي، وحديث - لتصفية ما ستراه."},
+        {"@type":"HowToStep","position":3,"name":"انسخ مفضلاتك","text":"انقر فوق أي علامة تصنيف لنسخها. تتحول البطاقة إلى اللون الأخضر لفترة وجيزة. استخدم نسخ الكل للحصول على المجموعة الكاملة مرة واحدة."}
+    ]}</script>
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/wedding-hashtag-generator/"><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/wedding-hashtag-generator/">
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?784c824843f328ed5f8254991ef8b2f4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ywxiu97hg8");
+    </script>
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/wedding-hashtag-generator/"/><link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/wedding-hashtag-generator/"/><link rel="alternate" hreflang="es" href="https://weddingai.video/es/tools/wedding-hashtag-generator/"/><link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/tools/wedding-hashtag-generator/"/><link rel="alternate" hreflang="de" href="https://weddingai.video/de/tools/wedding-hashtag-generator/"/><link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/tools/wedding-hashtag-generator/"/><link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/tools/wedding-hashtag-generator/"/><link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/wedding-hashtag-generator/"/><link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/tools/wedding-hashtag-generator/"/><link rel="alternate" hreflang="th" href="https://weddingai.video/th/tools/wedding-hashtag-generator/"/><link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/tools/wedding-hashtag-generator/"/><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/wedding-hashtag-generator/"/></head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video — wedding video services">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services">Services <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none"><div class="nav-dropdown-heading">Video Enhancement</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">Slow Motion</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">Vintage Restoration</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none"><div class="nav-dropdown-heading">Personalization</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">Wedding Trailer</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI Video Generator</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">Pet Wedding</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">Multilingual</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">Cartoon Style</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">Wedding Memes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none"><div class="nav-dropdown-heading">Absence Compensation</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">Family Tribute</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">Family Message</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none"><a role="menuitem" href="/services/" class="nav-dropdown-all-link">View all services →</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/tools/" title="Free wedding photo tools" style="color: var(--color-primary);">Free Tools</a></li>
+                    <li><a href="/gallery/">Gallery</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/pricing/">Pricing</a></li>
+                    <li><a href="/order/" class="btn-nav">Get a Quote</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en" selected>EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option><option value="hi">HI</option></select></li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>مولد الهاشتاج الزفاف مجانا</h1>
+                <p>اكتب أسماء الزوجين واحصل على أكثر من 16 علامة تصنيف زفاف جاهزة للاستخدام بأساليب كلاسيكية ومضحكة ورومانسية وحديثة. نسخة بنقرة واحدة. لا الاشتراك. يعمل بالكامل في المتصفح الخاص بك.</p>
+                <p class="wa-tool-privacy">تتم معالجة الملفات محليا. لم يتم تحميل أي شيء.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a> <span>›</span> <a href="/tools/">Free Tools</a> <span>›</span> <span>مولد هاشتاج الزفاف</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. أخبرنا من سيتزوج</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control">
+                        <label for="first-name">الاسم الأول (الشريك 1)</label>
+                        <input type="text" id="first-name" maxlength="60" value="Emma" placeholder="e.g. Emma">
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="second-name">الاسم الأول (الشريك 2)</label>
+                        <input type="text" id="second-name" maxlength="60" value="Liam" placeholder="e.g. Liam">
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="last-name">الاسم الأخير المشترك (اختياري)</label>
+                        <input type="text" id="last-name" maxlength="60" value="Park" placeholder="e.g. Park">
+                        <small>If one of you is changing names, leave blank to skip last-name ideas.</small>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="year">سنة الزفاف (اختياري)</label>
+                        <input type="text" id="year" maxlength="6" value="2026" placeholder="e.g. 2026">
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="city">المدينة (اختياري)</label>
+                        <input type="text" id="city" maxlength="60" value="" placeholder="e.g. Lisbon">
+                        <small>Used for destination-style tags (no ranking impact, just flavor).</small>
+                    </div>
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label>مرشحات النمط</label>
+                        <div class="wa-hashtag-style-row" id="style-chips">
+                            <button type="button" class="wa-hashtag-style-chip is-active" data-style="classic">Classic</button>
+                            <button type="button" class="wa-hashtag-style-chip is-active" data-style="funny">Funny</button>
+                            <button type="button" class="wa-hashtag-style-chip is-active" data-style="romantic">Romantic</button>
+                            <button type="button" class="wa-hashtag-style-chip is-active" data-style="modern">Modern</button>
+                        </div>
+                        <small>Tap to toggle. The list shows everything that matches at least one active style.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. اختر المفضلة لديك</h2>
+                <div class="wa-hashtag-summary" id="summary" aria-live="polite">Type both names to see ideas.</div>
+                <div class="wa-hashtag-grid" id="results" aria-live="polite"></div>
+                <div class="wa-hashtag-banner">
+                    <strong>نصيحة الطول:</strong> من الصعب تذكر أي علامة تزيد عن 30 حرفًا، كما يصعب كتابتها على الهاتف. تهدف لفترة قصيرة.
+                </div>
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="copy-all-btn" disabled>نسخ الكل (مرئي)</button>
+                    <button type="button" class="btn btn-secondary" id="reset-btn">إعادة ضبط</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>What makes a wedding hashtag work?</h2>
+                <p>A good wedding hashtag does three things at once: it's <strong>short</strong> (so guests type it without typos), <strong>unique</strong> (so Instagram returns only your wedding photos), and <strong>flattering</strong> (so the bride and groom feel good seeing it on every print and welcome sign). This generator maximizes the first two and gives you stylistic variety for the third.</p>
+
+                <h3>Classic — formal weddings</h3>
+                <p>Classic tags lean on last names and shared family. Use these for traditional ceremonies, parent-organized events, and venues like country clubs, cathedrals, or hotel ballrooms. Examples from this generator: <code>#ParkForever</code>, <code>#TheParks2026</code>, <code>#ForeverParkSquad</code>.</p>
+
+                <h3>Funny — puns and wordplay</h3>
+                <p>Funny tags lean on rhyme, alliteration, and pop-culture nudges. Use them when your wedding's tone is loose — brewery receptions, group toasts, the part of the program where you want the room laughing. They're the hardest to make unique; check Instagram before committing.</p>
+
+                <h3>Romantic — first-name poems</h3>
+                <p>Romantic tags combine the two first names in a direct, intimate way. They work best for couples whose guests already know them by first names — close family, mid-size weddings, intimate destination ceremonies. Examples: <code>#EmmaMeetsLiam</code>, <code>#LiamLovesEmma</code>, <code>#EmmaAndLiamAlways</code>.</p>
+
+                <h3>Modern — minimal and brand-clean</h3>
+                <p>Modern tags look like a brand. Initials, lowercase, year suffix. They fit urban weddings, art-gallery receptions, couples who already have a strong visual brand. Examples: <code>#el2026</code>, <code>#emma.liam.2026</code>, <code>#EMP-2026</code>.</p>
+
+                <h2>How to pick the right one</h2>
+                <ol>
+                    <li>Shortlist 3-5 favorites from the list above.</li>
+                    <li>Search each on Instagram, TikTok, and X. If someone's already using it (especially a 2024-2026 wedding), drop it — your guests will see their photos.</li>
+                    <li>Say it out loud 4-5 times. If it trips your tongue, your guests won't type it either.</li>
+                    <li>Pick a runner-up. Couples often pick one primary tag and a secondary "kid-friendly" tag for grandparents who use the wrong one half the time.</li>
+                </ol>
+
+                <h2>From hashtag to wedding film</h2>
+                <p>The same engagement photos that get tagged with your new wedding hashtag are perfect raw material for an <a href="/blog/wedding-video-from-photos/">AI wedding film from photos</a>. <a href="/services/personalization/ai-video-generator/">Our AI Wedding Video Generator</a> turns them into a 60-90 second cinematic story in 48 hours, starting at $9.9.</p>
+
+                <h2>Frequently asked questions</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>Is this generator AI?</summary>
+                        <p>It runs in your browser using combinatorial templates — no AI call, no upload, no rate limit. For each pair of names, it returns the same set of patterns filtered by the style chips you toggle. That's why this tool can stay 100% free with no signup, no email, no watermark. If you want a longer, more bespoke generation with an LLM, that's a paid service we don't currently offer.</p>
+                    </details>
+                    <details>
+                        <summary>Can I suggest tags that aren't on the list?</summary>
+                        <p>Yes. After you pick a favorite, combine it with a year, location, or inside joke to make it yours — the generator does the formula work, you do the personality. Wedding hashtags usually read better when one human touch is added.</p>
+                    </details>
+                    <details>
+                        <summary>How long should a wedding hashtag be?</summary>
+                        <p>Under 20 characters is ideal. Up to 30 is acceptable. Over 30 is hard to type on a phone, hard to remember after a champagne toast, and easy to misspell. The generator warns you with a red badge on any tag over 30.</p>
+                    </details>
+                    <details>
+                        <summary>Should I include the year?</summary>
+                        <p>Yes if your name combination is common (Smiths, Garcias, Nguyens). The year diffuses collisions on Instagram. Skip the year if your names are unusual — adding digits to <code>#EmmaMeetsLiam</code> just makes it harder to type.</p>
+                    </details>
+                    <details>
+                        <summary>What about weddings outside the US?</summary>
+                        <p>The generator works in any language that uses Latin script because it only operates on first/last name spellings. For Chinese, Japanese, Arabic, Thai, Hindi, etc., the patterns still work — type the romanized spelling you want guests to see.</p>
+                    </details>
+                </div>
+
+                <h2>More free wedding tools</h2>
+                <div class="sibling-tools">
+                    <a href="/tools/save-the-date-maker/">Save the Date Maker</a>
+                    <a href="/tools/add-text-to-wedding-photo/">Add Text to Photo</a>
+                    <a href="/tools/wedding-photo-collage/">Photo Collage</a>
+                    <a href="/tools/compress-wedding-photos/">Compress Photos</a>
+                    <a href="/tools/crop-wedding-photo-for-reels/">Crop for Reels</a>
+                    <a href="/tools/remove-background-wedding-portrait/">Remove Background</a>
+                    <a href="/tools/heic-to-jpg-wedding-photos/">HEIC → JPG</a>
+                    <a href="/tools/">All Tools</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>Related guides</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-invitation-video-guide/">
+                        <h4>Wedding Invitation Video Guide</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-photo-slideshow/">
+                        <h4>Build a Wedding Photo Slideshow</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>AI Wedding Video From Photos</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-anniversary-video-ideas/">
+                        <h4>Wedding Anniversary Video Ideas</h4>
+                        <span>Read article →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>حصلت على الهاشتاج؟ جاهزين لفيلم الزفاف؟</h2>
+                <p>نفس الصور التي سيضعها ضيوفك على علامة تصبح فيلم زفاف سينمائي مدته 60-90 ثانية. ابتداء من 9.9 دولار.</p>
+                <a href="/order/" class="btn btn-primary btn-large">Get a Free Quote →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo" title="WeddingAI.video">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>AI-powered wedding video services for couples worldwide.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/gallery/">Gallery</a></li>
+                        <li><a href="/about/">About Us</a></li>
+                        <li><a href="/tools/">Free Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">Slow Motion</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI Video Generator</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">Wedding Trailer</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">Family Tribute</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="/order/">Get a Quote</a></li>
+                        <li><a href="/pricing/">Pricing</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. All rights reserved.</p>
+                <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+
+      // ---------- helpers ----------------------------------------------------------
+      var clean = function (s) {
+        return (s || '').toString().toLowerCase().replace(/[^a-z]/g, '');
+      };
+      var firstOf = function (s) {
+        var parts = (s || '').trim().split(/\s+/);
+        return clean(parts[0] || '');
+      };
+      var lastOf = function (s) {
+        var parts = (s || '').trim().split(/\s+/);
+        if (parts.length < 2) return '';
+        return clean(parts[parts.length - 1] || '');
+      };
+      var initialsOf = function (s) {
+        return (s || '').split(/\s+/).filter(Boolean)
+          .map(function (w) { return w.replace(/[^a-zA-Z]/g, '')[0] || ''; })
+          .join('').toLowerCase();
+      };
+      var cap = function (s) {
+        if (!s) return '';
+        return s[0].toUpperCase() + s.slice(1);
+      };
+
+      // 30 chars is the soft cap for wedding hashtags (Instagram trending note: longer = typos)
+      function isHardToType(tag) {
+        return tag.length > 30;
+      }
+
+      // dedupe + cap.
+      function dedupe(arr, n) {
+        var seen = new Set();
+        var out = [];
+        for (var i = 0; i < arr.length && out.length < n; i++) {
+          var t = arr[i];
+          if (!t) continue;
+          if (seen.has(t.toLowerCase())) continue;
+          seen.add(t.toLowerCase());
+          out.push(t);
+        }
+        return out;
+      }
+
+      // ---------- input ------------------------------------------------------------
+      var $first = document.getElementById('first-name');
+      var $second = document.getElementById('second-name');
+      var $last = document.getElementById('last-name');
+      var $year = document.getElementById('year');
+      var $city = document.getElementById('city');
+      var $results = document.getElementById('results');
+      var $summary = document.getElementById('summary');
+      var $copyAll = document.getElementById('copy-all-btn');
+      var $reset = document.getElementById('reset-btn');
+      var $chips = document.getElementById('style-chips');
+
+      var activeStyles = { classic: true, funny: true, romantic: true, modern: true };
+
+      $chips.addEventListener('click', function (e) {
+        var btn = e.target.closest('.wa-hashtag-style-chip');
+        if (!btn) return;
+        var style = btn.getAttribute('data-style');
+        activeStyles[style] = !activeStyles[style];
+        btn.classList.toggle('is-active', activeStyles[style]);
+        render();
+      });
+
+      // ---------- templates --------------------------------------------------------
+      function generateAll(f1, f2, last, year, city) {
+        var classic = [];
+        var funny = [];
+        var romantic = [];
+        var modern = [];
+
+        // --- Classic
+        if (last) {
+          classic.push('#' + cap(last) + 'Forever');
+          classic.push('#Forever' + cap(last));
+          classic.push('#' + cap(last) + (year ? year : ''));
+          classic.push('#The' + cap(last) + 'sOf' + (year ? year : 'Love'));
+          classic.push('#MrAndMrs' + cap(last));
+          classic.push('#' + cap(last) + 'Squad');
+          classic.push('#Finally' + cap(last));
+          classic.push('#' + cap(last) + 'PartyOf2');
+        }
+        classic.push('#Forever' + cap(f1 || f2));
+
+        // --- Funny (rhyming, alliteration, light wordplay)
+        if (last) {
+          funny.push('#' + cap(last) + 'PartyOf2');
+        }
+        if (f1 && f2) {
+          var f1c = cap(f1), f2c = cap(f2);
+          funny.push('#' + f1c + 'Meets' + f2c);
+          funny.push('#' + f2c + 'Meets' + f1c);
+          funny.push('#' + f1c + 'And' + f2c);
+        }
+        if (last && city) {
+          funny.push('#' + cap(last) + 'In' + cap(city).replace(/\s+/g, ''));
+        }
+        if (last) {
+          funny.push('#The' + cap(last) + 'GetHitched');
+          funny.push('#' + cap(last) + 'TieTheKnot');
+          funny.push('#' + cap(last) + 'SaidIDo');
+        }
+        funny.push('#GonnaBe' + cap(last || 'Trouble'));
+
+        // --- Romantic
+        if (f1 && f2) {
+          var A = cap(f1), B = cap(f2);
+          romantic.push('#' + A + 'And' + B + 'Always');
+          romantic.push('#' + A + 'Loves' + B);
+          romantic.push('#' + B + 'Loves' + A);
+          romantic.push('#' + A + 'Meets' + B + (year ? 'In' + year : ''));
+          romantic.push('#' + A + 'Plus' + B + 'EqualsForever');
+          romantic.push('#' + A + 'X' + B);
+          romantic.push('#Forever' + A + 'And' + B);
+          romantic.push('#MyHeart' + B);
+          romantic.push('#' + A + 'IsMy' + B);
+        }
+        if (city) {
+          romantic.push('#RomanceIn' + cap(city).replace(/\s+/g, ''));
+        }
+
+        // --- Modern
+        if (f1 && f2) {
+          var ai = initialsOf(f1 + ' ' + f2);
+          if (ai.length >= 2 && ai.length <= 5) {
+            modern.push('#' + ai);
+            modern.push('#' + ai + (year || ''));
+            modern.push('#' + ai + '.forever');
+          }
+          if (last) {
+            modern.push('#' + cap(last).toLowerCase() + (year || ''));
+          }
+          modern.push('#' + f1 + '.' + f2 + (year ? '.' + year : ''));
+          modern.push('#' + f1 + 'X' + f2);
+        }
+        if (last) {
+          modern.push('#' + last + '.forever');
+        }
+
+        // cap each style individually then interleave
+        classic = dedupe(classic, 4);
+        funny = dedupe(funny, 5);
+        romantic = dedupe(romantic, 6);
+        modern = dedupe(modern, 4);
+
+        return {
+          classic: classic, funny: funny, romantic: romantic, modern: modern,
+          allByStyle: {
+            classic: classic, funny: funny, romantic: romantic, modern: modern
+          }
+        };
+      }
+
+      // ---------- render -----------------------------------------------------------
+      function styleBucket(label) {
+        return {
+          classic: 'Classic', funny: 'Funny', romantic: 'Romantic', modern: 'Modern'
+        }[label] || label;
+      }
+
+      function render() {
+        var f1 = firstOf($first.value);
+        var f2 = firstOf($second.value);
+        var last = lastOf($last.value) || clean($last.value); // also accept single-word "last name"
+        var year = clean($year.value).slice(0, 4);
+        var city = clean($city.value);
+
+        $results.innerHTML = '';
+
+        if (!f1 && !f2) {
+          $summary.textContent = 'Type at least one name to see ideas.';
+          $copyAll.disabled = true;
+          $results.innerHTML = '<div class="wa-hashtag-empty">Your ideas will appear here.</div>';
+          return;
+        }
+
+        var sets = generateAll(f1, f2, last, year, city);
+
+        var flat = [];
+        var styles = ['classic', 'funny', 'romantic', 'modern'];
+        styles.forEach(function (s) {
+          if (!activeStyles[s]) return;
+          sets[s].forEach(function (t) {
+            flat.push({ tag: t, style: s });
+          });
+        });
+
+        if (flat.length === 0) {
+          $summary.textContent = 'No ideas match the active styles — toggle at least one.';
+          $copyAll.disabled = true;
+          $results.innerHTML = '<div class="wa-hashtag-empty">Try enabling more styles above.</div>';
+          return;
+        }
+
+        flat = dedupe(flat.map(function (f) { return f.tag; }), 24).map(function (t) {
+          var s = (sets.classic.indexOf(t) >= 0) ? 'classic'
+            : (sets.funny.indexOf(t) >= 0) ? 'funny'
+            : (sets.romantic.indexOf(t) >= 0) ? 'romantic'
+            : (sets.modern.indexOf(t) >= 0) ? 'modern'
+            : 'classic';
+          return { tag: t, style: s };
+        });
+
+        $summary.innerHTML = '<strong>' + flat.length + '</strong> ideas · click any to copy · tap a style chip to filter.';
+        $copyAll.disabled = false;
+
+        var frag = document.createDocumentFragment();
+        flat.forEach(function (entry) {
+          var card = document.createElement('button');
+          card.type = 'button';
+          card.className = 'wa-hashtag-card';
+          card.setAttribute('data-tag', entry.tag);
+          card.setAttribute('data-style', entry.style);
+          card.setAttribute('title', entry.style + ' · click to copy');
+
+          var txt = document.createElement('span');
+          txt.className = 'wa-hashtag-card-text';
+          txt.textContent = entry.tag;
+          card.appendChild(txt);
+
+          var lengthBadge = document.createElement('span');
+          lengthBadge.className = 'wa-hashtag-card-length' + (isHardToType(entry.tag) ? ' is-long' : '');
+          lengthBadge.textContent = entry.tag.length + ' chars';
+          card.appendChild(lengthBadge);
+
+          var styleBadge = document.createElement('span');
+          styleBadge.className = 'wa-hashtag-card-copy';
+          styleBadge.textContent = styleBucket(entry.style);
+          card.appendChild(styleBadge);
+
+          card.addEventListener('click', function () { copyCard(card, entry.tag); });
+          frag.appendChild(card);
+        });
+        $results.appendChild(frag);
+      }
+
+      function copyCard(card, tag) {
+        copyText(tag).then(function () {
+          card.classList.add('is-copied');
+          setTimeout(function () { card.classList.remove('is-copied'); }, 1400);
+        });
+      }
+
+      function copyText(s) {
+        if (navigator.clipboard && window.isSecureContext) {
+          return navigator.clipboard.writeText(s).then(function () { window.weddingAITool.toast('Copied · ' + s, 'success'); });
+        }
+        // fallback
+        var ta = document.createElement('textarea');
+        ta.value = s; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); window.weddingAITool.toast('Copied · ' + s, 'success'); }
+        catch (e) { window.weddingAITool.toast('Copy failed', 'error'); }
+        document.body.removeChild(ta);
+        return Promise.resolve();
+      }
+
+      $copyAll.addEventListener('click', function () {
+        var tags = [];
+        $results.querySelectorAll('.wa-hashtag-card').forEach(function (c) {
+          tags.push(c.getAttribute('data-tag'));
+        });
+        if (!tags.length) return;
+        copyText(tags.join('\n'));
+      });
+
+      $reset.addEventListener('click', function () {
+        $first.value = 'Emma';
+        $second.value = 'Liam';
+        $last.value = 'Park';
+        $year.value = '2026';
+        $city.value = '';
+        Object.keys(activeStyles).forEach(function (k) { activeStyles[k] = true; });
+        $chips.querySelectorAll('.wa-hashtag-style-chip').forEach(function (el) {
+          el.classList.add('is-active');
+        });
+        render();
+      });
+
+      // live
+      [$first, $second, $last, $year, $city].forEach(function (el) {
+        el.addEventListener('input', render);
+      });
+
+      render();
+    })();
+    </script>
+</body>
+</html>

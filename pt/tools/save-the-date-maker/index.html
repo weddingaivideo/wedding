@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Salve o criador de datas grátis – Online, sem inscrição | CasamentoAI.vídeo</title>
+    <link rel="canonical" href="https://weddingai.video/pt/tools/save-the-date-maker/">
+    <meta name="description" content="Criador de cartões Save the Date online gratuito. 4 modelos – Clássico, Romântico, Moderno, Photo Forward. Download PNG para Instagram, WhatsApp e impressão. 100% no navegador – sem inscrição." />
+    <meta name="keywords" content="save the date maker, save the date template, save the date card, free save the date, save the date online, wedding save the date, save the date instagram, save the date photo card" />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Criador de datas grátis — Online | WeddingAI.video">
+    <meta property="og:description" content="Design a save-the-date card with your names, date, and venue. 4 templates. PNG download. 100% in-browser.">
+    <meta property="og:url" content="https://weddingai.video/pt/tools/save-the-date-maker/">
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Criador de datas grátis by WeddingAI.video">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Criador de datas grátis — Online | WeddingAI.video">
+    <meta name="twitter:description" content="4 templates, in-browser, no signup. Your photo stays on your device.">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Salve o criador de datas">
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <script defer src="/js/i18n.js?v=4.28"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .tool-page-grid { display: grid; grid-template-columns: 1fr; max-width: 920px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); gap: var(--spacing-lg); }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+
+        /* Save-the-date tool — page-local styles only */
+        .wa-std-templates {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: 0.5rem;
+        }
+        .wa-std-template {
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--color-border);
+            overflow: hidden;
+            background: #fff;
+            transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+            text-align: center;
+            display: block;
+            padding: 0;
+        }
+        .wa-std-template:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+        .wa-std-template.is-active { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(212,175,55,0.18); }
+        .wa-std-template-thumb {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            display: block;
+            background: #f3f3f3;
+        }
+        .wa-std-template-thumb svg { width: 100%; height: 100%; display: block; }
+        .wa-std-template-label {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--color-secondary);
+            padding: 0.5rem 0.4rem 0.6rem;
+            line-height: 1.2;
+        }
+        .wa-std-preview-wrap {
+            position: relative;
+            width: 100%;
+            background: #f7f5f0;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            min-height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wa-std-preview-canvas {
+            max-width: 100%;
+            max-height: 540px;
+            display: block;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        }
+        .wa-std-banner {
+            background: #fff7e6;
+            border-left: 4px solid var(--color-primary);
+            padding: 0.75rem 1rem;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 0.9375rem;
+            color: var(--color-secondary);
+            margin-top: var(--spacing-md);
+        }
+    </style>
+
+    <!-- Google tag (gtag.js) — deferred -->
+    <script nonce="__CSP_NONCE__">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+      window.__loadGtag = function() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+        s.async = true;
+        s.onload = function() {
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search
+          });
+        };
+        s.setAttribute('data-gtag-lazy', '1');
+        document.head.appendChild(s);
+      };
+
+      ['scroll','click','touchstart','keydown'].forEach(function(evt){
+        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+      });
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+        } else {
+          setTimeout(window.__loadGtag, 3000);
+        }
+      });
+    </script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://weddingai.video/"},
+        {"@type":"ListItem","position":2,"name":"Free Wedding Photo Tools","item":"https://weddingai.video/tools/"},
+        {"@type":"ListItem","position":3,"name":"Salve o criador de datas","item":"https://weddingai.video/tools/save-the-date-maker/"}
+    ]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Salve o criador de datas","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"Requires modern browser with Canvas API","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Criador gratuito de cartões para salvar a data no navegador com 4 modelos (Clássico, Romântico, Moderno, Photo Forward). Visualização ao vivo, upload opcional de fotos de noivado, download PNG em 1080x1350 para Instagram, WhatsApp, Stories e impressão 5x7. Os arquivos nunca saem do dispositivo do usuário.","url":"https://weddingai.video/tools/save-the-date-maker/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["4 wedding templates","Optional engagement photo","Live preview","1080x1350 PNG download","No signup, in-browser"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Como fazer um cartão save the date no seu navegador","step":[
+        {"@type":"HowToStep","position":1,"name":"Escolha um modelo","text":"Escolha entre 4 modelos – Clássico, Romântico, Moderno ou Photo Forward. A visualização é atualizada instantaneamente."},
+        {"@type":"HowToStep","position":2,"name":"Adicione seus dados","text":"Digite os nomes do casal, data do casamento, cidade ou local, uma etiqueta de ano opcional, uma hashtag de casamento opcional e uma foto de noivado opcional."},
+        {"@type":"HowToStep","position":3,"name":"Refinar e baixar","text":"Assista à nova renderização da visualização enquanto você digita. Clique em Baixar PNG para salvar um cartão de 1080x1350 pronto para Instagram, WhatsApp ou impressão 5x7."}
+    ]}</script>
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/save-the-date-maker/"><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/save-the-date-maker/">
+    <!-- Baidu Tongji (hm.baidu.com) — analytics -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?784c824843f328ed5f8254991ef8b2f4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+    <!-- Clarity (clarity.ms) — heatmaps & session replay -->
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ywxiu97hg8");
+    </script>
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/save-the-date-maker/"/><link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/save-the-date-maker/"/><link rel="alternate" hreflang="es" href="https://weddingai.video/es/tools/save-the-date-maker/"/><link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/tools/save-the-date-maker/"/><link rel="alternate" hreflang="de" href="https://weddingai.video/de/tools/save-the-date-maker/"/><link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/tools/save-the-date-maker/"/><link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/tools/save-the-date-maker/"/><link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/save-the-date-maker/"/><link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/tools/save-the-date-maker/"/><link rel="alternate" hreflang="th" href="https://weddingai.video/th/tools/save-the-date-maker/"/><link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/tools/save-the-date-maker/"/><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/save-the-date-maker/"/></head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video — wedding video services">
+                <picture>
+                    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager" sizes="(max-width: 600px) 178px, 356px">
+                </picture>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Browse our wedding video services" aria-haspopup="true" aria-expanded="false">Services <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Video Enhancement</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/">Slow Motion</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/">Vintage Restoration</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Personalization</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/">Wedding Trailer</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/">AI Video Generator</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/">Pet Wedding</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/">Multilingual</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/">Cartoon Style</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/">Wedding Memes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading">Absence Compensation</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/">Family Tribute</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/">Family Message</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link">View all services →</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/tools/" title="Free wedding photo tools" style="color: var(--color-primary);">Free Tools</a></li>
+                    <li><a href="/gallery/" title="View our gallery and case studies">Gallery</a></li>
+                    <li><a href="/blog/" title="Read our wedding video blog">Blog</a></li>
+                    <li><a href="/pricing/" title="View transparent pricing">Pricing</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Get a free quote — start your project">Get a Quote</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en" selected>EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option><option value="hi">HI</option></select></li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero-mini">
+            <div class="container">
+                <h1>Salve o criador de cartões de data</h1>
+                <p>Crie um save the date no seu navegador. Escolha um modelo, adicione seus nomes e data, coloque uma foto de noivado - e baixe um PNG 1080×1350 pronto para Instagram, WhatsApp e impressão 5×7.</p>
+                <p class="wa-tool-privacy">Os arquivos são processados ​​localmente. Nada é carregado.</p>
+            </div>
+        </section>
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a> <span>›</span> <a href="/tools/">Free Tools</a> <span>›</span> <span>Salve o criador de datas</span>
+        </nav>
+
+        <section class="tool-page-grid">
+            <div class="wa-tool-card">
+                <h2>1. Escolha um modelo</h2>
+                <div class="wa-std-templates" id="template-grid" role="radiogroup" aria-label="Save the date template"></div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>2. Adicione seus dados</h2>
+                <div class="wa-tool-controls">
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="couple-names">Nomes de casais</label>
+                        <input type="text" id="couple-names" maxlength="60" value="Emma &amp; Liam" placeholder="e.g. Emma &amp; Liam">
+                        <small>The headline. Most templates support an ampersand or "and".</small>
+                    </div>
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="wedding-date">Data do casamento</label>
+                        <input type="text" id="wedding-date" maxlength="60" value="June 14, 2026" placeholder="e.g. June 14, 2026">
+                        <small>Free text — type it the way you want guests to read it.</small>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="city">Cidade ou local</label>
+                        <input type="text" id="city" maxlength="60" value="Banff, Canada" placeholder="e.g. Banff, Canada">
+                    </div>
+                    <div class="wa-tool-control">
+                        <label for="year-tag">Etiqueta de ano (opcional)</label>
+                        <input type="text" id="year-tag" maxlength="20" value="2026" placeholder="e.g. 2026">
+                    </div>
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="hashtag">Hashtag de casamento (opcional)</label>
+                        <input type="text" id="hashtag" maxlength="60" value="#EmmaAndLiam2026" placeholder="e.g. #EmmaAndLiam2026">
+                    </div>
+                    <div class="wa-tool-control" style="grid-column: 1 / -1;">
+                        <label for="photo-input">Foto de noivado (opcional – necessária para Photo Forward)</label>
+                        <div class="wa-tool-dropzone" id="photo-zone" aria-label="Drop an engagement photo here or click to browse">
+                            <div class="wa-tool-dropzone-title" id="photo-zone-title">Drop a photo here or click to browse</div>
+                            <div class="wa-tool-dropzone-hint">JPG, PNG, WebP — stays on your device</div>
+                            <input type="file" id="photo-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp">
+                        </div>
+                        <div class="wa-std-banner" id="photo-status" hidden></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wa-tool-card">
+                <h2>3. Visualizar e baixar</h2>
+                <div class="wa-std-preview-wrap" id="preview-wrap" aria-live="polite">
+                    <canvas id="preview-canvas" class="wa-std-preview-canvas" width="1080" height="1350" aria-label="Save the date preview"></canvas>
+                </div>
+                <div class="wa-tool-actions">
+                    <button type="button" class="btn btn-primary" id="download-btn">Baixar PNG (1080×1350)</button>
+                    <button type="button" class="btn btn-secondary" id="reset-btn">Reiniciar</button>
+                </div>
+                <div class="wa-std-banner">
+                    <strong>Privacy:</strong> every photo and every render happens locally using the Canvas API. Nothing uploads, no analytics on your content, no account.
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="article-body">
+                <h2>What each template is best for</h2>
+                <p>Save-the-date cards work best when they match the wedding's tone. Use this guide to pick a template the first time:</p>
+                <h3>Classic — formal invitations and traditional weddings</h3>
+                <p>Use the Classic template for traditional ceremonies, parent-approved wording, and venues like country clubs, cathedrals, or hotel ballrooms. The champagne palette and serif headline read as "formal" without requiring Latin or curlicues.</p>
+                <h3>Romantic — script fonts and floral motifs</h3>
+                <p>The Romantic template pairs Great Vibes script with a hand-drawn botanical. It fits garden weddings, vineyard ceremonies, and venues with greenery. Couples who want a personal, handwritten feel usually pick this one.</p>
+                <h3>Modern — minimal sans-serif, neutral palette</h3>
+                <p>The Modern template uses a single-color block and clean sans-serif typography. It fits urban weddings, loft venues, art galleries, and couples who already have a strong visual brand.</p>
+                <h3>Photo Forward — engagement photo as the centerpiece</h3>
+                <p>The Photo Forward template places your favorite engagement photo behind a slim white banner. Pick this when you have a strong photo and want the photo to do most of the talking.</p>
+
+                <h2>Tips for a great save-the-date card</h2>
+                <ul>
+                    <li><strong>Send 6–8 months ahead for local weddings.</strong> 8–12 months for destination weddings. (See <a href="/blog/wedding-anniversary-video-ideas/">our wedding anniversary guide</a> for the related timeline.)</li>
+                    <li><strong>Keep one essential fact per line.</strong> "Nomes de casais" + "Date" + "City" cover the contract; the rest is decoration.</li>
+                    <li><strong>Use a photo you already love.</strong> The <a href="/tools/crop-wedding-photo-for-reels/">Reels crop tool</a> can re-frame an existing photo to 4:5 portrait if your favorite isn't already vertical.</li>
+                    <li><strong>Run the final PNG through our <a href="/tools/compress-wedding-photos/">photo compressor</a></strong> before mailing — keeps the email attachment under 1&nbsp;MB.</li>
+                    <li><strong>Hand the photo to the <a href="/services/personalization/ai-video-generator/">AI Wedding Video Generator</a> later</strong> to turn your save-the-date and engagement photos into a 60–90 second film.</li>
+                </ul>
+
+                <h2>From save-the-date to wedding film</h2>
+                <p>The same engagement photo that anchors this card becomes the opening frame of your <a href="/blog/wedding-video-from-photos/">AI wedding film</a>. <a href="/order/">Get a free quote</a> after you've made the card — we'll handle the rest.</p>
+
+                <h2>Frequently asked questions</h2>
+                <div class="qa-block">
+                    <details>
+                        <summary>What size is the download?</summary>
+                        <p>1080 × 1350 pixels, PNG. That's the Instagram portrait aspect (4:5), which also works for WhatsApp status, Facebook posts, and a 5×7 print at 216&nbsp;DPI. A 5×7 print at standard 300&nbsp;DPI needs 1500&nbsp;×&nbsp;2100 — for that size, ask us for the higher-resolution export.</p>
+                    </details>
+                    <details>
+                        <summary>Can I use this for a wedding invitation, not just a save-the-date?</summary>
+                        <p>Yes — these templates work for either. Move the wedding date into a secondary line and add venue + RSVP info if you want a fuller invitation. For a long formal invitation, the <a href="/tools/wedding-photo-collage/">photo collage tool</a> handles 2–12 photos which is closer to a printed card layout.</p>
+                    </details>
+                    <details>
+                        <summary>How do I print this at 5×7?</summary>
+                        <p>Download the PNG, open it in any editor (Photos app on Mac/Windows, Canva, even Word), choose print at "5×7 in" with "Fit" or "Fill". For best print quality, export at 300&nbsp;DPI — that's a future enhancement.</p>
+                    </details>
+                    <details>
+                        <summary>Do you store my engagement photo?</summary>
+                        <p>No. The photo loads directly into your browser's memory, gets composed into the canvas, and the canvas turns straight into the file you download. Closing the tab clears it. Nothing is sent to any server.</p>
+                    </details>
+                    <details>
+                        <summary>Is this free?</summary>
+                        <p>Yes. No signup, no email, no watermark, no premium tier. The free tool is the entry point — if you'd like a custom film, our <a href="/services/personalization/ai-video-generator/">AI Wedding Video Generator</a> starts at $9.9.</p>
+                    </details>
+                </div>
+
+                <h2>More free wedding tools</h2>
+                <div class="sibling-tools">
+                    <a href="/tools/add-text-to-wedding-photo/">Add Text to Photo</a>
+                    <a href="/tools/wedding-photo-collage/">Photo Collage</a>
+                    <a href="/tools/compress-wedding-photos/">Compress Photos</a>
+                    <a href="/tools/crop-wedding-photo-for-reels/">Crop for Reels</a>
+                    <a href="/tools/remove-background-wedding-portrait/">Remove Background</a>
+                    <a href="/tools/heic-to-jpg-wedding-photos/">HEIC → JPG</a>
+                    <a href="/tools/">All Tools</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="max-width: 920px;">
+                <div class="section-header" style="text-align: left;">
+                    <h2>Guias relacionados</h2>
+                </div>
+                <div class="related-grid">
+                    <a class="related-card" href="/blog/wedding-invitation-video-guide/">
+                        <h4>The Complete Wedding Invitation Video Guide</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-photo-slideshow/">
+                        <h4>Build a Wedding Photo Slideshow That Captivates</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-video-from-photos/">
+                        <h4>How to Make a Wedding Video From Your Photos</h4>
+                        <span>Read article →</span>
+                    </a>
+                    <a class="related-card" href="/blog/wedding-anniversary-video-ideas/">
+                        <h4>Wedding Anniversary Video Ideas</h4>
+                        <span>Read article →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Made your save-the-date? Ready for a wedding film?</h2>
+                <p>Hand the same engagement photos to our AI Wedding Video Generator and get a cinematic 60–90 second film in 48 hours.</p>
+                <a href="/order/" class="btn btn-primary btn-large" title="Get a free quote — start your project">Get a Free Quote →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo" title="WeddingAI.video — wedding video services">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy" sizes="(max-width: 600px) 178px, 356px">
+                    </picture>
+                </a>
+                <p>AI-powered wedding video services for couples worldwide.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/gallery/">Gallery</a></li>
+                        <li><a href="/about/">About Us</a></li>
+                        <li><a href="/tools/">Free Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="/services/video-enhancement/slow-motion/">Slow Motion</a></li>
+                        <li><a href="/services/personalization/ai-video-generator/">AI Video Generator</a></li>
+                        <li><a href="/services/personalization/wedding-trailer/">Wedding Trailer</a></li>
+                        <li><a href="/services/absence-compensation/family-tribute/">Family Tribute</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="/order/">Get a Quote</a></li>
+                        <li><a href="/pricing/">Pricing</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 WeddingAI.video. All rights reserved.</p>
+                <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      'use strict';
+
+      var BASE_W = 1080;
+      var BASE_H = 1350;
+
+      // ---------- templates -------------------------------------------------------
+      // Each template drives colors, fonts, and the layout of the 4 text layers.
+      // "photo" can be 'optional' or 'required'; renderer handles missing image.
+      var TEMPLATES = [
+        {
+          id: 'classic',
+          label: 'Classic',
+          thumbColors: ['#f4ead5', '#D4AF37', '#1A1A1A'],
+          bgGradient: ['#f4ead5', '#e9d8b8'],
+          accent: '#D4AF37',
+          primary: '#1A1A1A',
+          secondary: '#7a6230',
+          tertiary: '#7a6230',
+          fontStack: "'Playfair Display', Georgia, serif",
+          scriptStack: "'Great Vibes', 'Apple Chancery', cursive",
+          layout: 'classic'
+        },
+        {
+          id: 'romantic',
+          label: 'Romantic',
+          thumbColors: ['#fbeae8', '#c97a8a', '#3e2a30'],
+          bgGradient: ['#fbeae8', '#f3d2d4'],
+          accent: '#c97a8a',
+          primary: '#3e2a30',
+          secondary: '#8b4a5a',
+          tertiary: '#a85d70',
+          fontStack: "'Great Vibes', 'Apple Chancery', cursive",
+          scriptStack: "'Playfair Display', Georgia, serif",
+          layout: 'romantic'
+        },
+        {
+          id: 'modern',
+          label: 'Modern',
+          thumbColors: ['#f7f7f4', '#1A1A1A', '#D4AF37'],
+          bgGradient: ['#f7f7f4', '#ffffff'],
+          accent: '#1A1A1A',
+          primary: '#1A1A1A',
+          secondary: '#444444',
+          tertiary: '#888888',
+          fontStack: "'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif",
+          scriptStack: "'Montserrat', sans-serif",
+          layout: 'modern'
+        },
+        {
+          id: 'photo',
+          label: 'Photo Forward',
+          thumbColors: ['#2c2c2c', '#ffffff', '#D4AF37'],
+          bgGradient: ['#2c2c2c', '#3a3a3a'],
+          accent: '#D4AF37',
+          primary: '#ffffff',
+          secondary: '#e8e8e8',
+          tertiary: '#ffffff',
+          fontStack: "'Playfair Display', Georgia, serif",
+          scriptStack: "'Great Vibes', cursive",
+          layout: 'photo-forward'
+        }
+      ];
+
+      // ---------- DOM -------------------------------------------------------------
+      var templateGrid = document.getElementById('template-grid');
+      var coupleInput = document.getElementById('couple-names');
+      var dateInput = document.getElementById('wedding-date');
+      var cityInput = document.getElementById('city');
+      var yearInput = document.getElementById('year-tag');
+      var hashtagInput = document.getElementById('hashtag');
+      var photoInput = document.getElementById('photo-input');
+      var photoZone = document.getElementById('photo-zone');
+      var photoZoneTitle = document.getElementById('photo-zone-title');
+      var photoStatus = document.getElementById('photo-status');
+      var previewCanvas = document.getElementById('preview-canvas');
+      var downloadBtn = document.getElementById('download-btn');
+      var resetBtn = document.getElementById('reset-btn');
+
+      var state = {
+        templateId: 'classic',
+        img: null,        // HTMLImageElement or null
+        imgName: ''
+      };
+
+      // ---------- template thumbnails (SVG, no images needed) ---------------------
+      function renderTemplateGrid() {
+        templateGrid.innerHTML = '';
+        TEMPLATES.forEach(function (t) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'wa-std-template' + (t.id === state.templateId ? ' is-active' : '');
+          btn.setAttribute('role', 'radio');
+          btn.setAttribute('aria-checked', String(t.id === state.templateId));
+          btn.setAttribute('data-template-id', t.id);
+          btn.innerHTML =
+            '<span class="wa-std-template-thumb">' + thumbSvg(t) + '</span>' +
+            '<span class="wa-std-template-label">' + t.label + '</span>';
+          btn.addEventListener('click', function () {
+            state.templateId = t.id;
+            // keep photo if photo template, drop if switched away and previous was photo
+            templateGrid.querySelectorAll('.wa-std-template').forEach(function (el) {
+              el.classList.remove('is-active');
+              el.setAttribute('aria-checked', 'false');
+            });
+            btn.classList.add('is-active');
+            btn.setAttribute('aria-checked', 'true');
+            render();
+          });
+          templateGrid.appendChild(btn);
+        });
+      }
+
+      function thumbSvg(t) {
+        var c = t.thumbColors;
+        if (t.layout === 'classic') {
+          return '<svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">' +
+            '<rect width="80" height="100" fill="' + c[0] + '"/>' +
+            '<line x1="14" y1="42" x2="66" y2="42" stroke="' + c[1] + '" stroke-width="1"/>' +
+            '<text x="40" y="32" font-family="Georgia,serif" font-size="9" font-weight="700" fill="' + c[2] + '" text-anchor="middle">A &amp; B</text>' +
+            '<text x="40" y="56" font-family="Georgia,serif" font-size="6.5" fill="' + c[2] + '" text-anchor="middle">June 14, 2026</text>' +
+            '<text x="40" y="66" font-family="Georgia,serif" font-size="5" fill="' + c[1] + '" text-anchor="middle" font-style="italic">Save the Date</text>' +
+            '</svg>';
+        }
+        if (t.layout === 'romantic') {
+          return '<svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">' +
+            '<rect width="80" height="100" fill="' + c[0] + '"/>' +
+            '<circle cx="20" cy="22" r="6" fill="' + c[1] + '" opacity="0.45"/>' +
+            '<circle cx="62" cy="78" r="8" fill="' + c[1] + '" opacity="0.45"/>' +
+            '<text x="40" y="48" font-family="cursive" font-size="13" font-style="italic" fill="' + c[2] + '" text-anchor="middle">A &amp; B</text>' +
+            '<text x="40" y="62" font-family="Georgia,serif" font-size="6" fill="' + c[2] + '" text-anchor="middle">June 14, 2026</text>' +
+            '</svg>';
+        }
+        if (t.layout === 'modern') {
+          return '<svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">' +
+            '<rect width="80" height="100" fill="' + c[0] + '"/>' +
+            '<rect x="14" y="20" width="52" height="2" fill="' + c[1] + '"/>' +
+            '<rect x="14" y="78" width="52" height="2" fill="' + c[1] + '"/>' +
+            '<text x="40" y="48" font-family="sans-serif" font-size="11" font-weight="800" letter-spacing="3" fill="' + c[1] + '" text-anchor="middle">A &amp; B</text>' +
+            '<text x="40" y="62" font-family="sans-serif" font-size="6" fill="' + c[2] + '" text-anchor="middle">14 · 06 · 2026</text>' +
+            '</svg>';
+        }
+        // photo-forward
+        return '<svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">' +
+          '<rect width="80" height="100" fill="' + c[0] + '"/>' +
+          '<rect x="6" y="6" width="68" height="74" fill="#888"/>' +
+          '<rect x="6" y="80" width="68" height="20" fill="#ffffff"/>' +
+          '<rect x="14" y="86" width="40" height="2" fill="' + c[2] + '"/>' +
+          '<rect x="14" y="91" width="22" height="1.5" fill="#888"/>' +
+          '<text x="55" y="76" font-family="sans-serif" font-size="9" fill="' + c[2] + '" text-anchor="middle">📷</text>' +
+          '</svg>';
+      }
+
+      // ---------- photo input -----------------------------------------------------
+      function bindPhoto() {
+        var T = window.weddingAITool;
+        if (!T) return;
+        T.bindDropZone({
+          dropEl: photoZone,
+          inputEl: photoInput,
+          accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+          multiple: false,
+          onFiles: function (files) {
+            var f = files[0];
+            if (!f) return;
+            T.fileToImage(f).then(function (res) {
+              if (state.img && state.img._objectUrl) URL.revokeObjectURL(state.img._objectUrl);
+              res.img._objectUrl = res.url;
+              state.img = res.img;
+              state.imgName = f.name || 'photo';
+              photoZoneTitle.textContent = '✓ ' + state.imgName + ' · click to swap';
+              photoStatus.hidden = false;
+              photoStatus.innerHTML = '<strong>Photo loaded:</strong> ' + state.imgName + ' · renders in the canvas below. Clear the photo any time by removing this card.';
+              render();
+            }).catch(function (err) {
+              window.weddingAITool.toast(err.message || 'Could not load this photo', 'error');
+            });
+          }
+        });
+      }
+
+      // ---------- text helpers (fit-shrink and measure) ---------------------------
+      function fitSize(ctx, text, requested, stack, maxWidth, minSize) {
+        var size = requested;
+        minSize = minSize || 18;
+        while (size > minSize) {
+          ctx.font = '700 ' + size + 'px ' + stack;
+          if (ctx.measureText(text).width <= maxWidth) return size;
+          size -= 2;
+        }
+        return minSize;
+      }
+
+      function fitSizeRegular(ctx, text, requested, stack, maxWidth, minSize) {
+        var size = requested;
+        minSize = minSize || 14;
+        while (size > minSize) {
+          ctx.font = '400 ' + size + 'px ' + stack;
+          if (ctx.measureText(text).width <= maxWidth) return size;
+          size -= 2;
+        }
+        return minSize;
+      }
+
+      // ---------- draw helpers ----------------------------------------------------
+      function fillGradient(ctx, w, h, c1, c2) {
+        var g = ctx.createLinearGradient(0, 0, 0, h);
+        g.addColorStop(0, c1);
+        g.addColorStop(1, c2);
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+      }
+
+      // Draw an image into the rect, "cover" semantics (center-cropped).
+      function drawCover(ctx, img, x, y, w, h) {
+        if (!img) return;
+        var ir = img.naturalWidth / img.naturalHeight;
+        var tr = w / h;
+        var sx, sy, sw, sh, dx, dy, dw, dh;
+        if (ir > tr) {
+          // image wider; crop sides
+          sh = img.naturalHeight;
+          sw = sh * tr;
+          sx = (img.naturalWidth - sw) / 2;
+          sy = 0;
+          dx = x; dy = y; dw = w; dh = h;
+        } else {
+          sw = img.naturalWidth;
+          sh = sw / tr;
+          sx = 0;
+          sy = (img.naturalHeight - sh) / 2;
+          dx = x; dy = y; dw = w; dh = h;
+        }
+        ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+      }
+
+      // ---------- layouts ---------------------------------------------------------
+      function getTemplate(id) {
+        for (var i = 0; i < TEMPLATES.length; i++) {
+          if (TEMPLATES[i].id === id) return TEMPLATES[i];
+        }
+        return TEMPLATES[0];
+      }
+
+      function getText() {
+        return {
+          couple: (coupleInput.value || '').trim(),
+          date: (dateInput.value || '').trim(),
+          city: (cityInput.value || '').trim(),
+          year: (yearInput.value || '').trim(),
+          hashtag: (hashtagInput.value || '').trim()
+        };
+      }
+
+      function render() {
+        var ctx = previewCanvas.getContext('2d');
+        var t = getTemplate(state.templateId);
+        var txt = getText();
+
+        ctx.clearRect(0, 0, BASE_W, BASE_H);
+
+        // background
+        fillGradient(ctx, BASE_W, BASE_H, t.bgGradient[0], t.bgGradient[1]);
+
+        if (t.layout === 'classic') {
+          // top Save the Date, big names, date, city, year tag, hashtag at bottom
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'alphabetic';
+          // top eyebrow
+          ctx.fillStyle = t.secondary;
+          ctx.font = '400 italic 36px ' + t.fontStack;
+          ctx.fillText('Save the Date', BASE_W / 2, 240);
+          // divider
+          ctx.fillStyle = t.accent;
+          ctx.fillRect(BASE_W / 2 - 60, 280, 120, 2);
+          // couple names
+          var coupleSize = fitSize(ctx, txt.couple || 'Emma & Liam', 120, t.fontStack, BASE_W * 0.84, 36);
+          ctx.fillStyle = t.primary;
+          ctx.font = '700 ' + coupleSize + 'px ' + t.fontStack;
+          ctx.fillText(txt.couple || 'Emma & Liam', BASE_W / 2, 240 + 280);
+          // date
+          ctx.fillStyle = t.secondary;
+          ctx.font = '400 ' + 56 + 'px ' + t.fontStack;
+          ctx.fillText(txt.date || 'June 14, 2026', BASE_W / 2, 240 + 280 + 100);
+          // city
+          ctx.fillStyle = t.secondary;
+          ctx.font = '400 ' + 36 + 'px ' + t.fontStack;
+          ctx.fillText(txt.city || 'Banff, Canada', BASE_W / 2, 240 + 280 + 100 + 64);
+          // year tag at bottom
+          ctx.fillStyle = t.accent;
+          ctx.font = '400 italic 32px ' + t.fontStack;
+          ctx.fillText(txt.year || '2026', BASE_W / 2, BASE_H - 90);
+          // hashtag
+          if (txt.hashtag) {
+            ctx.fillStyle = t.secondary;
+            ctx.font = '400 ' + 28 + 'px ' + t.fontStack;
+            ctx.fillText(txt.hashtag, BASE_W / 2, BASE_H - 50);
+          }
+        }
+        else if (t.layout === 'romantic') {
+          // script headline, romantic botanical accents (drawn paths)
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'alphabetic';
+          // botanical top
+          ctx.strokeStyle = t.accent;
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(BASE_W / 2 - 100, 120);
+          ctx.quadraticCurveTo(BASE_W / 2, 90, BASE_W / 2 + 100, 120);
+          ctx.stroke();
+          // leaf left
+          ctx.beginPath();
+          ctx.ellipse(BASE_W / 2 - 150, 130, 14, 6, -0.5, 0, Math.PI * 2);
+          ctx.fillStyle = t.accent; ctx.globalAlpha = 0.5; ctx.fill();
+          ctx.globalAlpha = 1;
+          ctx.beginPath();
+          ctx.ellipse(BASE_W / 2 + 150, 130, 14, 6, 0.5, 0, Math.PI * 2);
+          ctx.fillStyle = t.accent; ctx.globalAlpha = 0.5; ctx.fill();
+          ctx.globalAlpha = 1;
+          // names in script
+          var coupleSize = fitSize(ctx, txt.couple || 'Emma & Liam', 140, t.scriptStack, BASE_W * 0.86, 44);
+          ctx.fillStyle = t.primary;
+          ctx.font = '400 ' + coupleSize + 'px ' + t.scriptStack;
+          ctx.fillText(txt.couple || 'Emma & Liam', BASE_W / 2, 480);
+          // Save the date label
+          ctx.fillStyle = t.secondary;
+          ctx.font = '400 32px ' + t.fontStack;
+          ctx.fillText('— save the date —', BASE_W / 2, 560);
+          // date
+          var dateSize = fitSizeRegular(ctx, txt.date || 'June 14, 2026', 64, t.fontStack, BASE_W * 0.84, 24);
+          ctx.fillStyle = t.primary;
+          ctx.font = '400 ' + dateSize + 'px ' + t.fontStack;
+          ctx.fillText(txt.date || 'June 14, 2026', BASE_W / 2, 660);
+          // city
+          ctx.fillStyle = t.secondary;
+          ctx.font = '400 italic 38px ' + t.fontStack;
+          ctx.fillText(txt.city || 'Banff, Canada', BASE_W / 2, 740);
+          // hashtag at bottom
+          if (txt.hashtag) {
+            ctx.fillStyle = t.tertiary;
+            ctx.font = '400 ' + 30 + 'px ' + t.fontStack;
+            ctx.fillText(txt.hashtag, BASE_W / 2, BASE_H - 100);
+          }
+          // year
+          ctx.fillStyle = t.secondary;
+          ctx.font = '400 italic 36px ' + t.fontStack;
+          ctx.fillText(txt.year || '2026', BASE_W / 2, BASE_H - 50);
+        }
+        else if (t.layout === 'modern') {
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'alphabetic';
+          // top thin bar
+          ctx.fillStyle = t.accent;
+          ctx.fillRect(BASE_W / 2 - 40, 220, 80, 3);
+          // Save the date
+          ctx.fillStyle = t.secondary;
+          ctx.font = '400 36px ' + t.fontStack;
+          ctx.fillText('SAVE THE DATE', BASE_W / 2, 290);
+          // couple names — heavy weight, wide letter spacing
+          var coupleSize = fitSize(ctx, txt.couple || 'Emma & Liam', 130, t.fontStack, BASE_W * 0.84, 36);
+          ctx.fillStyle = t.primary;
+          ctx.font = '800 ' + coupleSize + 'px ' + t.fontStack;
+          ctx.fillText(txt.couple || 'Emma & Liam', BASE_W / 2, 600);
+          // numeric date
+          var dateSize = 80;
+          ctx.fillStyle = t.primary;
+          ctx.font = '400 ' + dateSize + 'px ' + t.fontStack;
+          ctx.fillText(txt.date || 'June 14, 2026', BASE_W / 2, 760);
+          // city
+          ctx.fillStyle = t.secondary;
+          ctx.font = '400 ' + 42 + 'px ' + t.fontStack;
+          ctx.fillText(txt.city || 'Banff, Canada', BASE_W / 2, 850);
+          // hairline + year
+          ctx.fillStyle = t.accent;
+          ctx.fillRect(BASE_W / 2 - 100, 1010, 200, 1);
+          ctx.fillStyle = t.primary;
+          ctx.font = '400 44px ' + t.fontStack;
+          ctx.fillText(txt.year || '2026', BASE_W / 2, 1080);
+          if (txt.hashtag) {
+            ctx.fillStyle = t.tertiary;
+            ctx.font = '400 28px ' + t.fontStack;
+            ctx.fillText(txt.hashtag, BASE_W / 2, 1140);
+          }
+        }
+        else if (t.layout === 'photo-forward') {
+          // if a photo is provided, fill the upper 70%; otherwise solid dark gradient with photo prompt
+          if (state.img) {
+            // top photo region
+            var photoH = Math.round(BASE_H * 0.7);
+            drawCover(ctx, state.img, 0, 0, BASE_W, photoH);
+            // subtle dark overlay for text contrast
+            ctx.fillStyle = 'rgba(0,0,0,0.18)';
+            ctx.fillRect(0, 0, BASE_W, photoH);
+            // Save the date at top
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'alphabetic';
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '400 italic 38px ' + t.fontStack;
+            ctx.fillText('Save the Date', BASE_W / 2, 130);
+          } else {
+            // no photo — overlay a placeholder message
+            ctx.fillStyle = 'rgba(255,255,255,0.08)';
+            ctx.fillRect(60, 60, BASE_W - 120, BASE_H * 0.7 - 120);
+            ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([10, 8]);
+            ctx.strokeRect(60, 60, BASE_W - 120, BASE_H * 0.7 - 120);
+            ctx.setLineDash([]);
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = 'rgba(255,255,255,0.7)';
+            ctx.font = '400 italic 36px ' + t.fontStack;
+            ctx.fillText('Drop your engagement photo', BASE_W / 2, BASE_H * 0.35 - 30);
+            ctx.font = '400 28px ' + t.fontStack;
+            ctx.fillText('to see it as the backdrop', BASE_W / 2, BASE_H * 0.35 + 10);
+            // "save the date" at top regardless
+            ctx.textBaseline = 'alphabetic';
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '400 italic 38px ' + t.fontStack;
+            ctx.fillText('Save the Date', BASE_W / 2, 130);
+          }
+          // bottom white panel
+          var panelY = Math.round(BASE_H * 0.7);
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, panelY, BASE_W, BASE_H - panelY);
+          // accent hairline
+          ctx.fillStyle = t.accent;
+          ctx.fillRect(BASE_W / 2 - 30, panelY + 30, 60, 2);
+          // couple names
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'alphabetic';
+          ctx.fillStyle = '#1A1A1A';
+          var coupleSize = fitSize(ctx, txt.couple || 'Emma & Liam', 90, t.fontStack, BASE_W * 0.86, 32);
+          ctx.font = '700 ' + coupleSize + 'px ' + t.fontStack;
+          ctx.fillText(txt.couple || 'Emma & Liam', BASE_W / 2, panelY + 130);
+          // date
+          ctx.fillStyle = '#444';
+          ctx.font = '400 44px ' + t.fontStack;
+          ctx.fillText(txt.date || 'June 14, 2026', BASE_W / 2, panelY + 200);
+          // city
+          ctx.fillStyle = '#666';
+          ctx.font = '400 italic 32px ' + t.fontStack;
+          ctx.fillText(txt.city || 'Banff, Canada', BASE_W / 2, panelY + 250);
+          if (txt.hashtag) {
+            ctx.fillStyle = '#888';
+            ctx.font = '400 26px ' + t.fontStack;
+            ctx.fillText(txt.hashtag, BASE_W / 2, panelY + 295);
+          }
+        }
+      }
+
+      // ---------- wire ------------------------------------------------------------
+      renderTemplateGrid();
+      bindPhoto();
+      render();
+
+      // live re-render on any input change
+      [coupleInput, dateInput, cityInput, yearInput, hashtagInput].forEach(function (el) {
+        el.addEventListener('input', function () { render(); });
+      });
+
+      // ---------- download --------------------------------------------------------
+      downloadBtn.addEventListener('click', function () {
+        render();
+        var T = window.weddingAITool;
+        T.canvasToBlob(previewCanvas, 'image/png', 1.0).then(function (blob) {
+          var name = 'save-the-date-' + (getText().couple || 'card').replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase().slice(0, 40) + '.png';
+          T.download(blob, name);
+          T.toast('Saved · ' + (blob.size / 1024).toFixed(0) + ' KB', 'success');
+        });
+      });
+
+      // ---------- reset -----------------------------------------------------------
+      resetBtn.addEventListener('click', function () {
+        coupleInput.value = 'Emma & Liam';
+        dateInput.value = 'June 14, 2026';
+        cityInput.value = 'Banff, Canada';
+        yearInput.value = '2026';
+        hashtagInput.value = '#EmmaAndLiam2026';
+        if (state.img && state.img._objectUrl) URL.revokeObjectURL(state.img._objectUrl);
+        state.img = null;
+        state.imgName = '';
+        photoZoneTitle.textContent = 'Drop a photo here or click to browse';
+        photoStatus.hidden = true;
+        photoStatus.innerHTML = '';
+        render();
+      });
+    })();
+    </script>
+</body>
+</html>
