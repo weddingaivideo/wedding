@@ -146,27 +146,27 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How does the wedding budget calculator work?",
+          "name": "¿Cómo funciona la calculadora de presupuesto de boda?",
           "acceptedAnswer": { "@type": "Answer", "text": "Introduzca el presupuesto total de su boda, elija una moneda y la herramienta distribuye la cantidad en 14 categorías estándar utilizando porcentajes promedio de la industria. Arrastra el control deslizante de cualquier categoría para ajustar su cuota o escribe una cantidad personalizada. El gráfico circular y los totales por categoría se actualizan en tiempo real. Exporta como CSV cuando hayas terminado." }
         },
         {
           "@type": "Question",
-          "name": "What are the average wedding budget percentages?",
+          "name": "¿Cuáles son los porcentajes promedio del presupuesto de una boda?",
           "acceptedAnswer": { "@type": "Answer", "text": "Industry averages for a US wedding: Lugar y recepción 35-40%, Catering & Bar 25-30%, Fotografía 10-12%, Videografía 5-7%, Flores y decoración 8-10%, Vestimenta y belleza 8-10%, "Entretenimiento musical"; 7-10%, Pasteles y postres 2%, Anillos y joyas 4-5%, Invitaciones y artículos de papelería 2-3%, Favores y regalos 2-3%, Transporte 2%, Luna de miel 5-8%, Varios 3-5%. These add up to about 100% but can be rebalanced based on priorities." }
         },
         {
           "@type": "Question",
-          "name": "Which currencies are supported?",
+          "name": "¿Qué monedas se admiten?",
           "acceptedAnswer": { "@type": "Answer", "text": "USD ($), EDR, GBP, JPY, CNY, INR y KRW. La moneda es puramente una etiqueta de visualización: escribe el presupuesto en tu moneda local y el desglose utiliza el mismo símbolo en todo momento." }
         },
         {
           "@type": "Question",
-          "name": "Is the budget data private?",
+          "name": "¿Los datos del presupuesto son privados?",
           "acceptedAnswer": { "@type": "Answer", "text": "Sí. Todos los valores del presupuesto se almacenan solo en localStorage de su navegador. No se carga nada en ningún servidor. Borra el almacenamiento de tu navegador para borrar los datos." }
         },
         {
           "@type": "Question",
-          "name": "Can I export the budget?",
+          "name": "¿Puedo exportar el presupuesto?",
           "acceptedAnswer": { "@type": "Answer", "text": "Sí. Presiona Exportar CSV para descargar un archivo separado por comas con las 14 categorías, porcentajes e importes. Abrir en Excel, Google Sheets o cualquier hoja de cálculo. Utilice Imprimir para obtener un diseño limpio y listo para PDF." }
         }
       ]
@@ -246,7 +246,7 @@
                         <input type="number" id="bg-total" min="0" step="100" value="30000">
                     </div>
                     <div>
-                        <label for="bg-currency">Currency</label>
+                        <label for="bg-currency">Moneda</label>
                         <select id="bg-currency">
                             <option value="$">USD ($)</option>
                             <option value="€">EDR</option>
@@ -260,10 +260,10 @@
                 </div>
                 <h2 style="margin-top: 1rem;">2. Elige un punto de partida</h2>
                 <div class="bg-preset-row" id="preset-row" role="radiogroup" aria-label="Budget preset">
-                    <button type="button" data-preset="us" class="active">US Average</button>
-                    <button type="button" data-preset="uk">UK Average</button>
+                    <button type="button" data-preset="us" class="active">Promedio EE. UU.</button>
+                    <button type="button" data-preset="uk">Promedio Reino Unido</button>
                     <button type="button" data-preset="budget">Presupuesto / bricolaje</button>
-                    <button type="button" data-preset="luxury">Luxury</button>
+                    <button type="button" data-preset="luxury">Lujo</button>
                     <button type="button" data-preset="reset">Restablecimiento</button>
                 </div>
                 <h2 style="margin-top: 1rem;">Resumen</h2>
@@ -286,9 +286,9 @@
                 </div>
 
                 <div class="bg-export-row">
-                    <button type="button" class="bg-btn primary" id="export-csv-btn">Export CSV</button>
+                    <button type="button" class="bg-btn primary" id="export-csv-btn">Exportar CSV</button>
                     <button type="button" class="bg-btn" id="print-btn">Imprimir</button>
-                    <button type="button" class="bg-btn" id="reset-btn">Resetear todo</button>
+                    <button type="button" class="bg-btn" id="reset-btn">Restablecerear todo</button>
                 </div>
             </section>
         </div>
@@ -332,20 +332,20 @@
                     <p>Sí. Presiona Exportar CSV para descargar un archivo separado por comas con las 14 categorías, porcentajes e importes. Abrir en Excel, Google Sheets o cualquier hoja de cálculo. Utilice Imprimir para obtener un diseño limpio y listo para PDF.</p>
                 </details>
                 <details>
-                    <summary>What are the average wedding budget percentages?</summary>
+                    <summary>¿Cuáles son los porcentajes promedio del presupuesto de una boda?</summary>
                     <p>Promedios de la industria para una boda en EE. UU.: Lugar y recepción 35-40%, Catering y bar 25-30%, Fotografía 10-12%, Videografía 5-7%, Flores y decoración 8-10%, Vestimenta y belleza 8-10%, Música y entretenimiento 7-10%, Pasteles y postres 2%, Anillos y joyas 4-5%, Invitaciones y papelería 2-3%, Favores y regalos 2-3%, Transporte 2%, Luna de miel 5-8%, Varios 3-5%. Estos suman alrededor del 100%, pero se pueden reequilibrar en función de las prioridades.</p>
                 </details>
                 <details>
-                    <summary>Which currencies are supported?</summary>
+                    <summary>¿Qué monedas se admiten?</summary>
                     <p>USD ($), EUR (€), GBP (£), JPY (¥), CNY (¥), INR (₹), and KRW (₩). The currency is purely a display label — type the budget in your local currency and the breakdown uses the same symbol throughout.</p>
                 </details>
                 <details>
-                    <summary>Is the budget data private?</summary>
+                    <summary>¿Los datos del presupuesto son privados?</summary>
                     <p>Yes. All budget values are stored in your browser's localStorage only. Nothing is uploaded to any server. Clear your browser storage to wipe the data.</p>
                 </details>
                 <details>
-                    <summary>Can I export the budget?</summary>
-                    <p>Yes. Hit Export CSV to download a comma-separated file with all 14 categories, percentages, and amounts. Open in Excel, Google Sheets, or any spreadsheet. Use Print for a clean PDF-ready layout.</p>
+                    <summary>¿Puedo exportar el presupuesto?</summary>
+                    <p>Yes. Hit Exportar CSV to download a comma-separated file with all 14 categories, percentages, and amounts. Open in Excel, Google Sheets, or any spreadsheet. Use Imprimir for a clean PDF-ready layout.</p>
                 </details>
             </div>
 
@@ -555,12 +555,12 @@
   }
 
   function renderAll() {
-    renderSummary();
+    renderResumen();
     renderAmounts();
     renderChart();
   }
 
-  function renderSummary() {
+  function renderResumen() {
     var sum = 0;
     CATEGORIES.forEach(function (c) {
       sum += Math.round(state.total * (state.pcts[c.id] || 0) / 100);
@@ -645,7 +645,7 @@
     saveState(); renderAll();
   });
 
-  // Export CSV
+  // Exportar CSV
   exportCsvBtn.addEventListener('click', function () {
     var rows = ['Category,Percent,Amount'];
     CATEGORIES.forEach(function (c) {
@@ -667,7 +667,7 @@
 
   printBtn.addEventListener('click', function () { window.print(); });
   resetBtn.addEventListener('click', function () {
-    if (!window.confirm('Reset all budget values?')) return;
+    if (!window.confirm('Restablecer all budget values?')) return;
     state = defaultState();
     init();
     saveState();

@@ -132,7 +132,7 @@
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Any (browser-based)",
       "browserRequirements": "Requires JavaScript",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "offers": { "@type": "Offer", "price": "0", "price货币": "USD" },
       "description": "\"description\": \"免费在线婚礼预算计算器。14个类别（场地、餐饮、照片、视频、鲜花、服装、音乐、蛋糕、戒指、邀请、青睐、交通、蜜月、其他）。实时滑块调整、饼图、CSV导出。100%在浏览器中—无需注册。\"",
       "inLanguage": "zh",
       "isAccessibleForFree": true,
@@ -146,28 +146,28 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How does the wedding budget calculator work?",
+          "name": "婚礼预算计算器是如何工作的？",
           "acceptedAnswer": { "@type": "Answer", "text": "Enter your total wedding budget, pick a currency, and the tool distributes the amount across 14 standard categories using industry-average percentages. Drag any category's slider to adjust its share, or type a custom amount. The pie chart and per-category totals update in real time. Export as CSV when you're done." }
         },
         {
           "@type": "Question",
-          "name": "What are the average wedding budget percentages?",
+          "name": "平均婚礼预算百分比是多少？",
           "acceptedAnswer": { "@type": "Answer", "text": "Industry averages for a US wedding: Venue & Reception 35-40%, Catering & Bar 25-30%, Photography 10-12%, Videography 5-7%, Flowers & Decor 8-10%, Attire & Beauty 8-10%, Music & Entertainment 7-10%, Cake & Desserts 2%, Rings & Jewelry 4-5%, Invitations & Stationery 2-3%, Favors & Gifts 2-3%, Transportation 2%, Honeymoon 5-8%, Miscellaneous 3-5%. These add up to about 100% but can be rebalanced based on priorities." }
         },
         {
           "@type": "Question",
-          "name": "Which currencies are supported?",
+          "name": "支持哪些货币？",
           "acceptedAnswer": { "@type": "Answer", "text": "USD ($), EUR (€), GBP (£), JPY (¥), CNY (¥), INR (₹), and KRW (₩). The currency is purely a display label — type the budget in your local currency and the breakdown uses the same symbol throughout." }
         },
         {
           "@type": "Question",
-          "name": "Is the budget data private?",
+          "name": "预算数据是私有的吗？",
           "acceptedAnswer": { "@type": "Answer", "text": "Yes. All budget values are stored in your browser's localStorage only. Nothing is uploaded to any server. Clear your browser storage to wipe the data." }
         },
         {
           "@type": "Question",
-          "name": "Can I export the budget?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Hit Export CSV to download a comma-separated file with all 14 categories, percentages, and amounts. Open in Excel, Google Sheets, or any spreadsheet. Use Print for a clean PDF-ready layout." }
+          "name": "我可以导出预算吗？",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Hit 导出 CSV to download a comma-separated file with all 14 categories, percentages, and amounts. Open in Excel, Google Sheets, or any spreadsheet. Use 打印 for a clean PDF-ready layout." }
         }
       ]
     }
@@ -176,13 +176,13 @@
     {
       "@context": "https://schema.org",
       "@type": "HowTo",
-      "name": "How to plan a wedding budget",
+      "name": "如何规划婚礼预算",
       "step": [
         { "@type": "HowToStep", "position": 1, "name": "Set the total budget", "text": "Start with the total amount you can spend on the wedding. Be honest about what you can afford without going into debt — most wedding industry surveys put the US median at $30,000-$35,000 for 2026." },
-        { "@type": "HowToStep", "position": 2, "name": "Pick a starting allocation", "text": "Choose a preset (US Average, UK Average, Budget/DIY, or Luxury) or leave the tool's defaults. The 14 categories will fill in." },
+        { "@type": "HowToStep", "position": 2, "name": "Pick a starting allocation", "text": "Choose a preset (美国平均, 英国平均, Budget/DIY, or 豪华) or leave the tool's defaults. The 14 categories will fill in." },
         { "@type": "HowToStep", "position": 3, "name": "Adjust the sliders", "text": "Drag any category slider up or down to match your priorities. The pie chart and the running total update in real time. The remaining 100% is auto-balanced as you go." },
         { "@type": "HowToStep", "position": 4, "name": "Lock in vendor quotes", "text": "As you collect real quotes from venues, photographers, and caterers, override the slider amounts with actual numbers. The gap between your budget and the actual quote becomes obvious at a glance." },
-        { "@type": "HowToStep", "position": 5, "name": "Export and share", "text": "Hit Export CSV to share the final breakdown with your partner, family, or wedding planner. The CSV opens in any spreadsheet." }
+        { "@type": "HowToStep", "position": 5, "name": "Export and share", "text": "Hit 导出 CSV to share the final breakdown with your partner, family, or wedding planner. The CSV opens in any spreadsheet." }
       ],
       "totalTime": "PT20M"
     }
@@ -239,14 +239,14 @@
     <div class="bg-tool-wrap">
         <div class="bg-tool-grid">
             <aside class="bg-panel" aria-label="Budget settings">
-                <h2>1.设定预算</h2>
+                <h2>1. 设定预算</h2>
                 <div class="bg-form-row" style="grid-template-columns: 1fr 100px;">
                     <div>
-                        <label for="bg-total">Total budget</label>
+                        <label for="bg-total">总预算</label>
                         <input type="number" id="bg-total" min="0" step="100" value="30000">
                     </div>
                     <div>
-                        <label for="bg-currency">Currency</label>
+                        <label for="bg-currency">货币</label>
                         <select id="bg-currency">
                             <option value="$">USD ($)</option>
                             <option value="€">EUR (€)</option>
@@ -258,15 +258,15 @@
                         </select>
                     </div>
                 </div>
-                <h2 style="margin-top: 1rem;">2. Pick a starting point</h2>
+                <h2 style="margin-top: 1rem;">2. 选择起点</h2>
                 <div class="bg-preset-row" id="preset-row" role="radiogroup" aria-label="Budget preset">
-                    <button type="button" data-preset="us" class="active">US Average</button>
-                    <button type="button" data-preset="uk">UK Average</button>
-                    <button type="button" data-preset="budget">Budget / DIY</button>
-                    <button type="button" data-preset="luxury">Luxury</button>
-                    <button type="button" data-preset="reset">Reset</button>
+                    <button type="button" data-preset="us" class="active">美国平均</button>
+                    <button type="button" data-preset="uk">英国平均</button>
+                    <button type="button" data-preset="budget">经济型 / DIY</button>
+                    <button type="button" data-preset="luxury">豪华</button>
+                    <button type="button" data-preset="reset">重置</button>
                 </div>
-                <h2 style="margin-top: 1rem;">Summary</h2>
+                <h2 style="margin-top: 1rem;">摘要</h2>
                 <div class="bg-summary" aria-label="Budget summary">
                     <div class="bg-stat" id="stat-allocated"><span class="num">$0</span><span class="lbl">Allocated</span></div>
                     <div class="bg-stat" id="stat-remaining"><span class="num">$0</span><span class="lbl">Remaining</span></div>
@@ -275,7 +275,7 @@
 
             <section class="bg-cats-wrap" aria-label="Budget categories">
                 <div class="bg-cats-header">
-                    <h2>3.调整类别</h2>
+                    <h2>3. 调整类别</h2>
                 </div>
                 <div class="bg-cats" id="cats"></div>
 
@@ -286,9 +286,9 @@
                 </div>
 
                 <div class="bg-export-row">
-                    <button type="button" class="bg-btn primary" id="export-csv-btn">Export CSV</button>
-                    <button type="button" class="bg-btn" id="print-btn">Print</button>
-                    <button type="button" class="bg-btn" id="reset-btn">Reset all</button>
+                    <button type="button" class="bg-btn primary" id="export-csv-btn">导出 CSV</button>
+                    <button type="button" class="bg-btn" id="print-btn">打印</button>
+                    <button type="button" class="bg-btn" id="reset-btn">重置 all</button>
                 </div>
             </section>
         </div>
@@ -302,9 +302,9 @@
             <p>Most US wedding industry surveys put the 2026 median wedding at $30,000-$35,000 for ~130 guests. The 14 categories below are weighted toward that median. If your budget is different — $8,000 elopement, $80,000 luxury — change the total first, then drag the sliders. The percentages and pie chart will rescale automatically.</p>
             <h3>随时锁定供应商报价</h3>
             <p>The slider is a planning tool, not a contract. When you get a real quote from a venue ($12,000 for the hall) or a photographer ($4,500 for 8 hours), override the slider amount with the actual number. The gap between your budget and the actual quote becomes obvious at a glance. The remaining categories stay at the percentages you set; you don't need to rebalance them until you actually have data.</p>
-            <h3>三大门票类别定下了基调</h3>
+            <h3>三大开销类别定下了基调</h3>
             <p>Venue, catering, and photography typically account for 60-70% of any wedding budget. Get those right and the rest falls into place. If you need to cut, cut catering (buffet vs. plated, or weeknight vs. Saturday) before you cut the photographer — the photos are what you keep forever, the food is gone in an hour.</p>
-            <h3>蜜月是一条单独的线路，而不是“杂项”线路</h3>
+            <h3>蜜月是单独的一项，而不是“杂项”</h3>
             <p>Put the honeymoon in its own category. If you treat it as miscellaneous, it'll be the first thing you cut when overruns happen elsewhere. The honeymoon is the actual wedding present to yourselves — give it its own line and protect it.</p>
 
             <h2>14个婚礼预算类别说明</h2>
@@ -332,20 +332,20 @@
                     <p>可以。点击导出CSV下载包含所有14个类别、百分比和金额的逗号分隔文件。在Excel、Google表格或任何电子表格中打开。使用“打印”以获得干净的PDF就绪布局。</p>
                 </details>
                 <details>
-                    <summary>What are the average wedding budget percentages?</summary>
+                    <summary>平均婚礼预算百分比是多少？</summary>
                     <p>Industry averages for a US wedding: Venue &amp; Reception 35-40%, Catering &amp; Bar 25-30%, Photography 10-12%, Videography 5-7%, Flowers &amp; Decor 8-10%, Attire &amp; Beauty 8-10%, Music &amp; Entertainment 7-10%, Cake &amp; Desserts 2%, Rings &amp; Jewelry 4-5%, Invitations &amp; Stationery 2-3%, Favors &amp; Gifts 2-3%, Transportation 2%, Honeymoon 5-8%, Miscellaneous 3-5%. These add up to about 100% but can be rebalanced based on priorities.</p>
                 </details>
                 <details>
-                    <summary>Which currencies are supported?</summary>
+                    <summary>支持哪些货币？</summary>
                     <p>USD ($), EUR (€), GBP (£), JPY (¥), CNY (¥), INR (₹), and KRW (₩). The currency is purely a display label — type the budget in your local currency and the breakdown uses the same symbol throughout.</p>
                 </details>
                 <details>
-                    <summary>Is the budget data private?</summary>
+                    <summary>预算数据是私有的吗？</summary>
                     <p>Yes. All budget values are stored in your browser's localStorage only. Nothing is uploaded to any server. Clear your browser storage to wipe the data.</p>
                 </details>
                 <details>
-                    <summary>Can I export the budget?</summary>
-                    <p>Yes. Hit Export CSV to download a comma-separated file with all 14 categories, percentages, and amounts. Open in Excel, Google Sheets, or any spreadsheet. Use Print for a clean PDF-ready layout.</p>
+                    <summary>我可以导出预算吗？</summary>
+                    <p>Yes. Hit 导出 CSV to download a comma-separated file with all 14 categories, percentages, and amounts. Open in Excel, Google Sheets, or any spreadsheet. Use 打印 for a clean PDF-ready layout.</p>
                 </details>
             </div>
 
@@ -376,19 +376,19 @@
             </div>
             <div class="related-grid">
                 <a class="related-card" href="/blog/wedding-budget-breakdown-2026/">
-                    <h4>Wedding Budget Breakdown 2026: What Couples Actually Spend</h4>
+                    <h4>2026年婚礼预算明细：情侣实际花费</h4>
                     <span>Read article →</span>
                 </a>
                 <a class="related-card" href="/blog/average-wedding-cost-2026/">
-                    <h4>Average Wedding Cost 2026: Country-by-Country</h4>
+                    <h4>2026年平均婚礼成本：按国家</h4>
                     <span>Read article →</span>
                 </a>
                 <a class="related-card" href="/blog/wedding-vendor-payment-schedule/">
-                    <h4>Wedding Vendor Payment Schedule: When to Pay Whom</h4>
+                    <h4>婚礼供应商付款时间表：何时付给谁</h4>
                     <span>Read article →</span>
                 </a>
                 <a class="related-card" href="/blog/wedding-video-from-photos/">
-                    <h4>AI Wedding Video From Photos</h4>
+                    <h4>从照片生成 AI 婚礼视频</h4>
                     <span>Read article →</span>
                 </a>
             </div>
@@ -555,12 +555,12 @@
   }
 
   function renderAll() {
-    renderSummary();
+    render摘要();
     renderAmounts();
     renderChart();
   }
 
-  function renderSummary() {
+  function render摘要() {
     var sum = 0;
     CATEGORIES.forEach(function (c) {
       sum += Math.round(state.total * (state.pcts[c.id] || 0) / 100);
@@ -645,7 +645,7 @@
     saveState(); renderAll();
   });
 
-  // Export CSV
+  // 导出 CSV
   exportCsvBtn.addEventListener('click', function () {
     var rows = ['Category,Percent,Amount'];
     CATEGORIES.forEach(function (c) {
@@ -667,7 +667,7 @@
 
   printBtn.addEventListener('click', function () { window.print(); });
   resetBtn.addEventListener('click', function () {
-    if (!window.confirm('Reset all budget values?')) return;
+    if (!window.confirm('重置 all budget values?')) return;
     state = defaultState();
     init();
     saveState();

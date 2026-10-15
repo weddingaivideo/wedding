@@ -146,27 +146,27 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How does the wedding budget calculator work?",
+          "name": "Comment fonctionne le calculateur de budget de mariage ?",
           "acceptedAnswer": { "@type": "Answer", "text": "Entrez votre budget total de mariage, choisissez une devise et l'outil répartit le montant entre 14 catégories standard en utilisant des pourcentages moyens de l'industrie. Faites glisser le curseur de n'importe quelle catégorie pour ajuster sa part ou saisissez un montant personnalisé. Le graphique circulaire et les totaux par catégorie sont mis à jour en temps réel. Exportez au format CSV lorsque vous avez terminé." }
         },
         {
           "@type": "Question",
-          "name": "What are the average wedding budget percentages?",
+          "name": "Quels sont les pourcentages moyens du budget de mariage ?",
           "acceptedAnswer": { "@type": "Answer", "text": "Industry averages for a US wedding: Venue & Reception 35-40%, Catering & Bar 25-30%, Photography 10-12%, Videography 5-7%, Flowers & Decor 8-10%, Attire & Beauty 8-10%, Music & Entertainment 7-10%, Cake & Desserts 2%, Rings & Jewelry 4-5%, Invitations & Stationery 2-3%, Favors & Gifts 2-3%, Transportation 2%, Honeymoon 5-8%, Miscellaneous 3-5%. These add up to about 100% but can be rebalanced based on priorities." }
         },
         {
           "@type": "Question",
-          "name": "Which currencies are supported?",
+          "name": "Quelles devises sont prises en charge ?",
           "acceptedAnswer": { "@type": "Answer", "text": "USD ($ ), EUR (€ ), GBP (£ ), JPY (¥ ), CNY (¥ ), INR (₹ ) et KRW (₩ ). La devise est purement une étiquette d'affichage — tapez le budget dans votre devise locale et la ventilation utilise le même symbole partout." }
         },
         {
           "@type": "Question",
-          "name": "Is the budget data private?",
+          "name": "Les données du budget sont-elles privées ?",
           "acceptedAnswer": { "@type": "Answer", "text": "Oui. Toutes les valeurs budgétaires sont stockées dans le localStorage de votre navigateur uniquement. Rien n'est téléchargé sur un serveur. Effacez le stockage de votre navigateur pour effacer les données." }
         },
         {
           "@type": "Question",
-          "name": "Can I export the budget?",
+          "name": "Puis-je exporter le budget ?",
           "acceptedAnswer": { "@type": "Answer", "text": "Oui. Appuyez sur Exporter CSV pour télécharger un fichier séparé par des virgules avec les 14 catégories, pourcentages et montants. Ouvrez dans Excel, Google Sheets ou n'importe quelle feuille de calcul. Utilisez Imprimer pour une mise en page propre prête pour le PDF." }
         }
       ]
@@ -182,7 +182,7 @@
         { "@type": "HowToStep", "position": 2, "name": "Pick a starting allocation", "text": "Choose a preset (Moyenne US, UK Moyenne, Budget/DIY, or Luxe) or leave the tool's defaults. The 14 categories will fill in." },
         { "@type": "HowToStep", "position": 3, "name": "Adjust the sliders", "text": "Drag any category slider up or down to match your priorities. The pie chart and the running total update in real time. The remaining 100% is auto-balanced as you go." },
         { "@type": "HowToStep", "position": 4, "name": "Lock in vendor quotes", "text": "As you collect real quotes from venues, photographers, and caterers, override the slider amounts with actual numbers. The gap between your budget and the actual quote becomes obvious at a glance." },
-        { "@type": "HowToStep", "position": 5, "name": "Export and share", "text": "Hit Export CSV to share the final breakdown with your partner, family, or wedding planner. The CSV opens in any spreadsheet." }
+        { "@type": "HowToStep", "position": 5, "name": "Export and share", "text": "Hit Exporter CSV to share the final breakdown with your partner, family, or wedding planner. The CSV opens in any spreadsheet." }
       ],
       "totalTime": "PT20M"
     }
@@ -246,7 +246,7 @@
                         <input type="number" id="bg-total" min="0" step="100" value="30000">
                     </div>
                     <div>
-                        <label for="bg-currency">Currency</label>
+                        <label for="bg-currency">Devise</label>
                         <select id="bg-currency">
                             <option value="$">USD ($)</option>
                             <option value="€">EUR (€)</option>
@@ -260,10 +260,10 @@
                 </div>
                 <h2 style="margin-top: 1rem;">2. Choisissez un point de départ</h2>
                 <div class="bg-preset-row" id="preset-row" role="radiogroup" aria-label="Budget preset">
-                    <button type="button" data-preset="us" class="active">US Average</button>
-                    <button type="button" data-preset="uk">UK Average</button>
+                    <button type="button" data-preset="us" class="active">Moyenne américaine</button>
+                    <button type="button" data-preset="uk">Moyenne britannique</button>
                     <button type="button" data-preset="budget">Budget / bricolage</button>
-                    <button type="button" data-preset="luxury">Luxury</button>
+                    <button type="button" data-preset="luxury">Luxe</button>
                     <button type="button" data-preset="reset">Réinitialiser</button>
                 </div>
                 <h2 style="margin-top: 1rem;">Résumé</h2>
@@ -286,7 +286,7 @@
                 </div>
 
                 <div class="bg-export-row">
-                    <button type="button" class="bg-btn primary" id="export-csv-btn">Export CSV</button>
+                    <button type="button" class="bg-btn primary" id="export-csv-btn">Exporter CSV</button>
                     <button type="button" class="bg-btn" id="print-btn">Impression</button>
                     <button type="button" class="bg-btn" id="reset-btn">Tout réinitialiser</button>
                 </div>
@@ -332,20 +332,20 @@
                     <p>Oui. Appuyez sur Exporter CSV pour télécharger un fichier séparé par des virgules avec les 14 catégories, pourcentages et montants. Ouvrez dans Excel, Google Sheets ou n'importe quelle feuille de calcul. Utilisez Imprimer pour une mise en page propre prête pour le PDF.</p>
                 </details>
                 <details>
-                    <summary>What are the average wedding budget percentages?</summary>
+                    <summary>Quels sont les pourcentages moyens du budget de mariage ?</summary>
                     <p>Moyennes de l'industrie pour un mariage aux États-Unis : Lieu et réception 35-40%, Restauration et bar 25-30%, Photographie 10-12%, Vidéographie 5-7%, Fleurs et décoration 8-10%, Attire et beauté 8-10%, Musique et divertissement 7-10%, Gâteaux et desserts 2%, Bagues et bijoux 4-5%, Invitations et papeterie 2-3%, Faveurs et cadeaux 2-3%, Transport 2%, Lune de miel 5-8%, Divers 3-5%. Ceux-ci totalisent environ 100 %, mais peuvent être rééquilibrés en fonction des priorités.</p>
                 </details>
                 <details>
-                    <summary>Which currencies are supported?</summary>
+                    <summary>Quelles devises sont prises en charge ?</summary>
                     <p>USD ($), EUR (€), GBP (£), JPY (¥), CNY (¥), INR (₹), and KRW (₩). The currency is purely a display label — type the budget in your local currency and the breakdown uses the same symbol throughout.</p>
                 </details>
                 <details>
-                    <summary>Is the budget data private?</summary>
+                    <summary>Les données du budget sont-elles privées ?</summary>
                     <p>Yes. All budget values are stored in your browser's localStorage only. Nothing is uploaded to any server. Clear your browser storage to wipe the data.</p>
                 </details>
                 <details>
-                    <summary>Can I export the budget?</summary>
-                    <p>Yes. Hit Export CSV to download a comma-separated file with all 14 categories, percentages, and amounts. Open in Excel, Google Sheets, or any spreadsheet. Use Print for a clean PDF-ready layout.</p>
+                    <summary>Puis-je exporter le budget ?</summary>
+                    <p>Yes. Hit Exporter CSV to download a comma-separated file with all 14 categories, percentages, and amounts. Open in Excel, Google Sheets, or any spreadsheet. Use Imprimer for a clean PDF-ready layout.</p>
                 </details>
             </div>
 
@@ -376,19 +376,19 @@
             </div>
             <div class="related-grid">
                 <a class="related-card" href="/blog/wedding-budget-breakdown-2026/">
-                    <h4>Wedding Budget Breakdown 2026: What Couples Actually Spend</h4>
+                    <h4>Répartition du budget de mariage 2026 : ce que dépensent vraiment les couples</h4>
                     <span>Read article →</span>
                 </a>
                 <a class="related-card" href="/blog/average-wedding-cost-2026/">
-                    <h4>Average Wedding Cost 2026: Country-by-Country</h4>
+                    <h4>Coût moyen d'un mariage 2026 : pays par pays</h4>
                     <span>Read article →</span>
                 </a>
                 <a class="related-card" href="/blog/wedding-vendor-payment-schedule/">
-                    <h4>Wedding Vendor Payment Schedule: When to Pay Whom</h4>
+                    <h4>Calendrier de paiement des prestataires de mariage : quand payer qui</h4>
                     <span>Read article →</span>
                 </a>
                 <a class="related-card" href="/blog/wedding-video-from-photos/">
-                    <h4>AI Wedding Video From Photos</h4>
+                    <h4>Vidéo de mariage IA à partir de photos</h4>
                     <span>Read article →</span>
                 </a>
             </div>
@@ -555,12 +555,12 @@
   }
 
   function renderAll() {
-    renderSummary();
+    renderRésumé();
     renderAmounts();
     renderChart();
   }
 
-  function renderSummary() {
+  function renderRésumé() {
     var sum = 0;
     CATEGORIES.forEach(function (c) {
       sum += Math.round(state.total * (state.pcts[c.id] || 0) / 100);
@@ -645,7 +645,7 @@
     saveState(); renderAll();
   });
 
-  // Export CSV
+  // Exporter CSV
   exportCsvBtn.addEventListener('click', function () {
     var rows = ['Category,Percent,Amount'];
     CATEGORIES.forEach(function (c) {
@@ -667,7 +667,7 @@
 
   printBtn.addEventListener('click', function () { window.print(); });
   resetBtn.addEventListener('click', function () {
-    if (!window.confirm('Reset all budget values?')) return;
+    if (!window.confirm('Réinitialiser all budget values?')) return;
     state = defaultState();
     init();
     saveState();

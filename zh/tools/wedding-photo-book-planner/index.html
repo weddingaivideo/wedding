@@ -165,27 +165,27 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How does the wedding photo book planner work?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Pick a book size (8x8, 10x10, 12x12, or A4 landscape) and page count (20/40/60). Drop in your wedding photos — the tool stores them in your browser only. Choose from 5 page layouts (1-photo, 2-photo split, 3-photo mosaic, 4-photo grid, title/cover). Auto-distribute distributes photos round-robin across pages. Add captions per photo, click any page to fine-tune, then export per-page PNG files ready to upload to any print service." }
+          "name": "婚礼相册规划器是如何工作的？",
+          "acceptedAnswer": { "@type": "Answer", "text": "Pick a book size (8x8, 10x10, 12x12, or A4 landscape) and page count (20/40/60). Drop in your wedding photos — the tool stores them in your browser only. Choose from 5 page layouts (1-photo, 2-photo split, 3-photo mosaic, 4-photo grid, title/cover). 自动分配 distributes photos round-robin across pages. Add captions per photo, click any page to fine-tune, then export per-page PNG files ready to upload to any print service." }
         },
         {
           "@type": "Question",
-          "name": "What size photo book should I order?",
+          "name": "我应该订多大尺寸的相册？",
           "acceptedAnswer": { "@type": "Answer", "text": "8x8 inches is the classic square — most common, cheapest, fits 1-3 photos per page. 10x10 gives larger photos for grandparent-friendly viewing. 12x12 is the coffee-table album — best for hero shots with breathing room. A4 landscape is the European standard for magazine-style spreads." }
         },
         {
           "@type": "Question",
-          "name": "How many pages do I need?",
+          "name": "我需要多少页？",
           "acceptedAnswer": { "@type": "Answer", "text": "20 pages fits 40-60 photos with breathing room. 40 pages fits 80-120 photos — the typical wedding coverage. 60 pages fits 150+ photos — for the couple that wants every candid." }
         },
         {
           "@type": "Question",
-          "name": "Is the data private?",
+          "name": "数据是私有的吗？",
           "acceptedAnswer": { "@type": "Answer", "text": "Yes. All photos and page data live in your browser's localStorage. The tool never uploads a single image to any server. Clear your browser storage to wipe the data." }
         },
         {
           "@type": "Question",
-          "name": "What format are the exported pages?",
+          "name": "导出的页面是什么格式？",
           "acceptedAnswer": { "@type": "Answer", "text": "PNG files at 300 DPI — 8x8 = 2400x2400, 10x10 = 3000x3000, 12x12 = 3600x3600, A4 landscape = 3508x2480. These upload directly to Blurb, Artifact, Shutterfly, or any print service." }
         }
       ]
@@ -199,8 +199,8 @@
       "step": [
         { "@type": "HowToStep", "position": 1, "name": "Drop in your photos", "text": "Drag and drop or click to upload. Add a title, date, and hashtag for the cover. Photos are stored locally in your browser — nothing is uploaded." },
         { "@type": "HowToStep", "position": 2, "name": "Drop in your photos", "text": "Drag and drop or click to upload. Add a title, date, and hashtag for the cover. Photos are stored locally in your browser — nothing is uploaded." },
-        { "@type": "HowToStep", "position": 3, "name": "Distribute photos across pages", "text": "Hit Auto-distribute to round-robin photos across pages based on each page's layout. Or click any page thumbnail to manually assign photos to specific slots and add per-photo captions." },
-        { "@type": "HowToStep", "position": 4, "name": "Export and print", "text": "Hit Download current page for a single page, or Download all pages for the full book. PNG files are 300 DPI, ready to upload to Blurb, Artifact, Shutterfly, or any print-on-demand service." }
+        { "@type": "HowToStep", "position": 3, "name": "Distribute photos across pages", "text": "Hit 自动分配 to round-robin photos across pages based on each page's layout. Or click any page thumbnail to manually assign photos to specific slots and add per-photo captions." },
+        { "@type": "HowToStep", "position": 4, "name": "Export and print", "text": "Hit Download current page for a single page, or 下载所有页面 for the full book. PNG files are 300 DPI, ready to upload to Blurb, Artifact, Shutterfly, or any print-on-demand service." }
       ],
       "totalTime": "PT45M"
     }
@@ -257,10 +257,10 @@
     <div class="pb-tool-wrap">
         <div class="pb-tool-grid">
             <aside class="pb-panel" aria-label="Book settings and photo library">
-                <h2>1. Book setup</h2>
+                <h2>1. 相册设置</h2>
                 <div class="pb-form-row">
                     <div>
-                        <label for="book-size">Caption</label>
+                        <label for="book-size">说明</label>
                         <select id="book-size">
                             <option value="8x8">8×8 in (square)</option>
                             <option value="10x10">10×10 in (square)</option>
@@ -269,7 +269,7 @@
                         </select>
                     </div>
                     <div>
-                        <label for="book-pages">Pages</label>
+                        <label for="book-pages">页数</label>
                         <select id="book-pages">
                             <option value="20">20 pages</option>
                             <option value="40" selected>40 pages</option>
@@ -279,32 +279,32 @@
                 </div>
                 <div class="pb-form-row" style="grid-template-columns: 1fr;">
                     <div>
-                        <label for="book-title">Book title</label>
+                        <label for="book-title">相册标题</label>
                         <input type="text" id="book-title" maxlength="80" placeholder="e.g. Emma &amp; Liam — 2026" value="Emma &amp; Liam">
                     </div>
                 </div>
                 <div class="pb-form-row">
                     <div>
-                        <label for="book-date">Date</label>
+                        <label for="book-date">日期</label>
                         <input type="text" id="book-date" maxlength="40" value="June 14, 2026">
                     </div>
                     <div>
-                        <label for="book-tag">Tagline / hashtag</label>
+                        <label for="book-tag">副标题 / 标签</label>
                         <input type="text" id="book-tag" maxlength="40" value="#EmmaAndLiam2026">
                     </div>
                 </div>
                 <div class="pb-btn-row">
-                    <button type="button" class="pb-btn" id="reset-book-btn">Reset book</button>
+                    <button type="button" class="pb-btn" id="reset-book-btn">重置相册</button>
                 </div>
 
                 <div class="pb-summary" aria-label="Book summary">
                     <div class="pb-stat"><span class="num" id="stat-photos">0</span><span class="lbl">Photos</span></div>
-                    <div class="pb-stat"><span class="num" id="stat-pages">40</span><span class="lbl">Pages</span></div>
+                    <div class="pb-stat"><span class="num" id="stat-pages">40</span><span class="lbl">页数</span></div>
                     <div class="pb-stat"><span class="num" id="stat-filled">0</span><span class="lbl">Filled</span></div>
                     <div class="pb-stat"><span class="num" id="stat-empty">40</span><span class="lbl">Empty</span></div>
                 </div>
 
-                <h2 style="margin-top: 1rem;">2. Photo library</h2>
+                <h2 style="margin-top: 1rem;">2. 照片库</h2>
                 <label class="pb-photo-drop" id="photo-drop">
                     <input type="file" id="photo-input" accept="image/*" multiple>
                     Drop photos here or click to browse
@@ -314,19 +314,19 @@
 
             <section class="pb-pages-wrap" aria-label="Page layout">
                 <div class="pb-pages-header">
-                    <h2>3. Pages</h2>
+                    <h2>3. 页面</h2>
                     <div class="pb-pages-controls">
-                        <button type="button" class="pb-btn small" id="auto-distribute-btn">Auto-distribute</button>
-                        <button type="button" class="pb-btn small" id="clear-pages-btn">Clear pages</button>
+                        <button type="button" class="pb-btn small" id="auto-distribute-btn">自动分配</button>
+                        <button type="button" class="pb-btn small" id="clear-pages-btn">清空页面</button>
                     </div>
                 </div>
 
-                <div class="pb-template-pick" role="radiogroup" aria-label="Layout template for new pages">
-                    <button type="button" data-template="1photo" class="active">1 Photo</button>
-                    <button type="button" data-template="2photo">2 Photo</button>
-                    <button type="button" data-template="3photo">3 Photo</button>
-                    <button type="button" data-template="4photo">4 Photo</button>
-                    <button type="button" data-template="cover">Cover</button>
+                <div class="pb-template-pick" role="radiogroup" aria-label="排版 template for new pages">
+                    <button type="button" data-template="1photo" class="active">1 张</button>
+                    <button type="button" data-template="2photo">2 张</button>
+                    <button type="button" data-template="3photo">3 张</button>
+                    <button type="button" data-template="4photo">4 张</button>
+                    <button type="button" data-template="cover">封面</button>
                 </div>
 
                 <div class="pb-pages-grid" id="pages-grid"></div>
@@ -335,24 +335,24 @@
                     <h3>Edit page <span id="editor-page-num"></span></h3>
                     <div class="pb-editor-row">
                         <div>
-                            <label for="editor-layout">Layout</label>
+                            <label for="editor-layout">排版</label>
                             <select id="editor-layout">
-                                <option value="1photo">1 Photo</option>
-                                <option value="2photo">2 Photo</option>
-                                <option value="3photo">3 Photo</option>
-                                <option value="4photo">4 Photo</option>
-                                <option value="cover">Cover / Title</option>
+                                <option value="1photo">1 张</option>
+                                <option value="2photo">2 张</option>
+                                <option value="3photo">3 张</option>
+                                <option value="4photo">4 张</option>
+                                <option value="cover">封面 / Title</option>
                             </select>
                         </div>
                         <div>
-                            <label for="editor-caption">Caption</label>
+                            <label for="editor-caption">说明</label>
                             <input type="text" id="editor-caption" maxlength="120" placeholder="Optional caption for this page">
                         </div>
                     </div>
                     <div class="pb-slots" id="editor-slots"></div>
                     <div class="pb-export-row">
-                        <button type="button" class="pb-btn primary" id="download-current-btn">Download this page (300 DPI PNG)</button>
-                        <button type="button" class="pb-btn" id="download-all-btn">Download all pages</button>
+                        <button type="button" class="pb-btn primary" id="download-current-btn">下载此页面 (300 DPI PNG)</button>
+                        <button type="button" class="pb-btn" id="download-all-btn">下载所有页面</button>
                     </div>
                 </div>
             </section>
@@ -361,18 +361,18 @@
 
     <section class="section" style="background: var(--color-bg-alt);">
         <div class="container article-body">
-            <h2>How to plan a wedding photo book</h2>
+            <h2>如何规划婚礼相册</h2>
             <p>The wedding photo book is the heirloom that lands on every grandparent's coffee table. Done well, it tells the day in sequence — getting ready, ceremony, portraits, reception, dancing — with breathing room between the best shots. Done badly, it's 60 pages of ceremony close-ups and a back cover that says "Thanks for coming!" with a typo. This planner lays out the pages, the photos, and the captions — you bring the story.</p>
             <h3>Edit page <span id="editor-page-num"></span></h3>
             <p>Book size dictates everything downstream. <strong>8×8 inches</strong> is the classic square — most common, cheapest to print, fits 1–3 photos per page. <strong>10×10</strong> gives larger photos for grandparent-friendly viewing. <strong>12×12</strong> is the coffee-table album — best for hero shots with breathing room. <strong>A4 landscape</strong> is the European standard for magazine-style spreads. If you have 40–60 photos, 8×8 with 20 pages is enough. If you have 100+ photos, go 10×10 with 40 pages.</p>
-            <h3>Pick the size before you pick the photos</h3>
+            <h3>先选尺寸，再选照片</h3>
             <p>The five layouts in this tool cover 90% of wedding photo books: a 1-photo full-bleed for the hero shot, a 2-photo split for the first-look + reaction pair, a 3-photo mosaic for the ceremony triptych, a 4-photo grid for the reception dance floor, and a cover/title for the front and back. Mix them — every page the same layout is a calendar, not a story.</p>
-            <h3>Layouts do the heavy lifting</h3>
+            <h3>排版承担重任</h3>
             <p>A photo of two people kissing is nice. "Aunt Marie and Uncle Carlos — 47 years married" is the photo the kids will look at in 20 years. Add a name, place, or year to the key pages — first dance, parent dance, cake cutting, the moment the bride's dad cried. Skip the captions on the action shots; let those breathe.</p>
-            <h3>Captions matter more than you'd think</h3>
+            <h3>标题比你想的更重要</h3>
             <p>The exported PNGs are 300 DPI: 8×8 = 2400×2400, 10×10 = 3000×3000, 12×12 = 3600×3600, A4 = 3508×2480. Upload directly to Blurb, Artifact, Shutterfly, or any print service. The high resolution means the print is sharp even if you zoom in on a face across the room.</p>
 
-            <h2>Tips for a great wedding photo book</h2>
+            <h2>优秀婚礼相册的技巧</h2>
             <ul>
                 <li><strong>Start with the cover photo, work backward.</strong> Pick the one shot that says "this was our day" — that's the cover. Then build the back cover from the last dance or the sparkler exit.</li>
                 <li><strong>Spread the best photos across the book.</strong> Don't stack 5 hero shots on pages 4–8. Place one hero per 6–8 pages so the reader's eye gets a fresh "wow" every few spreads.</li>
@@ -383,35 +383,35 @@
                 <li><strong>Add one page of "thank you".</strong> A final page that says "Thank you for being part of our day" with the date and hashtag closes the story. Print services sometimes call this a "back cover copy".</li>
             </ul>
 
-            <h2>Frequently asked questions</h2>
+            <h2>常见问题</h2>
             <div class="qa-block">
                 <details>
-                    <summary>What format are the exported pages?</summary>
+                    <summary>导出的页面是什么格式？</summary>
                     <p>PNG files at 300 DPI — 8×8 = 2400×2400, 10×10 = 3000×3000, 12×12 = 3600×3600, A4 landscape = 3508×2480. These upload directly to Blurb, Artifact, Shutterfly, or any print service.</p>
                 </details>
                 <details>
-                    <summary>What size photo book should I order?</summary>
+                    <summary>我应该订多大尺寸的相册？</summary>
                     <p>8×8 inches is the classic square — most common, cheapest, fits 1–3 photos per page. 10×10 gives larger photos for grandparent-friendly viewing. 12×12 is the coffee-table album — best for hero shots with breathing room. A4 landscape is the European standard for magazine-style spreads.</p>
                 </details>
                 <details>
-                    <summary>How many pages do I need?</summary>
+                    <summary>我需要多少页？</summary>
                     <p>20 pages fits 40–60 photos with breathing room. 40 pages fits 80–120 photos — the typical wedding coverage. 60 pages fits 150+ photos — for the couple that wants every candid.</p>
                 </details>
                 <details>
-                    <summary>Is the data private?</summary>
+                    <summary>数据是私有的吗？</summary>
                     <p>Yes. All photos and page data live in your browser's localStorage. The tool never uploads a single image to any server. Clear your browser storage to wipe the data.</p>
                 </details>
                 <details>
-                    <summary>What format are the exported pages?</summary>
+                    <summary>导出的页面是什么格式？</summary>
                     <p>PNG files at 300 DPI — 8×8 = 2400×2400, 10×10 = 3000×3000, 12×12 = 3600×3600, A4 landscape = 3508×2480. These upload directly to Blurb, Artifact, Shutterfly, or any print service.</p>
                 </details>
             </div>
 
-            <h2>From photo book to wedding film</h2>
+            <h2>从相册到婚礼电影</h2>
             <p>The same photos that fill the album become the building blocks of your wedding film. Drop the best 30–50 into our <a href="/blog/wedding-video-from-photos/">AI wedding video generator</a> for a 60–90 second cinematic edit, delivered in 48 hours, starting at $9.9. <a href="/order/">Get a free quote</a> to see a draft before you book.</p>
 
             <div class="sibling-tools" aria-label="More free wedding tools">
-                <a href="/tools/save-the-date-maker/">Save the Date Maker</a>
+                <a href="/tools/save-the-date-maker/">Save the 日期 Maker</a>
                 <a href="/tools/wedding-invitation-maker/">Wedding Invitation Maker</a>
                 <a href="/tools/wedding-video-invitation-maker/">Video Invitation Maker</a>
                 <a href="/tools/wedding-hashtag-generator/">Hashtag Generator</a>
@@ -429,23 +429,27 @@
     <section class="section">
         <div class="container" style="max-width: 920px;">
             <div class="section-header" style="text-align: left;">
-                <h2>Related guides</h2>
+                <h2>相关指南</h2>
             </div>
             <div class="related-grid">
                 <a class="related-card" href="/blog/wedding-photo-album-ideas/">
-                    <h4>AI Wedding Video From Photos</h4>
+                    <h4>婚礼相册创意：12种有效布局</h4>
+                    <span>阅读文章 →</span>
+                </a>
+                <a class="related-card" href="/blog/wedding-photo-album-ideas/">
+                    <h4>从照片生成 AI 婚礼视频</h4>
                     <span>Read article →</span>
                 </a>
                 <a class="related-card" href="/blog/best-wedding-photo-books-2026/">
-                    <h4>Best Wedding Photo Books of 2026</h4>
+                    <h4>2026年最佳婚礼相册</h4>
                     <span>Read article →</span>
                 </a>
                 <a class="related-card" href="/blog/wedding-invitation-video-guide/">
-                    <h4>Wedding Invitation Video Guide</h4>
+                    <h4>婚礼请柬视频指南</h4>
                     <span>Read article →</span>
                 </a>
                 <a class="related-card" href="/blog/wedding-video-from-photos/">
-                    <h4>AI Wedding Video From Photos</h4>
+                    <h4>从照片生成 AI 婚礼视频</h4>
                     <span>Read article →</span>
                 </a>
             </div>
@@ -454,7 +458,7 @@
 
     <section class="cta-section">
         <div class="container">
-            <h2>Photo book ready? Bring it to life on screen.</h2>
+            <h2>相册准备好了？在屏幕上赋予它生命。</h2>
             <p>Same engagement photos, 60–90 second cinematic wedding film, delivered in 48 hours. Starting at $9.9.</p>
             <a href="/order/" class="btn btn-primary btn-large">Get a Free Quote →</a>
         </div>
@@ -474,7 +478,7 @@
                 <p>AI-powered wedding video services for couples worldwide.</p>
             </div>
             <div class="footer-col">
-                <h3>Print at 300 DPI</h3>
+                <h3>以 300 DPI 打印</h3>
                 <ul>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/gallery/">Gallery</a></li>
@@ -499,6 +503,15 @@
                     <li><a href="/contact/">Contact</a></li>
                 </ul>
             </div>
+                <div class="footer-col">
+                    <h3>公司</h3>
+                    <ul>
+                        <li><a href="/order/">获取报价</a></li>
+                        <li><a href="/pricing/">价格</a></li>
+                        <li><a href="/contact/">联系</a></li>
+                    </ul>
+                </div>
+
         </div>
         <div class="footer-bottom">
             <p>© 2026 WeddingAI.video. All rights reserved.</p>
@@ -517,11 +530,11 @@
     'a4':    { w: 3508, h: 2480, label: 'A4 landscape', cssAspect: '3508 / 2480' }
   };
   var LAYOUTS = {
-    '1photo': { slots: 1, label: '1 Photo' },
-    '2photo': { slots: 2, label: '2 Photo' },
-    '3photo': { slots: 3, label: '3 Photo' },
-    '4photo': { slots: 4, label: '4 Photo' },
-    'cover':  { slots: 0, label: 'Cover / Title' }
+    '1photo': { slots: 1, label: '1 张' },
+    '2photo': { slots: 2, label: '2 张' },
+    '3photo': { slots: 3, label: '3 张' },
+    '4photo': { slots: 4, label: '4 张' },
+    'cover':  { slots: 0, label: '封面 / Title' }
   };
   var DEFAULT_LAYOUT = '1photo';
   var state = loadState() || defaultState();
@@ -548,7 +561,7 @@
   function saveState() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
   }
-  function rebuildPages() {
+  function rebuild页数() {
     var n = state.pages;
     var cur = state.pages_data || [];
     var out = [];
@@ -563,10 +576,10 @@
   }
 
   // --- DOM refs
-  var bookSizeEl = document.getElementById('book-size');
-  var bookPagesEl = document.getElementById('book-pages');
+  var book尺寸El = document.getElementById('book-size');
+  var book页数El = document.getElementById('book-pages');
   var bookTitleEl = document.getElementById('book-title');
-  var bookDateEl = document.getElementById('book-date');
+  var book日期El = document.getElementById('book-date');
   var bookTagEl = document.getElementById('book-tag');
   var resetBtn = document.getElementById('reset-book-btn');
   var photoInput = document.getElementById('photo-input');
@@ -574,16 +587,16 @@
   var photoListEl = document.getElementById('photo-list');
   var pagesGridEl = document.getElementById('pages-grid');
   var autoDistributeBtn = document.getElementById('auto-distribute-btn');
-  var clearPagesBtn = document.getElementById('clear-pages-btn');
+  var clear页数Btn = document.getElementById('clear-pages-btn');
   var statPhotos = document.getElementById('stat-photos');
-  var statPages = document.getElementById('stat-pages');
+  var stat页数 = document.getElementById('stat-pages');
   var statFilled = document.getElementById('stat-filled');
   var statEmpty = document.getElementById('stat-empty');
   var templatePick = document.querySelectorAll('.pb-template-pick button');
   var pageEditor = document.getElementById('page-editor');
   var editorPageNum = document.getElementById('editor-page-num');
-  var editorLayout = document.getElementById('editor-layout');
-  var editorCaption = document.getElementById('editor-caption');
+  var editor排版 = document.getElementById('editor-layout');
+  var editor说明 = document.getElementById('editor-caption');
   var editorSlots = document.getElementById('editor-slots');
   var downloadCurrentBtn = document.getElementById('download-current-btn');
   var downloadAllBtn = document.getElementById('download-all-btn');
@@ -591,24 +604,24 @@
   var currentPageIdx = -1;
 
   function init() {
-    bookSizeEl.value = state.size;
-    bookPagesEl.value = String(state.pages);
+    book尺寸El.value = state.size;
+    book页数El.value = String(state.pages);
     bookTitleEl.value = state.title;
-    bookDateEl.value = state.date;
+    book日期El.value = state.date;
     bookTagEl.value = state.tag;
-    rebuildPages();
+    rebuild页数();
     renderAll();
   }
 
   function renderAll() {
     renderStats();
     renderPhotoList();
-    renderPagesGrid();
+    render页数Grid();
   }
 
   function renderStats() {
     statPhotos.textContent = state.photos.length;
-    statPages.textContent = state.pages_data.length;
+    stat页数.textContent = state.pages_data.length;
     var filled = 0;
     state.pages_data.forEach(function (p) {
       var s = p.slots || [];
@@ -634,7 +647,7 @@
     photoListEl.innerHTML = html;
   }
 
-  function renderPagesGrid() {
+  function render页数Grid() {
     var html = '';
     state.pages_data.forEach(function (p, idx) {
       var activeClass = idx === currentPageIdx ? ' active' : '';
@@ -680,7 +693,7 @@
       if (photo) {
         var img = new Image();
         img.onload = function () {
-          drawCover(ctx, img, sp.x, sp.y, sp.w, sp.h);
+          draw封面(ctx, img, sp.x, sp.y, sp.w, sp.h);
         };
         img.src = photo.url;
       } else {
@@ -703,7 +716,7 @@
     }
   }
 
-  function drawCover(ctx, img, x, y, w, h) {
+  function draw封面(ctx, img, x, y, w, h) {
     var imgAspect = img.width / img.height;
     var boxAspect = w / h;
     var dx, dy, dw, dh;
@@ -759,7 +772,7 @@
       if (!file.type.startsWith('image/')) return;
       var reader = new FileReader();
       reader.onload = function (e) {
-        var id = 'p' + Date.now() + Math.random().toString(36).slice(2, 7);
+        var id = 'p' + 日期.now() + Math.random().toString(36).slice(2, 7);
         state.photos.push({ id: id, name: file.name, url: e.target.result });
         saveState();
         renderAll();
@@ -792,21 +805,21 @@
   });
 
   // --- Book settings
-  bookSizeEl.addEventListener('change', function () { state.size = bookSizeEl.value; saveState(); renderAll(); });
-  bookPagesEl.addEventListener('change', function () {
-    state.pages = parseInt(bookPagesEl.value, 10);
-    rebuildPages();
+  book尺寸El.addEventListener('change', function () { state.size = book尺寸El.value; saveState(); renderAll(); });
+  book页数El.addEventListener('change', function () {
+    state.pages = parseInt(book页数El.value, 10);
+    rebuild页数();
     saveState();
     renderAll();
   });
   bookTitleEl.addEventListener('input', function () { state.title = bookTitleEl.value; saveState(); renderAll(); });
-  bookDateEl.addEventListener('input', function () { state.date = bookDateEl.value; saveState(); renderAll(); });
+  book日期El.addEventListener('input', function () { state.date = book日期El.value; saveState(); renderAll(); });
   bookTagEl.addEventListener('input', function () { state.tag = bookTagEl.value; saveState(); renderAll(); });
 
   resetBtn.addEventListener('click', function () {
     if (!window.confirm('Reset the entire book? Photos will be cleared.')) return;
     state = defaultState();
-    rebuildPages();
+    rebuild页数();
     init();
     saveState();
   });
@@ -822,32 +835,32 @@
     var p = state.pages_data[idx];
     pageEditor.hidden = false;
     editorPageNum.textContent = idx + 1;
-    editorLayout.value = p.layout || DEFAULT_LAYOUT;
-    editorCaption.value = p.caption || '';
+    editor排版.value = p.layout || DEFAULT_LAYOUT;
+    editor说明.value = p.caption || '';
     renderEditorSlots();
     // Re-render grid to show active
-    renderPagesGrid();
+    render页数Grid();
     pageEditor.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
   function closeEditor() {
     currentPageIdx = -1;
     pageEditor.hidden = true;
-    renderPagesGrid();
+    render页数Grid();
   }
-  editorLayout.addEventListener('change', function () {
+  editor排版.addEventListener('change', function () {
     if (currentPageIdx < 0) return;
-    state.pages_data[currentPageIdx].layout = editorLayout.value;
+    state.pages_data[currentPageIdx].layout = editor排版.value;
     state.pages_data[currentPageIdx].slots = [];
     saveState();
     renderEditorSlots();
-    renderPagesGrid();
+    render页数Grid();
     renderStats();
   });
-  editorCaption.addEventListener('input', function () {
+  editor说明.addEventListener('input', function () {
     if (currentPageIdx < 0) return;
-    state.pages_data[currentPageIdx].caption = editorCaption.value;
+    state.pages_data[currentPageIdx].caption = editor说明.value;
     saveState();
-    renderPagesGrid();
+    render页数Grid();
   });
 
   function renderEditorSlots() {
@@ -855,7 +868,7 @@
     var p = state.pages_data[currentPageIdx];
     var layout = LAYOUTS[p.layout] || LAYOUTS[DEFAULT_LAYOUT];
     if (layout.slots === 0) {
-      editorSlots.innerHTML = '<div class="pb-photo-empty">Cover page — uses the title, date, and tagline.</div>';
+      editorSlots.innerHTML = '<div class="pb-photo-empty">封面 page — uses the title, date, and tagline.</div>';
       return;
     }
     var html = '';
@@ -894,7 +907,7 @@
     p.slots[sIdx] = choices[idx].id;
     saveState();
     renderEditorSlots();
-    renderPagesGrid();
+    render页数Grid();
     renderStats();
   }
 
@@ -933,7 +946,7 @@
     }
   }
 
-  clearPagesBtn.addEventListener('click', function () {
+  clear页数Btn.addEventListener('click', function () {
     if (!window.confirm('Clear all page assignments?')) return;
     state.pages_data.forEach(function (p) { p.slots = []; p.caption = ''; });
     saveState();
@@ -961,18 +974,18 @@
     if (layout.slots === 0) {
       // cover
       ctx.fillStyle = '#2c2c2c';
-      var titleSize = fitSize(ctx, state.title || 'Wedding', size.w * 0.18, 'Georgia, serif', size.w * 0.85, size.w * 0.05);
-      ctx.font = '700 ' + titleSize + 'px Georgia, serif';
+      var title尺寸 = fit尺寸(ctx, state.title || 'Wedding', size.w * 0.18, 'Georgia, serif', size.w * 0.85, size.w * 0.05);
+      ctx.font = '700 ' + title尺寸 + 'px Georgia, serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(state.title || 'Wedding', size.w/2, size.h * 0.42);
-      var dateSize = titleSize * 0.4;
-      ctx.font = '300 ' + dateSize + 'px Georgia, serif';
+      var date尺寸 = title尺寸 * 0.4;
+      ctx.font = '300 ' + date尺寸 + 'px Georgia, serif';
       ctx.fillStyle = '#7a7a7a';
       ctx.fillText(state.date || '', size.w/2, size.h * 0.55);
       if (state.tag) {
         ctx.fillStyle = '#d4af37';
-        ctx.font = '300 ' + (dateSize * 0.7) + 'px Georgia, serif';
+        ctx.font = '300 ' + (date尺寸 * 0.7) + 'px Georgia, serif';
         ctx.fillText(state.tag, size.w/2, size.h * 0.62);
       }
     } else {
@@ -984,7 +997,7 @@
         if (photo) {
           var img = new Image();
           img.onload = function () {
-            drawCover(ctx, img, sp.x, sp.y, sp.w, sp.h);
+            draw封面(ctx, img, sp.x, sp.y, sp.w, sp.h);
             pending--;
             if (pending === 0) finalizePageExport(c, idx);
           };
@@ -1008,14 +1021,14 @@
     if (layout.slots === 0) finalizePageExport(c, idx);
   }
 
-  function fitSize(ctx, text, maxSize, fontStack, maxWidth, minSize) {
-    var size = maxSize;
-    while (size > minSize) {
+  function fit尺寸(ctx, text, max尺寸, fontStack, maxWidth, min尺寸) {
+    var size = max尺寸;
+    while (size > min尺寸) {
       ctx.font = '700 ' + size + 'px ' + fontStack;
       if (ctx.measureText(text).width <= maxWidth) return size;
       size -= 2;
     }
-    return minSize;
+    return min尺寸;
   }
 
   function finalizePageExport(canvas, idx) {
