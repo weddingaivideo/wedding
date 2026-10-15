@@ -4544,4 +4544,10 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://weddingai.video/de/tools/wedding-budget-calculator/</loc>
+        <lastmod>2026-10-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
 </urlset>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Kostenloser Hochzeitsbudget-Rechner — 14 Kategorien, USD/EUR/GBP/JPY/CNY/INR | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/de/tools/wedding-budget-calculator/">
+    <meta name="description" content="Kostenloser Online-Hochzeitsbudgetrechner. 14 Kategorien (Veranstaltungsort, Catering, Foto, Video, Blumen, Kleidung, Musik, Kuchen, Ringe, Einladungen, Gefälligkeiten, Transport, Flitterwochen, Sonstiges). Echtzeit-Schieberegleranpassungen, Tortendiagramm, CSV-Export. 100 % im Browser — keine Anmeldung." />
+    <meta name="keywords" content="hochzeitsbudgetrechner, kostenloses Hochzeitsbudget, Hochzeitskostenaufschlüsselung, durchschnittliche Hochzeitskosten, Hochzeitsbudgetplaner, Hochzeitsbudget nach Kategorie, Hochzeitskosten-Tracker" />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kostenloser Hochzeitsbudget-Rechner - 14 Kategorien, mehrere Währungen">
+    <meta property="og:description" content="Planen Sie Ihr Hochzeitsbudget nach Kategorie. Echtzeit-Slider, Tortendiagramm, CSV-Export. USD, EUR, GBP, JPY, CNY, INR.">
+    <meta property="og:url" content="https://weddingai.video/de/tools/wedding-budget-calculator/">>
+    <meta property="og:site_name" content="WeddingAI.video">
+    <meta property="og:locale" content="de_DE">>
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Kostenloser Hochzeitsbudget-Rechner">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kostenloser Hochzeitsbudget-Rechner">
+    <meta name="twitter:description" content="Planen Sie Ihr Hochzeitsbudget nach Kategorie. Echtzeit-Slider, Tortendiagramm, CSV-Export.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Hochzeitsbudget-Rechner">
+    <link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/wedding-budget-calculator/" />
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/wedding-budget-calculator/" />
+    <link rel="alternate" hreflang="es" href="https://weddingai.video/es/tools/wedding-budget-calculator/" />
+    <link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/tools/wedding-budget-calculator/" />
+    <link rel="alternate" hreflang="de" href="https://weddingai.video/de/tools/wedding-budget-calculator/" />
+    <link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/tools/wedding-budget-calculator/" />
+    <link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/tools/wedding-budget-calculator/" />
+    <link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/wedding-budget-calculator/" />
+    <link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/tools/wedding-budget-calculator/" />
+    <link rel="alternate" hreflang="th" href="https://weddingai.video/th/tools/wedding-budget-calculator/" />
+    <link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/tools/wedding-budget-calculator/" />
+    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
+    <script defer src="/js/main.min.js?v=3.20"></script>
+    <script defer src="/js/tools/common.js?v=1.0.0"></script>
+    <script defer src="/js/i18n.js?v=4.28"></script>
+    <style>
+        .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
+        .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero-mini p { color: rgba(255,255,255,0.85); max-width: 720px; margin: 0 auto; }
+        .breadcrumb { padding: var(--spacing-md) 0; font-size: 0.875rem; color: var(--color-text-light); max-width: var(--max-width); margin: 0 auto; }
+        .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+        .breadcrumb span { margin: 0 var(--spacing-xs); color: var(--color-border); }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+        .section { padding: var(--spacing-xl) 0; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-md); }
+        .related-card { display: block; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .related-card h4 { font-family: var(--font-heading); color: var(--color-secondary); font-size: 0.9375rem; margin: 0 0 0.4rem 0; line-height: 1.3; }
+        .related-card span { color: var(--color-primary); font-size: 0.8125rem; font-weight: 600; }
+        .cta-section { background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0; }
+        .cta-section h2 { color: #fff; }
+        .cta-section p { color: rgba(255,255,255,0.78); margin-bottom: var(--spacing-md); }
+        .article-body { max-width: 760px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .article-body h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-sm); font-size: 1.5rem; color: var(--color-secondary); }
+        .article-body h3 { margin-top: var(--spacing-lg); margin-bottom: 0.5rem; font-size: 1.125rem; color: var(--color-secondary); }
+        .article-body p { margin-bottom: 0.85rem; color: var(--color-text); }
+        .article-body ul, .article-body ol { margin: 0.5rem 0 1rem 1.25rem; list-style: disc; color: var(--color-text); }
+        .article-body ul li, .article-body ol li { margin-bottom: 0.4rem; }
+        .article-body a { color: var(--color-primary); font-weight: 600; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body strong { color: var(--color-secondary); }
+        .qa-block details { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: 0.6rem; }
+        .qa-block summary { font-weight: 600; color: var(--color-secondary); cursor: pointer; font-size: 1rem; }
+        .qa-block summary::-webkit-details-marker { color: var(--color-primary); }
+        .qa-block details[open] { box-shadow: var(--shadow-sm); }
+        .qa-block p { margin-top: 0.6rem; color: var(--color-text); font-size: 0.9375rem; }
+        .sibling-tools { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+        .sibling-tools a { font-size: 0.8125rem; padding: 0.4rem 0.85rem; border-radius: 999px; background: var(--color-bg-alt); border: 1px solid var(--color-border); color: var(--color-secondary); text-decoration: none; }
+        .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
+
+        /* Budget-specific */
+        .bg-tool-wrap { max-width: 1200px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md); }
+        .bg-tool-grid { display: grid; grid-template-columns: 360px 1fr; gap: var(--spacing-lg); align-items: start; }
+        @media (max-width: 900px) { .bg-tool-grid { grid-template-columns: 1fr; } }
+        .bg-panel { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); position: sticky; top: var(--spacing-md); }
+        .bg-panel h2 { font-size: 1.0625rem; color: var(--color-secondary); margin: 0 0 0.75rem 0; }
+        .bg-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem; }
+        .bg-form-row label { display: block; font-size: 0.75rem; color: var(--color-text-light); margin-bottom: 0.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; }
+        .bg-form-row input, .bg-form-row select { width: 100%; padding: 0.5rem 0.6rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font: inherit; font-size: 0.875rem; background: #fff; color: var(--color-text); }
+        .bg-form-row input:focus, .bg-form-row select:focus { outline: 2px solid var(--color-primary); outline-offset: 0; border-color: var(--color-primary); }
+        .bg-btn-row { display: flex; gap: 0.5rem; margin-top: 0.6rem; flex-wrap: wrap; }
+        .bg-btn { padding: 0.55rem 0.95rem; border-radius: var(--radius-sm); font: inherit; font-size: 0.8125rem; font-weight: 600; cursor: pointer; border: 1px solid var(--color-border); background: var(--color-white); color: var(--color-secondary); transition: background .15s ease, border-color .15s ease; }
+        .bg-btn:hover { background: #fff7e6; border-color: var(--color-primary); }
+        .bg-btn.primary { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+        .bg-btn.primary:hover { background: #c19d2e; border-color: #c19d2e; }
+        .bg-btn.small { padding: 0.3rem 0.55rem; font-size: 0.7rem; }
+        .bg-preset-row { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.5rem; }
+        .bg-preset-row button { padding: 0.3rem 0.55rem; border-radius: 999px; font: inherit; font-size: 0.7rem; font-weight: 600; cursor: pointer; border: 1px solid var(--color-border); background: var(--color-bg-alt); color: var(--color-secondary); }
+        .bg-preset-row button:hover { background: #fff7e6; border-color: var(--color-primary); }
+        .bg-preset-row button.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+        .bg-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-top: 0.6rem; }
+        .bg-stat { background: var(--color-bg-alt); border-radius: var(--radius-sm); padding: 0.5rem; text-align: center; }
+        .bg-stat .num { display: block; font-size: 1.05rem; font-weight: 700; color: var(--color-secondary); line-height: 1.1; }
+        .bg-stat .lbl { font-size: 0.7rem; color: var(--color-text-light); text-transform: uppercase; letter-spacing: 0.04em; }
+        .bg-stat.over .num { color: #b94c4c; }
+        .bg-stat.under .num { color: #6b8e23; }
+        .bg-cats-wrap { background: #fcfaf6; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); }
+        .bg-cats-header { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; justify-content: space-between; margin-bottom: 0.8rem; }
+        .bg-cats-header h2 { font-size: 1.0625rem; color: var(--color-secondary); margin: 0; }
+        .bg-cats { display: grid; grid-template-columns: 1fr; gap: 0.5rem; }
+        .bg-cat { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.6rem 0.8rem; }
+        .bg-cat-row { display: grid; grid-template-columns: 1fr 80px 1fr 100px; gap: 0.6rem; align-items: center; }
+        .bg-cat-name { font-weight: 600; color: var(--color-secondary); font-size: 0.9rem; }
+        .bg-cat-name .pct { font-weight: 400; color: var(--color-text-light); font-size: 0.75rem; margin-left: 0.3rem; }
+        .bg-cat-amount { font-weight: 700; color: var(--color-secondary); font-size: 0.9rem; text-align: right; }
+        .bg-cat input[type="range"] { width: 100%; }
+        .bg-cat input[type="number"] { width: 100%; padding: 0.3rem 0.4rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font: inherit; font-size: 0.85rem; }
+        .bg-chart-wrap { margin-top: 1rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); }
+        .bg-chart-wrap h3 { font-size: 0.95rem; color: var(--color-secondary); margin: 0 0 0.5rem 0; text-align: center; }
+        .bg-chart { max-width: 400px; margin: 0 auto; }
+        .bg-chart-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem 0.6rem; font-size: 0.75rem; color: var(--color-text); margin-top: 0.6rem; }
+        .bg-chart-legend-item { display: flex; align-items: center; gap: 0.4rem; }
+        .bg-chart-legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+        .bg-export-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.8rem; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "\"name\": \"Hochzeitsbudget-Rechner\"",
+      "url": "https://weddingai.video/tools/wedding-budget-calculator/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any (browser-based)",
+      "browserRequirements": "Requires JavaScript",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "\"description\": \"Kostenloser Online-Hochzeitsbudgetrechner. 14 Kategorien (Veranstaltungsort, Catering, Foto, Video, Blumen, Kleidung, Musik, Kuchen, Ringe, Einladungen, Gefälligkeiten, Transport, Flitterwochen, Sonstiges). Echtzeit-Schieberegleranpassungen, Tortendiagramm, CSV-Export. 100 % im Browser — keine Anmeldung.\"",
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "creator": { "@type": "Organization", "name": "WeddingAI.video", "url": "https://weddingai.video/" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does the wedding budget calculator work?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Enter your total wedding budget, pick a currency, and the tool distributes the amount across 14 standard categories using industry-average percentages. Drag any category's slider to adjust its share, or type a custom amount. The pie chart and per-category totals update in real time. Export as CSV when you're done." }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the average wedding budget percentages?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Industry averages for a US wedding: Venue & Reception 35-40%, Catering & Bar 25-30%, Photography 10-12%, Videography 5-7%, Flowers & Decor 8-10%, Attire & Beauty 8-10%, Music & Entertainment 7-10%, Cake & Desserts 2%, Rings & Jewelry 4-5%, Invitations & Stationery 2-3%, Favors & Gifts 2-3%, Transportation 2%, Honeymoon 5-8%, Miscellaneous 3-5%. These add up to about 100% but can be rebalanced based on priorities." }
+        },
+        {
+          "@type": "Question",
+          "name": "Which currencies are supported?",
+          "acceptedAnswer": { "@type": "Answer", "text": "USD ($), EUR (€), GBP (£), JPY (¥), CNY (¥), INR (₹), and KRW (₩). The currency is purely a display label — type the budget in your local currency and the breakdown uses the same symbol throughout." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the budget data private?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. All budget values are stored in your browser's localStorage only. Nothing is uploaded to any server. Clear your browser storage to wipe the data." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I export the budget?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Hit Export CSV to download a comma-separated file with all 14 categories, percentages, and amounts. Open in Excel, Google Sheets, or any spreadsheet. Use Print for a clean PDF-ready layout." }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to plan a wedding budget",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Set the total budget", "text": "Start with the total amount you can spend on the wedding. Be honest about what you can afford without going into debt — most wedding industry surveys put the US median at $30,000-$35,000 for 2026." },
+        { "@type": "HowToStep", "position": 2, "name": "Pick a starting allocation", "text": "Choose a preset (US Average, UK Average, Budget/DIY, or Luxury) or leave the tool's defaults. The 14 categories will fill in." },
+        { "@type": "HowToStep", "position": 3, "name": "Adjust the sliders", "text": "Drag any category slider up or down to match your priorities. The pie chart and the running total update in real time. The remaining 100% is auto-balanced as you go." },
+        { "@type": "HowToStep", "position": 4, "name": "Lock in vendor quotes", "text": "As you collect real quotes from venues, photographers, and caterers, override the slider amounts with actual numbers. The gap between your budget and the actual quote becomes obvious at a glance." },
+        { "@type": "HowToStep", "position": 5, "name": "Export and share", "text": "Hit Export CSV to share the final breakdown with your partner, family, or wedding planner. The CSV opens in any spreadsheet." }
+      ],
+      "totalTime": "PT20M"
+    }
+    </script>
+</head>
+<body class="page-tool">
+<a class="wa-skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="/" class="site-logo" aria-label="WeddingAI.video home">
+            <picture>
+                <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                <img src="/images/logo-full-356.avif" alt="WeddingAI.video" width="178" height="40" loading="eager" fetchpriority="high" decoding="async">
+            </picture>
+        </a>
+        <nav class="nav-primary" aria-label="Primary">
+            <ul>
+                <li class="has-dropdown">
+                    <button type="button" aria-expanded="false" aria-haspopup="true">Services <span aria-hidden="true">▾</span></button>
+                    <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                        <li role="none"><a href="/services/wedding-video/" role="menuitem">Wedding Film</a></li>
+                        <li role="none"><a href="/services/" role="menuitem">View all services →</a></li>
+                        <li role="none"><a href="/tools/" role="menuitem">Free Tools</a></li>
+                        <li role="none"><a href="/gallery/" role="menuitem">Gallery</a></li>
+                        <li role="none"><a href="/blog/" role="menuitem">Blog</a></li>
+                        <li role="none"><a href="/pricing/" role="menuitem">Pricing</a></li>
+                        <li role="none"><a href="/order/" role="menuitem">Get a Quote</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="/order/" class="btn btn-primary">Get a Quote</a>
+            <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main id="main-content">
+    <section class="page-hero-mini">
+        <div class="container">
+            <h1>Hochzeitsbudget-Rechner</h1>
+            <p>Plan your wedding budget across 14 standard categories. Set a total, pick a currency, drag the sliders to match your priorities, see the pie chart update in real time, and export the final breakdown as CSV. Free, no signup, no upload.</p>
+            <p class="wa-tool-privacy">Budgetdaten bleiben in Ihrem Browser. Es wird nichts hochgeladen.</p>
+        </div>
+    </section>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a> <span>›</span> <a href="/tools/">Free Tools</a> <span>›</span> <span>Hochzeitsbudget-Rechner</span>
+    </nav>
+
+    <div class="bg-tool-wrap">
+        <div class="bg-tool-grid">
+            <aside class="bg-panel" aria-label="Budget settings">
+                <h2>Legen Sie Ihr Budget fest.</h2>
+                <div class="bg-form-row" style="grid-template-columns: 1fr 100px;">
+                    <div>
+                        <label for="bg-total">Total budget</label>
+                        <input type="number" id="bg-total" min="0" step="100" value="30000">
+                    </div>
+                    <div>
+                        <label for="bg-currency">Currency</label>
+                        <select id="bg-currency">
+                            <option value="$">USD ($)</option>
+                            <option value="€">EUR (€)</option>
+                            <option value="£">GBP (£)</option>
+                            <option value="¥">JPY (¥)</option>
+                            <option value="¥">CNY (¥)</option>
+                            <option value="₹">INR (₹)</option>
+                            <option value="₩">KRW (₩)</option>
+                        </select>
+                    </div>
+                </div>
+                <h2 style="margin-top: 1rem;">2. Pick a starting point</h2>
+                <div class="bg-preset-row" id="preset-row" role="radiogroup" aria-label="Budget preset">
+                    <button type="button" data-preset="us" class="active">US Average</button>
+                    <button type="button" data-preset="uk">UK Average</button>
+                    <button type="button" data-preset="budget">Budget / DIY</button>
+                    <button type="button" data-preset="luxury">Luxury</button>
+                    <button type="button" data-preset="reset">Reset</button>
+                </div>
+                <h2 style="margin-top: 1rem;">Summary</h2>
+                <div class="bg-summary" aria-label="Budget summary">
+                    <div class="bg-stat" id="stat-allocated"><span class="num">$0</span><span class="lbl">Allocated</span></div>
+                    <div class="bg-stat" id="stat-remaining"><span class="num">$0</span><span class="lbl">Remaining</span></div>
+                </div>
+            </aside>
+
+            <section class="bg-cats-wrap" aria-label="Budget categories">
+                <div class="bg-cats-header">
+                    <h2>3. Passen Sie die Kategorien an</h2>
+                </div>
+                <div class="bg-cats" id="cats"></div>
+
+                <div class="bg-chart-wrap">
+                    <h3>Where the money goes</h3>
+                    <canvas id="bg-chart" class="bg-chart" width="400" height="400"></canvas>
+                    <div class="bg-chart-legend" id="bg-legend"></div>
+                </div>
+
+                <div class="bg-export-row">
+                    <button type="button" class="bg-btn primary" id="export-csv-btn">Export CSV</button>
+                    <button type="button" class="bg-btn" id="print-btn">Print</button>
+                    <button type="button" class="bg-btn" id="reset-btn">Reset all</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <section class="section" style="background: var(--color-bg-alt);">
+        <div class="container article-body">
+            <h2>So planen Sie ein Hochzeitsbudget</h2>
+            <p>The wedding budget is the single most important number in the entire planning process. It decides the venue, the guest count, the dress, the photographer, the honeymoon — every line item on the 14-category breakdown below. Most couples start with a number pulled out of the air, then discover two-thirds of the way through that the photographer alone costs what they budgeted for the whole wedding. This calculator prevents that. Set the total honestly, distribute the percentages to match your priorities, and watch the pie chart. The number on the right of each row is the cap for that category — go over it only when you have a real quote, not a wish.</p>
+            <h3>Start with the total, not the categories</h3>
+            <p>Most US wedding industry surveys put the 2026 median wedding at $30,000-$35,000 for ~130 guests. The 14 categories below are weighted toward that median. If your budget is different — $8,000 elopement, $80,000 luxury — change the total first, then drag the sliders. The percentages and pie chart will rescale automatically.</p>
+            <h3>Lock in vendor quotes as you go</h3>
+            <p>The slider is a planning tool, not a contract. When you get a real quote from a venue ($12,000 for the hall) or a photographer ($4,500 for 8 hours), override the slider amount with the actual number. The gap between your budget and the actual quote becomes obvious at a glance. The remaining categories stay at the percentages you set; you don't need to rebalance them until you actually have data.</p>
+            <h3>The three big-ticket categories set the tone</h3>
+            <p>Venue, catering, and photography typically account for 60-70% of any wedding budget. Get those right and the rest falls into place. If you need to cut, cut catering (buffet vs. plated, or weeknight vs. Saturday) before you cut the photographer — the photos are what you keep forever, the food is gone in an hour.</p>
+            <h3>Honeymoon is a separate line, not a "misc" line</h3>
+            <p>Put the honeymoon in its own category. If you treat it as miscellaneous, it'll be the first thing you cut when overruns happen elsewhere. The honeymoon is the actual wedding present to yourselves — give it its own line and protect it.</p>
+
+            <h2>14 Hochzeitsbudget-Kategorien erklärt</h2>
+            <ul>
+                <li><strong>Venue & Reception (35-40%)</strong> — The biggest line. Includes the ceremony space, reception hall, ceremony + reception fees, and any required insurance.</li>
+                <li><strong>Catering & Bar (25-30%)</strong> — Per-head cost × guest count. Buffet usually runs $50-$80/head; plated $80-$150/head; bar $20-$40/head additional.</li>
+                <li><strong>Photography (10-12%)</strong> — 8 hours of coverage with an album runs $3,500-$6,000. Engagement shoot adds $400-$800.</li>
+                <li><strong>Videography (5-7%)</strong> — Same-day-edit or 60-90 second highlight runs $1,500-$4,000. Full ceremony + reception + editing runs $3,500-$8,000.</li>
+                <li><strong>Flowers & Decor (8-10%)</strong> — Bridal bouquet ($150-$300), centerpieces ($50-$150 each × table count), ceremony arch ($500-$2,000), venue decor.</li>
+                <li><strong>Attire & Beauty (8-10%)</strong> — Wedding dress $1,500-$4,000, suit/tux $400-$1,200, hair & makeup $300-$800, alterations $200-$500.</li>
+                <li><strong>Music & Entertainment (7-10%)</strong> — DJ $1,200-$2,500, live band $3,500-$8,000, ceremony musicians $500-$1,500, sound system rentals.</li>
+                <li><strong>Cake & Desserts (2%)</strong> — Wedding cake $400-$1,000, dessert table $200-$600.</li>
+                <li><strong>Rings & Jewelry (4-5%)</strong> — Engagement ring + wedding bands together. Excludes the engagement ring if already purchased.</li>
+                <li><strong>Invitations & Stationery (2-3%)</strong> — Save-the-dates, invitations, RSVPs, thank-you cards. Or $0 if you use the free digital tools on this site.</li>
+                <li><strong>Favors & Gifts (2-3%)</strong> — Guest favors ($3-$8 each), wedding party gifts ($50-$200 each × 6-10 people), parent gifts.</li>
+                <li><strong>Transportation (2%)</strong> — Limo for the couple $400-$1,000, guest shuttle $500-$1,500, parking.</li>
+                <li><strong>Honeymoon (5-8%)</strong> — International 7-10 days $5,000-$12,000. Domestic 5-7 days $2,500-$6,000.</li>
+                <li><strong>Miscellaneous (3-5%)</strong> — Tips, marriage license ($50-$100), wedding insurance ($200-$500), postage, alterations, the "we forgot" line.</li>
+            </ul>
+
+            <h2>Häufig gestellte Fragen</h2>
+            <div class="qa-block">
+                <details>
+                    <summary>Kann ich das Budget exportieren?</summary>
+                    <p>Ja. Klicken Sie auf CSV exportieren, um eine kommagetrennte Datei mit allen 14 Kategorien, Prozentsätzen und Beträgen herunterzuladen. Öffnen Sie in Excel, Google Tabellen oder einer anderen Tabelle. Verwenden Sie Drucken für ein sauberes PDF-bereites Layout.</p>
+                </details>
+                <details>
+                    <summary>What are the average wedding budget percentages?</summary>
+                    <p>Industry averages for a US wedding: Venue &amp; Reception 35-40%, Catering &amp; Bar 25-30%, Photography 10-12%, Videography 5-7%, Flowers &amp; Decor 8-10%, Attire &amp; Beauty 8-10%, Music &amp; Entertainment 7-10%, Cake &amp; Desserts 2%, Rings &amp; Jewelry 4-5%, Invitations &amp; Stationery 2-3%, Favors &amp; Gifts 2-3%, Transportation 2%, Honeymoon 5-8%, Miscellaneous 3-5%. These add up to about 100% but can be rebalanced based on priorities.</p>
+                </details>
+                <details>
+                    <summary>Which currencies are supported?</summary>
+                    <p>USD ($), EUR (€), GBP (£), JPY (¥), CNY (¥), INR (₹), and KRW (₩). The currency is purely a display label — type the budget in your local currency and the breakdown uses the same symbol throughout.</p>
+                </details>
+                <details>
+                    <summary>Is the budget data private?</summary>
+                    <p>Yes. All budget values are stored in your browser's localStorage only. Nothing is uploaded to any server. Clear your browser storage to wipe the data.</p>
+                </details>
+                <details>
+                    <summary>Can I export the budget?</summary>
+                    <p>Yes. Hit Export CSV to download a comma-separated file with all 14 categories, percentages, and amounts. Open in Excel, Google Sheets, or any spreadsheet. Use Print for a clean PDF-ready layout.</p>
+                </details>
+            </div>
+
+            <h2>Vom Budget zum Hochzeitsfilm</h2>
+            <p>Once the budget is set, the next conversation is "what do we keep forever". For most couples that's the photos and the wedding film. Both are line items in the calculator — photo is 10-12% and video is 5-7%. Put them together and you're at 15-19% of the budget, which is a fair price for the only two things you'll watch 10 years from now. <a href="/blog/wedding-video-from-photos/">See how the AI wedding video service works</a> if you want a 60-90 second cinematic film for under $10 per attendee. <a href="/order/">Get a free quote</a>.</p>
+
+            <div class="sibling-tools" aria-label="More free wedding tools">
+                <a href="/tools/save-the-date-maker/">Save the Date Maker</a>
+                <a href="/tools/wedding-invitation-maker/">Wedding Invitation Maker</a>
+                <a href="/tools/wedding-video-invitation-maker/">Video Invitation Maker</a>
+                <a href="/tools/wedding-hashtag-generator/">Hashtag Generator</a>
+                <a href="/tools/wedding-seating-chart-maker/">Seating Chart Maker</a>
+                <a href="/tools/wedding-photo-book-planner/">Photo Book Planner</a>
+                <a href="/tools/wedding-photo-collage/">Photo Collage</a>
+                <a href="/tools/add-text-to-wedding-photo/">Add Text to Photo</a>
+                <a href="/tools/compress-wedding-photos/">Compress Photos</a>
+                <a href="/tools/crop-wedding-photo-for-reels/">Crop for Reels</a>
+                <a href="/tools/remove-background-wedding-portrait/">Remove Background</a>
+                <a href="/tools/heic-to-jpg-wedding-photos/">HEIC → JPG</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container" style="max-width: 920px;">
+            <div class="section-header" style="text-align: left;">
+                <h2>Related guides</h2>
+            </div>
+            <div class="related-grid">
+                <a class="related-card" href="/blog/wedding-budget-breakdown-2026/">
+                    <h4>Wedding Budget Breakdown 2026: What Couples Actually Spend</h4>
+                    <span>Read article →</span>
+                </a>
+                <a class="related-card" href="/blog/average-wedding-cost-2026/">
+                    <h4>Average Wedding Cost 2026: Country-by-Country</h4>
+                    <span>Read article →</span>
+                </a>
+                <a class="related-card" href="/blog/wedding-vendor-payment-schedule/">
+                    <h4>Wedding Vendor Payment Schedule: When to Pay Whom</h4>
+                    <span>Read article →</span>
+                </a>
+                <a class="related-card" href="/blog/wedding-video-from-photos/">
+                    <h4>AI Wedding Video From Photos</h4>
+                    <span>Read article →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Budget eingesperrt? Bereit für den Film?</h2>
+            <p>Gleiche Verlobungsfotos, 60–90 Sekunden filmischer Hochzeitsfilm, in 48 Stunden geliefert. Ab $ 9.9.</p>
+            <a href="/order/" class="btn btn-primary btn-large">Get a Free Quote →</a>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="/" class="footer-logo" aria-label="WeddingAI.video home">
+                    <picture>
+                        <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+                        <img src="/images/logo-full-356.avif" alt="WeddingAI.video" width="178" height="40" loading="lazy" decoding="async">
+                    </picture>
+                </a>
+                <p>AI-powered wedding video services for couples worldwide.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/gallery/">Gallery</a></li>
+                    <li><a href="/about-us/">About Us</a></li>
+                    <li><a href="/tools/">Free Tools</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="/services/wedding-video/">Wedding Film</a></li>
+                    <li><a href="/services/personalization/ai-video-generator/">AI Video Generator</a></li>
+                    <li><a href="/services/wedding-trailer/">Wedding Trailer</a></li>
+                    <li><a href="/services/family-tribute/">Family Tribute</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Unternehmen</h3>
+                <ul>
+                    <li><a href="/order/">Get a Quote</a></li>
+                    <li><a href="/pricing/">Pricing</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 WeddingAI.video. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var STORAGE_KEY = 'wedding-budget-v1';
+  var CATEGORIES = [
+    { id: 'venue',       name: 'Venue & Reception',      defaultPct: 38, color: '#d4af37' },
+    { id: 'catering',    name: 'Catering & Bar',         defaultPct: 27, color: '#b8941f' },
+    { id: 'photo',       name: 'Photography',           defaultPct: 11, color: '#a37517' },
+    { id: 'video',       name: 'Videography',           defaultPct: 6,  color: '#8c5e10' },
+    { id: 'flowers',     name: 'Flowers & Decor',       defaultPct: 9,  color: '#6b8e23' },
+    { id: 'attire',      name: 'Attire & Beauty',       defaultPct: 9,  color: '#5a7a1d' },
+    { id: 'music',       name: 'Music & Entertainment', defaultPct: 8,  color: '#4a6b8a' },
+    { id: 'cake',        name: 'Cake & Desserts',       defaultPct: 2,  color: '#3d5a73' },
+    { id: 'rings',       name: 'Rings & Jewelry',       defaultPct: 4,  color: '#a8324a' },
+    { id: 'invites',     name: 'Invitations & Stationery', defaultPct: 3,  color: '#8c2839' },
+    { id: 'favors',      name: 'Favors & Gifts',        defaultPct: 2,  color: '#7a7a7a' },
+    { id: 'transport',   name: 'Transportation',        defaultPct: 2,  color: '#5c5c5c' },
+    { id: 'honeymoon',   name: 'Honeymoon',             defaultPct: 7,  color: '#4a90b8' },
+    { id: 'misc',        name: 'Miscellaneous',         defaultPct: 4,  color: '#3d3d3d' }
+  ];
+  var PRESETS = {
+    us:     { venue:38, catering:27, photo:11, video:6, flowers:9, attire:9, music:8, cake:2, rings:4, invites:3, favors:2, transport:2, honeymoon:7, misc:4 },
+    uk:     { venue:30, catering:25, photo:10, video:8, flowers:8, attire:8, music:7, cake:2, rings:3, invites:2, favors:2, transport:2, honeymoon:11, misc:4 },
+    budget: { venue:25, catering:22, photo:15, video:3, flowers:5, attire:10, music:5, cake:2, rings:5, invites:1, favors:2, transport:2, honeymoon:0,  misc:3 },
+    luxury: { venue:40, catering:30, photo:10, video:8, flowers:10, attire:8, music:10, cake:3, rings:4, invites:3, favors:3, transport:2, honeymoon:7,  misc:2 }
+  };
+  var state = loadState() || defaultState();
+
+  function defaultState() {
+    var s = { total: 30000, currency: '$', pcts: {}, locked: {} };
+    CATEGORIES.forEach(function (c) { s.pcts[c.id] = c.defaultPct; });
+    return s;
+  }
+  function loadState() {
+    try {
+      var s = localStorage.getItem(STORAGE_KEY);
+      if (!s) return null;
+      return JSON.parse(s);
+    } catch (e) { return null; }
+  }
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  // DOM refs
+  var totalEl = document.getElementById('bg-total');
+  var currencyEl = document.getElementById('bg-currency');
+  var presetRow = document.getElementById('preset-row');
+  var statAllocated = document.getElementById('stat-allocated');
+  var statRemaining = document.getElementById('stat-remaining');
+  var catsEl = document.getElementById('cats');
+  var chartCanvas = document.getElementById('bg-chart');
+  var legendEl = document.getElementById('bg-legend');
+  var exportCsvBtn = document.getElementById('export-csv-btn');
+  var printBtn = document.getElementById('print-btn');
+  var resetBtn = document.getElementById('reset-btn');
+
+  function init() {
+    totalEl.value = state.total;
+    currencyEl.value = state.currency;
+    renderCats();
+    renderAll();
+  }
+
+  function renderCats() {
+    var html = '';
+    CATEGORIES.forEach(function (c) {
+      var pct = state.pcts[c.id] || 0;
+      var amount = Math.round(state.total * pct / 100);
+      html += '<div class="bg-cat" data-cat-id="' + c.id + '">'
+            + '<div class="bg-cat-row">'
+            +   '<div class="bg-cat-name">' + c.name + '<span class="pct">' + pct + '%</span></div>'
+            +   '<input type="number" min="0" step="50" value="' + amount + '" data-amount-input="' + c.id + '" aria-label="' + c.name + ' amount">'
+            +   '<input type="range" min="0" max="60" step="1" value="' + pct + '" data-range-input="' + c.id + '" aria-label="' + c.name + ' percent">'
+            +   '<div class="bg-cat-amount" data-amount-display="' + c.id + '">' + state.currency + formatNum(amount) + '</div>'
+            + '</div>'
+            + '</div>';
+    });
+    catsEl.innerHTML = html;
+    // wire inputs
+    catsEl.querySelectorAll('[data-amount-input]').forEach(function (el) {
+      el.addEventListener('input', function () {
+        var id = el.getAttribute('data-amount-input');
+        var amt = parseFloat(el.value) || 0;
+        state.locked[id] = amt;
+        if (state.total > 0) {
+          state.pcts[id] = Math.round((amt / state.total) * 1000) / 10;
+        }
+        saveState(); renderAll();
+      });
+    });
+    catsEl.querySelectorAll('[data-range-input]').forEach(function (el) {
+      el.addEventListener('input', function () {
+        var id = el.getAttribute('data-range-input');
+        state.pcts[id] = parseFloat(el.value) || 0;
+        state.locked[id] = null;
+        saveState(); renderAll();
+      });
+    });
+  }
+
+  function formatNum(n) {
+    return n.toLocaleString('en-US');
+  }
+
+  function renderAll() {
+    renderSummary();
+    renderAmounts();
+    renderChart();
+  }
+
+  function renderSummary() {
+    var sum = 0;
+    CATEGORIES.forEach(function (c) {
+      sum += Math.round(state.total * (state.pcts[c.id] || 0) / 100);
+    });
+    var remaining = state.total - sum;
+    statAllocated.querySelector('.num').textContent = state.currency + formatNum(sum);
+    statRemaining.querySelector('.num').textContent = (remaining >= 0 ? '+' : '') + state.currency + formatNum(Math.abs(remaining));
+    statAllocated.className = 'bg-stat' + (sum > state.total ? ' over' : (sum < state.total ? ' under' : ''));
+    statRemaining.className = 'bg-stat' + (remaining < 0 ? ' over' : (remaining > 0 ? ' under' : ''));
+  }
+
+  function renderAmounts() {
+    CATEGORIES.forEach(function (c) {
+      var pct = state.pcts[c.id] || 0;
+      var amount = Math.round(state.total * pct / 100);
+      var amtEl = catsEl.querySelector('[data-amount-display="' + c.id + '"]');
+      var inEl = catsEl.querySelector('[data-amount-input="' + c.id + '"]');
+      var rgEl = catsEl.querySelector('[data-range-input="' + c.id + '"]');
+      var pctEl = catsEl.querySelector('.bg-cat[data-cat-id="' + c.id + '"] .pct');
+      if (amtEl) amtEl.textContent = state.currency + formatNum(amount);
+      if (pctEl) pctEl.textContent = pct + '%';
+      if (rgEl && document.activeElement !== rgEl) rgEl.value = pct;
+      if (inEl && document.activeElement !== inEl) inEl.value = amount;
+    });
+  }
+
+  function renderChart() {
+    var c = chartCanvas;
+    var ctx = c.getContext('2d');
+    var W = c.width, H = c.height;
+    var cx = W / 2, cy = H / 2;
+    var r = Math.min(W, H) / 2 - 10;
+    ctx.clearRect(0, 0, W, H);
+    var total = 0;
+    CATEGORIES.forEach(function (c) { total += (state.pcts[c.id] || 0); });
+    if (total === 0) return;
+    var startAngle = -Math.PI / 2;
+    var html = '';
+    CATEGORIES.forEach(function (c) {
+      var pct = state.pcts[c.id] || 0;
+      if (pct === 0) return;
+      var slice = (pct / total) * Math.PI * 2;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, startAngle, startAngle + slice);
+      ctx.closePath();
+      ctx.fillStyle = c.color;
+      ctx.fill();
+      // segment line + label
+      var midAngle = startAngle + slice / 2;
+      var lx = cx + Math.cos(midAngle) * (r + 12);
+      var ly = cy + Math.sin(midAngle) * (r + 12);
+      html += '<div class="bg-chart-legend-item"><span class="bg-chart-legend-dot" style="background:' + c.color + ';"></span>' + c.name + ' <strong>' + pct + '%</strong></div>';
+      startAngle += slice;
+    });
+    legendEl.innerHTML = html;
+  }
+
+  // Presets
+  presetRow.querySelectorAll('button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var key = btn.getAttribute('data-preset');
+      presetRow.querySelectorAll('button').forEach(function (b) { b.classList.toggle('active', b === btn); });
+      if (key === 'reset') {
+        state = defaultState();
+      } else if (PRESETS[key]) {
+        CATEGORIES.forEach(function (c) {
+          state.pcts[c.id] = PRESETS[key][c.id] || 0;
+          state.locked[c.id] = null;
+        });
+      }
+      saveState(); renderAll();
+    });
+  });
+
+  totalEl.addEventListener('input', function () {
+    state.total = Math.max(0, parseFloat(totalEl.value) || 0);
+    saveState(); renderAll();
+  });
+  currencyEl.addEventListener('change', function () {
+    state.currency = currencyEl.value;
+    saveState(); renderAll();
+  });
+
+  // Export CSV
+  exportCsvBtn.addEventListener('click', function () {
+    var rows = ['Category,Percent,Amount'];
+    CATEGORIES.forEach(function (c) {
+      var pct = state.pcts[c.id] || 0;
+      var amt = Math.round(state.total * pct / 100);
+      rows += [c.name, pct + '%', state.currency + amt].join(',');
+    });
+    var total = 0;
+    CATEGORIES.forEach(function (c) { total += Math.round(state.total * (state.pcts[c.id] || 0) / 100); });
+    rows += ['Total,100%,' + state.currency + total].join(',');
+    var csv = rows.join('\n');
+    var blob = new Blob([csv], { type: 'text/csv' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'wedding-budget.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  printBtn.addEventListener('click', function () { window.print(); });
+  resetBtn.addEventListener('click', function () {
+    if (!window.confirm('Reset all budget values?')) return;
+    state = defaultState();
+    init();
+    saveState();
+  });
+
+  init();
+})();
+</script>
+</body>
+</html>
