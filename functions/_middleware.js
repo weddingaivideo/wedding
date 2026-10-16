@@ -33,16 +33,17 @@ function generateNonce() {
 // Differences from the static _headers CSP:
 //   - 'unsafe-inline' removed from script-src
 //   - 'nonce-XXX' added (one-time per request)
-//   - 'strict-dynamic' added so dynamically-injected third-party scripts
-//     (gtag, AdSense, Cloudflare Insights beacon) inherit trust from the
-//     nonce'd loader — without it, every external <script src="..."> in
-//     the HTML also needs a nonce (and a 3rd-party ad loader that injects
-//     more scripts at runtime can never satisfy that, so the page would
-//     just break).
-//   - 'self' + host URLs in script-src are IGNORED when 'strict-dynamic'
-//     is present (CSP3). This is by design — the nonce is the only trust
-//     anchor; host-source whitelisting is meaningless once you trust
-//     code-loaded-by-code.
+//   - 'strict-dynamic' was REMOVED 2026-10-16 (Bug #17): Cloudflare's Web
+//     Analytics beacon is injected by CF Pages as a plain <script src="
+//     static.cloudflareinsights.com/beacon.js"> in the HTML, which has no
+//     nonce and is therefore rejected under strict-dynamic (CSP3 ignores
+//     host whitelists when strict-dynamic is present). Without
+//     strict-dynamic, the host whitelist below takes effect for non-nonced
+//     <script src> tags — same XSS protection (nonce + host whitelist),
+//     CF beacon works again. Host whitelisting is still enforced for
+//     dynamic scripts created at runtime by nonce'd loaders.
+//   - 'self' + host URLs in script-src ARE honored (no strict-dynamic to
+//     override them).
 //   - script-src-attr is kept for defense-in-depth: any new <element on*=...>
 //     added later (e.g. a vendor snippet) must carry a matching nonce or
 //     the browser blocks it. The pre-deploy-check also enforces this
@@ -51,15 +52,19 @@ function generateNonce() {
 //     in the <head> and inline style="..." on hero overlays). Migrating
 //     to nonce for style would be a much bigger change and isn't covered
 //     by the same XSS risk model as scripts.
+//   - connect-src added f.clarity.ms + u.clarity.ms (Bug #10): Clarity
+//     session replay uploads beacon data to f.clarity.ms / u.clarity.ms;
+//     missing from connect-src meant session-recording data was silently
+//     dropped. c.clarity.ms was already listed.
 function buildCsp(nonce) {
     return [
         "default-src 'self'",
-        `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://hm.baidu.com https://www.clarity.ms`,
+        `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://hm.baidu.com https://www.clarity.ms https://f.clarity.ms`,
         `script-src-attr 'self' 'nonce-${nonce}'`,
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: https://hm.baidu.com https://www.clarity.ms",
         "font-src 'self' data:",
-        "connect-src 'self' https://www.google-analytics.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://*.analytics.google.com https://hm.baidu.com https://www.clarity.ms https://c.clarity.ms",
+        "connect-src 'self' https://www.google-analytics.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://*.analytics.google.com https://hm.baidu.com https://www.clarity.ms https://c.clarity.ms https://f.clarity.ms https://u.clarity.ms",
         "frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net",
         "form-action 'self'",
         "report-to csp-endpoint",
@@ -67,13 +72,19 @@ function buildCsp(nonce) {
 }
 
 // Inject a `nonce="..."` attribute on every <script> opening tag that
-// doesn't already have one. Necessary because CSP3 `script-src 'strict-dynamic'`
-// causes Chrome to ignore `'self'` and host-source URLs — every external
-// <script src="/js/main.min.js"> must carry a valid nonce, or the script is
-// blocked. 87 HTML templates in this project would otherwise need a manual
-// edit, and any new <script> added later would silently fail.
+// doesn't already have one. Defense-in-depth: even though host whitelists
+// ARE honored now (strict-dynamic removed 2026-10-16), adding a nonce to
+// every inline <script> keeps XSS injection via inline payloads blocked.
+// External <script src="/js/main.min.js"> tags without a nonce still match
+// 'self' in the host whitelist, so a missing nonce wouldn't break them —
+// but injecting the nonce gives us a second layer of defense and also
+// makes future tightening back to strict-dynamic a one-line revert.
+// 87 HTML templates in this project would otherwise need a manual edit,
+// and any new <script> added later would silently fail CSP enforcement.
 // (Fix 2026-07-28: dropdown not switching languages because main.min.js,
-// langs.js, and i18n.js were all blocked by strict-dynamic.)
+// langs.js, and i18n.js were blocked by strict-dynamic. Re-tightened the
+// model so the same incident can't recur if the policy is ever changed
+// back to nonce-only.)
 function injectScriptNonce(html, nonce) {
     return html.replace(
         /<script\b([^>]*)>/gi,

@@ -28,7 +28,7 @@
     <meta name="theme-color" content="#D4AF37">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI Tools">
     <link rel="stylesheet" href="/styles.min.css?v=3.29">
     <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
@@ -433,7 +433,7 @@
     </footer>
 
     <script>
-    (function () {
+    document.addEventListener('DOMContentLoaded', function () {
       'use strict';
       var dropzone = document.getElementById('dropzone');
       var input = document.getElementById('file-input');
@@ -616,7 +616,7 @@
       });
 
       refreshUI();
-    })();
+    });
     </script>
 </body>
 </html>

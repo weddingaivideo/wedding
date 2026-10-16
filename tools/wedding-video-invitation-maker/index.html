@@ -22,7 +22,7 @@
     <meta name="theme-color" content="#D4AF37">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Wedding Video Invitation">
     <link rel="stylesheet" href="/styles.min.css?v=3.29">
     <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
@@ -497,7 +497,7 @@
     </footer>
 
     <script>
-    (function () {
+    document.addEventListener('DOMContentLoaded', function () {
       'use strict';
 
       // 1080x1920 is the master size; we downscale to 540x960 canvas for preview
@@ -1012,7 +1012,7 @@
       });
 
       render();
-    })();
+    });
     </script>
 </body>
 </html>

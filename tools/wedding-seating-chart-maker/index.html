@@ -24,7 +24,7 @@
     <meta name="theme-color" content="#D4AF37">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Wedding Seating Chart Maker">
     <link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/wedding-seating-chart-maker/" />
     <link rel="alternate" hreflang="en" href="https://weddingai.video/tools/wedding-seating-chart-maker/" />
@@ -126,10 +126,10 @@
         .seating-table.sweetheart { border-radius: 12px; }
         .seating-table-name { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.85rem; font-weight: 700; color: var(--color-secondary); pointer-events: none; text-align: center; line-height: 1.1; }
         .seating-table-count { position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: var(--color-text-light); white-space: nowrap; }
-        .seating-seat { position: absolute; width: 64px; height: 36px; background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.66rem; color: var(--color-text); text-align: center; padding: 2px; line-height: 1.05; cursor: pointer; transition: background .15s ease, border-color .15s ease, transform .15s ease; }
-        .seating-seat:hover { border-color: var(--color-primary); transform: scale(1.05); }
+        .seating-seat { position: absolute; width: 36px; height: 24px; background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--color-text); text-align: center; padding: 1px 2px; line-height: 1.05; cursor: pointer; transition: background .15s ease, border-color .15s ease, transform .15s ease; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .seating-seat:hover { border-color: var(--color-primary); transform: scale(1.1); z-index: 2; }
         .seating-seat.occupied { color: #fff; font-weight: 600; }
-        .seating-seat.drop-target { background: #fff7e6; border-color: var(--color-primary); border-style: dashed; }
+        .seating-seat.drop-target { background: #fff7e6; border-color: var(--color-primary); border-style: dashed; transform: scale(1.15); z-index: 3; }
         .seating-seat .plus-one { display: block; font-size: 0.6rem; color: rgba(255,255,255,0.85); }
 
         .seating-export-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.8rem; }
@@ -513,9 +513,20 @@
     intimate:  { label: 'Intimate (5 rounds of 6 + sweetheart)', build: buildIntimate },
     ushape:    { label: 'U-Shape with head table',               build: buildUShape }
   };
-  var SEAT_RADIUS = 30;       // px offset from table center
+  // Seat geometry — bug #7: previous constants (radius 30, box 64×36) placed
+  // 8 seats around a round table with arc-length 23.6px between centers,
+  // while each seat was 64px wide — every adjacent seat pair overlapped
+  // (~40px overlap). Across 8 tables that produced 144+ overlapping seat
+  // pairs visually, with seat numbers stacking on top of each other.
+// Fix: keep the table radius (38) but pull seats outward to radius 56 so
+// the arc between adjacent seat centers becomes ~44px, and shrink seat
+  // boxes to 36×24 so each fits without overlap (36 < 44). Names truncate
+  // to a single initial + first letter in the seat; full names appear in
+  // the hover title (already set). Floor width grows a bit but still fits
+  // comfortably in the panel.
+var SEAT_RADIUS = 56;       // px offset from table center
   var TABLE_R = 38;           // round table radius
-  var SEAT_W = 64, SEAT_H = 36;
+  var SEAT_W = 36, SEAT_H = 24;
   var state = loadState() || defaultState();
 
   function defaultState() {
@@ -633,7 +644,17 @@
 
   function renderGuestList() {
     var html = '';
-    state.guests.forEach(function (g) {
+    // Bug #9 fix: previously displayed guests in insertion order, so adding a
+    // Work guest before a Family one placed Work first. Sort by group with
+    // the legend order (VIP > Family > Friends > Work > Other) so the list
+    // matches the legend dots the user is reading against.
+    var order = { vip: 0, family: 1, friends: 2, work: 3, other: 4 };
+    var sortedGuests = state.guests.slice().sort(function (a, b) {
+      var da = (typeof a.group === 'string') ? a.group : 'other';
+      var db = (typeof b.group === 'string') ? b.group : 'other';
+      return (order[da] || 5) - (order[db] || 5);
+    });
+    sortedGuests.forEach(function (g) {
       var g0 = GROUPS[g.group] || GROUPS.other;
       var assignedClass = isAssigned(g.id) ? ' assigned' : '';
       var plusLabel = g.plusOne ? ' (+1)' : '';
@@ -804,6 +825,37 @@
     showSeatPicker(t, seatIndex, unassigned);
   }
 
+  // Assign a guest (by id) directly to a seat — used by the drag-and-drop
+  // path (Bug #6). If the seat is already occupied, the existing guest is
+  // bounced back to the unassigned pool. If the dragged guest is already
+  // seated elsewhere, that prior assignment is removed first (move, not copy).
+  function assignGuestToSeat(guestId, tableId, seatIndex) {
+    var t = state.tables.find(function (x) { return x.id === tableId; });
+    if (!t) return;
+    if (!t.assigned) t.assigned = {};
+    var guest = state.guests.find(function (g) { return g.id === guestId; });
+    if (!guest) return;
+    var seatKey = t.id + '-s' + seatIndex;
+    // Remove the dragged guest from any seat they currently occupy.
+    state.tables.forEach(function (other) {
+      if (!other.assigned) return;
+      Object.keys(other.assigned).forEach(function (k) {
+        if (other.assigned[k] === guestId) delete other.assigned[k];
+      });
+    });
+    t.assigned[seatKey] = guestId;
+    // Auto-place plus-one in the next seat (matches the click flow).
+    if (guest.plusOne) {
+      var positions = computeSeatPositions(t);
+      var nextIndex = seatIndex + 1;
+      if (nextIndex < positions.length) {
+        var nextKey = t.id + '-s' + nextIndex;
+        if (!t.assigned[nextKey]) t.assigned[nextKey] = guestId;
+      }
+    }
+    saveState(); render();
+  }
+
   function showSeatPicker(t, seatIndex, unassigned) {
     // very simple: prompt for guest id
     var opts = unassigned.map(function (g, i) { return (i + 1) + ') ' + g.name + ' [' + (GROUPS[g.group]||GROUPS.other).label + ']'; }).join('\n');
@@ -854,6 +906,13 @@
   }
 
   function clearSeats() {
+    // Bug #8 fix: clearSeats previously wiped all assignments silently — one
+    // accidental click after 30 minutes of careful seating = total loss.
+    // clearAll has had confirm() since day one; align clearSeats the same.
+    var occupied = state.tables.reduce(function (n, t) {
+      return n + (t.assigned ? Object.keys(t.assigned).length : 0);
+    }, 0);
+    if (occupied && !window.confirm('Clear all seat assignments? Guests and tables stay; only the seating is reset.')) return;
     state.tables.forEach(function (t) { t.assigned = {}; });
     saveState(); render();
   }
@@ -908,7 +967,49 @@
       deleteGuest(del.getAttribute('data-del'));
     }
   });
-  // delegate seat click
+  // Bug #6 fix: drag-and-drop from guest list to a seat. The old code had
+  // `draggable="true"` on .seating-guest-item but no dragstart/drop handlers
+  // anywhere — drag was decorative only; the actual assignment went through
+  // window.prompt() (broken on touch/iPad). The click handler below stays as
+  // a fallback; drag is now the primary path on desktop, the only path on touch.
+  guestListEl.addEventListener('dragstart', function (e) {
+    var item = e.target.closest('.seating-guest-item');
+    if (!item) return;
+    var guestId = item.getAttribute('data-guest-id');
+    if (!guestId) return;
+    e.dataTransfer.setData('text/plain', guestId);
+    e.dataTransfer.setData('application/x-wedding-guest', guestId);
+    e.dataTransfer.effectAllowed = 'move';
+    // Hide the drag image slightly so the source row doesn't visually duplicate.
+    try { e.dataTransfer.setDragImage(item, 12, 12); } catch (_) {}
+  });
+  // Visual + functional drop target on the floor.
+  floorEl.addEventListener('dragover', function (e) {
+    if (!e.dataTransfer) return;
+    var types = e.dataTransfer.types || [];
+    var isGuestDrag = Array.prototype.indexOf.call(types, 'application/x-wedding-guest') !== -1;
+    if (!isGuestDrag) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    var seat = e.target.closest('.seating-seat');
+    if (seat) seat.classList.add('drop-target');
+  });
+  floorEl.addEventListener('dragleave', function (e) {
+    var seat = e.target.closest('.seating-seat');
+    if (seat) seat.classList.remove('drop-target');
+  });
+  floorEl.addEventListener('drop', function (e) {
+    var seat = e.target.closest('.seating-seat');
+    if (!seat) return;
+    var guestId = e.dataTransfer.getData('application/x-wedding-guest') || e.dataTransfer.getData('text/plain');
+    if (!guestId) return;
+    e.preventDefault();
+    seat.classList.remove('drop-target');
+    var tableId = seat.getAttribute('data-table-id');
+    var seatIndex = parseInt(seat.getAttribute('data-seat-index'), 10);
+    assignGuestToSeat(guestId, tableId, seatIndex);
+  });
+  // delegate seat click (fallback for touch / users who prefer the prompt)
   floorEl.addEventListener('click', function (e) {
     var seat = e.target.closest('.seating-seat');
     if (seat) {

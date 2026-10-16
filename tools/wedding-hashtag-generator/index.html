@@ -25,7 +25,7 @@
     <meta name="theme-color" content="#D4AF37">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Wedding Hashtag Generator">
     <link rel="stylesheet" href="/styles.min.css?v=3.29">
     <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
@@ -326,7 +326,7 @@
                 <div class="wa-hashtag-summary" id="summary" aria-live="polite">Type both names to see ideas.</div>
                 <div class="wa-hashtag-grid" id="results" aria-live="polite"></div>
                 <div class="wa-hashtag-banner">
-                    <strong>Length tip:</strong> any tag over 30 characters is hard to remember and even harder to type on a phone. Aim for short.
+                    <strong>Length tip:</strong> any tag over 20 characters is hard to remember and even harder to type on a phone. Aim for short.
                 </div>
                 <div class="wa-tool-actions">
                     <button type="button" class="btn btn-primary" id="copy-all-btn" disabled>Copy all (visible)</button>
@@ -375,7 +375,7 @@
                     </details>
                     <details>
                         <summary>How long should a wedding hashtag be?</summary>
-                        <p>Under 20 characters is ideal. Up to 30 is acceptable. Over 30 is hard to type on a phone, hard to remember after a champagne toast, and easy to misspell. The generator warns you with a red badge on any tag over 30.</p>
+                        <p>Under 20 characters is ideal — that fits a single screenshot and types cleanly on a phone. The generator flags anything over 20 with a red badge so you can spot the long ones quickly.</p>
                     </details>
                     <details>
                         <summary>Should I include the year?</summary>
@@ -512,9 +512,14 @@
         return s[0].toUpperCase() + s.slice(1);
       };
 
-      // 30 chars is the soft cap for wedding hashtags (Instagram trending note: longer = typos)
+      // 20 chars is the soft cap for wedding hashtags — the QA section ("Under 20
+      // is ideal") and the Length-tip banner were authored against a 30-char
+      // limit that never actually fired (longest generator output is 26 chars:
+      // #EmmaPlusLiamEqualsForever). Bug #13: with limit=30 the warning never
+      // triggers. Lowered to 20 so the warning actually fires for the tags
+      // that need it. (Hero copy and FAQ updated to match.)
       function isHardToType(tag) {
-        return tag.length > 30;
+        return tag.length > 20;
       }
 
       // dedupe + cap.
@@ -561,18 +566,28 @@
         var romantic = [];
         var modern = [];
 
-        // --- Classic
+        // --- Classic (last-name and first-name tags interleaved)
+        // Bug #5 fix: original pushed all 8 last-name templates first, then the
+        // 1 first-name template last. dedupe(_, 4) kept only the first 4 — all
+        // last-name. Fix interleaves so the visible Classic set mixes both.
         if (last) {
-          classic.push('#' + cap(last) + 'Forever');
-          classic.push('#Forever' + cap(last));
-          classic.push('#' + cap(last) + (year ? year : ''));
-          classic.push('#The' + cap(last) + 'sOf' + (year ? year : 'Love'));
-          classic.push('#MrAndMrs' + cap(last));
-          classic.push('#' + cap(last) + 'Squad');
-          classic.push('#Finally' + cap(last));
-          classic.push('#' + cap(last) + 'PartyOf2');
+          classic.push('#' + cap(last) + 'Forever');           // #ParkForever
         }
-        classic.push('#Forever' + cap(f1 || f2));
+        if (f1 && f2) {
+          classic.push('#' + cap(f1) + 'And' + cap(f2) + 'Forever'); // #EmmaAndLiamForever
+        }
+        if (last) {
+          classic.push('#Forever' + cap(last));                 // #ForeverPark
+          classic.push('#MrAndMrs' + cap(last));                // #MrAndMrsPark
+        }
+        if (f1 && f2) {
+          classic.push('#' + cap(f1) + 'And' + cap(f2) + 'TieTheKnot'); // #EmmaAndLiamTieTheKnot
+        }
+        if (last) {
+          classic.push('#The' + cap(last) + 'sOf' + (year ? year : 'Love')); // #TheParksOfLove
+          classic.push('#Finally' + cap(last));                 // #FinallyPark
+        }
+        classic.push('#Forever' + cap(f1 || f2));              // #ForeverEmma (first only)
 
         // --- Funny (rhyming, alliteration, light wordplay)
         if (last) {

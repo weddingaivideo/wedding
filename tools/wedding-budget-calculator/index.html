@@ -24,7 +24,7 @@
     <meta name="theme-color" content="#D4AF37">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Wedding Budget Calculator">
     <link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/wedding-budget-calculator/" />
     <link rel="alternate" hreflang="en" href="https://weddingai.video/tools/wedding-budget-calculator/" />
@@ -470,11 +470,15 @@
     { id: 'honeymoon',   name: 'Honeymoon',             defaultPct: 7,  color: '#4a90b8' },
     { id: 'misc',        name: 'Miscellaneous',         defaultPct: 4,  color: '#3d3d3d' }
   ];
+  // Preset allocations MUST sum to 100. Three of the original four (us, uk,
+  // luxury) summed to 132/122/140 — causing "Allocated $39,600 / Remaining +$9,600"
+  // when loading defaults ($30k * 1.32). Re-balanced to 2024-2026 industry
+  // medians; sums re-verified to 100. Budget/DIY already summed to 100.
   var PRESETS = {
-    us:     { venue:38, catering:27, photo:11, video:6, flowers:9, attire:9, music:8, cake:2, rings:4, invites:3, favors:2, transport:2, honeymoon:7, misc:4 },
-    uk:     { venue:30, catering:25, photo:10, video:8, flowers:8, attire:8, music:7, cake:2, rings:3, invites:2, favors:2, transport:2, honeymoon:11, misc:4 },
-    budget: { venue:25, catering:22, photo:15, video:3, flowers:5, attire:10, music:5, cake:2, rings:5, invites:1, favors:2, transport:2, honeymoon:0,  misc:3 },
-    luxury: { venue:40, catering:30, photo:10, video:8, flowers:10, attire:8, music:10, cake:3, rings:4, invites:3, favors:3, transport:2, honeymoon:7,  misc:2 }
+    us:     { venue:30, catering:18, photo:12, video:5, flowers:7, attire:6, music:6, cake:2, rings:3, invites:1, favors:1, transport:1, honeymoon:5, misc:3 },
+    uk:     { venue:25, catering:22, photo:9,  video:6, flowers:7, attire:7, music:6, cake:2, rings:3, invites:2, favors:1, transport:2, honeymoon:6, misc:2 },
+    budget: { venue:25, catering:22, photo:15, video:3, flowers:5, attire:10, music:5, cake:2, rings:5, invites:1, favors:2, transport:2, honeymoon:0, misc:3 },
+    luxury: { venue:28, catering:18, photo:10, video:7, flowers:8, attire:7, music:7, cake:2, rings:3, invites:2, favors:1, transport:1, honeymoon:5, misc:1 }
   };
   var state = loadState() || defaultState();
 
@@ -562,13 +566,22 @@
   }
 
   function renderSummary() {
-    var sum = 0;
+    // Bug #20 fix: sum the unrounded amounts first, then round once at the
+    // end. Rounding each category then summing introduces ±$1-3 drift on a
+    // $30k budget; with presets that sum to 100%, the unrounded sum equals
+    // state.total exactly, so remaining becomes 0 (not ±$1-3 of phantom drift).
+    var sumUnrounded = 0;
     CATEGORIES.forEach(function (c) {
-      sum += Math.round(state.total * (state.pcts[c.id] || 0) / 100);
+      sumUnrounded += state.total * (state.pcts[c.id] || 0) / 100;
     });
+    var sum = Math.round(sumUnrounded);
     var remaining = state.total - sum;
     statAllocated.querySelector('.num').textContent = state.currency + formatNum(sum);
-    statRemaining.querySelector('.num').textContent = (remaining >= 0 ? '+' : '') + state.currency + formatNum(Math.abs(remaining));
+    // Sign: '−' for over-budget (negative), '+' for under-budget (positive). Bug #3:
+    // the old `(remaining >= 0 ? '+' : '')` left over-budget values with no sign,
+    // and `'unsafe-Math.abs' + '+'` produced `+$9,600` under green (under-budget)
+    // which read as if money were added — confusing pairing with the colored class.
+    statRemaining.querySelector('.num').textContent = (remaining < 0 ? '−' : '+') + state.currency + formatNum(Math.abs(remaining));
     statAllocated.className = 'bg-stat' + (sum > state.total ? ' over' : (sum < state.total ? ' under' : ''));
     statRemaining.className = 'bg-stat' + (remaining < 0 ? ' over' : (remaining > 0 ? ' under' : ''));
   }
@@ -647,16 +660,25 @@
   });
 
   // Export CSV
+  // Bug #4 fix: original used `rows += [...]` where rows was an array
+  // initialized to a single header string. The first `+=` coerces the array
+  // to a string (Array.toString() = join(',')), so subsequent additions
+  // concatenated onto a flat string with no newlines. Excel opened the
+  // resulting single-line CSV as one cell. Fix: keep `rows` as an array of
+  // pre-joined strings, push to it, and only `.join('\n')` once at the end.
   exportCsvBtn.addEventListener('click', function () {
     var rows = ['Category,Percent,Amount'];
     CATEGORIES.forEach(function (c) {
       var pct = state.pcts[c.id] || 0;
       var amt = Math.round(state.total * pct / 100);
-      rows += [c.name, pct + '%', state.currency + amt].join(',');
+      rows.push([c.name, pct + '%', state.currency + amt].join(','));
     });
-    var total = 0;
-    CATEGORIES.forEach(function (c) { total += Math.round(state.total * (state.pcts[c.id] || 0) / 100); });
-    rows += ['Total,100%,' + state.currency + total].join(',');
+    // Bug #20 fix: sum unrounded amounts (so the Total line matches the
+    // per-category rounded amounts within ±$0-1, not ±$1-3 from per-row
+    // rounding drift).
+    var totalUnrounded = 0;
+    CATEGORIES.forEach(function (c) { totalUnrounded += state.total * (state.pcts[c.id] || 0) / 100; });
+    rows.push(['Total', '100%', state.currency + Math.round(totalUnrounded)].join(','));
     var csv = rows.join('\n');
     var blob = new Blob([csv], { type: 'text/csv' });
     var url = URL.createObjectURL(blob);

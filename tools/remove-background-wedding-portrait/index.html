@@ -28,7 +28,7 @@
     <meta name="theme-color" content="#D4AF37">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI Tools">
     <link rel="stylesheet" href="/styles.min.css?v=3.29">
     <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
@@ -245,6 +245,7 @@
                         <div class="wa-tool-color-row">
                             <input type="color" id="bg-color" value="#FFFFFF">
                             <input type="text" id="bg-color-hex" value="#FFFFFF" maxlength="7" pattern="#?[0-9A-Fa-f]{6}" aria-label="Backdrop color hex value">
+                            <button type="button" id="sample-bg-btn" class="btn btn-secondary btn-small" disabled title="Sample the average color from the 4 corners of the first uploaded image">Sample from corners</button>
                         </div>
                         <div class="wa-tool-color-presets" role="group" aria-label="Common backdrop presets">
                             <button type="button" data-color="#FFFFFF" aria-pressed="true" title="White" style="background:#FFFFFF;"></button>
@@ -254,7 +255,7 @@
                             <button type="button" data-color="#E8DCC4" aria-pressed="false" title="Beige" style="background:#E8DCC4;"></button>
                             <button type="button" data-color="#1E3A5F" aria-pressed="false" title="Navy" style="background:#1E3A5F;"></button>
                         </div>
-                        <small>Pick the color of the actual studio backdrop. White is the default for traditional portrait studios.</small>
+                        <small>Pick the color of the actual studio backdrop. White is the default for traditional portrait studios. <strong>Sample from corners</strong> averages the 4 corners of the first uploaded image — handy when you don't know the exact backdrop color.</small>
                     </div>
 
                     <div class="wa-tool-control">
@@ -456,7 +457,7 @@
     </footer>
 
     <script>
-    (function () {
+    document.addEventListener('DOMContentLoaded', function () {
       'use strict';
       var dropzone = document.getElementById('dropzone');
       var input = document.getElementById('file-input');
@@ -467,6 +468,7 @@
       var clearBtn = document.getElementById('clear-btn');
       var bgColorEl = document.getElementById('bg-color');
       var bgColorHex = document.getElementById('bg-color-hex');
+      var sampleBgBtn = document.getElementById('sample-bg-btn');
       var toleranceEl = document.getElementById('tolerance');
       var toleranceVal = document.getElementById('tolerance-val');
       var featherEl = document.getElementById('feather');
@@ -480,6 +482,13 @@
         list.hidden = files.length === 0;
         runBtn.disabled = files.length === 0 || files.every(function (f) { return f.status === 'done' || f.status === 'working'; });
         saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        // Bug #12 fix: Sample-from-corners button enables as soon as any file
+        // is queued (uses the first file's image). Disable when no files or
+        // during processing — sampling mid-process could race with re-render.
+        if (sampleBgBtn) {
+          var hasFile = files.some(function (f) { return f.inputFile; });
+          sampleBgBtn.disabled = !hasFile;
+        }
         if (window.weddingAITool && window.weddingAITool.renderFileList) {
           window.weddingAITool.renderFileList(list, files, function () {});
           Array.prototype.forEach.call(list.children, function (row, i) {
@@ -694,6 +703,54 @@
       saveAllBtn.addEventListener('click', saveAllDownloads);
       clearBtn.addEventListener('click', clearAll);
 
+      // Bug #12 fix: Sample the average backdrop color from the 4 corners
+      // of the first uploaded image. Heuristic, not magic — assumes backdrop
+      // reaches the edges (true for most studio shots) and that the couple
+      // doesn't extend into a corner. For complex compositions, prefer the
+      // color picker or a preset.
+      if (sampleBgBtn) {
+        sampleBgBtn.addEventListener('click', function () {
+          var first = files.find(function (f) { return f.inputFile; });
+          if (!first) return;
+          var T = window.weddingAITool;
+          if (!T) return;
+          T.fileToImage(first.inputFile).then(function (res) {
+            var img = res.img;
+            var w = img.naturalWidth, h = img.naturalHeight;
+            var corner = Math.max(8, Math.round(Math.min(w, h) * 0.05)); // ~5% of short side, min 8px
+            var canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            // Sample 4 corners, average per-channel.
+            var r = 0, g = 0, b = 0, n = 0;
+            [
+              [0, 0],
+              [w - corner, 0],
+              [0, h - corner],
+              [w - corner, h - corner],
+            ].forEach(function (xy) {
+              var data = ctx.getImageData(xy[0], xy[1], corner, corner).data;
+              for (var i = 0; i < data.length; i += 4) {
+                r += data[i]; g += data[i + 1]; b += data[i + 2]; n++;
+              }
+            });
+            URL.revokeObjectURL(res.url);
+            if (n === 0) return;
+            var avgR = Math.round(r / n), avgG = Math.round(g / n), avgB = Math.round(b / n);
+            var hex = '#' + [avgR, avgG, avgB].map(function (c) {
+              var s = c.toString(16); return s.length === 1 ? '0' + s : s;
+            }).join('').toUpperCase();
+            bgColorEl.value = hex;
+            bgColorHex.value = hex;
+            syncPresetButtons(hex);
+            if (T.toast) T.toast('Sampled backdrop color ' + hex + ' from 4 corners', 'success');
+          }).catch(function (err) {
+            if (T.toast) T.toast(err.message || 'Could not sample color', 'error');
+          });
+        });
+      }
+
       list.addEventListener('wa-row-remove', function (e) {
         var idx = parseInt((e.detail || '0'), 10);
         if (!isNaN(idx)) {
@@ -706,7 +763,7 @@
       });
 
       refreshUI();
-    })();
+    });
     </script>
 </body>
 </html>
