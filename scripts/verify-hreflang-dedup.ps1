@@ -21,9 +21,13 @@
 #  - HTTPS_PROXY env var cleared (CF Pages proxy interferes)
 $ErrorActionPreference = 'Stop'
 
-# Disable inherited proxy.
-[System.Environment]::SetEnvironmentVariable('HTTPS_PROXY', $null, 'Process')
-[System.Environment]::SetEnvironmentVariable('HTTP_PROXY',  $null, 'Process')
+# Disable inherited proxy.  We must use [string]::Empty (NOT $null) because
+# [Environment]::SetEnvironmentVariable with $null becomes an empty string,
+# and curl still sees HTTPS_PROXY='' which ... actually works for some
+# Windows curl builds but not others. Using EnvironmentVariableTarget::Process
+# with an empty string reliably removes the variable from the process env.
+[System.Environment]::SetEnvironmentVariable('HTTPS_PROXY', [string]::Empty, [System.EnvironmentVariableTarget]::Process)
+[System.Environment]::SetEnvironmentVariable('HTTP_PROXY',  [string]::Empty, [System.EnvironmentVariableTarget]::Process)
 $env:HTTPS_PROXY = $null
 $env:HTTP_PROXY  = $null
 
@@ -57,7 +61,12 @@ $RE_CANON    = [regex]'<link[^>]+rel="canonical"[^>]+>'
 
 function Check-Url {
     param($UrlPath)
-    $url = "https://weddingai.video$UrlPath" + '?t=' + $CB
+    # Normalize: UrlPath may or may not start with '/'. Always produce
+    # /path form before concatenating to base URL to avoid
+    # https://weddingai.videotools/... (missing slash).
+    $normalized = $UrlPath
+    if (-not $normalized.StartsWith('/')) { $normalized = '/' + $normalized }
+    $url = "https://weddingai.video$normalized" + '?t=' + $CB
 
     $tmp = [System.IO.Path]::GetTempFileName()
     try {
