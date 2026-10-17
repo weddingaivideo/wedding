@@ -1,1 +1,0 @@
-﻿fix(seo/tools/add-text): SERP-driven '8 add-text-to-photo tools vs AI face-aware + IG caption bundle' comparison table 9 rows vs Canva 100+ fonts + Media.io 4.9/3695592 image-to-image + DocHub in-browser + Fotor AI + OpenArt text-to-photo + LightX no watermark + Kapwing + Pokecut (53 new i18n keys)

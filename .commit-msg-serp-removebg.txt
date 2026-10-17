@@ -1,1 +1,0 @@
-﻿fix(seo/tools/remove-bg): SERP-driven '8 background removers vs AI bundle BG + wedding video' comparison table 9 rows vs Remove.bg chapel search + Fotor HD + Playground AI Apr 20 2026 wedding-specific + Picsart 4.9/6942 700M removed + Canva BG Remover Pro + Adobe Firefly + PhotoScissors auto + RemoveBackgroundAI (53 new i18n keys)

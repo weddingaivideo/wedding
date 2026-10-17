@@ -1,1 +1,0 @@
-﻿fix(seo/tools/heic): SERP-driven '8 HEIC converters vs auto-pair to .9 video workflow' comparison table 10 rows vs Adobe Express 4.3/113 + Heic to JPG 200 free + Canva Pro  + Microsoft local no upload + iMazing 4.6/6458 Mac PC + VowPix no upload browser + Imagen AI 4.8/4.9 fast private + Photo AI Studio Apr 30 2026 best overall + CloudConvert (58 new i18n keys)

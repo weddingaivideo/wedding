@@ -1,1 +1,0 @@
-﻿fix(seo/tools/video-invitation): SERP-driven '8 video invitation makers vs AI from-photos 30-90s RSVP link' comparison table 9 rows vs Canva Video Editor + Adobe Express free + invideo AI 4.7/530 + Google Play App 4.8/10943 + SeeMyMarriage free template animation + Crreo AI text-to-video 1-30 min multilingual + Instagram popular list + Selfanimate (53 new i18n keys)

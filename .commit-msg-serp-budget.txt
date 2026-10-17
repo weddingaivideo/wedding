@@ -1,1 +1,0 @@
-﻿fix(seo/tools/budget): SERP-driven '10 wedding budget calculators vs AI savings line' comparison table 11 rows vs Wedinspire + NerdWallet Jun 2026 + Zola tracker + The Knot Budget Advisor + WeddingWire spend tracker + Truly Engaging + Your Wedding Company 2026 + Loverly + Joy Sep 2024 + The Wedding Report zip-code (63 new i18n keys)
