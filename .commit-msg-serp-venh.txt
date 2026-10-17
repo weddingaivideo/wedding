@@ -1,0 +1,1 @@
+﻿fix(seo/services/video-enhancement): SERP-driven '6 video enhancement services vs .9 4K + 8 styles + 11 langs bundle' comparison table 6 rows vs YouCam 4.9/157821 + Fotor AI super-resolution + Eternaedits Dec 2025 + YouTube 'How To Film Weddings' 5-tool tutorials + BrideGroom.video Jun 2026 (37 new i18n keys)
