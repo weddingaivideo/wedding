@@ -1,0 +1,1 @@
+﻿fix(seo/tools/photobook): SERP-driven '9 photo book services vs AI layout + .9 video' comparison table 10 rows vs Artifact Uprising 4.3/4.6K - + Nations Photo Lab  4.7/206 + Printerpix .99 4.5/14226 + MILK Books archival + Shutterfly templates + MyAlbum free + PikPerfect 4.9/3928 + Social Print Studio  5.0/280 + The Knot Feb 2026 (58 new i18n keys)
