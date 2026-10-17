@@ -1,0 +1,1 @@
+﻿fix(seo/tools/seating-chart): SERP-driven '8 seating chart tools vs AI auto-no-overlap .9 video credits' comparison table 9 rows vs SeatPlan.io free unlimited + Wedding Studio spreadsheet + Canva Pro  + Table-plan.com QR + WeddingWire autosync guest list + Planning.Wedding 5.0/429 + Brides Nov 2025 + WedSites dragdrop (53 new i18n keys)
