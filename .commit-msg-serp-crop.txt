@@ -1,0 +1,1 @@
+﻿fix(seo/tools/crop-reels): SERP-driven '6 crop-to-reels tools vs AI face-centered batch + IG caption' comparison table 7 rows vs Imagen AI 4.8/4.9 916 only + Simple Image Resizer reels cover 1080x1920 + Figma 916 1080x1920 guide + Reddit r/Instagram hacks + Fstoppers May 2022 + SF City Hall Wedding 2:3 vs 16:9 (43 new i18n keys)
