@@ -77,7 +77,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI.video">    <style id="critical-css">:root{--color-primary:#d4af37;--color-primary-dark:#b8962e;--color-secondary:#2c2c2c;--color-accent:#e8d5b7;--color-bg:#fdfbf8;--color-bg-alt:#f5f0ea;--color-text:#2c2c2c;--color-text-light:#6b6b6b;--color-white:#fff;--color-border:#e5e0d8;--font-heading:"Playfair Display",Georgia,serif;--font-body:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;--spacing-xs:0.5rem;--spacing-sm:1rem;--spacing-md:1.5rem;--spacing-lg:2rem;--spacing-xl:3rem;--spacing-2xl:5rem;--radius-sm:4px;--radius-md:8px;--radius-lg:16px;--radius-xl:24px;--shadow-sm:0 2px 8px rgba(0,0,0,.06);--shadow-md:0 4px 20px rgba(0,0,0,.08);--shadow-lg:0 8px 40px rgba(0,0,0,.12);--transition:0.3s ease;--max-width:1200px} html{scroll-behavior:smooth;font-size:16px} body{font-family:var(--font-body);color:var(--color-text);background-color:var(--color-bg);line-height:1.6;-webkit-font-smoothing:antialiased} img,video{max-width:100%;height:auto;display:block} a{color:inherit;text-decoration:none} ol,ul{list-style:none} button{cursor:pointer;border:none;background:none;font-family:inherit} h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);line-height:1.2;font-weight:600} .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--spacing-md)} .btn{display:inline-flex;gap:var(--spacing-xs);padding:.75rem 1.5rem;border-radius:var(--radius-md);font-size:.9375rem;font-weight:600;transition:var(--transition);white-space:nowrap} .btn-primary{background:var(--color-primary);color:#1a1a1a} .btn-primary:hover{background:var(--color-primary-dark);transform:translateY(-1px);box-shadow:var(--shadow-md)} .btn-secondary{background:transparent;color:var(--color-secondary);border:2px solid var(--color-secondary)} .site-header{position:sticky;top:0;z-index:100;background:hsla(36,56%,98%,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--color-border)} .header-inner{justify-content:space-between;height:72px} .logo{display:flex;align-items:center} .logo img{max-height:72px;max-width:400px;width:auto;height:auto;display:block;object-fit:contain} .main-nav{display:block;position:static;top:auto;left:auto;right:auto;background:0 0;border-top:none;box-shadow:none;padding:0} .nav-list{display:flex;align-items:center;gap:var(--spacing-lg)} .mobile-menu-toggle{display:none;flex-direction:column;gap:5px;padding:var(--spacing-xs)} .hero{position:relative;min-height:90vh;display:flex;align-items:center;overflow:hidden} .hero-bg{background:linear-gradient(135deg,#e8d5b7,#c9a96e 50%,#8b6914)} .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(44,44,44,.3) 0,rgba(44,44,44,.5) 50%,rgba(44,44,44,.7))} .hero-content{position:relative;z-index:1;text-align:center;padding-top:var(--spacing-2xl);padding-bottom:var(--spacing-2xl)} .hero-title{font-size:clamp(2rem,5vw,3.5rem);color:var(--color-white);max-width:800px;margin:0 auto var(--spacing-md);text-shadow:0 2px 20px rgba(0,0,0,.3)} .hero-subtitle{font-size:clamp(1rem,2vw,1.25rem);color:hsla(0,0%,100%,.9);max-width:600px;margin:0 auto var(--spacing-lg)} .hero-cta{display:flex;flex-wrap:wrap;gap:var(--spacing-sm);justify-content:center;margin-bottom:var(--spacing-lg)} .hero-trust{font-size:.875rem;color:hsla(0,0%,100%,.75)} .section-dark{background:var(--color-secondary);color:#fff} @media (max-width:768px){.main-nav{display:none;position:absolute;top:72px;left:0;right:0;background:var(--color-white);border-top:1px solid var(--color-border);box-shadow:var(--shadow-md);padding:var(--spacing-md)}.main-nav.active{display:block}.main-nav .nav-list{flex-direction:column;align-items:flex-start;gap:var(--spacing-sm)}.mobile-menu-toggle{display:flex}.hero{min-height:80vh}.hero-bg .hero-video,.hero-bg video.hero-video{display:none}.hero-bg .hero-poster-fallback{z-index:0!important;opacity:1!important}.hero-cta{flex-direction:column;align-items:center}.hero-cta .btn{width:100%;max-width:280px}.section{padding:var(--spacing-xl) 0}.footer-inner{grid-template-columns:1fr}.footer-nav{grid-template-columns:1fr 1fr}} @media (prefers-reduced-motion:reduce){*,:after,:before{transition:none!important;animation:none!important}.hero-bg .hero-video,.hero-bg video.hero-video{display:none}.hero-bg .hero-poster-fallback{z-index:0!important;opacity:1!important}} @media print{.faq-item summary:after,.hero-cta,.mobile-menu-toggle,.site-header{display:none}.hero{min-height:auto;background:var(--color-bg-alt)!important}.hero-bg,.hero-overlay{display:none}.hero-content{color:var(--color-text)}}</style>
     
-    <link rel="stylesheet" href="/styles.min.css?v=3.29">
+    <link rel="stylesheet" href="/styles.min.css?v=3.30">
 <script nonce="__CSP_NONCE__" defer src="/js/main.min.js?v=3.20"></script>
     <script nonce="__CSP_NONCE__" defer src="/js/lazy-videos.js?v=1.0"></script>
     <script nonce="__CSP_NONCE__" src="/js/cookie-consent.js" defer></script>
@@ -500,6 +500,89 @@ if ('serviceWorker' in navigator) {
                         <span class="service-learn-more" data-i18n="index.a_text.learn_more.12869768">Learn More →</span>
                     </a>
                 </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FREE TOOLS ========== -->
+    <section class="section free-tools" aria-label="Free Wedding Tools" style="background: var(--color-bg-alt);">
+        <div class="container">
+            <header class="section-header">
+                <h2 data-i18n="index.h2_text.13_free_wedding_tools_for_2026.q1r2s3t4">13 Free Wedding Tools for 2026</h2>
+                <p class="section-intro" data-i18n="index.p_text.no_signup_no_payment_100_browser_side.a1b2c3d4">No signup. No payment. 100% browser-side. Pair any tool with a $9.9 AI wedding video for the same workflow.</p>
+            </header>
+
+            <div class="tool-grid">
+                <a class="tool-card" href="/tools/compress-wedding-photos/">
+                    <div class="tool-card-head">
+                        <span class="tool-badge" data-i18n="tools.card.badge.edit.01">JPG/PNG/HEIC</span>
+                        <h3 class="tool-name" data-i18n="tools.card.name.edit.01">Compress Wedding Photos</h3>
+                    </div>
+                    <p class="tool-tag" data-i18n="tools.card.tag.edit.01">AI face-aware batch compresses 100+ wedding photos at $0, 60-85% smaller, EXIF kept</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta" data-i18n="tools.card.cta.try_free.01">Try free →</span>
+                    </div>
+                </a>
+
+                <a class="tool-card" href="/tools/wedding-photo-collage/">
+                    <div class="tool-card-head">
+                        <span class="tool-badge" data-i18n="tools.card.badge.edit.03">8 styles</span>
+                        <h3 class="tool-name" data-i18n="tools.card.name.edit.03">Wedding Photo Collage</h3>
+                    </div>
+                    <p class="tool-tag" data-i18n="tools.card.tag.edit.03">AI auto-layout 8 collage styles in 9 minutes from 2-30 photos, face-aware, no drag-and-drop</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta" data-i18n="tools.card.cta.try_free.01">Try free →</span>
+                    </div>
+                </a>
+
+                <a class="tool-card" href="/tools/wedding-budget-calculator/">
+                    <div class="tool-card-head">
+                        <span class="tool-badge" data-i18n="tools.card.badge.plan.07">14 categories</span>
+                        <h3 class="tool-name" data-i18n="tools.card.name.plan.07">Wedding Budget Calculator</h3>
+                    </div>
+                    <p class="tool-tag" data-i18n="tools.card.tag.plan.07">14 categories by region + guest count. Includes a $9.9 AI video line item that swaps $2,500 videographer cost.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta" data-i18n="tools.card.cta.try_free.01">Try free →</span>
+                    </div>
+                </a>
+
+                <a class="tool-card" href="/tools/wedding-hashtag-generator/">
+                    <div class="tool-card-head">
+                        <span class="tool-badge" data-i18n="tools.card.badge.plan.09">50+ ideas</span>
+                        <h3 class="tool-name" data-i18n="tools.card.name.plan.09">Wedding Hashtag Generator</h3>
+                    </div>
+                    <p class="tool-tag" data-i18n="tools.card.tag.plan.09">AI generates 50+ hashtag ideas from your names + date — 11 languages, custom audio</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta" data-i18n="tools.card.cta.try_free.01">Try free →</span>
+                    </div>
+                </a>
+
+                <a class="tool-card" href="/tools/wedding-invitation-maker/">
+                    <div class="tool-card-head">
+                        <span class="tool-badge" data-i18n="tools.card.badge.gen.12">8 styles</span>
+                        <h3 class="tool-name" data-i18n="tools.card.name.gen.12">Wedding Invitation Maker</h3>
+                    </div>
+                    <p class="tool-tag" data-i18n="tools.card.tag.gen.12">AI auto-designs 8 invitation styles from names + date + venue, 9 minutes, WhatsApp + RSVP link</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta" data-i18n="tools.card.cta.try_free.01">Try free →</span>
+                        <span class="tool-video-link" data-i18n="index.span_text.from_photos_to_video.d1e2f3g4">+$9.9 video →</span>
+                    </div>
+                </a>
+
+                <a class="tool-card" href="/tools/wedding-video-invitation-maker/">
+                    <div class="tool-card-head">
+                        <span class="tool-badge" data-i18n="tools.card.badge.gen.13">8 styles</span>
+                        <h3 class="tool-name" data-i18n="tools.card.name.gen.13">Video Invitation Maker</h3>
+                    </div>
+                    <p class="tool-tag" data-i18n="tools.card.tag.gen.13">AI wedding invitation video at $9.9 in 9 minutes — 8 styles (romantic, minimalist, fairytale, more)</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta" data-i18n="index.span_text.from_photos_to_video.d1e2f3g4">+$9.9 video →</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="section-cta" style="text-align: center; margin-top: var(--spacing-xl);">
+                <a href="/tools/" class="btn btn-primary" title="Browse all 13 free wedding tools" data-i18n="index.a_text.browse_all_13_free_tools.h1i2j3k4">Browse All 13 Free Tools →</a>
             </div>
         </div>
     </section>

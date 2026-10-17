@@ -2935,3 +2935,97 @@ a.case-img-link {
     color:inherit;
     text-decoration:none;
 }
+
+
+/* =============================================
+   Tool card components (extracted from /tools/index.html
+   so the homepage "FREE TOOLS" section can share the
+   same look). Kept identical to the inline <style> on
+   /tools/index.html so cards render the same on both
+   surfaces. Last touched: 2026-10-17.
+   ============================================= */
+
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.tool-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    text-decoration: none;
+    color: inherit;
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+}
+
+.tool-card-head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.tool-badge {
+    font-size: 0.6875rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--color-bg-alt);
+    color: var(--color-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.tool-name {
+    font-size: 1.125rem;
+    color: var(--color-secondary);
+    margin: 0;
+    line-height: 1.25;
+    flex: 1;
+    min-width: 0;
+}
+
+.tool-tag {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    line-height: 1.45;
+    flex: 1;
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.tool-card-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    border-top: 1px dashed var(--color-border);
+    padding-top: var(--spacing-sm);
+}
+
+.tool-cta {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+.tool-video-link {
+    color: #fff;
+    background: var(--color-secondary);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
