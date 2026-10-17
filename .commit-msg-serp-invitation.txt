@@ -1,0 +1,1 @@
+﻿fix(seo/tools/invitation-maker): SERP-driven '8 invitation makers vs AI auto-design + .9 video invitation' comparison table 9 rows vs Canva 4.2/2200 + Adobe Express Premium + Greetings Island 1000s designs RSVP + Jukebox Print matching RSVP + Joy RSVP tracking + Pinterest + Paperless Post 50 sends + Reddit r/Weddingsunder10k (53 new i18n keys)
