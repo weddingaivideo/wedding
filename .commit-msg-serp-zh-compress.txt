@@ -1,0 +1,1 @@
+﻿fix(i18n/zh/compress-wedding-photos): SERP-driven zh comparison table for /zh/tools/compress-wedding-photos/ — addresses '婚纱照片压缩 免费' SERP with 5 zh-relevant competitors (TinyPNG tinify.cn + iLoveIMG zh-cn + Recompressor zh + Microsoft Store + apowersoft) vs WeddingAI.video .9 face-aware AI (38 new zh keys, EN already covered all SERP angles)
