@@ -1,0 +1,1 @@
+﻿fix(seo/tools/compress): SERP-driven '5 compress tools vs AI face-aware .9 video included' comparison table 6 rows vs Adobe Express 40MB cap + ResizeImage.dev Sep 2026 200-500KB target + Img2Go 4.5/1574 reviews batch + Bulk Image Compressor no upload no signup + iLoveIMG free seconds batch (38 new i18n keys)
