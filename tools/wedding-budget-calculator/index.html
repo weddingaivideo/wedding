@@ -455,20 +455,20 @@
   'use strict';
   var STORAGE_KEY = 'wedding-budget-v1';
   var CATEGORIES = [
-    { id: 'venue',       name: 'Venue & Reception',      defaultPct: 38, color: '#d4af37' },
-    { id: 'catering',    name: 'Catering & Bar',         defaultPct: 27, color: '#b8941f' },
-    { id: 'photo',       name: 'Photography',           defaultPct: 11, color: '#a37517' },
-    { id: 'video',       name: 'Videography',           defaultPct: 6,  color: '#8c5e10' },
-    { id: 'flowers',     name: 'Flowers & Decor',       defaultPct: 9,  color: '#6b8e23' },
-    { id: 'attire',      name: 'Attire & Beauty',       defaultPct: 9,  color: '#5a7a1d' },
-    { id: 'music',       name: 'Music & Entertainment', defaultPct: 8,  color: '#4a6b8a' },
+    { id: 'venue',       name: 'Venue & Reception',      defaultPct: 29, color: '#d4af37' },
+    { id: 'catering',    name: 'Catering & Bar',         defaultPct: 20, color: '#b8941f' },
+    { id: 'photo',       name: 'Photography',           defaultPct: 8, color: '#a37517' },
+    { id: 'video',       name: 'Videography',           defaultPct: 5,  color: '#8c5e10' },
+    { id: 'flowers',     name: 'Flowers & Decor',       defaultPct: 7,  color: '#6b8e23' },
+    { id: 'attire',      name: 'Attire & Beauty',       defaultPct: 7,  color: '#5a7a1d' },
+    { id: 'music',       name: 'Music & Entertainment', defaultPct: 6,  color: '#4a6b8a' },
     { id: 'cake',        name: 'Cake & Desserts',       defaultPct: 2,  color: '#3d5a73' },
-    { id: 'rings',       name: 'Rings & Jewelry',       defaultPct: 4,  color: '#a8324a' },
-    { id: 'invites',     name: 'Invitations & Stationery', defaultPct: 3,  color: '#8c2839' },
+    { id: 'rings',       name: 'Rings & Jewelry',       defaultPct: 3,  color: '#a8324a' },
+    { id: 'invites',     name: 'Invitations & Stationery', defaultPct: 2,  color: '#8c2839' },
     { id: 'favors',      name: 'Favors & Gifts',        defaultPct: 2,  color: '#7a7a7a' },
     { id: 'transport',   name: 'Transportation',        defaultPct: 2,  color: '#5c5c5c' },
-    { id: 'honeymoon',   name: 'Honeymoon',             defaultPct: 7,  color: '#4a90b8' },
-    { id: 'misc',        name: 'Miscellaneous',         defaultPct: 4,  color: '#3d3d3d' }
+    { id: 'honeymoon',   name: 'Honeymoon',             defaultPct: 5,  color: '#4a90b8' },
+    { id: 'misc',        name: 'Miscellaneous',         defaultPct: 2,  color: '#3d3d3d' }
   ];
   // Preset allocations MUST sum to 100. Three of the original four (us, uk,
   // luxury) summed to 132/122/140 — causing "Allocated $39,600 / Remaining +$9,600"
@@ -678,7 +678,14 @@
     // rounding drift).
     var totalUnrounded = 0;
     CATEGORIES.forEach(function (c) { totalUnrounded += state.total * (state.pcts[c.id] || 0) / 100; });
-    rows.push(['Total', '100%', state.currency + Math.round(totalUnrounded)].join(','));
+    // Bug #B fix (2026-10-16): was hardcoded '100%'. When CATEGORIES pcts don't
+    // sum to 100 (e.g. mid-edit, or after dragging sliders off-locked), CSV
+    // 'Total' row's percent was misleading. Now uses the real sum so
+    // Excel users running SUMIF/SUMIFS get a value consistent with the
+    // percent column.
+    var totalPct = 0;
+    CATEGORIES.forEach(function (c) { totalPct += (state.pcts[c.id] || 0); });
+    rows.push(['Total', Math.round(totalPct) + '%', state.currency + Math.round(totalUnrounded)].join(','));
     var csv = rows.join('\n');
     var blob = new Blob([csv], { type: 'text/csv' });
     var url = URL.createObjectURL(blob);

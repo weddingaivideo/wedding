@@ -59,7 +59,7 @@ function generateNonce() {
 function buildCsp(nonce) {
     return [
         "default-src 'self'",
-        `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://hm.baidu.com https://www.clarity.ms https://f.clarity.ms`,
+        `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://hm.baidu.com https://www.clarity.ms https://f.clarity.ms https://scripts.clarity.ms`,
         `script-src-attr 'self' 'nonce-${nonce}'`,
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: https://hm.baidu.com https://www.clarity.ms",

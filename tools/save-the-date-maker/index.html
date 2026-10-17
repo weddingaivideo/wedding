@@ -942,7 +942,13 @@
         render();
         var T = window.weddingAITool;
         T.canvasToBlob(previewCanvas, 'image/png', 1.0).then(function (blob) {
-          var name = 'save-the-date-' + (getText().couple || 'card').replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase().slice(0, 40) + '.png';
+          // Bug #F fix (2026-10-16): filename now embeds template id so couples
+          // can tell Classic / Romantic / Modern / Photo Forward apart in
+          // their Downloads folder (4 templates previously saved as
+          // identical 'save-the-date-emma-liam.png' → confusion).
+          var templateSlug = state.templateId === 'photo' ? 'photo-forward' : state.templateId;
+          var name = 'save-the-date-' + templateSlug + '-' + (getText().couple || 'card')
+            .replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase().slice(0, 40) + '.png';
           T.download(blob, name);
           T.toast('Saved · ' + (blob.size / 1024).toFixed(0) + ' KB', 'success');
         });
@@ -950,6 +956,18 @@
 
       // ---------- reset -----------------------------------------------------------
       resetBtn.addEventListener('click', function () {
+        // Bug #G fix (2026-10-16): Reset was inconsistent — it cleared
+        // text but PRESERVED the selected template (and the photo). Now
+        // matches seating-chart-maker's clearAll pattern: confirm() guard
+        // + full reset of templateId + drop photo.
+        if (!window.confirm('Reset all fields and the selected template?')) return;
+        state.templateId = 'classic';
+        // Re-render the template grid to reflect the reset selection.
+        if (templateGrid) {
+          templateGrid.querySelectorAll('.wa-std-template').forEach(function (el) {
+            el.classList.toggle('is-active', el.getAttribute('data-template-id') === state.templateId);
+          });
+        }
         coupleInput.value = 'Emma & Liam';
         dateInput.value = 'June 14, 2026';
         cityInput.value = 'Banff, Canada';
