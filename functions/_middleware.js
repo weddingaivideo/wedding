@@ -1333,8 +1333,15 @@ export const onRequest = async (context) => {
             // (2026-10-12 first surfaced on /tools/<slug>/ — those hand-written
             // hreflang blocks predate the November 2026 Hindi launch.)
             const enCanonicalBlock = buildCanonicalAndAlternates(path, DEFAULT_LANG);
-            text = text.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*>\n?\s*/gi, "");
-            text = text.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*>\n?\s*/gi, "");
+            // Strip pre-existing canonical + alternates (both plain `<link ...>`
+            // and self-closing `<link ... />` forms). The previous regex only
+            // matched the plain form, so any author-written self-closing
+            // alternates survived the strip and were re-injected alongside
+            // the middleware block — Surfacing as 7 Hreflang: Multiple
+            // Entries issues in the 2026-10-16 SF crawl. (Tools pages and
+            // their 301 redirect targets authored the alternates with `/>`.)
+            text = text.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
+            text = text.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
             if (/<title[\s>][\s\S]*?<\/title>/i.test(text)) {
                 text = text.replace(/(<\/title>)/i, `$1\n    ${enCanonicalBlock}`);
             } else if (/<head>/i.test(text)) {
@@ -1531,8 +1538,9 @@ export const onRequest = async (context) => {
 
         // 2. canonical + hreflang
         const newBlock = buildCanonicalAndAlternates(rest, lang);
-        text = text.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*>\n?\s*/gi, "");
-        text = text.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*>\n?\s*/gi, "");
+        // Same self-closing-aware strip as the EN branch above.
+        text = text.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
+        text = text.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
         if (/<title[\s>][\s\S]*?<\/title>/i.test(text)) {
             text = text.replace(/(<\/title>)/i, `$1\n    ${newBlock}`);
         } else if (/<head>/i.test(text)) {
