@@ -1,0 +1,1 @@
+﻿fix(seo/tools/save-the-date): SERP-driven '8 save-the-date video makers vs AI from-photos 30-60s same style' comparison table 9 rows vs Canva free Video Editor + Pinterest 62 searched + Adobe Express free + HeyGen free plan AI voices + FlexClip + Media.io AI + VEED 4.6/2139 + SeeMyMarriage free draft (53 new i18n keys)
