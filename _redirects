@@ -895,6 +895,162 @@
 /services/video-enhancement/vintage-restoration/gallery/  /services/video-enhancement/vintage-restoration/  301
 /services/video-enhancement/vintage-restoration/about/    /services/video-enhancement/vintage-restoration/  301
 
+
+# === 2026-10-16 tool-footer 4xx cleanup — 132 belt-and-suspenders 301s ===
+# Triggered by Screaming Frog crawl at 2026-10-16 20:28 UTC: 12 URLs reported
+# as 4xx with non-zero inlinks, all originating from tool-page footer / related-
+# card sections. Both the inlink source and the redirect target are corrected
+# below — see scripts/fix-4xx-inlinks-toolfooters.py for the source-side fix
+# (77 HTML files), and this block for the redirect-side belt-and-suspenders
+# (132 explicit rules: 12 EN + 12 × 10 lang = 132 entries).
+#
+# Strategy: 301 (permanent) — these are deliberate URL consolidations to a
+# verified 200 OK page, not temporary moves.
+#
+# Position: inserted between Category D (line 896) and the 2026-08-07 user-
+# reported block (line 898) so all 132 static rules win first-match for GET
+# requests ahead of the i18n 200 rewrite globs at the end of this file.
+# (CF Pages 4.x explicit-then-glob 解析顺序 for GET — see commit history.)
+# --- Category E (service slugs): flat /services/<short> -> canonical 3-bucket taxonomy ---
+/services/wedding-trailer/    /services/personalization/wedding-trailer/    301
+/services/wedding-video/    /services/personalization/ai-video-generator/    301
+/services/family-tribute/    /services/absence-compensation/family-tribute/    301
+# --- Category F (legacy /about-us/) ---
+/about-us/    /about/    301
+# --- Category G (legacy /contact/, user-confirmed 2026-10-16 1 认可) ---
+/contact/    /order/    301
+# --- Category H (removed blog posts -> closest semantic neighbor) ---
+/blog/wedding-budget-breakdown-2026/    /blog/wedding-video-cost-2026/    301
+/blog/average-wedding-cost-2026/    /blog/wedding-video-cost-2026/    301
+/blog/wedding-vendor-payment-schedule/    /blog/wedding-video-cost-2026/    301
+/blog/wedding-reception-timeline/    /blog/wedding-video-timeline/    301
+# --- Category I (removed blog posts -> active tool page) ---
+/blog/wedding-seating-chart-ideas/    /tools/wedding-seating-chart-maker/    301
+/blog/best-wedding-photo-books-2026/    /tools/wedding-photo-book-planner/    301
+# --- Category J (no semantic blog equivalent -> tool page) ---
+/blog/wedding-photo-album-ideas/    /tools/wedding-photo-book-planner/    301
+
+# --- Localized variants (10 langs) ---
+/zh/services/wedding-trailer/    /zh/services/personalization/wedding-trailer/    301
+/zh/services/wedding-video/    /zh/services/personalization/ai-video-generator/    301
+/zh/services/family-tribute/    /zh/services/absence-compensation/family-tribute/    301
+/zh/about-us/    /zh/about/    301
+/zh/contact/    /zh/order/    301
+/zh/blog/wedding-budget-breakdown-2026/    /zh/blog/wedding-video-cost-2026/    301
+/zh/blog/average-wedding-cost-2026/    /zh/blog/wedding-video-cost-2026/    301
+/zh/blog/wedding-vendor-payment-schedule/    /zh/blog/wedding-video-cost-2026/    301
+/zh/blog/wedding-reception-timeline/    /zh/blog/wedding-video-timeline/    301
+/zh/blog/wedding-seating-chart-ideas/    /zh/tools/wedding-seating-chart-maker/    301
+/zh/blog/best-wedding-photo-books-2026/    /zh/tools/wedding-photo-book-planner/    301
+/zh/blog/wedding-photo-album-ideas/    /zh/tools/wedding-photo-book-planner/    301
+/hi/services/wedding-trailer/    /hi/services/personalization/wedding-trailer/    301
+/hi/services/wedding-video/    /hi/services/personalization/ai-video-generator/    301
+/hi/services/family-tribute/    /hi/services/absence-compensation/family-tribute/    301
+/hi/about-us/    /hi/about/    301
+/hi/contact/    /hi/order/    301
+/hi/blog/wedding-budget-breakdown-2026/    /hi/blog/wedding-video-cost-2026/    301
+/hi/blog/average-wedding-cost-2026/    /hi/blog/wedding-video-cost-2026/    301
+/hi/blog/wedding-vendor-payment-schedule/    /hi/blog/wedding-video-cost-2026/    301
+/hi/blog/wedding-reception-timeline/    /hi/blog/wedding-video-timeline/    301
+/hi/blog/wedding-seating-chart-ideas/    /hi/tools/wedding-seating-chart-maker/    301
+/hi/blog/best-wedding-photo-books-2026/    /hi/tools/wedding-photo-book-planner/    301
+/hi/blog/wedding-photo-album-ideas/    /hi/tools/wedding-photo-book-planner/    301
+/th/services/wedding-trailer/    /th/services/personalization/wedding-trailer/    301
+/th/services/wedding-video/    /th/services/personalization/ai-video-generator/    301
+/th/services/family-tribute/    /th/services/absence-compensation/family-tribute/    301
+/th/about-us/    /th/about/    301
+/th/contact/    /th/order/    301
+/th/blog/wedding-budget-breakdown-2026/    /th/blog/wedding-video-cost-2026/    301
+/th/blog/average-wedding-cost-2026/    /th/blog/wedding-video-cost-2026/    301
+/th/blog/wedding-vendor-payment-schedule/    /th/blog/wedding-video-cost-2026/    301
+/th/blog/wedding-reception-timeline/    /th/blog/wedding-video-timeline/    301
+/th/blog/wedding-seating-chart-ideas/    /th/tools/wedding-seating-chart-maker/    301
+/th/blog/best-wedding-photo-books-2026/    /th/tools/wedding-photo-book-planner/    301
+/th/blog/wedding-photo-album-ideas/    /th/tools/wedding-photo-book-planner/    301
+/ar/services/wedding-trailer/    /ar/services/personalization/wedding-trailer/    301
+/ar/services/wedding-video/    /ar/services/personalization/ai-video-generator/    301
+/ar/services/family-tribute/    /ar/services/absence-compensation/family-tribute/    301
+/ar/about-us/    /ar/about/    301
+/ar/contact/    /ar/order/    301
+/ar/blog/wedding-budget-breakdown-2026/    /ar/blog/wedding-video-cost-2026/    301
+/ar/blog/average-wedding-cost-2026/    /ar/blog/wedding-video-cost-2026/    301
+/ar/blog/wedding-vendor-payment-schedule/    /ar/blog/wedding-video-cost-2026/    301
+/ar/blog/wedding-reception-timeline/    /ar/blog/wedding-video-timeline/    301
+/ar/blog/wedding-seating-chart-ideas/    /ar/tools/wedding-seating-chart-maker/    301
+/ar/blog/best-wedding-photo-books-2026/    /ar/tools/wedding-photo-book-planner/    301
+/ar/blog/wedding-photo-album-ideas/    /ar/tools/wedding-photo-book-planner/    301
+/ru/services/wedding-trailer/    /ru/services/personalization/wedding-trailer/    301
+/ru/services/wedding-video/    /ru/services/personalization/ai-video-generator/    301
+/ru/services/family-tribute/    /ru/services/absence-compensation/family-tribute/    301
+/ru/about-us/    /ru/about/    301
+/ru/contact/    /ru/order/    301
+/ru/blog/wedding-budget-breakdown-2026/    /ru/blog/wedding-video-cost-2026/    301
+/ru/blog/average-wedding-cost-2026/    /ru/blog/wedding-video-cost-2026/    301
+/ru/blog/wedding-vendor-payment-schedule/    /ru/blog/wedding-video-cost-2026/    301
+/ru/blog/wedding-reception-timeline/    /ru/blog/wedding-video-timeline/    301
+/ru/blog/wedding-seating-chart-ideas/    /ru/tools/wedding-seating-chart-maker/    301
+/ru/blog/best-wedding-photo-books-2026/    /ru/tools/wedding-photo-book-planner/    301
+/ru/blog/wedding-photo-album-ideas/    /ru/tools/wedding-photo-book-planner/    301
+/ja/services/wedding-trailer/    /ja/services/personalization/wedding-trailer/    301
+/ja/services/wedding-video/    /ja/services/personalization/ai-video-generator/    301
+/ja/services/family-tribute/    /ja/services/absence-compensation/family-tribute/    301
+/ja/about-us/    /ja/about/    301
+/ja/contact/    /ja/order/    301
+/ja/blog/wedding-budget-breakdown-2026/    /ja/blog/wedding-video-cost-2026/    301
+/ja/blog/average-wedding-cost-2026/    /ja/blog/wedding-video-cost-2026/    301
+/ja/blog/wedding-vendor-payment-schedule/    /ja/blog/wedding-video-cost-2026/    301
+/ja/blog/wedding-reception-timeline/    /ja/blog/wedding-video-timeline/    301
+/ja/blog/wedding-seating-chart-ideas/    /ja/tools/wedding-seating-chart-maker/    301
+/ja/blog/best-wedding-photo-books-2026/    /ja/tools/wedding-photo-book-planner/    301
+/ja/blog/wedding-photo-album-ideas/    /ja/tools/wedding-photo-book-planner/    301
+/pt/services/wedding-trailer/    /pt/services/personalization/wedding-trailer/    301
+/pt/services/wedding-video/    /pt/services/personalization/ai-video-generator/    301
+/pt/services/family-tribute/    /pt/services/absence-compensation/family-tribute/    301
+/pt/about-us/    /pt/about/    301
+/pt/contact/    /pt/order/    301
+/pt/blog/wedding-budget-breakdown-2026/    /pt/blog/wedding-video-cost-2026/    301
+/pt/blog/average-wedding-cost-2026/    /pt/blog/wedding-video-cost-2026/    301
+/pt/blog/wedding-vendor-payment-schedule/    /pt/blog/wedding-video-cost-2026/    301
+/pt/blog/wedding-reception-timeline/    /pt/blog/wedding-video-timeline/    301
+/pt/blog/wedding-seating-chart-ideas/    /pt/tools/wedding-seating-chart-maker/    301
+/pt/blog/best-wedding-photo-books-2026/    /pt/tools/wedding-photo-book-planner/    301
+/pt/blog/wedding-photo-album-ideas/    /pt/tools/wedding-photo-book-planner/    301
+/de/services/wedding-trailer/    /de/services/personalization/wedding-trailer/    301
+/de/services/wedding-video/    /de/services/personalization/ai-video-generator/    301
+/de/services/family-tribute/    /de/services/absence-compensation/family-tribute/    301
+/de/about-us/    /de/about/    301
+/de/contact/    /de/order/    301
+/de/blog/wedding-budget-breakdown-2026/    /de/blog/wedding-video-cost-2026/    301
+/de/blog/average-wedding-cost-2026/    /de/blog/wedding-video-cost-2026/    301
+/de/blog/wedding-vendor-payment-schedule/    /de/blog/wedding-video-cost-2026/    301
+/de/blog/wedding-reception-timeline/    /de/blog/wedding-video-timeline/    301
+/de/blog/wedding-seating-chart-ideas/    /de/tools/wedding-seating-chart-maker/    301
+/de/blog/best-wedding-photo-books-2026/    /de/tools/wedding-photo-book-planner/    301
+/de/blog/wedding-photo-album-ideas/    /de/tools/wedding-photo-book-planner/    301
+/fr/services/wedding-trailer/    /fr/services/personalization/wedding-trailer/    301
+/fr/services/wedding-video/    /fr/services/personalization/ai-video-generator/    301
+/fr/services/family-tribute/    /fr/services/absence-compensation/family-tribute/    301
+/fr/about-us/    /fr/about/    301
+/fr/contact/    /fr/order/    301
+/fr/blog/wedding-budget-breakdown-2026/    /fr/blog/wedding-video-cost-2026/    301
+/fr/blog/average-wedding-cost-2026/    /fr/blog/wedding-video-cost-2026/    301
+/fr/blog/wedding-vendor-payment-schedule/    /fr/blog/wedding-video-cost-2026/    301
+/fr/blog/wedding-reception-timeline/    /fr/blog/wedding-video-timeline/    301
+/fr/blog/wedding-seating-chart-ideas/    /fr/tools/wedding-seating-chart-maker/    301
+/fr/blog/best-wedding-photo-books-2026/    /fr/tools/wedding-photo-book-planner/    301
+/fr/blog/wedding-photo-album-ideas/    /fr/tools/wedding-photo-book-planner/    301
+/es/services/wedding-trailer/    /es/services/personalization/wedding-trailer/    301
+/es/services/wedding-video/    /es/services/personalization/ai-video-generator/    301
+/es/services/family-tribute/    /es/services/absence-compensation/family-tribute/    301
+/es/about-us/    /es/about/    301
+/es/contact/    /es/order/    301
+/es/blog/wedding-budget-breakdown-2026/    /es/blog/wedding-video-cost-2026/    301
+/es/blog/average-wedding-cost-2026/    /es/blog/wedding-video-cost-2026/    301
+/es/blog/wedding-vendor-payment-schedule/    /es/blog/wedding-video-cost-2026/    301
+/es/blog/wedding-reception-timeline/    /es/blog/wedding-video-timeline/    301
+/es/blog/wedding-seating-chart-ideas/    /es/tools/wedding-seating-chart-maker/    301
+/es/blog/best-wedding-photo-books-2026/    /es/tools/wedding-photo-book-planner/    301
+/es/blog/wedding-photo-album-ideas/    /es/tools/wedding-photo-book-planner/    301
 # === 2026-08-07 user-reported 404 cleanup ===
 # Two URL-shape gaps the 50-rule block above doesn't cover:
 #
