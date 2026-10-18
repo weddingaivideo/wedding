@@ -121,3 +121,9 @@ jobs/
 
 # ---- Local probe results (regenerated on every verify run) ----
 scripts/verify-redirects-toolfooters-results.csv
+
+# ---- i18n pre-cleanup backups (regenerated when needed; not deliverable) ----
+.en-backup/
+
+# ---- One-off commit message drafts (project owner creates these ad hoc) ----
+COMMIT_MSG_*.txt
