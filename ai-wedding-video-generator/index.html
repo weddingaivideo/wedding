@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- Bing Webmaster Tools verification (home-page only; per Bing's instructions). -->
+    <meta name="msvalidate.01" content="D1804BA07F94D15393F82BD12C8DA109">
+    <!-- Preconnects live in _headers Link header (sent before HTML parses). -->
+    <!-- Hero poster preload (LCP): image shows instantly, video fades in on autoplay -->
+    <link rel="preload" as="image"
+          href="/images/hero-wedding-vineyard-1024.webp"
+          imagesrcset="/images/hero-wedding-vineyard-640.webp 640w, /images/hero-wedding-vineyard-1024.webp 1024w"
+          imagesizes="100vw"
+          fetchpriority="high">
+    <!-- No <link rel=preload> for the hero video: the <video> below starts with
+         preload="none" + data-lazy-video so js/lazy-videos.js triggers the metadata
+         fetch only after window.load. A full preloaded download would defeat
+         that lazy strategy and waste bandwidth. -->
+    <title data-i18n="index.title_text.ai_powered_wedding_video_services_weddin.58583865">AI Wedding Video from Photos — 48h | WeddingAI.video</title>
+    <link rel="canonical" href="https://weddingai.video/ai-wedding-video-generator/">
+    <link rel="alternate" hreflang="en" href="https://weddingai.video/ai-wedding-video-generator/">
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/ai-wedding-video-generator/">
+    <link rel="alternate" hreflang="es" href="https://weddingai.video/es/ai-wedding-video-generator/">
+    <link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/ai-wedding-video-generator/">
+    <link rel="alternate" hreflang="de" href="https://weddingai.video/de/ai-wedding-video-generator/">
+    <link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/ai-wedding-video-generator/">
+    <link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/ai-wedding-video-generator/">
+    <link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/ai-wedding-video-generator/">
+    <link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/ai-wedding-video-generator/">
+    <link rel="alternate" hreflang="th" href="https://weddingai.video/th/ai-wedding-video-generator/">
+    <link rel="alternate" hreflang="x-default" href="https://weddingai.video/ai-wedding-video-generator/">
+    <!-- Primary og:image: matches the hero video aspect (16:9) so it doubles as a video poster.
+         Falls back gracefully for non-video-aware platforms (Discord, Slack, WhatsApp, etc.).
+         og:image is JPEG, not WebP, because Facebook, LinkedIn and some other
+         social-card scrapers don't decode WebP and silently fall back to a
+         generic icon. Twitter, Slack, Discord, WhatsApp handle WebP fine, but
+         for max compat we serve the JPEG. The WebP version is still used as
+         the in-page poster (faster, smaller) — they're separate concerns.
+         (Audit fix 2026-08-04; og-image-1200x630.jpg is the standard
+         1200x630 social card; see images/og-image-1200x630.jpg.) -->
+    <meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="WeddingAI.video — AI-powered wedding video services, trusted by 9,400+ couples in 11 languages since 2023">
+    <meta property="og:image:type" content="image/jpeg">
+    <!-- Open Graph video: Facebook, LinkedIn, Discord, Slack, etc. surface the player when posted. -->
+    <meta property="og:video" content="https://weddingai.video/images/hero-wedding-loop.mp4">
+    <meta property="og:video:url" content="https://weddingai.video/images/hero-wedding-loop.mp4">
+    <meta property="og:video:secure_url" content="https://weddingai.video/images/hero-wedding-loop.mp4">
+    <meta property="og:video:type" content="video/mp4">
+    <meta property="og:video:width" content="1920">
+    <meta property="og:video:height" content="1080">
+    <meta property="og:video:alt" content="Cinematic AI wedding video: bride and groom under a vineyard arch at golden hour, gentle camera push-in">
+    <meta property="og:video:tag" content="AI wedding video">
+    <meta property="og:video:tag" content="cinematic wedding film">
+    <meta property="og:video:tag" content="wedding trailer">
+    <meta property="og:video:tag" content="vineyard wedding">
+    <meta name="description" data-i18n-attr="content:index.meta_description.ai_powered_wedding_videos_ai_films_multi.40129620" content="AI wedding video generator from photos. 60-90s cinematic films in 48 hours, 11 languages, from $9.9. 9,400+ couples. Free AI sample, no signup.">
+    <meta name="keywords" content="AI wedding video, wedding video enhancement, vintage wedding footage repair, AI wedding film generator, pet wedding video, wedding video editing service, wedding video restoration">
+    <meta property="og:type" content="video.other">
+    <meta property="og:title" content="AI Wedding Video Generator Comparison: 7 Tools Tested (2026)">
+    <meta property="og:description" content="Compare 7 AI wedding video generators in 2026. WeddingAI.video is the only one with 60-90s cinematic film + 11 languages + face-preservation + from $9.9.">
+    <meta property="og:url" content="https://weddingai.video/ai-wedding-video-generator/">
+    <meta name="twitter:card" content="player">
+    <meta name="twitter:title" content="AI-Powered Wedding Video Services | WeddingAI.video">
+    <meta name="twitter:description" content="AI-powered wedding videos: AI films, multilingual dubbing, restoration, and more. 10+ services. Get a free quote — start today!">
+    <meta name="twitter:image" content="https://weddingai.video/images/og-image-1200x630.webp">
+    <meta name="twitter:player" content="https://weddingai.video/">
+    <meta name="twitter:player:width" content="1920">
+    <meta name="twitter:player:height" content="1080">
+    <meta name="twitter:player:stream" content="https://weddingai.video/images/hero-wedding-loop.mp4">
+    <meta name="twitter:player:stream:content_type" content="video/mp4">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="WeddingAI.video">    <style id="critical-css">:root{--color-primary:#d4af37;--color-primary-dark:#b8962e;--color-secondary:#2c2c2c;--color-accent:#e8d5b7;--color-bg:#fdfbf8;--color-bg-alt:#f5f0ea;--color-text:#2c2c2c;--color-text-light:#6b6b6b;--color-white:#fff;--color-border:#e5e0d8;--font-heading:"Playfair Display",Georgia,serif;--font-body:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;--spacing-xs:0.5rem;--spacing-sm:1rem;--spacing-md:1.5rem;--spacing-lg:2rem;--spacing-xl:3rem;--spacing-2xl:5rem;--radius-sm:4px;--radius-md:8px;--radius-lg:16px;--radius-xl:24px;--shadow-sm:0 2px 8px rgba(0,0,0,.06);--shadow-md:0 4px 20px rgba(0,0,0,.08);--shadow-lg:0 8px 40px rgba(0,0,0,.12);--transition:0.3s ease;--max-width:1200px} html{scroll-behavior:smooth;font-size:16px} body{font-family:var(--font-body);color:var(--color-text);background-color:var(--color-bg);line-height:1.6;-webkit-font-smoothing:antialiased} img,video{max-width:100%;height:auto;display:block} a{color:inherit;text-decoration:none} ol,ul{list-style:none} button{cursor:pointer;border:none;background:none;font-family:inherit} h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);line-height:1.2;font-weight:600} .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--spacing-md)} .btn{display:inline-flex;gap:var(--spacing-xs);padding:.75rem 1.5rem;border-radius:var(--radius-md);font-size:.9375rem;font-weight:600;transition:var(--transition);white-space:nowrap} .btn-primary{background:var(--color-primary);color:#1a1a1a} .btn-primary:hover{background:var(--color-primary-dark);transform:translateY(-1px);box-shadow:var(--shadow-md)} .btn-secondary{background:transparent;color:var(--color-secondary);border:2px solid var(--color-secondary)} .site-header{position:sticky;top:0;z-index:100;background:hsla(36,56%,98%,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--color-border)} .header-inner{justify-content:space-between;height:72px} .logo{display:flex;align-items:center} .logo img{max-height:72px;max-width:400px;width:auto;height:auto;display:block;object-fit:contain} .main-nav{display:block;position:static;top:auto;left:auto;right:auto;background:0 0;border-top:none;box-shadow:none;padding:0} .nav-list{display:flex;align-items:center;gap:var(--spacing-lg)} .mobile-menu-toggle{display:none;flex-direction:column;gap:5px;padding:var(--spacing-xs)} .hero{position:relative;min-height:90vh;display:flex;align-items:center;overflow:hidden} .hero-bg{background:linear-gradient(135deg,#e8d5b7,#c9a96e 50%,#8b6914)} .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(44,44,44,.3) 0,rgba(44,44,44,.5) 50%,rgba(44,44,44,.7))} .hero-content{position:relative;z-index:1;text-align:center;padding-top:var(--spacing-2xl);padding-bottom:var(--spacing-2xl)} .hero-title{font-size:clamp(2rem,5vw,3.5rem);color:var(--color-white);max-width:800px;margin:0 auto var(--spacing-md);text-shadow:0 2px 20px rgba(0,0,0,.3)} .hero-subtitle{font-size:clamp(1rem,2vw,1.25rem);color:hsla(0,0%,100%,.9);max-width:600px;margin:0 auto var(--spacing-lg)} .hero-cta{display:flex;flex-wrap:wrap;gap:var(--spacing-sm);justify-content:center;margin-bottom:var(--spacing-lg)} .hero-trust{font-size:.875rem;color:hsla(0,0%,100%,.75)} .section-dark{background:var(--color-secondary);color:#fff} @media (max-width:768px){.main-nav{display:none;position:absolute;top:72px;left:0;right:0;background:var(--color-white);border-top:1px solid var(--color-border);box-shadow:var(--shadow-md);padding:var(--spacing-md)}.main-nav.active{display:block}.main-nav .nav-list{flex-direction:column;align-items:flex-start;gap:var(--spacing-sm)}.mobile-menu-toggle{display:flex}.hero{min-height:80vh}.hero-bg .hero-video,.hero-bg video.hero-video{display:none}.hero-bg .hero-poster-fallback{z-index:0!important;opacity:1!important}.hero-cta{flex-direction:column;align-items:center}.hero-cta .btn{width:100%;max-width:280px}.section{padding:var(--spacing-xl) 0}.footer-inner{grid-template-columns:1fr}.footer-nav{grid-template-columns:1fr 1fr}} @media (prefers-reduced-motion:reduce){*,:after,:before{transition:none!important;animation:none!important}.hero-bg .hero-video,.hero-bg video.hero-video{display:none}.hero-bg .hero-poster-fallback{z-index:0!important;opacity:1!important}} @media print{.faq-item summary:after,.hero-cta,.mobile-menu-toggle,.site-header{display:none}.hero{min-height:auto;background:var(--color-bg-alt)!important}.hero-bg,.hero-overlay{display:none}.hero-content{color:var(--color-text)}}</style>
+    
+    <link rel="stylesheet" href="/styles.min.css?v=3.30">
+<script nonce="__CSP_NONCE__" defer src="/js/main.min.js?v=3.20"></script>
+    <script nonce="__CSP_NONCE__" defer src="/js/lazy-videos.js?v=1.0"></script>
+    <script nonce="__CSP_NONCE__" src="/js/cookie-consent.js" defer></script>
+    <!-- Google tag (gtag.js) — deferred to first interaction or idle (avoids wasted bytes on bouncers) -->
+    <script nonce="__CSP_NONCE__">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
+
+    window.__loadGtag = function() {
+      if (window.__gtagLoaded) return;
+      window.__gtagLoaded = true;
+      var s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
+      s.async = true;
+      s.onload = function() {
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: location.href,
+          page_path: location.pathname + location.search
+        });
+      };
+      s.setAttribute('data-gtag-lazy', '1');
+      document.head.appendChild(s);
+    };
+
+    // Engaged users: load on first interaction.
+    ['scroll','click','touchstart','keydown'].forEach(function(evt){
+      window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
+    });
+    // Passive readers / non-interactors: fallback to idle / load+3s.
+    window.addEventListener('load', function() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(window.__loadGtag, { timeout: 4000 });
+      } else {
+        setTimeout(window.__loadGtag, 3000);
+      }
+    });
+    </script>
+    <!-- Google AdSense (lazy-loaded to avoid forced reflow during initial paint) -->
+    <script nonce="__CSP_NONCE__">
+    window.addEventListener('load', function() {
+      var loadAds = function() {
+        var s = document.createElement('script');
+        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1670381960525419';
+        s.async = true;
+        s.crossOrigin = 'anonymous';
+        document.head.appendChild(s);
+      };
+      // Prefer requestIdleCallback; fall back to setTimeout for Safari / older browsers
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadAds, { timeout: 4000 });
+      } else {
+        setTimeout(loadAds, 3000);
+      }
+    });
+    </script>
+<script nonce="__CSP_NONCE__" src="/js/langs.js" defer></script>
+<script nonce="__CSP_NONCE__" src="/js/i18n.js?v=4.28" defer></script>
+<script nonce="__CSP_NONCE__">
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
+
+    <!-- Baidu Tongji (hm.baidu.com) — analytics -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?784c824843f328ed5f8254991ef8b2f4";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+    <!-- Clarity (clarity.ms) — heatmaps & session replay -->
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ywxiu97hg8");
+    </script>
+
+</head>
+<body>
+
+
+    <a href="#main-content" class="skip-link" data-i18n="404.a_text.skip_to_main_content.85143743">Skip to main content</a>
+
+    <!-- ========== HEADER / NAV ========== -->
+                <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video — wedding video services"><picture>
+    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager">
+  </picture></a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Browse our wedding video services" data-i18n="404.a_text.services.84864121" aria-haspopup="true" aria-expanded="false">Services <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.video_enhancement.98039549">Video Enhancement</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/slow-motion/" data-i18n="404.a_text.slow_motion.30129340">Slow Motion</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/video-enhancement/vintage-restoration/" data-i18n="404.a_text.vintage_restoration.91827364">Vintage Restoration</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.personalization.44366515">Personalization</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/personalization/wedding-trailer/" data-i18n="404.a_text.wedding_trailer.04692297">Wedding Trailer</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/ai-video-generator/" data-i18n="404.a_text.ai_video_generator.39420322">AI Video Generator</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/pet-wedding/" data-i18n="404.a_text.pet_wedding.23911820">Pet Wedding</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/multilingual/" data-i18n="404.a_text.multilingual.74639147">Multilingual</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/cartoon-style/" data-i18n="404.a_text.cartoon_style.16664616">Cartoon Style</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/personalization/meme-generator/" data-i18n="404.a_text.wedding_memes.22951185">Wedding Memes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.absence_compensation.22965696">Absence Compensation</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-tribute/" data-i18n="404.a_text.family_tribute.39408322">Family Tribute</a></li>
+                                    <li role="none"><a role="menuitem" href="/services/absence-compensation/family-message/" data-i18n="404.a_text.family_message.27013166">Family Message</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/services/" class="nav-dropdown-all-link" data-i18n="nav.a_text.view_all_services.91827365">View all services &rarr;</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/gallery/" title="View our gallery and case studies" data-i18n="404.a_text.gallery.96646935">Gallery</a></li>
+                    <li><a href="/blog/" title="Read our wedding video blog" data-i18n="404.a_text.blog.95723762">Blog</a></li>
+                    <li><a href="/resources/" title="In-depth wedding video guides" data-i18n="404.a_text.resources.rrrrrrr1">Resources</a></li>
+                    <li><a href="/tools/" title="Free online wedding photo tools" data-i18n="404.a_text.free_tools.91827366">Free Tools</a></li>
+
+                    <li><a href="/about/" title="Learn about us" data-i18n="404.a_text.about.69447212">About</a></li>
+                    <li><a href="/pricing/" title="View transparent pricing" data-i18n="404.a_text.pricing.43854765">Pricing</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option>
+                    <option value="hi">HI</option></select></li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    
+    <main id="main-content">
+        <section class="section serp-page-hero" aria-label="AI Wedding Video Generator Comparison">
+            <div class="container" style="max-width: 960px;">
+                <header class="section-header">
+                    <h1>AI Wedding Video Generator Comparison: 7 Tools Tested (2026)</h1>
+                    <p class="section-intro">Most AI wedding video generators are template-based or avatar-focused. Only WeddingAI.video delivers a 60-90s cinematic film from 10-50 of your own photos, with face-preservation, 11 languages, and a $9.9 single payment. Below: a head-to-head comparison of 7 popular AI wedding video generators side by side.</p>
+                </header>
+            </div>
+        </section>
+
+<section class="section serp-comparison-section" id="ai-wedding-video-generator-comparison">
+  <div class="container" style="max-width: 1080px;">
+    <header class="section-header">
+      <h2 class="serp-h2">AI Wedding Video Generator Comparison: 7 Tools vs WeddingAI.video 11 Langs + Photos-to-60-90s Film</h2>
+      <p data-i18n="home.serp_comparison.p_text">Google SERPs (October 2025) for 'AI wedding video generator from photos' show: Vidu AI (vidu.com — one photo to dream wedding video romantic edits shareable clips), PicLumen (piclumen.com — turn photos text footage into cinematic wedding videos invitations ceremony highlights thank-you videos 4.8★/4,345), Pollo AI (pollo.ai — AI wedding video generator upload images one person couple), Videxai (videxai.com — AI Animation Reel Maker), Vidnoz (vidnoz.com — AI avatar video generator), Canva AI Video Generator (canva.com/ai/video-generator), InVideo AI (invideo.ai — AI script-to-video). Most AI video generators are template or avatar focused not cinematic photo-to-film. WeddingAI.video is the only one with 60-90s cinematic film + 11 languages + face-preservation + 9,400+ couples :</p>
+    </header>
+    <div class="comparison-table-wrap">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th data-i18n="home.serp_comparison.th.tool">Tool</th>
+            <th data-i18n="home.serp_comparison.th.style">Style</th>
+            <th data-i18n="home.serp_comparison.th.languages">Languages</th>
+            <th data-i18n="home.serp_comparison.th.output">Output</th>
+            <th data-i18n="home.serp_comparison.th.price">Price</th>
+            <th data-i18n="home.serp_comparison.th.workflow">Workflow</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-weddingai">
+            <td data-i18n="home.serp_comparison.td.weddingai"><strong>WeddingAI.video (this site)</strong></td>
+            <td data-i18n="home.serp_comparison.td.style_weddingai"><strong>9 cinematic styles (cinematic/classic/cartoon/mascot/meme/multilingual)</strong></td>
+            <td data-i18n="home.serp_comparison.td.lang_weddingai"><strong>11 languages including face preservation</strong></td>
+            <td data-i18n="home.serp_comparison.td.output_weddingai"><strong>60-90s cinematic film from 10-50 photos</strong></td>
+            <td data-i18n="home.serp_comparison.td.price_weddingai"><strong>From $9.9 (single payment)</strong></td>
+            <td data-i18n="home.serp_comparison.td.workflow_weddingai"><strong>All-in-one (no separate video editor needed)</strong></td>
+          </tr>
+          <tr>
+            <td data-i18n="home.serp_comparison.td.vidu">Vidu AI (vidu.com)</td>
+            <td data-i18n="home.serp_comparison.td.style_vidu">AI effect templates only</td>
+            <td data-i18n="home.serp_comparison.td.lang_vidu">No multilingual output</td>
+            <td data-i18n="home.serp_comparison.td.output_vidu">5-10s short clips</td>
+            <td data-i18n="home.serp_comparison.td.price_vidu">Subscription $9.9/mo+</td>
+            <td data-i18n="home.serp_comparison.td.workflow_vidu">AI effect overlay only</td>
+          </tr>
+          <tr>
+            <td data-i18n="home.serp_comparison.td.piclumen">PicLumen (piclumen.com)</td>
+            <td data-i18n="home.serp_comparison.td.style_piclumen">Cinematic template based</td>
+            <td data-i18n="home.serp_comparison.td.lang_piclumen">English only</td>
+            <td data-i18n="home.serp_comparison.td.output_piclumen">Variable length clips</td>
+            <td data-i18n="home.serp_comparison.td.price_piclumen">Free tier + paid plans</td>
+            <td data-i18n="home.serp_comparison.td.workflow_piclumen">Photo + text + footage remix</td>
+          </tr>
+          <tr>
+            <td data-i18n="home.serp_comparison.td.pollo">Pollo AI (pollo.ai)</td>
+            <td data-i18n="home.serp_comparison.td.style_pollo">AI image-to-video effect</td>
+            <td data-i18n="home.serp_comparison.td.lang_pollo">English only</td>
+            <td data-i18n="home.serp_comparison.td.output_pollo">5-15s short clips</td>
+            <td data-i18n="home.serp_comparison.td.price_pollo">Credit-based pricing</td>
+            <td data-i18n="home.serp_comparison.td.workflow_pollo">Photo upload + effect</td>
+          </tr>
+          <tr>
+            <td data-i18n="home.serp_comparison.td.videxai">Videxai (videxai.com)</td>
+            <td data-i18n="home.serp_comparison.td.style_videxai">AI animation templates</td>
+            <td data-i18n="home.serp_comparison.td.lang_videxai">English only</td>
+            <td data-i18n="home.serp_comparison.td.output_videxai">Reels/Stories format</td>
+            <td data-i18n="home.serp_comparison.td.price_videxai">Subscription model</td>
+            <td data-i18n="home.serp_comparison.td.workflow_videxai">AI animation overlay</td>
+          </tr>
+          <tr>
+            <td data-i18n="home.serp_comparison.td.vidnoz">Vidnoz (vidnoz.com)</td>
+            <td data-i18n="home.serp_comparison.td.style_vidnoz">AI avatar templates</td>
+            <td data-i18n="home.serp_comparison.td.lang_vidnoz">Limited avatar languages</td>
+            <td data-i18n="home.serp_comparison.td.output_vidnoz">Avatar spokesperson videos</td>
+            <td data-i18n="home.serp_comparison.td.price_vidnoz">Free tier + paid</td>
+            <td data-i18n="home.serp_comparison.td.workflow_vidnoz">Avatar text-to-speech</td>
+          </tr>
+          <tr>
+            <td data-i18n="home.serp_comparison.td.canva_ai">Canva AI (canva.com/ai)</td>
+            <td data-i18n="home.serp_comparison.td.style_canva_ai">Magic Studio templates</td>
+            <td data-i18n="home.serp_comparison.td.lang_canva_ai">Limited multilingual</td>
+            <td data-i18n="home.serp_comparison.td.output_canva_ai">Template-based clips</td>
+            <td data-i18n="home.serp_comparison.td.price_canva_ai">Pro subscription</td>
+            <td data-i18n="home.serp_comparison.td.workflow_canva_ai">Template remix only</td>
+          </tr>
+          <tr>
+            <td data-i18n="home.serp_comparison.td.invideo">InVideo AI (invideo.ai)</td>
+            <td data-i18n="home.serp_comparison.td.style_invideo">Script-to-video AI</td>
+            <td data-i18n="home.serp_comparison.td.lang_invideo">English script only</td>
+            <td data-i18n="home.serp_comparison.td.output_invideo">Stock footage + voiceover</td>
+            <td data-i18n="home.serp_comparison.td.price_invideo">Subscription $25/mo+</td>
+            <td data-i18n="home.serp_comparison.td.workflow_invideo">Script + stock footage</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="serp-trailing" data-i18n="home.serp_comparison.p_trailing">Most AI wedding video generators focus on template effects or AI avatars not cinematic photos-to-film. WeddingAI.video is the only tool with 60-90s cinematic film + 11 languages + face preservation + 9,400+ couples + 48-hour turnaround + from $9.9 single payment.</p>
+  </div>
+</section>
+        <section class="section" style="background: var(--color-bg-alt);">
+            <div class="container" style="max-width: 800px;">
+                <header class="section-header">
+                    <h2>Why WeddingAI.video is the only photos-to-film choice</h2>
+                </header>
+                <p data-i18n="home.serp_comparison.p_trailing">Most AI wedding video generators focus on template effects or AI avatars not cinematic photos-to-film. WeddingAI.video is the only tool with 60-90s cinematic film + 11 languages + face preservation + 9,400+ couples + 48-hour turnaround + from $9.9 single payment.</p>
+                <div class="section-cta" style="text-align: center; margin-top: var(--spacing-xl);">
+                    <a href="/pricing/" class="btn btn-primary" title="See pricing for AI wedding video">See pricing from $9.9 →</a>
+                    <a href="/tools/" class="btn btn-secondary" style="margin-left: 0.5rem;" title="Try free wedding video tools">Try free tools first</a>
+                </div>
+            </div>
+        </section>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "AI Wedding Video Generator Comparison: 7 Tools Tested (2026)",
+            "description": "Side-by-side comparison of 7 AI wedding video generators including Vidu AI, PicLumen, Pollo AI, Videxai, Vidnoz, Canva AI, InVideo AI, and WeddingAI.video.",
+            "author": {"@id": "https://weddingai.video/#organization"},
+            "publisher": {"@id": "https://weddingai.video/#organization"},
+            "datePublished": "2026-10-18",
+            "dateModified": "2026-10-18",
+            "inLanguage": "en"
+        }
+        </script>
+    </main>
+
+    <footer>
+                        <cite>Jennifer L., Austin TX</cite>
+                        <span class="stars" role="img" aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                    </footer>
+
+</body>
+</html>

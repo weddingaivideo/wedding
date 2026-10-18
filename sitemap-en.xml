@@ -2992,4 +2992,22 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://weddingai.video/ai-wedding-video-generator/</loc>
+        <lastmod>2026-10-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://weddingai.video/ai-wedding-video-generator/" />
+        <xhtml:link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/ai-wedding-video-generator/" />
+        <xhtml:link rel="alternate" hreflang="es" href="https://weddingai.video/es/ai-wedding-video-generator/" />
+        <xhtml:link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/ai-wedding-video-generator/" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://weddingai.video/de/ai-wedding-video-generator/" />
+        <xhtml:link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/ai-wedding-video-generator/" />
+        <xhtml:link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/ai-wedding-video-generator/" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/ai-wedding-video-generator/" />
+        <xhtml:link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/ai-wedding-video-generator/" />
+        <xhtml:link rel="alternate" hreflang="th" href="https://weddingai.video/th/ai-wedding-video-generator/" />
+        <xhtml:link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/ai-wedding-video-generator/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://weddingai.video/ai-wedding-video-generator/" />
+    </url>
 </urlset>
