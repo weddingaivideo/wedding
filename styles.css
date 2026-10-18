@@ -2360,20 +2360,21 @@ a.case-img-link {
     margin-bottom: 0.75rem;
 }
 
-.comparison-table {
+.comparison-table, .full-pricing-table {
     width: 100%;
     border-collapse: collapse;
     margin: 1.5rem 0;
 }
 
-.comparison-table th, .comparison-table td {
+.comparison-table th, .comparison-table td,
+.full-pricing-table th, .full-pricing-table td {
     padding: 0.75rem 1rem;
     text-align: left;
     border-bottom: 1px solid var(--color-border);
     font-size: 0.9375rem;
 }
 
-.comparison-table th {
+.comparison-table th, .full-pricing-table th {
     background: var(--color-bg-alt);
     font-weight: 700;
 }
