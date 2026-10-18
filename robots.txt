@@ -52,6 +52,8 @@ Disallow: /__pycache__
 Disallow: /__pycache__/
 Disallow: /functions
 Disallow: /functions/
+Disallow: /private
+Disallow: /private/
 Disallow: /netlify.toml
 Disallow: /AGENTS.md
 Disallow: /CHANGELOG.md
