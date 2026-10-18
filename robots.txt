@@ -54,12 +54,6 @@ Disallow: /functions
 Disallow: /functions/
 Disallow: /private
 Disallow: /private/
-Disallow: /netlify.toml
-Disallow: /AGENTS.md
-Disallow: /CHANGELOG.md
-Disallow: /README.md
-Disallow: /RESEND_SETUP.md
-Disallow: /TESTING-PLAN.md
 Disallow: /_redirects
 Disallow: /_headers.bak
 Disallow: /indexnow-key.txt
@@ -67,6 +61,17 @@ Disallow: /.gitignore
 Disallow: /.assetsignore
 Disallow: /.github
 Disallow: /.github/
+
+# Files not present in repo and already excluded via .assetsignore (deploy layer).
+# Kept commented as a safety net if these files are re-added later — the
+# .assetsignore comment in the deploy file is the source of truth.
+# Disallow: /netlify.toml   (Netlify legacy, never existed in CF Pages repo)
+# Disallow: /AGENTS.md       (internal dev doc, .assetsignore excludes)
+# Disallow: /CHANGELOG.md    (internal dev doc, .assetsignore excludes)
+# Disallow: /RESEND_SETUP.md (internal dev doc, .assetsignore excludes)
+# Disallow: /TESTING-PLAN.md (internal dev doc, .assetsignore excludes)
+# README.md is the only .md actually deployed — left disallowed to avoid leaking
+# repo structure to crawlers.
 
 # ---- AI / LLM crawlers -----------------------------------------------------
 # We explicitly allow common AI crawlers (GPTBot, Claude, Perplexity, etc.)
