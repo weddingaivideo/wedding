@@ -206,6 +206,50 @@ function withCspHeaders(response, text, nonce) {
     });
 }
 
+// Cache the post-transform HTML body in caches.default for 5 minutes.
+//
+// Added 2026-10-19 to fix CF Pages Free 50 ms CPU limit / error 1102:
+// every git push creates a new Worker isolate that must cold-start V8 +
+// load the 82 KB middleware module (~30 ms init), then run 15+ regex
+// passes + JSON parse/stringify on the HTML body. Heavy pages (blog/,
+// gallery/, hi/, ar/ blog indexes with 200-280 data-i18n attrs) easily
+// exceed 50 ms on the first cold hit, producing Cloudflare error 1102
+// ("Worker exceeded resource limits").
+//
+// Cache scope: pre-nonce body only. The nonce + CSP meta MUST be
+// regenerated per request for security, so withCspHeaders stays outside
+// the cache boundary. The cache key uses a virtual URL on a synthetic
+// origin (cache.local) so caches.default treats it as a real cacheable
+// object without colliding with real page URLs.
+//
+// Key: `wa-body:<lang>:<rest>` (EN branch uses `wa-body:en:<path>`).
+// No I18N_VERSION — new deploy = new isolate, so the cache naturally
+// busts on deploy boundaries.
+//
+// TTL: 5 min. Even if translation JSON changes mid-isolate, the worst
+// case is a 5-min view of stale translations, which matches the existing
+// loadI18nDict TTL on the i18n JSON itself.
+async function getCachedProcessedBody(cacheKey, builder) {
+    const cache = caches.default;
+    try {
+        const hit = await cache.match(cacheKey);
+        if (hit) return await hit.text();
+    } catch (e) { /* fall through to builder */ }
+    const body = await builder();
+    try {
+        await cache.put(
+            cacheKey,
+            new Response(body, {
+                headers: {
+                    "Content-Type": "text/html; charset=utf-8",
+                    "Cache-Control": "public, max-age=300",
+                },
+            })
+        );
+    } catch (e) { /* cache write failures are non-fatal */ }
+    return body;
+}
+
 // Wrap context.next() so the static-file response also gets nonce injection.
 // Only runs on text/html responses — non-HTML (CSS/JS/images) don't have
 // the placeholder and would be wasted work.
@@ -1318,60 +1362,71 @@ export const onRequest = async (context) => {
             const res = await context.next();
             const ct = res.headers.get("content-type") || "";
             if (!ct.includes("text/html")) return res;
-            let text = await res.text();
-            text = fixOgUrlTrailingSlash(text);
-            // Note: og:locale and inLanguage for EN are already correct (en_US
-            // and en-US), so no rewrite needed for the default lang.
-            // /success/ noindex for EN too.
-            text = addNoindexIfSuccess(text, path);
-            // P2 (2026-10-12): Inject the FULL 11-lang + x-default hreflang graph
-            // for EN pages too. Until now the EN pages kept whatever the HTML
-            // author hand-wrote — typically only 3 alternate links (en + a single
-            // other lang + x-default), leaving Google with an incomplete hreflang
-            // graph for the 9 other languages. Building the same block here
-            // mirrors the non-EN branch so every page exposes all 12 alternates.
-            // (2026-10-12 first surfaced on /tools/<slug>/ — those hand-written
-            // hreflang blocks predate the November 2026 Hindi launch.)
-            const enCanonicalBlock = buildCanonicalAndAlternates(path, DEFAULT_LANG);
-            // Strip pre-existing canonical + alternates (both plain `<link ...>`
-            // and self-closing `<link ... />` forms). The previous regex only
-            // matched the plain form, so any author-written self-closing
-            // alternates survived the strip and were re-injected alongside
-            // the middleware block — Surfacing as 7 Hreflang: Multiple
-            // Entries issues in the 2026-10-16 SF crawl. (Tools pages and
-            // their 301 redirect targets authored the alternates with `/>`.)
-            text = text.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
-            text = text.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
-            if (/<title[\s>][\s\S]*?<\/title>/i.test(text)) {
-                text = text.replace(/(<\/title>)/i, `$1\n    ${enCanonicalBlock}`);
-            } else if (/<head>/i.test(text)) {
-                text = text.replace(/(<head>)/i, `$1\n    ${enCanonicalBlock}`);
-            }
-            // Article schema date diversification (matches the non-EN path).
-            if (text.includes('"@type": "Article"') || text.includes('"@type":"Article"')) {
-                text = diversifyArticleDates(text, context.request.url);
-                text = rewriteArticleAuthor(text);
-                // Mirror the diversified dates into og:article:* so social crawlers
-                // see per-post unique dates consistent with the JSON-LD schema.
-                text = diversifyOgArticleDates(text, context.request.url);
-            }
-            // ItemList + blog-index card date diversification. The 100-entry
-            // ItemList on /blog/ has 50 entries stamped "2026-08-01" (the
-            // same batch-generate date that the per-post diversification
-            // already handles). Mirror the same hash logic so the listing
-            // and visible card text also get unique dates. (Added 2026-08-11
-            // when user reported the Aug 1 cluster in view-source / GSC.)
-            if (text.includes('"@type": "ItemList"') || text.includes('"@type":"ItemList"')) {
-                text = diversifyItemListDates(text);
-            }
-            if (text.includes('Aug 1, 2026')) {
-                text = refreshBlogIndexCardDates(text);
-            }
-            // Refresh visible "Updated" date to match JSON-LD dateModified.
-            // Note: `lang` is not yet defined here (only available in the
-            // match branch below). Pass null so refreshVisibleUpdateDate
-            // uses the ISO format fallback.
-            text = refreshVisibleUpdateDate(text, context.request.url, null);
+            // Wrap the transforms in a 5-min caches.default cache. Heavy pages
+            // (blog/, gallery/) on cold-start can blow the CF Pages Free 50ms
+            // CPU limit; the cache lets the heavy work run once per (path) per
+            // 5-min window per isolate. See getCachedProcessedBody above.
+            const enBodyCacheKey = new Request(
+                `https://cache.local/wa-body/en${path}`,
+                { method: "GET" }
+            );
+            const text = await getCachedProcessedBody(enBodyCacheKey, async () => {
+                let text = await res.text();
+                text = fixOgUrlTrailingSlash(text);
+                // Note: og:locale and inLanguage for EN are already correct (en_US
+                // and en-US), so no rewrite needed for the default lang.
+                // /success/ noindex for EN too.
+                text = addNoindexIfSuccess(text, path);
+                // P2 (2026-10-12): Inject the FULL 11-lang + x-default hreflang graph
+                // for EN pages too. Until now the EN pages kept whatever the HTML
+                // author hand-wrote — typically only 3 alternate links (en + a single
+                // other lang + x-default), leaving Google with an incomplete hreflang
+                // graph for the 9 other languages. Building the same block here
+                // mirrors the non-EN branch so every page exposes all 12 alternates.
+                // (2026-10-12 first surfaced on /tools/<slug>/ — those hand-written
+                // hreflang blocks predate the November 2026 Hindi launch.)
+                const enCanonicalBlock = buildCanonicalAndAlternates(path, DEFAULT_LANG);
+                // Strip pre-existing canonical + alternates (both plain `<link ...>`
+                // and self-closing `<link ... />` forms). The previous regex only
+                // matched the plain form, so any author-written self-closing
+                // alternates survived the strip and were re-injected alongside
+                // the middleware block — Surfacing as 7 Hreflang: Multiple
+                // Entries issues in the 2026-10-16 SF crawl. (Tools pages and
+                // their 301 redirect targets authored the alternates with `/>`.)
+                text = text.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
+                text = text.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
+                if (/<title[\s>][\s\S]*?<\/title>/i.test(text)) {
+                    text = text.replace(/(<\/title>)/i, `$1\n    ${enCanonicalBlock}`);
+                } else if (/<head>/i.test(text)) {
+                    text = text.replace(/(<head>)/i, `$1\n    ${enCanonicalBlock}`);
+                }
+                // Article schema date diversification (matches the non-EN path).
+                if (text.includes('"@type": "Article"') || text.includes('"@type":"Article"')) {
+                    text = diversifyArticleDates(text, context.request.url);
+                    text = rewriteArticleAuthor(text);
+                    // Mirror the diversified dates into og:article:* so social crawlers
+                    // see per-post unique dates consistent with the JSON-LD schema.
+                    text = diversifyOgArticleDates(text, context.request.url);
+                }
+                // ItemList + blog-index card date diversification. The 100-entry
+                // ItemList on /blog/ has 50 entries stamped "2026-08-01" (the
+                // same batch-generate date that the per-post diversification
+                // already handles). Mirror the same hash logic so the listing
+                // and visible card text also get unique dates. (Added 2026-08-11
+                // when user reported the Aug 1 cluster in view-source / GSC.)
+                if (text.includes('"@type": "ItemList"') || text.includes('"@type":"ItemList"')) {
+                    text = diversifyItemListDates(text);
+                }
+                if (text.includes('Aug 1, 2026')) {
+                    text = refreshBlogIndexCardDates(text);
+                }
+                // Refresh visible "Updated" date to match JSON-LD dateModified.
+                // Note: `lang` is not yet defined here (only available in the
+                // match branch below). Pass null so refreshVisibleUpdateDate
+                // uses the ISO format fallback.
+                text = refreshVisibleUpdateDate(text, context.request.url, null);
+                return text;
+            });
             return withCspHeaders(res, text, nonce);
         }
 
@@ -1528,105 +1583,119 @@ export const onRequest = async (context) => {
         const contentType = response.headers.get("content-type") || "";
         if (!contentType.includes("text/html")) return response;
 
-        let text = await response.text();
+        // Wrap the entire transform pipeline in a 5-min caches.default cache.
+        // For non-EN pages, the transforms include a fetch of /i18n/<lang>.json
+        // + applyDataI18n (200-280 attrs regex on 50-300 KB HTML), which on
+        // cold-start after a git push can blow the CF Pages Free 50ms CPU
+        // limit (Cloudflare error 1102). Cache key: wa-body:<lang>:<rest>.
+        // See getCachedProcessedBody above for the rationale.
+        const bodyCacheKey = new Request(
+            `https://cache.local/wa-body/${lang}${rest}`,
+            { method: "GET" }
+        );
+        const text = await getCachedProcessedBody(bodyCacheKey, async () => {
+            let text = await response.text();
 
-        // 1. <html lang="xx" dir="rtl">
-        if (lang !== DEFAULT_LANG) {
-            const rtl = RTL[lang] ? ' dir="rtl"' : "";
-            text = text.replace(/<html\s+lang="en"\s*>/i, `<html lang="${lang}"${rtl}>`);
-        }
-
-        // 2. canonical + hreflang
-        const newBlock = buildCanonicalAndAlternates(rest, lang);
-        // Same self-closing-aware strip as the EN branch above.
-        text = text.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
-        text = text.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
-        if (/<title[\s>][\s\S]*?<\/title>/i.test(text)) {
-            text = text.replace(/(<\/title>)/i, `$1\n    ${newBlock}`);
-        } else if (/<head>/i.test(text)) {
-            text = text.replace(/(<head>)/i, `$1\n    ${newBlock}`);
-        }
-
-        // 3. og:locale rewrite (per language). Apply BEFORE i18n so that
-        // the locale reflects the language the user is actually viewing.
-        text = setOgLocale(text, lang);
-
-        // 4. JSON-LD inLanguage rewrite (per language).
-        text = rewriteInLanguage(text, lang);
-
-        // 5. og:url trailing-slash normalization.
-        text = fixOgUrlTrailingSlash(text);
-
-        // 6. /success/ noindex.
-        text = addNoindexIfSuccess(text, rest);
-
-        // 6.5. Diversify Article schema datePublished / dateModified across
-        //      blog posts. All 50 posts currently share "2026-07-23" which
-        //      looks suspicious to Google. We hash the URL to produce a
-        //      stable per-post date in the past 60 days.
-        if (text.includes('"@type": "Article"') || text.includes('"@type":"Article"')) {
-            text = diversifyArticleDates(text, context.request.url);
-            // 6.6. Rewrite Article author Organization → Person for E-E-A-T.
-            text = rewriteArticleAuthor(text);
-            // 6.6.1. Mirror diversified dates into og:article:* meta tags so
-            //        social-media crawlers (FB, LinkedIn, Slack) see per-post
-            //        unique dates consistent with the JSON-LD schema.
-            text = diversifyOgArticleDates(text, context.request.url);
-        }
-        // 6.7. Refresh the visible "Updated YYYY-MM-DD" text on blog posts
-        //      so the body matches the JSON-LD dateModified. This is most
-        //      important for seasonal content (christmas/spring/summer).
-        text = refreshVisibleUpdateDate(text, context.request.url, lang);
-        // 6.7.1. ItemList + blog-index card date diversification (same logic
-        //        as the EN branch). The 100-entry ItemList on /blog/ has
-        //        50 entries stamped "2026-08-01" that need per-URL hash
-        //        diversification. Added 2026-08-11 to fix the same-day
-        //        cluster on the listing page.
-        if (text.includes('"@type": "ItemList"') || text.includes('"@type":"ItemList"')) {
-            text = diversifyItemListDates(text);
-        }
-        if (text.includes('Aug 1, 2026')) {
-            text = refreshBlogIndexCardDates(text);
-        }
-
-        // 7. Server-side i18n: load translation JSON and apply data-i18n
-        //    attributes so Googlebot sees the translated HTML, not the
-        //    English source. Skip for the default lang.
-        if (lang !== DEFAULT_LANG) {
-            try {
-                const version = await getI18nVersion(context);
-                const dict = await loadI18nDict(lang, version);
-                if (dict) {
-                    text = applyDataI18n(text, dict);
-                    text = applyDataI18nAttr(text, dict);
-        // #I18N-5: add local currency equivalents for non-EN/USD locales
-        text = localizeCurrencyForLang(text, lang);
-                    // #I18N-PHASE1: replace og:title / og:description / twitter:title
-                    //   / twitter:description with language-localized values so
-                    //   social-card previews (FB / WhatsApp / LinkedIn / Slack) and
-                    //   Google SERP cards stop being English-only on /xx/ pages.
-                    text = replaceOgTwitterMeta(text, dict, lang);
-                    // #I18N-PRICING: same idea but scoped to the /pricing/ page.
-                    //   rest is the path-without-lang (e.g. "/pricing/" for
-                    //   /zh/pricing/), so any of these spellings trigger the
-                    //   pricing-specific override.
-                    const restNorm = (rest || "/").replace(/\/+$/, "") || "/";
-                    if (restNorm === "/pricing" || restNorm === "/pricing/") {
-                        text = replacePricingMeta(text, dict, lang);
-                    }
-                    // #I18N-PHASE2: localise FAQ JSON-LD blocks. Auto-detects
-                    //   homepage_faq vs pricing_faq by checking which prefix
-                    //   the dict actually carries; within the matched scope,
-                    //   each Question in mainEntity gets its name + acceptedAnswer.text
-                    //   rewritten from <scope>.q<i+1>.{name,text}. Missing keys
-                    //   pass through unchanged.
-                    text = replaceFaqJsonLd(text, dict, lang);
-                }
-            } catch (e) {
-                // If i18n fails for any reason, fall through and serve the
-                // English source. Client-side JS will still translate.
+            // 1. <html lang="xx" dir="rtl">
+            if (lang !== DEFAULT_LANG) {
+                const rtl = RTL[lang] ? ' dir="rtl"' : "";
+                text = text.replace(/<html\s+lang="en"\s*>/i, `<html lang="${lang}"${rtl}>`);
             }
-        }
+
+            // 2. canonical + hreflang
+            const newBlock = buildCanonicalAndAlternates(rest, lang);
+            // Same self-closing-aware strip as the EN branch above.
+            text = text.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
+            text = text.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
+            if (/<title[\s>][\s\S]*?<\/title>/i.test(text)) {
+                text = text.replace(/(<\/title>)/i, `$1\n    ${newBlock}`);
+            } else if (/<head>/i.test(text)) {
+                text = text.replace(/(<head>)/i, `$1\n    ${newBlock}`);
+            }
+
+            // 3. og:locale rewrite (per language). Apply BEFORE i18n so that
+            // the locale reflects the language the user is actually viewing.
+            text = setOgLocale(text, lang);
+
+            // 4. JSON-LD inLanguage rewrite (per language).
+            text = rewriteInLanguage(text, lang);
+
+            // 5. og:url trailing-slash normalization.
+            text = fixOgUrlTrailingSlash(text);
+
+            // 6. /success/ noindex.
+            text = addNoindexIfSuccess(text, rest);
+
+            // 6.5. Diversify Article schema datePublished / dateModified across
+            //      blog posts. All 50 posts currently share "2026-07-23" which
+            //      looks suspicious to Google. We hash the URL to produce a
+            //      stable per-post date in the past 60 days.
+            if (text.includes('"@type": "Article"') || text.includes('"@type":"Article"')) {
+                text = diversifyArticleDates(text, context.request.url);
+                // 6.6. Rewrite Article author Organization → Person for E-E-A-T.
+                text = rewriteArticleAuthor(text);
+                // 6.6.1. Mirror diversified dates into og:article:* meta tags so
+                //        social-media crawlers (FB, LinkedIn, Slack) see per-post
+                //        unique dates consistent with the JSON-LD schema.
+                text = diversifyOgArticleDates(text, context.request.url);
+            }
+            // 6.7. Refresh the visible "Updated YYYY-MM-DD" text on blog posts
+            //      so the body matches the JSON-LD dateModified. This is most
+            //      important for seasonal content (christmas/spring/summer).
+            text = refreshVisibleUpdateDate(text, context.request.url, lang);
+            // 6.7.1. ItemList + blog-index card date diversification (same logic
+            //        as the EN branch). The 100-entry ItemList on /blog/ has
+            //        50 entries stamped "2026-08-01" that need per-URL hash
+            //        diversification. Added 2026-08-11 to fix the same-day
+            //        cluster on the listing page.
+            if (text.includes('"@type": "ItemList"') || text.includes('"@type":"ItemList"')) {
+                text = diversifyItemListDates(text);
+            }
+            if (text.includes('Aug 1, 2026')) {
+                text = refreshBlogIndexCardDates(text);
+            }
+
+            // 7. Server-side i18n: load translation JSON and apply data-i18n
+            //    attributes so Googlebot sees the translated HTML, not the
+            //    English source. Skip for the default lang.
+            if (lang !== DEFAULT_LANG) {
+                try {
+                    const version = await getI18nVersion(context);
+                    const dict = await loadI18nDict(lang, version);
+                    if (dict) {
+                        text = applyDataI18n(text, dict);
+                        text = applyDataI18nAttr(text, dict);
+            // #I18N-5: add local currency equivalents for non-EN/USD locales
+            text = localizeCurrencyForLang(text, lang);
+                        // #I18N-PHASE1: replace og:title / og:description / twitter:title
+                        //   / twitter:description with language-localized values so
+                        //   social-card previews (FB / WhatsApp / LinkedIn / Slack) and
+                        //   Google SERP cards stop being English-only on /xx/ pages.
+                        text = replaceOgTwitterMeta(text, dict, lang);
+                        // #I18N-PRICING: same idea but scoped to the /pricing/ page.
+                        //   rest is the path-without-lang (e.g. "/pricing/" for
+                        //   /zh/pricing/), so any of these spellings trigger the
+                        //   pricing-specific override.
+                        const restNorm = (rest || "/").replace(/\/+$/, "") || "/";
+                        if (restNorm === "/pricing" || restNorm === "/pricing/") {
+                            text = replacePricingMeta(text, dict, lang);
+                        }
+                        // #I18N-PHASE2: localise FAQ JSON-LD blocks. Auto-detects
+                        //   homepage_faq vs pricing_faq by checking which prefix
+                        //   the dict actually carries; within the matched scope,
+                        //   each Question in mainEntity gets its name + acceptedAnswer.text
+                        //   rewritten from <scope>.q<i+1>.{name,text}. Missing keys
+                        //   pass through unchanged.
+                        text = replaceFaqJsonLd(text, dict, lang);
+                    }
+                } catch (e) {
+                    // If i18n fails for any reason, fall through and serve the
+                    // English source. Client-side JS will still translate.
+                }
+            }
+
+            return text;
+        });
 
         return withCspHeaders(response, text, nonce);
     } catch (err) {
