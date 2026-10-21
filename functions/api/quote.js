@@ -333,13 +333,12 @@ export async function onRequestPost({ request, env }) {
             "Configure RESEND_API_KEY in Cloudflare Pages → Settings → Environment variables.";
         console.error(failLog);
         await updateLeadStatus(env, leadKey, "failed", 0, "missing_api_key");
-        return new Response(
-            "Server is not configured to send email. Please email order@weddingai.video directly.",
-            {
-                status: 500,
-                headers: { "Content-Type": "text/plain; charset=utf-8" },
-            }
-        );
+        // UX test 2026-10-20 (UX-004): this branch used to return a raw 500
+        // text/plain page, so the browser sat on /api/quote and the customer
+        // never saw their reference number — even though the lead was safely
+        // stored in KV and js/main.js already renders the ?status=pending
+        // notice. Treat "no API key" like every other email failure.
+        return redirect303(origin_base, successUrl("pending"));
     }
 
     const subject = `New quote: ${formData.get("name")} — ${label(SERVICE_LABELS, formData.get("service"))}`;

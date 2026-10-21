@@ -140,6 +140,46 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ---------- Buttons ---------- */
+/* Grid/flex children default to min-width:auto, i.e. they refuse to shrink below
+   their content min-content width. On the tool pages that let a 958px seating
+   diagram or a 426px tool card stretch the whole document sideways instead of
+   scrolling inside their own track. */
+[class*="tool-grid"] > *,
+.tool-page-grid > *,
+.seating-layout-wrap > *,
+.related-grid > *,
+.wa-tool-card,
+.bg-panel,
+.seating-panel {
+    min-width: 0;
+}
+
+/* German compounds and long URLs have no break opportunity, so on a 390px phone they
+   pushed the whole document sideways (UX test 2026-10-20: /de/tools/wedding-hashtag-
+   generator/ overflowed 189px because of one <p>). */
+/* Unclassed data tables (e.g. the budget calculator) had no scroll container either.
+   On phones every table becomes its own horizontally scrollable region. */
+@media (max-width: 768px) {
+    /* A <select> is sized by its longest option, so one long label can widen a
+       whole grid column (UX test 2026-10-20: budget calculator, 84px overflow). */
+    select, input, textarea { max-width: 100%; }
+    [class*="tool-grid"] .bg-form-row > *, [class*="tool-grid"] .seating-form-row > * { min-width: 0; }
+}
+
+@media (max-width: 768px) {
+    .article-body table, .qa-block table, .tool-compare-section table,
+    .guide-article table, .section table {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-hint {
+    overflow-wrap: break-word;
+}
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -1261,6 +1301,11 @@ a.case-img-link {
     border-top: 1px solid var(--color-border);
     box-shadow: var(--shadow-md);
     padding: var(--spacing-md);
+    max-height: calc(100vh - 72px);
+    max-height: calc(100dvh - 72px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     }
 
     
@@ -2362,8 +2407,12 @@ a.case-img-link {
 
 .comparison-table, .full-pricing-table {
     width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     margin: 1.5rem 0;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .comparison-table th, .comparison-table td,

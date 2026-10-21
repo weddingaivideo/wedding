@@ -41,7 +41,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI.video">
     
-    <link rel="stylesheet" href="/styles.min.css?v=3.31">
+    <link rel="stylesheet" href="/styles.min.css?v=3.37">
     <link rel="stylesheet" href="/styles/i18n.css">
 <script defer src="/js/main.min.js?v=3.20"></script>
     <style>
@@ -75,6 +75,14 @@
         .guide-article .related-cta { background: var(--color-bg-alt); padding: var(--spacing-md); border-radius: var(--radius-md); margin-top: var(--spacing-lg); display: flex; align-items: center; gap: var(--spacing-md); flex-wrap: wrap; }
         .guide-article .related-cta p { margin: 0; flex: 1 1 200px; font-size: 0.9375rem; }
         .guide-article .related-cta .btn { white-space: nowrap; }
+        /* UX test 2026-10-20 (UX-006): `white-space: nowrap` inside a flex row made
+           the button's min-content width (~325px) wider than a 390px phone screen,
+           pushing the page 32px sideways. Let the label wrap on narrow screens and
+           let the flex children shrink below their content width. */
+        .guide-article .related-cta > * { min-width: 0; }
+        @media (max-width: 768px) {
+            .guide-article .related-cta .btn { white-space: normal; text-align: center; }
+        }
     </style>
     <!-- Google tag (gtag.js) — deferred to first interaction or idle (avoids wasted bytes on bouncers) -->
     <script nonce="__CSP_NONCE__">

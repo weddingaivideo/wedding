@@ -21,6 +21,7 @@
   padding: var(--spacing-lg);
   box-shadow: var(--shadow-sm);
   margin-bottom: var(--spacing-lg);
+  max-width: 100%;
 }
 
 .wa-tool-card h2 {

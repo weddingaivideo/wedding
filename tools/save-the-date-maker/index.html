@@ -27,7 +27,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Save the Date Maker">
-    <link rel="stylesheet" href="/styles.min.css?v=3.31">
+    <link rel="stylesheet" href="/styles.min.css?v=3.37">
     <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
     <script defer src="/js/main.min.js?v=3.20"></script>
     <script defer src="/js/tools/common.js?v=1.0.0"></script>
@@ -306,7 +306,7 @@
                     </div>
                     <div class="wa-tool-control" style="grid-column: 1 / -1;">
                         <label for="photo-input">Engagement photo (optional — required for Photo Forward)</label>
-                        <div class="wa-tool-dropzone" id="photo-zone" aria-label="Drop an engagement photo here or click to browse">
+                        <div class="wa-tool-dropzone" id="photo-zone" role="button" tabindex="0" aria-label="Drop an engagement photo here or click to browse">
                             <div class="wa-tool-dropzone-title" id="photo-zone-title">Drop a photo here or click to browse</div>
                             <div class="wa-tool-dropzone-hint">JPG, PNG, WebP — stays on your device</div>
                             <input type="file" id="photo-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp">

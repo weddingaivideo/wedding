@@ -46,7 +46,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI.video">
     
-    <link rel="stylesheet" href="/styles.min.css?v=3.31">
+    <link rel="stylesheet" href="/styles.min.css?v=3.37">
     <link rel="stylesheet" href="/styles/i18n.css">
 <script defer src="/js/main.min.js?v=3.20"></script>
     <style>
@@ -501,10 +501,10 @@ if ('serviceWorker' in navigator) {
 
         const list = scored.slice(0, 12).map(({ item }) => `
             <li class="search-result">
-                <h3><a href="/${item.url}">${highlight(item.title, query)}</a></h3>
+                <h3><a href="${item.url}">${highlight(item.title, query)}</a></h3>
                 <p>${highlight(item.desc, query)}</p>
                 <div class="search-meta">${item.url}</div>
-            <li></li>
+            </li>
         `).join('');
         resultsEl.innerHTML = '<ul class="search-results-list">' + list + '</ul>';
     }

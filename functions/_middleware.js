@@ -56,13 +56,19 @@ function generateNonce() {
 //     session replay uploads beacon data to f.clarity.ms / u.clarity.ms;
 //     missing from connect-src meant session-recording data was silently
 //     dropped. c.clarity.ms was already listed.
+//   - img-src got `blob:` (2026-10-20, UX test UX-003): js/tools/common.js
+//     fileToImage() decodes uploads via URL.createObjectURL() + `img.src`.
+//     Without blob: the browser blocked the image, img.onerror fired, and
+//     compress/crop/remove-background told users "Could not decode this file"
+//     for perfectly valid photos. blob: is same-origin-only and safe here.
 function buildCsp(nonce) {
     return [
         "default-src 'self'",
         `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://hm.baidu.com https://www.clarity.ms https://f.clarity.ms https://scripts.clarity.ms`,
         `script-src-attr 'self' 'nonce-${nonce}'`,
         "style-src 'self' 'unsafe-inline'",
-        "img-src 'self' data: https://hm.baidu.com https://www.clarity.ms https://pagead2.googlesyndication.com https://www.google.com https://www.googletagmanager.com",
+        "img-src 'self' data: blob: https://hm.baidu.com https://www.clarity.ms https://pagead2.googlesyndication.com https://www.google.com https://www.googletagmanager.com",
+        "media-src 'self' data: blob:",
         "font-src 'self' data:",
         "connect-src 'self' https://www.google-analytics.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://*.analytics.google.com https://hm.baidu.com https://www.clarity.ms https://c.clarity.ms https://f.clarity.ms https://u.clarity.ms https://e.clarity.ms https://t.clarity.ms https://*.clarity.ms https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.googleadservices.com https://ep1.adtrafficquality.google",
         "frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net",

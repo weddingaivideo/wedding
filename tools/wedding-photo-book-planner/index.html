@@ -38,7 +38,7 @@
     <link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/tools/wedding-photo-book-planner/" />
     <link rel="alternate" hreflang="th" href="https://weddingai.video/th/tools/wedding-photo-book-planner/" />
     <link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/tools/wedding-photo-book-planner/" />
-    <link rel="stylesheet" href="/styles.min.css?v=3.31">
+    <link rel="stylesheet" href="/styles.min.css?v=3.37">
     <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
     <script defer src="/js/main.min.js?v=3.20"></script>
     <script defer src="/js/tools/common.js?v=1.0.0"></script>
@@ -111,7 +111,12 @@
 
         .pb-photo-drop { border: 2px dashed var(--color-border); border-radius: var(--radius-sm); padding: 1rem; text-align: center; color: var(--color-text-light); font-size: 0.8125rem; margin-top: 0.6rem; cursor: pointer; transition: border-color .15s ease, background .15s ease; }
         .pb-photo-drop:hover, .pb-photo-drop.dragover { border-color: var(--color-primary); background: #fff7e6; color: var(--color-secondary); }
-        .pb-photo-drop input { display: none; }
+        /* UX test 2026-10-20 (UX-007): `display:none` made the file input
+           unfocusable, so keyboard users could never open a file picker in this
+           tool. Visually hide it instead (it stays in the tab order and is still
+           announced), and show the zone as focused via :focus-within. */
+        .pb-photo-drop input { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+        .pb-photo-drop:focus-within, .pb-photo-drop:focus { border-color: var(--color-primary); background: #fff7e6; color: var(--color-secondary); outline: 2px solid var(--color-primary); outline-offset: 2px; }
 
         .pb-pages-wrap { background: #fcfaf6; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); }
         .pb-pages-header { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; justify-content: space-between; margin-bottom: 0.8rem; }
