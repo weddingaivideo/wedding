@@ -164,6 +164,12 @@ h1, h2, h3, h4, h5, h6 {
        whole grid column (UX test 2026-10-20: budget calculator, 84px overflow). */
     select, input, textarea { max-width: 100%; }
     [class*="tool-grid"] .bg-form-row > *, [class*="tool-grid"] .seating-form-row > * { min-width: 0; }
+    /* Translated CTA labels run longer than their English source and .btn is
+       white-space: nowrap, so on a phone the label pushed the whole document
+       sideways: ru 54px, pt 35px, de 8px. normal only wraps when it must.
+       Doubled class on purpose: a plain .btn here ties with the base .btn
+       rule on specificity and loses on source order in the minified sheet. */
+    .btn.btn { max-width: 100%; white-space: normal; }
 }
 
 @media (max-width: 768px) {
