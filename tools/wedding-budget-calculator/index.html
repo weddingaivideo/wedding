@@ -117,7 +117,17 @@
         .bg-cat input[type="number"] { width: 100%; padding: 0.3rem 0.4rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font: inherit; font-size: 0.85rem; }
         .bg-chart-wrap { margin-top: 1rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-md); }
         .bg-chart-wrap h3 { font-size: 0.95rem; color: var(--color-secondary); margin: 0 0 0.5rem 0; text-align: center; }
-        .bg-chart { max-width: 400px; margin: 0 auto; }
+        /* UX test 2026-10-21: `max-width: 400px` never constrained the canvas —
+           width="400" is its *intrinsic* box, so on a 390px phone (342px of
+           content after padding) it rendered at 400px and pushed the whole
+           document 84px sideways. `max-width: 100%` lets it shrink to the
+           column; `height: auto` keeps the 1:1 aspect so the square chart does
+           not stretch. The 400x400 drawing buffer is untouched, so it stays
+           crisp — only the displayed box scales. */
+        .bg-chart { width: 100%; max-width: 400px; height: auto; margin: 0 auto; }
+        /* 1fr 80px 1fr 100px refused to shrink below its inputs' min-content
+           width, so the row overflowed the card by ~18px on a phone. */
+        .bg-cat-row > * { min-width: 0; }
         .bg-chart-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem 0.6rem; font-size: 0.75rem; color: var(--color-text); margin-top: 0.6rem; }
         .bg-chart-legend-item { display: flex; align-items: center; gap: 0.4rem; }
         .bg-chart-legend-dot { width: 10px; height: 10px; border-radius: 2px; }

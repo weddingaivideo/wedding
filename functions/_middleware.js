@@ -55,7 +55,15 @@ function generateNonce() {
 //   - connect-src added f.clarity.ms + u.clarity.ms (Bug #10): Clarity
 //     session replay uploads beacon data to f.clarity.ms / u.clarity.ms;
 //     missing from connect-src meant session-recording data was silently
-//     dropped. c.clarity.ms was already listed.
+//     dropped. c.clarity.ms was already listed there — but that note was
+//     about connect-src only, which is where the real bug lived.
+//   - img-src added c.clarity.ms + c.bing.com (2026-10-21, UX re-verification):
+//     Clarity's page-view tracking pixel is GET https://c.clarity.ms/c.gif and
+//     its cookie-sync companion is GET https://c.bing.com/c.gif — both are
+//     *image* requests. img-src only listed www.clarity.ms, so both were refused
+//     on every page view site-wide and Clarity collected nothing; connect-src
+//     was irrelevant to them. Symptom was a CSP violation in the console of
+//     every page rather than an obviously broken script.
 //   - img-src got `blob:` (2026-10-20, UX test UX-003): js/tools/common.js
 //     fileToImage() decodes uploads via URL.createObjectURL() + `img.src`.
 //     Without blob: the browser blocked the image, img.onerror fired, and
@@ -67,7 +75,7 @@ function buildCsp(nonce) {
         `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://hm.baidu.com https://www.clarity.ms https://f.clarity.ms https://scripts.clarity.ms`,
         `script-src-attr 'self' 'nonce-${nonce}'`,
         "style-src 'self' 'unsafe-inline'",
-        "img-src 'self' data: blob: https://hm.baidu.com https://www.clarity.ms https://pagead2.googlesyndication.com https://www.google.com https://www.googletagmanager.com",
+        "img-src 'self' data: blob: https://hm.baidu.com https://www.clarity.ms https://c.clarity.ms https://c.bing.com https://pagead2.googlesyndication.com https://www.google.com https://www.googletagmanager.com",
         "media-src 'self' data: blob:",
         "font-src 'self' data:",
         "connect-src 'self' https://www.google-analytics.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://*.analytics.google.com https://hm.baidu.com https://www.clarity.ms https://c.clarity.ms https://f.clarity.ms https://u.clarity.ms https://e.clarity.ms https://t.clarity.ms https://*.clarity.ms https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.googleadservices.com https://ep1.adtrafficquality.google",
