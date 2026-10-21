@@ -31,6 +31,11 @@ qa/incidents/
 # ---- qa/ audit HTML snapshots (regenerable; canonical reports stay in git) ----
 qa/*.html
 
+# ---- qa/ux/ Playwright sweep output: raw JSON dumps + evidence screenshots ----
+# ~4.9 MB and fully regenerable from qa/ux/sweep.py + evidence.py. The findings
+# themselves live in qa/UX-TEST-REPORT-2026-10-20.md, which does stay in git.
+qa/ux/results/
+
 # ---- Deploy + log files ----
 deploy-debug.log
 *.log
