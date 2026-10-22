@@ -827,6 +827,54 @@ function rewriteInLanguage(html, lang) {
     );
 }
 
+// Hub-path allowlist for link localisation.
+// Only paths verified to exist in ALL 10 languages may be rewritten — the
+// middleware has no filesystem access, so anything not on this list keeps
+// pointing at the English page (which is the correct behaviour when no
+// translation of that page exists).
+//   - single-segment hubs: probed live in every language, all return 200 with
+//     a localised <title>
+//   - "tools/*": all 13 tools exist as <lang>/tools/<tool>/index.html in all
+//     10 languages (verified against the repo)
+// Deep paths under /services/ are deliberately EXCLUDED: most service detail
+// pages have no per-language twin, and rewriting them would 404.
+const LOCALIZABLE_HUB_SEGMENTS = new Set([
+    "", "tools", "blog", "about", "pricing", "order",
+    "services", "resources", "gallery", "privacy", "terms",
+]);
+const LOCALIZABLE_HUB_PREFIXES = ["tools/"];
+
+// localizeHubLinks repoints root-relative <a href> targets to /<lang>/... on
+// middleware-rendered language pages. Without it the whole site nav on /xx/
+// and /xx/pricing/ sends readers back to the English site, which both leaks
+// internal-link equity upstream and bounces the visitor out of their locale.
+//
+// Only <a> elements are touched. <link> is skipped on purpose: hreflang
+// alternates must keep pointing at the other languages.
+function localizeHubLinks(html, lang) {
+    if (!lang || lang === DEFAULT_LANG) return html;
+    const prefix = `/${lang}/`;
+    return html.replace(
+        /(<a\b[^>]*?\shref\s*=\s*["'])(\/[^"'#?]*)/gi,
+        (m, head, href) => {
+            if (href.startsWith(prefix) || href === `/${lang}`) return m;
+            // Cloudflare's own endpoints (email obfuscation, beacons) are not
+            // site routes and must never be prefixed.
+            if (href.startsWith("/cdn-cgi/")) return m;
+            const hadSlash = href.endsWith("/") && href !== "/";
+            const seg = href.replace(/^\/+/, "").replace(/\/+$/, "");
+            const localizable =
+                LOCALIZABLE_HUB_SEGMENTS.has(seg) ||
+                (seg && LOCALIZABLE_HUB_PREFIXES.some(
+                    (p) => seg === p.replace(/\/$/, "") || seg.startsWith(p)));
+            if (!localizable) return m;
+            // Preserve the trailing slash: /th/gallery/ avoids a 301 hop that
+            // /th/gallery would cost on Cloudflare Pages.
+            return head + prefix + seg + (hadSlash ? "/" : "");
+        }
+    );
+}
+
 // Diversify Article schema datePublished / dateModified across blog posts.
 // All 50 blog posts in the repo were authored with the same date stamp
 // (2026-07-23), which looks suspicious to Google and may trigger a
@@ -1679,6 +1727,10 @@ export const onRequest = async (context) => {
                     if (dict) {
                         text = applyDataI18n(text, dict);
                         text = applyDataI18nAttr(text, dict);
+                        // Nav links on the middleware-rendered pages still carry
+                        // the English /tools/ /order/ /about/ hrefs because the
+                        // template is the English page with text swapped in.
+                        text = localizeHubLinks(text, lang);
             // #I18N-5: add local currency equivalents for non-EN/USD locales
             text = localizeCurrencyForLang(text, lang);
                         // #I18N-PHASE1: replace og:title / og:description / twitter:title
