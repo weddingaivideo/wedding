@@ -842,7 +842,12 @@ const LOCALIZABLE_HUB_SEGMENTS = new Set([
     "", "tools", "blog", "about", "pricing", "order",
     "services", "resources", "gallery", "privacy", "terms",
 ]);
-const LOCALIZABLE_HUB_PREFIXES = ["tools/"];
+// Deep service paths are allowlisted too: /xx/services/<cat>/<slug>/ is
+// middleware-rendered like the hubs, verified 200 with a localised <title>
+// in all 10 languages (transient 503s under concurrency are CF cold-start,
+// not missing pages). If a future service page has no localised version,
+// remove it from this list before it ships.
+const LOCALIZABLE_HUB_PREFIXES = ["tools/", "services/"];
 
 // localizeHubLinks repoints root-relative <a href> targets to /<lang>/... on
 // middleware-rendered language pages. Without it the whole site nav on /xx/
