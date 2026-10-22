@@ -281,67 +281,67 @@
             </div>
         </section>
 
-        <nav class="breadcrumb" aria-label="面包屑">
-            <a href="/ar/">首页</a> <span>›</span> <a href="/ar/tools/">免费工具</a> <span>›</span> <span>给婚纱照加文字</span>
+        <nav class="breadcrumb" aria-label="面包屑" data-i18n-attr="aria-label:tools.add-text-to-wedding-photo.aria-label.169b227a">
+            <a href="/ar/" data-i18n="tools.add-text-to-wedding-photo.a_text.db1c89e0">首页</a> <span>›</span> <a href="/ar/tools/" data-i18n="tools.add-text-to-wedding-photo.a_text.3a3d85f2">免费工具</a> <span>›</span> <span data-i18n="tools.add-text-to-wedding-photo.span_text.d94202dd">给婚纱照加文字</span>
         </nav>
 
         <section class="tool-page-grid">
             <div class="wa-tool-card">
-                <h2>1. 上传婚纱照</h2>
-                <div class="wa-tool-dropzone" id="dropzone" aria-label="拖入婚纱照或点击浏览">
-                    <div class="wa-tool-dropzone-title">拖入照片或点击浏览</div>
-                    <div class="wa-tool-dropzone-hint">JPG、PNG、WebP • 可多张（同一文字应用到全部）• 受限于浏览器内存</div>
+                <h2 data-i18n="tools.add-text-to-wedding-photo.h2_text.ce75155a">1. 上传婚纱照</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="拖入婚纱照或点击浏览" data-i18n-attr="aria-label:tools.add-text-to-wedding-photo.aria-label.027c7c3b">
+                    <div class="wa-tool-dropzone-title" data-i18n="tools.add-text-to-wedding-photo.div_text.0adda3c8">拖入照片或点击浏览</div>
+                    <div class="wa-tool-dropzone-hint" data-i18n="tools.add-text-to-wedding-photo.div_text.a5e3c671">JPG、PNG、WebP • 可多张（同一文字应用到全部）• 受限于浏览器内存</div>
                     <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
                 </div>
-                <div class="wa-tool-empty" id="empty-state">还没有照片——拖入一张即可开始。</div>
+                <div class="wa-tool-empty" id="empty-state" data-i18n="tools.add-text-to-wedding-photo.div_text.40c2fa30">还没有照片——拖入一张即可开始。</div>
                 <div class="wa-tool-file-list" id="file-list" hidden></div>
             </div>
 
             <div class="wa-tool-card">
-                <h2>2. 文字与样式</h2>
+                <h2 data-i18n="tools.add-text-to-wedding-photo.h2_text.9287070e">2. 文字与样式</h2>
                 <div class="wa-tool-controls">
                     <div class="wa-tool-control" style="grid-column: 1 / -1;">
-                        <label for="primary-text">主标题</label>
-                        <input type="text" id="primary-text" maxlength="120" value="Save the Date · 2026.06.14" placeholder="例如：Save the Date · 2026.06.14">
-                        <small>主标题文案，最多 120 字。文字过长时字号会自动缩小。</small>
+                        <label for="primary-text" data-i18n="tools.add-text-to-wedding-photo.label_text.39f31e6b">主标题</label>
+                        <input type="text" id="primary-text" maxlength="120" value="Save the Date · 2026.06.14" placeholder="例如：Save the Date · 2026.06.14" data-i18n-attr="placeholder:tools.add-text-to-wedding-photo.placeholder.c987a43b">
+                        <small data-i18n="tools.add-text-to-wedding-photo.small_text.fd7e05e4">主标题文案，最多 120 字。文字过长时字号会自动缩小。</small>
                     </div>
                     <div class="wa-tool-control" style="grid-column: 1 / -1;">
-                        <label for="secondary-text">副标题（可选）</label>
-                        <input type="text" id="secondary-text" maxlength="120" value="Emma &amp; Liam" placeholder="例如：Emma &amp; Liam">
-                        <small>用于姓名、地点或一句短寄语。</small>
+                        <label for="secondary-text" data-i18n="tools.add-text-to-wedding-photo.label_text.488a1277">副标题（可选）</label>
+                        <input type="text" id="secondary-text" maxlength="120" value="Emma &amp; Liam" placeholder="例如：Emma &amp; Liam" data-i18n-attr="placeholder:tools.add-text-to-wedding-photo.placeholder.8ba815fb">
+                        <small data-i18n="tools.add-text-to-wedding-photo.small_text.a9d7bf23">用于姓名、地点或一句短寄语。</small>
                     </div>
 
                     <div class="wa-tool-control">
-                        <label for="font">字体</label>
+                        <label for="font" data-i18n="tools.add-text-to-wedding-photo.label_text.8456bc40">字体</label>
                         <select id="font">
-                            <option value="Playfair Display" selected>Playfair Display（优雅衬线）</option>
-                            <option value="Cormorant Garamond">Cormorant Garamond（精致衬线）</option>
-                            <option value="Bodoni Moda">Bodoni Moda（高对比衬线）</option>
-                            <option value="DM Serif Display">DM Serif Display（醒目衬线）</option>
-                            <option value="Cinzel">Cinzel（古典大写）</option>
-                            <option value="Libre Baskerville">Libre Baskerville（过渡衬线）</option>
-                            <option value="Lora">Lora（暖色衬线）</option>
-                            <option value="Abril Fatface">Abril Fatface（展示衬线）</option>
-                            <option value="Montserrat">Montserrat（清爽无衬线）</option>
-                            <option value="Inter">Inter（现代无衬线）</option>
-                            <option value="Great Vibes">Great Vibes（浪漫手写体）</option>
-                            <option value="Sacramento">Sacramento（手写花体）</option>
-                            <option value="Pacifico">Pacifico（流畅手写）</option>
-                            <option value="Dancing Script">Dancing Script（俏皮手写）</option>
+                            <option value="Playfair Display" selected data-i18n="tools.add-text-to-wedding-photo.option_text.43c02858">Playfair Display（优雅衬线）</option>
+                            <option value="Cormorant Garamond" data-i18n="tools.add-text-to-wedding-photo.option_text.a07617ac">Cormorant Garamond（精致衬线）</option>
+                            <option value="Bodoni Moda" data-i18n="tools.add-text-to-wedding-photo.option_text.fb37e106">Bodoni Moda（高对比衬线）</option>
+                            <option value="DM Serif Display" data-i18n="tools.add-text-to-wedding-photo.option_text.af7f21ea">DM Serif Display（醒目衬线）</option>
+                            <option value="Cinzel" data-i18n="tools.add-text-to-wedding-photo.option_text.03b7cadf">Cinzel（古典大写）</option>
+                            <option value="Libre Baskerville" data-i18n="tools.add-text-to-wedding-photo.option_text.7f53b2b9">Libre Baskerville（过渡衬线）</option>
+                            <option value="Lora" data-i18n="tools.add-text-to-wedding-photo.option_text.3e43e425">Lora（暖色衬线）</option>
+                            <option value="Abril Fatface" data-i18n="tools.add-text-to-wedding-photo.option_text.3217dc57">Abril Fatface（展示衬线）</option>
+                            <option value="Montserrat" data-i18n="tools.add-text-to-wedding-photo.option_text.73144310">Montserrat（清爽无衬线）</option>
+                            <option value="Inter" data-i18n="tools.add-text-to-wedding-photo.option_text.ff7bb2ab">Inter（现代无衬线）</option>
+                            <option value="Great Vibes" data-i18n="tools.add-text-to-wedding-photo.option_text.f9dd14dc">Great Vibes（浪漫手写体）</option>
+                            <option value="Sacramento" data-i18n="tools.add-text-to-wedding-photo.option_text.29ccb6ae">Sacramento（手写花体）</option>
+                            <option value="Pacifico" data-i18n="tools.add-text-to-wedding-photo.option_text.d5075635">Pacifico（流畅手写）</option>
+                            <option value="Dancing Script" data-i18n="tools.add-text-to-wedding-photo.option_text.890daacd">Dancing Script（俏皮手写）</option>
                         </select>
-                        <small>14 种字体，分衬线、无衬线、手写三类。</small>
+                        <small data-i18n="tools.add-text-to-wedding-photo.small_text.402d881e">14 种字体，分衬线、无衬线、手写三类。</small>
                     </div>
 
                     <div class="wa-tool-control">
-                        <label for="position">位置</label>
+                        <label for="position" data-i18n="tools.add-text-to-wedding-photo.label_text.d4d2a668">位置</label>
                         <select id="position">
-                            <option value="top">顶部</option>
-                            <option value="top-center" selected>顶部居中</option>
-                            <option value="center">正中</option>
-                            <option value="bottom-center">底部居中</option>
-                            <option value="bottom">底部</option>
+                            <option value="top" data-i18n="tools.add-text-to-wedding-photo.option_text.c949729c">顶部</option>
+                            <option value="top-center" selected data-i18n="tools.add-text-to-wedding-photo.option_text.f620edd1">顶部居中</option>
+                            <option value="center" data-i18n="tools.add-text-to-wedding-photo.option_text.c646a231">正中</option>
+                            <option value="bottom-center" data-i18n="tools.add-text-to-wedding-photo.option_text.879e6d08">底部居中</option>
+                            <option value="bottom" data-i18n="tools.add-text-to-wedding-photo.option_text.12c4c5e8">底部</option>
                         </select>
-                        <small>「底部居中」是 Save the Date 最经典的写法。</small>
+                        <small data-i18n="tools.add-text-to-wedding-photo.small_text.943ad5ab">「底部居中」是 Save the Date 最经典的写法。</small>
                     </div>
 
                     <div class="wa-tool-control">
@@ -355,56 +355,56 @@
                     </div>
 
                     <div class="wa-tool-control">
-                        <label for="text-color">文字颜色</label>
+                        <label for="text-color" data-i18n="tools.add-text-to-wedding-photo.label_text.7ec907e7">文字颜色</label>
                         <div class="wa-text-color-row">
                             <input type="color" id="text-color" value="#FFFFFF">
-                            <div class="wa-text-swatch-row" id="swatch-row" aria-label="快速选择颜色">
-                                <button type="button" class="wa-text-swatch" data-color="#FFFFFF" style="background:#FFFFFF" aria-label="白色"></button>
-                                <button type="button" class="wa-text-swatch" data-color="#F4E4C1" style="background:#F4E4C1" aria-label="香槟色"></button>
-                                <button type="button" class="wa-text-swatch" data-color="#D4AF37" style="background:#D4AF37" aria-label="金色"></button>
-                                <button type="button" class="wa-text-swatch" data-color="#1A1A1A" style="background:#1A1A1A" aria-label="黑色"></button>
-                                <button type="button" class="wa-text-swatch" data-color="#7A1F2B" style="background:#7A1F2B" aria-label="酒红色"></button>
-                                <button type="button" class="wa-text-swatch" data-color="#2C5F5D" style="background:#2C5F5D" aria-label="鼠尾草绿"></button>
+                            <div class="wa-text-swatch-row" id="swatch-row" aria-label="快速选择颜色" data-i18n-attr="aria-label:tools.add-text-to-wedding-photo.aria-label.9dac2a96">
+                                <button type="button" class="wa-text-swatch" data-color="#FFFFFF" style="background:#FFFFFF" aria-label="白色" data-i18n-attr="aria-label:tools.add-text-to-wedding-photo.aria-label.2fc96b27"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#F4E4C1" style="background:#F4E4C1" aria-label="香槟色" data-i18n-attr="aria-label:tools.add-text-to-wedding-photo.aria-label.4461d93a"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#D4AF37" style="background:#D4AF37" aria-label="金色" data-i18n-attr="aria-label:tools.add-text-to-wedding-photo.aria-label.454b22f9"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#1A1A1A" style="background:#1A1A1A" aria-label="黑色" data-i18n-attr="aria-label:tools.add-text-to-wedding-photo.aria-label.9d2d1f62"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#7A1F2B" style="background:#7A1F2B" aria-label="酒红色" data-i18n-attr="aria-label:tools.add-text-to-wedding-photo.aria-label.ff645c3a"></button>
+                                <button type="button" class="wa-text-swatch" data-color="#2C5F5D" style="background:#2C5F5D" aria-label="鼠尾草绿" data-i18n-attr="aria-label:tools.add-text-to-wedding-photo.aria-label.e1d4db71"></button>
                             </div>
                         </div>
                     </div>
 
                     <div class="wa-tool-control">
-                        <label>投影</label>
+                        <label data-i18n="tools.add-text-to-wedding-photo.label_text.16ad4ad5">投影</label>
                         <div class="wa-text-toggle-row">
                             <label><input type="checkbox" id="shadow-toggle" checked> 启用</label>
                             <label for="shadow-offset" style="font-weight:400;color:var(--color-text-light);">偏移：<span id="shadow-offset-val">2</span>px</label>
                             <input type="range" id="shadow-offset" min="0" max="10" step="1" value="2" style="max-width:140px;">
                         </div>
-                        <small>半透明黑色阴影，让文字在任何背景上都清晰可读。</small>
+                        <small data-i18n="tools.add-text-to-wedding-photo.small_text.987f93c5">半透明黑色阴影，让文字在任何背景上都清晰可读。</small>
                     </div>
 
                     <div class="wa-tool-control">
-                        <label for="format">输出格式</label>
+                        <label for="format" data-i18n="tools.add-text-to-wedding-photo.label_text.e5593680">输出格式</label>
                         <select id="format">
-                            <option value="image/png" selected>PNG（支持透明，推荐）</option>
-                            <option value="image/jpeg">JPG（文件更小，适合分享）</option>
+                            <option value="image/png" selected data-i18n="tools.add-text-to-wedding-photo.option_text.c44ce1d2">PNG（支持透明，推荐）</option>
+                            <option value="image/jpeg" data-i18n="tools.add-text-to-wedding-photo.option_text.46fc58b9">JPG（文件更小，适合分享）</option>
                         </select>
                     </div>
                 </div>
             </div>
 
             <div class="wa-tool-card">
-                <h2>3. 预览与下载</h2>
+                <h2 data-i18n="tools.add-text-to-wedding-photo.h2_text.e0400439">3. 预览与下载</h2>
                 <div class="wa-text-preview-wrap" id="preview-wrap" aria-live="polite">
-                    <div class="wa-text-preview-empty" id="preview-empty">拖入一张照片即可看到实时预览。</div>
+                    <div class="wa-text-preview-empty" id="preview-empty" data-i18n="tools.add-text-to-wedding-photo.div_text.108b0a88">拖入一张照片即可看到实时预览。</div>
                     <canvas id="preview-canvas" class="wa-text-preview-canvas" hidden></canvas>
                 </div>
                 <div class="wa-tool-actions">
-                    <button type="button" class="btn btn-primary" id="run-btn" disabled>应用全部</button>
-                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>保存全部</button>
-                    <button type="button" class="btn btn-secondary" id="clear-btn">清空</button>
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled data-i18n="tools.add-text-to-wedding-photo.button_text.b8104e1e">应用全部</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled data-i18n="tools.add-text-to-wedding-photo.button_text.aac9e35b">保存全部</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn" data-i18n="tools.add-text-to-wedding-photo.button_text.288f0c40">清空</button>
                 </div>
 
                 <div class="wa-tool-summary" id="summary" hidden></div>
 
                 <div class="wa-tool-banner">
-                    <strong>隐私：</strong>每张照片都通过浏览器 Canvas API 在本地处理。整个过程只发生在你的浏览器标签页里——不上传、不分析你的照片、不需要账号。
+                    <strong data-i18n="tools.add-text-to-wedding-photo.strong_text.9781def9">隐私：</strong>每张照片都通过浏览器 Canvas API 在本地处理。整个过程只发生在你的浏览器标签页里——不上传、不分析你的照片、不需要账号。
                 </div>
             </div>
         </section>
@@ -546,15 +546,15 @@
                     </details>
                 </div>
 
-                <h2>更多免费婚纱照工具</h2>
-                <p>「加文字」只是婚纱照工作流的一步。本套件其他成员覆盖了剩下的流程：</p>
+                <h2 data-i18n="tools.add-text-to-wedding-photo.h2_text.34397c64">更多免费婚纱照工具</h2>
+                <p data-i18n="tools.add-text-to-wedding-photo.p_text.6e87af7d">「加文字」只是婚纱照工作流的一步。本套件其他成员覆盖了剩下的流程：</p>
                 <div class="sibling-tools">
-                    <a href="/ar/tools/compress-wedding-photos/">压缩婚纱照</a>
+                    <a href="/ar/tools/compress-wedding-photos/" data-i18n="tools.add-text-to-wedding-photo.a_text.cdeabc6a">压缩婚纱照</a>
                     <a href="/ar/tools/heic-to-jpg-wedding-photos/">HEIC إلى JPG</a>
-                    <a href="/ar/tools/wedding-photo-collage/">婚纱照拼图</a>
-                    <a href="/ar/tools/crop-wedding-photo-for-reels/">为 Reels 裁剪</a>
-                    <a href="/ar/tools/remove-background-wedding-portrait/">去除背景</a>
-                    <a href="/ar/tools/">全部工具</a>
+                    <a href="/ar/tools/wedding-photo-collage/" data-i18n="tools.add-text-to-wedding-photo.a_text.7599f1a4">婚纱照拼图</a>
+                    <a href="/ar/tools/crop-wedding-photo-for-reels/" data-i18n="tools.add-text-to-wedding-photo.a_text.a0970761">为 Reels 裁剪</a>
+                    <a href="/ar/tools/remove-background-wedding-portrait/" data-i18n="tools.add-text-to-wedding-photo.a_text.7d187b76">去除背景</a>
+                    <a href="/ar/tools/" data-i18n="tools.add-text-to-wedding-photo.a_text.3898303e">全部工具</a>
                 </div>
             </div>
         </section>
@@ -562,24 +562,24 @@
         <section class="section">
             <div class="container" style="max-width: 920px;">
                 <div class="section-header" style="text-align: left;">
-                    <h2>相关文章</h2>
+                    <h2 data-i18n="tools.add-text-to-wedding-photo.h2_text.9d36daea">相关文章</h2>
                 </div>
                 <div class="related-grid">
                     <a class="related-card" href="/ar/blog/wedding-photo-slideshow/">
-                        <h4>如何做一段让人沉浸的婚纱照轮播视频</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.add-text-to-wedding-photo.h4_text.c54550ad">如何做一段让人沉浸的婚纱照轮播视频</h4>
+                        <span data-i18n="tools.add-text-to-wedding-photo.span_text.0f34f296">阅读文章 →</span>
                     </a>
                     <a class="related-card" href="/ar/blog/wedding-video-from-photos/">
-                        <h4>从照片到婚礼视频：AI 全流程指南</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.add-text-to-wedding-photo.h4_text.004982aa">从照片到婚礼视频：AI 全流程指南</h4>
+                        <span data-i18n="tools.add-text-to-wedding-photo.span_text.0f34f296">阅读文章 →</span>
                     </a>
                     <a class="related-card" href="/ar/blog/wedding-video-captions/">
-                        <h4>婚礼视频字幕：让文字真正落地的设计指南</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.add-text-to-wedding-photo.h4_text.84ca8672">婚礼视频字幕：让文字真正落地的设计指南</h4>
+                        <span data-i18n="tools.add-text-to-wedding-photo.span_text.0f34f296">阅读文章 →</span>
                     </a>
                     <a class="related-card" href="/ar/blog/wedding-invitation-video-guide/">
-                        <h4>婚礼请柬视频完整制作指南</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.add-text-to-wedding-photo.h4_text.cfe6467a">婚礼请柬视频完整制作指南</h4>
+                        <span data-i18n="tools.add-text-to-wedding-photo.span_text.0f34f296">阅读文章 →</span>
                     </a>
                 </div>
             </div>
@@ -587,9 +587,9 @@
 
         <section class="cta-section">
             <div class="container">
-                <h2>文字加好了？下一步，做一部婚礼短片</h2>
-                <p>把照片交给 AI 婚礼视频生成器，48 小时即可拿到一段电影感短片。</p>
-                <a href="/ar/order/" class="btn btn-primary btn-large" title="免费报价，开启你的项目">免费获取报价 →</a>
+                <h2 data-i18n="tools.add-text-to-wedding-photo.h2_text.f54c5e89">文字加好了？下一步，做一部婚礼短片</h2>
+                <p data-i18n="tools.add-text-to-wedding-photo.p_text.4b6ea1bf">把照片交给 AI 婚礼视频生成器，48 小时即可拿到一段电影感短片。</p>
+                <a href="/ar/order/" class="btn btn-primary btn-large" title="免费报价，开启你的项目" data-i18n="tools.add-text-to-wedding-photo.a_text.0e765caa" data-i18n-attr="title:tools.add-text-to-wedding-photo.title.43a164b4">免费获取报价 →</a>
             </div>
         </section>
     </main>

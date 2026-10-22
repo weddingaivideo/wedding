@@ -206,70 +206,70 @@
             </div>
         </section>
 
-        <nav class="breadcrumb" aria-label="面包屑导航">
-            <a href="/th/">首页</a> <span>›</span> <a href="/th/tools/">免费工具</a> <span>›</span> <span>HEIC 转 JPG 转换器</span>
+        <nav class="breadcrumb" aria-label="面包屑导航" data-i18n-attr="aria-label:tools.heic-to-jpg-wedding-photos.aria-label.3576258a">
+            <a href="/th/" data-i18n="tools.heic-to-jpg-wedding-photos.a_text.db1c89e0">首页</a> <span>›</span> <a href="/th/tools/" data-i18n="tools.heic-to-jpg-wedding-photos.a_text.3a3d85f2">免费工具</a> <span>›</span> <span data-i18n="tools.heic-to-jpg-wedding-photos.span_text.186af5fa">HEIC 转 JPG 转换器</span>
         </nav>
 
         <section class="tool-page-grid">
             <div class="wa-tool-card">
-                <h2>1. 将 HEIC 文件拖到这里</h2>
-                <div class="wa-tool-dropzone" id="dropzone" aria-label="拖入或点击浏览 HEIC 婚纱照">
-                    <div class="wa-tool-dropzone-title">拖入 HEIC 文件，或点击浏览</div>
-                    <div class="wa-tool-dropzone-hint">HEIC、HEIF • iPhone、iPad、佳能 CR3 • 支持批量</div>
+                <h2 data-i18n="tools.heic-to-jpg-wedding-photos.h2_text.bcfd5523">1. 将 HEIC 文件拖到这里</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="拖入或点击浏览 HEIC 婚纱照" data-i18n-attr="aria-label:tools.heic-to-jpg-wedding-photos.aria-label.715e1d4f">
+                    <div class="wa-tool-dropzone-title" data-i18n="tools.heic-to-jpg-wedding-photos.div_text.dfe94ecb">拖入 HEIC 文件，或点击浏览</div>
+                    <div class="wa-tool-dropzone-hint" data-i18n="tools.heic-to-jpg-wedding-photos.div_text.c7b2c006">HEIC、HEIF • iPhone、iPad、佳能 CR3 • 支持批量</div>
                     <input type="file" id="file-input" accept=".heic,.heif,image/heic,image/heif" multiple>
                 </div>
-                <div class="wa-tool-empty" id="empty-state">还没有 HEIC 文件 — 在上方拖入一些开始转换。</div>
+                <div class="wa-tool-empty" id="empty-state" data-i18n="tools.heic-to-jpg-wedding-photos.div_text.c4a4cfe5">还没有 HEIC 文件 — 在上方拖入一些开始转换。</div>
                 <div class="wa-tool-file-list" id="file-list" hidden></div>
                 <div class="wa-tool-heic-note">
-                    <strong>浏览器支持：</strong>Safari 17 及以上版本可在 <code>&lt;img&gt;</code> 中直接解码 HEIC/HEIF，可顺利转换。桌面端 Chrome、Firefox 和大多数 Edge 版本需要额外解码库才能解码 HEIC——若转换失败，请用同一设备上的 <strong>Safari</strong> 打开本页面，或在 iPhone 上预转（<em>设置 → 照片 → 最兼容</em>）。
+                    <strong data-i18n="tools.heic-to-jpg-wedding-photos.strong_text.975cd7f0">浏览器支持：</strong>Safari 17 及以上版本可在 <code>&lt;img&gt;</code> 中直接解码 HEIC/HEIF，可顺利转换。桌面端 Chrome、Firefox 和大多数 Edge 版本需要额外解码库才能解码 HEIC——若转换失败，请用同一设备上的 <strong>Safari</strong> 打开本页面，或在 iPhone 上预转（<em data-i18n="tools.heic-to-jpg-wedding-photos.em_text.406ab251">设置 → 照片 → 最兼容</em>）。
                 </div>
             </div>
 
             <div class="wa-tool-card">
-                <h2>2. 画质与尺寸</h2>
+                <h2 data-i18n="tools.heic-to-jpg-wedding-photos.h2_text.3f0fb9c3">2. 画质与尺寸</h2>
                 <div class="wa-tool-controls">
                     <div class="wa-tool-control">
                         <label for="quality">输出 JPG 画质：<span id="quality-val">90</span></label>
                         <input type="range" id="quality" min="60" max="95" step="1" value="90">
-                        <small>HEIC 本身已经很高效 — 默认保持较高画质。仅在需要更小体积时降到 75–85。</small>
+                        <small data-i18n="tools.heic-to-jpg-wedding-photos.small_text.22bb8b9e">HEIC 本身已经很高效 — 默认保持较高画质。仅在需要更小体积时降到 75–85。</small>
                     </div>
                     <div class="wa-tool-control">
-                        <label for="max-dim">最长边限制（像素） — 可选</label>
+                        <label for="max-dim" data-i18n="tools.heic-to-jpg-wedding-photos.label_text.63023024">最长边限制（像素） — 可选</label>
                         <select id="max-dim">
-                            <option value="0">不缩放</option>
-                            <option value="4096">4096（印刷母版）</option>
-                            <option value="2048" selected>2048（相册上传）</option>
-                            <option value="1600">1600（邮件附件）</option>
-                            <option value="1080">1080（屏幕/社交）</option>
-                            <option value="720">720（即时消息）</option>
+                            <option value="0" data-i18n="tools.heic-to-jpg-wedding-photos.option_text.a079a487">不缩放</option>
+                            <option value="4096" data-i18n="tools.heic-to-jpg-wedding-photos.option_text.bb538460">4096（印刷母版）</option>
+                            <option value="2048" selected data-i18n="tools.heic-to-jpg-wedding-photos.option_text.d9fbc17c">2048（相册上传）</option>
+                            <option value="1600" data-i18n="tools.heic-to-jpg-wedding-photos.option_text.a0ab802c">1600（邮件附件）</option>
+                            <option value="1080" data-i18n="tools.heic-to-jpg-wedding-photos.option_text.b6bd1f76">1080（屏幕/社交）</option>
+                            <option value="720" data-i18n="tools.heic-to-jpg-wedding-photos.option_text.0bde1587">720（即时消息）</option>
                         </select>
-                        <small>先缩放，再重新编码。</small>
+                        <small data-i18n="tools.heic-to-jpg-wedding-photos.small_text.b631f0aa">先缩放，再重新编码。</small>
                     </div>
                     <div class="wa-tool-control">
-                        <label>输出格式</label>
-                        <div style="padding: 0.55rem 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: #fff; color: var(--color-text-light); font-size: 0.9375rem;">
+                        <label data-i18n="tools.heic-to-jpg-wedding-photos.label_text.e5593680">输出格式</label>
+                        <div style="padding: 0.55rem 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: #fff; color: var(--color-text-light); font-size: 0.9375rem;" data-i18n="tools.heic-to-jpg-wedding-photos.div_text.9988cfff">
                             JPG（通用 — 任何相册、印刷服务和在线表单都接受）
                         </div>
-                        <small>本工具的核心就是 iPhone 转 JPG。这里不提供 PNG 或 WebP 选项。</small>
+                        <small data-i18n="tools.heic-to-jpg-wedding-photos.small_text.d927306a">本工具的核心就是 iPhone 转 JPG。这里不提供 PNG 或 WebP 选项。</small>
                     </div>
                 </div>
 
                 <div class="wa-tool-actions">
-                    <button type="button" class="btn btn-primary" id="run-btn" disabled>转换为 JPG</button>
-                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>全部保存</button>
-                    <button type="button" class="btn btn-secondary" id="clear-btn">清空</button>
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled data-i18n="tools.heic-to-jpg-wedding-photos.button_text.0415e2a3">转换为 JPG</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled data-i18n="tools.heic-to-jpg-wedding-photos.button_text.d3592c88">全部保存</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn" data-i18n="tools.heic-to-jpg-wedding-photos.button_text.288f0c40">清空</button>
                 </div>
 
                 <div class="wa-tool-summary" id="summary" hidden></div>
 
                 <div class="wa-tool-banner">
-                    <strong>隐私：</strong>每张照片都在浏览器标签页内使用 Canvas API 完成本地解码与重新编码。我们不会上传、存储或记录您的婚纱照，也不会用图像数据发起任何网络请求。在非 Safari 浏览器上，工具会显示清晰的限制说明，绝不会偷偷发送您的 HEIC 文件。
+                    <strong data-i18n="tools.heic-to-jpg-wedding-photos.strong_text.9781def9">隐私：</strong>每张照片都在浏览器标签页内使用 Canvas API 完成本地解码与重新编码。我们不会上传、存储或记录您的婚纱照，也不会用图像数据发起任何网络请求。在非 Safari 浏览器上，工具会显示清晰的限制说明，绝不会偷偷发送您的 HEIC 文件。
                 </div>
             </div>
 
             <div class="wa-tool-card">
-                <h2>3. 下载</h2>
-                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的照片都会显示独立的下载按钮。使用 <strong>全部保存</strong> 一键下载整批文件。文件统一改名为 <code>.jpg</code>，可在任意程序中打开 — 设备上原始的 <code>.heic</code> 文件保持不动。</p>
+                <h2 data-i18n="tools.heic-to-jpg-wedding-photos.h2_text.ccec0008">3. 下载</h2>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的照片都会显示独立的下载按钮。使用 <strong data-i18n="tools.heic-to-jpg-wedding-photos.strong_text.d3592c88">全部保存</strong> 一键下载整批文件。文件统一改名为 <code>.jpg</code>，可在任意程序中打开 — 设备上原始的 <code>.heic</code> 文件保持不动。</p>
             </div>
         </section>
 
@@ -434,15 +434,15 @@
                     </details>
                 </div>
 
-                <h2>更多免费婚礼图片工具</h2>
-                <p>HEIC 转 JPG 是工作流的第一步。继续使用本套件的其他工具：</p>
+                <h2 data-i18n="tools.heic-to-jpg-wedding-photos.h2_text.00b86871">更多免费婚礼图片工具</h2>
+                <p data-i18n="tools.heic-to-jpg-wedding-photos.p_text.deedd259">HEIC 转 JPG 是工作流的第一步。继续使用本套件的其他工具：</p>
                 <div class="sibling-tools">
-                    <a href="/th/tools/compress-wedding-photos/">🗜️ 压缩 JPG</a>
-                    <a href="/th/tools/wedding-photo-collage/">🖼️ 拼图</a>
-                    <a href="/th/tools/crop-wedding-photo-for-reels/">📱 竖版裁剪</a>
-                    <a href="/th/tools/remove-background-wedding-portrait/">✂️ 移除背景</a>
-                    <a href="/th/tools/add-text-to-wedding-photo/">🖋️ 添加文字</a>
-                    <a href="/th/tools/">全部工具</a>
+                    <a href="/th/tools/compress-wedding-photos/" data-i18n="tools.heic-to-jpg-wedding-photos.a_text.2e27c264">🗜️ 压缩 JPG</a>
+                    <a href="/th/tools/wedding-photo-collage/" data-i18n="tools.heic-to-jpg-wedding-photos.a_text.68589fbf">🖼️ 拼图</a>
+                    <a href="/th/tools/crop-wedding-photo-for-reels/" data-i18n="tools.heic-to-jpg-wedding-photos.a_text.4ae02f23">📱 竖版裁剪</a>
+                    <a href="/th/tools/remove-background-wedding-portrait/" data-i18n="tools.heic-to-jpg-wedding-photos.a_text.8defeb2b">✂️ 移除背景</a>
+                    <a href="/th/tools/add-text-to-wedding-photo/" data-i18n="tools.heic-to-jpg-wedding-photos.a_text.795ef878">🖋️ 添加文字</a>
+                    <a href="/th/tools/" data-i18n="tools.heic-to-jpg-wedding-photos.a_text.3898303e">全部工具</a>
                 </div>
             </div>
         </section>
@@ -450,24 +450,24 @@
         <section class="section">
             <div class="container" style="max-width: 920px;">
                 <div class="section-header" style="text-align: left;">
-                    <h2>相关文章</h2>
+                    <h2 data-i18n="tools.heic-to-jpg-wedding-photos.h2_text.9d36daea">相关文章</h2>
                 </div>
                 <div class="related-grid">
                     <a class="related-card" href="/th/blog/wedding-video-from-photos/">
-                        <h4>如何用照片制作婚礼视频（AI 指南）</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.heic-to-jpg-wedding-photos.h4_text.a9c03070">如何用照片制作婚礼视频（AI 指南）</h4>
+                        <span data-i18n="tools.heic-to-jpg-wedding-photos.span_text.0f34f296">阅读文章 →</span>
                     </a>
                     <a class="related-card" href="/th/blog/ai-wedding-video-generator-guide/">
-                        <h4>AI 婚礼视频生成器指南（2026）</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.heic-to-jpg-wedding-photos.h4_text.9f67cf05">AI 婚礼视频生成器指南（2026）</h4>
+                        <span data-i18n="tools.heic-to-jpg-wedding-photos.span_text.0f34f296">阅读文章 →</span>
                     </a>
                     <a class="related-card" href="/th/tools/compress-wedding-photos/">
-                        <h4>压缩婚纱照 — JPG 体积缩小 60–85%</h4>
-                        <span>使用工具 →</span>
+                        <h4 data-i18n="tools.heic-to-jpg-wedding-photos.h4_text.0c40d65e">压缩婚纱照 — JPG 体积缩小 60–85%</h4>
+                        <span data-i18n="tools.heic-to-jpg-wedding-photos.span_text.bd534e10">使用工具 →</span>
                     </a>
                     <a class="related-card" href="/th/order/">
-                        <h4>为您的 AI 婚礼影片获取免费报价</h4>
-                        <span>开启项目 →</span>
+                        <h4 data-i18n="tools.heic-to-jpg-wedding-photos.h4_text.434fc8cb">为您的 AI 婚礼影片获取免费报价</h4>
+                        <span data-i18n="tools.heic-to-jpg-wedding-photos.span_text.f1a3b784">开启项目 →</span>
                     </a>
                 </div>
             </div>
@@ -475,9 +475,9 @@
 
         <section class="cta-section">
             <div class="container">
-                <h2>HEIC 文件转好了？准备做一部婚礼电影吗？</h2>
-                <p>把 JPG 交给我们的 AI 婚礼视频生成器，48 小时内拿到一部电影感短片。</p>
-                <a href="/th/order/" class="btn btn-primary btn-large" title="获取免费报价 — 开启您的项目">获取免费报价 →</a>
+                <h2 data-i18n="tools.heic-to-jpg-wedding-photos.h2_text.d84cb427">HEIC 文件转好了？准备做一部婚礼电影吗？</h2>
+                <p data-i18n="tools.heic-to-jpg-wedding-photos.p_text.11265583">把 JPG 交给我们的 AI 婚礼视频生成器，48 小时内拿到一部电影感短片。</p>
+                <a href="/th/order/" class="btn btn-primary btn-large" title="获取免费报价 — 开启您的项目" data-i18n="tools.heic-to-jpg-wedding-photos.a_text.b7bf04b4" data-i18n-attr="title:tools.heic-to-jpg-wedding-photos.title.23cdfa48">获取免费报价 →</a>
             </div>
         </section>
     </main>

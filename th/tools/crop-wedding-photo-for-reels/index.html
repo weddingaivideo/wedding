@@ -210,77 +210,77 @@
             </div>
         </section>
 
-        <nav class="breadcrumb" aria-label="面包屑导航">
-            <a href="/th/">首页</a> <span>›</span> <a href="/th/tools/">免费工具</a> <span>›</span> <span>婚纱照裁剪 Reels</span>
+        <nav class="breadcrumb" aria-label="面包屑导航" data-i18n-attr="aria-label:tools.crop-wedding-photo-for-reels.aria-label.3576258a">
+            <a href="/th/" data-i18n="tools.crop-wedding-photo-for-reels.a_text.db1c89e0">首页</a> <span>›</span> <a href="/th/tools/" data-i18n="tools.crop-wedding-photo-for-reels.a_text.3a3d85f2">免费工具</a> <span>›</span> <span data-i18n="tools.crop-wedding-photo-for-reels.span_text.d58bd034">婚纱照裁剪 Reels</span>
         </nav>
 
         <section class="tool-page-grid">
             <div class="wa-tool-card">
-                <h2>1. 把照片拖到这里</h2>
-                <div class="wa-tool-dropzone" id="dropzone" aria-label="拖入婚纱照或点击浏览">
-                    <div class="wa-tool-dropzone-title">拖照片到此处，或点击浏览</div>
-                    <div class="wa-tool-dropzone-hint">支持 JPG、PNG、WebP · 可批量处理 · 上限取决于浏览器内存</div>
+                <h2 data-i18n="tools.crop-wedding-photo-for-reels.h2_text.58e3f5ad">1. 把照片拖到这里</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="拖入婚纱照或点击浏览" data-i18n-attr="aria-label:tools.crop-wedding-photo-for-reels.aria-label.027c7c3b">
+                    <div class="wa-tool-dropzone-title" data-i18n="tools.crop-wedding-photo-for-reels.div_text.e1100328">拖照片到此处，或点击浏览</div>
+                    <div class="wa-tool-dropzone-hint" data-i18n="tools.crop-wedding-photo-for-reels.div_text.109df7e5">支持 JPG、PNG、WebP · 可批量处理 · 上限取决于浏览器内存</div>
                     <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
                 </div>
-                <div class="wa-tool-empty" id="empty-state">还没有照片 — 把照片拖到上面开始。</div>
+                <div class="wa-tool-empty" id="empty-state" data-i18n="tools.crop-wedding-photo-for-reels.div_text.c12a8faa">还没有照片 — 把照片拖到上面开始。</div>
                 <div class="wa-tool-file-list" id="file-list" hidden></div>
             </div>
 
             <div class="wa-tool-card">
-                <h2>2. 选择比例与设置</h2>
+                <h2 data-i18n="tools.crop-wedding-photo-for-reels.h2_text.a613106a">2. 选择比例与设置</h2>
                 <div class="wa-tool-controls">
                     <div class="wa-tool-control">
-                        <label for="aspect">目标长宽比</label>
+                        <label for="aspect" data-i18n="tools.crop-wedding-photo-for-reels.label_text.956ab7f6">目标长宽比</label>
                         <select id="aspect">
                             <option value='{"w":9,"h":16,"outW":1080,"outH":1920,"slug":"reels"}' selected>9:16 Reels / TikTok（1080×1920）</option>
-                            <option value='{"w":1,"h":1,"outW":1080,"outH":1080,"slug":"square"}'>1:1 Instagram 九宫格（1080×1080）</option>
-                            <option value='{"w":4,"h":5,"outW":1080,"outH":1350,"slug":"portrait"}'>4:5 竖版（1080×1350）</option>
-                            <option value='{"w":16,"h":9,"outW":1920,"outH":1080,"slug":"cinematic"}'>16:9 宽银幕（1920×1080）</option>
-                            <option value='{"w":4,"h":3,"outW":1600,"outH":1200,"slug":"print"}'>4:3 印刷（1600×1200）</option>
+                            <option value='{"w":1,"h":1,"outW":1080,"outH":1080,"slug":"square"}' data-i18n="tools.crop-wedding-photo-for-reels.option_text.bda2b91e">1:1 Instagram 九宫格（1080×1080）</option>
+                            <option value='{"w":4,"h":5,"outW":1080,"outH":1350,"slug":"portrait"}' data-i18n="tools.crop-wedding-photo-for-reels.option_text.6242b556">4:5 竖版（1080×1350）</option>
+                            <option value='{"w":16,"h":9,"outW":1920,"outH":1080,"slug":"cinematic"}' data-i18n="tools.crop-wedding-photo-for-reels.option_text.43c3a9cd">16:9 宽银幕（1920×1080）</option>
+                            <option value='{"w":4,"h":3,"outW":1600,"outH":1200,"slug":"print"}' data-i18n="tools.crop-wedding-photo-for-reels.option_text.7686433a">4:3 印刷（1600×1200）</option>
                             <option value='{"w":9,"h":16,"outW":1080,"outH":1920,"slug":"story"}'>9:16 Story（1080×1920）</option>
                         </select>
-                        <small>在你的照片内取最大能容纳此比例的矩形，浏览器再缩放到 Instagram 原生像素。</small>
+                        <small data-i18n="tools.crop-wedding-photo-for-reels.small_text.5cf54bc3">在你的照片内取最大能容纳此比例的矩形，浏览器再缩放到 Instagram 原生像素。</small>
                     </div>
                     <div class="wa-tool-control">
                         <label class="wa-tool-toggle">
                             <input type="checkbox" id="smart-offset" checked>
                             <span>
                                 智能人脸安全偏移
-                                <small>裁剪窗口偏向婚纱人像常见的人物位置。新娘的脸会留在画面内，而不是把背景放到正中央。横版素材开启选此项，若源图已是紧凑的竖版构图则可关闭。</small>
+                                <small data-i18n="tools.crop-wedding-photo-for-reels.small_text.a6b24d1f">裁剪窗口偏向婚纱人像常见的人物位置。新娘的脸会留在画面内，而不是把背景放到正中央。横版素材开启选此项，若源图已是紧凑的竖版构图则可关闭。</small>
                             </span>
                         </label>
                     </div>
                     <div class="wa-tool-control">
-                        <label for="output-res">裁剪输出分辨率</label>
+                        <label for="output-res" data-i18n="tools.crop-wedding-photo-for-reels.label_text.94cda6a5">裁剪输出分辨率</label>
                         <select id="output-res">
-                            <option value="instagram" selected>Instagram（1080×X）— 直接上传</option>
-                            <option value="max">原始最大 — 保留源分辨率</option>
+                            <option value="instagram" selected data-i18n="tools.crop-wedding-photo-for-reels.option_text.6cfe245c">Instagram（1080×X）— 直接上传</option>
+                            <option value="max" data-i18n="tools.crop-wedding-photo-for-reels.option_text.67fc4815">原始最大 — 保留源分辨率</option>
                         </select>
-                        <small>Instagram 预设按平台原生像素输出。原始最大保留源像素数，适合归档。</small>
+                        <small data-i18n="tools.crop-wedding-photo-for-reels.small_text.a6c5c0c6">Instagram 预设按平台原生像素输出。原始最大保留源像素数，适合归档。</small>
                     </div>
                     <div class="wa-tool-control">
                         <label for="quality">输出 JPG 质量：<span id="quality-val">85</span></label>
                         <input type="range" id="quality" min="60" max="95" step="1" value="85">
-                        <small>数值越小文件越小。85 在大多数婚纱照上与原图几乎无差别。</small>
+                        <small data-i18n="tools.crop-wedding-photo-for-reels.small_text.7eae4188">数值越小文件越小。85 在大多数婚纱照上与原图几乎无差别。</small>
                     </div>
                 </div>
 
                 <div class="wa-tool-actions">
-                    <button type="button" class="btn btn-primary" id="run-btn" disabled>裁剪</button>
-                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>全部保存</button>
-                    <button type="button" class="btn btn-secondary" id="clear-btn">清空</button>
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled data-i18n="tools.crop-wedding-photo-for-reels.button_text.293cafbb">裁剪</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled data-i18n="tools.crop-wedding-photo-for-reels.button_text.d3592c88">全部保存</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn" data-i18n="tools.crop-wedding-photo-for-reels.button_text.288f0c40">清空</button>
                 </div>
 
                 <div class="wa-tool-summary" id="summary" hidden></div>
 
                 <div class="wa-tool-banner">
-                    <strong>隐私：</strong>所有照片都在你的设备上通过 Canvas API 本地处理。浏览器标签页是唯一发生处理的地方 — 不上传、不分析你的照片、无需账号。
+                    <strong data-i18n="tools.crop-wedding-photo-for-reels.strong_text.9781def9">隐私：</strong>所有照片都在你的设备上通过 Canvas API 本地处理。浏览器标签页是唯一发生处理的地方 — 不上传、不分析你的照片、无需账号。
                 </div>
             </div>
 
             <div class="wa-tool-card">
-                <h2>3. 下载</h2>
-                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的照片都会显示独立的下载按钮。点击 <strong>全部保存</strong> 一键打包整批文件。文件名会附加比例标签（例如 <code>-reels</code>、<code>-square</code>、<code>-story</code>），原图保持不变。</p>
+                <h2 data-i18n="tools.crop-wedding-photo-for-reels.h2_text.ccec0008">3. 下载</h2>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的照片都会显示独立的下载按钮。点击 <strong data-i18n="tools.crop-wedding-photo-for-reels.strong_text.d3592c88">全部保存</strong> 一键打包整批文件。文件名会附加比例标签（例如 <code>-reels</code>、<code>-square</code>、<code>-story</code>），原图保持不变。</p>
             </div>
         </section>
 
@@ -414,15 +414,15 @@
                     </details>
                 </div>
 
-                <h2>更多免费婚纱照工具</h2>
-                <p>裁剪只是工作流中的一步。结合本套件的其他工具继续：</p>
+                <h2 data-i18n="tools.crop-wedding-photo-for-reels.h2_text.34397c64">更多免费婚纱照工具</h2>
+                <p data-i18n="tools.crop-wedding-photo-for-reels.p_text.42858a5a">裁剪只是工作流中的一步。结合本套件的其他工具继续：</p>
                 <div class="sibling-tools">
-                    <a href="/th/tools/compress-wedding-photos/">压缩婚纱照</a>
+                    <a href="/th/tools/compress-wedding-photos/" data-i18n="tools.crop-wedding-photo-for-reels.a_text.cdeabc6a">压缩婚纱照</a>
                     <a href="/th/tools/heic-to-jpg-wedding-photos/">HEIC เป็น JPG</a>
-                    <a href="/th/tools/wedding-photo-collage/">照片拼图</a>
-                    <a href="/th/tools/remove-background-wedding-portrait/">一键抠图</a>
-                    <a href="/th/tools/add-text-to-wedding-photo/">添加文字</a>
-                    <a href="/th/tools/">全部工具</a>
+                    <a href="/th/tools/wedding-photo-collage/" data-i18n="tools.crop-wedding-photo-for-reels.a_text.018c91b6">照片拼图</a>
+                    <a href="/th/tools/remove-background-wedding-portrait/" data-i18n="tools.crop-wedding-photo-for-reels.a_text.67d39741">一键抠图</a>
+                    <a href="/th/tools/add-text-to-wedding-photo/" data-i18n="tools.crop-wedding-photo-for-reels.a_text.399ca720">添加文字</a>
+                    <a href="/th/tools/" data-i18n="tools.crop-wedding-photo-for-reels.a_text.3898303e">全部工具</a>
                 </div>
             </div>
         </section>
@@ -430,24 +430,24 @@
         <section class="section">
             <div class="container" style="max-width: 920px;">
                 <div class="section-header" style="text-align: left;">
-                    <h2>相关文章</h2>
+                    <h2 data-i18n="tools.crop-wedding-photo-for-reels.h2_text.9d36daea">相关文章</h2>
                 </div>
                 <div class="related-grid">
                     <a class="related-card" href="/blog/wedding-video-from-photos/">
-                        <h4>如何用照片做婚礼视频（AI 指南）</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.crop-wedding-photo-for-reels.h4_text.3a3d72fa">如何用照片做婚礼视频（AI 指南）</h4>
+                        <span data-i18n="tools.crop-wedding-photo-for-reels.span_text.0f34f296">阅读文章 →</span>
                     </a>
                     <a class="related-card" href="/blog/unique-wedding-video-ideas/">
-                        <h4>真正让人想看完的独特婚礼视频创意</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.crop-wedding-photo-for-reels.h4_text.b9155c4b">真正让人想看完的独特婚礼视频创意</h4>
+                        <span data-i18n="tools.crop-wedding-photo-for-reels.span_text.0f34f296">阅读文章 →</span>
                     </a>
                     <a class="related-card" href="/blog/wedding-video-social-media/">
-                        <h4>社交媒体婚礼视频：2026 年实操手册</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.crop-wedding-photo-for-reels.h4_text.f1e9e001">社交媒体婚礼视频：2026 年实操手册</h4>
+                        <span data-i18n="tools.crop-wedding-photo-for-reels.span_text.0f34f296">阅读文章 →</span>
                     </a>
                     <a class="related-card" href="/th/blog/wedding-video-captions/">
-                        <h4>给婚礼视频加字幕、文案和话题标签的正确姿势</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.crop-wedding-photo-for-reels.h4_text.61d14a2d">给婚礼视频加字幕、文案和话题标签的正确姿势</h4>
+                        <span data-i18n="tools.crop-wedding-photo-for-reels.span_text.0f34f296">阅读文章 →</span>
                     </a>
                 </div>
             </div>
@@ -455,9 +455,9 @@
 
         <section class="cta-section">
             <div class="container">
-                <h2>裁剪完照片？准备做婚礼短片了？</h2>
-                <p>把它们交给我们的 AI 婚礼视频生成器，48 小时拿到一支电影感短片 — 适配 Reels、Story 和大屏。</p>
-                <a href="/th/order/" class="btn btn-primary btn-large" title="免费报价 — 开启你的项目">获取免费报价 →</a>
+                <h2 data-i18n="tools.crop-wedding-photo-for-reels.h2_text.88c65d2f">裁剪完照片？准备做婚礼短片了？</h2>
+                <p data-i18n="tools.crop-wedding-photo-for-reels.p_text.259fad07">把它们交给我们的 AI 婚礼视频生成器，48 小时拿到一支电影感短片 — 适配 Reels、Story 和大屏。</p>
+                <a href="/th/order/" class="btn btn-primary btn-large" title="免费报价 — 开启你的项目" data-i18n="tools.crop-wedding-photo-for-reels.a_text.b7bf04b4" data-i18n-attr="title:tools.crop-wedding-photo-for-reels.title.c2544d96">获取免费报价 →</a>
             </div>
         </section>
     </main>

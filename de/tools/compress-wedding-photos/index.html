@@ -203,68 +203,68 @@
             </div>
         </section>
 
-        <nav class="breadcrumb" aria-label="面包屑导航">
-            <a href="/de/">首页</a> <span>›</span> <a href="/de/tools/">免费工具</a> <span>›</span> <span>压缩婚纱照</span>
+        <nav class="breadcrumb" aria-label="面包屑导航" data-i18n-attr="aria-label:tools.compress-wedding-photos.aria-label.3576258a">
+            <a href="/de/" data-i18n="tools.compress-wedding-photos.a_text.db1c89e0">首页</a> <span>›</span> <a href="/de/tools/" data-i18n="tools.compress-wedding-photos.a_text.3a3d85f2">免费工具</a> <span>›</span> <span data-i18n="tools.compress-wedding-photos.span_text.cdeabc6a">压缩婚纱照</span>
         </nav>
 
         <section class="tool-page-grid">
             <div class="wa-tool-card">
-                <h2>1. 把照片拖到这里</h2>
-                <div class="wa-tool-dropzone" id="dropzone" aria-label="拖入婚纱照或点击浏览">
-                    <div class="wa-tool-dropzone-title">将照片拖到此处，或点击浏览</div>
-                    <div class="wa-tool-dropzone-hint">JPG、PNG、WebP • 支持批量 • 上限取决于浏览器内存</div>
+                <h2 data-i18n="tools.compress-wedding-photos.h2_text.58e3f5ad">1. 把照片拖到这里</h2>
+                <div class="wa-tool-dropzone" id="dropzone" aria-label="拖入婚纱照或点击浏览" data-i18n-attr="aria-label:tools.compress-wedding-photos.aria-label.027c7c3b">
+                    <div class="wa-tool-dropzone-title" data-i18n="tools.compress-wedding-photos.div_text.96fef884">将照片拖到此处，或点击浏览</div>
+                    <div class="wa-tool-dropzone-hint" data-i18n="tools.compress-wedding-photos.div_text.c9fe97e1">JPG、PNG、WebP • 支持批量 • 上限取决于浏览器内存</div>
                     <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
                 </div>
-                <div class="wa-tool-empty" id="empty-state">还没有照片 — 在上方拖入一些开始压缩。</div>
+                <div class="wa-tool-empty" id="empty-state" data-i18n="tools.compress-wedding-photos.div_text.453b51ba">还没有照片 — 在上方拖入一些开始压缩。</div>
                 <div class="wa-tool-file-list" id="file-list" hidden></div>
             </div>
 
             <div class="wa-tool-card">
-                <h2>2. 画质与尺寸</h2>
+                <h2 data-i18n="tools.compress-wedding-photos.h2_text.3f0fb9c3">2. 画质与尺寸</h2>
                 <div class="wa-tool-controls">
                     <div class="wa-tool-control">
                         <label for="quality">输出 JPG 画质：<span id="quality-val">75</span></label>
                         <input type="range" id="quality" min="30" max="95" step="1" value="75">
-                        <small>数值越小，文件越小。75 在多数婚礼场景下与原图视觉无差别。</small>
+                        <small data-i18n="tools.compress-wedding-photos.small_text.0809d03b">数值越小，文件越小。75 在多数婚礼场景下与原图视觉无差别。</small>
                     </div>
                     <div class="wa-tool-control">
-                        <label for="max-dim">最长边限制（像素） — 可选</label>
+                        <label for="max-dim" data-i18n="tools.compress-wedding-photos.label_text.63023024">最长边限制（像素） — 可选</label>
                         <select id="max-dim">
-                            <option value="0">不缩放</option>
-                            <option value="4096">4096（印刷母版）</option>
-                            <option value="2048" selected>2048（相册上传）</option>
-                            <option value="1600">1600（邮件附件）</option>
-                            <option value="1080">1080（屏幕/社交）</option>
-                            <option value="720">720（即时消息）</option>
+                            <option value="0" data-i18n="tools.compress-wedding-photos.option_text.a079a487">不缩放</option>
+                            <option value="4096" data-i18n="tools.compress-wedding-photos.option_text.bb538460">4096（印刷母版）</option>
+                            <option value="2048" selected data-i18n="tools.compress-wedding-photos.option_text.d9fbc17c">2048（相册上传）</option>
+                            <option value="1600" data-i18n="tools.compress-wedding-photos.option_text.a0ab802c">1600（邮件附件）</option>
+                            <option value="1080" data-i18n="tools.compress-wedding-photos.option_text.b6bd1f76">1080（屏幕/社交）</option>
+                            <option value="720" data-i18n="tools.compress-wedding-photos.option_text.0bde1587">720（即时消息）</option>
                         </select>
-                        <small>先缩放，再重新编码。</small>
+                        <small data-i18n="tools.compress-wedding-photos.small_text.b631f0aa">先缩放，再重新编码。</small>
                     </div>
                     <div class="wa-tool-control">
-                        <label for="format">输出格式</label>
+                        <label for="format" data-i18n="tools.compress-wedding-photos.label_text.e5593680">输出格式</label>
                         <select id="format">
-                            <option value="image/jpeg" selected>JPG（体积更小，推荐用于分享）</option>
-                            <option value="image/webp">WebP（体积更小，现代浏览器）</option>
-                            <option value="image/png">PNG（无损，文件最大）</option>
+                            <option value="image/jpeg" selected data-i18n="tools.compress-wedding-photos.option_text.c06b8c68">JPG（体积更小，推荐用于分享）</option>
+                            <option value="image/webp" data-i18n="tools.compress-wedding-photos.option_text.1724a385">WebP（体积更小，现代浏览器）</option>
+                            <option value="image/png" data-i18n="tools.compress-wedding-photos.option_text.babb5986">PNG（无损，文件最大）</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="wa-tool-actions">
-                    <button type="button" class="btn btn-primary" id="run-btn" disabled>压缩</button>
-                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled>全部保存</button>
-                    <button type="button" class="btn btn-secondary" id="clear-btn">清空</button>
+                    <button type="button" class="btn btn-primary" id="run-btn" disabled data-i18n="tools.compress-wedding-photos.button_text.6612548a">压缩</button>
+                    <button type="button" class="btn btn-secondary" id="save-all-btn" disabled data-i18n="tools.compress-wedding-photos.button_text.d3592c88">全部保存</button>
+                    <button type="button" class="btn btn-secondary" id="clear-btn" data-i18n="tools.compress-wedding-photos.button_text.288f0c40">清空</button>
                 </div>
 
                 <div class="wa-tool-summary" id="summary" hidden></div>
 
                 <div class="wa-tool-banner">
-                    <strong>隐私：</strong>每张照片都在设备本地通过 Canvas API 完成处理。浏览器标签页是唯一的工作场所 — 没有上传、不会对您的照片做统计、不会留账号。
+                    <strong data-i18n="tools.compress-wedding-photos.strong_text.9781def9">隐私：</strong>每张照片都在设备本地通过 Canvas API 完成处理。浏览器标签页是唯一的工作场所 — 没有上传、不会对您的照片做统计、不会留账号。
                 </div>
             </div>
 
             <div class="wa-tool-card">
-                <h2>3. 下载</h2>
-                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的照片都会显示独立的下载按钮。使用 <strong>全部保存</strong> 一键获取整批文件。文件名会追加 <code>-min</code>，原文件保持不动。</p>
+                <h2 data-i18n="tools.compress-wedding-photos.h2_text.ccec0008">3. 下载</h2>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的照片都会显示独立的下载按钮。使用 <strong data-i18n="tools.compress-wedding-photos.strong_text.d3592c88">全部保存</strong> 一键获取整批文件。文件名会追加 <code>-min</code>，原文件保持不动。</p>
             </div>
         </section>
 
@@ -387,15 +387,15 @@
                     </details>
                 </div>
 
-                <h2>更多免费婚礼照片工具</h2>
-                <p>压缩是工作流的第一步。继续使用本套件的其他工具：</p>
+                <h2 data-i18n="tools.compress-wedding-photos.h2_text.037eed4a">更多免费婚礼照片工具</h2>
+                <p data-i18n="tools.compress-wedding-photos.p_text.c3c08671">压缩是工作流的第一步。继续使用本套件的其他工具：</p>
                 <div class="sibling-tools">
-                    <a href="/de/tools/heic-to-jpg-wedding-photos/">HEIC 转 JPG</a>
-                    <a href="/de/tools/wedding-photo-collage/">照片拼图</a>
-                    <a href="/de/tools/crop-wedding-photo-for-reels/">竖版裁剪</a>
-                    <a href="/de/tools/remove-background-wedding-portrait/">移除背景</a>
-                    <a href="/de/tools/add-text-to-wedding-photo/">添加文字</a>
-                    <a href="/de/tools/">全部工具</a>
+                    <a href="/de/tools/heic-to-jpg-wedding-photos/" data-i18n="tools.compress-wedding-photos.a_text.f0ac99ce">HEIC 转 JPG</a>
+                    <a href="/de/tools/wedding-photo-collage/" data-i18n="tools.compress-wedding-photos.a_text.018c91b6">照片拼图</a>
+                    <a href="/de/tools/crop-wedding-photo-for-reels/" data-i18n="tools.compress-wedding-photos.a_text.0203c701">竖版裁剪</a>
+                    <a href="/de/tools/remove-background-wedding-portrait/" data-i18n="tools.compress-wedding-photos.a_text.9a17b1af">移除背景</a>
+                    <a href="/de/tools/add-text-to-wedding-photo/" data-i18n="tools.compress-wedding-photos.a_text.399ca720">添加文字</a>
+                    <a href="/de/tools/" data-i18n="tools.compress-wedding-photos.a_text.3898303e">全部工具</a>
                 </div>
             </div>
         </section>
@@ -403,24 +403,24 @@
         <section class="section">
             <div class="container" style="max-width: 920px;">
                 <div class="section-header" style="text-align: left;">
-                    <h2>相关文章</h2>
+                    <h2 data-i18n="tools.compress-wedding-photos.h2_text.9d36daea">相关文章</h2>
                 </div>
                 <div class="related-grid">
                     <a class="related-card" href="/blog/wedding-video-from-photos/">
-                        <h4>如何用照片制作婚礼视频（AI 指南）</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.compress-wedding-photos.h4_text.a9c03070">如何用照片制作婚礼视频（AI 指南）</h4>
+                        <span data-i18n="tools.compress-wedding-photos.span_text.0f34f296">阅读文章 →</span>
                     </a>
                     <a class="related-card" href="/blog/send-large-wedding-video/">
-                        <h4>如何把大型婚礼视频文件发给家人</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.compress-wedding-photos.h4_text.15c6467d">如何把大型婚礼视频文件发给家人</h4>
+                        <span data-i18n="tools.compress-wedding-photos.span_text.0f34f296">阅读文章 →</span>
                     </a>
                     <a class="related-card" href="/blog/wedding-photo-slideshow/">
-                        <h4>做出让人回味的婚礼照片轮播</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.compress-wedding-photos.h4_text.d4226d97">做出让人回味的婚礼照片轮播</h4>
+                        <span data-i18n="tools.compress-wedding-photos.span_text.0f34f296">阅读文章 →</span>
                     </a>
                     <a class="related-card" href="/blog/restore-old-wedding-photos/">
-                        <h4>用 AI 修复老婚纱照（2026 指南）</h4>
-                        <span>阅读文章 →</span>
+                        <h4 data-i18n="tools.compress-wedding-photos.h4_text.ac68dcc4">用 AI 修复老婚纱照（2026 指南）</h4>
+                        <span data-i18n="tools.compress-wedding-photos.span_text.0f34f296">阅读文章 →</span>
                     </a>
                 </div>
             </div>
@@ -428,9 +428,9 @@
 
         <section class="cta-section">
             <div class="container">
-                <h2>照片已经压缩好？准备做一部婚礼电影吗？</h2>
-                <p>把它们交给我们的 AI 婚礼视频生成器，48 小时内拿到一部电影感短片。</p>
-                <a href="/de/order/" class="btn btn-primary btn-large" title="获取免费报价 — 开启您的项目">获取免费报价 →</a>
+                <h2 data-i18n="tools.compress-wedding-photos.h2_text.f4815577">照片已经压缩好？准备做一部婚礼电影吗？</h2>
+                <p data-i18n="tools.compress-wedding-photos.p_text.86b704ae">把它们交给我们的 AI 婚礼视频生成器，48 小时内拿到一部电影感短片。</p>
+                <a href="/de/order/" class="btn btn-primary btn-large" title="获取免费报价 — 开启您的项目" data-i18n="tools.compress-wedding-photos.a_text.b7bf04b4" data-i18n-attr="title:tools.compress-wedding-photos.title.23cdfa48">获取免费报价 →</a>
             </div>
         </section>
     </main>
