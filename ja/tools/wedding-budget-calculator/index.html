@@ -28,7 +28,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="結婚式予算計算">
     <link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/wedding-budget-calculator/" />
-    <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/wedding-budget-calculator/" />
+    <link rel="alternate" hreflang="zh" href="https://weddingai.video/ja/tools/wedding-budget-calculator/" />
     <link rel="alternate" hreflang="es" href="https://weddingai.video/es/tools/wedding-budget-calculator/" />
     <link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/tools/wedding-budget-calculator/" />
     <link rel="alternate" hreflang="de" href="https://weddingai.video/de/tools/wedding-budget-calculator/" />
@@ -124,70 +124,9 @@
         .bg-export-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.8rem; }
     </style>
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Wedding Budget Calculator",
-      "url": "https://weddingai.video/tools/wedding-budget-calculator/",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Any (browser-based)",
-      "browserRequirements": "Requires JavaScript",
-      "offers": { "@type": "Offer", "price": "0", "price通貨": "USD" },
-      "description": "\"description \":\"無料のオンライン結婚式予算計算機。14のカテゴリ（会場、ケータリング、写真、ビデオ、花、服装、音楽、ケーキ、リング、招待状、恩恵、輸送、ハネムーン、その他）。リアルタイムのスライダー調整、円グラフ、CSVエクスポート。100%ブラウザ内—サインアップなし。\"",
-      "inLanguage": "ja",
-      "isAccessibleForFree": true,
-      "creator": { "@type": "Organization", "name": "WeddingAI.video", "url": "https://weddingai.video/" }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "結婚式予算計算ツールはどのように機能しますか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "結婚式の総予算を入力し、通貨を選び、このツールが業界平均の割合を使って14の標準カテゴリーに金額を配分します。任意のカテゴリーのスライダーをドラッグして配分を変更したり、カスタム金額を入力したりできます。円グラフとカテゴリー別合計がリアルタイムで更新されます。完了したらCSVとしてエクスポートしてください。" }
-        },
-        {
-          "@type": "Question",
-          "name": "結婚式予算の平均的な割合は何ですか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "Industry averages for a US wedding: Venue & Reception 35-40%, Catering & Bar 25-30%, Photography 10-12%, Videography 5-7%, Flowers & Decor 8-10%, Attire & Beauty 8-10%, Music & Entertainment 7-10%, Cake & Desserts 2%, Rings & Jewelry 4-5%, Invitations & Stationery 2-3%, Favors & Gifts 2-3%, Transportation 2%, Honeymoon 5-8%, Miscellaneous 3-5%. These add up to about 100% but can be rebalanced based on priorities." }
-        },
-        {
-          "@type": "Question",
-          "name": "対応している通貨は？",
-          "acceptedAnswer": { "@type": "Answer", "text": "USD（$）、EUR（€）、GBP（£）、JPY（¥）、CNY（¥）、INR（₹）、KRW（₩）。通貨は単なる表示ラベルです — 地元の通貨で予算を入力すると、内訳全体で同じ記号が使用されます。" }
-        },
-        {
-          "@type": "Question",
-          "name": "予算データはプライベートですか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "はい。すべての予算値はお使いのブラウザのlocalStorageにのみ保存されます。サーバーには何もアップロードされません。データを消去するにはブラウザのストレージをクリアしてください。" }
-        },
-        {
-          "@type": "Question",
-          "name": "予算をエクスポートできますか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "はい。CSVをエクスポートをクリックすると、14のすべてのカテゴリー、割合、金額を含むカンマ区切りファイルがダウンロードされます。Excel、Googleスプレッドシート、その他のスプレッドシートで開いてください。印刷を使えば、PDFにきれいなレイアウトで出力できます。" }
-        }
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "結婚式の予算の立て方",
-      "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Set the total budget", "text": "Start with the total amount you can spend on the wedding. Be honest about what you can afford without going into debt — most wedding industry surveys put the US median at $30,000-$35,000 for 2026." },
-        { "@type": "HowToStep", "position": 2, "name": "Pick a starting allocation", "text": "Choose a preset (米国平均, 英国平均, Budget/DIY, or ラグジュアリー) or leave the tool's defaults. The 14 categories will fill in." },
-        { "@type": "HowToStep", "position": 3, "name": "Adjust the sliders", "text": "Drag any category slider up or down to match your priorities. The pie chart and the running total update in real time. The remaining 100% is auto-balanced as you go." },
-        { "@type": "HowToStep", "position": 4, "name": "Lock in vendor quotes", "text": "As you collect real quotes from venues, photographers, and caterers, override the slider amounts with actual numbers. The gap between your budget and the actual quote becomes obvious at a glance." },
-        { "@type": "HowToStep", "position": 5, "name": "Export and share", "text": "Hit CSVエクスポート to share the final breakdown with your partner, family, or wedding planner. The CSV opens in any spreadsheet." }
-      ],
-      "totalTime": "PT20M"
-    }
-    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Wedding Budget Calculator", "url": "https://weddingai.video/tools/wedding-budget-calculator/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (browser-based)", "browserRequirements": "Requires JavaScript", "offers": {"@type": "Offer", "price": "0", "price通貨": "USD"}, "description": "\"description \":\"無料のオンライン結婚式予算計算機。14のカテゴリ（会場、ケータリング、写真、ビデオ、花、服装、音楽、ケーキ、リング、招待状、恩恵、輸送、ハネムーン、その他）。リアルタイムのスライダー調整、円グラフ、CSVエクスポート。100%ブラウザ内—サインアップなし。\"", "inLanguage": "ja", "isAccessibleForFree": true, "creator": {"@type": "Organization", "name": "WeddingAI.video", "url": "https://weddingai.video/"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "結婚式予算計算ツールはどのように機能しますか？", "acceptedAnswer": {"@type": "Answer", "text": "結婚式の総予算を入力し、通貨を選び、このツールが業界平均の割合を使って14の標準カテゴリーに金額を配分します。任意のカテゴリーのスライダーをドラッグして配分を変更したり、カスタム金額を入力したりできます。円グラフとカテゴリー別合計がリアルタイムで更新されます。完了したらCSVとしてエクスポートしてください。"}}, {"@type": "Question", "name": "結婚式予算の平均的な割合は何ですか？", "acceptedAnswer": {"@type": "Answer", "text": "Industry averages for a US wedding: Venue & Reception 35-40%, Catering & Bar 25-30%, Photography 10-12%, Videography 5-7%, Flowers & Decor 8-10%, Attire & Beauty 8-10%, Music & Entertainment 7-10%, Cake & Desserts 2%, Rings & Jewelry 4-5%, Invitations & Stationery 2-3%, Favors & Gifts 2-3%, Transportation 2%, Honeymoon 5-8%, Miscellaneous 3-5%. These add up to about 100% but can be rebalanced based on priorities."}}, {"@type": "Question", "name": "対応している通貨は？", "acceptedAnswer": {"@type": "Answer", "text": "USD（$）、EUR（€）、GBP（£）、JPY（¥）、CNY（¥）、INR（₹）、KRW（₩）。通貨は単なる表示ラベルです — 地元の通貨で予算を入力すると、内訳全体で同じ記号が使用されます。"}}, {"@type": "Question", "name": "予算データはプライベートですか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。すべての予算値はお使いのブラウザのlocalStorageにのみ保存されます。サーバーには何もアップロードされません。データを消去するにはブラウザのストレージをクリアしてください。"}}, {"@type": "Question", "name": "予算をエクスポートできますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。CSVをエクスポートをクリックすると、14のすべてのカテゴリー、割合、金額を含むカンマ区切りファイルがダウンロードされます。Excel、Googleスプレッドシート、その他のスプレッドシートで開いてください。印刷を使えば、PDFにきれいなレイアウトで出力できます。"}}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "結婚式の予算の立て方", "step": [{"@type": "HowToStep", "position": 1, "name": "Set the total budget", "text": "Start with the total amount you can spend on the wedding. Be honest about what you can afford without going into debt — most wedding industry surveys put the US median at $30,000-$35,000 for 2026."}, {"@type": "HowToStep", "position": 2, "name": "Pick a starting allocation", "text": "Choose a preset (米国平均, 英国平均, Budget/DIY, or ラグジュアリー) or leave the tool's defaults. The 14 categories will fill in."}, {"@type": "HowToStep", "position": 3, "name": "Adjust the sliders", "text": "Drag any category slider up or down to match your priorities. The pie chart and the running total update in real time. The remaining 100% is auto-balanced as you go."}, {"@type": "HowToStep", "position": 4, "name": "Lock in vendor quotes", "text": "As you collect real quotes from venues, photographers, and caterers, override the slider amounts with actual numbers. The gap between your budget and the actual quote becomes obvious at a glance."}, {"@type": "HowToStep", "position": 5, "name": "Export and share", "text": "Hit CSVエクスポート to share the final breakdown with your partner, family, or wedding planner. The CSV opens in any spreadsheet."}], "totalTime": "PT20M"}</script>
 </head>
 <body class="page-tool">
 <a class="wa-skip-link" href="#main-content">Skip to main content</a>
