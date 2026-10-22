@@ -193,7 +193,7 @@
                     <li><a href="/fr/about/" title="Learn about us" data-i18n="404.a_text.about.69447212">About</a></li>
                     <li><a href="/fr/pricing/" title="View transparent pricing" data-i18n="404.a_text.pricing.43854765">Pricing</a></li>
                     <li><a href="/fr/order/" class="btn-nav" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
-                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">Chinois</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option>
                     <option value="hi">HI</option></select></li>
                 </ul>
             </nav>
@@ -244,9 +244,7 @@
                     <div class="wa-tool-control">
                         <label class="wa-tool-toggle">
                             <input type="checkbox" id="smart-offset" checked>
-                            <span>
-                                智能人脸安全偏移
-                                <small data-i18n="tools.crop-wedding-photo-for-reels.small_text.a6b24d1f">裁剪窗口偏向婚纱人像常见的人物位置。新娘的脸会留在画面内，而不是把背景放到正中央。横版素材开启选此项，若源图已是紧凑的竖版构图则可关闭。</small>
+                            <span>Compensation intelligente du visage<small data-i18n="tools.crop-wedding-photo-for-reels.small_text.a6b24d1f">裁剪窗口偏向婚纱人像常见的人物位置。新娘的脸会留在画面内，而不是把背景放到正中央。横版素材开启选此项，若源图已是紧凑的竖版构图则可关闭。</small>
                             </span>
                         </label>
                     </div>
@@ -259,7 +257,7 @@
                         <small data-i18n="tools.crop-wedding-photo-for-reels.small_text.a6c5c0c6">Instagram 预设按平台原生像素输出。原始最大保留源像素数，适合归档。</small>
                     </div>
                     <div class="wa-tool-control">
-                        <label for="quality">输出 JPG 质量：<span id="quality-val">85</span></label>
+                        <label for="quality">Qualité de sortie JPG :<span id="quality-val">85</span></label>
                         <input type="range" id="quality" min="60" max="95" step="1" value="85">
                         <small data-i18n="tools.crop-wedding-photo-for-reels.small_text.7eae4188">数值越小文件越小。85 在大多数婚纱照上与原图几乎无差别。</small>
                     </div>
@@ -274,13 +272,12 @@
                 <div class="wa-tool-summary" id="summary" hidden></div>
 
                 <div class="wa-tool-banner">
-                    <strong data-i18n="tools.crop-wedding-photo-for-reels.strong_text.9781def9">隐私：</strong>所有照片都在你的设备上通过 Canvas API 本地处理。浏览器标签页是唯一发生处理的地方 — 不上传、不分析你的照片、无需账号。
-                </div>
+                    <strong data-i18n="tools.crop-wedding-photo-for-reels.strong_text.9781def9">隐私：</strong>Toutes les photos sont traitées nativement sur votre appareil via l'API Canvas. L'onglet du navigateur est le seul endroit où le traitement a lieu : aucun téléchargement, aucune analyse de vos photos, aucun compte requis.</div>
             </div>
 
             <div class="wa-tool-card">
                 <h2 data-i18n="tools.crop-wedding-photo-for-reels.h2_text.ccec0008">3. 下载</h2>
-                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的照片都会显示独立的下载按钮。点击 <strong data-i18n="tools.crop-wedding-photo-for-reels.strong_text.d3592c88">全部保存</strong> 一键打包整批文件。文件名会附加比例标签（例如 <code>-reels</code>、<code>-square</code>、<code>-story</code>），原图保持不变。</p>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">Chaque photo terminée affichera un bouton de téléchargement distinct. Cliquez<strong data-i18n="tools.crop-wedding-photo-for-reels.strong_text.d3592c88">全部保存</strong>Emballez un lot entier de fichiers en un seul clic. Le nom du fichier sera accompagné d'une balise d'échelle (par ex.<code>-reels</code>、<code>-square</code>、<code>-story</code>), l'image originale reste inchangée.</p>
             </div>
         </section>
 
@@ -643,33 +640,33 @@
         if (cropX < 0) cropX = 0;
         if (cropY < 0) cropY = 0;
         if (cropX + cropW > W) cropW = W - cropX;
-        if (cropY + cropH > H) cropH = H - cropY;
-        return { cropX: cropX, cropY: cropY, cropW: cropW, cropH: cropH };
+        if (cropY + cropH >H) récolteH = H - récolteY ;
+        return { cropX : cropX, cropY : cropY, cropW : cropW, cropH : cropH } ;
       }
 
-      async function processOne(entry, settings) {
-        entry.status = 'working';
-        entry.error = null;
-        refreshUI();
+      fonction asynchrone processOne (entrée, paramètres) {
+        entrée.status = 'travaillant';
+        entrée.erreur = null ;
+        actualiserUI();
 
-        try {
-          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
-          var img = loaded.img;
+        essayez {
+          var chargé = attendre window.weddingAITool.fileToImage(entry.inputFile);
+          var img = chargé.img;
           var W = img.naturalWidth;
           var H = img.naturalHeight;
-          if (!W || !H) throw new Error('图片没有尺寸，请换一个文件。');
+          if (!W || !H) throw new Error('L'image n'a pas de taille, veuillez modifier un fichier.');
 
-          var crop = computeCrop(W, H, settings.aspect.w, settings.aspect.h, settings.smart);
+          var crop = calculateCrop(W, H, settings.aspect.w, settings.aspect.h, settings.smart);
 
-          var outW, outH;
+          var sortieW, sortieH ;
           if (settings.resolution === 'instagram') {
             outW = settings.aspect.outW;
             outH = settings.aspect.outH;
-          } else {
+          } autre {
             outW = crop.cropW;
             outH = crop.cropH;
           }
-          if (outW < 1 || outH < 1) throw new Error('计算出的输出尺寸无效。');
+          si (hors W< 1 || outH < 1) throw new Error('计算出的输出尺寸无效。');
 
           var canvas = document.createElement('canvas');
           canvas.width = outW;
@@ -721,47 +718,46 @@
         var ratio = origTotal > 0 ? ((origTotal - outTotal) / origTotal * 100) : 0;
         summaryEl.hidden = false;
         summaryEl.innerHTML =
-          '<div><strong>' + done.length + '</strong> 张已裁剪</div>' +
-          '<div><strong>输出合计：</strong> ' + window.weddingAITool.formatBytes(outTotal) +
+          '<div><strong>' + done.length + '</strong>La feuille a été recadrée</div>' +
+          '<div><strong>Production totale :</strong> ' + window.weddingAITool.formatBytes(outTotal) +
           '（原 ' + window.weddingAITool.formatBytes(origTotal) + '，' + (ratio >= 0 ? '−' : '+') + Math.abs(ratio).toFixed(1) + '%）</div>' +
-          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' 张失败</strong> — 删除后重试。</div>' : '');
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' Échec</strong>— Supprimez et réessayez.</div>' : '');
       }
 
-      function saveAll() {
-        var outputs = files
+      fonction saveAll() {
+        sorties var = fichiers
           .filter(function (f) { return f.status === 'done' && f.output; })
-          .map(function (f) { return { name: f.outputName, blob: f.output }; });
-        if (outputs.length === 0) return;
-        window.weddingAITool.downloadZip(outputs, 'cropped');
-        window.weddingAITool.toast('正在保存 ' + outputs.length + ' 个文件…');
+          .map(function (f) { return { nom : f.outputName, blob : f.output }; });
+        if (outputs.length === 0) return ;
+        window.weddingAITool.downloadZip(sorties, 'recadrées');
+        window.weddingAITool.toast('Sauvegarde ' + sorties.longueur + ' fichiers...');
       }
 
-      // wire up
+      // câblage
       window.weddingAITool.bindDropZone({
-        dropEl: dropzone,
-        inputEl: input,
-        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
-        multiple: true,
-        onFiles: addFiles,
+        dropEl : zone de dépôt,
+        inputEl : entrée,
+        accepter : 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple : vrai,
+        onFiles : addFiles,
       });
 
       qualityEl.addEventListener('input', function () { qualityVal.textContent = qualityEl.value; });
-      runBtn.addEventListener('click', runAll);
-      saveAllBtn.addEventListener('click', saveAll);
-      clearBtn.addEventListener('click', clearAll);
+      runBtn.addEventListener('cliquez', runAll);
+      saveAllBtn.addEventListener('cliquez', saveAll);
+      clearBtn.addEventListener('cliquez', clearAll);
 
-      list.addEventListener('wa-row-remove', function (e) {
+      list.addEventListener('wa-row-remove', fonction (e) {
         var idx = parseInt((e.detail || '0'), 10);
-        if (!isNaN(idx)) {
-          var f = files[idx];
+        si (!isNaN(idx)) {
+          var f = fichiers[idx];
           if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
-          files.splice(idx, 1);
-          refreshUI();
+          fichiers.splice(idx, 1);
+          actualiserUI();
         }
       });
 
-      refreshUI();
-    });
-    </script>
+      actualiserUI();
+    });</script>
 </body>
 </html>

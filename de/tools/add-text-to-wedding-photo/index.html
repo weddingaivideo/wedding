@@ -264,7 +264,7 @@
                     <li><a href="/de/about/" title="Learn about us" data-i18n="404.a_text.about.69447212">About</a></li>
                     <li><a href="/de/pricing/" title="View transparent pricing" data-i18n="404.a_text.pricing.43854765">Pricing</a></li>
                     <li><a href="/de/order/" class="btn-nav" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
-                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">Chinesisch</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option>
                     <option value="hi">HI</option></select></li>
                 </ul>
             </nav>
@@ -345,12 +345,12 @@
                     </div>
 
                     <div class="wa-tool-control">
-                        <label for="primary-size">主标题字号：<span id="primary-size-val">56</span>px</label>
+                        <label for="primary-size">Schriftgröße des Haupttitels:<span id="primary-size-val">56</span>px</label>
                         <input type="range" id="primary-size" min="24" max="200" step="1" value="56">
                     </div>
 
                     <div class="wa-tool-control">
-                        <label for="secondary-size">副标题字号：<span id="secondary-size-val">24</span>px</label>
+                        <label for="secondary-size">Schriftgröße der Untertitel:<span id="secondary-size-val">24</span>px</label>
                         <input type="range" id="secondary-size" min="16" max="120" step="1" value="24">
                     </div>
 
@@ -372,8 +372,8 @@
                     <div class="wa-tool-control">
                         <label data-i18n="tools.add-text-to-wedding-photo.label_text.16ad4ad5">投影</label>
                         <div class="wa-text-toggle-row">
-                            <label><input type="checkbox" id="shadow-toggle" checked> 启用</label>
-                            <label for="shadow-offset" style="font-weight:400;color:var(--color-text-light);">偏移：<span id="shadow-offset-val">2</span>px</label>
+                            <label><input type="checkbox" id="shadow-toggle" checked>aktivieren</label>
+                            <label for="shadow-offset" style="font-weight:400;color:var(--color-text-light);">Versatz:<span id="shadow-offset-val">2</span>px</label>
                             <input type="range" id="shadow-offset" min="0" max="10" step="1" value="2" style="max-width:140px;">
                         </div>
                         <small data-i18n="tools.add-text-to-wedding-photo.small_text.987f93c5">半透明黑色阴影，让文字在任何背景上都清晰可读。</small>
@@ -404,8 +404,7 @@
                 <div class="wa-tool-summary" id="summary" hidden></div>
 
                 <div class="wa-tool-banner">
-                    <strong data-i18n="tools.add-text-to-wedding-photo.strong_text.9781def9">隐私：</strong>每张照片都通过浏览器 Canvas API 在本地处理。整个过程只发生在你的浏览器标签页里——不上传、不分析你的照片、不需要账号。
-                </div>
+                    <strong data-i18n="tools.add-text-to-wedding-photo.strong_text.9781def9">隐私：</strong>Jedes Foto wird lokal über die Canvas-API des Browsers verarbeitet. Der gesamte Vorgang findet in Ihrem Browser-Tab statt – kein Hochladen, keine Analyse Ihrer Fotos, kein Konto erforderlich.</div>
             </div>
         </section>
 
@@ -851,7 +850,7 @@
 
       // ---------- file list -------------------------------------------------------
       function refreshUI() {
-        empty.hidden = files.length > 0;
+        empty.hidden = files.length >0;
         list.hidden = files.length === 0;
         var hasRenderable = files.some(function (f) { return f.img; });
         runBtn.disabled = !hasRenderable;
@@ -874,32 +873,32 @@
         }
       }
 
-      function addFiles(picked) {
-        var added = 0;
+      Funktion addFiles(picked) {
+        var hinzugefügt = 0;
         picked.forEach(function (f) {
           if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
-            return;
+            Rückkehr;
           }
           files.push({
-            status: 'queued',
-            name: f.name,
-            inputFile: f,
+            Status: 'in der Warteschlange',
+            Name: f.name,
+            Eingabedatei: f,
             img: null,
-            sizes: { orig: f.size, out: 0 },
-            output: null,
-            outputName: null,
-            previewUrl: URL.createObjectURL(f)
+            Größen: { orig: f.size, out: 0 },
+            Ausgabe: null,
+            Ausgabename: null,
+            VorschauUrl: URL.createObjectURL(f)
           });
-          added++;
+          hinzugefügt++;
         });
-        if (added === 0) { window.weddingAITool.toast('暂不支持该文件。请尝试 JPG、PNG 或 WebP。', 'error'); return; }
-        var newStartIdx = files.length - added;
-        for (var i = newStartIdx; i < files.length; i++) {
+        if (added === 0) { window.weddingAITool.toast('Diese Datei wird noch nicht unterstützt. Bitte versuchen Sie es mit JPG, PNG oder WebP.', 'error'); zurückkehren; }
+        var newStartIdx = files.length – hinzugefügt;
+        for (var i = newStartIdx; i< files.length; i++) {
           (function (idx) {
             window.weddingAITool.fileToImage(files[idx].inputFile).then(function (loaded) {
               files[idx].img = loaded.img;
               URL.revokeObjectURL(loaded.url);
-              if (idx === activeIndex || activeIndex >= files.length - added) {
+              if (idx === activeIndex || activeIndex >= files.length - hinzugefügt) {
                 if (idx === 0 || !files[activeIndex] || !files[activeIndex].img) {
                   activeIndex = idx;
                 }
@@ -908,38 +907,38 @@
               refreshUI();
             }).catch(function (err) {
               files[idx].status = 'error';
-              files[idx].error = err && err.message ? err.message : String(err);
+              files[idx].error = err && err.message ? err.message: String(err);
               refreshUI();
             });
-          })(i);
+          })(ich);
         }
         refreshUI();
       }
 
-      function clearAll() {
+      Funktion clearAll() {
         files.forEach(function (f) {
           if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
         });
-        files = [];
-        activeIndex = 0;
-        summaryEl.hidden = true;
-        previewEmpty.hidden = false;
-        previewCanvas.hidden = true;
+        Dateien = [];
+        aktivIndex = 0;
+        ZusammenfassungEl.hidden = true;
+        VorschauEmpty.hidden = false;
+        PreviewCanvas.hidden = true;
         refreshUI();
       }
 
-      // ---------- batch render ----------------------------------------------------
-      async function processOne(entry, settings) {
-        entry.status = 'working';
-        entry.error = null;
+      // ---------- Batch-Rendering ---------------------------------------------------
+      asynchrone Funktion ProcessOne(Eintrag, Einstellungen) {
+        Eintrag.status = 'funktioniert';
+        Eintrag.error = null;
         refreshUI();
-        try {
+        versuche es mit {
           if (!entry.img) {
-            var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
-            entry.img = loaded.img;
+            var geladen = Warten auf window.weddingAITool.fileToImage(entry.inputFile);
+            Eintrag.img = geladen.img;
             URL.revokeObjectURL(loaded.url);
           }
-          var img = entry.img;
+          var img = Eintrag.img;
           var w = img.naturalWidth, h = img.naturalHeight;
           var canvas = document.createElement('canvas');
           canvas.width = w;
@@ -948,30 +947,30 @@
           ctx.imageSmoothingEnabled = true;
           ctx.imageSmoothingQuality = 'high';
           ctx.drawImage(img, 0, 0, w, h);
-          drawTextBlock(ctx, settings, w, h);
-          var mime = settings.format;
-          var quality = (mime === 'image/png' || mime === 'image/webp') ? undefined : 0.92;
-          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
-          if (!blob || blob.size === 0) throw new Error('渲染结果为空，请尝试其它格式。');
-          entry.output = blob;
-          entry.sizes.out = blob.size;
-          entry.status = 'done';
-          var ext = (mime === 'image/png') ? 'png' : (mime === 'image/webp') ? 'webp' : 'jpg';
-          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-captioned.' + ext);
+          drawTextBlock(ctx, Settings, w, h);
+          var mime = Settings.format;
+          var qualität = (mime === 'image/png' || mime === 'image/webp') ? undefiniert: 0,92;
+          var blob = waiting window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('Das Rendering-Ergebnis ist leer, bitte versuchen Sie es mit anderen Formaten.');
+          Eintrag.Ausgabe = Blob;
+          Eintrag.sizes.out = blob.size;
+          Eintrag.status = 'erledigt';
+          var ext = (mime === 'image/png') ? 'png': (mime === 'image/webp') ? 'webp': 'jpg';
+          Eintrag.outputName = window.weddingAITool.safeFileName(entry.name, '-captioned.' + ext);
           if (entry.output) {
-            entry.previewUrl = URL.createObjectURL(entry.output);
+            Eintrag.previewUrl = URL.createObjectURL(entry.output);
           }
-        } catch (err) {
-          entry.status = 'error';
-          entry.error = err && err.message ? err.message : String(err);
+        } fangen (irrt) {
+          Eintrag.status = 'Fehler';
+          enter.error = err && err.message ? err.message: String(err);
         }
         refreshUI();
       }
 
-      async function runAll() {
-        var settings = getSettings();
+      asynchrone Funktion runAll() {
+        var-Einstellungen = getSettings();
         runBtn.disabled = true;
-        for (var i = 0; i < files.length; i++) {
+        für (var i = 0; i< files.length; i++) {
           var f = files[i];
           if (f.status === 'done') continue;
           if (!f.img) continue;
@@ -991,10 +990,10 @@
         var outTotal = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
         summaryEl.hidden = false;
         summaryEl.innerHTML =
-          '<div><strong>' + done.length + '</strong> 张已加文字</div>' +
-          '<div><strong>原始大小：</strong> ' + window.weddingAITool.formatBytes(origTotal) + '</div>' +
-          '<div><strong>输出大小：</strong> ' + window.weddingAITool.formatBytes(outTotal) + '</div>' +
-          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' 张出错</strong> — 请移除后重试。</div>' : '');
+          '<div><strong>' + done.length + '</strong>Zhang hat Text hinzugefügt</div>' +
+          '<div><strong>Originalgröße:</strong> ' + window.weddingAITool.formatBytes(origTotal) + '</div>' +
+          '<div><strong>Ausgabegröße:</strong> ' + window.weddingAITool.formatBytes(outTotal) + '</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' Zhang-Fehler</strong>— Bitte entfernen Sie es und versuchen Sie es erneut.</div>' : '');
       }
 
       function saveAll() {

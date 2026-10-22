@@ -186,7 +186,7 @@
                     <li><a href="/de/about/" title="Learn about us" data-i18n="404.a_text.about.69447212">About</a></li>
                     <li><a href="/de/pricing/" title="View transparent pricing" data-i18n="404.a_text.pricing.43854765">Pricing</a></li>
                     <li><a href="/de/order/" class="btn-nav" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
-                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">Chinesisch</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option>
                     <option value="hi">HI</option></select></li>
                 </ul>
             </nav>
@@ -223,7 +223,7 @@
                 <h2 data-i18n="tools.compress-wedding-photos.h2_text.3f0fb9c3">2. 画质与尺寸</h2>
                 <div class="wa-tool-controls">
                     <div class="wa-tool-control">
-                        <label for="quality">输出 JPG 画质：<span id="quality-val">75</span></label>
+                        <label for="quality">Ausgabe-JPG-Qualität:<span id="quality-val">75</span></label>
                         <input type="range" id="quality" min="30" max="95" step="1" value="75">
                         <small data-i18n="tools.compress-wedding-photos.small_text.0809d03b">数值越小，文件越小。75 在多数婚礼场景下与原图视觉无差别。</small>
                     </div>
@@ -258,13 +258,12 @@
                 <div class="wa-tool-summary" id="summary" hidden></div>
 
                 <div class="wa-tool-banner">
-                    <strong data-i18n="tools.compress-wedding-photos.strong_text.9781def9">隐私：</strong>每张照片都在设备本地通过 Canvas API 完成处理。浏览器标签页是唯一的工作场所 — 没有上传、不会对您的照片做统计、不会留账号。
-                </div>
+                    <strong data-i18n="tools.compress-wedding-photos.strong_text.9781def9">隐私：</strong>Jedes Foto wird lokal auf dem Gerät über die Canvas-API verarbeitet. Der einzige Ort zum Arbeiten sind Browser-Tabs – keine Uploads, kein Zählen Ihrer Fotos, keine Konten.</div>
             </div>
 
             <div class="wa-tool-card">
                 <h2 data-i18n="tools.compress-wedding-photos.h2_text.ccec0008">3. 下载</h2>
-                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的照片都会显示独立的下载按钮。使用 <strong data-i18n="tools.compress-wedding-photos.strong_text.d3592c88">全部保存</strong> 一键获取整批文件。文件名会追加 <code>-min</code>，原文件保持不动。</p>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">Für jedes fertige Foto wird ein separater Download-Button angezeigt. Benutzen<strong data-i18n="tools.compress-wedding-photos.strong_text.d3592c88">全部保存</strong>Erhalten Sie mit einem Klick einen ganzen Stapel Dateien. Der Dateiname wird angehängt<code>-min</code>, die Originaldatei bleibt unverändert.</p>
             </div>
         </section>
 
@@ -576,10 +575,10 @@
           var tw = w, th = h;
           if (settings.maxDim > 0 && Math.max(w, h) > settings.maxDim) {
             if (w >= h) {
-              tw = settings.maxDim;
+              tw = Settings.maxDim;
               th = Math.round(h * (settings.maxDim / w));
-            } else {
-              th = settings.maxDim;
+            } sonst {
+              th = Settings.maxDim;
               tw = Math.round(w * (settings.maxDim / h));
             }
           }
@@ -590,30 +589,30 @@
           ctx.imageSmoothingEnabled = true;
           ctx.imageSmoothingQuality = 'high';
           ctx.drawImage(img, 0, 0, tw, th);
-          var mime = settings.format;
-          var quality = settings.quality;
-          // PNG is lossless, quality is ignored
-          if (mime === 'image/png') quality = undefined;
-          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
-          if (!blob || blob.size === 0) throw new Error('压缩结果为空文件。请尝试其他格式。');
-          entry.output = blob;
-          entry.sizes.out = blob.size;
-          entry.status = 'done';
-          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-min.' + (mime === 'image/png' ? 'png' : mime === 'image/webp' ? 'webp' : 'jpg'));
-          // free the loaded image
+          var mime = Settings.format;
+          var qualität = Settings.quality;
+          // PNG ist verlustfrei, Qualität wird ignoriert
+          if (mime === 'image/png') qualität = undefiniert;
+          var blob = waiting window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('Das Komprimierungsergebnis ist eine leere Datei. Bitte versuchen Sie es mit anderen Formaten.');
+          Eintrag.Ausgabe = Blob;
+          Eintrag.sizes.out = blob.size;
+          Eintrag.status = 'erledigt';
+          enter.outputName = window.weddingAITool.safeFileName(entry.name, '-min.' + (mime === 'image/png' ? 'png' : mime === 'image/webp' ? 'webp' : 'jpg'));
+          // das geladene Bild freigeben
           URL.revokeObjectURL(loaded.url);
-        } catch (err) {
-          entry.status = 'error';
-          entry.error = err && err.message ? err.message : String(err);
+        } fangen (irrt) {
+          Eintrag.status = 'Fehler';
+          enter.error = err && err.message ? err.message: String(err);
         }
         refreshUI();
       }
 
-      async function runAll() {
-        var settings = getCurrentSettings();
+      asynchrone Funktion runAll() {
+        var-Einstellungen = getCurrentSettings();
         runBtn.disabled = true;
-        // Sequential: easier on memory for huge batches
-        for (var i = 0; i < files.length; i++) {
+        // Sequentiell: Weniger Speicher für große Stapel
+        für (var i = 0; i< files.length; i++) {
           var f = files[i];
           if (f.status === 'done') continue;
           await processOne(f, settings);
@@ -634,27 +633,27 @@
         var ratio = origTotal > 0 ? (saved / origTotal * 100) : 0;
         summaryEl.hidden = false;
         summaryEl.innerHTML =
-          '<div><strong>' + done.length + '</strong> 张已压缩</div>' +
-          '<div><strong>共节省：</strong> ' + window.weddingAITool.formatBytes(saved) + '（-' + ratio.toFixed(1) + '%）</div>' +
-          '<div><strong>现总大小：</strong> ' + window.weddingAITool.formatBytes(outTotal) + '（原 ' + window.weddingAITool.formatBytes(origTotal) + '）</div>' +
-          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' 张失败</strong> — 请移除后重试。</div>' : '');
+          '<div><strong>' + done.length + '</strong>Zhang wurde komprimiert</div>' +
+          '<div><strong>Gesamteinsparungen:</strong> ' + window.weddingAITool.formatBytes(saved) + '（-' + ratio.toFixed(1) + '%）</div>' +
+          '<div><strong>Aktuelle Gesamtgröße:</strong>' + window.weddingAITool.formatBytes(outTotal) + ' (original ' + window.weddingAITool.formatBytes(origTotal) + ')</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' Fehlgeschlagen</strong>— Bitte entfernen Sie es und versuchen Sie es erneut.</div>' : '');
       }
 
-      function saveAll() {
-        var outputs = files
+      Funktion saveAll() {
+        var-Ausgaben = Dateien
           .filter(function (f) { return f.status === 'done' && f.output; })
           .map(function (f) { return { name: f.outputName, blob: f.output }; });
         if (outputs.length === 0) return;
         window.weddingAITool.downloadZip(outputs, 'compressed');
-        window.weddingAITool.toast('正在保存 ' + outputs.length + ' 个文件…');
+        window.weddingAITool.toast('Speichern ' + Ausgaben.Länge + ' Dateien...');
       }
 
-      // wire up
+      // verkabeln
       window.weddingAITool.bindDropZone({
-        dropEl: dropzone,
-        inputEl: input,
-        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
-        multiple: true,
+        dropEl: Dropzone,
+        inputEl: Eingabe,
+        akzeptieren: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        mehrfach: wahr,
         onFiles: addFiles,
       });
 
@@ -663,7 +662,7 @@
       saveAllBtn.addEventListener('click', saveAll);
       clearBtn.addEventListener('click', clearAll);
 
-      list.addEventListener('wa-row-remove', function (e) {
+      list.addEventListener('wa-row-remove', Funktion (e) {
         var idx = parseInt((e.detail || '0'), 10);
         if (!isNaN(idx)) {
           var f = files[idx];
@@ -674,7 +673,6 @@
       });
 
       refreshUI();
-    });
-    </script>
+    });</script>
 </body>
 </html>

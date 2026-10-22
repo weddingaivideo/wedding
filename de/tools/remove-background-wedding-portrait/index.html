@@ -193,7 +193,7 @@
                     <li><a href="/de/about/" title="Learn about us" data-i18n="404.a_text.about.69447212">About</a></li>
                     <li><a href="/de/pricing/" title="View transparent pricing" data-i18n="404.a_text.pricing.43854765">Pricing</a></li>
                     <li><a href="/de/order/" class="btn-nav" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
-                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">Chinesisch</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option>
                     <option value="hi">HI</option></select></li>
                 </ul>
             </nav>
@@ -247,13 +247,13 @@
                     </div>
 
                     <div class="wa-tool-control">
-                        <label for="tolerance">容差：<span id="tolerance-val">50</span></label>
+                        <label for="tolerance">Toleranz:<span id="tolerance-val">50</span></label>
                         <input type="range" id="tolerance" min="0" max="150" step="1" value="50">
                         <small data-i18n="tools.remove-background-wedding-portrait.small_text.b7525931">数值越大，去掉的像素越多。如果皮肤或头发也被吃掉了，就调小一点。</small>
                     </div>
 
                     <div class="wa-tool-control">
-                        <label for="feather">边缘羽化：<span id="feather-val">3</span> 像素</label>
+                        <label for="feather">Kantenverlauf:<span id="feather-val">3</span>Pixel</label>
                         <input type="range" id="feather" min="0" max="8" step="1" value="3">
                         <small data-i18n="tools.remove-background-wedding-portrait.small_text.0c23797e">让裁剪边缘变柔和，避免头发和肩部出现硬光环。</small>
                     </div>
@@ -274,13 +274,12 @@
                 </div>
 
                 <div class="wa-tool-banner">
-                    <strong data-i18n="tools.remove-background-wedding-portrait.strong_text.390a4d9a">提示：</strong>最适合平整、光线均匀的背景 — 影楼照、绿幕照、证件照风格。户外场景和带纹理墙面无法用「背景色去除」工具彻底清除，这类情况需要真正的 AI 语义分割模型。
-                </div>
+                    <strong data-i18n="tools.remove-background-wedding-portrait.strong_text.390a4d9a">提示：</strong>Am besten geeignet für flache, gleichmäßig beleuchtete Hintergründe – Studioaufnahmen, Greenscreen-Aufnahmen, Passfotostile. Außenszenen und strukturierte Wände können mit dem Tool „Hintergrundfarbenentfernung“ nicht vollständig entfernt werden. Solche Situationen erfordern ein echtes semantisches Segmentierungsmodell der KI.</div>
             </div>
 
             <div class="wa-tool-card">
                 <h2 data-i18n="tools.remove-background-wedding-portrait.h2_text.ccec0008">3. 下载</h2>
-                <p style="color: var(--color-text-light); margin-bottom: 0;">每张完成的人像都有自己的下载按钮。用<strong data-i18n="tools.remove-background-wedding-portrait.strong_text.d3592c88">全部保存</strong>可以一次性获取整批照片。文件会以 <code>-nobg</code> 后缀追加到原文件名，原文件不会被修改。</p>
+                <p style="color: var(--color-text-light); margin-bottom: 0;">Jedes fertige Porträt verfügt über einen eigenen Download-Button. verwenden<strong data-i18n="tools.remove-background-wedding-portrait.strong_text.d3592c88">全部保存</strong>Der gesamte Fotostapel kann auf einmal bezogen werden. Das Dokument endet mit<code>-nobg</code>Das Suffix wird an den Originaldateinamen angehängt und die Originaldatei wird nicht verändert.</p>
             </div>
         </section>
 
@@ -369,7 +368,7 @@
         </div>
 
                 <h2>Warum Hochzeitsporträts fast immer einen entfernbaren Hintergrund haben</h2>
-                <p>Wenn Sie sich jemals gefragt haben, warum so viele Paarporträts aussehen, als wären sie "vor einer Wand aus nichts" aufgenommen worden, dann是因为 sie wurden. Porträtstudios – und die meisten angesehenen Hochzeitsfotografen, die in Innenräumen arbeiten – verwenden eine nahtlose Papier- oder Stoffbahn als Hintergrund in einer einzigen, flachen Farbe. Weiß ist am häufigsten, weil es Hauttöne schmeichelt und zum Brautkleid passt, aber Sie werden auch Grau sehen (für hochkey-redaktionelle Looks), Schwarz (für Dramatik), Marineblau (für Vintage-Porträts) und zunehmend Beige oder Hellrosa.</p>
+                <p>Wenn Sie waren. Verwenden Sie eine nahtlose Papier- oder Stoffbahn als Hintergrund in einer einzigen, flachen Farbe. Marineblau (für Vintage-Porträts) und zunehmend Beige oder Hellrosa.</p>
                 <p>Diese flache Farbe ist der Grund, warum dieses Tool funktioniert. Ein Studio-Hintergrund ist von Design her eine Farbe, die das Paar nicht hat. Ein Pixel, das "sehr nah an der Hintergrundfarbe" ist, ist mit ziemlicher Sicherheit Hintergrund. Ein Pixel, das "sehr weit von der Hintergrundfarbe" entfernt ist, ist mit ziemlicher Sicherheit das Paar. Der Trick liegt darin, die richtige Hintergrundfarbe zu wählen und zu entscheiden, wie streng der "nahe genug"-Schwellenwert ist – das ist, was der Toleranz-Regler tut.</p>
 
                 <h3>So funktioniert der Entferner tatsächlich</h3>
@@ -554,7 +553,7 @@
       var files = [];
 
       function refreshUI() {
-        empty.hidden = files.length > 0;
+        empty.hidden = files.length >0;
         list.hidden = files.length === 0;
         runBtn.disabled = files.length === 0 || files.every(function (f) { return f.status === 'done' || f.status === 'working'; });
         saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
@@ -566,70 +565,70 @@
         }
       }
 
-      function addFiles(picked) {
+      Funktion addFiles(picked) {
         picked.forEach(function (f) {
           if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
-            return;
+            Rückkehr;
           }
           files.push({
-            status: 'queued',
-            name: f.name,
-            inputFile: f,
-            sizes: { orig: f.size, out: 0 },
-            output: null,
-            previewUrl: null,
-            error: null,
+            Status: 'in der Warteschlange',
+            Name: f.name,
+            Eingabedatei: f,
+            Größen: { orig: f.size, out: 0 },
+            Ausgabe: null,
+            VorschauUrl: null,
+            Fehler: null,
           });
         });
-        if (files.length === 0) { window.weddingAITool.toast('没有支持的文件。请用 JPG、PNG 或 WebP。', 'error'); return; }
+        if (files.length === 0) { window.weddingAITool.toast('Keine unterstützte Datei. Bitte verwenden Sie JPG, PNG oder WebP.', 'error'); zurückkehren; }
         files.forEach(function (entry) {
           if (entry.previewUrl) return;
-          entry.previewUrl = URL.createObjectURL(entry.inputFile);
+          Eintrag.previewUrl = URL.createObjectURL(entry.inputFile);
         });
         refreshUI();
       }
 
-      function clearAll() {
+      Funktion clearAll() {
         files.forEach(function (f) {
           if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
           if (f.outputUrl) URL.revokeObjectURL(f.outputUrl);
         });
-        files = [];
+        Dateien = [];
         refreshUI();
       }
 
-      function hexToRgb(hex) {
+      Funktion hexToRgb(hex) {
         var s = (hex || '').replace('#', '');
         if (s.length === 3) s = s.split('').map(function (c) { return c + c; }).join('');
         if (!/^[0-9A-Fa-f]{6}$/.test(s)) return { r: 255, g: 255, b: 255 };
-        return {
+        zurück {
           r: parseInt(s.slice(0, 2), 16),
           g: parseInt(s.slice(2, 4), 16),
           b: parseInt(s.slice(4, 6), 16)
         };
       }
 
-      function getCurrentSettings() {
+      Funktion getCurrentSettings() {
         var bg = hexToRgb(bgColorEl.value);
-        return {
+        zurück {
           bg: bg,
-          tolerance: parseInt(toleranceEl.value, 10),
-          feather: parseInt(featherEl.value, 10),
-          mode: outputModeEl.value, // 'png' or 'jpg'
+          Toleranz: parseInt(toleranceEl.value, 10),
+          Feder: parseInt(featherEl.value, 10),
+          Modus: OutputModeEl.value, // 'png' oder 'jpg'
         };
       }
 
-      async function processOne(entry, settings) {
-        entry.status = 'working';
-        entry.error = null;
+      asynchrone Funktion ProcessOne(Eintrag, Einstellungen) {
+        Eintrag.status = 'funktioniert';
+        Eintrag.error = null;
         refreshUI();
 
-        try {
-          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
-          var img = loaded.img;
+        versuche es mit {
+          var geladen = Warten auf window.weddingAITool.fileToImage(entry.inputFile);
+          var img = geladen.img;
           var w = img.naturalWidth, h = img.naturalHeight;
 
-          // Paint the original image (with its own alpha) onto the working canvas
+          // Malen Sie das Originalbild (mit seinem eigenen Alpha) auf die Arbeitsfläche
           var canvas = document.createElement('canvas');
           canvas.width = w;
           canvas.height = h;
@@ -641,17 +640,17 @@
 
           var imageData = ctx.getImageData(0, 0, w, h);
           var data = imageData.data;
-          var bgR = settings.bg.r, bgG = settings.bg.g, bgB = settings.bg.b;
-          var tol = settings.tolerance;
-          var feather = settings.feather;
+          var bgR = Settings.bg.r, bgG = Settings.bg.g, bgB = Settings.bg.b;
+          var tol = Settings.tolerance;
+          var Feather = Settings.feather;
           var innerT = tol;
-          // Feather band width: ~8 RGB units per 1 px of feathering (tunable constant)
-          var outerT = tol + feather * 8;
-          var bandWidth = outerT - innerT;
-          var mode = settings.mode;
+          // Federbandbreite: ~8 RGB-Einheiten pro 1 Pixel Federung (einstellbare Konstante)
+          var äußereT = Tol + Feder * 8;
+          var bandWidth = äußereT - innereT;
+          var mode = Settings.mode;
 
-          // Single-pass pixel loop. Math.sqrt is the only expensive op here.
-          for (var i = 0; i < data.length; i += 4) {
+          // Single-Pass-Pixelschleife. Math.sqrt ist hier die einzige teure Operation.
+          für (var i = 0; i< data.length; i += 4) {
             var dr = data[i]     - bgR;
             var dg = data[i + 1] - bgG;
             var db = data[i + 2] - bgB;
