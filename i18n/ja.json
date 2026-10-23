@@ -49857,7 +49857,7 @@
   "search.p_text.our_site_search_indexes_all_20_pages_acr.13969662": "当社のサイト検索では、サイト全体の 20 ページすべてがインデックス化されます。最良の結果を得るには、1 つまたは 2 つの短いキーワードを使用します。エンジンはタイトル、タグ、説明によって一致をスコア付けするため、サービスの見出しに表示される単語 (「スローモーション」や「多言語」など) から最も関連性の高いサービスが最初に返されます。",
   "search.p_text.popular_searches.65888893": "人気の検索:",
   "search.p_text.submit_a_free_quote_request_and_sofia_wi.84994125": "無料の見積もりリクエストを送信してください。ソフィアがあなたの日に適切なサービスを個人的に推奨します。",
-  "search.strong_text.absence_compensation.22965696": "休業補償",
+  "search.strong_text.absence_compensation.22965696": "不在補償",
   "search.strong_text.cinematic.32719156": "映画的な",
   "search.strong_text.ghibli.37554753": "ジブリ",
   "search.strong_text.gif.92346181": "GIF",
@@ -65059,5 +65059,7 @@
   "blog.free-wedding-video-maker.li_text.4k_export.f7f1cd4b": "4Kエクスポート対応",
   "blog.make-first-ai-wedding-video.li_text.sns_instagram_tiktok_facebook_youtube.aa09f986": "**SNS** — Instagram 、 TikTok 、 Facebook 、 YouTube",
   "blog.photographer-upsell-video.li_text.additional_revenue_15000.c4524767": "年間の追加収益: 15,000 ドル",
-  "blog.wedding-video-no-editing-skills.li_text.x.476a6b36": "「田中太郎＆田中花子」"
+  "blog.wedding-video-no-editing-skills.li_text.x.476a6b36": "「田中太郎＆田中花子」",
+  "blog.photographer-upsell-video.li_text.weddingaivideoservicespersonalizationai_video_gene.2df1dcb5": "WeddingAI.video に素材をアップロード",
+  "blog.photographer-upsell-video.li_text.weddingaivideoservicespersonalizationwedding_trail.41c680bc": "WeddingAI.video で予告編を自動生成"
 }
