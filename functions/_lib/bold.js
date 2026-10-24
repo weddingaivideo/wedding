@@ -131,11 +131,40 @@ export function convertBoldMarkers(html) {
 
     if (openAt.size === 0) return html;
 
+    // Rebuild. Whitespace that sits just inside a bold run is moved back
+    // outside it: "** text**" renders as " <strong>text</strong>", which is
+    // visually identical but keeps the run itself clean for screen readers
+    // and for a bold that starts mid-sentence. The whitespace is only moved
+    // when the text in front of the marker does not already end with one,
+    // otherwise "x: ** lead**" would turn into a double space.
     const out = [];
+    let last = "";           // last character emitted
     for (let i = 0; i < n; i++) {
-        if (openAt.has(i)) { out.push("<strong>"); continue; }
-        if (closeAt.has(i)) { out.push("</strong>"); continue; }
+        if (openAt.has(i)) {
+            const close = openAt.get(i);
+            const content = toks.slice(i + 1, close).join("");
+            const lead = content.match(/^\s+/);
+            const trail = content.match(/\s+$/);
+            const core = lead || trail
+                ? content.slice(lead ? lead[0].length : 0,
+                                trail ? content.length - trail[0].length : content.length)
+                : content;
+            if (lead && !/\s$/.test(last)) {
+                out.push(lead[0]);
+                last = lead[0][lead[0].length - 1];
+            }
+            out.push("<strong>", core, "</strong>");
+            last = ">";
+            if (trail) {
+                out.push(trail[0]);
+                last = trail[0][trail[0].length - 1];
+            }
+            i = close;                 // the closing marker is replaced above
+            continue;
+        }
+        if (closeAt.has(i)) continue;  // already emitted with its opener
         out.push(toks[i]);
+        last = toks[i][toks[i].length - 1] || last;
     }
     return out.join("");
 }
