@@ -14,6 +14,7 @@
    ============================================= */
 
 import { LANGS, DEFAULT_LANG, RTL } from "./_lib/langs.js";
+import { convertBoldMarkers } from "./_lib/bold.js";
 const SITE_ORIGIN = "https://weddingai.video";
 const AUTO_LANG_COOKIE = "wa_lang_auto"; // presence = user has been auto-redirected once
 const USER_LANG_COOKIE = "wa_lang_user"; // explicit user choice (via switcher)
@@ -1492,6 +1493,13 @@ export const onRequest = async (context) => {
                 // match branch below). Pass null so refreshVisibleUpdateDate
                 // uses the ISO format fallback.
                 text = refreshVisibleUpdateDate(text, context.request.url, null);
+                // 9. **bold** markers -> <strong>. The content pipeline writes
+                //    emphasis as **text** and nothing ever converted it, so
+                //    readers saw raw asterisks. Runs last, on the finished
+                //    document, so it covers the English source text of every
+                //    data-i18n element as well as the translation values
+                //    that were swapped in above.
+                text = convertBoldMarkers(text);
                 return text;
             });
             return withCspHeaders(res, text, nonce);
@@ -1764,6 +1772,14 @@ export const onRequest = async (context) => {
                     // English source. Client-side JS will still translate.
                 }
             }
+
+            // 8. **bold** markers -> <strong>. The content pipeline writes
+            //    emphasis as **text** and nothing ever converted it, so
+            //    readers saw raw asterisks. Runs last, on the finished
+            //    document, so it covers the translation values swapped in
+            //    above as well as the English source text of any binding
+            //    that had no translation.
+            text = convertBoldMarkers(text);
 
             return text;
         });
