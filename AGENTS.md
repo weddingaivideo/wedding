@@ -93,3 +93,35 @@ That single rule recovered 68 damaged lines across 45 files after a
 digit-stripping pass had eaten `2026`, `12 designs`, `1,000 photos`,
 `9:16`, `from 3 templates` and the `msvalidate` verification code.
 
+## `**bold**` is converted to `<strong>` at render time
+
+The content pipeline writes emphasis as `**text**`. Nothing in the client
+(`js/i18n.js` only handles the language switcher) or in the dictionaries
+turns those markers into markup — the conversion happens in
+`functions/_middleware.js`, which calls `convertBoldMarkers()`
+(`functions/_lib/bold.js`) as the **last** step of the transform, in both
+the English and the translated branch.
+
+Consequences for audits and edits:
+
+- A `**` in an i18n value, or in the English source text of a
+  `data-i18n` element, renders as bold. It is **not** a defect — grep
+  hits for `\*\*` across the content are expected and must not be
+  "cleaned up".
+- The converter pairs two markers only when they sit in the same block
+  scope, so a bold run never spans a paragraph, list item or table cell.
+  An unpaired, empty or over-long marker stays literal text — *that* is a
+  real source defect, and it is fixed in the content, not in the
+  converter.
+- To find those real defects, count the markers per `data-i18n` element
+  and per i18n value and look for an **odd** count. A whole-document
+  count is useless, because one stray marker shifts the parity of
+  everything after it.
+- `styles.css` styles `.blog-article strong` and 12,784 i18n values
+  already use a literal `<strong>`, so `<strong>` is the intended
+  markup.
+
+Established 2026-10-24 (commit `692898ad`). Before it, readers saw raw
+asterisks on 456 of the 722 pages — 37,704 markers in the static HTML
+plus ~252,000 inside `i18n/<lang>.json`.
+
