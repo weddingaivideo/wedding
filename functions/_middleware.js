@@ -585,6 +585,47 @@ function replaceOgTwitterMeta(html, dict, lang) {
     return html;
 }
 
+// Fill in social-card meta tags that a page does not define.
+//
+// The homepage keeps its site-wide marketing copy (index.og_*), but every
+// other page has to describe ITSELF: a localized blog post whose og:title
+// says "WeddingAI.video - AI wedding videos" tells a social crawler nothing
+// about the post. Missing (or empty) og:/twitter: tags are filled from the
+// page's own <title> and <meta name="description">; a tag that already has
+// a value is never overwritten.
+function fillMissingSocialMeta(html) {
+    const setIfMissing = (html, attr, name, value) => {
+        if (!value) return html;
+        const re = new RegExp(
+            `<meta\\s+(?:property|name)=["']${name}["']\\s+content=["']([^"']*)["']\\s*\\/?>`,
+            "i"
+        );
+        const m = html.match(re);
+        if (m) {
+            if (m[1].trim()) return html;   // already has a value - keep it
+            return html.replace(re,
+                `<meta ${attr}="${name}" content="${escapeHtmlAttr(value)}">`);
+        }
+        const tag = `<meta ${attr}="${name}" content="${escapeHtmlAttr(value)}">`;
+        const anchor = /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i;
+        if (anchor.test(html)) {
+            return html.replace(anchor, (hit) => hit + "\n    " + tag);
+        }
+        return html;
+    };
+
+    const titleM = html.match(/<title[^>]*>([^<]*)<\/title>/i);
+    const pageTitle = titleM ? titleM[1].trim() : "";
+    const descM = html.match(/<meta\s+name="description"\s+content="([^"]*)"/i);
+    const pageDesc = descM ? descM[1].trim() : "";
+
+    html = setIfMissing(html, "property", "og:title", pageTitle);
+    html = setIfMissing(html, "name", "twitter:title", pageTitle);
+    html = setIfMissing(html, "property", "og:description", pageDesc);
+    html = setIfMissing(html, "name", "twitter:description", pageDesc);
+    return html;
+}
+
 // Replace pricing-page meta description (and pricing-page og:title /
 // og:description if present) using i18n dict. Called for any URL whose
 // rest-of-language path is exactly "/pricing/" or "pricing/".
@@ -1746,11 +1787,17 @@ export const onRequest = async (context) => {
                         text = localizeHubLinks(text, lang);
             // #I18N-5: add local currency equivalents for non-EN/USD locales
             text = localizeCurrencyForLang(text, lang);
-                        // #I18N-PHASE1: replace og:title / og:description / twitter:title
-                        //   / twitter:description with language-localized values so
-                        //   social-card previews (FB / WhatsApp / LinkedIn / Slack) and
-                        //   Google SERP cards stop being English-only on /xx/ pages.
-                        text = replaceOgTwitterMeta(text, dict, lang);
+                        // #I18N-PHASE1: the HOMEPAGE carries the site-wide marketing
+                        //   social copy. Every other page must describe itself - a
+                        //   localized blog post whose og:title says "WeddingAI.video
+                        //   - AI wedding videos" tells a social crawler nothing about
+                        //   the post, and the page's own og:description was empty.
+                        //   So the marketing copy is applied to the homepage only;
+                        //   other pages keep their own og:/twitter: tags.
+                        const homePath = (rest || "/").replace(/\/+$/, "") || "/";
+                        if (homePath === "/") {
+                            text = replaceOgTwitterMeta(text, dict, lang);
+                        }
                         // #I18N-PRICING: same idea but scoped to the /pricing/ page.
                         //   rest is the path-without-lang (e.g. "/pricing/" for
                         //   /zh/pricing/), so any of these spellings trigger the
@@ -1771,6 +1818,16 @@ export const onRequest = async (context) => {
                     // If i18n fails for any reason, fall through and serve the
                     // English source. Client-side JS will still translate.
                 }
+            }
+
+            // 7.5 Social card: fill any og:/twitter: tag that a page leaves
+            //    empty (or omits) from the page's own <title> / meta
+            //    description. Never overwrites a tag that already has a
+            //    value. Runs after the i18n substitution above, so the
+            //    description it copies is the localized one.
+            const socialHome = (rest || "/").replace(/\/+$/, "") || "/";
+            if (socialHome !== "/") {
+                text = fillMissingSocialMeta(text);
             }
 
             // 8. **bold** markers -> <strong>. The content pipeline writes
