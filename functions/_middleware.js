@@ -427,8 +427,12 @@ function applyDataI18nAttr(html, dict) {
                 const v = dict[key];
                 if (v == null) continue;
                 // Replace attr="OLD" or attr='OLD' (no single-quote in our code)
+                // Use a replacer FUNCTION, not a string: in a string replacement
+                // "$&" / "$`" / "$'" are substitution patterns, so a translation
+                // containing them would be corrupted (e.g. "$&" expands to the
+                // whole matched attribute).
                 const attrRe = new RegExp(`\\b${attrName}="[^"]*"`);
-                newAttrs = newAttrs.replace(attrRe, `${attrName}="${v.replace(/"/g, "&quot;")}"`);
+                newAttrs = newAttrs.replace(attrRe, () => `${attrName}="${v.replace(/"/g, "&quot;")}"`);
             }
             // Strip the data-i18n-attr="..." pair from the final attributes.
             newAttrs = newAttrs.replace(/\s*data-i18n-attr="[^"]*"/, "");
@@ -513,35 +517,179 @@ async function getI18nVersion(context) {
 // translated ones): trailing-slash on og:url, /success/ noindex.
 // =========================================================================
 
+// =========================================================================
+// Meta-tag helpers.
+//
+// Attribute ORDER inside a <meta> tag is NOT consistent across the site:
+//     <meta property="og:title" content="...">                    (ja/de/fr/ar/th)
+//     <meta content="..." property="og:title"/>                    (hi)
+//     <meta name="description" data-i18n-attr="..." content="..."/> (ja/de)
+// A positional regex ("property=... content=...") silently misses the other
+// two forms. That is how 50 Hindi pages kept English social cards (the fill
+// code never saw their tags) and how /<lang>/pricing/ ended up with an empty
+// og:/twitter: block. Everything below therefore parses attributes BY NAME
+// and never by position.
+// =========================================================================
+
+const META_TAG_RE = /<meta\b[^>]*>/gi;
+const TAG_ATTR_RE = /([a-zA-Z_:][-a-zA-Z0-9_:.]*)\s*=\s*("([^"]*)"|'([^']*)'|([^\s"'>]+))/g;
+
+// Parse the attributes of a single tag into {name, value, start, end} records.
+// start/end are offsets INTO the tag string, so a single attribute can be
+// rewritten without touching the others.
+function parseTagAttrs(tag) {
+    const out = [];
+    TAG_ATTR_RE.lastIndex = 0;
+    let m;
+    while ((m = TAG_ATTR_RE.exec(tag)) !== null) {
+        const value = m[3] !== undefined ? m[3] : (m[4] !== undefined ? m[4] : m[5]);
+        out.push({
+            name: m[1].toLowerCase(),
+            value: value,
+            start: m.index,
+            end: TAG_ATTR_RE.lastIndex,
+        });
+    }
+    return out;
+}
+
+// Find the <meta> tag identified by `idValue` inside one of the given
+// identifying attribute names ("property" for og:*, "name" for twitter:*
+// and description). Attribute order inside the tag is irrelevant.
+// Returns null when the tag is absent.
+function findMetaTag(html, idAttrs, idValue) {
+    const wanted = String(idValue).toLowerCase();
+    const names = idAttrs.map((n) => n.toLowerCase());
+    META_TAG_RE.lastIndex = 0;
+    let m;
+    while ((m = META_TAG_RE.exec(html)) !== null) {
+        const tag = m[0];
+        const attrs = parseTagAttrs(tag);
+        const id = attrs.find(
+            (a) => names.indexOf(a.name) !== -1 && String(a.value).toLowerCase() === wanted
+        );
+        if (!id) continue;
+        const content = attrs.find((a) => a.name === "content");
+        return { index: m.index, length: tag.length, tag, attrs, content };
+    }
+    return null;
+}
+
+// Replace the content="" value of an already-found meta tag, preserving
+// every other attribute and the original attribute order.
+// `value` must already be HTML-attribute-safe.
+function setMetaContent(html, found, value) {
+    if (!found) return html;
+    let newTag;
+    if (found.content) {
+        newTag = found.tag.slice(0, found.content.start) +
+            `content="${value}"` +
+            found.tag.slice(found.content.end);
+    } else {
+        // No content attribute at all: add one before the closing bracket.
+        const close = found.tag.endsWith("/>") ? found.tag.length - 2 : found.tag.length - 1;
+        newTag = found.tag.slice(0, close) + ` content="${value}"` + found.tag.slice(close);
+    }
+    return html.slice(0, found.index) + newTag + html.slice(found.index + found.length);
+}
+
+// Insert a new <meta> tag into <head>: right after the meta description when
+// there is one (keeps the social block together), else after <title>.
+function insertMetaTag(html, tag) {
+    const desc = findMetaTag(html, ["name"], "description");
+    if (desc) {
+        const at = desc.index + desc.length;
+        return html.slice(0, at) + "\n    " + tag + html.slice(at);
+    }
+    const titleM = html.match(/<title[^>]*>[\s\S]*?<\/title>/i);
+    if (titleM) {
+        const at = titleM.index + titleM[0].length;
+        return html.slice(0, at) + "\n    " + tag + html.slice(at);
+    }
+    if (/<head[^>]*>/i.test(html)) {
+        return html.replace(/<head[^>]*>/i, (h) => h + "\n    " + tag);
+    }
+    return html;
+}
+
+// Decode the HTML entities we actually use in <title> / meta descriptions.
+function decodeHtmlEntities(s) {
+    return String(s)
+        .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+        .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+        .replace(/&quot;/g, '"')
+        .replace(/&apos;/g, "'")
+        .replace(/&nbsp;/g, " ")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&amp;/g, "&");     // &amp; last, so "&amp;lt;" stays "&lt;"
+}
+
+// The page's own title, as plain text.
+//
+// A <title> may contain inline markup: the pricing page wraps the local
+// currency in a <span data-i18n="...">, so `([^<]*)` captures nothing and the
+// title reads as empty. Strip tags, then decode entities.
+function extractPageTitle(html) {
+    const m = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+    if (!m) return "";
+    return decodeHtmlEntities(m[1].replace(/<[^>]*>/g, "")).replace(/\s+/g, " ").trim();
+}
+
+// The page's own meta description, as raw (still entity-escaped) attribute text.
+function extractMetaDescription(html) {
+    const found = findMetaTag(html, ["name"], "description");
+    if (!found || !found.content) return "";
+    return String(found.content.value).trim();
+}
+
 // Add a trailing slash to og:url if missing. The site uses clean URLs with
 // trailing slashes, but several pages were authored without one (audit G2-7).
 function fixOgUrlTrailingSlash(html) {
-    return html.replace(
-        /<meta\s+property="og:url"\s+content="(https:\/\/weddingai\.video\/[^"#?]*[^/])"\s*>/g,
-        (m, url) => {
-            // Don't add a slash if the URL has a query string or hash (none of
-            // our og:url do, but be safe).
-            if (url.indexOf("?") !== -1 || url.indexOf("#") !== -1) return m;
-            return `<meta property="og:url" content="${url}/">`;
-        }
-    );
+    const found = findMetaTag(html, ["property", "name"], "og:url");
+    if (!found || !found.content) return html;
+    const url = String(found.content.value);
+    if (url.indexOf("?") !== -1 || url.indexOf("#") !== -1) return html;
+    if (!/^https:\/\/weddingai\.video\/[^"#?]*[^/]$/.test(url)) return html;
+    return setMetaContent(html, found, url + "/");
+}
+
+// Point og:url at the localized URL.
+//
+// A middleware-rendered page (/<lang>/pricing/, /<lang>/tools/, ...) is
+// served from the English source file, so it inherits the English og:url.
+// Facebook/Twitter use og:url to identify shared content, so a shared
+// /ja/pricing/ link would be attributed to /pricing/ and the two collapsed
+// into one card. Static localized pages already carry the right URL and are
+// left untouched.
+function fixLocalizedOgUrl(html, lang, rest) {
+    if (!lang || lang === DEFAULT_LANG) return html;
+    const found = findMetaTag(html, ["property", "name"], "og:url");
+    if (!found || !found.content) return html;
+    const cur = String(found.content.value);
+    let restNorm = rest || "/";
+    if (!restNorm.endsWith("/")) restNorm += "/";
+    const enUrl = `${SITE_ORIGIN}${restNorm}`;
+    if (cur !== enUrl) return html;          // already localized, or hand-set
+    return setMetaContent(html, found, `${SITE_ORIGIN}/${lang}${restNorm}`);
 }
 
 // Set og:locale to the correct value for the requested language.
 function setOgLocale(html, lang) {
     const locale = LANG_TO_OG_LOCALE[lang] || LANG_TO_OG_LOCALE[DEFAULT_LANG];
-    // Match existing og:locale and replace, or insert one if missing.
-    if (/<meta\s+property="og:locale"\s+content="[^"]*"\s*>/i.test(html)) {
-        return html.replace(
-            /<meta\s+property="og:locale"\s+content="[^"]*"\s*>/i,
-            `<meta property="og:locale" content="${locale}">`
-        );
+    const found = findMetaTag(html, ["property", "name"], "og:locale");
+    if (found) {
+        return setMetaContent(html, found, escapeHtmlAttr(locale));
     }
-    // Insert after og:url (or og:title) so the og:* block stays contiguous.
-    return html.replace(
-        /(<meta\s+property="og:url"\s+content="[^"]*"\s*>)/i,
-        `$1\n    <meta property="og:locale" content="${locale}">`
-    );
+    // Insert after og:url so the og:* block stays contiguous.
+    const url = findMetaTag(html, ["property", "name"], "og:url");
+    if (url) {
+        const at = url.index + url.length;
+        return html.slice(0, at) +
+            `\n    <meta property="og:locale" content="${escapeHtmlAttr(locale)}">` +
+            html.slice(at);
+    }
+    return html;
 }
 
 // Escape a string for safe insertion into an HTML attribute value (between
@@ -560,27 +708,23 @@ function escapeHtmlAttr(s) {
 // the page's language. EN pages have all keys already in HTML so this is a
 // no-op for EN; non-EN pages get translated social-card copy. Falls through
 // silently when a key is missing or the corresponding meta tag is absent.
+//
+// Only the content="" value is rewritten, so the tag keeps its original
+// attribute order (the site mixes `property` first and `content` first).
 function replaceOgTwitterMeta(html, dict, lang) {
     if (!dict || lang === DEFAULT_LANG) return html;
     const pairs = [
-        { prop: "og:title",       key: "index.og_title" },
-        { prop: "og:description", key: "index.og_description" },
-        { prop: "twitter:title",  key: "index.twitter_title" },
-        { prop: "twitter:description", key: "index.twitter_description" },
+        { id: "og:title",           key: "index.og_title" },
+        { id: "og:description",     key: "index.og_description" },
+        { id: "twitter:title",      key: "index.twitter_title" },
+        { id: "twitter:description", key: "index.twitter_description" },
     ];
-    for (const { prop, key } of pairs) {
+    for (const { id, key } of pairs) {
         const val = dict[key];
         if (typeof val !== "string") continue;
-        const safe = escapeHtmlAttr(val);
-        const re = new RegExp(
-            `<meta\\s+(?:property|name)=["']${prop}["']\\s+content=["'][^"']*["']\\s*\\/?>`,
-            "i"
-        );
-        if (re.test(html)) {
-            html = html.replace(re,
-                `<meta ${prop.startsWith("og:") ? "property" : "name"}="${prop}" content="${safe}">`
-            );
-        }
+        const found = findMetaTag(html, ["property", "name"], id);
+        if (!found) continue;
+        html = setMetaContent(html, found, escapeHtmlAttr(val));
     }
     return html;
 }
@@ -593,36 +737,42 @@ function replaceOgTwitterMeta(html, dict, lang) {
 // about the post. Missing (or empty) og:/twitter: tags are filled from the
 // page's own <title> and <meta name="description">; a tag that already has
 // a value is never overwritten.
+//
+// The twitter: tags mirror their og: counterparts rather than the raw
+// <title>, because og:title is the curated social copy (on /<lang>/pricing/
+// it is the localized pricing headline, not the English page title).
 function fillMissingSocialMeta(html) {
-    const setIfMissing = (html, attr, name, value) => {
+    const pageTitle = extractPageTitle(html);
+    const pageDesc = extractMetaDescription(html);
+
+    const ensure = (html, id, value) => {
         if (!value) return html;
-        const re = new RegExp(
-            `<meta\\s+(?:property|name)=["']${name}["']\\s+content=["']([^"']*)["']\\s*\\/?>`,
-            "i"
-        );
-        const m = html.match(re);
-        if (m) {
-            if (m[1].trim()) return html;   // already has a value - keep it
-            return html.replace(re,
-                `<meta ${attr}="${name}" content="${escapeHtmlAttr(value)}">`);
+        const found = findMetaTag(html, ["property", "name"], id);
+        if (found) {
+            const cur = found.content ? String(found.content.value).trim() : "";
+            if (cur) return html;              // already has a value - keep it
+            return setMetaContent(html, found, value);
         }
-        const tag = `<meta ${attr}="${name}" content="${escapeHtmlAttr(value)}">`;
-        const anchor = /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i;
-        if (anchor.test(html)) {
-            return html.replace(anchor, (hit) => hit + "\n    " + tag);
-        }
-        return html;
+        const attr = id.indexOf("og:") === 0 ? "property" : "name";
+        const tag = `<meta ${attr}="${id}" content="${value}">`;
+        return insertMetaTag(html, tag);
     };
 
-    const titleM = html.match(/<title[^>]*>([^<]*)<\/title>/i);
-    const pageTitle = titleM ? titleM[1].trim() : "";
-    const descM = html.match(/<meta\s+name="description"\s+content="([^"]*)"/i);
-    const pageDesc = descM ? descM[1].trim() : "";
+    // The title is plain text (tags stripped, entities decoded), so it needs a
+    // full attribute escape. The description and the og:/twitter: values are
+    // copied out of existing attributes, so they are already entity-escaped
+    // and only the quote needs neutralising - re-escaping "&" would double it.
+    const copy = (s) => String(s).replace(/"/g, "&quot;");
 
-    html = setIfMissing(html, "property", "og:title", pageTitle);
-    html = setIfMissing(html, "name", "twitter:title", pageTitle);
-    html = setIfMissing(html, "property", "og:description", pageDesc);
-    html = setIfMissing(html, "name", "twitter:description", pageDesc);
+    html = ensure(html, "og:title", escapeHtmlAttr(pageTitle));
+    html = ensure(html, "og:description", copy(pageDesc));
+
+    const ogTitle = findMetaTag(html, ["property", "name"], "og:title");
+    const ogDesc = findMetaTag(html, ["property", "name"], "og:description");
+    html = ensure(html, "twitter:title",
+        ogTitle && ogTitle.content ? copy(ogTitle.content.value.trim()) : copy(pageTitle));
+    html = ensure(html, "twitter:description",
+        ogDesc && ogDesc.content ? copy(ogDesc.content.value.trim()) : copy(pageDesc));
     return html;
 }
 
@@ -632,25 +782,16 @@ function fillMissingSocialMeta(html) {
 function replacePricingMeta(html, dict, lang) {
     if (!dict || lang === DEFAULT_LANG) return html;
     const pairs = [
-        { selector: /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i,
-          attr: "name", name: "description",
-          key: "pricing.meta_description" },
-        { selector: /<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/i,
-          attr: "property", name: "og:title",
-          key: "pricing.og_title" },
-        { selector: /<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/i,
-          attr: "property", name: "og:description",
-          key: "pricing.og_description" },
+        { id: "description",   idAttrs: ["name"],            key: "pricing.meta_description" },
+        { id: "og:title",      idAttrs: ["property", "name"], key: "pricing.og_title" },
+        { id: "og:description", idAttrs: ["property", "name"], key: "pricing.og_description" },
     ];
-    for (const { selector, attr, name, key } of pairs) {
+    for (const { id, idAttrs, key } of pairs) {
         const val = dict[key];
         if (typeof val !== "string") continue;
-        const safe = escapeHtmlAttr(val);
-        if (selector.test(html)) {
-            html = html.replace(selector,
-                `<meta ${attr}="${name}" content="${safe}">`
-            );
-        }
+        const found = findMetaTag(html, idAttrs, id);
+        if (!found) continue;
+        html = setMetaContent(html, found, escapeHtmlAttr(val));
     }
     return html;
 }
@@ -1738,6 +1879,14 @@ export const onRequest = async (context) => {
 
             // 5. og:url trailing-slash normalization.
             text = fixOgUrlTrailingSlash(text);
+
+            // 5.5. og:url must point at the LOCALIZED url. A middleware-rendered
+            //   page (/<lang>/pricing/, /<lang>/tools/, ...) is served from the
+            //   English source file and therefore inherits the English og:url,
+            //   so Facebook/Twitter attribute the shared localized link to the
+            //   English page. Static localized pages already carry the right
+            //   URL and are left alone.
+            text = fixLocalizedOgUrl(text, lang, rest);
 
             // 6. /success/ noindex.
             text = addNoindexIfSuccess(text, rest);
