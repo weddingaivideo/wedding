@@ -39,6 +39,34 @@ Affected: `index.meta_description` in de/hi (156, 160 chars) +
 `pricing.meta_description` in de/es/fr/hi/pt/th (167-188 chars).
 All fixed in commit `f91b20ef`.
 
+## A localized URL without a localized twin falls back to the ENGLISH file
+
+The middleware probes `/<lang><rest>` first and only falls back to
+`/rest` (the English source) when that probe 404s. A 404 does not mean
+the language is missing — it means **that one page** has no pre-translated
+twin. Measured 2026-10-24: 140 English pages, but only 63 localized pages
+per language, so ~77 English pages per language are served from the English
+source (`ru` has only 13 localized pages in total).
+
+Consequences for any audit:
+
+- The page BODY is translated at runtime (the `data-i18n` bindings are
+  resolved from `i18n/<lang>.json`), so the text is fine **only if the
+  dictionary has the key**. `ru` has ~36k blog keys missing, so its blog
+  pages render the English body with a translated navigation.
+- The `og:` / `twitter:` tags are NOT bound to the dictionary, so on such
+  a page they stay English unless the middleware rewrites them.
+- A localized page that IS backed by a static file keeps its own
+  hand-written og:title — 139 of the 140 English pages deliberately use a
+  different headline for the card than for the `<title>` (the `<title>`
+  targets one search intent, the card another). Do not "normalise" a card
+  to the `<title>`; the middleware only replaces it when the page's own
+  title was actually translated.
+
+Audit rule: a page is localized only if `<lang>/<rest>/index.html` exists.
+A file-count comparison across the language folders is the fastest way to
+see how much of the site is actually translated.
+
 ## The 13 wedding photo tools are FREE — no price may appear on a tool page
 
 All tools are client-side browser utilities. None of them charges the user,
