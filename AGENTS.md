@@ -52,10 +52,30 @@ so a price on a tool page contradicts the product claim. Established
   and the homepage's **tool list** section.
 - **Prices stay** on the paid AI-wedding-video product: `/pricing/`,
   `/order/`, the homepage's "By the Numbers" table (incl. the
-  `AggregateOffer` `lowPrice: 9.90`), and the `index.p_text.based_on_9_400_*`
-  market-average paragraph. Those are real, purchasable products.
+  `AggregateOffer` `lowPrice: 9.90`), and the
+  `index.p_text.based_on_9_400_*` market-average paragraph. Those are real,
+  purchasable products.
 - "free" is NOT a price — "13 Free Wedding Photo Tools", "100% free",
   "Try free →" are the product promise and must survive any price sweep.
+
+### TRAP: the couple count is 500+, but the KEYS still say 9_400
+
+Since 2026-10-24 (commit `5720fbcc`) the site claims **500+ couples** and
+**500+ customer reviews**, not "9,400+". The old figures had no external
+source, while the published Goodfirms and ReviewNexa listings both say
+"500+ couples, 4.9/5". The same pass removed "since 2023" everywhere - the
+domain was registered 2026-03-17.
+
+The **key names were left untouched** (`pricing.td_text.9_400_couples_served_*`,
+`index.p_text.based_on_9_400_*`, `index.td_text.9_400_verified_reviews.*`,
+`gallery.h2_text.gallery_by_the_numbers_9_400_*`), so the value and the key
+now disagree. **That is intentional, not a bug to repair.** A future pass
+that "fixes" the value back to 9,400 to match its key would reintroduce a
+claim the site cannot source.
+
+Same trap with the revision policy: the site says **two** free revisions
+everywhere (`pricing.td_text.two_free_revisions_included.*`), while some
+key names still read `...1_free_revision_and...`. Trust the value.
 
 ### Price-audit checklist
 
