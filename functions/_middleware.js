@@ -730,17 +730,25 @@ function replaceOgTwitterMeta(html, dict, lang) {
 }
 
 // Overwrite og:title / og:description with the page's own <title> and
-// <meta name="description">.
+// <meta name="description"> - but ONLY when the page's own title or
+// description was actually translated by the i18n pass.
 //
 // Used for a localized page that was served from the ENGLISH source file
 // because no localized twin exists (/ru/blog/<slug>/ has no ru/blog/<slug>/).
-// Such a page carries the English social card: the English og:title and
-// og:description, which describe the English page rather than the page the
-// visitor is actually reading. The page's own title and description are
-// translated by the i18n pass, so they are the right replacement.
+// Such a page carries the English social card, while its title and
+// description have just been translated. When the title was translated, the
+// English og:title is an untranslated leftover and has to go.
+//
+// The condition matters: the EN pages carry a deliberately different,
+// hand-written og:title (the <title> targets one search intent, the card
+// another - "Affordable AI Wedding Video: 5 Options from $9.9" vs "No Budget
+// for a Videographer?"). Replacing that curated headline with the <title>
+// would lose a better match. So the copy is only replaced when the page
+// itself is in another language, and then the card follows it.
 //
 // The twitter: tags are NOT touched here - see syncTwitterToOg.
-function setSocialMetaFromPage(html) {
+function setSocialMetaFromPage(html, translated) {
+    translated = translated || {};
     const pageTitle = extractPageTitle(html);
     const pageDesc = extractMetaDescription(html);
     const set = (html, id, value) => {
@@ -751,8 +759,13 @@ function setSocialMetaFromPage(html) {
     };
     // The title is plain text (tags stripped, entities decoded) -> full
     // escape. The description is raw attribute text -> quotes only.
-    let out = set(html, "og:title", escapeHtmlAttr(pageTitle));
-    out = set(out, "og:description", String(pageDesc).replace(/"/g, "&quot;"));
+    let out = html;
+    if (translated.title) {
+        out = set(out, "og:title", escapeHtmlAttr(pageTitle));
+    }
+    if (translated.description) {
+        out = set(out, "og:description", String(pageDesc).replace(/"/g, "&quot;"));
+    }
     return out;
 }
 
@@ -1997,6 +2010,13 @@ export const onRequest = async (context) => {
                     const version = await getI18nVersion(context);
                     const dict = await loadI18nDict(lang, version);
                     if (dict) {
+                        // Remember the page's own title / description BEFORE
+                        // the translation pass, so we can tell afterwards
+                        // whether they were actually translated. That decides
+                        // if an English og:title is an untranslated leftover
+                        // or the page's deliberate, hand-written headline.
+                        const preTitle = extractPageTitle(text);
+                        const preDesc = extractMetaDescription(text);
                         text = applyDataI18n(text, dict);
                         text = applyDataI18nAttr(text, dict);
                         // Nav links on the middleware-rendered pages still carry
@@ -2012,7 +2032,10 @@ export const onRequest = async (context) => {
                         // has just been translated, so the page's own title
                         // and description are the correct replacement.
                         if (servedFromEnglishSource) {
-                            text = setSocialMetaFromPage(text);
+                            text = setSocialMetaFromPage(text, {
+                                title: extractPageTitle(text) !== preTitle,
+                                description: extractMetaDescription(text) !== preDesc,
+                            });
                         }
                         // #I18N-PHASE1: the HOMEPAGE carries the site-wide marketing
                         //   social copy. Every other page must describe itself - a
