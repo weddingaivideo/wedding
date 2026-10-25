@@ -729,6 +729,58 @@ function replaceOgTwitterMeta(html, dict, lang) {
     return html;
 }
 
+// Overwrite og:title / og:description with the page's own <title> and
+// <meta name="description">.
+//
+// Used for a localized page that was served from the ENGLISH source file
+// because no localized twin exists (/ru/blog/<slug>/ has no ru/blog/<slug>/).
+// Such a page carries the English social card: the English og:title and
+// og:description, which describe the English page rather than the page the
+// visitor is actually reading. The page's own title and description are
+// translated by the i18n pass, so they are the right replacement.
+//
+// The twitter: tags are NOT touched here - see syncTwitterToOg.
+function setSocialMetaFromPage(html) {
+    const pageTitle = extractPageTitle(html);
+    const pageDesc = extractMetaDescription(html);
+    const set = (html, id, value) => {
+        if (!value) return html;
+        const found = findMetaTag(html, ["property", "name"], id);
+        if (!found) return html;
+        return setMetaContent(html, found, value);
+    };
+    // The title is plain text (tags stripped, entities decoded) -> full
+    // escape. The description is raw attribute text -> quotes only.
+    let out = set(html, "og:title", escapeHtmlAttr(pageTitle));
+    out = set(out, "og:description", String(pageDesc).replace(/"/g, "&quot;"));
+    return out;
+}
+
+// Make the Twitter card repeat the Open Graph tags.
+//
+// twitter:title / twitter:description are a copy of og:title / og:description,
+// so a card cannot end up with two different headlines for the same page.
+// The homepage is excluded: it carries a separate, deliberately different
+// twitter:title (index.twitter_title vs index.og_title).
+function syncTwitterToOg(html) {
+    const set = (html, id, value) => {
+        if (!value) return html;
+        const found = findMetaTag(html, ["property", "name"], id);
+        if (!found) return html;
+        return setMetaContent(html, found, value);
+    };
+    const ogTitle = findMetaTag(html, ["property", "name"], "og:title");
+    const ogDesc = findMetaTag(html, ["property", "name"], "og:description");
+    let out = html;
+    if (ogTitle && ogTitle.content) {
+        out = set(out, "twitter:title", String(ogTitle.content.value).replace(/"/g, "&quot;"));
+    }
+    if (ogDesc && ogDesc.content) {
+        out = set(out, "twitter:description", String(ogDesc.content.value).replace(/"/g, "&quot;"));
+    }
+    return out;
+}
+
 // Fill in social-card meta tags that a page does not define.
 //
 // The homepage keeps its site-wide marketing copy (index.og_*), but every
@@ -1627,6 +1679,17 @@ export const onRequest = async (context) => {
                 // and en-US), so no rewrite needed for the default lang.
                 // /success/ noindex for EN too.
                 text = addNoindexIfSuccess(text, path);
+                // Social card: some English pages carry og:* but no twitter:*
+                // at all (/pricing/ for one), which leaves the Twitter card
+                // without a headline or description. Fill the missing tags
+                // from the page's own title / description - a tag that already
+                // has a value is never touched. The homepage is excluded: it
+                // ships a deliberately different twitter:title.
+                const enPath = path.replace(/\/+$/, "") || "/";
+                if (enPath !== "/" && enPath !== "/index.html") {
+                    text = fillMissingSocialMeta(text);
+                    text = syncTwitterToOg(text);
+                }
                 // P2 (2026-10-12): Inject the FULL 11-lang + x-default hreflang graph
                 // for EN pages too. Until now the EN pages kept whatever the HTML
                 // author hand-wrote — typically only 3 alternate links (en + a single
@@ -1772,6 +1835,11 @@ export const onRequest = async (context) => {
             : null;
         let underlyingUrl = url.origin + rest + url.search;
         let prefixedProbe = null;
+        // True when the page had to be served from the English source file
+        // because no localized twin exists for this language. The body is
+        // translated by the i18n pass, but the social-card tags still hold
+        // the English copy and have to be replaced (see setSocialMetaFromPage).
+        let servedFromEnglishSource = false;
         if (prefixedUrl) {
             prefixedProbe = await fetch(prefixedUrl, {
                 method: "GET",
@@ -1782,6 +1850,7 @@ export const onRequest = async (context) => {
                 underlyingUrl = prefixedUrl;
             } else {
                 prefixedProbe = null; // signal to fall back below
+                servedFromEnglishSource = true;
             }
         }
         // Use redirect: "manual" (2026-08-10) so a 30x from _redirects is
@@ -1936,6 +2005,15 @@ export const onRequest = async (context) => {
                         text = localizeHubLinks(text, lang);
             // #I18N-5: add local currency equivalents for non-EN/USD locales
             text = localizeCurrencyForLang(text, lang);
+                        // A localized page with no localized twin of its own
+                        // (/ru/blog/<slug>/ has no ru/blog/<slug>/) is served
+                        // from the English source file, so its og:title and
+                        // og:description are still the English ones. The body
+                        // has just been translated, so the page's own title
+                        // and description are the correct replacement.
+                        if (servedFromEnglishSource) {
+                            text = setSocialMetaFromPage(text);
+                        }
                         // #I18N-PHASE1: the HOMEPAGE carries the site-wide marketing
                         //   social copy. Every other page must describe itself - a
                         //   localized blog post whose og:title says "WeddingAI.video
@@ -1954,6 +2032,13 @@ export const onRequest = async (context) => {
                         const restNorm = (rest || "/").replace(/\/+$/, "") || "/";
                         if (restNorm === "/pricing" || restNorm === "/pricing/") {
                             text = replacePricingMeta(text, dict, lang);
+                        }
+                        // A Twitter card repeats the Open Graph tags, so the
+                        // two can never end up with different headlines for
+                        // the same page. The homepage is excluded - it ships a
+                        // separate, curated twitter:title on purpose.
+                        if (homePath !== "/") {
+                            text = syncTwitterToOg(text);
                         }
                         // #I18N-PHASE2: localise FAQ JSON-LD blocks. Auto-detects
                         //   homepage_faq vs pricing_faq by checking which prefix
