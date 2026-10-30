@@ -36,6 +36,24 @@ const TO_EMAIL_DEFAULT = "order@weddingai.video";
 const FROM_ADDRESS = "WeddingAI Quote <noreply@weddingai.video>";
 const SUCCESS_PATH = "/success";
 
+/**
+ * Resolve the address the lead notification is sent to.
+ *
+ * env.TO_EMAIL wins when it holds a valid address; otherwise we fall back to
+ * the default. (Commit 48cf7c14 hard-coded the default because an env value
+ * had once been polluted with garbage — so the value is validated here
+ * instead of being trusted blindly.)
+ */
+function resolveToEmail(env) {
+    const raw = (env.TO_EMAIL || "").replace(/^\ufeff+/, "").trim();
+    if (!raw) return { address: TO_EMAIL_DEFAULT, source: "default" };
+    if (!/^[^\s@,<>]+@[^\s@,<>]+\.[^\s@,<>]+$/.test(raw)) {
+        console.warn(`[QUOTE] env.TO_EMAIL is not a valid address ("${raw}") — falling back to ${TO_EMAIL_DEFAULT}`);
+        return { address: TO_EMAIL_DEFAULT, source: "default" };
+    }
+    return { address: raw, source: "env" };
+}
+
 const SERVICE_LABELS = {
     "slow-motion": "AI Slow Motion Enhancement",
     "vintage-restoration": "Vintage Footage Restoration",
@@ -172,7 +190,7 @@ async function rateLimit(env, ip) {
 // TTL 90 天（7 776 000 秒）—— 够人工跟进，又不会无限堆积。
 const LEAD_TTL_SECONDS = 60 * 60 * 24 * 90;
 
-async function writeLead(env, formData, request) {
+async function writeLead(env, formData, request, toAddress) {
     const kv = env.RATE_LIMIT_KV || env.LEAD_STORAGE;
     if (!kv) return null;
     const refId = ((formData.get("reference_id") || "").toString().trim()) || null;
@@ -180,9 +198,15 @@ async function writeLead(env, formData, request) {
     const key = `lead:${Date.now()}:${safeRef}`;
     const record = {
         reference_id: refId,
-        email_status: "pending",   // → "delivered" 或 "failed"，由 updateLeadStatus 改写
+        // "pending" → "sent" (Resend accepted it) → "delivered" | "failed" |
+        // "abandoned". The "delivered" state is only ever written after the
+        // provider's own delivery event was read back — a 2xx on the send
+        // request only means "accepted" (see functions/scheduled.js).
+        email_status: "pending",
         resend_status: null,
+        resend_email_id: null,
         resend_error: null,
+        to_address: toAddress || null,
         received_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
         form: {
@@ -212,7 +236,7 @@ async function writeLead(env, formData, request) {
     }
 }
 
-async function updateLeadStatus(env, key, emailStatus, resendStatus, resendError) {
+async function updateLeadStatus(env, key, emailStatus, resendStatus, resendError, resendEmailId) {
     if (!key) return;
     const kv = env.RATE_LIMIT_KV || env.LEAD_STORAGE;
     if (!kv) return;
@@ -225,6 +249,7 @@ async function updateLeadStatus(env, key, emailStatus, resendStatus, resendError
         existing.email_status = emailStatus;
         existing.resend_status = resendStatus;
         existing.resend_error = resendError;
+        if (resendEmailId) existing.resend_email_id = resendEmailId;
         existing.updated_at = new Date().toISOString();
         await kv.put(key, JSON.stringify(existing), { expirationTtl: LEAD_TTL_SECONDS });
     } catch (e) {
@@ -316,8 +341,11 @@ export async function onRequestPost({ request, env }) {
 
     // 先存后发：把 lead 写进 KV（status=pending），再尝试发邮件。
     // 这样即使 Resend 抽风、API key 缺失、或 function 中途抛异常，lead 也不会丢。
-    // 后面 updateLeadStatus 会把这条记录改成 "delivered" 或 "failed"。
-    const leadKey = await writeLead(env, formData, request);
+    // 后面 updateLeadStatus 会把这条记录改成 "sent"（Resend 已接受），
+    // 再由 functions/scheduled.js 读回 Resend 的真实投递事件，改成
+    // "delivered" 或 "failed" —— 2xx 不等于送达。
+    const to = resolveToEmail(env);
+    const leadKey = await writeLead(env, formData, request, to.address);
     if (leadKey) {
         console.log(`[LEAD STORED] ref=${refId || "—"} key=${leadKey}`);
     } else {
@@ -352,7 +380,7 @@ export async function onRequestPost({ request, env }) {
             },
             body: JSON.stringify({
                 from: FROM_ADDRESS,
-                to: [TO_EMAIL_DEFAULT],  // DEBUG: use pure default to bypass env pollution,
+                to: [to.address],
                 reply_to: email,
                 subject,
                 html: buildHtmlEmail(formData),
@@ -360,8 +388,14 @@ export async function onRequestPost({ request, env }) {
             }),
         });
 
+        // The body is read once: it carries the Resend message id we need for
+        // the delivery read-back, and the error detail when the send failed.
+        const resText = await res.text();
+        let resJson = null;
+        try { resJson = JSON.parse(resText); } catch (e) { resJson = null; }
+
         if (!res.ok) {
-            const errBody = await res.text();
+            const errBody = resText;
             // 详细日志：包含 reference_id + 关键字段 + Resend 错误体
             // 失败时不再 silent redirect —— 用户会看到 status=pending 的提示页
             const failLog = `[QUOTE FAIL] ref=${refId || "—"} resend_status=${res.status} name=${formData.get("name")} email=${formData.get("email")} country=${formData.get("country")} service=${formData.get("service")} body=${errBody}`;
@@ -386,9 +420,14 @@ export async function onRequestPost({ request, env }) {
             return redirect303(origin_base, successUrl("pending"));
         }
 
-        // Email sent successfully — flip the lead to "delivered"
-        await updateLeadStatus(env, leadKey, "delivered", res.status, null);
-        console.log(`[QUOTE OK] ref=${refId || "—"} name=${formData.get("name")} email=${formData.get("email")} country=${formData.get("country")} service=${formData.get("service")} lead=${leadKey || "—"}`);
+        // Resend accepted the message (HTTP 2xx). That is NOT proof of
+        // delivery: an address on Resend's suppression list, or one that
+        // hard-bounces later, also answers 2xx. The lead therefore goes to
+        // "sent" and only the provider's own delivery event — read back by
+        // functions/scheduled.js — can turn it into "delivered".
+        const resendId = resJson && resJson.id ? resJson.id : null;
+        await updateLeadStatus(env, leadKey, "sent", res.status, null, resendId);
+        console.log(`[QUOTE OK] ref=${refId || "—"} name=${formData.get("name")} email=${formData.get("email")} country=${formData.get("country")} service=${formData.get("service")} to=${to.address} resend_id=${resendId || "—"} lead=${leadKey || "—"} (status=sent, delivery pending read-back)`);
         return redirect303(origin_base, successUrl(null));
     } catch (e) {
         // 网络层失败（fetch throw）——告诉用户 + 保留 lead

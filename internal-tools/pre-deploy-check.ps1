@@ -47,7 +47,23 @@ Write-Host ""
 Write-Host "[1/9] HTML <title> tag integrity"
 # Exclude the GSC verification template (legacy; production uses bca20c476d04af209950cbf5921e821d.txt)
 # and the Service Worker offline fallback (intentionally no GA — no network to send beacons).
-$htmlFiles = Get-ChildItem $root -Recurse -Filter "*.html" -File | Where-Object { $_.Name -ne "google-site-verification.html" -and $_.Name -ne "offline.html" }
+#
+# Also exclude every directory that is NEVER deployed to the edge.
+# TRAP: a `*\tmp\*` pattern does NOT match `\.tmp\` — the dot-prefixed
+# scratch dir holds 1400+ captured HTML files (post-middleware dumps). Left
+# unfiltered, those produced 300+ FALSE failures here — hard-coded nonces,
+# FAQ mismatches, stale GA4 loaders — and blocked the deploy gate for
+# changes that were perfectly fine.
+$scratchDirs = @('*\tmp\*', '*\.tmp\*', '*\private\*', '*\qa\*', '*\internal-docs\*',
+                 '*\node_modules\*', '*\.wrangler\*', '*\.git\*', '*\__pycache__\*')
+function Test-DeployedPath([string]$p) {
+    foreach ($pat in $scratchDirs) { if ($p -like $pat) { return $false } }
+    return $true
+}
+$htmlFiles = Get-ChildItem $root -Recurse -Filter "*.html" -File | Where-Object {
+    $_.Name -ne "google-site-verification.html" -and $_.Name -ne "offline.html" -and
+    (Test-DeployedPath $_.FullName)
+}
 $badTitles = 0
 foreach ($f in $htmlFiles) {
     $c = Get-RawSafe $f.FullName
@@ -251,6 +267,7 @@ if ($badImgs -eq 0) { Pass "All service page images resolve" }
 Write-Host "[2.5/9] srcset / picture hygiene"
 $hygieneIssues = 0
 $htmls = Get-ChildItem "$root" -Recurse -Filter "*.html" | Where-Object {
+    (Test-DeployedPath $_.FullName) -and
     $_.FullName -notlike "*\tmp\*" -and
     $_.FullName -notlike "*\private\*" -and
     $_.FullName -notlike "*\i18n\*" -and
@@ -372,31 +389,74 @@ foreach ($f in $htmlFiles) {
 }
 Pass "No dead Privacy/Terms links"
 
-# ---------- 6. GA4 ID ----------
-Write-Host "[6/9] Google Analytics 4 ID"
-$gaCount = 0
-$legacySyncGtag = 0  # pages still using <script async src="googletagmanager..."> synchronously
+# ---------- 6. Retired analytics stay removed ----------
+# GA4 (property G-4FE7KSJDNB) was deactivated and Baidu Tongji was dropped
+# (the site no longer targets the domestic China market) on 2026-10-28.
+# This check is a hard FAIL so a later edit cannot silently re-introduce
+# either loader. The old check was the mirror image — it FAILED when the
+# GA4 ID was missing from pages.
+Write-Host "[6/9] Retired analytics removed (GA4 + Baidu Tongji)"
+$ga4Hits = 0
+$baiduHits = 0
+$ga4Page = ""
+$baiduPage = ""
 foreach ($f in $htmlFiles) {
     $c = Get-RawSafe $f.FullName
-    if ($c -match 'G-4FE7KSJDNB') {
-        $gaCount++
+    if ($c -match 'googletagmanager\.com/gtag/js|G-4FE7KSJDNB|__loadGtag') {
+        $ga4Hits++
+        if (-not $ga4Page) { $ga4Page = $f.FullName }
     }
-    if ($c -match '<script async src="https://www\.googletagmanager\.com/gtag/js\?id=') {
-        $legacySyncGtag++
+    if ($c -match 'hm\.baidu\.com/hm\.js|_hmt\s*=') {
+        $baiduHits++
+        if (-not $baiduPage) { $baiduPage = $f.FullName }
     }
 }
-if ($gaCount -eq $htmlFiles.Count) {
-    Pass "GA4 ID present in all $gaCount pages (using production ID G-4FE7KSJDNB)"
+if ($ga4Hits -eq 0) {
+    Pass "No GA4 loader in any of the $($htmlFiles.Count) pages"
 } else {
-    Warn "GA4 ID found in $gaCount / $($htmlFiles.Count) pages"
+    Fail "$ga4Hits page(s) still contain the GA4 loader (first: $ga4Page)"
 }
-if ($legacySyncGtag -gt 0) {
-    Fail "$legacySyncGtag page(s) still loading gtag.js synchronously — re-run internal-tools/inject-lazy-gtag.ps1 to defer it"
+if ($baiduHits -eq 0) {
+    Pass "No Baidu Tongji loader in any of the $($htmlFiles.Count) pages"
 } else {
-    Pass "All pages use the lazy-load gtag pattern (no synchronous <script async src=\"googletagmanager\"> tags)"
+    Fail "$baiduHits page(s) still contain the Baidu Tongji loader (first: $baiduPage)"
 }
-# Note: G-4FE7KSJDNB is the confirmed production GA4 ID (per stakeholder, 2026-07-20).
-# To swap to a different ID later: powershell -ExecutionPolicy Bypass -File scripts/standardize-ga4.ps1 -NewId 'G-XXXXXXXXXX'
+
+# The CSP must not whitelist the retired origins either — a stale
+# script-src entry leaves the door open for a re-injected loader.
+$cspStale = 0
+foreach ($cf in @("$root\_headers", "$root\functions\_middleware.js")) {
+    $cc = Get-RawSafe $cf
+    foreach ($pat in @('googletagmanager\.com', 'google-analytics\.com', 'analytics\.google\.com', 'hm\.baidu\.com')) {
+        if ($cc -match $pat) {
+            Fail "CSP still whitelists '$pat' in $cf"
+            $cspStale++
+        }
+    }
+}
+if ($cspStale -eq 0) {
+    Pass "CSP whitelists no retired analytics origin"
+}
+
+# The vendors that ARE still allowed must stay allowed — dropping these
+# would silently kill ad revenue / heatmaps rather than fail a deploy.
+$clarityHits = 0
+$adsenseHits = 0
+foreach ($f in $htmlFiles) {
+    $c = Get-RawSafe $f.FullName
+    if ($c -match 'clarity\.ms/tag/') { $clarityHits++ }
+    if ($c -match 'pagead2\.googlesyndication\.com') { $adsenseHits++ }
+}
+if ($clarityHits -gt 0) {
+    Pass "Microsoft Clarity present on $clarityHits page(s)"
+} else {
+    Warn "Microsoft Clarity not found on any page — heatmaps / session replay would be dead"
+}
+if ($adsenseHits -gt 0) {
+    Pass "Google AdSense present on $adsenseHits page(s)"
+} else {
+    Fail "Google AdSense not found on any page — ad revenue would be dead"
+}
 
 # ---------- 7. (REMOVED) Netlify config ----------
 # Project migrated from Netlify to Cloudflare Pages (2026-07-27). netlify.toml
@@ -410,7 +470,7 @@ if ($legacySyncGtag -gt 0) {
 
 # ---------- 8. Page count ----------
 Write-Host "[8/9] Page and asset counts"
-$htmlCount = (Get-ChildItem $root -Recurse -Filter "*.html" -File).Count
+$htmlCount = $htmlFiles.Count
 $imgCount = (Get-ChildItem "$root\images" -File).Count
 Write-Host "  HTML pages: $htmlCount (was 19, +privacy +terms = 21 expected)"
 Write-Host "  Images: $imgCount"
@@ -479,6 +539,105 @@ if (Test-Path $schemaScript) {
     }
 } else {
     Warn "scripts\verify-schemas.py not found; skipping JSON-LD schema check"
+}
+
+# ---------- 9b. Live i18n title/description lengths ----------
+# The check in step 9 measures the STATIC html. For the 525 pages whose
+# title carries data-i18n and whose description carries
+# data-i18n-attr="content:…", the value a visitor receives comes from
+# i18n/<lang>.json — the static file only holds the English source. That
+# layer was completely invisible to this gate until now.
+#
+# REPORT-ONLY on purpose: the backlog is a translation/rewriting job per
+# language, not a deploy blocker. Switch this step to Fail once a language
+# has been cleaned up (the script also accepts --strict).
+Write-Host "[9b/9] Live i18n title/description lengths"
+$i18nMetaScript = "$root\scripts\check-i18n-meta-lengths.py"
+if (Test-Path $i18nMetaScript) {
+    $py = $null
+    foreach ($candidate in @("python", "python3", "py")) {
+        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($cmd) { $py = $candidate; break }
+    }
+    if ($py) {
+        $i18nMetaOutput = & $py $i18nMetaScript 2>&1
+        $i18nMetaExit = $LASTEXITCODE
+        $key = $i18nMetaOutput | Select-String -Pattern 'bound title keys|live values over|^\S+\s+\d+\s+\d+$' | Select-Object -First 16
+        foreach ($line in $key) { Write-Host "  $($line -replace '^\s*','')" }
+        # Decide on the COUNTS, not on the exit code: the script is report-only
+        # by default, so a non-zero exit never happens here.
+        # NB: MatchInfo.Matches.Count is the number of MATCHES (1), not the
+        # number of capture groups - test the groups themselves.
+        $overCount = 0
+        $overLine = $i18nMetaOutput | Select-String -Pattern 'live values over the limit:\s*(\d+)\s+titles,\s*(\d+)\s+descriptions' | Select-Object -First 1
+        if ($overLine -and $overLine.Matches[0].Groups[1].Success -and $overLine.Matches[0].Groups[2].Success) {
+            $overCount = [int]$overLine.Matches[0].Groups[1].Value + [int]$overLine.Matches[0].Groups[2].Value
+        }
+        if ($i18nMetaExit -eq 0 -and $overCount -eq 0) {
+            Pass "All live i18n title/description values within limits"
+        } else {
+            Warn "Live i18n metadata over the limit ($overCount values). These are the values the middleware serves to non-English visitors - see scripts/check-i18n-meta-lengths.py. Report-only by design."
+        }
+    } else {
+        Warn "Python not found in PATH; skipping live i18n metadata check."
+    }
+} else {
+    Warn "scripts\check-i18n-meta-lengths.py not found; skipping live i18n metadata check"
+}
+
+# ---------- 9c. Lead mail routing + delivery truth ----------
+# Background (2026-10-29): two weeks of leads were lost because the domain had
+# no MX record for 17 days, and because /api/quote.js recorded a 2xx from the
+# mail API as "delivered" — a 2xx only means "accepted"; a suppressed or
+# later-bounced address answers 2xx as well.
+#
+# Check 1: the domain must have MX records at all (the 2026-10-12 failure).
+# Check 2: the code must not write "delivered" straight from a 2xx, the cron
+#          must read the provider's delivery event back, and the admin
+#          endpoint must know the "sent" state.
+$leadDomain = "weddingai.video"
+$mxSeen = @()
+try {
+    # Inline DoH query (the Get-DohJson helper is defined further down, in the
+    # production-domain section, so it is not in scope here).
+    $mxResp = Invoke-WebRequest -Uri "https://dns.google/resolve?name=$leadDomain&type=MX" -Headers @{ accept = "application/dns-json" } -UseBasicParsing -TimeoutSec 25
+    $mxText = if ($mxResp.Content -is [byte[]]) { [System.Text.Encoding]::UTF8.GetString($mxResp.Content) } else { [string]$mxResp.Content }
+    $mxJson = $mxText | ConvertFrom-Json
+    $mxSeen = @($mxJson.Answer | Where-Object { $_.type -eq 15 } | ForEach-Object { $_.data })
+} catch {
+    Write-Host "  MX lookup for $leadDomain failed: $($_.Exception.Message -replace '\s+',' ')" -ForegroundColor DarkGray
+}
+if ($mxSeen.Count -eq 0) {
+    Fail "$leadDomain has NO MX record - no mail can be delivered and every lead notification bounces. Add MX records in Cloudflare (DNS -> Records)."
+} else {
+    Pass "$leadDomain MX records: $($mxSeen -join ', ')"
+    if (-not ($mxSeen -join ' ') -match 'mxbiz[12]\.qq\.com') {
+        Warn "$leadDomain MX points somewhere other than the Tencent 企业邮 hosts (mxbiz1/mxbiz2.qq.com). Fine if the mail provider changed deliberately - just make sure the mailbox really exists there."
+    }
+}
+
+$quotePath = "$root\functions\api\quote.js"
+$schedPath = "$root\functions\scheduled.js"
+$dlqPath = "$root\functions\api\dead-letters.js"
+if ((Test-Path $quotePath) -and (Test-Path $schedPath) -and (Test-Path $dlqPath)) {
+    $quoteSrc = Get-RawSafe $quotePath
+    $schedSrc = Get-RawSafe $schedPath
+    $dlqSrc = Get-RawSafe $dlqPath
+    $falseGreen = @()
+    if ($quoteSrc -match 'updateLeadStatus\([^)]*,\s*"delivered"') { $falseGreen += "quote.js writes email_status=delivered directly from the send request" }
+    if ($schedSrc -match 'getDeliveryEvent' -and $schedSrc -match 'getSuppressedAddresses') {
+        # the read-back and the suppression guard are both present
+    } else {
+        $falseGreen += "scheduled.js does not read the provider's delivery event back (getDeliveryEvent) and/or does not check the suppression list (getSuppressedAddresses)"
+    }
+    if ($dlqSrc -notmatch '"sent"') { $falseGreen += "dead-letters.js does not know the 'sent' state" }
+    if ($falseGreen.Count -eq 0) {
+        Pass "Lead delivery states are honest: 2xx -> 'sent', provider event -> 'delivered'/'failed'"
+    } else {
+        foreach ($g in $falseGreen) { Fail "Lead delivery can still be recorded as delivered without proof - $g" }
+    }
+} else {
+    Warn "Lead-mail state files not found; skipping the delivery-truth check"
 }
 
 # ---------- Cloudflare Pages Functions ----------
@@ -560,7 +719,7 @@ if (Test-Path $fnPath) {
 # are allowed relative since they're not part of the i18n critical path.
 $relativeScriptIssues = 0
 $htmlFiles = Get-ChildItem -Recurse -Filter "*.html" -File |
-    Where-Object { $_.FullName -notlike "*\i18n\*" -and $_.FullName -notlike "*\qa\*" -and $_.FullName -notlike "*\tmp\*" -and $_.FullName -notlike "*\admin\*" }
+    Where-Object { (Test-DeployedPath $_.FullName) -and $_.FullName -notlike "*\i18n\*" -and $_.FullName -notlike "*\qa\*" -and $_.FullName -notlike "*\tmp\*" -and $_.FullName -notlike "*\admin\*" }
 foreach ($f in $htmlFiles) {
     $raw = Get-RawSafe $f.FullName
     # Match <script src="X..."> where X doesn't start with http(s)://, /, or #
@@ -603,6 +762,131 @@ if (Test-Path $blogCheckScript) {
     }
 } else {
     Warn "qa\check_blog_redirects.py not found; skipping blog 301 retention check"
+}
+
+# ---------- Production domain reachability (DNS over HTTPS + HTTPS) ----------
+# Added 2026-10-28: the Cloudflare DNS records for the custom domain were
+# removed from the zone, which took the whole site (722 pages, 11 languages)
+# offline for the public while every other check in this script stayed green.
+#
+# The dev box runs Clash Verge (Mihomo) in TUN + fake-ip mode, so a normal
+# resolver can still hand back a cached answer for a domain that no longer
+# exists. Every lookup below therefore goes over DoH, and the HTTPS probe
+# resolves through DoH as well (curl --doh-url), so no local cache can mask
+# an outage. Cloudflare keeps serving the Pages custom domain at the edge
+# even with the DNS record gone, which is exactly why "the browser still
+# works" is not evidence that the site is up.
+Write-Host "[11/11] Production domain DNS + HTTPS"
+$prodDomain = "weddingai.video"
+$pagesTarget = "weddingai-video.pages.dev"
+$dohResolvers = @(
+    @{ Name = "dns.google";     Url = "https://dns.google/resolve?name=$prodDomain&type=A" },
+    @{ Name = "cloudflare-dns"; Url = "https://cloudflare-dns.com/dns-query?name=$prodDomain&type=A" }
+)
+$dnsOk = @()
+$dnsMissing = @()
+$dnsUnreachable = @()
+# PowerShell 5.1 returns .Content as byte[] for non-text content types
+# (application/dns-json), so decode it before parsing.
+function Get-DohJson($uri) {
+    $resp = Invoke-WebRequest -Uri $uri -Headers @{ accept = "application/dns-json" } -UseBasicParsing -TimeoutSec 25
+    if ($resp.Content -is [byte[]]) {
+        $text = [System.Text.Encoding]::UTF8.GetString($resp.Content)
+    } else {
+        $text = [string]$resp.Content
+    }
+    return ($text | ConvertFrom-Json)
+}
+foreach ($resolver in $dohResolvers) {
+    try {
+        $dohJson = Get-DohJson $resolver.Url
+        $aRecords = @($dohJson.Answer | Where-Object { $_.type -eq 1 })
+        if ($aRecords.Count -gt 0) {
+            $ips = ($aRecords | ForEach-Object { $_.data }) -join ", "
+            $dnsOk += "$($resolver.Name): A -> $ips"
+        } elseif ($dohJson.Status -eq 3) {
+            $dnsMissing += "$($resolver.Name): NXDOMAIN"
+        } else {
+            $dnsMissing += "$($resolver.Name): NODATA (no A record)"
+        }
+    } catch {
+        $reason = $_.Exception.Message -replace '\s+', ' '
+        $dnsUnreachable += "$($resolver.Name): unreachable ($reason)"
+    }
+}
+foreach ($line in ($dnsOk + $dnsMissing + $dnsUnreachable)) { Write-Host "  $line" -ForegroundColor DarkGray }
+
+# ---------- HTTPS probe (runs before the verdict so the verdict can cite it) ----------
+# Two resolution paths, several attempts each way: the system resolver and the
+# DoH resolver. Either one alone can lie - the system resolver may serve a
+# stale cache, and on this dev box the direct-to-Cloudflare-IP path is dropped
+# by the local TUN proxy (measured: 2/8 successes for weddingai.video and
+# 6/8 for cloudflare.com, so it is the path that fails, not the site).
+# A single failed attempt must therefore never fail the gate; the authoritative
+# DNS verdict above is what decides a real outage.
+$curlExe = Get-Command curl.exe -ErrorAction SilentlyContinue
+$httpsCode = ""
+$httpsSeen = @()
+if ($curlExe) {
+    $probes = @(
+        @{ Label = "system resolver"; Extra = @("-4") },
+        @{ Label = "DoH";             Extra = @("-4", "--doh-url", "https://dns.google/dns-query") },
+        @{ Label = "system resolver"; Extra = @("-4") },
+        @{ Label = "DoH";             Extra = @("-4", "--doh-url", "https://dns.google/dns-query") }
+    )
+    foreach ($p in $probes) {
+        $code = & curl.exe -s -o NUL -L -w "%{http_code}" --max-time 25 @($p.Extra) "https://$prodDomain/" 2>&1
+        $exit = $LASTEXITCODE
+        $httpsSeen += "$($p.Label)=$code(exit $exit)"
+        if ("$code" -eq "200") { $httpsCode = "200"; break }
+    }
+} else {
+    try {
+        $httpsCode = (Invoke-WebRequest -Uri "https://$prodDomain/" -UseBasicParsing -TimeoutSec 30).StatusCode
+        $httpsSeen += "Invoke-WebRequest=$httpsCode"
+    } catch {
+        $httpsSeen += "Invoke-WebRequest failed: $($_.Exception.Message -replace '\s+', ' ')"
+    }
+}
+Write-Host ("  HTTPS attempts: " + ($httpsSeen -join ", ")) -ForegroundColor DarkGray
+
+if ($dnsOk.Count -gt 0 -and $dnsMissing.Count -gt 0) {
+    # A single resolver can answer oddly for some zones (Cloudflare's own
+    # resolver does this for Cloudflare-owned domains). Do not hard-fail on a
+    # disagreement alone.
+    Warn "DoH resolvers disagree about $prodDomain. Some still resolve it while others report it missing - visitors with a cold cache may not reach the site."
+} elseif ($dnsOk.Count -gt 0) {
+    Pass "$prodDomain resolves via DoH"
+} elseif ($dnsMissing.Count -gt 0) {
+    # Authoritative truth: the domain has no address record, so visitors with
+    # a cold cache cannot reach it - even if this machine still can.
+    Fail "$prodDomain has NO A record at the authoritative nameservers (every DoH resolver agrees). The custom-domain DNS record was deleted - re-add it in Cloudflare (DNS -> Records: CNAME @ -> $pagesTarget, proxy ON). The site is unreachable for visitors."
+} else {
+    Fail "Could not verify $prodDomain via DoH (all resolvers unreachable). The domain health cannot be proven - fix the network or the DoH endpoint before deploying."
+}
+
+if ($httpsCode -eq "200") {
+    Pass "https://$prodDomain/ returns 200"
+} else {
+    Fail "https://$prodDomain/ did not return 200 ($($httpsSeen -join '; '))."
+}
+
+# (the HTTPS probe now runs above, together with the DNS verdict)
+
+# www is informational only: every canonical URL in the repo uses the apex,
+# and www may legitimately never exist.
+try {
+    $wwwJson = Get-DohJson "https://dns.google/resolve?name=www.$prodDomain&type=A"
+    $wwwA = @($wwwJson.Answer | Where-Object { $_.type -eq 1 })
+    if ($wwwA.Count -gt 0) {
+        Write-Host "  www.$prodDomain -> A record present" -ForegroundColor DarkGray
+    } elseif ($wwwJson.Status -eq 3) {
+        Write-Host "  www.$prodDomain -> NXDOMAIN (no www record; canonical URLs use the apex, so this is fine)" -ForegroundColor DarkGray
+    } else {
+        Write-Host "  www.$prodDomain -> no A record" -ForegroundColor DarkGray
+    }
+} catch {
+    Write-Host "  www.$prodDomain -> lookup unavailable" -ForegroundColor DarkGray
 }
 
 # ---------- Summary ----------

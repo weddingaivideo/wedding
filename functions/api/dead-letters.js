@@ -97,9 +97,12 @@ export async function onRequestGet({ request, env }) {
     // Cost: 1 KV read per item, max 100 reads per request — fine for an admin
     // tool that's manually hit by the operator.
     if (statusFilter) {
-        const allowed = new Set(["pending", "delivered", "failed", "abandoned"]);
+        // "sent" = the provider accepted the request but its delivery event has
+        // not been confirmed yet (2026-10-29). It is deliberately NOT called
+        // "delivered": a 2xx on the send request only means "accepted".
+        const allowed = new Set(["pending", "sent", "delivered", "failed", "abandoned"]);
         if (!allowed.has(statusFilter)) {
-            return new Response(`Invalid status filter: ${statusFilter} (allowed: pending, delivered, failed, abandoned)`, { status: 400 });
+            return new Response(`Invalid status filter: ${statusFilter} (allowed: pending, sent, delivered, failed, abandoned)`, { status: 400 });
         }
         const hydrated = await Promise.all(
             itemsRaw.map(async (it) => {
