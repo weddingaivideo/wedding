@@ -32,6 +32,11 @@ param(
     [switch]$DryRun,
     [int]$PollSeconds = 45,
     [int]$KvDelaySeconds = 2,
+    # Seconds to wait between two sends. The enterprise mail server blocks a
+    # sender that delivers a burst of mail to the same recipient
+    # ("550 Mailbox unavailable or access denied", 企业微信帮助中心 doc 20057),
+    # so the backlog goes in one message at a time.
+    [int]$SendDelaySeconds = 90,
     [string]$To = "order@weddingai.video",
     [string]$From = "WeddingAI Quote <noreply@weddingai.video>"
 )
@@ -151,6 +156,29 @@ function Build-Text {
     return ($lines -join "`n")
 }
 
+function Wait-DeliveryEvent {
+    param([string]$EmailId, [int]$TimeoutSeconds = 45)
+    $event = "unknown"
+    for ($i = 0; $i -lt [Math]::Max(1, [int]($TimeoutSeconds / 10)); $i++) {
+        Start-Sleep -Seconds 10
+        try {
+            $e = Invoke-RestMethod -Uri "https://api.resend.com/emails/$EmailId" -Headers $resendHeaders -TimeoutSec 60
+            $event = $e.last_event
+        } catch { $event = "poll-error" }
+        if ($event -in @("delivered", "bounced", "failed", "suppressed")) { break }
+    }
+    return $event
+}
+
+function Get-BounceDetail {
+    param([string]$EmailId)
+    try {
+        $e = Invoke-RestMethod -Uri "https://api.resend.com/emails/$EmailId" -Headers $resendHeaders -TimeoutSec 60
+        if ($e.bounce -and $e.bounce.diagnosticCode) { return ($e.bounce.diagnosticCode -join ' ') }
+    } catch { }
+    return ""
+}
+
 $tokens = Get-Tokens
 $resendHeaders = @{ Authorization = "Bearer $($tokens['RESEND_API_KEY'])"; "Content-Type" = "application/json" }
 
@@ -170,8 +198,9 @@ if ($LeadKey.Count -gt 0) {
 if ($entries.Count -eq 0) { Write-Host "Nothing to send." -ForegroundColor Yellow; exit 0 }
 
 Write-Host ""
-Write-Host "=== 2. re-send ===" -ForegroundColor Cyan
+Write-Host ("=== 2. re-send (one at a time, {0}s apart) ===" -f $SendDelaySeconds) -ForegroundColor Cyan
 $sent = @()
+$stopped = $null
 foreach ($entry in $entries) {
     $lead = $entry.Lead
     $f = $lead.form
@@ -190,32 +219,44 @@ foreach ($entry in $entries) {
     $res = Invoke-RestMethod -Method POST -Uri "https://api.resend.com/emails" -Headers $resendHeaders -Body $body -TimeoutSec 60
     $sent += [pscustomobject]@{ Id = $res.id; Ref = $lead.reference_id; Email = $f.email }
     Write-Host ("      sent id={0}" -f $res.id)
+
+    # One message at a time: the enterprise mail server blocks a sender that
+    # delivers a burst to the same recipient ("550 Mailbox unavailable or
+    # access denied", 企业微信帮助中心 doc 20057). Wait for this message to
+    # land before sending the next one, and stop the run on the first failure
+    # instead of pushing the whole backlog into the same wall.
+    $event = Wait-DeliveryEvent -EmailId $res.id -TimeoutSeconds $PollSeconds
+    $color = if ($event -eq "delivered") { "Green" } else { "Yellow" }
+    Write-Host ("      event: {0}" -f $event) -ForegroundColor $color
+    if ($event -ne "delivered") {
+        $detail = Get-BounceDetail -EmailId $res.id
+        if ($detail) { Write-Host ("      bounce: {0}" -f $detail) -ForegroundColor Yellow }
+        $stopped = $lead.reference_id
+        Write-Host ("   STOPPED at {0} ({1}) - the rest of the backlog was NOT sent." -f $lead.reference_id, $event) -ForegroundColor Red
+        Write-Host "   Check the bounce above, wait out any rate limit, then run this script again." -ForegroundColor Yellow
+        break
+    }
+    if ($SendDelaySeconds -gt 0 -and $entry -ne $entries[$entries.Count - 1]) {
+        Write-Host ("      waiting {0}s before the next one" -f $SendDelaySeconds) -ForegroundColor DarkGray
+        Start-Sleep -Seconds $SendDelaySeconds
+    }
 }
 
 if ($DryRun) { Write-Host "`n[WhatIf] nothing was sent." -ForegroundColor Yellow; exit 0 }
 
 Write-Host ""
-Write-Host "=== 3. delivery events (poll up to $PollSeconds s) ===" -ForegroundColor Cyan
+Write-Host "=== 3. summary ===" -ForegroundColor Cyan
 foreach ($s in $sent) {
-    $event = "unknown"
-    for ($i = 0; $i -lt [Math]::Max(1, [int]($PollSeconds / 10)); $i++) {
-        Start-Sleep -Seconds 10
-        try {
-            $e = Invoke-RestMethod -Uri "https://api.resend.com/emails/$($s.Id)" -Headers $resendHeaders -TimeoutSec 60
-            $event = $e.last_event
-        } catch { $event = "poll-error" }
-        if ($event -in @("delivered", "bounced", "failed", "suppressed")) { break }
-    }
-    $color = if ($event -eq "delivered") { "Green" } else { "Yellow" }
-    Write-Host ("   {0,-16} {1,-24} {2}" -f $s.Ref, $s.Email, $event) -ForegroundColor $color
-    if ($event -ne "delivered") {
-        try {
-            $e = Invoke-RestMethod -Uri "https://api.resend.com/emails/$($s.Id)" -Headers $resendHeaders -TimeoutSec 60
-            if ($e.bounce.diagnosticCode) { Write-Host ("      bounce: {0}" -f ($e.bounce.diagnosticCode -join ' ')) -ForegroundColor Yellow }
-        } catch { }
-    }
+    $e = Invoke-RestMethod -Uri "https://api.resend.com/emails/$($s.Id)" -Headers $resendHeaders -TimeoutSec 60
+    $color = if ($e.last_event -eq "delivered") { "Green" } else { "Yellow" }
+    Write-Host ("   {0,-16} {1,-24} {2}" -f $s.Ref, $s.Email, $e.last_event) -ForegroundColor $color
 }
 
 Write-Host ""
+if ($stopped) {
+    Write-Host ("Stopped early at {0}. {1} of {2} leads were sent." -f $stopped, $sent.Count, $entries.Count) -ForegroundColor Yellow
+} else {
+    Write-Host ("All {0} leads were sent and confirmed delivered." -f $sent.Count) -ForegroundColor Green
+}
 Write-Host "Done. Every lead is still in KV (90 day TTL) until it is deleted by hand." -ForegroundColor Cyan
 exit 0

@@ -749,6 +749,35 @@ under the endpoint's 10-reads-per-5-minutes limit) and re-sends them through
 Resend. `-To` and `-From` are parameters, so the same script can target the
 mailbox, an alias, or a fallback inbox.
 
+### The backlog goes in ONE message at a time
+
+The first attempt sent all four leads back-to-back. Every one of them bounced
+with `550 Mailbox unavailable or access denied` — the enterprise mail server's
+anti-abuse limit (doc 20057), triggered by the burst itself. The script now:
+
+* sends one message, **waits for its delivery event**, and only then sends the
+  next one (`-SendDelaySeconds`, default 90);
+* **stops the run on the first failure** instead of pushing the rest of the
+  backlog into the same wall, and prints the bounce verbatim;
+* re-checks every message at the end and reports `sent / delivered` counts.
+
+Do not "optimise" this back into a batch send. A burst is what triggers the
+block, and the block is invisible from the outside: the mails are accepted by
+the API and then dropped by the receiving server.
+
+### The delivery target is order@weddingai.video — the code default, no env var
+
+The owner's decision (2026-10-29): new leads are notified to
+`order@weddingai.video`. `TO_EMAIL_DEFAULT` in both `functions/api/quote.js` and
+`functions/scheduled.js` already is that address, and `resolveToEmail()` only
+lets `env.TO_EMAIL` override it when the value is a valid address.
+
+**No Pages environment variable was added on purpose.** PATCHing
+`deployment_configs.production` with a partial object risks dropping the KV
+bindings that live in the same object — and those bindings are where the leads
+are stored. The default gives the wanted behaviour with zero risk to the
+storage layer.
+
 
 
 
