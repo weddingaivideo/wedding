@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,7 @@
     
     
     
-    <meta name="description" content="Elimina el fondo blanco, gris o negro de las fotos de boda en un clic. Ideal para invitaciones, carteles e impresión. Gratis en el navegador, sin subir archivos." />
+    <meta name="description" content="Elimina el fondo blanco, gris o negro de las fotos de boda en un clic. Ideal para invitaciones, carteles e impresión. Gratis en el navegador, sin subir." />
     <meta name="keywords" content="quitar fondo foto de boda, eliminar fondo blanco foto boda, recorte fondo boda, fondo transparente boda, retrato boda invitación">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Quitar Fondo a Foto de Boda — Gratis en el Navegador | WeddingAI.video">
@@ -29,7 +29,7 @@
     <meta name="theme-color" content="#D4AF37">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Herramientas WeddingAI">
     <link rel="stylesheet" href="/styles.min.css?v=3.39">
     <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
@@ -81,57 +81,21 @@
         .wa-tool-color-presets button[aria-pressed="true"] { border-color: var(--color-primary); box-shadow: 0 0 0 2px var(--color-primary); }
     </style>
 
-    <!-- Google tag (gtag.js) — deferred -->
-    <script nonce="__CSP_NONCE__">
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
-
-      window.__loadGtag = function() {
-        if (window.__gtagLoaded) return;
-        window.__gtagLoaded = true;
-        var s = document.createElement('script');
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
-        s.async = true;
-        s.onload = function() {
-          gtag('event', 'page_view', {
-            page_title: document.title,
-            page_location: location.href,
-            page_path: location.pathname + location.search
-          });
-        };
-        s.setAttribute('data-gtag-lazy', '1');
-        document.head.appendChild(s);
-      };
-
-      ['scroll','click','touchstart','keydown'].forEach(function(evt){
-        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
-      });
-      window.addEventListener('load', function() {
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
-        } else {
-          setTimeout(window.__loadGtag, 3000);
-        }
-      });
-    </script>
-
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "página delantera", "item": "https://weddingai.video/"}, {"@type": "ListItem", "position": 2, "name": "Herramienta gratuita para fotografías de bodas", "item": "https://weddingai.video/es/tools/"}, {"@type": "ListItem", "position": 3, "name": "Eliminar el fondo de los retratos de boda.", "item": "https://weddingai.video/es/tools/remove-background-wedding-portrait/"}]}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Eliminar el fondo de los retratos de boda.", "applicationCategory": "MultimediaApplication", "operatingSystem": "WEB", "browserRequirements": "Requiere navegadores modernos que admitan Canvas API y Uint8ClampedArray", "softwareVersion": "1.0", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Herramienta gratuita en el navegador para eliminar el fondo de estudio de color sólido (blanco/gris/negro) de las fotos de bodas y generar archivos PNG transparentes o JPG con fondo blanco. Tolerancia de color ajustable y difuminado de bordes, los archivos nunca salen del dispositivo del usuario.", "url": "https://weddingai.video/es/tools/remove-background-wedding-portrait/", "image": "https://weddingai.video/images/og-image-1200x630.jpg", "publisher": {"@type": "Organization", "name": "WeddingAI.video", "url": "https://weddingai.video/"}, "featureList": ["Seleccione cualquier color de fondo (blanco predeterminado)", "Control deslizante de tolerancia 0–150", "Borde degradado 0–8 px", "Salida: PNG transparente o JPG con fondo blanco", "Procesamiento 100% del lado del cliente", "No es necesario cargar, no es necesario registrarse"]}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Cómo eliminar el fondo de estudio de las fotos de boda", "step": [{"@type": "HowToStep", "position": 1, "name": "Arrastrar en la foto", "text": "Arrastre las fotos de la boda (JPG, PNG, WebP) al área de colocación o haga clic en Examinar para seleccionar el archivo."}, {"@type": "HowToStep", "position": 2, "name": "Elige el color de fondo", "text": "Utilice el selector de color: blanco predeterminado (más común en estudios fotográficos). Cambie a gris, beige o negro según sea necesario."}, {"@type": "HowToStep", "position": 3, "name": "Establecer tolerancia (predeterminado 50)", "text": "Comience con 50. Si no se puede eliminar el fondo, ajústelo más alto. Si accidentalmente se come la piel o el cabello, ajústelo más abajo."}, {"@type": "HowToStep", "position": 4, "name": "Establecer difuminado de borde (predeterminado 3 px)", "text": "Las tiras de plumas más estrechas pueden eliminar el halo duro alrededor de los bordes del cabello y los hombros. Los valores más grandes son más suaves, los valores más pequeños son más nítidos."}, {"@type": "HowToStep", "position": 5, "name": "Elija salida: PNG transparente o JPG con fondo blanco", "text": "El PNG permanece transparente para pegarlo fácilmente en invitaciones de colores. El JPG tiene un fondo blanco, lo que facilita su impresión o publicación directa."}, {"@type": "HowToStep", "position": 6, "name": "Ejecutar y descargar", "text": "Haga clic en \"Eliminar fondo\" y luego haga clic en el botón de descarga para cada fila, o use \"Guardar todo\" para descargar todos los resultados a la vez."}]}</script>
-<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/remove-background-wedding-portrait/"><link rel="alternate" hreflang="zh" href="https://weddingai.video/es/tools/remove-background-wedding-portrait/"><link rel="alternate" hreflang="es" href="https://weddingai.video/es/tools/remove-background-wedding-portrait/"><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/remove-background-wedding-portrait/">
-    <!-- Baidu Tongji (hm.baidu.com) — analytics -->
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?784c824843f328ed5f8254991ef8b2f4";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    });
-    </script>
-
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/remove-background-wedding-portrait/">
+<link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/remove-background-wedding-portrait/">
+<link rel="alternate" hreflang="es" href="https://weddingai.video/es/tools/remove-background-wedding-portrait/">
+<link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/tools/remove-background-wedding-portrait/">
+<link rel="alternate" hreflang="de" href="https://weddingai.video/de/tools/remove-background-wedding-portrait/">
+<link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/tools/remove-background-wedding-portrait/">
+<link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/tools/remove-background-wedding-portrait/">
+<link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/remove-background-wedding-portrait/">
+<link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/tools/remove-background-wedding-portrait/">
+<link rel="alternate" hreflang="th" href="https://weddingai.video/th/tools/remove-background-wedding-portrait/">
+<link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/tools/remove-background-wedding-portrait/">
+<link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/remove-background-wedding-portrait/">
     <!-- Clarity (clarity.ms) — heatmaps & session replay -->
     <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -516,7 +480,7 @@
             <div class="container">
                 <p data-i18n="404.p_text.2026_weddingai_video_all_rights_reserve.73926096">© 2026 WeddingAI.video. All rights reserved.</p>
                 <div class="footer-featured">
-                    <a class="footer-badge footer-badge-secondary" href="/es/about/" title="500+ couples served, 4.9/5 rating" data-i18n="about.a_text.couples_served.ddddddd1" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 0.75rem;background:var(--color-bg-alt);border-radius:6px;font-size:0.8125rem;font-weight:600;color:var(--color-secondary);text-decoration:none;border:1px solid var(--color-border);">⭐ 4.9/5 · 500+ couples</a>
+                    <a class="footer-badge footer-badge-secondary" href="/es/about/" title="500+ couples served, 4.9/5 rating" data-i18n="about.a_text.couples_served.ddddddd1" data-i18n-attr="title:about.a_text.couples_served_title.ddddddd3" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 0.75rem;background:var(--color-bg-alt);border-radius:6px;font-size:0.8125rem;font-weight:600;color:var(--color-secondary);text-decoration:none;border:1px solid var(--color-border);">⭐ 4.9/5 · 500+ couples</a>
                 </div>
             </div>
         </div>

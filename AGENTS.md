@@ -570,9 +570,6 @@ customers re-submitted because no reply ever came.
 
 ### Still open
 
-* The site still marks a suppressed send as `delivered`. Nothing polls
-  Resend's event status or the suppression list, so the same silent loss can
-  happen again, silently, for as long as it takes someone to notice.
 * `functions/api/quote.js` hard-codes `TO_EMAIL_DEFAULT = "order@weddingai.video"`
   and **ignores** `env.TO_EMAIL` (commit 48cf7c14 forced the default to work
   around an env-pollution bug). Repointing the notification address is a code
@@ -908,3 +905,437 @@ All eleven languages: **0 titles over 60, 0 descriptions over 160, 0 missing
 keys**. 700 localized bindings agree across both layers. The static layer
 stays at `751 OK, 0 over`. The gate's step 9b is now clean but stays
 report-only.
+
+## The currency tokenizer read three locales wrong (2026-10-30)
+
+`functions/_middleware.js` → `localizeCurrencyForLang` rewrites every USD
+price in the served document into `$X <span class="wa-local-price">(≈ €9)</span>`,
+so a visitor in a non-USD locale sees a rough local equivalent. The **number
+parser** was the weak part, and it was wrong in three ways at once. Every case
+below was proven by running the real function (old vs new) over the whole
+corpus — 403 distinct price tokens, 13 294 documents that contain a `$`.
+
+| what the copy says | what the OLD code did | what it does now |
+|---|---|---|
+| `$9,9` (decimal comma) | `$9 <span>(≈ R$49)</span>,9` — the span landed **inside** the number and 9 USD was converted instead of 9.9 | `$9,9 <span>(≈ R$53)</span>` |
+| `$15.000` (European thousands) | parsed as **15** — a 1000× error — and the range `$1.000-$3.000` was cut mid-number | `$15.000 <span>(≈ €13.800)</span>` |
+| `R$3.000` (Brazilian reais) | treated as USD and "converted" into euros/rupees | left alone — it is already a local amount |
+
+Two more shapes the old regex simply did not match, so those prices got **no**
+local equivalent at all: `US$ 9,9` and `$ 34,90` (a space between the symbol
+and the amount).
+
+The rules now in `USD_AMOUNT` / `USD_MARK` / `parseUsdAmount`:
+
+* a separator followed by **three** digits is a thousands separator
+  (`$1,000` → 1000), one or **two** digits is a decimal comma (`$9,9` → 9.9);
+* the `$` starts a USD amount only when **no letter precedes it**, or when it
+  is explicitly `US$` — so `R$` (reais) is never converted;
+* one space after the `$` is allowed (`US$ 9,9`);
+* the span is placed after the **whole** token, range included.
+
+**A plain `$9.9` is byte-for-byte unchanged.** The gate's served-title model
+in `scripts/check-i18n-meta-lengths.py` was updated to the same tokenization
+(`parse_usd_amount`), because a checker that models a different tokenizer
+measures a title the visitor never sees.
+
+### The gate's title budget must include the injected currency text
+
+The `<title>` is **not** a `<meta>` tag, so the middleware's meta-stash does
+not protect it: the price in a title is rewritten too, and the span's *text*
+counts towards the title a visitor sees. `served_title_length()` adds the
+length of `(≈ EUR9)` per price. The localised homepage titles were shortened
+until the **served** length fits — `pt 60`, `es 59`, `ru 57`, `th 54`,
+`ar 53`, `de 50`, `fr 49` — and the price itself was kept, not deleted.
+
+## The machine translation transliterated the DOMAIN (2026-10-30)
+
+The brand is `WeddingAI.video`. The machine translation wrote the **domain**
+in the target script — `वेडिंगएआई.वीडियो` in Hindi (1 812 dictionary values)
+and `СвадьбаAI.видео` / `СвадьбаAI.video` in Russian (5). A visitor in Delhi
+was told the site was called `वेडिंगएआई.वीडियो`.
+
+The authoritative native layer never did this: the Hindi static pages write
+`WeddingAI.video` **835** times and `वेडिंगएआई.वीडियो` **0** times; the Russian
+static pages write it 179 times and `СвадьбаAI.видео` 0 times. So the
+transliteration was machine residue, not a house style — and both layers were
+rewritten with the same token list so they keep agreeing.
+
+**TRAP: `वेडिंग` is the Hindi word "wedding", not the brand.** The bare
+transliterated *product* name is `वेडिंगएआई`; the common word is `वेडिंग`.
+Grepping for the short form flags 800+ legitimate values. Match the full
+`वेडिंगएआई` (or the brand in Latin) and never the three-letter prefix.
+
+## The localized fallback titles had drifted from their English source (2026-10-30)
+
+The last 23 over-limit titles were the **fallback** ones: `hi` (18) and `ru`
+(5), each bound by exactly one page — the **English** one. Changing the
+dictionary value therefore touches no localized page and creates no
+two-layer drift (a key bound by a localized page would).
+
+They were not just long, they were **stale**: they translated the *old*
+English title. The English title now reads "15 Unique Wedding Video Ideas",
+the Hindi one still said **25** — a factual contradiction between the two
+languages on the same page. The rewritten values translate the **current**
+English title in the language's own native house style (Hindi: natural
+sentence, no brand suffix, no price; Russian: `… | WeddingAI.video` on the
+service pages, matching the native `ru/tools/*` pages).
+
+## Result (2026-10-30)
+
+All eleven languages: **0 titles over 60, 0 descriptions over 160, 0 missing
+keys** (ru still lacks 214 translation keys — a content gap, not a length
+one). 700 localized bindings agree across both layers, the static layer stays
+at `751 OK, 0 over`, all 11 dictionaries round-trip byte-identically, and the
+full pre-deploy gate reports **Errors 0, Warnings 1, READY TO DEPLOY**.
+
+## The 13 tools got a full bug-fix pass on 2026-10-16 — a bug report may describe the pre-fix build (2026-10-30)
+
+Commits `869d4504` (Bug #7/#10/#17 + iOS PWA meta + IIFE->DOMContentLoaded) and
+`5a0f4b59` fixed the P0/P1 tool bugs in one pass. Verified 2026-10-30: the
+**live** site already serves the fixed build (marker check on all 13 tool
+pages: `DOMContentLoaded`, `PRESET100`, `SEAT-SORT`, `CSV-ROWS`, `SIGN`,
+`BINDPHOTO`, `CROP-DISCLOSE`, `RM-BG-AUTO`, `BOOK-STAT` all present).
+
+A test report claiming "100% reproducible, 5-6 of 13 tools crash on load"
+therefore describes a **pre-2026-10-16 snapshot**, not the current site.
+
+### What the report got right, and what is still open
+
+* **#18 Crop "Smart center" is fake — TRUE, and only half-fixed.** The code
+  has no face detection (hard-coded `biasY = H * 0.6`). The *control* now
+  says "Off-center bias (heuristic, not face detection)", but the page still
+  advertises AI face detection in the `<meta name="description">`, the
+  comparison table ("AI face-centered auto-crop"), the body paragraph
+  ("runs the face-detection model in the browser"), the SERP paragraph and
+  the tools-hub card. The page contradicts itself in the same viewport.
+* **Same class, not in the report:** `tools/compress-wedding-photos` claims
+  "face-aware quality preservation" / "Face-aware AI quality 60-85%
+  reduction" and beats competitors on "no face detection" — its JS is plain
+  canvas re-encode, no face logic at all.
+* **#19 `apple-mobile-web-app-capable` — only the English pages were fixed.**
+  Still present on 153 files: 130 localized tool pages, `services/*`,
+  `about/`, `gallery/`, `terms/`, `privacy/`, `order/`, `search/`,
+  `resources/`, `success/`. Root cause: `internal-tools/inject-pwa-tags.ps1`
+  still writes the deprecated tag, so fixing the pages alone lets the next
+  run re-inject it. **Fix the script and the pages together.**
+
+### Audit rule
+
+Before acting on a bug report for this site, check the **live build's**
+markers, not just the repo. And when a report says "100% reproducible" in a
+real browser against the live site, treat that as a claim about an older
+build until the live HTML is checked.
+
+## 63% of the site returned 503: the dictionaries were parsed per request (2026-10-31)
+
+### The measurement
+
+Crawling all 1539 sitemap URLs against the pinned edge IP (correct SNI, no
+local DNS cache) gave:
+
+```
+en  2.2% 503    ru  7.9%    ar 26.4%    de 53.6%    es 77.9%
+hi 82.9%        ja 86.4%    pt 85.7%    th 93.6%    zh 97.1%
+-----------------------------------------------------------------
+ALL 63.3%  (974 of 1539 URLs)
+```
+
+The error body is exactly `error code: 1102` - Cloudflare's Worker CPU limit.
+English is fine because `if (lang === DEFAULT_LANG) return null;` means the
+English path never loads a dictionary. Every other language degrades in
+proportion to the size of its dictionary.
+
+The dictionaries are 6-17 MB; a pure `JSON.parse` of one costs **219-591 ms**
+against the 50 ms the CF Pages Free plan allows.
+
+**The 5-minute body cache cannot rescue this.** `getCachedProcessedBody` only
+helps a page whose build already succeeded once; the first build blows the
+limit, throws, and the cache never receives an entry. The failure is permanent
+for that URL.
+
+### The fix: namespace shards
+
+`qa/build-i18n-shards.py` splits each dictionary into per-namespace shards
+(407-408 per language, biggest 366 KB) plus a manifest at
+`i18n/<lang>.manifest.json`. A page loads only the namespaces its own
+`data-i18n` keys live in - about 10 of the 407. Parse cost drops from
+219-591 ms to **1.2-13.9 ms**.
+
+`functions/_lib/i18n-shards.js` does the loading; `functions/_middleware.js`
+calls it and falls back to the full dictionary if anything is missing, so the
+behaviour degrades instead of breaking.
+
+### TRAP: namespace granularity is too coarse for the blog hub
+
+`blog/index.html` binds the title and the meta description of ~100 articles.
+But each article lives in its own namespace that holds the **entire article
+body** (~1000-1400 keys, 170-370 KB each). So the hub needed **111
+namespaces** - over the 40-shard budget of the loader and over the
+50-subrequest limit of the plan - and the union of those namespaces is
+**85-87% of the whole dictionary** (9-15 MB).
+
+Re-bundling by prefix does NOT help: the payload would be the same 9-15 MB,
+and parsing it is exactly what blows the CPU limit. The only fix is to stop
+loading the article bodies.
+
+### The page bundle
+
+For a page over the budget, the builder emits ONE bundle file holding
+exactly the keys that page binds, plus the few keys the middleware looks up
+by a fixed name (`index.og_*`, `index.twitter_*`, `pricing.meta_*`,
+`homepage_faq.qN.*`, `pricing_faq.qN.*`). For the blog hub that is ~190 card
+strings - **47 KB instead of 9-15 MB, one request instead of 111**.
+
+The bundle is keyed by the hash of the page's **namespace set**, because that
+is what the runtime can compute from the html it is about to serve. The
+manifest carries it under `__bundles__`; the runtime looks the hash up and,
+if it finds a bundle, fetches that one file. No bundle -> the old namespace
+path.
+
+### The freshness gate (step 9d)
+
+The shards are a DERIVED artefact. Editing `i18n/<lang>.json` without
+rebuilding them makes the middleware serve the OLD translations - silently,
+because the page still returns 200. Nothing in the old gate could see it.
+
+`scripts/verify-i18n-shards.py` (wired into
+`internal-tools/pre-deploy-check.ps1` as step 9d, FATAL) proves:
+
+1. **Coverage** - every namespace of every dictionary has a manifest entry.
+2. **Freshness** - the shards, merged, equal the dictionary exactly. This is
+   the real staleness test.
+3. **Parity** - `namespaceOf()` in `functions/_lib/i18n-shards.js` agrees with
+   `ns_of()` in `qa/build-i18n-shards.py`. If they drift, the middleware asks
+   for shard files that do not exist and every translation silently falls
+   back to English.
+
+It also proves the bundles: the right file, keyed by the right namespace-set
+id, carrying every key the page binds.
+
+### TRAP: the builder's key parser filed `title:key` under `_root`
+
+The builder used to understand only `data-i18n="key"` and
+`data-i18n-attr="content:key"`. So:
+
+* `data-i18n-attr="title:key"` was parsed as the key `"title:key"`, whose
+  namespace came out as `_root` - no shard was ever built for the real
+  namespace, and the binding stayed English.
+* `data-i18n-attr="content:a|b"` was parsed as ONE key `"a|b"`, so only one of
+  the two namespaces was ever requested.
+
+Both bugs show up as untranslated text, never as an error. All three
+implementations (builder, verifier, runtime) now use the same rule, and the
+verifier cross-checks the Python and the JavaScript against each other.
+
+### TRAP: a concurrent writer can empty `i18n/<lang>.json`
+
+`i18n/ja.json` was once reduced to **0 bytes** by a plain
+`open(path, "w")`, which truncates BEFORE the write. `scripts/set-i18n-values.py`
+now writes to a temp file, fsyncs it and `os.replace()`s it over the target,
+which is atomic on Windows.
+
+Read a dictionary that is being rewritten and you can get a torn or empty
+file - a `json.loads` error that looks like a corrupt file but is really a
+race. Another agent session working on the same workspace is enough to cause
+it.
+
+### The rule
+
+**Rebuild the shards as the last step before a deploy, and let the gate
+prove it.** The shards and the manifests are NOT tracked by git yet - they
+have to be `git add`ed, or the middleware falls back to the full dictionary
+and the 503s come straight back.
+
+```
+powershell -File internal-tools/refresh-i18n-shards.ps1
+```
+
+rebuilds and verifies in one go, and exits non-zero if anything is still out
+of sync. Run it AFTER every other session that touches `i18n/<lang>.json` has
+finished - see the trap below.
+
+`node tests/middleware-i18n-check.cjs` runs the real middleware against the
+real files with a mocked origin and asserts the whole chain: no markup in
+the `<title>`, the trust line and the footer badge translated, the shard path
+used (not the full dictionary), and the blog hub served from a bundle with
+its card titles translated.
+
+`node tests/cookie-consent-check.cjs` does the same for the cookie banner,
+which the middleware's server-side pass cannot reach because it is built at
+runtime.
+
+## The hreflang graph was broken in three ways (2026-11-01)
+
+### What the live site served
+
+The middleware builds a correct hreflang block (11 languages + x-default)
+and injects it, but it first has to REMOVE the author's own block. The
+strip regex only matched ONE attribute order:
+
+```
+<link rel="alternate" hreflang="xx" href="...">      stripped
+<link href="..." hreflang="xx" rel="alternate"/>      NOT stripped
+```
+
+The 50 `hi/blog/*` pages are written in the second form, so their block
+survived next to the injected one and the live page served **24 alternate
+links instead of 12** - "Hreflang: Multiple Entries" in Search Console.
+
+Measured live (pinned edge IP, correct SNI): 12 of 13 sampled pages were
+fine; `/hi/blog/affordable-wedding-video-ai/` was the broken one.
+
+### The author's blocks were themselves wrong
+
+Three defects, all invisible to a naive read of the markup:
+
+* **MISSING LANGUAGES** - 670 pages advertised only 10 languages. The `hi`
+  graph (added with the November 2026 Hindi launch) was never backfilled:
+  622 pages had no alternate for a language that exists.
+* **THE WRONG LANGUAGE IN THE `zh` SLOT** - the block was copied from the
+  ENGLISH page with the page's own language prefix substituted into the
+  FIRST localized entry, which in the template is `zh`. So every localized
+  page outside the zh folder advertised `zh` pointing at ITSELF: an `/ar/`
+  page told Google the Arabic version of the page is the Urdu one.
+* **DUPLICATED ENTRIES** - 34 pages carried the English page's `en` +
+  x-default pair next to their own, so the same hreflang value appeared
+  twice (68 duplicate values in total).
+
+### The fix
+
+* `functions/_middleware.js` - `stripCanonicalAndAlternates()` parses the
+  attributes instead of matching them positionally, so any order and any
+  quoting is handled.
+* `scripts/fix-hreflang-blocks.py` - rewrites every page's block to the
+  canonical 12-entry form and verifies each file before writing it.
+* `scripts/verify-hreflang.py` - the checker; wired into the pre-deploy
+  gate as step 9e (FATAL).
+
+**The lesson**: the middleware was already generating the right thing. The
+defect was that the cleanup step only understood one spelling of the markup
+it had to remove, so the stale copy leaked through. A cleanup that matches
+one form is a cleanup that silently does nothing on the other form.
+
+### TRAP: 633 of the 722 html files started with a UTF-8 BOM
+
+Harmless in a browser, but it breaks every naive text tool:
+`text.startswith("<!DOCTYPE")` is False, `re.match(r"^<html")` is None. It
+also blocked `scripts/fix-hreflang-blocks.py` from touching those files at
+all - the script refused to rewrite a file it could not reason about. The
+BOMs were removed in the same pass.
+
+## `js/langs.js` and `functions/_lib/langs.js` are NOT byte-identical
+
+The older note in this file said the two must stay byte-identical. They
+deliberately are not any more: `js/langs.js` also assigns
+`window.WA_LANGS` / `window.WA_DEFAULT_LANG` / `window.WA_RTL` for the
+browser, and the Functions copy has no `window`. What must match is the
+**LANGS array**, and `scripts/check_langs_sync.py` checks exactly that.
+
+### TRAP: that script also reported a false positive about `_redirects`
+
+It demanded a `/en/* → /:splat 200` rule for every language including the
+default one. The default language needs NO such rule: `/about/` IS the
+English source, and the rule exists to reach the English source FROM a
+localized url. Adding it would be actively harmful - it would match
+`/en/blog/01-<old-slug>/` BEFORE the 50 blog 301 rules that migrate those
+slugs, sending visitors to a 404 instead of the 301.
+
+`scripts/check_langs_sync.py` now excludes the default language.
+
+## The free tools advertised AI they never had (2026-11-01)
+
+A capability audit of the 13 free browser tools against their own JavaScript.
+Every claim in their copy was checked against the implementation, and the two
+layers had drifted apart. **Nine tools shipped claims their code cannot
+support.**
+
+### What each free tool actually does
+
+| tool | actual implementation | what the copy claimed |
+|---|---|---|
+| crop-wedding-photo-for-reels | hard-coded off-center bias (`biasY = H*0.6` landscape / `H*0.5` portrait) | "AI face-centred", "face detection" |
+| compress-wedding-photos | canvas re-encode + quality slider | "face-aware compression" |
+| wedding-photo-collage | 6 fixed `LAYOUTS` (grid-2x2, grid-2x3, grid-3x3, grid-3x4, strip-h, strip-v) and **no filter/preset system at all** | "8 AI styles (cinematic, vintage, cartoon, pet, meme, multilingual)", "AI auto-pair detects wedding chapters" |
+| wedding-photo-book-planner | 5 plain layouts (1/2/3/4 photos + cover); `autoDistribute()` fills slots in upload order | "AI auto-pairs photos per chapter", "auto-pairs by theme (preparation/ceremony/reception/portraits)", "9 AI styles", "AI Layout" |
+| remove-background-wedding-portrait | RGB colour key (`hexToRgb`) | "AI face preservation", "9 Thai wedding background styles" - there is no background library, only colour-key presets |
+| heic-to-jpg-wedding-photos | `<img>` decode (Safari only) + `drawImage` -> `canvasToBlob` | "EXIF preserved", "auto-pair into the video workflow", and a "Hand off to AI Video Generator" button + "upload queue" that **do not exist** |
+| add-text-to-wedding-photo | fixed text positions, no caption generator | "AI 10 IG captions auto-generated" |
+| wedding-hashtag-generator | template combinations in the browser | "AI generates 50+ hashtag ideas" |
+| wedding-seating-chart-maker | `autoAssign()` sorts guests by group (vip > family > friends > work > other) and fills the seats | "AI no-overlap auto-assign", plus invented constraints ("no divorced parents together", "grandparents near the exit") and "runs in 9 seconds" |
+| wedding-invitation-maker | `getTemplate()` / `render()` over a fixed template set | "AI auto-designs layout from names + venue" |
+| save-the-date-maker | local canvas card render | "AI save-the-date card" |
+
+### The rule
+
+A free in-browser tool must not claim a capability its own JavaScript does
+not implement. Two kinds of claim were removed:
+
+1. **Invented capability** - face detection, chapter detection, auto-pairing,
+   EXIF preservation, a button that does not exist.
+2. **Overstated mechanism** - calling a deterministic local algorithm "AI".
+   The comparison tables list "no AI auto-design" as a *competitor's* weakness,
+   so the label is a comparative claim, not decoration.
+
+What was kept: every "AI" that modifies the **AI wedding video product** (the
+paid server-side service). Those cannot be verified from this repository, so
+they stay - the same boundary that keeps `blog.*` and `services.*` untouched.
+
+### The dictionary KEY NAMES are not the bug
+
+`td_text.8_ai_styles_2_30_photos`, `th_text.ai_layout`,
+`td_text.ai_auto_pairs_photos_per_ch` still carry the old words in their key
+names. That is intentional - the key is an identity, the value is the copy.
+Same trap as `pricing.td_text.9_400_couples_served_*`: a value that disagrees
+with its key is not automatically wrong.
+
+### The static layer and the dictionary layer both carry the English source
+
+The localized static pages keep the ENGLISH text in their `data-i18n` lines,
+so one byte-level replacement pass fixes the English page, the localized page
+and the fallback path at the same time. The dictionary then needs its own
+translation per language. Both layers must be done, or the site serves two
+different stories for the same key.
+
+### TRAP: zero-width spaces make a substring replacement match nothing
+
+Several stored values contain U+200B inside a phrase (`EXIF preservado`).
+A literal `str.replace` silently finds nothing there and reports "0
+replacements" - which looks exactly like "nothing to fix". Use a regex with
+an optional zero-width-space class and **assert the match count**.
+
+### TRAP: my own correction propagated a false claim into 9 languages
+
+The collage copy said "8 distinct styles (cinematic, vintage, ...)" and the
+styles do not exist - the tool has 6 layouts and no style system. A first
+pass replaced the *chapter detection* claim and left the style list intact,
+then translated that English into 9 languages. The number was wrong in every
+one of them. **Verify the nouns in a claim, not only the verb.**
+
+### Writing a 10 MB dictionary must be atomic
+
+`open(path, "w")` truncates first, so a failure mid-write leaves a 0-byte
+file. `scripts/set-i18n-values.py` writes a sibling temp file, fsyncs it and
+`os.replace`s it into place. A worker once truncated `i18n/ja.json` to 0 bytes
+this way.
+
+### The gates
+
+* `scripts/scan-false-capability-residuals.py` - full-site scanner for the
+  claim phrases above. Its classification is **negation-aware** ("no face
+  detection", "顔認識なし", "人脸识别不明确" are honest) and its scope
+  excludes `blog/` and `services/`, which describe the AI video product.
+* `scripts/scan-face-claims.py` - capability-assertion parity between every
+  localized value and its English canonical. A localized value that asserts a
+  capability the English value does not is machine-translation drift.
+* `scripts/verify-no-false-face-claims.py` - the per-change gate.
+* Fixers: `scripts/fix-en-false-ai-claims.py` (English layer + all localized
+  static pages), `scripts/fix-tierb-ai-labels.py` (the "AI" mechanism labels),
+  `scripts/fix-residual-claims.py` (last batch), `scripts/build-lang-false-ai-fixes.py`
+  and `scripts/build-th-drift-fixes.py` (per-language packages).
+
+Every dictionary change requires a shard rebuild afterwards - `i18n/shards/`
+is the artifact the middleware reads first, and a stale shard set serves the
+old copy silently.
+
+

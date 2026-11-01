@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -29,7 +29,7 @@
     <meta name="theme-color" content="#D4AF37">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="أدوات WeddingAI">
     <link rel="stylesheet" href="/styles.min.css?v=3.39">
     <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
@@ -74,57 +74,21 @@
         .sibling-tools a:hover { background: #fff7e6; border-color: var(--color-primary); color: var(--color-secondary); }
     </style>
 
-    <!-- Google tag (gtag.js) — deferred -->
-    <script nonce="__CSP_NONCE__">
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
-
-      window.__loadGtag = function() {
-        if (window.__gtagLoaded) return;
-        window.__gtagLoaded = true;
-        var s = document.createElement('script');
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
-        s.async = true;
-        s.onload = function() {
-          gtag('event', 'page_view', {
-            page_title: document.title,
-            page_location: location.href,
-            page_path: location.pathname + location.search
-          });
-        };
-        s.setAttribute('data-gtag-lazy', '1');
-        document.head.appendChild(s);
-      };
-
-      ['scroll','click','touchstart','keydown'].forEach(function(evt){
-        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
-      });
-      window.addEventListener('load', function() {
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
-        } else {
-          setTimeout(window.__loadGtag, 3000);
-        }
-      });
-    </script>
-
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "الصفحة الأولى", "item": "https://weddingai.video/"}, {"@type": "ListItem", "position": 2, "name": "أداة مجانية لصور الزفاف", "item": "https://weddingai.video/ar/tools/"}, {"@type": "ListItem", "position": 3, "name": "صور زفاف مضغوطة", "item": "https://weddingai.video/ar/tools/compress-wedding-photos/"}]}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "صور زفاف مضغوطة", "applicationCategory": "MultimediaApplication", "operatingSystem": "WEB", "browserRequirements": "يتطلب متصفحًا حديثًا يدعم Canvas API", "softwareVersion": "1.0", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "أداة مجانية داخل المتصفح تعمل على تقليل حجم فستان الزفاف بصيغة JPG وPNG بنسبة 60-85% بدون تحميل. جودة صورة قابلة للتعديل وقياس جانبي أطول اختياريًا. تظل الملفات دائمًا على جهاز المستخدم.", "url": "https://weddingai.video/ar/tools/compress-wedding-photos/", "image": "https://weddingai.video/images/og-image-1200x630.jpg", "publisher": {"@type": "Organization", "name": "WeddingAI.video", "url": "https://weddingai.video/"}, "featureList": ["سحب وإسقاط تحميل الدفعة", "جودة JPG قابلة للتعديل (30-95)", "اختياري أطول تحجيم جانبي", "معالجة من جانب العميل بنسبة 100%", "لا حاجة للتحميل، لا حاجة للتسجيل", "تحميل دفعة"]}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "كيفية ضغط صور الزفاف في المتصفح", "step": [{"@type": "HowToStep", "position": 1, "name": "اسحب الصور أو حددها", "text": "اسحب صورة أو انقر للتصفح. يدعم JPG، PNG، ويب بي."}, {"@type": "HowToStep", "position": 2, "name": "ضبط جودة JPG (الافتراضي 75)", "text": "كلما كانت القيمة أصغر، كان الملف أصغر؛ كلما كانت القيمة أكبر، كانت جودة الصورة أفضل. 75 في أغلب مشاهد الأعراس لا يوجد فرق بالعين المجردة."}, {"@type": "HowToStep", "position": 3, "name": "اختياري: تحديد الجانب الأطول", "text": "يكون هذا مفيدًا عند التحميل إلى ألبوم بحد أقصى 2048 بكسل."}, {"@type": "HowToStep", "position": 4, "name": "انقر للضغط", "text": "تتم معالجة الملفات واحدًا تلو الآخر في المتصفح، ويتم عرض الحجم المحفوظ لكل صورة في الوقت الفعلي."}, {"@type": "HowToStep", "position": 5, "name": "تحميل", "text": "انقر فوق زر التنزيل لكل صورة، أو استخدم Save All لتصدير الدفعة بأكملها مرة واحدة."}]}</script>
-<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/compress-wedding-photos/"><link rel="alternate" hreflang="zh" href="https://weddingai.video/ar/tools/compress-wedding-photos/"><link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/tools/compress-wedding-photos/"><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/compress-wedding-photos/">
-    <!-- Baidu Tongji (hm.baidu.com) — analytics -->
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?784c824843f328ed5f8254991ef8b2f4";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    });
-    </script>
-
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/compress-wedding-photos/">
+<link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/compress-wedding-photos/">
+<link rel="alternate" hreflang="es" href="https://weddingai.video/es/tools/compress-wedding-photos/">
+<link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/tools/compress-wedding-photos/">
+<link rel="alternate" hreflang="de" href="https://weddingai.video/de/tools/compress-wedding-photos/">
+<link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/tools/compress-wedding-photos/">
+<link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/tools/compress-wedding-photos/">
+<link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/compress-wedding-photos/">
+<link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/tools/compress-wedding-photos/">
+<link rel="alternate" hreflang="th" href="https://weddingai.video/th/tools/compress-wedding-photos/">
+<link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/tools/compress-wedding-photos/">
+<link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/compress-wedding-photos/">
     <!-- Clarity (clarity.ms) — heatmaps & session replay -->
     <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -270,14 +234,14 @@
         <section class="section" style="background: var(--color-bg-alt);">
             <div class="article-body">
         <div class="compress-compare-section" style="margin: var(--spacing-lg) 0;">
-            <h2 data-i18n="tools.compress-wedding-photos.h2_text.compress_tool_comparison_5_v8w9x0y1">Compress Tool Comparison: 5 Tools vs WeddingAI.video Face-Aware AI</h2>
-<p data-i18n="tools.compress-wedding-photos.p_text.google_serp_for_compress_weddi.q1r2s3t4">Google SERPs for "compress wedding photos for email free" (Oct 2025) surface Adobe Express (40 MB upload cap), ResizeImage.dev (Sep 2026 target 200–500 KB per photo), Img2Go (4.5★, 1,574 reviews — 7 compression modes), Bulk Image Compressor (no upload, no signup), and iLoveIMG (free, multiple files in seconds). None ship face-aware AI quality + bundled wedding video workflow like WeddingAI.video does:</p>
+            <h2 data-i18n="tools.compress-wedding-photos.h2_text.compress_tool_comparison_5_v8w9x0y1">Compress Tool Comparison: 5 Tools vs WeddingAI.video In-Browser Batch</h2>
+<p data-i18n="tools.compress-wedding-photos.p_text.google_serp_for_compress_weddi.q1r2s3t4">Google SERPs for "compress wedding photos for email free" (Oct 2025) surface Adobe Express (40 MB upload cap), ResizeImage.dev (Sep 2026 target 200–500 KB per photo), Img2Go (4.5★, 1,574 reviews — 7 compression modes), Bulk Image Compressor (no upload, no signup), and iLoveIMG (free, multiple files in seconds). None ship a bundled wedding-video workflow like WeddingAI.video does:</p>
 <table class="full-pricing-table" style="margin: var(--spacing-md) 0;">
 <thead>
 <tr>
 <th data-i18n="tools.compress-wedding-photos.th_text.tool.1a2b3c4d">Tool</th>
 <th data-i18n="tools.compress-wedding-photos.th_text.batch_cap.5e6f7g8h">Batch / File Cap</th>
-<th data-i18n="tools.compress-wedding-photos.th_text.ai_quality.9i0j1k2l">AI Face-Aware Quality</th>
+<th data-i18n="tools.compress-wedding-photos.th_text.ai_quality.9i0j1k2l">Output Quality</th>
 <th data-i18n="tools.compress-wedding-photos.th_text.bundled_video.7q8r9s0t">Bundled Wedding Video</th>
 </tr>
 </thead>
@@ -285,7 +249,7 @@
 <tr>
 <td data-i18n="tools.compress-wedding-photos.td_text.weddingaivideo_faceaware.1u2v3w4x"><strong>WeddingAI.video Compressor</strong> (this tool)</td>
 <td data-i18n="tools.compress-wedding-photos.td_text.unlimited_100plus_tested.5y6z7a8b"><strong>Unlimited, 100+ photos tested</strong></td>
-<td data-i18n="tools.compress-wedding-photos.td_text.face_aware_ai_quality_6085.9c0d1e2f"><strong>Face-aware AI quality 60&ndash;85% reduction</strong></td>
+<td data-i18n="tools.compress-wedding-photos.td_text.face_aware_ai_quality_6085.9c0d1e2f"><strong>60&ndash;85% smaller, one-click batch</strong></td>
 <td data-i18n="tools.compress-wedding-photos.td_text.same_workflow_as_9_9_video.7k8l9m0n"><strong>Same workflow as the AI wedding video</strong></td>
 </tr>
 <tr>
@@ -320,7 +284,7 @@
 </tr>
 </tbody>
 </table>
-<p data-i18n="tools.compress-wedding-photos.p_text.most_compress_tools_resize_by_9k0l1m2n">Most compress tools resize by target file size or quality slider alone. WeddingAI.video’s unique angle: face-aware Canvas re-encoding keeps bride/groom faces at higher fidelity (eyes, skin) while compressing the rest harder — so the 100+ wedding photos you actually email look natural, not blurry. Plus the same 100+ photos can be handed off to the AI wedding video service without re-uploading.</p>
+<p data-i18n="tools.compress-wedding-photos.p_text.most_compress_tools_resize_by_9k0l1m2n">Most compress tools resize by target file size or quality slider alone. WeddingAI.video’s unique angle: one-click Canvas re-encoding with a quality slider and an optional max-dimension resize — so the 100+ wedding photos you actually email look natural, not blurry. Plus the same 100+ photos can be handed off to the AI wedding video service without re-uploading.</p>
         </div>
 
                 <h2>لماذا ضغط صور الزفاف على الإطلاق؟</h2>
@@ -476,7 +440,7 @@
             <div class="container">
                 <p data-i18n="404.p_text.2026_weddingai_video_all_rights_reserve.73926096">© 2026 WeddingAI.video. All rights reserved.</p>
                 <div class="footer-featured">
-                    <a class="footer-badge footer-badge-secondary" href="/ar/about/" title="500+ couples served, 4.9/5 rating" data-i18n="about.a_text.couples_served.ddddddd1" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 0.75rem;background:var(--color-bg-alt);border-radius:6px;font-size:0.8125rem;font-weight:600;color:var(--color-secondary);text-decoration:none;border:1px solid var(--color-border);">⭐ 4.9/5 · 500+ couples</a>
+                    <a class="footer-badge footer-badge-secondary" href="/ar/about/" title="500+ couples served, 4.9/5 rating" data-i18n="about.a_text.couples_served.ddddddd1" data-i18n-attr="title:about.a_text.couples_served_title.ddddddd3" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 0.75rem;background:var(--color-bg-alt);border-radius:6px;font-size:0.8125rem;font-weight:600;color:var(--color-secondary);text-decoration:none;border:1px solid var(--color-border);">⭐ 4.9/5 · 500+ couples</a>
                 </div>
             </div>
         </div>

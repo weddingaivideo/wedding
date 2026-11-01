@@ -147,9 +147,16 @@ on the next deploy.
 Production deploys happen automatically on push to `main`. The Cloudflare
 Pages project `weddingai-video` is connected to the GitHub repo (private).
 
+> The project's pages.dev hostname is **`weddingai-video-bin.pages.dev`** — the
+> project *name* and the *subdomain* differ here. `weddingai-video.pages.dev`
+> is a leftover project from an earlier account that still serves an older copy
+> of the site; it is not the deployment target. Always read the real subdomain
+> from `GET /accounts/{account_id}/pages/projects/weddingai-video` (field
+> `subdomain`) instead of assuming it.
+
 ```bash
 git push origin main        # → production deploy (weddingai.video)
-git push origin dev         # → preview deploy (<branch>.weddingai-video.pages.dev)
+git push origin dev         # → preview deploy (<branch>.weddingai-video-bin.pages.dev)
 ```
 
 For ad-hoc deploys (without going through Git):
@@ -219,5 +226,8 @@ historical fixes.
 - **Hosting**: Cloudflare Pages (static + Functions)
 - **Forms**: Cloudflare Functions + Cloudflare KV (rate-limit, lead capture) +
   Resend (transactional email)
-- **Analytics**: Google Analytics 4 (lazy-loaded on interaction)
+- **Analytics**: Cloudflare Web Analytics (cookie-free, injected at the edge) +
+  Microsoft Clarity (heatmaps / session replay). GA4 and Baidu Tongji were
+  removed on 2026-10-28 — the GA4 property was deactivated and the site no
+  longer targets the domestic China market.
 - **Search console**: Ahrefs + Bing Webmaster + IndexNow

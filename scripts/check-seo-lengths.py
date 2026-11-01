@@ -18,8 +18,13 @@ ROOT = Path(os.environ.get("WEDDINGAI_ROOT") or Path(__file__).resolve().parent.
 TITLE_MAX = 60
 DESC_MAX = 160
 
-title_pat = re.compile(r'<title>(.*?)</title>', re.DOTALL)
-desc_pat = re.compile(r'<meta\s+name="description"\s+content="(.*?)"', re.DOTALL)
+# The tag must be matched with any ATTRIBUTES allowed. 525 pages carry
+# `data-i18n` on <title> or `data-i18n-attr="content:…"` in front of the
+# description's `content=`; the old strict patterns could not see them, so
+# those pages were never length-checked at all.  `[^>]*` cannot cross a ">",
+# so the match can never leave the tag it started in.
+title_pat = re.compile(r'<title\b[^>]*>(.*?)</title>', re.DOTALL)
+desc_pat = re.compile(r'<meta\b[^>]*\bname="description"[^>]*\bcontent="(.*?)"', re.DOTALL)
 
 
 def visible_len(s):
@@ -32,7 +37,13 @@ def main():
     for root, dirs, names in os.walk(ROOT):
         if "scripts\\archive" in root or "scripts/archive" in root:
             continue
-        if "tmp\\" in root or "tmp/" in root:
+        # Scratch / non-deployed dirs. Note: a `tmp\` substring test does NOT
+        # match the dot-prefixed `.tmp\` scratch dir, which held 1400+ captured
+        # HTML files — this check then read binary junk and crashed with a
+        # UnicodeDecodeError.
+        segs = root.replace("/", "\\").split("\\")
+        if any(s in (".tmp", "tmp", "private", ".wrangler", "node_modules")
+               for s in segs):
             continue
         for name in names:
             if not name.endswith(".html"):

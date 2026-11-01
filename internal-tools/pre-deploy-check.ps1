@@ -585,6 +585,97 @@ if (Test-Path $i18nMetaScript) {
     Warn "scripts\check-i18n-meta-lengths.py not found; skipping live i18n metadata check"
 }
 
+# ---------- 9d. i18n shard freshness ----------
+# The 503 storm of 2026-10-30 (63.3% of all sitemap URLs, Cloudflare error
+# 1102 = Worker CPU limit) was caused by the middleware parsing a 10-17 MB
+# dictionary per request. The fix is the namespace shards under
+# i18n/shards/<lang>/, which cut the parse to ~2 ms.
+#
+# The shards are a DERIVED artefact. If somebody edits i18n/<lang>.json and
+# does not rebuild them, the middleware keeps serving the OLD translations -
+# silently, because the page still returns 200. No other check in this gate
+# could see it, which is why this step exists.
+#
+# The script proves three things: the manifest covers every namespace, the
+# shards merged back equal the dictionary exactly (the real staleness test),
+# and the JS namespace rule agrees with the builder's Python rule (otherwise
+# the middleware asks for shard files that do not exist and every translation
+# silently falls back to English).
+#
+# This step is FATAL: a stale shard set means the deploy ships translations
+# that are not the ones in the repository.
+Write-Host "[9d/9] i18n shard freshness"
+$shardScript = "$root\scripts\verify-i18n-shards.py"
+if (Test-Path $shardScript) {
+    $py = $null
+    foreach ($candidate in @("python", "python3", "py")) {
+        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($cmd) { $py = $candidate; break }
+    }
+    if ($py) {
+        $shardOutput = & $py $shardScript 2>&1
+        $shardExit = $LASTEXITCODE
+        $key = $shardOutput | Select-String -Pattern 'RESULT:|FAIL |WARN |heaviest page|exceed the budget' | Select-Object -First 14
+        foreach ($line in $key) { Write-Host "  $($line -replace '^\s*','')" }
+        if ($shardExit -eq 0) {
+            Pass "i18n shards match the dictionaries (coverage, freshness and JS/Python namespace parity)"
+        } else {
+            Fail "i18n shards are out of sync with the dictionaries. Run 'powershell -File internal-tools/refresh-i18n-shards.ps1' (rebuild + verify) and commit i18n/shards/** plus i18n/*.manifest.json. Stale shards make the middleware serve old translations. If another session is editing i18n/<lang>.json right now, wait for it to finish first."
+        }
+    } else {
+        Warn "Python not found in PATH; skipping i18n shard freshness check. Install Python or run 'python scripts/verify-i18n-shards.py' manually."
+    }
+} else {
+    Warn "scripts\verify-i18n-shards.py not found; skipping i18n shard freshness check"
+}
+
+# ---------- 9e. hreflang graph ----------
+# Every page must advertise exactly one alternate per language (11) plus
+# x-default, and every href must match its hreflang.
+#
+# Two defects this catches, both invisible to a naive read:
+#   * a duplicated hreflang value (the en + x-default pair pointing at the
+#     same URL, or the same language advertised twice), and
+#   * an alternate whose hreflang says one language while its href points at
+#     another language's URL - the block was copied from the ENGLISH page
+#     with the page's own language prefix substituted into the FIRST
+#     localized entry (which is `zh` in the template), so an /ar/ page
+#     advertised `zh` pointing at itself.
+#
+# It also parses the attributes instead of matching one fixed string, because
+# the site carries two attribute orders:
+#     <link rel="alternate" hreflang="xx" href="...">
+#     <link href="..." hreflang="xx" rel="alternate"/>
+# A regex written against one form reports "0 problems" on the pages that use
+# the other form - which is exactly what happened.
+#
+# This step is FATAL: a broken hreflang graph makes Google treat the page as
+# duplicate content and pick the wrong language.
+Write-Host "[9e/9] hreflang graph"
+$hreflangScript = "$root\scripts\verify-hreflang.py"
+if (Test-Path $hreflangScript) {
+    $py = $null
+    foreach ($candidate in @("python", "python3", "py")) {
+        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($cmd) { $py = $candidate; break }
+    }
+    if ($py) {
+        $hlOutput = & $py $hreflangScript 2>&1
+        $hlExit = $LASTEXITCODE
+        $key = $hlOutput | Select-String -Pattern 'pages with an alternate|PROBLEM|RESULT:' | Select-Object -First 8
+        foreach ($line in $key) { Write-Host "  $($line -replace '^\s*','')" }
+        if ($hlExit -eq 0) {
+            Pass "Every page advertises one alternate per language (11 + x-default) and every href matches its hreflang"
+        } else {
+            Fail "The hreflang graph is inconsistent. Run 'python scripts/fix-hreflang-blocks.py' to rebuild the blocks, then re-run this check."
+        }
+    } else {
+        Warn "Python not found in PATH; skipping the hreflang check."
+    }
+} else {
+    Warn "scripts\verify-hreflang.py not found; skipping the hreflang check"
+}
+
 # ---------- 9c. Lead mail routing + delivery truth ----------
 # Background (2026-10-29): two weeks of leads were lost because the domain had
 # no MX record for 17 days, and because /api/quote.js recorded a 2xx from the

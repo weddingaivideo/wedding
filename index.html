@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +18,7 @@
          that lazy strategy and waste bandwidth. -->
     <title data-i18n="index.title_text.ai_powered_wedding_video_services_weddin.58583865">AI Wedding Video from Photos — 48h | WeddingAI.video</title>
     <link rel="canonical" href="https://weddingai.video/">
-    <link rel="alternate" hreflang="en" href="https://weddingai.video/">
+<link rel="alternate" hreflang="en" href="https://weddingai.video/">
     <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/">
     <link rel="alternate" hreflang="es" href="https://weddingai.video/es/">
     <link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/">
@@ -28,7 +28,18 @@
     <link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/">
     <link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/">
     <link rel="alternate" hreflang="th" href="https://weddingai.video/th/">
+    <link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/">
     <link rel="alternate" hreflang="x-default" href="https://weddingai.video/">
+
+
+
+
+
+
+
+
+
+
     <!-- Primary og:image: matches the hero video aspect (16:9) so it doubles as a video poster.
          Falls back gracefully for non-video-aware platforms (Discord, Slack, WhatsApp, etc.).
          og:image is JPEG, not WebP, because Facebook, LinkedIn and some other
@@ -81,43 +92,6 @@
 <script nonce="__CSP_NONCE__" defer src="/js/main.min.js?v=3.20"></script>
     <script nonce="__CSP_NONCE__" defer src="/js/lazy-videos.js?v=1.0"></script>
     <script nonce="__CSP_NONCE__" src="/js/cookie-consent.js" defer></script>
-    <!-- Google tag (gtag.js) — deferred to first interaction or idle (avoids wasted bytes on bouncers) -->
-    <script nonce="__CSP_NONCE__">
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
-
-    window.__loadGtag = function() {
-      if (window.__gtagLoaded) return;
-      window.__gtagLoaded = true;
-      var s = document.createElement('script');
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
-      s.async = true;
-      s.onload = function() {
-        gtag('event', 'page_view', {
-          page_title: document.title,
-          page_location: location.href,
-          page_path: location.pathname + location.search
-        });
-      };
-      s.setAttribute('data-gtag-lazy', '1');
-      document.head.appendChild(s);
-    };
-
-    // Engaged users: load on first interaction.
-    ['scroll','click','touchstart','keydown'].forEach(function(evt){
-      window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
-    });
-    // Passive readers / non-interactors: fallback to idle / load+3s.
-    window.addEventListener('load', function() {
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(window.__loadGtag, { timeout: 4000 });
-      } else {
-        setTimeout(window.__loadGtag, 3000);
-      }
-    });
-    </script>
     <!-- Google AdSense (lazy-loaded to avoid forced reflow during initial paint) -->
     <script nonce="__CSP_NONCE__">
     window.addEventListener('load', function() {
@@ -147,17 +121,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
-
-    <!-- Baidu Tongji (hm.baidu.com) — analytics -->
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?784c824843f328ed5f8254991ef8b2f4";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
 
     <!-- Clarity (clarity.ms) — heatmaps & session replay -->
     <script type="text/javascript">
@@ -268,7 +231,7 @@ if ('serviceWorker' in navigator) {
                 <a href="/order/" class="btn btn-primary btn-large btn-hero-primary" title="Get a free quote — start your project" data-i18n="about.a_text.get_a_free_quote.53673839">Get a Free Quote →</a>
                 <a href="#services" class="btn btn-text-link" title="Explore all our wedding video services" data-i18n="index.a_text.explore_our_services.49519743">Explore Our Services</a>
             </div>
-            <p class="hero-trust" data-i18n="index.p_text.trusted_by_9400_couples_in_11_languages.32124339">Trusted by 500+ couples · Top-rated 4.9/5 · 48h turnaround</p>
+            <p class="hero-trust" data-i18n="index.p_text.trusted_by_500_couples_in_the_us_europe.32124339">Trusted by 500+ couples · Top-rated 4.9/5 · 48h turnaround</p>
         </div>
     </section>
 
@@ -517,7 +480,7 @@ if ('serviceWorker' in navigator) {
                         <span class="tool-badge" data-i18n="tools.card.badge.edit.01">JPG/PNG/HEIC</span>
                         <h3 class="tool-name" data-i18n="tools.card.name.edit.01">Compress Wedding Photos</h3>
                     </div>
-                    <p class="tool-tag" data-i18n="tools.card.tag.edit.01">AI face-aware batch compresses 100+ wedding photos for free, 60-85% smaller, EXIF kept</p>
+                    <p class="tool-tag" data-i18n="tools.card.tag.edit.01">Batch compresses 100+ wedding photos for free, 60-85% smaller, EXIF kept</p>
                     <div class="tool-card-foot">
                         <span class="tool-cta" data-i18n="tools.card.cta.try_free.01">Try free →</span>
                     </div>
@@ -525,10 +488,10 @@ if ('serviceWorker' in navigator) {
 
                 <a class="tool-card" href="/tools/wedding-photo-collage/">
                     <div class="tool-card-head">
-                        <span class="tool-badge" data-i18n="tools.card.badge.edit.03">8 styles</span>
+                        <span class="tool-badge" data-i18n="tools.card.badge.edit.03">6 layouts</span>
                         <h3 class="tool-name" data-i18n="tools.card.name.edit.03">Wedding Photo Collage</h3>
                     </div>
-                    <p class="tool-tag" data-i18n="tools.card.tag.edit.03">AI auto-layout 8 collage styles in 9 minutes from 2-30 photos, face-aware, no drag-and-drop</p>
+                    <p class="tool-tag" data-i18n="tools.card.tag.edit.03">Auto-layout 8 collage styles in 9 minutes from 2-30 photos, no drag-and-drop</p>
                     <div class="tool-card-foot">
                         <span class="tool-cta" data-i18n="tools.card.cta.try_free.01">Try free →</span>
                     </div>
@@ -550,7 +513,7 @@ if ('serviceWorker' in navigator) {
                         <span class="tool-badge" data-i18n="tools.card.badge.plan.09">50+ ideas</span>
                         <h3 class="tool-name" data-i18n="tools.card.name.plan.09">Wedding Hashtag Generator</h3>
                     </div>
-                    <p class="tool-tag" data-i18n="tools.card.tag.plan.09">AI generates 50+ hashtag ideas from your names + date — 11 languages, custom audio</p>
+                    <p class="tool-tag" data-i18n="tools.card.tag.plan.09">Generates 50+ hashtag ideas from your names + date — 11 languages, custom audio</p>
                     <div class="tool-card-foot">
                         <span class="tool-cta" data-i18n="tools.card.cta.try_free.01">Try free →</span>
                     </div>
@@ -561,7 +524,7 @@ if ('serviceWorker' in navigator) {
                         <span class="tool-badge" data-i18n="tools.card.badge.gen.12">8 styles</span>
                         <h3 class="tool-name" data-i18n="tools.card.name.gen.12">Wedding Invitation Maker</h3>
                     </div>
-                    <p class="tool-tag" data-i18n="tools.card.tag.gen.12">AI auto-designs 8 invitation styles from names + date + venue, 9 minutes, WhatsApp + RSVP link</p>
+                    <p class="tool-tag" data-i18n="tools.card.tag.gen.12">Auto-designs 8 invitation styles from names + date + venue, 9 minutes, WhatsApp + RSVP link</p>
                     <div class="tool-card-foot">
                         <span class="tool-cta" data-i18n="tools.card.cta.try_free.01">Try free →</span>
  <span class="tool-video-link" data-i18n="tools.card.cta.video_link">Video →</span>
@@ -873,7 +836,7 @@ if ('serviceWorker' in navigator) {
             <div class="container">
                 <p data-i18n="404.p_text.2026_weddingai_video_all_rights_reserve.73926096">© 2026 WeddingAI.video. All rights reserved.</p>
                 <div class="footer-featured">
-                    <a class="footer-badge footer-badge-secondary" href="/about/" title="500+ couples served, 4.9/5 rating" data-i18n="about.a_text.couples_served.ddddddd1" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 0.75rem;background:var(--color-bg-alt);border-radius:6px;font-size:0.8125rem;font-weight:600;color:var(--color-secondary);text-decoration:none;border:1px solid var(--color-border);">⭐ 4.9/5 · 500+ couples</a>
+                    <a class="footer-badge footer-badge-secondary" href="/about/" title="500+ couples served, 4.9/5 rating" data-i18n="about.a_text.couples_served.ddddddd1" data-i18n-attr="title:about.a_text.couples_served_title.ddddddd3" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 0.75rem;background:var(--color-bg-alt);border-radius:6px;font-size:0.8125rem;font-weight:600;color:var(--color-secondary);text-decoration:none;border:1px solid var(--color-border);">⭐ 4.9/5 · 500+ couples</a>
                 </div>
             </div>
         </div>

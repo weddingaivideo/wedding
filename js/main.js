@@ -134,24 +134,6 @@
                     btn.textContent = 'Sending…';
                 }
 
-                // GA4 generate_lead event — captures the funnel.
-                // Use sendBeacon if available (survives navigation to /success).
-                try {
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'generate_lead', {
-                            service: (orderForm.querySelector('#service') || {}).value || 'unknown',
-                            country: (orderForm.querySelector('#country') || {}).value || 'unknown',
-                            reference_id: refId,
-                        });
-                    }
-                    if (navigator.sendBeacon) {
-                        const fd = new FormData();
-                        fd.append('event', 'lead_submit_attempt');
-                        fd.append('reference_id', refId);
-                        navigator.sendBeacon('/__lead_event', fd);
-                    }
-                } catch (e) { /* analytics are best-effort */ }
-
                 // Persist reference_id so success.html can show it after the
                 // 303 redirect to /success?id=… below.
                 try { sessionStorage.setItem('wa_ref_id', refId); } catch (e) { /* SSR / private mode */ }

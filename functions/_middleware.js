@@ -15,6 +15,7 @@
 
 import { LANGS, DEFAULT_LANG, RTL } from "./_lib/langs.js";
 import { convertBoldMarkers } from "./_lib/bold.js";
+import { loadI18nShards } from "./_lib/i18n-shards.js";
 const SITE_ORIGIN = "https://weddingai.video";
 const AUTO_LANG_COOKIE = "wa_lang_auto"; // presence = user has been auto-redirected once
 const USER_LANG_COOKIE = "wa_lang_user"; // explicit user choice (via switcher)
@@ -73,13 +74,13 @@ function generateNonce() {
 function buildCsp(nonce) {
     return [
         "default-src 'self'",
-        `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://hm.baidu.com https://www.clarity.ms https://f.clarity.ms https://scripts.clarity.ms`,
+        `script-src 'self' 'nonce-${nonce}' https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://www.clarity.ms https://f.clarity.ms https://scripts.clarity.ms`,
         `script-src-attr 'self' 'nonce-${nonce}'`,
         "style-src 'self' 'unsafe-inline'",
-        "img-src 'self' data: blob: https://hm.baidu.com https://www.clarity.ms https://c.clarity.ms https://c.bing.com https://pagead2.googlesyndication.com https://www.google.com https://www.googletagmanager.com",
+        "img-src 'self' data: blob: https://www.clarity.ms https://c.clarity.ms https://c.bing.com https://pagead2.googlesyndication.com https://www.google.com",
         "media-src 'self' data: blob:",
         "font-src 'self' data:",
-        "connect-src 'self' https://www.google-analytics.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://*.analytics.google.com https://hm.baidu.com https://www.clarity.ms https://c.clarity.ms https://f.clarity.ms https://u.clarity.ms https://e.clarity.ms https://t.clarity.ms https://*.clarity.ms https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.googleadservices.com https://ep1.adtrafficquality.google",
+        "connect-src 'self' https://cloudflareinsights.com https://*.cloudflareinsights.com https://www.clarity.ms https://c.clarity.ms https://f.clarity.ms https://u.clarity.ms https://e.clarity.ms https://t.clarity.ms https://*.clarity.ms https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.googleadservices.com https://ep1.adtrafficquality.google",
         "frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net",
         "form-action 'self'",
         "report-to csp-endpoint",
@@ -343,6 +344,51 @@ function buildCanonicalAndAlternates(rest, lang) {
     }
     links.push(`<link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}${restNorm}">`);
     return links.join("\n    ");
+}
+
+// Remove the AUTHOR's canonical and alternate links, whatever attribute order
+// they are written in.
+//
+// The previous implementation used two regexes that only matched ONE order:
+//
+//   <link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*\/?\s*>
+//
+// But the site carries both spellings:
+//
+//   <link rel="alternate" hreflang="xx" href="...">      (stripped)
+//   <link href="..." hreflang="xx" rel="alternate"/>      (NOT stripped)
+//
+// A page written in the second form kept its own block, and the block we
+// inject was added NEXT to it. The output then carried every hreflang twice
+// - "Hreflang: Multiple Entries" in Search Console - plus the author's own
+// mistakes, because the author's block was itself wrong on many pages: it
+// was copied from the English page with the page's own language prefix
+// substituted into the FIRST localized entry (which is `zh` in the
+// template), so an /ar/ page advertised `zh` pointing at itself.
+//
+// Measured live 2026-11-01: /hi/blog/affordable-wedding-video-ai/ served 24
+// alternate links instead of 12.
+//
+// The attributes are parsed instead of matched positionally, so any order
+// and any quoting is handled.
+function stripCanonicalAndAlternates(html) {
+    return html.replace(
+        /[ \t]*<link\b[^>]*>[ \t]*\r?\n?/gi,
+        (tag) => {
+            const attrs = {};
+            const re = /([a-zA-Z-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g;
+            let m;
+            while ((m = re.exec(tag)) !== null) {
+                attrs[m[1].toLowerCase()] = m[2] !== undefined ? m[2] : m[3];
+            }
+            const rel = (attrs.rel || "").toLowerCase();
+            if (rel === "canonical") return "";
+            // An alternate WITHOUT a hreflang is a preload/stylesheet, not an
+            // hreflang link - leave it alone.
+            if (rel === "alternate" && attrs.hreflang) return "";
+            return tag;
+        }
+    );
 }
 
 // Map our 2-letter lang code → og:locale (BCP-47 locale variants Google expects).
@@ -1438,38 +1484,88 @@ const LANG_TO_CURRENCY = {
     // en stays USD; no need to convert
 };
 
+// A USD amount with either decimal separator. A separator followed by exactly
+// three digits is a thousands separator ("$1,000"); one or two digits is a
+// decimal comma ("$9,9" = 9.9).
+const USD_AMOUNT = String.raw`\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{1,2})?`;
+
+// A USD marker. A plain "$" counts only when no letter stands in front of it,
+// so "R$3.000" (Brazilian reais) is left alone; "US$" is explicit USD.
+const USD_MARK = String.raw`(?:US\s*\$|(?<![A-Za-z])\$)`;
+
+// A price token: a USD marker in front of the amount, optionally followed by a
+// range.
+const USD_PRICE_RE = new RegExp(
+    String.raw`(${USD_MARK}\s?${USD_AMOUNT}(?:[ –\-]${USD_MARK}\s?${USD_AMOUNT})?)`, "g"
+);
+
+// Read the USD amount out of a matched price token.
+//
+//   "$9.9"       -> 9.9
+//   "$9,9"       -> 9.9      (decimal comma)
+//   "$1,000"     -> 1000     (three digits after the comma: thousands)
+//   "$9.9-$19.9" -> 9.9      (a range uses its first number)
+function parseUsdAmount(token) {
+    const m = String(token).match(new RegExp(String.raw`\$\s?(${USD_AMOUNT})`));
+    if (!m) return NaN;
+    const s = m[1].replace(/[\s ]/g, "");
+    // A separator followed by one or two digits AT THE END is a decimal
+    // separator; three digits there is a thousands separator.
+    const dec = s.match(/^(.*?)[.,](\d{1,2})$/);
+    if (dec) {
+        const whole = dec[1].replace(/[.,]/g, "") || "0";
+        const v = parseFloat(`${whole}.${dec[2]}`);
+        return isNaN(v) ? NaN : v;
+    }
+    const v = parseFloat(s.replace(/[.,]/g, ""));
+    return isNaN(v) ? NaN : v;
+}
+
 function localizeCurrencyForLang(html, lang) {
     if (!lang || !LANG_TO_CURRENCY[lang]) return html;
     const cur = LANG_TO_CURRENCY[lang];
 
-    // Hide every <meta ...> tag's content before running the $XX regex.
+    // Hide every <meta ...> tag AND the <title> element before running the
+    // $XX regex.
+    //
     // Without this, the regex below matches USD prices that appear INSIDE
-    // attribute values (e.g. <meta name="description" content="...起价 $49 ...">)
+    // attribute values (e.g. <meta name="description" content="...起价 $49 ...")
     // and injects a <span> into the attribute value — which (a) breaks the
     // attribute syntax (HTML parser sees the literal text), (b) leaks the
     // local-equivalent text into the visible description in some browsers
     // and dev tools, and (c) makes the description non-text for SEO. We
     // swap each <meta ...> with a sentinel of the same length so byte
     // offsets stay stable, then put the originals back at the end.
-    const metaStash = [];
+    //
+    // The <title> has to be hidden for the same reason, and harder: a
+    // <title> must be plain text. Injecting a <span> into it put raw
+    // markup in the served title - the browser tab and the SERP entry
+    // showed literally
+    //   起价 $9.9 <span class="wa-local-price" …>(≈ ¥71)</span>
+    // on 6 localized homepages (es, pt, ja, ru, th, zh). The title now
+    // keeps the plain price and no markup.
+    const stash = [];
     const protectedHtml = html.replace(
-        /<meta\b[^>]*>/gi,
+        /<meta\b[^>]*>|<title\b[^>]*>[\s\S]*?<\/title>/gi,
         (m) => {
-            metaStash.push(m);
-            return `<!--__WA_META_${metaStash.length - 1}__-->`;
+            stash.push(m);
+            return `<!--__WA_STASH_${stash.length - 1}__-->`;
         }
     );
 
-    // Convert "From $XX" or "$XX" or "XX" preceding "$" into the local currency.
-    // Pattern: "From $X" or "From $X-Y" or "From $X,XXX" or just "$X"
-    // We add a new line with the local equivalent AFTER each USD price.
+    // Convert "$X" into the local currency. The amount may use either decimal
+    // separator: the English "9.9" or the European "9,9". A separator followed
+    // by exactly three digits is a thousands separator ("$1,000"); one or two
+    // digits is a decimal comma ("$9,9" = 9.9).
+    //
+    // Reading "$9,9" as "$9" put the local-equivalent span INSIDE the number
+    // ("$9 (≈ R$49),9") and converted 9 USD instead of 9.9 USD, so a visitor
+    // in a comma-decimal locale read a mangled and wrong price.
     const converted = protectedHtml.replace(
-        /(\$\d{1,3}(?:,\d{3})*(?:\.\d+)?(?:[ –\-]\$\d{1,3}(?:,\d{3})*)?)/g,
+        USD_PRICE_RE,
         (m, usdStr) => {
             // Extract first number
-            const numMatch = usdStr.match(/\$(\d{1,3}(?:,\d{3})*(?:\.\d+)?)/);
-            if (!numMatch) return m;
-            const num = parseFloat(numMatch[1].replace(/,/g, ""));
+            const num = parseUsdAmount(usdStr);
             if (isNaN(num)) return m;
             const local = Math.round(num * cur.rate);
             let formatted;
@@ -1483,11 +1579,17 @@ function localizeCurrencyForLang(html, lang) {
         }
     );
 
-    // Restore the stashed <meta> tags. The number in the sentinel must be
-    // unique per request so a $XX in another context can't shadow it.
+    // Restore the stashed <meta> tags and the <title>. The number in the
+    // sentinel must be unique per request so a $XX in another context can't
+    // shadow it.
+    //
+    // The replacement is a FUNCTION, not a string: a stashed title can
+    // contain "$" (e.g. "起价 $9.9") and in a string replacement "$&",
+    // "$'" and "$`" are substitution patterns, so they would expand to the
+    // wrong text.
     let result = converted;
-    for (let i = metaStash.length - 1; i >= 0; i--) {
-        result = result.replace(`<!--__WA_META_${i}__-->`, metaStash[i]);
+    for (let i = stash.length - 1; i >= 0; i--) {
+        result = result.replace(`<!--__WA_STASH_${i}__-->`, () => stash[i]);
     }
     return result;
 }
@@ -1719,8 +1821,7 @@ export const onRequest = async (context) => {
                 // the middleware block — Surfacing as 7 Hreflang: Multiple
                 // Entries issues in the 2026-10-16 SF crawl. (Tools pages and
                 // their 301 redirect targets authored the alternates with `/>`.)
-                text = text.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
-                text = text.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
+                text = stripCanonicalAndAlternates(text);
                 if (/<title[\s>][\s\S]*?<\/title>/i.test(text)) {
                     text = text.replace(/(<\/title>)/i, `$1\n    ${enCanonicalBlock}`);
                 } else if (/<head>/i.test(text)) {
@@ -1944,8 +2045,7 @@ export const onRequest = async (context) => {
             // 2. canonical + hreflang
             const newBlock = buildCanonicalAndAlternates(rest, lang);
             // Same self-closing-aware strip as the EN branch above.
-            text = text.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
-            text = text.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[^"]*"\s*\/?\s*>\n?\s*/gi, "");
+            text = stripCanonicalAndAlternates(text);
             if (/<title[\s>][\s\S]*?<\/title>/i.test(text)) {
                 text = text.replace(/(<\/title>)/i, `$1\n    ${newBlock}`);
             } else if (/<head>/i.test(text)) {
@@ -2008,7 +2108,24 @@ export const onRequest = async (context) => {
             if (lang !== DEFAULT_LANG) {
                 try {
                     const version = await getI18nVersion(context);
-                    const dict = await loadI18nDict(lang, version);
+                    // Load ONLY the shards this page needs.
+                    //
+                    // The full dictionary is 6-17 MB and parsing it costs
+                    // 50-80 ms of CPU - more than the CF Pages Free plan
+                    // allows (50 ms). That is what produced Cloudflare error
+                    // 1102 on 63% of the localized URLs (measured 2026-10-30:
+                    // 974 of 1539 sitemap URLs returned 503, from 2% in
+                    // English to 97% in Chinese).
+                    //
+                    // The per-namespace shards cut the payload to ~270 KB and
+                    // the parse to ~2 ms. The body cache cannot rescue the
+                    // old path: the first build blew the limit, so the
+                    // cache never received an entry to serve.
+                    //
+                    // If the shards are missing (not deployed yet) this
+                    // returns null and we fall back to the full dictionary.
+                    let dict = await loadI18nShards(SITE_ORIGIN, lang, version, text);
+                    if (!dict) dict = await loadI18nDict(lang, version);
                     if (dict) {
                         // Remember the page's own title / description BEFORE
                         // the translation pass, so we can tell afterwards

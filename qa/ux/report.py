@@ -266,7 +266,7 @@ def main() -> None:
     add("")
     add("1. 测试在本地 `wrangler pages dev` 上进行，与生产同构（中间件、CSP、重定向全部生效），但**没有边缘缓存**，"
         "因此本地加载耗时不能直接代表线上 Core Web Vitals；页体积为**未压缩**本地值。")
-    add("2. GA4 / Clarity / 百度统计 / AdSense 等第三方脚本在测试中被拦截，以避免网络波动污染结果；"
+    add("2. Clarity / AdSense 等第三方脚本在测试中被拦截，以避免网络波动污染结果；"
         "因此本报告的 console 结果只反映第一方代码。")
     add("3. Service Worker 被显式禁用，避免上一轮访问的缓存污染结果。")
     add("4. 本地 miniflare 运行时在长时间高并发扫描下会崩溃退出（与生产 1102 问题不同源），"

@@ -32,7 +32,10 @@ foreach ($f in $files) {
   $themeMeta = '<meta name="theme-color" content="#c45a72">'
   $manifestLink = "<link rel=`"manifest`" href=`"$manifestPath`">"
   $appleLink = "<link rel=`"apple-touch-icon`" href=`"$iconPath`">"
-  $mobileCapable = '<meta name="apple-mobile-web-app-capable" content="yes">'
+  # iOS 17+ deprecated `apple-mobile-web-app-capable` in favour of the
+  # standard `mobile-web-app-capable`; the old name still triggers a console
+  # warning on every page that carries it. Inject only the standard name.
+  $mobileCapable = '<meta name="mobile-web-app-capable" content="yes">'
   $mobileTitle = '<meta name="apple-mobile-web-app-title" content="WeddingAI.video">'
 
   # Inject after the existing <link rel="icon"> line

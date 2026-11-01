@@ -61,8 +61,84 @@ Warnings: 1
 READY TO DEPLOY
 ```
 
-> 1 个 warning (`GA4 found in 527/528 pages`) 是 pre-existing 基线，不需要修。
+> 1 个 warning 是 `qa\check_blog_redirects.py not found` — 该脚本不存在，
+> 属于 pre-existing 基线，不需要修。
 > 任何 `Errors: N`（N>0）= **不要 push**，先 fix。
+
+> **2026-10-28 起门禁变诚实了**：此前 `pre-deploy-check.ps1` 的路径过滤写的是
+> `*\tmp\*`，匹配不到 `\.tmp\`，而 `.tmp\` 里躺着 1400+ 个历史页面快照。
+> 这些快照被当成线上页面扫描，一口气报出 **313 个假错误**（硬编码 nonce、
+> FAQ 不一致、残留 GA4 loader），把真正的错误全淹了。过滤已修复，现在报的是
+> 真实问题。当前存量：2 个 pre-existing error（非英语工具页 69 个 title 超 60
+> 字符 / 8 个 description 超 160 字符；`blog/wedding-video-trends-2026` 缺
+> FAQPage JSON-LD），与 2026-10-28 的 GA4 / 百度下线改动无关。
+
+### [11/11] 生产域名可达性门禁（2026-10-28 新增）
+
+`pre-deploy-check.ps1` 现在会检查生产域名本身，**失败即阻断 push**：
+
+1. 用 DoH（`dns.google` + `cloudflare-dns`）查 `weddingai.video` 的 A 记录
+   —— 权威判定，两个解析器都报缺失才算缺失
+2. 请求 `https://weddingai.video/`，**系统解析器和 DoH 两条路径各试一次、
+   最多四次**，任一次返回 200 即通过
+
+为什么必须绕开普通解析：本机跑 Clash Verge（Mihomo）TUN + fake-ip，普通
+`Resolve-DnsName` 只会返回 `198.18.x.x` 假 IP，真实解析发生在连接时；而
+Cloudflare 边缘节点在 DNS 记录被删后**仍然**会响应 `weddingai.video`。
+所以「浏览器还能打开」不等于「站点在线」——本地 200 是假象。
+
+反过来，DoH 直连路径在本机也不可靠（实测直连 Cloudflare anycast IP 会被
+本地 TUN 丢掉大量连接：`weddingai.video` 2/8 成功、`cloudflare.com` 6/8），
+所以**单次探测失败不能判死**，必须多次重试 + 双路径。
+
+> **2026-10-28 事故**：Cloudflare zone 里 apex 的 A/CNAME 记录被删除（`www`
+> 同时变成 NXDOMAIN），722 个页面、11 种语言全部对外不可达，而门禁全绿——
+> 当时没有任何检查会解析生产域名。现在这个检查会如实报错并拦住 push。
+> 完整根因与修复流程见下一节。
+
+### 生产域名的 DNS 归属 = Cloudflare 后台（不在仓库里）
+
+`weddingai.video` / `www.weddingai.video` 是 Cloudflare Pages 自定义域，
+NS 为 `valentin/ines.ns.cloudflare.com`。**DNS 记录只存在于 CF 后台**：
+仓库里没有 `_redirects` 规则、没有 wrangler 配置、没有 DNS-as-code 文件。
+
+修复（CF 后台 → DNS → Records → Add record）：
+
+| 类型 | Name | Target | Proxy | TTL |
+|---|---|---|---|---|
+| CNAME | `@` | `weddingai-video-bin.pages.dev` | 已代理（橙云） | Auto |
+| CNAME | `www` | `weddingai-video-bin.pages.dev` | 已代理（橙云） | Auto |
+
+> Target 必须是 **`weddingai-video-bin.pages.dev`**。Pages 项目名叫
+> `weddingai-video`，但子域是 `-bin`；`weddingai-video.pages.dev` 是早期
+> 另一个账号留下的旧项目，还在跑一份旧副本，**不是部署目标**。
+> 用 `GET /accounts/{account_id}/pages/projects/weddingai-video` 的
+> `subdomain` 字段读真实子域，不要按项目名猜。
+
+**补完 DNS 还不够**：Pages 会把 DNS 记录消失的自定义域自动置为
+`deactivated`，此时即使 DNS 记录补回来了，边缘也只回 **403**。还要把
+Pages 侧重新激活：
+
+```
+PATCH /accounts/{account_id}/pages/projects/weddingai-video/domains/weddingai.video
+body: {"status": "active"}        # 状态：deactivated → pending → active
+```
+
+（用 `PUT` 会返回 405，必须用 `PATCH`。）
+
+一键脚本（读 token → 查 zone → 取真实子域 → 建/修 CNAME → 重新激活 Pages
+自定义域 → 全链路验证）：
+
+```powershell
+.\internal-tools\restore-dns-record.ps1 -TokenFile "<你的 token 文件>" -AlsoWWW
+.\internal-tools\restore-dns-record.ps1 -TokenFile "<你的 token 文件>" -WhatIf   # 只看会做什么
+```
+
+Token 权限：`Zone → DNS → Edit`、`Zone → Read`、`Pages → Edit`。
+
+Pages 源站与边缘绑定都是健在的（`weddingai-video-bin.pages.dev` 仍返回当前
+构建），所以**补回 DNS + 重新激活 Pages 即可恢复**，不需要重新部署。
+`www` 是可选的——仓库里所有 canonical 都用 apex。
 
 ### 一次性环境检查（确认机器就绪）
 - Python 在 PATH（`python --version` 应该有 3.x）
@@ -108,7 +184,7 @@ push 到 `main` 触发 **2 个 workflow 并行**。
   1. `actions/checkout@v4` (with LFS)
   2. `actions/setup-python@v5` (3.11)
   3. **Force UTF-8 I/O** (`PYTHONIOENCODING=utf-8` env var) — Windows cp1252 会让 ✅/❌/→/⚠️ emoji 崩
-  4. Run `internal-tools\pre-deploy-check.ps1` — 25 个 PowerShell 检查（CSP nonces, hN tag mismatch, inline event handlers, GA4 ID, CF Functions, relative `<script src>`, CSS empty rules, critical files, secrets in `functions/`, etc.）
+  4. Run `internal-tools\pre-deploy-check.ps1` — 25 个 PowerShell 检查（CSP nonces, hN tag mismatch, inline event handlers, 已下线统计脚本残留, CF Functions, relative `<script src>`, CSS empty rules, critical files, secrets in `functions/`, etc.）
   5. Run `qa/full_qa.py` — Python i18n + structural
 
 - **结果**:

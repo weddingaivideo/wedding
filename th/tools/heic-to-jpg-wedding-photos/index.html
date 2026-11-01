@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
@@ -29,7 +29,7 @@
     <meta name="theme-color" content="#D4AF37">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="เครื่องมือ WeddingAI">
     <link rel="stylesheet" href="/styles.min.css?v=3.39">
     <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
@@ -77,57 +77,21 @@
         .wa-tool-heic-note code { background: rgba(0,0,0,0.04); padding: 0.05rem 0.35rem; border-radius: 4px; font-size: 0.875rem; }
     </style>
 
-    <!-- Google tag (gtag.js) — deferred -->
-    <script nonce="__CSP_NONCE__">
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
-
-      window.__loadGtag = function() {
-        if (window.__gtagLoaded) return;
-        window.__gtagLoaded = true;
-        var s = document.createElement('script');
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
-        s.async = true;
-        s.onload = function() {
-          gtag('event', 'page_view', {
-            page_title: document.title,
-            page_location: location.href,
-            page_path: location.pathname + location.search
-          });
-        };
-        s.setAttribute('data-gtag-lazy', '1');
-        document.head.appendChild(s);
-      };
-
-      ['scroll','click','touchstart','keydown'].forEach(function(evt){
-        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
-      });
-      window.addEventListener('load', function() {
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
-        } else {
-          setTimeout(window.__loadGtag, 3000);
-        }
-      });
-    </script>
-
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "หน้าแรก", "item": "https://weddingai.video/"}, {"@type": "ListItem", "position": 2, "name": "เครื่องมือรูปภาพงานแต่งงานฟรี", "item": "https://weddingai.video/tools/"}, {"@type": "ListItem", "position": 3, "name": "โปรแกรมแปลงรูปภาพงานแต่งงาน HEIC เป็น JPG", "item": "https://weddingai.video/th/tools/heic-to-jpg-wedding-photos/"}]}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "โปรแกรมแปลงรูปภาพงานแต่งงาน HEIC เป็น JPG", "applicationCategory": "MultimediaApplication", "operatingSystem": "WEB", "browserRequirements": "ต้องใช้ Safari 17 ขึ้นไปเพื่อถอดรหัส HEIC โดยกำเนิด เบราว์เซอร์อื่นๆ จะแสดงคำแนะนำในการบูตที่ชัดเจน", "softwareVersion": "1.0", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "เครื่องมือในเบราว์เซอร์ฟรีเพื่อแปลงภาพถ่ายงานแต่งงานของ iPhone HEIC เป็น JPG Safari ถอดรหัสโดยกำเนิด เบราว์เซอร์อื่นๆ ให้คำอธิบายที่ชัดเจนเกี่ยวกับข้อจำกัดของเบราว์เซอร์ รองรับการปรับคุณภาพของภาพและการปรับขนาดด้านที่ยาวที่สุดซึ่งเป็นอุปกรณ์เสริม ไฟล์จะยังคงอยู่ในอุปกรณ์ของผู้ใช้เสมอ", "url": "https://weddingai.video/th/tools/heic-to-jpg-wedding-photos/", "image": "https://weddingai.video/images/og-image-1200x630.jpg", "publisher": {"@type": "Organization", "name": "WeddingAI.video", "url": "https://weddingai.video/"}, "featureList": ["ลากและวางการอัปโหลดไฟล์ HEIC/HEIF เป็นชุด", "คุณภาพ JPG ที่ปรับได้ (60–95)", "การปรับขนาดด้านที่ยาวที่สุดที่เป็นตัวเลือก", "การดำเนินการฝั่งไคลเอ็นต์ 100%", "ไม่จำเป็นต้องอัปโหลดหรือลงทะเบียน", "ดาวน์โหลดเป็นชุด"]}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "วิธีแปลงภาพถ่ายงานแต่งงาน HEIC เป็น JPG", "step": [{"@type": "HowToStep", "position": 1, "name": "เปิดใน Safari เพื่อการถอดรหัสแบบเนทีฟ", "text": "เครื่องมือนี้ใช้ตัวถอดรหัสรูปภาพในตัวของเบราว์เซอร์ Safari 17 ขึ้นไปสามารถถอดรหัส HEIC/HEIF ได้โดยตรง ไม่รองรับเดสก์ท็อป Chrome, Firefox และ Edge - โปรดเปิดใน Safari บนอุปกรณ์เดียวกัน หรือใช้กระบวนการดำเนินการบนมือถือ"}, {"@type": "HowToStep", "position": 2, "name": "ลากหรือเลือกไฟล์ HEIC", "text": "ลากรูปภาพ HEIC/HEIF หรือคลิกเพื่อเรียกดู เป็นมิตรเป็นกลุ่ม รองรับทั้งนามสกุล .heic และ .heif"}, {"@type": "HowToStep", "position": 3, "name": "ตั้งค่าคุณภาพ JPG (ค่าเริ่มต้น 90)", "text": "HEIC เป็นการเข้ารหัสที่มีประสิทธิภาพโดยเนื้อแท้ และเรารักษาคุณภาพของภาพให้สูงขึ้นตามค่าเริ่มต้น 90 เป็นค่าเริ่มต้น หากปริมาณมีความสำคัญมากกว่า ให้ลดลงเหลือ 75–85"}, {"@type": "HowToStep", "position": 4, "name": "ทางเลือก: จำกัดด้านที่ยาวที่สุด", "text": "มีประโยชน์เมื่ออัปโหลดไปยังอัลบั้มที่มีขนาดจำกัดที่ 2048px 4096 สำหรับผู้เชี่ยวชาญด้านการพิมพ์ และ 1,080 สำหรับโซเชียลมีเดีย"}, {"@type": "HowToStep", "position": 5, "name": "คลิกเพื่อแปลงและดาวน์โหลด", "text": "คลิกปุ่มแปลง ภาพถ่ายที่เสร็จสมบูรณ์แต่ละภาพจะแสดงปุ่มดาวน์โหลดแยกต่างหาก ใช้คลิกเดียวบันทึกทั้งหมดเพื่อดาวน์โหลดเป็นชุด"}]}</script>
-<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/heic-to-jpg-wedding-photos/"><link rel="alternate" hreflang="zh" href="https://weddingai.video/th/tools/heic-to-jpg-wedding-photos/"><link rel="alternate" hreflang="th" href="https://weddingai.video/th/tools/heic-to-jpg-wedding-photos/"><link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/heic-to-jpg-wedding-photos/">
-    <!-- Baidu Tongji (hm.baidu.com) — analytics -->
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?784c824843f328ed5f8254991ef8b2f4";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    });
-    </script>
-
+<link rel="alternate" hreflang="en" href="https://weddingai.video/tools/heic-to-jpg-wedding-photos/">
+<link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/heic-to-jpg-wedding-photos/">
+<link rel="alternate" hreflang="es" href="https://weddingai.video/es/tools/heic-to-jpg-wedding-photos/">
+<link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/tools/heic-to-jpg-wedding-photos/">
+<link rel="alternate" hreflang="de" href="https://weddingai.video/de/tools/heic-to-jpg-wedding-photos/">
+<link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/tools/heic-to-jpg-wedding-photos/">
+<link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/tools/heic-to-jpg-wedding-photos/">
+<link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/tools/heic-to-jpg-wedding-photos/">
+<link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/tools/heic-to-jpg-wedding-photos/">
+<link rel="alternate" hreflang="th" href="https://weddingai.video/th/tools/heic-to-jpg-wedding-photos/">
+<link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/tools/heic-to-jpg-wedding-photos/">
+<link rel="alternate" hreflang="x-default" href="https://weddingai.video/tools/heic-to-jpg-wedding-photos/">
     <!-- Clarity (clarity.ms) — heatmaps & session replay -->
     <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -275,7 +239,7 @@
         <section class="section" style="background: var(--color-bg-alt);">
             <div class="article-body">
         <div class="tool-compare-section" style="margin: var(--spacing-lg) 0;">
-            <h2 data-i18n="tools.heic-to-jpg-wedding-photos.h2_text.heic_tool_comparison_8_9i0j1k2">HEIC Tool Comparison: 8 Converters vs WeddingAI.video Auto-Pair to AI Video</h2>
+            <h2 data-i18n="tools.heic-to-jpg-wedding-photos.h2_text.heic_tool_comparison_8_9i0j1k2">HEIC Tool Comparison: 8 Converters vs WeddingAI.video Batch in Browser</h2>
 <p data-i18n="tools.heic-to-jpg-wedding-photos.p_text.google_serp_for_heic_to_jpg_c.l3m4n5o6">Google SERPs for "heic to jpg converter free wedding" (Oct 2025) surface Adobe Express (4.3★/113 reviews), Heic to JPG (up to 200 images, shrink 80% zero quality loss), Canva (Photo Editor free), Microsoft Real HEIC to JPG (local conversion, no upload), iMazing (4.6★/6,458 reviews, Mac/PC), VowPix (no upload, browser), Imagen AI (4.9★-★ free fast private), Photo AI Studio (Apr 30 2026, best overall), and CloudConvert (browser). WeddingAI.video ties conversion to the next step — the AI wedding video:</p>
 <table class="full-pricing-table" style="margin: var(--spacing-md) 0;">
 <thead>
@@ -349,7 +313,7 @@
 </tr>
 </tbody>
 </table>
-<p data-i18n="tools.heic-to-jpg-wedding-photos.p_text.most_heic_converters_leave_you.5m6n7o8p">Most HEIC converters leave you with a folder of JPGs that you then upload to your photobook, your AI video tool, your email, etc. WeddingAI.video’s unique angle: the converted JPGs auto-pair into the same workflow that powers the AI wedding video — same browser, no intermediate uploads, EXIF preserved through the chain. After conversion, click “Hand off to AI Video Generator” and the same files are already in the upload queue.</p>
+<p data-i18n="tools.heic-to-jpg-wedding-photos.p_text.most_heic_converters_leave_you.5m6n7o8p">Most HEIC converters leave you with a folder of JPGs that you then upload to your photobook, your AI video tool, your email, etc. WeddingAI.video’s unique angle: the converted JPGs stay in the same browser, so there are no intermediate uploads on the way to your AI wedding video. Pick the AI Video Generator handoff quality (85, max 4096 px) before you convert, then upload the finished JPGs when you are ready.</p>
         </div>
 
                 <h2>ทำไม HEIC ถึงเป็นค่าเริ่มต้นของ iPhone — และทำไมผู้ให้บริการงานแต่งงานถึงไม่ชอบมัน</h2>
@@ -519,7 +483,7 @@
             <div class="container">
                 <p data-i18n="404.p_text.2026_weddingai_video_all_rights_reserve.73926096">© 2026 WeddingAI.video. All rights reserved.</p>
                 <div class="footer-featured">
-                    <a class="footer-badge footer-badge-secondary" href="/th/about/" title="500+ couples served, 4.9/5 rating" data-i18n="about.a_text.couples_served.ddddddd1" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 0.75rem;background:var(--color-bg-alt);border-radius:6px;font-size:0.8125rem;font-weight:600;color:var(--color-secondary);text-decoration:none;border:1px solid var(--color-border);">⭐ 4.9/5 · 500+ couples</a>
+                    <a class="footer-badge footer-badge-secondary" href="/th/about/" title="500+ couples served, 4.9/5 rating" data-i18n="about.a_text.couples_served.ddddddd1" data-i18n-attr="title:about.a_text.couples_served_title.ddddddd3" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 0.75rem;background:var(--color-bg-alt);border-radius:6px;font-size:0.8125rem;font-weight:600;color:var(--color-secondary);text-decoration:none;border:1px solid var(--color-border);">⭐ 4.9/5 · 500+ couples</a>
                 </div>
             </div>
         </div>

@@ -4,7 +4,11 @@ import re
 import sys
 import urllib.request
 
-URL = "https://ff111fb5.weddingai-video.pages.dev"
+# The live deployment target. The Pages project is named "weddingai-video" but
+# its pages.dev subdomain is "weddingai-video-bin" - read it from
+# GET /accounts/{account_id}/pages/projects/weddingai-video (field "subdomain").
+# "weddingai-video.pages.dev" is a leftover project serving an older copy.
+URL = "https://weddingai-video-bin.pages.dev"
 
 
 def fetch(path: str) -> str:

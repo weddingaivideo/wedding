@@ -3,9 +3,9 @@ Insert Microsoft Clarity (clarity.ms) tracking snippet into all production HTML
 files of weddingai.video, right before </head>.
 
 Clarity is a heatmap + session-recording analytics tool. The official install
-instructions just say "paste this script into <head>". Like the Baidu Tongji
-script, this project installs it on EVERY page via static injection (not via
-middleware) so the tool is a flat-file editor that mutates HTML.
+instructions just say "paste this script into <head>". This project installs
+it on EVERY page via static injection (not via middleware) so the tool is a
+flat-file editor that mutates HTML.
 
 The snippet is the official async loader; it dynamically appends a
 <script src="https://www.clarity.ms/tag/<id>">. Under the project's CSP
@@ -13,7 +13,7 @@ The snippet is the official async loader; it dynamically appends a
 external script is allowed without listing the host in script-src — but we list
 it anyway for documentation and to satisfy the static _headers fallback.
 
-Mirrors tools/add_baidu_tongji.py structure for consistency:
+Structure notes:
   - skips google-site-verification.html (must stay raw)
   - skips any path under tmp/ (scratch)
   - idempotent: re-running is safe

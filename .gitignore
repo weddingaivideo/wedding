@@ -132,3 +132,44 @@ scripts/verify-redirects-toolfooters-results.csv
 
 # ---- One-off commit message drafts (project owner creates these ad hoc) ----
 COMMIT_MSG_*.txt
+COMMIT_MSG.txt
+
+# ---- Local-only working files that must never be committed -------------
+# private/ holds internal audits, probes and scan scripts (~220 files). It is
+# already in .assetsignore, so it is not published - but it IS untracked, so a
+# blanket `git add`/`git add -A` (the monthly i18n cron does exactly that in
+# its "git add + commit + git push origin main" step) would commit it and
+# push it into the deploy payload. Same for the one-off download dumps.
+private/
+dl.json
+dl2.json
+.cowork-temp-check.txt
+
+# ---- One-off qa/ fixer scripts (the project owner creates these ad hoc) ----
+# The canonical qa/ scripts stay tracked (build-i18n-shards.py,
+# check_blog_redirects.py, deploy.py, gen_sitemap.py, qa_full_recheck.py,
+# validate-deploy.py, validate-sitemap.py). These throwaway fixers and
+# one-shot verifiers are not, and a blanket `git add` would otherwise sweep
+# ~50 of them into the repo on every run.
+qa/fix-*.py
+qa/fix_*.py
+qa/analyse-*.py
+qa/find-*.py
+qa/final-verify-*.py
+qa/check-*.py
+qa/proofread-*.py
+qa/repair-*.py
+qa/restore-*.py
+qa/revert-*.py
+qa/show-*.py
+qa/survey-*.py
+qa/unify-*.py
+qa/verify-*.py
+qa/pre-deploy-trust-check.py
+
+# ---- qa/ux/ scratch probes (the canonical sweep stays tracked) ----
+qa/ux/_*
+
+# ---- i18n translation-job scratch state ----
+i18n/.jobA_*.json
+i18n/*.orphan-fixes.json

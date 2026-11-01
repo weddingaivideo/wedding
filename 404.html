@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,53 +39,6 @@
     </script>
 <script src="/js/langs.js" defer></script>
 <script src="/js/i18n.js?v=4.28" defer></script>
-
-        <!-- Google tag (gtag.js) — deferred to first interaction or idle (avoids wasted bytes on bouncers) -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4FE7KSJDNB', { send_page_view: false, transport_type: 'beacon' });
-
-      window.__loadGtag = function() {
-        if (window.__gtagLoaded) return;
-        window.__gtagLoaded = true;
-        var s = document.createElement('script');
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4FE7KSJDNB';
-        s.async = true;
-        s.onload = function() {
-          gtag('event', 'page_view', {
-            page_title: document.title,
-            page_location: location.href,
-            page_path: location.pathname + location.search
-          });
-        };
-        s.setAttribute('data-gtag-lazy', '1');
-        document.head.appendChild(s);
-      };
-
-      ['scroll','click','touchstart','keydown'].forEach(function(evt){
-        window.addEventListener(evt, window.__loadGtag, { once: true, passive: true, capture: true });
-      });
-      window.addEventListener('load', function() {
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(window.__loadGtag, { timeout: 4000 });
-        } else {
-          setTimeout(window.__loadGtag, 3000);
-        }
-      });
-    </script>
-
-    <!-- Baidu Tongji (hm.baidu.com) — analytics -->
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?784c824843f328ed5f8254991ef8b2f4";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
 
     <!-- Clarity (clarity.ms) — heatmaps & session replay -->
     <script type="text/javascript">
