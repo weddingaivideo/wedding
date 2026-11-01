@@ -1328,6 +1328,13 @@ this way.
 * `scripts/scan-face-claims.py` - capability-assertion parity between every
   localized value and its English canonical. A localized value that asserts a
   capability the English value does not is machine-translation drift.
+  **Thai has no space after the negation**: "ไม่รับรู้ใบหน้า" puts "ไม่"
+  directly in front of the token, so a negation list that only knows
+  "ไม่ " (with a space) misses every Thai negation and reports six false
+  positives. The bare "ไม่" belongs in the list.
+* `scripts/check-shard-values.py` - compares the **values** of the keys this
+  pass changed against the rebuilt shards. `verify-i18n-shards.py` compares
+  key SETS, so a stale shard set with matching keys would still pass it.
 * `scripts/verify-no-false-face-claims.py` - the per-change gate.
 * Fixers: `scripts/fix-en-false-ai-claims.py` (English layer + all localized
   static pages), `scripts/fix-tierb-ai-labels.py` (the "AI" mechanism labels),
@@ -1339,3 +1346,136 @@ is the artifact the middleware reads first, and a stale shard set serves the
 old copy silently.
 
 
+
+
+## The numbers the copy gave and the code never had (2026-11-01)
+
+A second pass over the same 13 free tools found a class the earlier one
+missed: the copy quoted a **count**, and the count was wrong. Every number
+below was measured from the tool JavaScript, not inferred:
+
+| tool | real | the copy said |
+|---|---|---|
+| `wedding-invitation-maker` | `TEMPLATES` = 3 (formal, modern, photo) | 8 styles |
+| `wedding-video-invitation-maker` | `TEMPLATES` = 5 (classic, romantic, modern, bold, photo) | 8 styles |
+| `wedding-photo-collage` | `LAYOUTS` = 6, max **12** photos | 8 styles, 2-30 photos |
+| `add-text-to-wedding-photo` | `FONT_STACKS` = 14 keys | 50 fonts |
+| `compress-wedding-photos` | `canvas.toBlob()` drops EXIF | "EXIF kept" |
+
+The invitation maker is the clearest case: its own `og:description` and
+`twitter:description` had already been corrected to "3 templates - Formal,
+Modern, Photo Forward", and its JSON-LD said "3 templates" - but the
+`<title>`, the `<h1>`, the `<meta name="description">`, the comparison table
+and the tool card still said **8 styles**, and in some languages they listed
+the AI *video* styles (cinematic / trailer / vintage / pet / storybook) as
+if the card maker produced them.
+
+### TRAP: three layers, three different truths
+
+| layer | what it holds | who wins |
+|---|---|---|
+| `og:` / `twitter:` | usually the honest copy | - |
+| `<title>` / `<h1>` / `<meta name="description">` | often the stale copy | the code |
+| `data-i18n` element text | the ENGLISH source, in every language | the dictionary |
+
+The localized pages carry **native** `<title>` / `<meta description>` (de
+"Kostenloser Hochzeitseinladungs-Generator", ja "5 つのテンプレート") but the
+**English** source inside their `data-i18n` elements. So one byte-level pass
+over the element fixes the English page, the localized page and the runtime
+fallback path at once - while the localized `<title>` needs a separate,
+native edit.
+
+### TRAP: a wrong count is not automatically a wrong sentence
+
+The collage comparison table has one row per tool. Pi7, PhotoJoiner,
+Photovisi and PhotoCollage.com really do take 2-30 photos, and their cells
+carry the SAME key family (`td_text.2_to_30.<hash>`) as our own cell
+(`2_to_30.9c0d1e2f`). A blanket "no 2-30 in the collage namespace" rule
+flags the competitors' true claims. The discriminator that works: our row
+either uses one of the two known our-cell keys, or lists our own layout grid
+(`2x2 / 2x3 / 3x3 / 3x4`).
+
+Same for "8 styles": the AI wedding **video** product genuinely ships 8
+styles, and they are quoted in `tools.faq.*`, `tools.why.*`,
+`tools.p_text.*`, `tools.video_section.*` and the save-the-date card
+(`tools.card.tag.gen.11`). Those are true and must stay. Only the two
+invitation tools' own namespaces are scanned for a count.
+
+### TRAP: canvas re-encoding does not keep EXIF
+
+`js/tools/common.js` -> `canvasToBlob()` is a bare `canvas.toBlob()`
+wrapper. The output is written from the canvas bitmap, which carries no
+metadata, and nothing in the repo re-injects EXIF. So the compress page's
+"browsers keep EXIF when re-encoding is done this way" was false, and the
+page contradicted itself two sentences later ("EXIF is read again from the
+original files"). The same mechanism made the HEIC converter's "EXIF
+preserved" false earlier.
+
+`canvas.toBlob()` never keeps EXIF - that is why libraries like
+`piexifjs` exist. The honest phrasing is "re-encoding writes raw pixels, so
+camera info and dates are not carried over".
+
+### TRAP: I reproduced the `re.sub`-deletes-the-element bug
+
+`scripts/fix-count-claims.py` replaced a `<title>` with
+`text[:start] + group1 + text[end:]` where `group1` was the element's
+**content**, not the whole match. The result: the `<title>` and
+`<meta name="description">` tags were deleted from three pages and their
+bare text was left behind in `<head>`. This is the same trap AGENTS.md
+records for `scripts/sync-faq-schema.py`, and I walked straight into it.
+
+The lesson is now enforced by a gate:
+
+* `scripts/check-html-structure.py` - every deployed page must have exactly
+  one `<title>`, one `<meta name="description">`, one `</head>`, one `<body>`
+  pair, at least one `<h1>`, and **no bare text directly inside `<head>`**.
+  The text is located with `html.parser`, not a regex: a `>` inside an
+  attribute value breaks every tag-stripping regex, and the title's own
+  content is legitimate prose.
+* `scripts/repair-meta-tags.py` - puts the deleted markup back.
+* `scripts/fix-stray-gt.py` - removes the stray `>` that earlier passes left
+  after a self-closing `<meta>` (30 files, 60 spots). A browser ignores it,
+  but it makes the structural check impossible.
+* `scripts/fix-head-tag-leftovers.py` - cleans the `... /> />` duplicate and
+  the `<meta property="og:title" ...</title>` that lost its closing `>`.
+
+**Always replace the content in place** (`group1 + new + group3`), never
+rebuild the match from the content alone.
+
+### The gates for this pass
+
+* `scripts/scan-false-capability-residuals.py` - rewritten. It now carries a
+  **truth table** (the counts above), scopes every count rule to the tool
+  that makes the claim, and knows the difference between our row and a
+  competitor row. It also **proves itself before reporting**: a synthetic
+  false claim must be flagged and a synthetic honest one must not, so "0
+  findings" can never be confused with "matches nothing".
+* `scripts/check-html-structure.py` - the structural gate described above.
+* `scripts/verify-no-false-face-claims.py` - still PASS; its canonical file
+  `scripts/en.face-canonical.json` is the approved English wording for the
+  19 tracked keys and has to be refreshed whenever one of them changes.
+* `scripts/check-seo-lengths.py` - still 751 OK / 0 over.
+
+### New helper: the setter can add a key
+
+`scripts/set-i18n-values.py --add-missing` appends a key that does not exist
+yet instead of aborting. Nine of the eleven dictionaries had no
+`tools.card.badge.edit.06` at all, so the badge fell back to English on
+every localized page. The insert keeps the house format (2-space indent, one
+key per line) and inserts before the closing brace, where JSON forbids a
+trailing comma.
+
+### Still open (deliberate, for the owner to weigh)
+
+* Three English titles still label the free tool's own output as AI -
+  "Add Text to Wedding Photo: **AI** Batch", "Save the Date Maker: **AI**
+  Save-the-Date", "Remove Background Wedding Portrait: **AI** Bundle". The
+  localized titles already omit it. It is a copy/SEO decision, not a
+  code-vs-copy contradiction, so it was left alone.
+* The "9 minutes" house number appears on the browser-only tool cards
+  ("Auto-fills 6 collage layouts in 9 minutes"). It is the site's product
+  number, consistent across 13 cards x 11 languages, so it was not touched
+  - but for a tool that renders instantly it is arguable.
+* `blog.*` and `services.*` still describe the AI video product's face
+  detection. That is a server-side capability and cannot be verified from
+  this repository, so it stays.

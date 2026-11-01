@@ -300,7 +300,7 @@
 
                 <h3>Was dieses Tool tut (und was nicht)</h3>
                 <p>Der Komprimierer nutzt die Canvas API des Browsers, um jedes abgelegte Bild in Ihrer gewählten Qualität neu zu kodieren. Er unterstützt JPG-, PNG- und WebP-Eingabe und gibt JPG, WebP oder PNG aus. Optionale "Max längste Kante" begrenzt die längste Seite — praktisch, wenn Sie das Größenlimit des Ziels kennen.</p>
-                <p>Was es nicht tut: Es entfernt standardmäßig keine EXIF-Metadaten (Browser behalten EXIF bei dieser Art der Neukodierung; für das Entfernen von Metadaten bräuchten Sie ein separates Tool), und es komprimiert nicht in eine ZIP-Datei — es nutzt den sequentiellen Datei-Download des Browsers, was bessere Kontrolle über die Dateibenennung pro Datei ermöglicht und den Einsatz einer ZIP-Bibliothek vermeidet.</p>
+                <p>Was es nicht tut: Es entfernt die EXIF-Metadaten (Canvas-Neukodierung schreibt nur Pixel, Kamerainfos und Datum gehen verloren), und es komprimiert nicht in eine ZIP-Datei — es nutzt den sequentiellen Datei-Download des Browsers, was bessere Kontrolle über die Dateibenennung pro Datei ermöglicht und den Einsatz einer ZIP-Bibliothek vermeidet.</p>
 
                 <h3>Empfohlene Qualitätseinstellungen</h3>
                 <ul>
@@ -339,7 +339,7 @@
                     </details>
                     <details>
                         <summary>Werden EXIF-Daten (Kamerainfos, Datum) erhalten?</summary>
-                        <p>Die Canvas API behält die meisten EXIF-Daten bei, kann aber je nach Browser einige Felder entfernen. Für unseren KI-Hochzeitsvideo-Generator werden EXIF erneut aus den Originaldateien gelesen, also ist das kein Problem. Für archivarische Metadaten-Erhaltung verwenden Sie ein dediziertes EXIF-erhaltendes Tool.</p>
+                        <p>Die Canvas API entfernt die EXIF-Daten vollständig — beim Neukodieren werden nur Pixel geschrieben, Kamerainfos und Datum gehen verloren. Für unseren KI-Hochzeitsvideo-Generator werden EXIF erneut aus den Originaldateien gelesen, also ist das kein Problem. Für archivarische Metadaten-Erhaltung verwenden Sie ein dediziertes EXIF-erhaltendes Tool.</p>
                     </details>
                 </div>
 

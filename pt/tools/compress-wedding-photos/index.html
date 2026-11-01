@@ -312,7 +312,7 @@
 
                 <h3>O que esta ferramenta faz (e o que não faz)</h3>
                 <p>O compressor usa a <strong>Canvas API</strong> nativa do navegador para recodificar cada imagem solta na qualidade escolhida. Aceita JPG, PNG e WebP como entrada e gera JPG, WebP ou PNG. A opção "Maior dimensão" limita o lado mais comprido — útil quando você já conhece o limite de tamanho do destino.</p>
-                <p>O que ela não faz: por padrão não remove metadados EXIF (o navegador costuma manter o EXIF ao recodificar assim; para limpar metadados seria necessária uma ferramenta separada) e não empacota tudo em um ZIP — usamos o download sequencial de arquivos do navegador, que dá mais controle sobre os nomes e evita trazer uma biblioteca de ZIP.</p>
+                <p>O que ela não faz: remove os metadados EXIF (a recodificação em canvas escreve apenas pixels: informações da câmera e datas não são preservadas) e não empacota tudo em um ZIP — usamos o download sequencial de arquivos do navegador, que dá mais controle sobre os nomes e evita trazer uma biblioteca de ZIP.</p>
 
                 <h3>Configurações de qualidade recomendadas</h3>
                 <ul>
@@ -351,7 +351,7 @@
                     </details>
                     <details>
                         <summary>O EXIF (informações da câmera, datas) é preservado?</summary>
-                        <p>A Canvas API mantém a maior parte do EXIF, mas pode descartar alguns campos dependendo do navegador. Para o nosso Gerador de Vídeo de Casamento com IA, o EXIF é relido a partir dos arquivos originais, então isso não é problema. Para preservação de metadados em nível de arquivo, use uma ferramenta dedicada.</p>
+                        <p>A Canvas API remove o EXIF por completo — a recodificação escreve apenas pixels, então as informações da câmera e as datas não são preservadas. Para o nosso Gerador de Vídeo de Casamento com IA, o EXIF é relido a partir dos arquivos originais, então isso não é problema. Para preservação de metadados em nível de arquivo, use uma ferramenta dedicada.</p>
                     </details>
                 </div>
 

@@ -300,7 +300,7 @@
 
                 <h3>Lo que hace esta herramienta (y lo que no hace)</h3>
                 <p>El compresor usa la Canvas API integrada del navegador para recodificar cada imagen soltada en la calidad que elijas. Admite entrada JPG, PNG y WebP y salida JPG, WebP o PNG. "Max longest edge" opcional limita el lado más largo — útil si conoces el límite de tamaño del destino.</p>
-                <p>Lo que no hace: no elimina los metadatos EXIF por defecto (los navegadores mantienen EXIF cuando la recodificación se hace de esta manera; para eliminar metadatos necesitarías una herramienta separada), y no agrupa en ZIP — usa la descarga de archivos secuenciales del navegador en su lugar, lo que da mejor control de nombres por archivo y evita agregar una biblioteca ZIP.</p>
+                <p>Lo que no hace: elimina los metadatos EXIF (la recodificación con canvas escribe solo píxeles: la info de cámara y las fechas no se conservan), y no agrupa en ZIP — usa la descarga de archivos secuenciales del navegador en su lugar, lo que da mejor control de nombres por archivo y evita agregar una biblioteca ZIP.</p>
 
                 <h3>Configuración de calidad recomendada</h3>
                 <ul>
@@ -339,7 +339,7 @@
                     </details>
                     <details>
                         <summary>¿Esto preserva EXIF (info de cámara, fechas)?</summary>
-                        <p>La Canvas API mantiene la mayoría de EXIF pero puede dropping algunos campos dependiendo del navegador. Para nuestro Generador de Video de Boda con IA, EXIF se lee nuevamente de los archivos originales, así que esto no es un problema. Para preservación de metadatos de grado de archivo, usa una herramienta dedicada que preserve EXIF.</p>
+                        <p>La Canvas API elimina el EXIF por completo: la recodificación escribe solo píxeles, así que no se conservan la info de cámara ni las fechas. Para nuestro Generador de Video de Boda con IA, EXIF se lee nuevamente de los archivos originales, así que esto no es un problema. Para preservación de metadatos de grado de archivo, usa una herramienta dedicada que preserve EXIF.</p>
                     </details>
                 </div>
 

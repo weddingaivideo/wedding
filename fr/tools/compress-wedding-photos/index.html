@@ -300,7 +300,7 @@
 
                 <h3>Ce que fait cet outil (et ce qu'il ne fait pas)</h3>
                 <p>Le compresseur utilise l'API Canvas intégrée du navigateur pour ré-encoder chaque image déposée à la qualité choisie. Il prend en charge les entrées JPG, PNG et WebP et produit en sortie JPG, WebP ou PNG. L'option « Max plus grand côté » limite le côté le plus long — pratique si vous connaissez la limite de taille de destination.</p>
-                <p>Ce qu'il ne fait pas : il ne supprime pas les métadonnées EXIF par défaut (les navigateurs conservent les EXIF lors de la ré-encodage de cette façon ; pour une suppression de métadonnées, vous voudriez un outil séparé), et il ne crée pas de lot en ZIP — il utilise le téléchargement séquentiel de fichiers du navigateur à la place, ce qui offre un meilleur contrôle de nommage par fichier et évite d'intégrer une bibliothèque ZIP.</p>
+                <p>Ce qu'il ne fait pas : il supprime les métadonnées EXIF (le ré-encodage canvas n'écrit que des pixels : les infos appareil et les dates sont perdues), et il ne crée pas de lot en ZIP — il utilise le téléchargement séquentiel de fichiers du navigateur à la place, ce qui offre un meilleur contrôle de nommage par fichier et évite d'intégrer une bibliothèque ZIP.</p>
 
                 <h3>Paramètres de qualité recommandés</h3>
                 <ul>
@@ -339,7 +339,7 @@
                     </details>
                     <details>
                         <summary>Cela préserve-t-il les EXIF (informations appareil, dates) ?</summary>
-                        <p>L'API Canvas conserve la plupart des EXIF mais peut supprimer quelques champs selon le navigateur. Pour notre générateur de vidéo de mariage IA, les EXIF sont relus à partir des fichiers originaux, donc ce n'est pas un problème. Pour une préservation de métadonnées de qualité archive, utilisez un outil de préservation EXIF dédié.</p>
+                        <p>L'API Canvas supprime complètement les EXIF — le ré-encodage n'écrit que des pixels, les infos appareil et les dates sont perdues. Pour notre générateur de vidéo de mariage IA, les EXIF sont relus à partir des fichiers originaux, donc ce n'est pas un problème. Pour une préservation de métadonnées de qualité archive, utilisez un outil de préservation EXIF dédié.</p>
                     </details>
                 </div>
 

@@ -256,7 +256,7 @@
 
                 <h3>What this tool does (and doesn't do)</h3>
                 <p>The compressor uses the browser's built-in <strong>Canvas API</strong> to re-encode each dropped image at your chosen quality. It supports JPG, PNG, and WebP input and outputs JPG, WebP, or PNG. Optional "Max longest edge" caps the longest side — handy if you know the destination's size limit.</p>
-                <p>What it doesn't do: it doesn't strip EXIF metadata by default (browsers keep EXIF when re-encoding is done this way; for a metadata strip you'd want a separate tool), and it doesn't batch into a ZIP — it uses the browser's sequential file download instead, which gives better per-file naming control and avoids pulling in a ZIP library.</p>
+                <p>What it doesn't do: it does drop EXIF metadata (canvas re-encoding writes raw pixels, so camera info and dates are not carried over), and it doesn't batch into a ZIP — it uses the browser's sequential file download instead, which gives better per-file naming control and avoids pulling in a ZIP library.</p>
 
                 <h3>Recommended quality settings</h3>
                 <ul>
@@ -348,7 +348,7 @@
                     </details>
                     <details>
                         <summary>Does this preserve EXIF (camera info, dates)?</summary>
-                        <p>The Canvas API keeps most EXIF but can drop a few fields depending on browser. For our AI Wedding Video Generator, EXIF is read again from the original files, so this isn't an issue. For archival-grade metadata preservation, use a dedicated EXIF-preserving tool.</p>
+                        <p>The Canvas API drops EXIF entirely - re-encoding writes raw pixels, so camera info and dates are not carried over. For our AI Wedding Video Generator, EXIF is read again from the original files, so this isn't an issue. For archival-grade metadata preservation, use a dedicated EXIF-preserving tool.</p>
                     </details>
                 </div>
 
