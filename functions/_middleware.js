@@ -74,12 +74,32 @@ function generateNonce() {
 function buildCsp(nonce) {
     return [
         "default-src 'self'",
-        `script-src 'self' 'nonce-${nonce}' https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://www.clarity.ms https://f.clarity.ms https://scripts.clarity.ms`,
+        // 'wasm-unsafe-eval' (added 2026-11-09): WebAssembly compilation is
+        // separate from JavaScript eval and needs its own keyword. It is
+        // required by the vendored tools that run a WASM build:
+        //   - js/vendor/pica/          (high-quality resampler; without it the
+        //     constructor throws, has_wasm() returns false and pica silently
+        //     falls back to its plain-JS resampler)
+        //   - js/vendor/onnxruntime/   (ONNX Runtime Web, used by the
+        //     on-device background-removal model)
+        // It does NOT allow eval() - 'unsafe-eval' is still absent.
+        `script-src 'self' 'nonce-${nonce}' 'wasm-unsafe-eval' https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://www.clarity.ms https://f.clarity.ms https://scripts.clarity.ms`,
         `script-src-attr 'self' 'nonce-${nonce}'`,
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: blob: https://www.clarity.ms https://c.clarity.ms https://c.bing.com https://pagead2.googlesyndication.com https://www.google.com",
         "media-src 'self' data: blob:",
         "font-src 'self' data:",
+        // worker-src (added 2026-11-09): the vendored libraries build their
+        // worker pools from a blob: URL.
+        //   - js/vendor/pica/     creates `new Worker(URL.createObjectURL(new
+        //     Blob([...])))` for its WASM resampler
+        //   - js/vendor/heic2any/ does the same for the HEIC decoder
+        // Without this directive worker-src falls back to default-src 'self',
+        // which does not allow blob:, so both libraries were blocked and
+        // silently degraded (pica fell back to its plain-JS resampler).
+        // blob: is same-origin-only: the page can only spawn a worker from a
+        // blob it created itself.
+        "worker-src 'self' blob:",
         "connect-src 'self' https://cloudflareinsights.com https://*.cloudflareinsights.com https://www.clarity.ms https://c.clarity.ms https://f.clarity.ms https://u.clarity.ms https://e.clarity.ms https://t.clarity.ms https://*.clarity.ms https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.googleadservices.com https://ep1.adtrafficquality.google",
         "frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net",
         "form-action 'self'",
@@ -451,6 +471,42 @@ function applyDataI18n(html, dict) {
             return cleanOpen + v + `</${tag}>`;
         }
     );
+}
+
+// Inject a RUNTIME copy of the "tools.copy" namespace as
+// window.__WA_I18N__ (added 2026-11-09).
+//
+// WHY THIS IS NEEDED
+// ------------------
+// applyDataI18n rewrites the STATIC html: an element that carries
+// data-i18n="tools.copy.download.zzzzzzfd45" gets its text replaced with
+// the dictionary value for the page's language. That covers every label
+// that is written into the markup.
+//
+// It does NOT cover the strings that js/tools/common.js creates AFTER the
+// middleware has run: the "Download" and "Remove" buttons it builds for
+// every file row, and the toasts it raises. Those were hard-coded English
+// on all 11 languages - the "tools.copy" namespace existed in every
+// dictionary but no page ever referenced it.
+//
+// The fix is to hand that namespace to the client. It is one flat object
+// of ~3.6 KB, it is already loaded as a shard for the tool pages, and it
+// lets common.js resolve any copy string at runtime.
+//
+// The JSON is escaped so a translation containing "</script>" cannot break
+// out of the inline script.
+function injectRuntimeI18n(html, dict, namespace) {
+    const prefix = namespace + ".";
+    const runtime = {};
+    for (const [k, v] of Object.entries(dict)) {
+        if (k.startsWith(prefix) && typeof v === "string") runtime[k] = v;
+    }
+    if (!Object.keys(runtime).length) return html;
+    const json = JSON.stringify(runtime).replace(/</g, "\\u003c");
+    const tag = `<script>window.__WA_I18N__=${json};</script>`;
+    // Before </body> so it is available as soon as the page's own scripts run.
+    if (html.includes("</body>")) return html.replace("</body>", tag + "</body>");
+    return html + tag;
 }
 
 // Apply data-i18n-attr: e.g. data-i18n-attr="content:key1|title:key2" →
@@ -2037,9 +2093,33 @@ export const onRequest = async (context) => {
             let text = await response.text();
 
             // 1. <html lang="xx" dir="rtl">
+            //
+            // Two shapes have to be handled:
+            //   - the ENGLISH source page, whose tag is `<html lang="en">`. This
+            //     is the FALLBACK path (a URL with no localized twin), and it
+            //     is the only shape the old one-liner matched.
+            //   - a LOCALIZED page, whose tag is already `<html lang="ar">`
+            //     (or `de`, `es`, ...). The old pattern did not match it, so
+            //     57 of the 63 Arabic pages shipped WITHOUT `dir="rtl"` in
+            //     their first HTML - the direction was only applied later, at
+            //     runtime, by js/i18n.js -> setDir().
+            //
+            // The attribute list is parsed rather than matched positionally,
+            // so any order and any quoting works, and `lang` is always forced
+            // to the language actually being served.
             if (lang !== DEFAULT_LANG) {
                 const rtl = RTL[lang] ? ' dir="rtl"' : "";
-                text = text.replace(/<html\s+lang="en"\s*>/i, `<html lang="${lang}"${rtl}>`);
+                text = text.replace(/<html\b[^>]*>/i, (tag) => {
+                    const attrs = {};
+                    const re = /([\w:-]+)\s*=\s*"([^"]*)"/g;
+                    let m;
+                    while ((m = re.exec(tag)) !== null) attrs[m[1].toLowerCase()] = m[2];
+                    const kept = Object.keys(attrs)
+                        .filter((k) => k !== "lang" && k !== "dir")
+                        .map((k) => ` ${k}="${attrs[k]}"`)
+                        .join("");
+                    return `<html lang="${lang}"${kept}${rtl}>`;
+                });
             }
 
             // 2. canonical + hreflang
@@ -2124,7 +2204,20 @@ export const onRequest = async (context) => {
                     //
                     // If the shards are missing (not deployed yet) this
                     // returns null and we fall back to the full dictionary.
-                    let dict = await loadI18nShards(SITE_ORIGIN, lang, version, text);
+                    //
+                    // The tool pages additionally need the "tools.copy"
+                    // namespace: js/tools/common.js builds its file-row
+                    // buttons and its toasts at RUNTIME, after this
+                    // translation pass has run, so those strings cannot be
+                    // resolved by the data-i18n mechanism. The namespace is
+                    // handed to the client as window.__WA_I18N__ instead
+                    // (see injectRuntimeI18n). It is only requested for
+                    // tool pages, so no other page pays for the shard.
+                    const isToolPage = /^\/tools(\/|$)/.test(rest || "");
+                    let dict = await loadI18nShards(
+                        SITE_ORIGIN, lang, version, text,
+                        isToolPage ? ["tools.copy"] : []
+                    );
                     if (!dict) dict = await loadI18nDict(lang, version);
                     if (dict) {
                         // Remember the page's own title / description BEFORE
@@ -2136,6 +2229,9 @@ export const onRequest = async (context) => {
                         const preDesc = extractMetaDescription(text);
                         text = applyDataI18n(text, dict);
                         text = applyDataI18nAttr(text, dict);
+                        if (isToolPage) {
+                            text = injectRuntimeI18n(text, dict, "tools.copy");
+                        }
                         // Nav links on the middleware-rendered pages still carry
                         // the English /tools/ /order/ /about/ hrefs because the
                         // template is the English page with text swapped in.

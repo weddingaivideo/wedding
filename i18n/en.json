@@ -36998,7 +36998,7 @@
   "tools.wedding-seating-chart-maker.td_text.weddingaivideo.1u2v3w4x": "<strong>WeddingAI.video Seating Chart Maker</strong> (this tool)",
   "tools.wedding-seating-chart-maker.td_text.unlimited_500_tested.5y6z7a8b": "<strong>Unlimited, 500+ tested</strong>",
   "tools.wedding-seating-chart-maker.td_text.ai_nooverlap_groups_vip.9c0d1e2f": "<strong>No-overlap auto-assign by group + VIP</strong>",
-  "tools.wedding-seating-chart-maker.td_text.printable_png_pdf_share_link.3g4h5i6j": "Printable PNG + PDF + share link",
+  "tools.wedding-seating-chart-maker.td_text.printable_png_pdf_share_link.3g4h5i6j": "Printable PNG + PDF",
   "tools.wedding-seating-chart-maker.td_text.same_workflow_99_video.7k8l9m0n": "<strong>Same workflow video credits</strong>",
   "tools.wedding-seating-chart-maker.td_text.seatplanio.1o2p3q4r": "SeatPlan.io (seatplan.io)",
   "tools.wedding-seating-chart-maker.td_text.unlimited_free_no_signup.5s6t7u8v": "Unlimited, free, no signup",
@@ -44147,5 +44147,157 @@
   "blog.multilingual-wedding-video.meta_description.x.d41d8cd9": "Generate wedding videos with AI subtitles in 11 languages (English, Spanish, Chinese, Arabic, Hindi, French, German, Portuguese, Japanese, Russian, Thai) f",
   "blog.pet-wedding-video.meta_description.x.d41d8cd9": "Pet wedding video: how to include your dog, cat, or other pet in your wedding film. AI option from $9.9 adds pet clips seamlessly in 48h. Real examples fro",
   "blog.slow-motion-wedding-video.meta_description.x.d41d8cd9": "Slow motion wedding video: 5 expert tips (frame rate, when to use, when not to) + AI option that adds slow-mo to regular video from $9.9. No 60/120 FPS cam",
-  "blog.vintage-wedding-video-restoration.meta_description.x.d41d8cd9": "Restore your vintage wedding video: VHS or camcorder upload → AI upscale to 4K + audio cleanup + cinematic highlight. $9.9 vs Etsy $30-$100. 5-min turnarou"
+  "blog.vintage-wedding-video-restoration.meta_description.x.d41d8cd9": "Restore your vintage wedding video: VHS or camcorder upload → AI upscale to 4K + audio cleanup + cinematic highlight. $9.9 vs Etsy $30-$100. 5-min turnarou",
+  "pricing.td_text.reply_within_24_hrs.zzzzzz1": "Reply within 24 hrs",
+  "pricing.td_text.not_sure_yet_sofia_recommends.zzzzzz1": "Not sure yet &mdash; Sofia will recommend the best fit",
+  "order.validation.is_required.zzzzzz1": "{field} is required",
+  "order.validation.invalid_email.zzzzzz2": "Please enter a valid email address",
+  "order.validation.error_prefix.zzzzzz3": "Please fix the following: ",
+  "order.validation.error_separator.zzzzzz4": "; ",
+  "order.validation.sending.zzzzzz5": "Sending your request…",
+  "order.validation.sending_button.zzzzzz6": "Sending…",
+  "order.validation.fill_in_prefix.zzzzzz7": "Please fill in: ",
+  "order.validation.fill_in_separator.zzzzzz8": ", ",
+  "success.validation.copied.zzzzzz1": "✓ Copied",
+  "success.validation.pending_headline.zzzzzz2": "We've Got Your Request",
+  "success.validation.pending_summary.zzzzzz3": "Your details are saved and our team will follow up within 24 hours. The automatic confirmation email didn't send on the first try — no action needed from you.",
+  "success.validation.followup_subject.zzzzzz4": "Follow-up on my quote {ref}",
+  "success.validation.followup_body.zzzzzz5": "Hi,\n\nFollowing up on my quote request {ref}. I haven't received a confirmation email yet.\n\nThanks!",
+  "search.copy.results_for.zzzzzz1": "Results for &ldquo;{query}&rdquo;",
+  "search.copy.showing.zzzzzz2": "Showing matching services and pages.",
+  "search.copy.no_matches.zzzzzz3": "No matches for &ldquo;{query}&rdquo;. Try one of the popular searches above, or <a href=\"/order/\" style=\"color: var(--color-primary); text-decoration: underline;\">send us a quote request</a> and we&rsquo;ll point you to the right service.",
+  "tools.copy.original.zzzzzz919c": "Original: ",
+  "tools.copy.output.zzzzzz78e6": "Output: ",
+  "tools.copy.download.zzzzzzfd45": "Download",
+  "tools.copy.remove.zzzzzz0f69": "Remove",
+  "tools.copy.working.zzzzzzc327": "Working",
+  "tools.copy.preview.zzzzzz5ebe": "preview",
+  "tools.copy.captioned.zzzzzz9233": "captioned",
+  "tools.copy.errored.zzzzzzd787": "{n} errored",
+  "tools.copy.erroredHint.zzzzzz4100": " — remove and retry.",
+  "tools.copy.originalTotal.zzzzzz1bb2": "Original total:",
+  "tools.copy.outputTotal.zzzzzz1011": "Output total:",
+  "tools.copy.totalSaved.zzzzzz86d9": "Total saved:",
+  "tools.copy.totalOutput.zzzzzz565d": "Total output:",
+  "tools.copy.noSupportedFiles.zzzzzz19c5": "No supported files. Try a JPG, PNG, or WebP.",
+  "tools.copy.noSupportedFilesShort.zzzzzz3dae": "No supported files. Try JPG, PNG, or WebP.",
+  "tools.copy.renderEmpty.zzzzzzbf0d": "Render returned an empty file. Try a different format.",
+  "tools.copy.renderComplete.zzzzzzfca1": "Render complete.",
+  "tools.copy.compressEmpty.zzzzzz6fba": "Compression returned an empty file. Try a different format.",
+  "tools.copy.compressComplete.zzzzzzd8f0": "Compression complete.",
+  "tools.copy.imageNoDimensions.zzzzzz916e": "Image has no dimensions. Try a different file.",
+  "tools.copy.invalidOutputDims.zzzzzz0828": "Computed output dimensions are invalid.",
+  "tools.copy.cropEmpty.zzzzzzc76e": "Crop returned an empty file. Try a different image.",
+  "tools.copy.cropComplete.zzzzzz4d32": "Crop complete.",
+  "tools.copy.photoLoaded.zzzzzz5d9b": "<strong>Photo loaded:</strong>",
+  "tools.copy.photoLoadedHint.zzzzzzcace": "renders in the canvas below. Clear the photo any time by removing this card.",
+  "tools.copy.savedDot.zzzzzz2111": "Saved · ",
+  "tools.copy.resetFieldsConfirm.zzzzzze493": "Reset all fields and the selected template?",
+  "tools.copy.typeNameHint.zzzzzzee29": "Type at least one name to see ideas.",
+  "tools.copy.noIdeasMatch.zzzzzz3f78": "No ideas match the active styles — toggle at least one.",
+  "tools.copy.ideasEmpty.zzzzzz66f4": "Your ideas will appear here.",
+  "tools.copy.tryMoreStyles.zzzzzze8c3": "Try enabling more styles above.",
+  "tools.copy.ideasCountHint.zzzzzz1e2c": "ideas · click any to copy · tap a style chip to filter.",
+  "tools.copy.copiedDot.zzzzzz5ccd": "Copied · ",
+  "tools.copy.savedPrint.zzzzzzcb0c": "Saved 5×7 (1500×2100) — ready for print",
+  "tools.copy.savedSocial.zzzzzz6a27": "Saved 1080×1350 — ready for WhatsApp/Instagram",
+  "tools.copy.resetBookConfirm.zzzzzzd17b": "Reset the entire book? Photos will be cleared.",
+  "tools.copy.noMorePhotos.zzzzzze783": "No more photos available. Add more photos or clear other slots.",
+  "tools.copy.addPhotosFirst.zzzzzzbab5": "Add some photos first.",
+  "tools.copy.clearAssignmentsConfirm.zzzzzz9ae9": "Clear all page assignments?",
+  "tools.copy.noPhotosYet.zzzzzzc9c7": "No photos yet. Drop some above.",
+  "tools.copy.coverPage.zzzzzz4328": "Cover page — uses the title, date, and tagline.",
+  "tools.copy.distributed.zzzzzz8201": "Distributed {n} photos across pages",
+  "tools.copy.downloadAllPages.zzzzzzb805": "Download all {n} pages? Browsers may queue multiple downloads.",
+  "tools.copy.layoutUses.zzzzzzcbfc": "Layout uses {n} photos",
+  "tools.copy.extrasIgnored.zzzzzz10de": "{n} extras ignored.",
+  "tools.copy.buildCollage.zzzzzz5d82": "Build collage",
+  "tools.copy.building.zzzzzz1b20": "Building…",
+  "tools.copy.needTwoPhotos.zzzzzze83c": "Need at least 2 readable photos.",
+  "tools.copy.addAtLeastTwo.zzzzzz82ea": "Add at least 2 photos to build a collage.",
+  "tools.copy.encodePngFailed.zzzzzz8e47": "Could not encode PNG output.",
+  "tools.copy.collageBuilt.zzzzzz34d2": "Collage built. Click Download PNG to save.",
+  "tools.copy.savedFrames.zzzzzzf7f9": "Saved 5 frames — assemble in CapCut / iMovie",
+  "tools.copy.dropPhoto.zzzzzz1286": "Drop a photo here or click to browse",
+  "tools.copy.zipFailed.zzzzzz4a1b": "Could not build the ZIP archive"
+,
+  "tools.copy.pdfFailed.zzzzzz4b2c": "Could not create the PDF"
+,
+  "tools.copy.pdfReady.zzzzzz4c3d": "PDF ready"
+,
+  "tools.copy.heicDecoding.zzzzzz4d4e": "Decoding HEIC…"
+,
+  "tools.copy.heicDecodeFailed.zzzzzz4e5f": "Could not decode this HEIC file"
+,
+  "tools.copy.aiModelLoading.zzzzzz4f6a": "Loading the AI model…"
+,
+  "tools.copy.aiRemoveFailed.zzzzzz4a7b": "Could not remove the background"
+,
+  "tools.copy.videoEncoding.zzzzzz4b8c": "Encoding video…"
+,
+  "tools.copy.videoEncodeFailed.zzzzzz4c9d": "Could not encode the video"
+,
+  "tools.copy.browserNoWebcodecs.zzzzzz4d0e": "Your browser cannot encode video in the page (WebCodecs is not supported). Download the PNG frames instead."
+,
+  "tools.copy.cropApply.zzzzzz4e1f": "Apply"
+,
+  "tools.copy.cropReset.zzzzzz4f2a": "Reset"
+,
+  "tools.copy.cropCancel.zzzzzz4a3b": "Cancel"
+,
+  "tools.copy.aiRemoveBackground.zzzzzz4b4c": "Remove background with AI"
+,
+  "tools.copy.aiModelNotice.zzzzzz4c5d": "The first run downloads the AI model (~17 MB) once and then works offline. Your photo never leaves this device."
+,
+  "tools.copy.seatTemplateClassic.zzzzzz5a01": "Classic Reception (8 rounds of 8)"
+,
+  "tools.copy.seatTemplateLong.zzzzzz5a02": "Long Banquet (3 long of 12)"
+,
+  "tools.copy.seatTemplateIntimate.zzzzzz5a03": "Intimate (5 rounds of 6 + sweetheart)"
+,
+  "tools.copy.seatTemplateUShape.zzzzzz5a04": "U-Shape with head table"
+,
+  "tools.copy.seatExportPng.zzzzzz5a05": "Export PNG (1600×1200)"
+,
+  "tools.copy.seatPrint.zzzzzz5a06": "Print"
+,
+  "tools.copy.seatDownloadPdf.zzzzzz5a07": "Download PDF"
+,
+  "tools.copy.seatChartTitle.zzzzzz5a08": "Wedding Seating Chart"
+,
+  "tools.copy.seatSavedPng.zzzzzz5a09": "Saved 1600×1200 PNG"
+,
+  "tools.copy.seatSavedPdf.zzzzzz5a0a": "Saved PDF"
+,
+  "tools.copy.heicComplete.zzzzzz6b01": "Conversion complete."
+,
+  "tools.copy.noHeicFiles.zzzzzz6b02": "No HEIC/HEIF files found. Drop .heic or .heif files."
+,
+  "tools.copy.heicSaving.zzzzzz6b03": "Saving {n} file(s)…"
+,
+  "tools.copy.heicConvertedToJpg.zzzzzz6b04": "converted to JPG"
+,
+  "tools.copy.heicTotalNow.zzzzzz6b05": "Total now:"
+,
+  "tools.copy.heicZeroConverted.zzzzzz6b06": "converted — this file could not be decoded."
+,
+  "tools.copy.heicErrored.zzzzzz6b07": "errored — this file could not be decoded."
+,
+  "tools.copy.cropStageTitle.zzzzzz6c01": "Adjust the crop"
+,
+  "tools.copy.cropStageHint.zzzzzz6c02": "Drag the corners to frame the shot. Photos you leave untouched keep the automatic centre crop."
+,
+  "tools.copy.cropPrev.zzzzzz6c03": "Previous photo"
+,
+  "tools.copy.cropNext.zzzzzz6c04": "Next photo"
+,
+  "tools.copy.cropPos.zzzzzz6c05": "Photo {n} of {m}"
+,
+  "tools.copy.cropPosManual.zzzzzz6c06": "Photo {n} of {m} — manual crop"
+,
+  "tools.copy.bgMethod.zzzzzz7a01": "Background removal method"
+,
+  "tools.copy.bgMethodColor.zzzzzz7a02": "Smart colour key (instant, no download)"
+,
+  "tools.copy.bgMethodAi.zzzzzz7a03": "AI matting (MODNet — one-time ~17 MB download, runs on your device)"
 }

@@ -28,11 +28,11 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Gerador de hashtag de casamento">
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -208,6 +208,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ywxiu97hg8");
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -596,9 +605,14 @@
         return s[0].toUpperCase() + s.slice(1);
       };
 
-      // 30 chars is the soft cap for wedding hashtags (Instagram trending note: longer = typos)
+      // 20 chars is the soft cap for wedding hashtags — the QA section ("Under 20
+      // is ideal") and the Length-tip banner were authored against a 30-char
+      // limit that never actually fired (longest generator output is 26 chars:
+      // #EmmaPlusLiamEqualsForever). Bug #13: with limit=30 the warning never
+      // triggers. Lowered to 20 so the warning actually fires for the tags
+      // that need it. (Hero copy and FAQ updated to match.)
       function isHardToType(tag) {
-        return tag.length > 30;
+        return tag.length > 20;
       }
 
       // dedupe + cap.
@@ -645,18 +659,28 @@
         var romantic = [];
         var modern = [];
 
-        // --- Classic
+        // --- Classic (last-name and first-name tags interleaved)
+        // Bug #5 fix: original pushed all 8 last-name templates first, then the
+        // 1 first-name template last. dedupe(_, 4) kept only the first 4 — all
+        // last-name. Fix interleaves so the visible Classic set mixes both.
         if (last) {
-          classic.push('#' + cap(last) + 'Forever');
-          classic.push('#Forever' + cap(last));
-          classic.push('#' + cap(last) + (year ? year : ''));
-          classic.push('#The' + cap(last) + 'sOf' + (year ? year : 'Love'));
-          classic.push('#MrAndMrs' + cap(last));
-          classic.push('#' + cap(last) + 'Squad');
-          classic.push('#Finally' + cap(last));
-          classic.push('#' + cap(last) + 'PartyOf2');
+          classic.push('#' + cap(last) + 'Forever');           // #ParkForever
         }
-        classic.push('#Forever' + cap(f1 || f2));
+        if (f1 && f2) {
+          classic.push('#' + cap(f1) + 'And' + cap(f2) + 'Forever'); // #EmmaAndLiamForever
+        }
+        if (last) {
+          classic.push('#Forever' + cap(last));                 // #ForeverPark
+          classic.push('#MrAndMrs' + cap(last));                // #MrAndMrsPark
+        }
+        if (f1 && f2) {
+          classic.push('#' + cap(f1) + 'And' + cap(f2) + 'TieTheKnot'); // #EmmaAndLiamTieTheKnot
+        }
+        if (last) {
+          classic.push('#The' + cap(last) + 'sOf' + (year ? year : 'Love')); // #TheParksOfLove
+          classic.push('#Finally' + cap(last));                 // #FinallyPark
+        }
+        classic.push('#Forever' + cap(f1 || f2));              // #ForeverEmma (first only)
 
         // --- Funny (rhyming, alliteration, light wordplay)
         if (last) {

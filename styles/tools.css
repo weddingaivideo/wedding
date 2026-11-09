@@ -333,3 +333,171 @@
     justify-content: flex-start;
   }
 }
+
+/* ===========================================================================
+   PRINT (added 2026-11-09)
+   ---------------------------------------------------------------------------
+   Two tool pages ship a "Print" button that calls window.print():
+   wedding-seating-chart-maker (prints the DOM floor plan) and
+   wedding-budget-calculator (prints the budget table).
+
+   Before this block the printout contained the whole page chrome - the site
+   header, the language switcher, the drop zone, every control, the file
+   list, the Export/Print buttons themselves, the FAQ, the related-tools grid
+   and the site footer. styles.css only hid .site-header, .mobile-menu-toggle,
+   .hero-cta and .faq-item summary::after, and it hid nothing on the tool
+   pages at all.
+
+   The rule here is: print the RESULT, not the application. Everything that
+   is an input, a control or site chrome is hidden; the artefact (the floor
+   plan, the budget table) and its heading stay.
+
+   Kept in tools.css rather than styles.css because these classes belong to
+   the tool suite, and tools.css is only loaded by the tool pages.
+   =========================================================================== */
+
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  /* --- site chrome ------------------------------------------------------- */
+  .site-header,
+  .site-footer,
+  .mobile-menu-toggle,
+  .wa-lang-switcher,
+  .wa-skip-link,
+  .breadcrumb,
+  .cta-section,
+  .related-grid,
+  .sibling-tools,
+  .qa-block,
+  .wa-tool-privacy,
+  .wa-tool-banner,
+  .article-body > .section:not(.wa-tool-print-keep),
+  /* --- the tool's own controls ------------------------------------------ */
+  .wa-tool-dropzone,
+  .wa-tool-controls,
+  .wa-tool-actions,
+  .wa-tool-actions-row,
+  .wa-tool-file-list,
+  .wa-tool-preview,
+  .wa-tool-summary,
+  .wa-tool-hub-grid,
+  /* --- interactive crop stage (an editing surface, never an artefact) ---- */
+  .wa-crop-stage-card,
+  .wa-crop-stage-bar,
+  /* --- seating-chart specific controls ---------------------------------- */
+  .seating-panel,
+  .seating-form-row,
+  .seating-btn-row,
+  .seating-template-pick,
+  .seating-layout-controls,
+  .seating-stat,
+  .seating-legend,
+  /* --- ad slots (none on the tool pages today, but the rule must hold) --- */
+  .adsbygoogle,
+  ins.adsbygoogle,
+  .ad-slot,
+  .ad-container {
+    display: none !important;
+  }
+
+  /* --- keep the artefact on white, unbordered, full width ---------------- */
+  .page-tool,
+  .wa-tool-card,
+  .section {
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  /* The floor plan / table should not be clipped by a screen-sized box. */
+  .seating-canvas {
+    min-height: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: #fff !important;
+  }
+
+  /* Keep table rows and list items from being split across pages. */
+  tr,
+  .seating-stat,
+  .wa-tool-file-row {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Print the URL of the printed design in the margin, so a paper seating
+     chart says where it came from. */
+  .wa-tool-print-source {
+    display: block !important;
+    font-size: 8pt;
+    color: #666;
+    margin-top: 6mm;
+  }
+}
+
+/* Only visible in print - the source line for a paper artefact. */
+.wa-tool-print-source {
+  display: none;
+}
+
+/* ===========================================================================
+   Interactive crop stage (added 2026-11-09)
+
+   The crop tool used to cut a fixed rectangle chosen by a heuristic. It now
+   shows the photo with a draggable frame, so the couple can put their own
+   subject in the shot.
+
+   The frame is drawn on a canvas with the Pointer Events API, so mouse,
+   touch and pen all work without a library. `touch-action: none` is
+   REQUIRED: without it the browser scrolls the page instead of dragging
+   the frame on a phone.
+   =========================================================================== */
+.wa-crop-stage-card {
+  margin-top: 18px;
+}
+
+.wa-crop-stage-hint {
+  color: #555;
+  font-size: 15px;
+  margin: 6px 0 12px;
+}
+
+.wa-crop-stage {
+  position: relative;
+  width: 100%;
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wa-crop-stage canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.wa-crop-stage-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.wa-crop-stage-pos {
+  font-size: 14px;
+  color: #555;
+}
+

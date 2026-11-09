@@ -1,7 +1,7 @@
 /*!
- * WeddingAI Free Tools — common.js (v1.0.0)
+ * WeddingAI Free Tools — common.js (v1.2.0)
  * Shared utilities for the /tools/* suite (wedding-photo processing).
- * Loaded as a deferred <script src="/js/tools/common.js?v=1.0.0"> on every tool page.
+ * Loaded as a deferred <script src="/js/tools/common.js?v=1.0.2"> on every tool page.
  *
  * Exports a single global `weddingAITool` namespace. No build step. Plain ES2018.
  *
@@ -21,8 +21,144 @@
  * Privacy: by design all processing is client-side. The header mentions this.
  */
 
+// ---------- vendored third-party libraries --------------------------------
+//
+// WHY THIS FILE LOADS THEM LAZILY
+// -------------------------------
+// Every library lives under /js/vendor/ and is fetched on FIRST USE, not on
+// page load. The tool pages are small and most visitors open exactly one
+// tool; making everybody download the PDF writer (410 KB) or the HEIC
+// decoder (1.3 MB) to crop a photo would be a waste of their bandwidth.
+//
+// The `?v=` stamp MUST match js/vendor/vendor-manifest.json. Cloudflare Pages
+// overrides Cache-Control on static assets, so the query string is the only
+// cache-busting mechanism - a stale stamp serves an old library forever.
+// `python scripts/vendor-libs.py --verify` checks the hashes.
+//
+// CSP: 'self' is in script-src, so a dynamically inserted same-origin
+// <script src> loads without a nonce. ('unsafe-inline' is ignored because the
+// policy carries a nonce, but that only affects inline code.)
+var VENDOR = {
+  fflate: { file: 'fflate.min.js', version: '0.8.3', global: 'fflate' },
+  jspdf: { file: 'jspdf.umd.min.js', version: '4.2.1', global: 'jspdf' },
+  heic2any: { file: 'heic2any.min.js', version: '0.0.4', global: 'heic2any' },
+  pica: { file: 'pica.min.js', version: '10.0.3', global: 'pica' },
+  onnxruntime: { file: 'ort.wasm.min.js', version: '1.22.0', global: 'ort' },
+};
+
+var vendorPromises = {};
+
+function loadVendor(lib) {
+  if (vendorPromises[lib]) return vendorPromises[lib];
+  vendorPromises[lib] = new Promise(function (resolve, reject) {
+    var spec = VENDOR[lib];
+    if (!spec) { reject(new Error('Unknown vendored library: ' + lib)); return; }
+    // Already there (e.g. the page loaded it explicitly).
+    if (window[spec.global]) { resolve(window[spec.global]); return; }
+    var s = document.createElement('script');
+    s.src = '/js/vendor/' + lib + '/' + spec.file + '?v=' + spec.version;
+    s.async = true;
+    s.onload = function () {
+      if (window[spec.global]) resolve(window[spec.global]);
+      else reject(new Error('/js/vendor/' + lib + '/' + spec.file + ' loaded but did not define ' + spec.global));
+    };
+    s.onerror = function () {
+      reject(new Error('Could not load /js/vendor/' + lib + '/' + spec.file));
+    };
+    document.head.appendChild(s);
+  });
+  return vendorPromises[lib];
+}
+
+
 (function () {
   'use strict';
+
+  // ---------- runtime copy strings -------------------------------------------
+  //
+  // The middleware translates the STATIC html: an element carrying
+  // data-i18n="tools.copy.download.zzzzzzfd45" gets the dictionary value for
+  // the page's language. It cannot translate the strings this file creates
+  // AFTER the page has loaded - the per-file "Download" / "Remove" buttons,
+  // the toasts - because by then the html is already served.
+  //
+  // So the middleware hands the "tools.copy" namespace to the client as
+  // window.__WA_I18N__ (see injectRuntimeI18n in functions/_middleware.js).
+  // t() reads from it and falls back to the English source string, which is
+  // what an English page (and any page served without the runtime
+  // dictionary) needs anyway.
+  //
+  // The alias table keeps the call sites readable. The keys themselves are
+  // flat top-level keys in i18n/<lang>.json, in the "tools.copy" namespace
+  // (the first two dotted segments decide the shard).
+  var COPY = {
+    download: 'tools.copy.download.zzzzzzfd45',
+    remove: 'tools.copy.remove.zzzzzz0f69',
+    working: 'tools.copy.working.zzzzzzc327',
+    preview: 'tools.copy.preview.zzzzzz5ebe',
+    noSupportedFiles: 'tools.copy.noSupportedFiles.zzzzzz19c5',
+    renderEmpty: 'tools.copy.renderEmpty.zzzzzzbf0d',
+    compressEmpty: 'tools.copy.compressEmpty.zzzzzz6fba',
+    imageNoDimensions: 'tools.copy.imageNoDimensions.zzzzzz916e',
+    invalidOutputDims: 'tools.copy.invalidOutputDims.zzzzzz0828',
+    cropEmpty: 'tools.copy.cropEmpty.zzzzzzc76e',
+    encodePngFailed: 'tools.copy.encodePngFailed.zzzzzz8e47',
+    // added 2026-11-09
+    zipFailed: 'tools.copy.zipFailed.zzzzzz4a1b',
+    pdfFailed: 'tools.copy.pdfFailed.zzzzzz4b2c',
+    pdfReady: 'tools.copy.pdfReady.zzzzzz4c3d',
+    heicDecoding: 'tools.copy.heicDecoding.zzzzzz4d4e',
+    heicDecodeFailed: 'tools.copy.heicDecodeFailed.zzzzzz4e5f',
+    aiModelLoading: 'tools.copy.aiModelLoading.zzzzzz4f6a',
+    aiRemoveFailed: 'tools.copy.aiRemoveFailed.zzzzzz4a7b',
+    videoEncoding: 'tools.copy.videoEncoding.zzzzzz4b8c',
+    videoEncodeFailed: 'tools.copy.videoEncodeFailed.zzzzzz4c9d',
+    browserNoWebcodecs: 'tools.copy.browserNoWebcodecs.zzzzzz4d0e',
+    cropApply: 'tools.copy.cropApply.zzzzzz4e1f',
+    cropReset: 'tools.copy.cropReset.zzzzzz4f2a',
+    cropCancel: 'tools.copy.cropCancel.zzzzzz4a3b',
+    // seating chart (added 2026-11-09)
+    seatTemplateClassic: 'tools.copy.seatTemplateClassic.zzzzzz5a01',
+    seatTemplateLong: 'tools.copy.seatTemplateLong.zzzzzz5a02',
+    seatTemplateIntimate: 'tools.copy.seatTemplateIntimate.zzzzzz5a03',
+    seatTemplateUShape: 'tools.copy.seatTemplateUShape.zzzzzz5a04',
+    seatExportPng: 'tools.copy.seatExportPng.zzzzzz5a05',
+    seatPrint: 'tools.copy.seatPrint.zzzzzz5a06',
+    seatDownloadPdf: 'tools.copy.seatDownloadPdf.zzzzzz5a07',
+    seatChartTitle: 'tools.copy.seatChartTitle.zzzzzz5a08',
+    seatSavedPng: 'tools.copy.seatSavedPng.zzzzzz5a09',
+    seatSavedPdf: 'tools.copy.seatSavedPdf.zzzzzz5a0a',
+    // HEIC tool (added 2026-11-09)
+    heicComplete: 'tools.copy.heicComplete.zzzzzz6b01',
+    noHeicFiles: 'tools.copy.noHeicFiles.zzzzzz6b02',
+    heicSaving: 'tools.copy.heicSaving.zzzzzz6b03',
+    heicConvertedToJpg: 'tools.copy.heicConvertedToJpg.zzzzzz6b04',
+    heicTotalNow: 'tools.copy.heicTotalNow.zzzzzz6b05',
+    heicZeroConverted: 'tools.copy.heicZeroConverted.zzzzzz6b06',
+    heicErrored: 'tools.copy.heicErrored.zzzzzz6b07',
+  };
+
+  // Replace {name} placeholders with values from `params`.
+  // The runtime dictionary value may contain them too, so the substitution
+  // happens on whichever string is returned - translated or English fallback.
+  function interpolate(str, params) {
+    if (!params || typeof str !== 'string') return str;
+    return str.replace(/\{(\w+)\}/g, function (m, k) {
+      return Object.prototype.hasOwnProperty.call(params, k) ? String(params[k]) : m;
+    });
+  }
+
+  function t(alias, fallback, params) {
+    try {
+      var dict = window.__WA_I18N__;
+      if (dict) {
+        var key = COPY[alias] || alias;
+        var v = dict[key];
+        if (typeof v === 'string' && v !== '') return interpolate(v, params);
+      }
+    } catch (e) { /* ignore */ }
+    return interpolate(fallback, params);
+  }
 
   // ---------- format helpers ----------------------------------------------------
 
@@ -175,7 +311,7 @@
     } else {
       var ph = document.createElement('div');
       ph.className = 'wa-tool-thumb wa-tool-thumb-ph';
-      ph.textContent = (state.status === 'working') ? '…' : 'img';
+      ph.textContent = (state.status === 'working') ? '…' : t('preview', 'img');
       row.appendChild(ph);
     }
 
@@ -214,19 +350,19 @@
       var dl = document.createElement('button');
       dl.type = 'button';
       dl.className = 'btn btn-primary btn-small';
-      dl.textContent = 'Download';
+      dl.textContent = t('download', 'Download');
       dl.addEventListener('click', function () { download(state.output); });
       actions.appendChild(dl);
     } else if (state.status === 'working') {
       var sp = document.createElement('span');
       sp.className = 'wa-tool-spinner';
-      sp.setAttribute('aria-label', 'Working');
+      sp.setAttribute('aria-label', t('working', 'Working'));
       actions.appendChild(sp);
     } else if (state.status === 'error') {
       var rm = document.createElement('button');
       rm.type = 'button';
       rm.className = 'btn btn-secondary btn-small';
-      rm.textContent = 'Remove';
+      rm.textContent = t('remove', 'Remove');
       rm.addEventListener('click', function () { row.dispatchEvent(new CustomEvent('wa-row-remove', { detail: row.getAttribute('data-index'), bubbles: true })); });
       actions.appendChild(rm);
     }
@@ -249,13 +385,252 @@
     }, 1000);
   }
 
+  // ---------- "Save all" as a real ZIP ---------------------------------------
+  //
+  // Until 2026-11-09 this fired one auto-download per file, 120 ms apart.
+  // Browsers block or throttle multiple downloads, so the user got N loose
+  // files (or one file and a permission prompt) instead of one archive.
+  // It now builds a real .zip with fflate (MIT, 32 KB).
+  //
+  // Signature is unchanged: downloadZip(blobs, baseName) where each blob is
+  // { blob: Blob, name: string }. It returns a Promise; callers that ignore
+  // it still work.
   function downloadZip(blobs, baseName) {
-    // Minimal "save all" — if a real zip lib isn't loaded, fall back to auto-downloads.
-    // Avoids pulling in JSZip just for a one-line save.
-    blobs.forEach(function (entry, i) {
-      setTimeout(function () { download(entry.blob, entry.name || (baseName + '_' + (i + 1) + '.jpg')); }, i * 120);
+    if (!blobs || !blobs.length) return Promise.resolve();
+    return loadVendor('fflate').then(function (fflate) {
+      return Promise.all(blobs.map(function (entry) {
+        return entry.blob.arrayBuffer().then(function (buf) {
+          return { buf: new Uint8Array(buf), entry: entry };
+        });
+      })).then(function (parts) {
+        var files = {};
+        parts.forEach(function (p, i) {
+          // Flat names only: a zip entry may not contain a path separator.
+          var name = p.entry.name || (baseName + '_' + (i + 1) + '.jpg');
+          name = String(name).replace(/[\/\\]/g, '_');
+          files[name] = p.buf;
+        });
+        return new Promise(function (resolve, reject) {
+          fflate.zip(files, { level: 6 }, function (err, data) {
+            if (err) { reject(err); return; }
+            var blob = new Blob([data], { type: 'application/zip' });
+            download(blob, (baseName || 'weddingai') + '.zip');
+            resolve(blob);
+          });
+        });
+      });
+    }).catch(function (err) {
+      toast(t('zipFailed', 'Could not build the ZIP archive') + ': ' + (err && err.message ? err.message : String(err)), 'error');
+      throw err;
     });
   }
+
+  // ---------- canvas -> PDF --------------------------------------------------
+  //
+  // Adds a real "Download PDF" next to the PNG export. jsPDF (MIT, 410 KB)
+  // is loaded on first use. The PDF page is exactly the canvas size, so a
+  // 1600x1200 seating chart becomes a 1600x1200 pt page - i.e. a print
+  // layout with no scaling.
+  function downloadPdf(canvas, filename, opts) {
+    opts = opts || {};
+    return loadVendor('jspdf').then(function (ns) {
+      var Ctor = (ns && ns.jsPDF) || (window.jspdf && window.jspdf.jsPDF);
+      if (!Ctor) throw new Error('jsPDF did not expose a jsPDF constructor');
+      var w = canvas.width, h = canvas.height;
+      var landscape = w > h;
+      var pdf = new Ctor({
+        orientation: landscape ? 'landscape' : 'portrait',
+        unit: 'px',
+        format: [w, h],
+        compress: true,
+      });
+      var mime = opts.mime || 'image/jpeg';
+      var quality = typeof opts.quality === 'number' ? opts.quality : 0.92;
+      var dataUrl = canvas.toDataURL(mime, quality);
+      pdf.addImage(dataUrl, mime === 'image/png' ? 'PNG' : 'JPEG', 0, 0, w, h, undefined, 'FAST');
+      pdf.save(filename || 'weddingai.pdf');
+      return true;
+    }).catch(function (err) {
+      toast(t('pdfFailed', 'Could not create the PDF') + ': ' + (err && err.message ? err.message : String(err)), 'error');
+      throw err;
+    });
+  }
+
+  // ---------- HEIC decoding --------------------------------------------------
+  //
+  // Only Safari decodes HEIC natively; Chrome, Edge and Firefox cannot. The
+  // HEIC tool used to rely on the browser's own decoder, which meant it only
+  // worked in Safari. heic2any (MIT, 1.3 MB) decodes it in the browser with
+  // an asm.js build of libheif - asm.js, not WebAssembly, so it needs no
+  // CSP change and no 'wasm-unsafe-eval'.
+  //
+  // Returns a Blob (JPEG by default). Falls back to the native decoder path
+  // if the library cannot handle the file.
+  function decodeHeic(file, opts) {
+    opts = opts || {};
+    return loadVendor('heic2any').then(function (heic2any) {
+      return heic2any({
+        blob: file,
+        toType: opts.toType || 'image/jpeg',
+        quality: typeof opts.quality === 'number' ? opts.quality : 0.92,
+        multiple: false,
+      });
+    }).then(function (out) {
+      // heic2any returns an array when `multiple` is true.
+      if (Array.isArray(out)) {
+        if (!out.length) throw new Error('HEIC decoder returned no image');
+        return out[0];
+      }
+      if (!out) throw new Error('HEIC decoder returned no image');
+      return out;
+    });
+  }
+
+  // ---------- high-quality resize -------------------------------------------
+  //
+  // The canvas drawImage() path resamples with the browser's bilinear filter,
+  // which softens a photo noticeably when it is scaled down a lot. pica
+  // (MIT) does a proper multi-step resample.
+  //
+  // pica ships its WASM resampler INLINED in the bundle, so it needs
+  // 'wasm-unsafe-eval' in the CSP (added 2026-11-09 in buildCsp() and
+  // _headers). If that keyword is ever missing, pica's has_wasm() returns
+  // false and it silently falls back to its plain-JS resampler - the page
+  // keeps working, the quality quietly drops. We surface that in the console
+  // so the failure is visible instead of invisible.
+  function resizeCanvas(source, width, height, opts) {
+    opts = opts || {};
+    var usePica = opts.pica !== false;
+    if (!usePica) return drawToCanvas(source, width, height);
+    return loadVendor('pica').then(function (pica) {
+      if (pica && typeof pica.has_wasm === 'function' && !pica.has_wasm()) {
+        if (window.console && console.warn) {
+          console.warn('[weddingai] pica has no WASM (check the CSP for ' + "'wasm-unsafe-eval'" + '); falling back to the JS resampler.');
+        }
+      }
+      var out = document.createElement('canvas');
+      out.width = width;
+      out.height = height;
+      return pica().resize(source, out, {
+        quality: opts.quality || 3,
+        alpha: opts.alpha !== false,
+      }).then(function () { return out; });
+    }).catch(function () {
+      // pica failed for any reason - the plain canvas path always works.
+      return drawToCanvas(source, width, height);
+    });
+  }
+
+  function drawToCanvas(source, width, height) {
+    var out = document.createElement('canvas');
+    out.width = width;
+    out.height = height;
+    var ctx = out.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(source, 0, 0, width, height);
+    return out;
+  }
+
+  // ---------- on-device AI background removal (MODNet) --------------------
+  //
+  // The remove-background tool used a COLOUR KEY: it sampled the backdrop
+  // colour from the corners of the photo and stripped every pixel within a
+  // tolerance of it. That cannot tell a wall from a wedding dress, and it
+  // fails outright on a busy backdrop.
+  //
+  // MODNet is a real matting network (Apache-2.0, quantised ONNX, 6.3 MB)
+  // and ONNX Runtime Web (MIT) runs it in the browser, so the site's
+  // promise - the photo never leaves the device - still holds.
+  //
+  // THE COST, stated plainly: the first run downloads ~11 MB of WASM runtime
+  // plus the 6.3 MB model from THIS origin. Nothing is uploaded and no third
+  // party is contacted. The browser caches both.
+  //
+  // CSP: the runtime compiles WebAssembly, so 'wasm-unsafe-eval' has to be
+  // in the policy - it is, in functions/_middleware.js buildCsp() and in
+  // _headers, both since 2026-11-09.
+  var MODNET_SIZE = 512;
+  var MODNET_MODEL = '/js/vendor/modnet/model_quantized.onnx?v=quantized';
+  var modnetSession = null;
+
+  function removeBackgroundAi(source) {
+    return loadVendor('onnxruntime').then(function (ort) {
+      if (!ort || !ort.InferenceSession) {
+        throw new Error('ONNX Runtime did not expose InferenceSession');
+      }
+      // The runtime has to find its own backend glue (.mjs) and the WASM
+      // binary next to the JS - there is no CDN and no bundler here.
+      ort.env.wasm.wasmPaths = '/js/vendor/onnxruntime/';
+      // The site is not cross-origin isolated, so SharedArrayBuffer is not
+      // available and the threaded build would fail. One thread it is.
+      ort.env.wasm.numThreads = 1;
+      ort.env.wasm.proxy = false;
+      if (modnetSession) return modnetSession;
+      return ort.InferenceSession.create(MODNET_MODEL, {
+        executionProviders: ['wasm'],
+        graphOptimizationLevel: 'all',
+      }).then(function (session) {
+        modnetSession = session;
+        return session;
+      });
+    }).then(function (session) {
+      var w = source.naturalWidth || source.width;
+      var h = source.naturalHeight || source.height;
+      if (!w || !h) throw new Error('Image has no dimensions. Try a different file.');
+
+      // MODNet's reference implementation resizes to 512x512 WITHOUT keeping
+      // the aspect ratio, predicts a matte, and scales the matte back up.
+      var small = document.createElement('canvas');
+      small.width = MODNET_SIZE;
+      small.height = MODNET_SIZE;
+      var sctx = small.getContext('2d', { willReadFrequently: true });
+      sctx.drawImage(source, 0, 0, MODNET_SIZE, MODNET_SIZE);
+      var px = sctx.getImageData(0, 0, MODNET_SIZE, MODNET_SIZE).data;
+
+      // NCHW float32, normalised to [-1, 1] (mean 0.5, std 0.5).
+      var plane = MODNET_SIZE * MODNET_SIZE;
+      var input = new Float32Array(plane * 3);
+      for (var p = 0, i = 0; p < plane; p++, i += 4) {
+        input[p] = (px[i] / 255 - 0.5) / 0.5;
+        input[p + plane] = (px[i + 1] / 255 - 0.5) / 0.5;
+        input[p + plane * 2] = (px[i + 2] / 255 - 0.5) / 0.5;
+      }
+      var tensor = new ort.Tensor('float32', input, [1, 3, MODNET_SIZE, MODNET_SIZE]);
+
+      return session.run({ input: tensor }).then(function (res) {
+        var out = res.output || res[Object.keys(res)[0]];
+        if (!out || !out.data) throw new Error('The matting model returned no result.');
+        var alpha = out.data;
+
+        var mcanvas = document.createElement('canvas');
+        mcanvas.width = MODNET_SIZE;
+        mcanvas.height = MODNET_SIZE;
+        var mctx = mcanvas.getContext('2d');
+        var mdata = mctx.createImageData(MODNET_SIZE, MODNET_SIZE);
+        for (var k = 0; k < alpha.length; k++) {
+          var v = alpha[k];
+          if (v < 0) v = 0; else if (v > 1) v = 1;
+          mdata.data[k * 4] = 255;
+          mdata.data[k * 4 + 1] = 255;
+          mdata.data[k * 4 + 2] = 255;
+          mdata.data[k * 4 + 3] = Math.round(v * 255);
+        }
+        mctx.putImageData(mdata, 0, 0);
+
+        // Keep the original pixels, take the matte as the alpha channel.
+        var result = document.createElement('canvas');
+        result.width = w;
+        result.height = h;
+        var rctx = result.getContext('2d');
+        rctx.drawImage(source, 0, 0, w, h);
+        rctx.globalCompositeOperation = 'destination-in';
+        rctx.drawImage(mcanvas, 0, 0, w, h);
+        return result;
+      });
+    });
+  }
+
 
   // ---------- toast (very small, no deps) ---------------------------------------
 
@@ -284,7 +659,7 @@
   // ---------- public namespace --------------------------------------------------
 
   window.weddingAITool = {
-    version: '1.0.0',
+    version: '1.1.0',
     formatBytes: formatBytes,
     formatPercent: formatPercent,
     safeFileName: safeFileName,
@@ -295,6 +670,12 @@
     updateFileRow: updateFileRow,
     download: download,
     downloadZip: downloadZip,
+    downloadPdf: downloadPdf,
+    decodeHeic: decodeHeic,
+    resizeCanvas: resizeCanvas,
+    removeBackgroundAi: removeBackgroundAi,
+    loadVendor: loadVendor,
+    t: t,
     toast: toast,
   };
 })();

@@ -42,11 +42,11 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Инструменты WeddingAI">
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -184,6 +184,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ywxiu97hg8");
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
@@ -677,8 +686,8 @@
       var previewEmpty = document.getElementById('preview-empty');
       var previewWrap = document.getElementById('preview-wrap');
 
-      var files = [];
-      var activeIndex = 0;
+      var files = [];           // [{ status, name, inputFile, sizes, output, outputName, previewUrl, img }]
+      var activeIndex = 0;        // which photo drives the live preview
       var renderTimer = null;
 
       // ---------- helpers ----------------------------------------------------------
@@ -697,249 +706,165 @@
         };
       }
 
-      function swatchButtons() {
-        return swatchRow ? swatchRow.querySelectorAll('.wa-text-swatch') : [];
+      // Position the (primary, secondary) pair as a block. Returns baseline Y for primary.
+      function measureText(ctx, text, size, family) {
+        ctx.font = size + 'px ' + family;
+        var w = 0;
+        if (text) {
+          w = ctx.measureText(text).width;
+        }
+        return { width: w, ascent: size, lineHeight: Math.round(size * 1.18) };
       }
-      function refreshSwatchActive(c) {
-        var lower = (c || '').toLowerCase();
-        swatchButtons().forEach(function (b) {
-          if ((b.getAttribute('data-color') || '').toLowerCase() === lower) {
-            b.classList.add('is-active');
-          } else {
-            b.classList.remove('is-active');
-          }
-        });
+
+      // Auto-shrink primary size so the rendered width fits the canvas with 8% padding.
+      function fitSize(ctx, text, requestedSize, family, maxWidth) {
+        var size = requestedSize;
+        var minSize = 24;
+        while (size > minSize) {
+          var m = measureText(ctx, text, size, family);
+          if (m.width <= maxWidth) return size;
+          size -= 2;
+        }
+        return minSize;
       }
-      swatchButtons().forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var c = btn.getAttribute('data-color');
-          colorEl.value = c;
-          refreshSwatchActive(c);
-          scheduleRender();
-        });
-      });
-      colorEl.addEventListener('input', function () {
-        refreshSwatchActive(colorEl.value);
-        scheduleRender();
-      });
 
-      function drawTextOnCanvas(ctx, img, settings) {
-        var w = img.naturalWidth, h = img.naturalHeight;
-        ctx.clearRect(0, 0, w, h);
-        ctx.drawImage(img, 0, 0, w, h);
-
+      // Draw text block onto ctx at the requested position. Returns nothing.
+      function drawTextBlock(ctx, settings, canvasW, canvasH) {
         var family = fontStack(settings.fontName);
-        var color = settings.color || '#FFFFFF';
+        var primary = settings.primary.trim();
+        var secondary = settings.secondary.trim();
+        if (!primary && !secondary) return;
 
-        // positions
-        var padX = Math.round(w * 0.06);
-        var padY = Math.round(h * 0.06);
+        var maxW = Math.round(canvasW * 0.84);
+        var primarySize = primary ? fitSize(ctx, primary, settings.primarySize, family, maxW) : 0;
+        var secondarySize = secondary ? Math.min(settings.secondarySize, primarySize ? Math.round(primarySize * 0.55) : settings.secondarySize) : 0;
 
-        function place(size, lines, isPrimary) {
-          if (!lines || !lines.length) return;
-          var totalH = 0;
-          for (var i = 0; i < lines.length; i++) totalH += size * 1.2;
-          var startY;
-          switch (settings.position) {
-            case 'top': startY = padY + size; break;
-            case 'top-center': startY = padY + size; break;
-            case 'center': startY = (h - totalH) / 2 + size; break;
-            case 'bottom': startY = h - padY - totalH + size; break;
-            case 'bottom-center':
-            default: startY = h - padY - totalH + size; break;
-          }
-          var align = (settings.position === 'top' || settings.position === 'bottom') ? 'left' : 'center';
-          for (var k = 0; k < lines.length; k++) {
-            var line = lines[k];
-            var fs = size;
-            // Auto-shrink on overflow
-            var maxW = w - padX * 2;
-            for (var tries = 0; tries < 20; tries++) {
-              ctx.font = '600 ' + fs + 'px ' + family;
-              var metrics = ctx.measureText(line);
-              if (metrics.width <= maxW || fs <= 14) break;
-              fs -= 2;
-            }
-            ctx.font = '600 ' + fs + 'px ' + family;
-            ctx.textBaseline = 'alphabetic';
-            ctx.fillStyle = color;
-            ctx.shadowColor = settings.shadow ? 'rgba(0,0,0,0.55)' : 'transparent';
-            ctx.shadowBlur = settings.shadow ? Math.max(2, settings.shadowOffset * 1.5) : 0;
-            ctx.shadowOffsetX = settings.shadow ? settings.shadowOffset : 0;
-            ctx.shadowOffsetY = settings.shadow ? settings.shadowOffset : 0;
-            var x;
-            if (align === 'center') {
-              ctx.textAlign = 'center';
-              x = w / 2;
-            } else {
-              ctx.textAlign = 'left';
-              x = padX;
-            }
-            var y = startY + k * (fs * 1.2);
-            ctx.fillText(line, x, y);
-          }
-          ctx.shadowColor = 'transparent';
-          ctx.shadowBlur = 0;
-          ctx.shadowOffsetX = 0;
-          ctx.shadowOffsetY = 0;
-          return totalH;
-        }
+        var lineH = (primarySize || 1) * 1.18;
+        var secLineH = secondarySize * 1.25;
+        var blockH = (primary ? lineH : 0) + (secondary ? secLineH : 0);
+        var padY = Math.round(canvasH * 0.05);
 
-        // Split by newline first, then wrap by chars for Russian/CJK as needed
-        function split(text, size) {
-          if (!text) return [];
-          var rawLines = String(text).split(/\n/);
-          var out = [];
-          for (var i = 0; i < rawLines.length; i++) {
-            var line = rawLines[i];
-            if (!line) { out.push(''); continue; }
-            ctx.font = '600 ' + size + 'px ' + family;
-            var maxW = w - padX * 2;
-            var words = line.split(/\s+/);
-            var current = '';
-            for (var j = 0; j < words.length; j++) {
-              var trial = current ? (current + ' ' + words[j]) : words[j];
-              if (ctx.measureText(trial).width <= maxW || !current) {
-                current = trial;
-              } else {
-                out.push(current);
-                current = words[j];
-              }
-            }
-            if (current) out.push(current);
-          }
-          return out;
-        }
-
-        if (settings.position === 'top' || settings.position === 'top-center') {
-          place(settings.primarySize, split(settings.primary, settings.primarySize), true);
-          // Secondary below primary
-          var startY2 = (function () {
-            switch (settings.position) {
-              case 'top': return padY + settings.primarySize * 1.4 + settings.secondarySize * 1.2;
-              case 'top-center': return padY + settings.primarySize * 1.4 + settings.secondarySize * 1.2;
-              default: return h - padY - settings.secondarySize * 1.2;
-            }
-          })();
-          if (settings.secondary) {
-            var sec = split(settings.secondary, settings.secondarySize);
-            ctx.font = '400 ' + settings.secondarySize + 'px ' + family;
-            ctx.fillStyle = color;
-            ctx.shadowColor = settings.shadow ? 'rgba(0,0,0,0.55)' : 'transparent';
-            ctx.shadowBlur = settings.shadow ? Math.max(2, settings.shadowOffset * 1.5) : 0;
-            ctx.shadowOffsetX = settings.shadow ? settings.shadowOffset : 0;
-            ctx.shadowOffsetY = settings.shadow ? settings.shadowOffset : 0;
-            for (var m = 0; m < sec.length; m++) {
-              ctx.textAlign = settings.position === 'top' ? 'left' : 'center';
-              ctx.fillText(sec[m], settings.position === 'top' ? padX : w / 2, startY2 + m * (settings.secondarySize * 1.2));
-            }
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
-            ctx.shadowOffsetX = 0;
-            ctx.shadowOffsetY = 0;
+        var primaryY, secondaryY;
+        if (settings.position === 'top') {
+          primaryY = padY + primarySize;
+          secondaryY = primaryY + secLineH;
+        } else if (settings.position === 'top-center' || settings.position === 'center') {
+          var centerY = Math.round(canvasH / 2);
+          var topY = centerY - Math.round(blockH / 2);
+          primaryY = topY + primarySize;
+          secondaryY = primaryY + secLineH;
+        } else if (settings.position === 'bottom') {
+          if (primary && secondary) {
+            secondaryY = canvasH - padY;
+            primaryY = secondaryY - secLineH - Math.round(primarySize * 0.2);
+          } else if (primary) {
+            primaryY = canvasH - padY + Math.round(primarySize * 0.1);
+          } else {
+            secondaryY = canvasH - padY;
           }
         } else {
-          if (settings.secondary) {
-            var linesSec = split(settings.secondary, settings.secondarySize);
-            var totalSec = linesSec.length * settings.secondarySize * 1.2;
-            place(settings.secondarySize, linesSec, false);
-            // primary above secondary, anchored to bottom
-            var primaryLines = split(settings.primary, settings.primarySize);
-            var totalPri = primaryLines.length * settings.primarySize * 1.2;
-            var startY3 = h - padY - totalPri - totalSec - settings.primarySize * 0.2;
-            ctx.shadowColor = settings.shadow ? 'rgba(0,0,0,0.55)' : 'transparent';
-            ctx.shadowBlur = settings.shadow ? Math.max(2, settings.shadowOffset * 1.5) : 0;
-            ctx.shadowOffsetX = settings.shadow ? settings.shadowOffset : 0;
-            ctx.shadowOffsetY = settings.shadow ? settings.shadowOffset : 0;
-            ctx.fillStyle = color;
-            ctx.font = '600 ' + settings.primarySize + 'px ' + family;
-            for (var n = 0; n < primaryLines.length; n++) {
-              ctx.textAlign = settings.position === 'bottom' ? 'left' : 'center';
-              ctx.fillText(primaryLines[n], settings.position === 'bottom' ? padX : w / 2, startY3 + n * (settings.primarySize * 1.2));
-            }
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
-            ctx.shadowOffsetX = 0;
-            ctx.shadowOffsetY = 0;
+          // bottom-center (default)
+          var gap = Math.round(canvasH * 0.04);
+          if (primary && secondary) {
+            secondaryY = canvasH - padY;
+            primaryY = secondaryY - secLineH - gap;
+            primaryY = primaryY + primarySize - lineH * 0.0;
+          } else if (primary) {
+            primaryY = canvasH - padY + primarySize - lineH * 0.1;
           } else {
-            place(settings.primarySize, split(settings.primary, settings.primarySize), true);
+            secondaryY = canvasH - padY;
           }
         }
+
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'alphabetic';
+        if (settings.shadow) {
+          ctx.shadowColor = 'rgba(0,0,0,0.5)';
+          ctx.shadowBlur = 4;
+          ctx.shadowOffsetX = settings.shadowOffset;
+          ctx.shadowOffsetY = settings.shadowOffset;
+        }
+
+        if (primary) {
+          ctx.font = primarySize + 'px ' + family;
+          ctx.fillStyle = settings.color;
+          ctx.fillText(primary, Math.round(canvasW / 2), primaryY);
+        }
+        if (secondary) {
+          ctx.font = secondarySize + 'px ' + family;
+          ctx.fillStyle = settings.color;
+          ctx.fillText(secondary, Math.round(canvasW / 2), secondaryY);
+        }
+        ctx.restore();
       }
 
-      function scheduleRender() {
-        if (renderTimer) clearTimeout(renderTimer);
-        renderTimer = setTimeout(renderPreview, 80);
-      }
-
-      async function loadActive() {
-        if (files.length === 0) return null;
-        var entry = files[activeIndex] || files[0];
-        if (!entry || !entry.inputFile) return null;
-        var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
-        entry.img = loaded.img;
-        return loaded;
-      }
-
-      async function renderPreview() {
-        if (files.length === 0) {
-          previewCanvas.hidden = true;
+      // ---------- preview ----------------------------------------------------------
+      function renderPreview() {
+        var entry = files[activeIndex];
+        if (!entry || !entry.img) {
           previewEmpty.hidden = false;
+          previewCanvas.hidden = true;
           return;
         }
-        try {
-          var loaded = await loadActive();
-          if (!loaded) return;
-          var img = loaded.img;
-          var w = img.naturalWidth, h = img.naturalHeight;
-          // Cap preview for big images
-          var maxSide = 1200;
-          var scale = Math.min(1, maxSide / Math.max(w, h));
-          previewCanvas.width = Math.round(w * scale);
-          previewCanvas.height = Math.round(h * scale);
-          var ctx = previewCanvas.getContext('2d');
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = 'high';
-          ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
-          ctx.drawImage(img, 0, 0, previewCanvas.width, previewCanvas.height);
-          // Draw text on scaled canvas — settings font sizes interpreted as % of original
-          var settings = getSettings();
-          var pScale = previewCanvas.width / w;
-          var scaledSettings = {
-            primary: settings.primary,
-            secondary: settings.secondary,
-            fontName: settings.fontName,
-            position: settings.position,
-            primarySize: Math.max(12, Math.round(settings.primarySize * pScale)),
-            secondarySize: Math.max(10, Math.round(settings.secondarySize * pScale)),
-            color: settings.color,
-            shadow: settings.shadow,
-            shadowOffset: Math.max(0, Math.round(settings.shadowOffset * pScale))
-          };
-          drawTextOnCanvas(ctx, img, scaledSettings);
-          previewCanvas.hidden = false;
-          previewEmpty.hidden = true;
-          URL.revokeObjectURL(loaded.url);
-        } catch (err) {
-          previewCanvas.hidden = true;
-          previewEmpty.hidden = false;
+        previewEmpty.hidden = true;
+        previewCanvas.hidden = false;
+
+        var img = entry.img;
+        // Cap preview display size to 720px longest edge; canvas pixels = image full size
+        var maxEdge = 720;
+        var scale = 1;
+        if (Math.max(img.naturalWidth, img.naturalHeight) > maxEdge) {
+          scale = maxEdge / Math.max(img.naturalWidth, img.naturalHeight);
         }
+        var dispW = Math.round(img.naturalWidth * scale);
+        var dispH = Math.round(img.naturalHeight * scale);
+        previewCanvas.width = img.naturalWidth;
+        previewCanvas.height = img.naturalHeight;
+        previewCanvas.style.width = dispW + 'px';
+        previewCanvas.style.height = dispH + 'px';
+        var ctx = previewCanvas.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+        ctx.drawImage(img, 0, 0, previewCanvas.width, previewCanvas.height);
+        drawTextBlock(ctx, getSettings(), previewCanvas.width, previewCanvas.height);
       }
 
+      function schedulePreview() {
+        if (renderTimer) clearTimeout(renderTimer);
+        renderTimer = setTimeout(renderPreview, 100);
+      }
+
+      // ---------- file list -------------------------------------------------------
       function refreshUI() {
         empty.hidden = files.length > 0;
         list.hidden = files.length === 0;
-        runBtn.disabled = files.length === 0;
+        var hasRenderable = files.some(function (f) { return f.img; });
+        runBtn.disabled = !hasRenderable;
         saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
         if (window.weddingAITool && window.weddingAITool.renderFileList) {
-          window.weddingAITool.renderFileList(list, files, function (i) { activeIndex = i; renderPreview(); });
+          window.weddingAITool.renderFileList(list, files, function () {});
           Array.prototype.forEach.call(list.children, function (row, i) {
+            // tag the active row for the preview
+            if (i === activeIndex) row.classList.add('is-active');
             window.weddingAITool.updateFileRow(row, files[i]);
+            // wire click on the row (not the action button) to switch preview
+            if (i !== activeIndex) {
+              row.addEventListener('click', function (ev) {
+                if (ev.target.closest('button')) return;
+                activeIndex = i;
+                Array.prototype.forEach.call(list.children, function (r) { r.classList.remove('is-active'); });
+                row.classList.add('is-active');
+                renderPreview();
+              });
+            }
           });
         }
       }
 
       function addFiles(picked) {
+        var added = 0;
         picked.forEach(function (f) {
           if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
             return;
@@ -951,13 +876,35 @@
             img: null,
             sizes: { orig: f.size, out: 0 },
             output: null,
-            previewUrl: URL.createObjectURL(f),
-            error: null
+            outputName: null,
+            previewUrl: URL.createObjectURL(f)
           });
+          added++;
         });
-        if (files.length === 0) { window.weddingAITool.toast('Нет подходящих файлов. Используйте JPG, PNG или WebP.', 'error'); return; }
+        if (added === 0) { window.weddingAITool.toast('No supported files. Try a JPG, PNG, or WebP.', 'error'); return; }
+        // Async-decode all newly added entries (do not block addFiles)
+        var newStartIdx = files.length - added;
+        for (var i = newStartIdx; i < files.length; i++) {
+          (function (idx) {
+            window.weddingAITool.fileToImage(files[idx].inputFile).then(function (loaded) {
+              files[idx].img = loaded.img;
+              URL.revokeObjectURL(loaded.url);
+              if (idx === activeIndex || activeIndex >= files.length - added) {
+                // first decoded becomes the active preview
+                if (idx === 0 || !files[activeIndex] || !files[activeIndex].img) {
+                  activeIndex = idx;
+                }
+                renderPreview();
+              }
+              refreshUI();
+            }).catch(function (err) {
+              files[idx].status = 'error';
+              files[idx].error = err && err.message ? err.message : String(err);
+              refreshUI();
+            });
+          })(i);
+        }
         refreshUI();
-        renderPreview();
       }
 
       function clearAll() {
@@ -965,40 +912,47 @@
           if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
         });
         files = [];
+        activeIndex = 0;
         summaryEl.hidden = true;
-        previewCanvas.hidden = true;
         previewEmpty.hidden = false;
+        previewCanvas.hidden = true;
         refreshUI();
       }
 
+      // ---------- batch render ----------------------------------------------------
       async function processOne(entry, settings) {
         entry.status = 'working';
         entry.error = null;
         refreshUI();
         try {
-          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
-          var img = loaded.img;
+          if (!entry.img) {
+            var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+            entry.img = loaded.img;
+            URL.revokeObjectURL(loaded.url);
+          }
+          var img = entry.img;
           var w = img.naturalWidth, h = img.naturalHeight;
-          if (!w || !h) throw new Error('У изображения нет размеров — попробуйте другой файл.');
-
           var canvas = document.createElement('canvas');
           canvas.width = w;
           canvas.height = h;
           var ctx = canvas.getContext('2d');
           ctx.imageSmoothingEnabled = true;
           ctx.imageSmoothingQuality = 'high';
-          drawTextOnCanvas(ctx, img, settings);
-
+          ctx.drawImage(img, 0, 0, w, h);
+          drawTextBlock(ctx, settings, w, h);
           var mime = settings.format;
-          var quality = (mime === 'image/jpeg') ? 0.92 : undefined;
+          var quality = (mime === 'image/png' || mime === 'image/webp') ? undefined : 0.92;
           var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
-          if (!blob || blob.size === 0) throw new Error('Не удалось сохранить результат — попробуйте другой формат.');
+          if (!blob || blob.size === 0) throw new Error('Render returned an empty file. Try a different format.');
           entry.output = blob;
           entry.sizes.out = blob.size;
           entry.status = 'done';
-          var ext = (mime === 'image/png') ? 'png' : 'jpg';
-          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-text.' + ext);
-          URL.revokeObjectURL(loaded.url);
+          var ext = (mime === 'image/png') ? 'png' : (mime === 'image/webp') ? 'webp' : 'jpg';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-captioned.' + ext);
+          // refresh row preview thumbnail to the new rendered image
+          if (entry.output) {
+            entry.previewUrl = URL.createObjectURL(entry.output);
+          }
         } catch (err) {
           entry.status = 'error';
           entry.error = err && err.message ? err.message : String(err);
@@ -1007,31 +961,32 @@
       }
 
       async function runAll() {
-        if (files.length === 0) return;
         var settings = getSettings();
         runBtn.disabled = true;
-        runBtn.textContent = 'Обработка…';
         for (var i = 0; i < files.length; i++) {
           var f = files[i];
           if (f.status === 'done') continue;
+          if (!f.img) continue; // decode failed earlier; skip silently
           await processOne(f, settings);
         }
         runBtn.disabled = false;
-        runBtn.textContent = 'Применить ко всем';
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
         renderSummary();
-        window.weddingAITool.toast('Готово. Можно скачивать.');
+        window.weddingAITool.toast('Render complete.');
       }
 
       function renderSummary() {
         var done = files.filter(function (f) { return f.status === 'done' && f.output; });
         var errs = files.filter(function (f) { return f.status === 'error'; });
         if (done.length === 0) { summaryEl.hidden = true; return; }
-        var total = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
+        var origTotal = done.reduce(function (s, f) { return s + f.sizes.orig; }, 0);
+        var outTotal = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
         summaryEl.hidden = false;
         summaryEl.innerHTML =
-          '<div><strong>' + done.length + '</strong> файлов обработано</div>' +
-          '<div><strong>Итог:</strong> ' + window.weddingAITool.formatBytes(total) + '</div>' +
-          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + '</strong> с ошибкой.</div>' : '');
+          '<div><strong>' + done.length + '</strong> captioned</div>' +
+          '<div><strong>Original total:</strong> ' + window.weddingAITool.formatBytes(origTotal) + '</div>' +
+          '<div><strong>Output total:</strong> ' + window.weddingAITool.formatBytes(outTotal) + '</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' errored</strong> — remove and retry.</div>' : '');
       }
 
       function saveAll() {
@@ -1039,10 +994,11 @@
           .filter(function (f) { return f.status === 'done' && f.output; })
           .map(function (f) { return { name: f.outputName, blob: f.output }; });
         if (outputs.length === 0) return;
-        window.weddingAITool.downloadZip(outputs, 'with-text');
-        window.weddingAITool.toast('Сохраняем ' + outputs.length + ' файлов…');
+        window.weddingAITool.downloadZip(outputs, 'captioned');
+        window.weddingAITool.toast('Saving ' + outputs.length + ' file' + (outputs.length === 1 ? '' : 's') + '…');
       }
 
+      // ---------- wire up ---------------------------------------------------------
       window.weddingAITool.bindDropZone({
         dropEl: dropzone,
         inputEl: input,
@@ -1051,14 +1007,33 @@
         onFiles: addFiles
       });
 
-      primaryTextEl.addEventListener('input', scheduleRender);
-      secondaryTextEl.addEventListener('input', scheduleRender);
-      fontEl.addEventListener('change', scheduleRender);
-      positionEl.addEventListener('change', scheduleRender);
-      primarySizeEl.addEventListener('input', function () { primarySizeVal.textContent = primarySizeEl.value; scheduleRender(); });
-      secondarySizeEl.addEventListener('input', function () { secondarySizeVal.textContent = secondarySizeEl.value; scheduleRender(); });
-      shadowToggleEl.addEventListener('change', scheduleRender);
-      shadowOffsetEl.addEventListener('input', function () { shadowOffsetVal.textContent = shadowOffsetEl.value; scheduleRender(); });
+      // live-preview triggers
+      [primaryTextEl, secondaryTextEl, fontEl, positionEl, primarySizeEl, secondarySizeEl,
+       colorEl, shadowToggleEl, shadowOffsetEl, formatEl].forEach(function (el) {
+        el.addEventListener('input', function () {
+          if (el === primarySizeEl) primarySizeVal.textContent = primarySizeEl.value;
+          if (el === secondarySizeEl) secondarySizeVal.textContent = secondarySizeEl.value;
+          if (el === shadowOffsetEl) shadowOffsetVal.textContent = shadowOffsetEl.value;
+          schedulePreview();
+        });
+        el.addEventListener('change', schedulePreview);
+      });
+
+      // color swatches
+      Array.prototype.forEach.call(swatchRow.querySelectorAll('.wa-text-swatch'), function (sw) {
+        sw.addEventListener('click', function () {
+          var c = sw.getAttribute('data-color');
+          if (!c) return;
+          colorEl.value = c;
+          Array.prototype.forEach.call(swatchRow.querySelectorAll('.wa-text-swatch'), function (x) {
+            x.classList.toggle('is-active', x === sw);
+          });
+          schedulePreview();
+        });
+      });
+      // mark default swatch active on first paint
+      var defaultSwatch = swatchRow.querySelector('.wa-text-swatch[data-color="' + colorEl.value + '"]');
+      if (defaultSwatch) defaultSwatch.classList.add('is-active');
 
       runBtn.addEventListener('click', runAll);
       saveAllBtn.addEventListener('click', saveAll);
@@ -1076,7 +1051,6 @@
         }
       });
 
-      refreshSwatchActive(colorEl.value);
       refreshUI();
     });
     </script>

@@ -250,6 +250,58 @@ async function run() {
         }
     }
 
+    // ------------------------------------------------- RTL on Arabic pages
+    //
+    // The <html> tag rewrite used to be a single pattern that only matched
+    // `<html lang="en">` - the ENGLISH source page. That covers the FALLBACK
+    // path (a URL with no localized twin), but a LOCALIZED Arabic page ships
+    // `<html lang="ar">`, which the pattern did not match. So 57 of the 63
+    // Arabic pages served their first HTML without `dir="rtl"`; the
+    // direction was only applied later, at runtime, by js/i18n.js.
+    //
+    // The direction is now derived from the language actually being served,
+    // and the attribute list is parsed rather than matched positionally.
+    {
+        const cases = [
+            ["/ar/blog/affordable-wedding-video-ai/", "ar", true],
+            ["/ar/blog/why-wedding-video-important/", "ar", true],
+            ["/ar/tools/save-the-date-maker/", "ar", true],
+            ["/ar/", "ar", true],
+            ["/ar/services/", "ar", true],
+            ["/de/blog/affordable-wedding-video-ai/", "de", false],
+            ["/es/", "es", false],
+            ["/zh/", "zh", false],
+        ];
+        const rows = [];
+        const bad = [];
+        for (const [url, lang, expectRtl] of cases) {
+            const request = new Request(ORIGIN + url, { method: "GET", headers: { "user-agent": "Mavis-Test/1.0" } });
+            const context = {
+                request,
+                env: {},
+                next: async () => new Response(fs.readFileSync(sourceFileFor(url)), {
+                    status: 200,
+                    headers: { "content-type": "text/html; charset=utf-8" },
+                }),
+            };
+            const res = await onRequest(context);
+            const html = await res.text();
+            const tag = (html.match(/<html[^>]*>/i) || ["(no <html> tag)"])[0];
+            const hasRtl = /\bdir="rtl"/.test(tag);
+            const langOk = new RegExp('lang="' + lang + '"').test(tag);
+            rows.push([url, tag, hasRtl === expectRtl && langOk]);
+            if (hasRtl !== expectRtl || !langOk) bad.push(url + " -> " + tag);
+        }
+        const ltrRows = rows.filter((r) => /lang="(de|es|zh)"/.test(r[1]));
+        report("RTL", "", [
+            ["Arabic pages carry dir=\"rtl\" in the first HTML", bad.length === 0,
+                bad.length === 0 ? rows.filter((r) => r[2]).length + " checked" : bad.join(" | ")],
+            ["non-Arabic pages carry no dir attribute",
+                ltrRows.length > 0 && ltrRows.every((r) => !/dir=/.test(r[1])),
+                ltrRows.map((r) => r[1]).join(" ")],
+        ]);
+    }
+
     console.log(`\n${failures === 0 ? "ALL CHECKS PASSED" : failures + " CHECK(S) FAILED"}`);
     process.exit(failures === 0 ? 0 : 1);
 }

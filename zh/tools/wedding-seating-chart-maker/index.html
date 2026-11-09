@@ -61,10 +61,10 @@
 
 
     <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -226,6 +226,15 @@
       "totalTime": "PT15M"
     }
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body class="page-tool">
 <a class="wa-skip-link" href="#main-content">Skip to main content</a>
@@ -447,19 +456,19 @@
                 </div>
 
                 <div class="seating-template-pick" role="radiogroup" aria-label="Layout template">
-                    <button type="button" data-template="classic" class="active">Classic Reception (8 rounds of 8)</button>
-                    <button type="button" data-template="long">Long Banquet (3 long of 12)</button>
-                    <button type="button" data-template="intimate">Intimate (5 rounds of 6 + sweetheart)</button>
-                    <button type="button" data-template="ushape">U-Shape with head table</button>
+                    <button type="button" data-template="classic" class="active" data-i18n="tools.copy.seatTemplateClassic.zzzzzz5a01">Classic Reception (8 rounds of 8)</button>
+                    <button type="button" data-template="long" data-i18n="tools.copy.seatTemplateLong.zzzzzz5a02">Long Banquet (3 long of 12)</button>
+                    <button type="button" data-template="intimate" data-i18n="tools.copy.seatTemplateIntimate.zzzzzz5a03">Intimate (5 rounds of 6 + sweetheart)</button>
+                    <button type="button" data-template="ushape" data-i18n="tools.copy.seatTemplateUShape.zzzzzz5a04">U-Shape with head table</button>
                 </div>
 
                 <div class="seating-canvas" id="seating-canvas">
                     <div class="seating-floor" id="seating-floor" aria-label="Floor plan"></div>
                 </div>
 
-                <div class="seating-export-row">
-                    <button type="button" class="seating-btn primary" id="export-png-btn">经典招待会（8轮8场）</button>
-                    <button type="button" class="seating-btn" id="print-btn">长宴（3长，共12个）</button>
+                <div class="wa-tool-print-source">weddingai.video &middot; <span data-i18n="tools.copy.seatChartTitle.zzzzzz5a08">Wedding Seating Chart</span></div><div class="seating-export-row">
+                    <button type="button" class="seating-btn primary" id="export-png-btn" data-i18n="tools.copy.seatExportPng.zzzzzz5a05">经典招待会（8轮8场）</button>
+                    <button type="button" class="seating-btn" id="print-btn" data-i18n="tools.copy.seatPrint.zzzzzz5a06">长宴（3长，共12个）</button> <button type="button" class="seating-btn" id="export-pdf-btn" data-i18n="tools.copy.seatDownloadPdf.zzzzzz5a07">Download PDF</button>
                 </div>
             </section>
         </div>
@@ -638,9 +647,20 @@
     intimate:  { label: 'Intimate (5 rounds of 6 + sweetheart)', build: buildIntimate },
     ushape:    { label: 'U-Shape with head table',               build: buildUShape }
   };
-  var SEAT_RADIUS = 30;       // px offset from table center
+  // Seat geometry — bug #7: previous constants (radius 30, box 64×36) placed
+  // 8 seats around a round table with arc-length 23.6px between centers,
+  // while each seat was 64px wide — every adjacent seat pair overlapped
+  // (~40px overlap). Across 8 tables that produced 144+ overlapping seat
+  // pairs visually, with seat numbers stacking on top of each other.
+// Fix: keep the table radius (38) but pull seats outward to radius 56 so
+// the arc between adjacent seat centers becomes ~44px, and shrink seat
+  // boxes to 36×24 so each fits without overlap (36 < 44). Names truncate
+  // to a single initial + first letter in the seat; full names appear in
+  // the hover title (already set). Floor width grows a bit but still fits
+  // comfortably in the panel.
+var SEAT_RADIUS = 56;       // px offset from table center
   var TABLE_R = 38;           // round table radius
-  var SEAT_W = 64, SEAT_H = 36;
+  var SEAT_W = 36, SEAT_H = 24;
   var state = loadState() || defaultState();
 
   function defaultState() {
@@ -758,7 +778,17 @@
 
   function renderGuestList() {
     var html = '';
-    state.guests.forEach(function (g) {
+    // Bug #9 fix: previously displayed guests in insertion order, so adding a
+    // Work guest before a Family one placed Work first. Sort by group with
+    // the legend order (VIP > Family > Friends > Work > Other) so the list
+    // matches the legend dots the user is reading against.
+    var order = { vip: 0, family: 1, friends: 2, work: 3, other: 4 };
+    var sortedGuests = state.guests.slice().sort(function (a, b) {
+      var da = (typeof a.group === 'string') ? a.group : 'other';
+      var db = (typeof b.group === 'string') ? b.group : 'other';
+      return (order[da] || 5) - (order[db] || 5);
+    });
+    sortedGuests.forEach(function (g) {
       var g0 = GROUPS[g.group] || GROUPS.other;
       var assignedClass = isAssigned(g.id) ? ' assigned' : '';
       var plusLabel = g.plusOne ? ' (+1)' : '';
@@ -769,7 +799,7 @@
             + '<button type="button" class="seating-guest-del" data-del="' + g.id + '" aria-label="Remove">×</button>'
             + '</div>';
     });
-    guestListEl.innerHTML = html || '<div style="padding:0.6rem;color:var(--color-text-light);font-size:0.8125rem;text-align:center;">还没有客人。上面补充一些。</div>';
+    guestListEl.innerHTML = html || '<div style="padding:0.6rem;color:var(--color-text-light);font-size:0.8125rem;text-align:center;">No guests yet. Add some above.</div>';
   }
 
   function isAssigned(guestId) {
@@ -929,6 +959,37 @@
     showSeatPicker(t, seatIndex, unassigned);
   }
 
+  // Assign a guest (by id) directly to a seat — used by the drag-and-drop
+  // path (Bug #6). If the seat is already occupied, the existing guest is
+  // bounced back to the unassigned pool. If the dragged guest is already
+  // seated elsewhere, that prior assignment is removed first (move, not copy).
+  function assignGuestToSeat(guestId, tableId, seatIndex) {
+    var t = state.tables.find(function (x) { return x.id === tableId; });
+    if (!t) return;
+    if (!t.assigned) t.assigned = {};
+    var guest = state.guests.find(function (g) { return g.id === guestId; });
+    if (!guest) return;
+    var seatKey = t.id + '-s' + seatIndex;
+    // Remove the dragged guest from any seat they currently occupy.
+    state.tables.forEach(function (other) {
+      if (!other.assigned) return;
+      Object.keys(other.assigned).forEach(function (k) {
+        if (other.assigned[k] === guestId) delete other.assigned[k];
+      });
+    });
+    t.assigned[seatKey] = guestId;
+    // Auto-place plus-one in the next seat (matches the click flow).
+    if (guest.plusOne) {
+      var positions = computeSeatPositions(t);
+      var nextIndex = seatIndex + 1;
+      if (nextIndex < positions.length) {
+        var nextKey = t.id + '-s' + nextIndex;
+        if (!t.assigned[nextKey]) t.assigned[nextKey] = guestId;
+      }
+    }
+    saveState(); render();
+  }
+
   function showSeatPicker(t, seatIndex, unassigned) {
     // very simple: prompt for guest id
     var opts = unassigned.map(function (g, i) { return (i + 1) + ') ' + g.name + ' [' + (GROUPS[g.group]||GROUPS.other).label + ']'; }).join('\n');
@@ -979,6 +1040,13 @@
   }
 
   function clearSeats() {
+    // Bug #8 fix: clearSeats previously wiped all assignments silently — one
+    // accidental click after 30 minutes of careful seating = total loss.
+    // clearAll has had confirm() since day one; align clearSeats the same.
+    var occupied = state.tables.reduce(function (n, t) {
+      return n + (t.assigned ? Object.keys(t.assigned).length : 0);
+    }, 0);
+    if (occupied && !window.confirm('Clear all seat assignments? Guests and tables stay; only the seating is reset.')) return;
     state.tables.forEach(function (t) { t.assigned = {}; });
     saveState(); render();
   }
@@ -1033,7 +1101,49 @@
       deleteGuest(del.getAttribute('data-del'));
     }
   });
-  // delegate seat click
+  // Bug #6 fix: drag-and-drop from guest list to a seat. The old code had
+  // `draggable="true"` on .seating-guest-item but no dragstart/drop handlers
+  // anywhere — drag was decorative only; the actual assignment went through
+  // window.prompt() (broken on touch/iPad). The click handler below stays as
+  // a fallback; drag is now the primary path on desktop, the only path on touch.
+  guestListEl.addEventListener('dragstart', function (e) {
+    var item = e.target.closest('.seating-guest-item');
+    if (!item) return;
+    var guestId = item.getAttribute('data-guest-id');
+    if (!guestId) return;
+    e.dataTransfer.setData('text/plain', guestId);
+    e.dataTransfer.setData('application/x-wedding-guest', guestId);
+    e.dataTransfer.effectAllowed = 'move';
+    // Hide the drag image slightly so the source row doesn't visually duplicate.
+    try { e.dataTransfer.setDragImage(item, 12, 12); } catch (_) {}
+  });
+  // Visual + functional drop target on the floor.
+  floorEl.addEventListener('dragover', function (e) {
+    if (!e.dataTransfer) return;
+    var types = e.dataTransfer.types || [];
+    var isGuestDrag = Array.prototype.indexOf.call(types, 'application/x-wedding-guest') !== -1;
+    if (!isGuestDrag) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    var seat = e.target.closest('.seating-seat');
+    if (seat) seat.classList.add('drop-target');
+  });
+  floorEl.addEventListener('dragleave', function (e) {
+    var seat = e.target.closest('.seating-seat');
+    if (seat) seat.classList.remove('drop-target');
+  });
+  floorEl.addEventListener('drop', function (e) {
+    var seat = e.target.closest('.seating-seat');
+    if (!seat) return;
+    var guestId = e.dataTransfer.getData('application/x-wedding-guest') || e.dataTransfer.getData('text/plain');
+    if (!guestId) return;
+    e.preventDefault();
+    seat.classList.remove('drop-target');
+    var tableId = seat.getAttribute('data-table-id');
+    var seatIndex = parseInt(seat.getAttribute('data-seat-index'), 10);
+    assignGuestToSeat(guestId, tableId, seatIndex);
+  });
+  // delegate seat click (fallback for touch / users who prefer the prompt)
   floorEl.addEventListener('click', function (e) {
     var seat = e.target.closest('.seating-seat');
     if (seat) {
@@ -1045,9 +1155,11 @@
   exportPngBtn.addEventListener('click', function () {
     exportPNG();
   });
+  var exportPdfBtn = document.getElementById('export-pdf-btn');
+  if (exportPdfBtn) exportPdfBtn.addEventListener('click', function () { exportPDF(); });
   printBtn.addEventListener('click', function () { window.print(); });
 
-  function exportPNG() {
+  function buildChartCanvas() {
     var W = 1600, H = 1200;
     var c = document.createElement('canvas');
     c.width = W; c.height = H;
@@ -1059,7 +1171,9 @@
     ctx.fillStyle = '#2c2c2c';
     ctx.font = '700 36px Georgia, serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Wedding Seating Chart', W / 2, 56);
+    ctx.fillText(window.weddingAITool && window.weddingAITool.t
+      ? window.weddingAITool.t('seatChartTitle', 'Wedding Seating Chart')
+      : 'Wedding Seating Chart', W / 2, 56);
     ctx.font = '300 18px Georgia, serif';
     ctx.fillStyle = '#7a7a7a';
     ctx.fillText(new Date().toLocaleDateString(), W / 2, 86);
@@ -1138,12 +1252,21 @@
       ctx.fillText(legend[li], lx + 14, ly);
       lx += 110;
     }
-    // save
+    return c;
+  }
+
+  function exportPNG() {
+    var c = buildChartCanvas();
     if (window.weddingAITool && window.weddingAITool.canvasToBlob) {
       window.weddingAITool.canvasToBlob(c, 'image/png', 1.0).then(function (blob) {
         var name = 'wedding-seating-chart-' + Date.now() + '.png';
         window.weddingAITool.download(blob, name);
-        if (window.weddingAITool.toast) window.weddingAITool.toast('Saved 1600×1200 PNG', 'success');
+        if (window.weddingAITool.toast) {
+          window.weddingAITool.toast(
+            window.weddingAITool.t ? window.weddingAITool.t('seatSavedPng', 'Saved 1600×1200 PNG')
+                                   : 'Saved 1600×1200 PNG',
+            'success');
+        }
       });
     } else {
       var url = c.toDataURL('image/png');
@@ -1151,6 +1274,25 @@
       a.href = url; a.download = 'wedding-seating-chart.png';
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }
+  }
+
+  // PDF export (added 2026-11-09). The page's own comparison table claims
+  // "PNG + PDF + share link"; until now there was no PDF at all. jsPDF is
+  // loaded on demand by the shared layer and the page size is exactly the
+  // canvas size (1600x1200), so the PDF is a true print layout.
+  function exportPDF() {
+    if (!window.weddingAITool || !window.weddingAITool.downloadPdf) return;
+    var c = buildChartCanvas();
+    var name = 'wedding-seating-chart-' + Date.now() + '.pdf';
+    window.weddingAITool.downloadPdf(c, name, { mime: 'image/jpeg', quality: 0.92 })
+      .then(function () {
+        if (window.weddingAITool.toast) {
+          window.weddingAITool.toast(
+            window.weddingAITool.t ? window.weddingAITool.t('seatSavedPdf', 'Saved PDF') : 'Saved PDF',
+            'success');
+        }
+      })
+      .catch(function () { /* downloadPdf already surfaced the error */ });
   }
   function roundRect(ctx, x, y, w, h, r) {
     ctx.beginPath();

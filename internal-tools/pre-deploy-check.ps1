@@ -676,6 +676,76 @@ if (Test-Path $hreflangScript) {
     Warn "scripts\verify-hreflang.py not found; skipping the hreflang check"
 }
 
+# ---------- 9f. Cookie consent banner (real page load order) ----------
+# Background (2026-11-02): the cookie banner existed in TWO implementations.
+# js/main.min.js built a hard-coded ENGLISH one and js/cookie-consent.js built
+# the LOCALIZED one; both used the id 'wa-cookie-banner', and main.min.js is
+# loaded FIRST on every page (both scripts are `defer`, so they run in
+# document order). The English banner therefore won on all 10 non-English
+# sites: the localized dictionary was fetched and thrown away, and the
+# privacy link always pointed at the English /privacy/ page.
+#
+# tests/cookie-consent-check.cjs replays the REAL load order for all 11
+# languages, so the second implementation can never come back unnoticed.
+$cookieTest = "$root\tests\cookie-consent-check.cjs"
+if (Test-Path $cookieTest) {
+    $node = $null
+    foreach ($candidate in @("node", "nodejs")) {
+        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($cmd) { $node = $candidate; break }
+    }
+    if ($node) {
+        $cookieOutput = & $node $cookieTest 2>&1
+        $cookieExit = $LASTEXITCODE
+        $cookieKey = $cookieOutput | Select-String -Pattern 'PASS|FAIL|CHECKS PASSED|CHECK\(S\) FAILED' | Select-Object -First 24
+        foreach ($line in $cookieKey) { Write-Host "  $($line -replace '^\s*','')" }
+        if ($cookieExit -eq 0) {
+            Pass "The cookie banner renders localized in all 11 languages on the real script load order"
+        } else {
+            Fail "The cookie banner is not localized on the real load order. js/cookie-consent.js must be the only implementation - do not re-add a banner to js/main.js or js/main.min.js."
+        }
+    } else {
+        Warn "Node not found in PATH; skipping the cookie consent check."
+    }
+} else {
+    Warn "tests\cookie-consent-check.cjs not found; skipping the cookie consent check"
+}
+
+# ---------- 9b. /order/ hint: no whole-dictionary download, no English-only hint ----------
+# The order form used to fetch the entire per-language i18n dictionary
+# client-side - 16.4 MB for hi, 14.3 MB for th - just to read the dozen
+# strings behind the service hint. It now loads one namespace shard.
+#
+# The same strings were also hardcoded English, so the "other / not sure yet"
+# option fell back to English in every language.
+#
+# tests/order-hint-check.cjs checks both: statically (no page may fetch a
+# whole dictionary) and behaviourally (the hint must render in the visitor's
+# language, with an English fallback when the shard cannot be loaded).
+$orderHintTest = "$root\tests\order-hint-check.cjs"
+if (Test-Path $orderHintTest) {
+    $node = $null
+    foreach ($candidate in @("node", "nodejs")) {
+        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($cmd) { $node = $candidate; break }
+    }
+    if ($node) {
+        $hintOutput = & $node $orderHintTest 2>&1
+        $hintExit = $LASTEXITCODE
+        $hintKey = $hintOutput | Select-String -Pattern 'PASS|FAIL|CHECKS PASSED|CHECK\(S\) FAILED' | Select-Object -First 24
+        foreach ($line in $hintKey) { Write-Host "  $($line -replace '^\s*','')" }
+        if ($hintExit -eq 0) {
+            Pass "The order form hint loads one shard and renders in the visitor's language"
+        } else {
+            Fail "The order form hint regressed: it must not download a whole i18n dictionary client-side, and every hint string must exist in all 11 language shards."
+        }
+    } else {
+        Warn "Node not found in PATH; skipping the order hint check."
+    }
+} else {
+    Warn "tests\order-hint-check.cjs not found; skipping the order hint check"
+}
+
 # ---------- 9c. Lead mail routing + delivery truth ----------
 # Background (2026-10-29): two weeks of leads were lost because the domain had
 # no MX record for 17 days, and because /api/quote.js recorded a 2xx from the

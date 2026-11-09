@@ -15,6 +15,7 @@ Adds (right before </head>):
     }
     </script>
 """
+import os
 import re
 import sys
 from pathlib import Path
@@ -31,7 +32,26 @@ if ('serviceWorker' in navigator) {
 }
 </script>"""
 
-EXCLUDE_DIRS = {"admin", "qa", "scripts", "__pycache__", "i18n", "js", "styles"}
+EXCLUDE_DIRS = {"admin", "qa", "scripts", "__pycache__", "i18n", "js", "styles",
+                # ".tmp" holds ~1800 one-off backup/scratch html files. They are
+                # gitignored, never deployed, and injecting into them is pure
+                # churn (added 2026-11-09).
+                ".tmp", "internal-tools", "internal-docs", "private", "vendor"}
+
+
+def write_atomic(path: Path, text: str) -> None:
+    """Write via a temp file + os.replace.
+
+    A plain write_text() truncates the target BEFORE the write, so an
+    interrupted run leaves a 0-byte html file. os.replace() is atomic on
+    Windows: the destination is either the old content or the new content.
+    """
+    tmp = path.with_name(path.name + ".tmpwrite")
+    with open(tmp, "w", encoding="utf-8", newline="") as fh:
+        fh.write(text)
+        fh.flush()
+        os.fsync(fh.fileno())
+    os.replace(tmp, path)
 
 
 def should_skip(p: Path) -> bool:
@@ -56,7 +76,7 @@ def main():
         if new_text == text:
             print(f"  [WARN] no </head> found in {f.relative_to(ROOT)}")
             continue
-        f.write_text(new_text, encoding="utf-8")
+        write_atomic(f, new_text)
         injected += 1
     print(f"Injected: {injected}")
     print(f"Skipped:  {skipped} (already had /sw.js or serviceWorker)")

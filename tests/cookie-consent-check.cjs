@@ -69,6 +69,12 @@ function installDom(lang, store) {
         body: makeElement("body"),
         createElement: (t) => makeElement(t),
         getElementById: (id) => byId[id] || null,
+        // js/main.min.js queries these at load time. The stub returns null /
+        // an empty list, which is what a page WITHOUT a mobile menu toggle
+        // and WITHOUT an order form looks like.
+        querySelector: () => null,
+        querySelectorAll: () => [],
+        addEventListener: () => {},
         _byId: byId,
     };
     globalThis.document = doc;
@@ -191,6 +197,85 @@ async function run() {
             }
         }
         check("all 11 languages have a complete cookie dictionary", missing.length === 0, missing.join(", ") || "11/11 complete");
+    }
+
+    // ------------------------------------ 6. the REAL page load order
+    //
+    // The single-file test above cannot see the defect this group exists
+    // for. On a real page BOTH js/main.min.js and js/cookie-consent.js run,
+    // and the <script> order in every template puts main.min.js FIRST
+    // (both are `defer`, so they execute in document order).
+    //
+    // Until 2026-11-02 main.min.js built its OWN hard-coded English banner
+    // with the id 'wa-cookie-banner'; cookie-consent.js builds the
+    // LOCALIZED one with the SAME id and guards on that id already existing.
+    // So the English banner won on all 10 non-English sites: the localized
+    // dictionary was fetched and thrown away, and the privacy link always
+    // pointed at the English /privacy/ page.
+    //
+    // This group replays the real order for all 11 languages.
+    {
+        const MAIN_SRC = fs.readFileSync(path.join(REPO, "js", "main.min.js"), "utf8");
+        const html = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
+        const orderMain = html.indexOf("main.min.js");
+        const orderCookie = html.indexOf("cookie-consent.js");
+        check(
+            "main.min.js is loaded before cookie-consent.js (the order that used to break it)",
+            orderMain > -1 && orderCookie > -1 && orderMain < orderCookie,
+            "main.min.js at " + orderMain + ", cookie-consent.js at " + orderCookie
+        );
+
+        const langs = ["en", "ar", "de", "es", "fr", "hi", "ja", "pt", "ru", "th", "zh"];
+        const bad = [];
+        for (const l of langs) {
+            const store = {};
+            const doc = installDom(l, store);
+            installFetch((url) => {
+                const name = String(url).replace("/i18n/cookie/", "").replace(/\.json$/, "");
+                try {
+                    return JSON.parse(fs.readFileSync(path.join(REPO, "i18n", "cookie", name + ".json"), "utf8"));
+                } catch (e) {
+                    return null;
+                }
+            });
+            // eslint-disable-next-line no-new-func
+            new Function(MAIN_SRC)();   // first, as on a real page
+            // eslint-disable-next-line no-new-func
+            new Function(SRC)();        // second
+            await settle();
+
+            const banner = doc.getElementById("wa-cookie-banner");
+            const dict = JSON.parse(fs.readFileSync(path.join(REPO, "i18n", "cookie", l + ".json"), "utf8"));
+            const bhtml = banner ? banner.innerHTML : "";
+            const prefix = l === "en" ? "" : "/" + l;
+            if (!banner) bad.push(l + ": no banner");
+            else if (bhtml.indexOf(dict.heading) === -1) bad.push(l + ": English heading");
+            else if (bhtml.indexOf(dict.link) === -1) bad.push(l + ": English link text");
+            else if (bhtml.indexOf(prefix + "/privacy/") === -1) bad.push(l + ": privacy link not localized");
+        }
+        check(
+            "on the real load order the LOCALIZED banner wins in all 11 languages",
+            bad.length === 0,
+            bad.length === 0 ? "11/11 localized" : bad.join("; ")
+        );
+
+        // The regression this guards against is a SECOND implementation of
+        // the banner appearing anywhere in the shared scripts. Only real
+        // CODE counts -- a comment that merely names the id is fine, so the
+        // comment blocks are stripped before the check.
+        const mainJs = fs.readFileSync(path.join(REPO, "js", "main.js"), "utf8");
+        const stripComments = (src) => src.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+        const dup = [];
+        for (const [name, src] of [["js/main.js", mainJs], ["js/main.min.js", MAIN_SRC]]) {
+            const code = stripComments(src);
+            if (code.indexOf("wa-cookie-banner") !== -1) dup.push(name + " still creates the banner");
+            if (/createElement\(\s*["']div["']\s*\)[\s\S]{0,200}wa-cookie-banner/.test(code)) dup.push(name + " still builds the banner");
+        }
+        check(
+            "no second banner implementation in the shared scripts",
+            dup.length === 0,
+            dup.length === 0 ? "js/cookie-consent.js is the single source of truth" : dup.join("; ")
+        );
     }
 
     console.log("=== cookie consent ===");

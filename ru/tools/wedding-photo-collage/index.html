@@ -43,11 +43,11 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Инструменты WeddingAI">
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <!-- Caption fonts used on the rendered canvas. Loaded via Google Fonts. -->
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
@@ -136,6 +136,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ywxiu97hg8");
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
@@ -358,6 +367,7 @@
                 <div class="wa-tool-actions">
                     <button type="button" class="btn btn-primary" id="run-btn" disabled>Собрать коллаж</button>
                     <button type="button" class="btn btn-primary" id="download-btn" disabled>Скачать PNG</button>
+                    <button type="button" class="btn btn-primary" id="download-pdf-btn" disabled>Скачать PDF</button>
                     <button type="button" class="btn btn-secondary" id="clear-btn">Очистить</button>
                 </div>
                 <div class="wa-tool-summary" id="summary" hidden></div>
@@ -641,6 +651,7 @@
       var empty = document.getElementById('empty-state');
       var runBtn = document.getElementById('run-btn');
       var downloadBtn = document.getElementById('download-btn');
+      var downloadPdfBtn = document.getElementById('download-pdf-btn');
       var clearBtn = document.getElementById('clear-btn');
       var layoutGrid = document.getElementById('layout-grid');
       var layoutInput = document.getElementById('layout');
@@ -658,12 +669,12 @@
 
       // Layout definitions — rows × cols + count expected for each.
       var LAYOUTS = {
-        'grid-2x2':  { rows: 2, cols: 2, count: 4,  help: '2 × 2 — 4 фото. Лучше всего для: save the date, квадратов в соцсетях.' },
-        'grid-2x3':  { rows: 2, cols: 3, count: 6,  help: '2 × 3 — 6 фото. Лучше всего для: благодарственных открыток, подарков родителям.' },
-        'grid-3x3':  { rows: 3, cols: 3, count: 9,  help: '3 × 3 — 9 фото. Лучше всего для: Instagram-каруселей, классической печати 5×5.' },
-        'grid-3x4':  { rows: 3, cols: 4, count: 12, help: '3 × 4 — 12 фото. Лучше всего для: разворотов родительского альбома, итогов дня.' },
-        'strip-h':   { rows: 1, cols: 5, count: 5,  help: 'Горизонтальная полоса — 5 в ряд. Лучше всего для: заголовков блога, обложек Facebook, панорамных рамок.' },
-        'strip-v':   { rows: 5, cols: 1, count: 5,  help: 'Вертикальная полоса — 5 в столбец. Лучше всего для: вертикальных каруселей Instagram, save the date в DM.' }
+        'grid-2x2':  { rows: 2, cols: 2, count: 4,  help: '2 × 2 — 4 photos. Best for: save-the-date cards, social media squares.' },
+        'grid-2x3':  { rows: 2, cols: 3, count: 6,  help: '2 × 3 — 6 photos. Best for: thank-you cards, parent gifts.' },
+        'grid-3x3':  { rows: 3, cols: 3, count: 9,  help: '3 × 3 — 9 photos. Best for: Instagram carousels, classic 5×5 prints.' },
+        'grid-3x4':  { rows: 3, cols: 4, count: 12, help: '3 × 4 — 12 photos. Best for: parent album inserts, full-day recap posts.' },
+        'strip-h':   { rows: 1, cols: 5, count: 5,  help: 'Horizontal strip — 5 in a row. Best for: blog headers, Facebook covers, panoramic frames.' },
+        'strip-v':   { rows: 5, cols: 1, count: 5,  help: 'Vertical strip — 5 in a column. Best for: Instagram portrait carousels, save-the-date DMs.' }
       };
 
       // Aspect ratio → canvas pixel dimensions (long edge ~1440 px max for print quality).
@@ -686,7 +697,7 @@
       // We choose this automatically and don't expose it to avoid surprising users.
       var CAPTION_COLOR = '#FFFFFF';
 
-      var files = [];
+      var files = []; // { name, inputFile, img (HTMLImageElement|null), previewUrl, status, error, sizes:{orig,out} }
       var lastBlob = null;
       var lastOutputName = 'wedding-collage.png';
 
@@ -696,6 +707,7 @@
         runBtn.disabled = files.length < 2;
         // Download is only enabled once we've built at least one collage successfully.
         downloadBtn.disabled = !lastBlob;
+        downloadPdfBtn.disabled = !lastBlob;
         if (window.weddingAITool && window.weddingAITool.renderFileList) {
           window.weddingAITool.renderFileList(list, files, function () {});
           Array.prototype.forEach.call(list.children, function (row, i) {
@@ -722,9 +734,10 @@
           });
         });
         if (files.length === before) {
-          window.weddingAITool.toast('Нет подходящих файлов. Попробуйте JPG, PNG или WebP.', 'error');
+          window.weddingAITool.toast('No supported files. Try JPG, PNG, or WebP.', 'error');
           return;
         }
+        // Decoded images are loaded lazily inside runBuild() — keeps drop responsive on big batches.
         refreshUI();
       }
 
@@ -746,11 +759,13 @@
       }
 
       function loadAllImages() {
+        // Sequential, so a single broken file doesn't swallow the batch.
         var promises = files.map(function (entry, i) {
           if (entry.img && entry.img.complete) return Promise.resolve(i);
           return window.weddingAITool.fileToImage(entry.inputFile)
             .then(function (loaded) {
               entry.img = loaded.img;
+              // We can keep the preview blob URL alive — the file list uses it.
             })
             .catch(function (err) {
               entry.status = 'error';
@@ -760,8 +775,9 @@
         return Promise.all(promises);
       }
 
+      // Compute pixel coords of each cell given canvas dims, padding, rows/cols.
       function computeCells(canvasW, canvasH, padding, rows, cols) {
-        var edgePad = Math.round(padding / 2);
+        var edgePad = Math.round(padding / 2); // half inside, half outside -> cells start after edgePad and end before edgePad
         var innerW = canvasW - edgePad * 2;
         var innerH = canvasH - edgePad * 2;
         var totalGapX = padding * (cols - 1);
@@ -782,6 +798,7 @@
         return cells;
       }
 
+      // Cover-crop drawImage: fill the (dx,dy,dw,dh) box by cropping the source symmetrically.
       function drawCover(ctx, img, dx, dy, dw, dh) {
         var iw = img.naturalWidth, ih = img.naturalHeight;
         if (!iw || !ih) return;
@@ -793,13 +810,16 @@
         ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
       }
 
+      // Try to await document.fonts.ready so the caption is rendered with the chosen typeface.
       function ensureFontLoaded(fontFamily) {
         try {
           if (!document.fonts || !document.fonts.load) return Promise.resolve();
+          // 64px is a comfortable test size; the renderer will measure the actual rendered string.
           return document.fonts.load("600 64px " + fontFamily).then(function () { return null; }).catch(function () { return null; });
         } catch (_) { return Promise.resolve(); }
       }
 
+      // Wrap the caption so it fits within maxWidth. Returns array of lines.
       function wrapCaption(ctx, text, maxWidth) {
         var words = text.split(/\s+/);
         var lines = [];
@@ -814,6 +834,7 @@
           }
         }
         if (cur) lines.push(cur);
+        // If a single word is itself wider than maxWidth, drawImage would clip; we accept that and let it overflow visually.
         return lines;
       }
 
@@ -825,6 +846,7 @@
         var ctx = canvas.getContext('2d');
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
+        // Background
         ctx.fillStyle = bgColor || '#FFFFFF';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -833,13 +855,16 @@
         for (var i = 0; i < used; i++) {
           drawCover(ctx, images[i], cells[i].x, cells[i].y, cells[i].w, cells[i].h);
         }
+        // Fill unused cells with bgColor so empty layouts look intentional.
         for (var j = used; j < cells.length; j++) {
           ctx.fillStyle = bgColor || '#FFFFFF';
           ctx.fillRect(cells[j].x, cells[j].y, cells[j].w, cells[j].h);
         }
 
+        // Caption (only if there's a caption AND photos were drawn)
         if (caption && used > 0) {
           var familyCss = FONT_FAMILY[captionFontKey] || FONT_FAMILY['Playfair Display'];
+          // Scale font size to canvas height — about 5% feels good, with min 28 / max 96.
           var fontSize = Math.max(28, Math.min(96, Math.round(canvas.height * 0.055)));
           ctx.font = '600 ' + fontSize + 'px ' + familyCss;
           ctx.textBaseline = 'middle';
@@ -847,8 +872,10 @@
 
           var maxLineW = Math.floor(canvas.width * 0.9);
           var lines = wrapCaption(ctx, caption, maxLineW);
+          // Cap to 2 lines so a long caption doesn't overflow the canvas.
           if (lines.length > 2) lines = [lines[0], lines.slice(1).join(' ')];
 
+          // Place caption in a translucent bottom band so it remains readable over light or dark photos.
           var bandH = Math.round(fontSize * 1.6 * lines.length + fontSize);
           var bandY = canvas.height - bandH;
           ctx.fillStyle = 'rgba(0,0,0,0.35)';
@@ -865,6 +892,7 @@
           for (var k = 0; k < lines.length; k++) {
             ctx.fillText(lines[k], canvas.width / 2, firstLineY + k * lineGap);
           }
+          // Reset shadow so it doesn't bleed into future draws.
           ctx.shadowColor = 'transparent';
           ctx.shadowBlur = 0;
           ctx.shadowOffsetY = 0;
@@ -878,18 +906,18 @@
 
       async function runBuild() {
         if (files.length < 2) {
-          window.weddingAITool.toast('Добавьте хотя бы 2 фото, чтобы собрать коллаж.', 'error');
+          window.weddingAITool.toast('Add at least 2 photos to build a collage.', 'error');
           return;
         }
         runBtn.disabled = true;
-        runBtn.textContent = 'Собираем…';
+        runBtn.textContent = 'Building…';
 
         try {
           await loadAllImages();
           var okFiles = files.filter(function (f) { return f.status !== 'error' && f.img; });
           var errCount = files.length - okFiles.length;
           if (okFiles.length < 2) {
-            window.weddingAITool.toast('Нужно хотя бы 2 читаемых фото.', 'error');
+            window.weddingAITool.toast('Need at least 2 readable photos.', 'error');
             return;
           }
 
@@ -898,7 +926,7 @@
           var layout = LAYOUTS[key];
           var used = Math.min(images.length, layout.count);
           if (images.length > layout.count) {
-            window.weddingAITool.toast('Макет использует ' + layout.count + ' фото — ' + (images.length - layout.count) + ' лишних проигнорировано.', 'info');
+            window.weddingAITool.toast('Layout uses ' + layout.count + ' photos — ' + (images.length - layout.count) + ' extras ignored.', 'info');
           }
 
           await ensureFontLoaded(captionFontEl.value);
@@ -917,8 +945,9 @@
           previewCanvas.hidden = false;
           previewEmpty.hidden = true;
 
+          // Output PNG. PNG is lossless and preserves the typography exactly.
           var blob = await window.weddingAITool.canvasToBlob(previewCanvas, 'image/png');
-          if (!blob || blob.size === 0) throw new Error('Не удалось закодировать PNG на выходе.');
+          if (!blob || blob.size === 0) throw new Error('Could not encode PNG output.');
           lastBlob = blob;
           var layoutSlug = key.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
           var aspectSlug = aspectEl.value.replace(':', 'x');
@@ -926,18 +955,18 @@
 
           summaryEl.hidden = false;
           summaryEl.innerHTML =
-            '<div><strong>' + used + '</strong> фото использовано</div>' +
-            '<div><strong>Макет:</strong> ' + layout.count + ' ячеек · ' + aspectEl.value + '</div>' +
-            '<div><strong>Размер:</strong> ' + previewCanvas.width + ' × ' + previewCanvas.height + ' px · ' +
+            '<div><strong>' + used + '</strong> photos used</div>' +
+            '<div><strong>Layout:</strong> ' + layout.count + ' cells · ' + aspectEl.value + '</div>' +
+            '<div><strong>Output size:</strong> ' + previewCanvas.width + ' × ' + previewCanvas.height + ' px · ' +
               window.weddingAITool.formatBytes(blob.size) + ' (PNG)</div>' +
-            (errCount ? '<div style="color:#b00020"><strong>' + errCount + '</strong> пропущено (не удалось декодировать).</div>' : '');
+            (errCount ? '<div style="color:#b00020"><strong>' + errCount + '</strong> skipped (could not decode).</div>' : '');
 
-          window.weddingAITool.toast('Коллаж собран. Нажмите «Скачать PNG».');
+          window.weddingAITool.toast('Collage built. Click Download PNG to save.');
         } catch (err) {
-          window.weddingAITool.toast((err && err.message) ? err.message : 'Не удалось собрать коллаж.', 'error');
+          window.weddingAITool.toast((err && err.message) ? err.message : 'Could not build collage.', 'error');
         } finally {
           runBtn.disabled = false;
-          runBtn.textContent = 'Собрать коллаж';
+          runBtn.textContent = 'Build collage';
           refreshUI();
         }
       }
@@ -945,8 +974,25 @@
       function downloadCollage() {
         if (!lastBlob) return;
         window.weddingAITool.download(lastBlob, lastOutputName);
-        window.weddingAITool.toast('Сохраняем ' + lastOutputName + '…');
+        window.weddingAITool.toast('Saving ' + lastOutputName + '…');
       }
+      // PDF export - the very same canvas the PNG export uses, so the PDF page
+      // is exactly the collage size (no scaling, no second render). jsPDF is
+      // loaded on first use by window.weddingAITool.downloadPdf().
+      function downloadCollagePdf() {
+        if (!lastBlob) return;
+        var pdfName = lastOutputName.replace(/\.png$/i, '') + '.pdf';
+        window.weddingAITool.downloadPdf(previewCanvas, pdfName, { mime: 'image/png' })
+          .then(function () {
+            window.weddingAITool.toast(window.weddingAITool.t('pdfReady', 'PDF ready'));
+          })
+          .catch(function () {
+            // downloadPdf() has already raised the localized error toast.
+          });
+      }
+
+
+      // ---------- wiring --------------------------------------------------------
 
       window.weddingAITool.bindDropZone({
         dropEl: dropzone,
@@ -956,6 +1002,7 @@
         onFiles: addFiles
       });
 
+      // Layout chip selection
       Array.prototype.forEach.call(layoutGrid.querySelectorAll('.wa-collage-layout-chip'), function (chip) {
         chip.addEventListener('click', function () {
           var key = chip.getAttribute('data-layout');
@@ -972,6 +1019,7 @@
       paddingEl.addEventListener('input', function () { paddingVal.textContent = paddingEl.value; });
       runBtn.addEventListener('click', runBuild);
       downloadBtn.addEventListener('click', downloadCollage);
+      downloadPdfBtn.addEventListener('click', downloadCollagePdf);
       clearBtn.addEventListener('click', clearAll);
 
       list.addEventListener('wa-row-remove', function (e) {

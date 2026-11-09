@@ -31,11 +31,11 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI Werkzeuge">
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -104,6 +104,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ywxiu97hg8");
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
@@ -188,6 +197,20 @@
                 </div>
                 <div class="wa-tool-empty" id="empty-state" data-i18n="tools.crop-wedding-photo-for-reels.div_text.c12a8faa">还没有照片 — 把照片拖到上面开始。</div>
                 <div class="wa-tool-file-list" id="file-list" hidden></div>
+                <div class="wa-tool-card wa-crop-stage-card" id="crop-stage-card" hidden>
+                    <h2 data-i18n="tools.copy.cropStageTitle.zzzzzz6c01">Adjust the crop</h2>
+                    <p class="wa-crop-stage-hint" data-i18n="tools.copy.cropStageHint.zzzzzz6c02">Drag the corners to frame the shot. Photos you leave untouched keep the automatic centre crop.</p>
+                    <div class="wa-crop-stage" id="crop-stage">
+                        <canvas id="crop-canvas" width="8" height="8" role="img" aria-label="Crop area" data-i18n-attr="aria-label:tools.copy.cropStageHint.zzzzzz6c02"></canvas>
+                    </div>
+                    <div class="wa-crop-stage-bar">
+                        <button type="button" class="btn btn-secondary btn-small" id="crop-prev-btn" data-i18n="tools.copy.cropPrev.zzzzzz6c03">Previous photo</button>
+                        <span class="wa-crop-stage-pos" id="crop-stage-pos" aria-live="polite"></span>
+                        <button type="button" class="btn btn-secondary btn-small" id="crop-next-btn" data-i18n="tools.copy.cropNext.zzzzzz6c04">Next photo</button>
+                        <button type="button" class="btn btn-secondary btn-small" id="crop-reset-btn" data-i18n="tools.copy.cropReset.zzzzzz4f2a">Reset</button>
+                    </div>
+                </div>
+
             </div>
 
             <div class="wa-tool-card">
@@ -371,7 +394,7 @@
                     </details>
                     <details>
                         <summary>Gibt es eine Möglichkeit, den Zuschnitt manuell anzupassen?</summary>
-                        <p>Nicht in diesem Tool — es ist ein Stapel-Ein-Klick-Zuschnitt-Tool, das für den häufigsten Fall konzipiert wurde. Für vollständige manuelle Kontrolle mit verschiebbaren Zuschnittfeldern empfehlen wir die Verwendung des Foto-Editors des Quellbildes (Lightroom, Photoshop, Snapseed) und exportieren den gewählten Bereich. Die intelligente gesichtssichere Heuristik hier bewältigt ~85% der Hochzeitsaufnahmen beim ersten Versuch korrekt.</p>
+                        <p>Ja. Der Schritt Zuschneiden öffnet jetzt einen ziehbaren Rahmen: Verschieben Sie die Ecken, um das Motiv selbst einzufassen, und klicken Sie dann auf Zuschneiden. Fotos, die Sie nicht anfassen, behalten den automatischen mittigen Beschnitt, der Stapelablauf funktioniert also wie bisher.</p>
                     </details>
                 </div>
 
@@ -497,6 +520,21 @@
 
       var files = [];
 
+      // ---------- interactive crop stage -----------------------------------
+      var stageCard = document.getElementById('crop-stage-card');
+      var stageCanvas = document.getElementById('crop-canvas');
+      var stagePos = document.getElementById('crop-stage-pos');
+      var stagePrevBtn = document.getElementById('crop-prev-btn');
+      var stageNextBtn = document.getElementById('crop-next-btn');
+      var stageResetBtn = document.getElementById('crop-reset-btn');
+      var stageIndex = 0;
+      var stageImg = null;      // the photo currently on the stage
+      var stageRect = null;      // {x,y,w,h} in CANVAS pixels
+      var stageScale = 1;         // source pixels per canvas pixel
+      var dragMode = null;        // 'move' | 'nw' | 'ne' | 'sw' | 'se' | 'new'
+      var dragStart = null;
+      var HANDLE = 16;            // corner handle hit radius, canvas px
+
       function refreshUI() {
         empty.hidden = files.length > 0;
         list.hidden = files.length === 0;
@@ -508,6 +546,7 @@
             window.weddingAITool.updateFileRow(row, files[i]);
           });
         }
+        updateStageBar();
       }
 
       function addFiles(picked) {
@@ -525,12 +564,13 @@
             error: null,
           });
         });
-        if (files.length === 0) { window.weddingAITool.toast('没有支持的文件。请使用 JPG、PNG 或 WebP。', 'error'); return; }
+        if (files.length === 0) { window.weddingAITool.toast('No supported files. Try a JPG, PNG, or WebP.', 'error'); return; }
         files.forEach(function (entry, idx) {
           if (entry.previewUrl) return;
           entry.previewUrl = URL.createObjectURL(entry.inputFile);
         });
         refreshUI();
+        showStage();
       }
 
       function clearAll() {
@@ -539,7 +579,10 @@
         });
         files = [];
         summaryEl.hidden = true;
+        stageIndex = 0;
+        stageRect = null;
         refreshUI();
+        showStage();
       }
 
       function getCurrentSettings() {
@@ -573,7 +616,11 @@
           cropW = W;
           cropH = W / tgtAR;
         }
-        // Choose the subject centroid per the smart face-safe heuristic.
+        // Choose the subject centroid per the off-center bias heuristic
+        // (60% down the Y axis for landscape, true center for portrait).
+        // This is NOT face detection; it is a hard-coded bias toward the
+        // area where wedding couples typically appear. Documented in the
+        // hero copy + toggle label so users know what they're getting.
         var biasX, biasY;
         if (smart) {
           if (W >= H) {
@@ -604,33 +651,42 @@
         if (cropX < 0) cropX = 0;
         if (cropY < 0) cropY = 0;
         if (cropX + cropW > W) cropW = W - cropX;
-        if (cropY + cropH >H) CropH = H – CropY;
-        return { CropX: CropX, CropY: CropY, CropW: CropW, CropH: CropH };
+        if (cropY + cropH > H) cropH = H - cropY;
+        return { cropX: cropX, cropY: cropY, cropW: cropW, cropH: cropH };
       }
 
-      asynchrone Funktion ProcessOne(Eintrag, Einstellungen) {
-        Eintrag.status = 'funktioniert';
-        Eintrag.error = null;
+      async function processOne(entry, settings) {
+        entry.status = 'working';
+        entry.error = null;
         refreshUI();
 
-        versuche es mit {
-          var geladen = Warten auf window.weddingAITool.fileToImage(entry.inputFile);
-          var img = geladen.img;
+        try {
+          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          var img = loaded.img;
           var W = img.naturalWidth;
           var H = img.naturalHeight;
-          if (!W || !H) throw new Error('Das Bild hat keine Größe, bitte ändern Sie eine Datei.');
+          if (!W || !H) throw new Error('Image has no dimensions. Try a different file.');
 
-          var Crop = ComputeCrop(W, H, Settings.aspect.w, Settings.aspect.h, Settings.smart);
+          // A manual crop wins, but only when it still matches the aspect
+          // ratio that is selected now - otherwise the photo would be
+          // stretched, so the automatic crop is used instead.
+          var crop = null;
+          if (entry.crop && Math.abs(entry.cropAr - settings.aspect.w / settings.aspect.h) < 0.0001) {
+            crop = entry.crop;
+          }
+          if (!crop) {
+            crop = computeCrop(W, H, settings.aspect.w, settings.aspect.h, settings.smart);
+          }
 
           var outW, outH;
           if (settings.resolution === 'instagram') {
-            outW = Settings.aspect.outW;
-            outH = Settings.aspect.outH;
-          } sonst {
+            outW = settings.aspect.outW;
+            outH = settings.aspect.outH;
+          } else {
             outW = crop.cropW;
             outH = crop.cropH;
           }
-          wenn (outW< 1 || outH < 1) throw new Error('计算出的输出尺寸无效。');
+          if (outW < 1 || outH < 1) throw new Error('Computed output dimensions are invalid.');
 
           var canvas = document.createElement('canvas');
           canvas.width = outW;
@@ -643,7 +699,7 @@
           ctx.drawImage(img, crop.cropX, crop.cropY, crop.cropW, crop.cropH, 0, 0, outW, outH);
 
           var blob = await window.weddingAITool.canvasToBlob(canvas, 'image/jpeg', settings.quality);
-          if (!blob || blob.size === 0) throw new Error('裁剪返回空文件，请换一张图片。');
+          if (!blob || blob.size === 0) throw new Error('Crop returned an empty file. Try a different image.');
 
           entry.output = blob;
           entry.sizes.out = blob.size;
@@ -670,7 +726,7 @@
         runBtn.disabled = false;
         saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
         renderSummary();
-        window.weddingAITool.toast('裁剪完成。');
+        window.weddingAITool.toast('Crop complete.');
       }
 
       function renderSummary() {
@@ -682,28 +738,283 @@
         var ratio = origTotal > 0 ? ((origTotal - outTotal) / origTotal * 100) : 0;
         summaryEl.hidden = false;
         summaryEl.innerHTML =
-          '<div><strong>' + done.length + '</strong>Blatt wurde beschnitten</div>' +
-          '<div><strong>Gesamtleistung:</strong> ' + window.weddingAITool.formatBytes(outTotal) +
-          '（原 ' + window.weddingAITool.formatBytes(origTotal) + '，' + (ratio >= 0 ? '−' : '+') + Math.abs(ratio).toFixed(1) + '%）</div>' +
-          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' Fehlgeschlagen</strong>— Löschen und erneut versuchen.</div>' : '');
+          '<div><strong>' + done.length + '</strong> cropped</div>' +
+          '<div><strong>Total output:</strong> ' + window.weddingAITool.formatBytes(outTotal) +
+          ' (from ' + window.weddingAITool.formatBytes(origTotal) + ', ' + (ratio >= 0 ? '−' : '+') + Math.abs(ratio).toFixed(1) + '%)</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' errored</strong> — remove and retry.</div>' : '');
       }
 
-      Funktion saveAll() {
-        var-Ausgaben = Dateien
+      function saveAll() {
+        var outputs = files
           .filter(function (f) { return f.status === 'done' && f.output; })
           .map(function (f) { return { name: f.outputName, blob: f.output }; });
         if (outputs.length === 0) return;
         window.weddingAITool.downloadZip(outputs, 'cropped');
-        window.weddingAITool.toast('Speichern ' + Ausgaben.Länge + ' Dateien...');
+        window.weddingAITool.toast('Saving ' + outputs.length + ' file' + (outputs.length === 1 ? '' : 's') + '…');
       }
 
-      // verkabeln
+      // wire up
       window.weddingAITool.bindDropZone({
-        dropEl: Dropzone,
-        inputEl: Eingabe,
-        akzeptieren: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
-        mehrfach: wahr,
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
         onFiles: addFiles,
+      });
+
+      // ---------- the crop stage implementation ----------------------------
+      //
+      // A canvas, a shaded overlay, four corner handles and pointer drag.
+      // The frame always matches the selected aspect ratio; a photo the user
+      // did not touch keeps the automatic crop.
+      function stageEntries() {
+        return files.filter(function (f) { return f.inputFile; });
+      }
+
+      function stageAspect() {
+        var a = getCurrentSettings().aspect;
+        return a.w / a.h;
+      }
+
+      function clampRect(r, ar) {
+        var cw = stageCanvas.width, ch = stageCanvas.height;
+        var w = Math.min(Math.max(r.w, 24), cw);
+        var h = w / ar;
+        if (h > ch) { h = ch; w = h * ar; }
+        var x = Math.min(Math.max(r.x, 0), cw - w);
+        var y = Math.min(Math.max(r.y, 0), ch - h);
+        return { x: x, y: y, w: w, h: h };
+      }
+
+      function pointerPos(e) {
+        var rect = stageCanvas.getBoundingClientRect();
+        if (!rect.width || !rect.height) return { x: 0, y: 0 };
+        return {
+          x: (e.clientX - rect.left) * (stageCanvas.width / rect.width),
+          y: (e.clientY - rect.top) * (stageCanvas.height / rect.height)
+        };
+      }
+
+      function hitTest(p) {
+        if (!stageRect) return 'new';
+        var r = stageRect;
+        var near = function (x, y, hx, hy) {
+          return Math.abs(p.x - hx) <= HANDLE && Math.abs(p.y - hy) <= HANDLE;
+        };
+        if (near(p.x, p.y, r.x, r.y)) return 'nw';
+        if (near(p.x, p.y, r.x + r.w, r.y)) return 'ne';
+        if (near(p.x, p.y, r.x, r.y + r.h)) return 'sw';
+        if (near(p.x, p.y, r.x + r.w, r.y + r.h)) return 'se';
+        if (p.x >= r.x && p.x <= r.x + r.w && p.y >= r.y && p.y <= r.y + r.h) return 'move';
+        return 'new';
+      }
+
+      function anchorFor(mode, r) {
+        if (mode === 'nw') return { x: r.x + r.w, y: r.y + r.h };
+        if (mode === 'ne') return { x: r.x, y: r.y + r.h };
+        if (mode === 'sw') return { x: r.x + r.w, y: r.y };
+        return { x: r.x, y: r.y };
+      }
+
+      function rectFromAnchor(anchor, p, ar) {
+        var dx = Math.abs(p.x - anchor.x);
+        var dy = Math.abs(p.y - anchor.y);
+        var w, h;
+        if (dx > dy * ar) { w = dx; h = w / ar; }
+        else { h = dy; w = h * ar; }
+        w = Math.max(w, 24);
+        h = Math.max(h, 24);
+        var x = (p.x < anchor.x) ? anchor.x - w : anchor.x;
+        var y = (p.y < anchor.y) ? anchor.y - h : anchor.y;
+        return clampRect({ x: x, y: y, w: w, h: h }, ar);
+      }
+
+      function drawStage() {
+        var ctx = stageCanvas.getContext('2d');
+        var cw = stageCanvas.width, ch = stageCanvas.height;
+        ctx.clearRect(0, 0, cw, ch);
+        var img = stageImg;
+        if (!img) return;
+        ctx.drawImage(img, 0, 0, cw, ch);
+        if (!stageRect) return;
+        var r = stageRect;
+        // shade everything OUTSIDE the frame
+        ctx.save();
+        ctx.fillStyle = 'rgba(0,0,0,0.55)';
+        ctx.beginPath();
+        ctx.rect(0, 0, cw, ch);
+        ctx.rect(r.x, r.y, r.w, r.h);
+        ctx.fill('evenodd');
+        ctx.restore();
+        // rule of thirds
+        ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+        ctx.lineWidth = 1;
+        for (var i = 1; i <= 2; i++) {
+          ctx.beginPath();
+          ctx.moveTo(r.x + r.w * i / 3, r.y);
+          ctx.lineTo(r.x + r.w * i / 3, r.y + r.h);
+          ctx.moveTo(r.x, r.y + r.h * i / 3);
+          ctx.lineTo(r.x + r.w, r.y + r.h * i / 3);
+          ctx.stroke();
+        }
+        // frame
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(r.x + 1, r.y + 1, r.w - 2, r.h - 2);
+        // corner handles
+        ctx.fillStyle = '#ffffff';
+        var corners = [[r.x, r.y], [r.x + r.w, r.y], [r.x, r.y + r.h], [r.x + r.w, r.y + r.h]];
+        for (var c = 0; c < corners.length; c++) {
+          ctx.fillRect(corners[c][0] - 6, corners[c][1] - 6, 12, 12);
+        }
+      }
+
+      function updateStageBar() {
+        var entries = stageEntries();
+        if (!stagePos) return;
+        var T = window.weddingAITool.t;
+        if (entries.length === 0) {
+          stagePos.textContent = '';
+          return;
+        }
+        var entry = entries[stageIndex];
+        var manual = !!(entry && entry.crop);
+        var txt = manual
+          ? T('cropPosManual', 'Photo {n} of {m} - manual crop')
+          : T('cropPos', 'Photo {n} of {m}');
+        stagePos.textContent = T
+          ? String(txt).replace(/\{(\w+)\}/g, function (m0, k) {
+              return k === 'n' ? String(stageIndex + 1) : k === 'm' ? String(entries.length) : m0;
+            })
+          : '';
+        if (stagePrevBtn) stagePrevBtn.disabled = stageIndex <= 0;
+        if (stageNextBtn) stageNextBtn.disabled = stageIndex >= entries.length - 1;
+      }
+
+      function saveStageCrop() {
+        var entries = stageEntries();
+        var entry = entries[stageIndex];
+        if (!entry || !stageRect) return;
+        // store the frame in SOURCE pixels so the batch crop is pixel-exact
+        entry.crop = {
+          x: Math.round(stageRect.x * stageScale),
+          y: Math.round(stageRect.y * stageScale),
+          w: Math.round(stageRect.w * stageScale),
+          h: Math.round(stageRect.h * stageScale)
+        };
+        entry.cropAr = stageAspect();
+        updateStageBar();
+      }
+
+      async function showStage() {
+        if (!stageCard || !stageCanvas) return;
+        var entries = stageEntries();
+        if (entries.length === 0) {
+          stageCard.hidden = true;
+          stageImg = null;
+          stageRect = null;
+          updateStageBar();
+          return;
+        }
+        stageCard.hidden = false;
+        if (stageIndex > entries.length - 1) stageIndex = entries.length - 1;
+        if (stageIndex < 0) stageIndex = 0;
+        var entry = entries[stageIndex];
+        try {
+          if (!entry.stageImg) {
+            var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+            entry.stageImg = loaded.img;
+            entry.stageUrl = loaded.url;
+          }
+          stageImg = entry.stageImg;
+          var w = stageImg.naturalWidth, h = stageImg.naturalHeight;
+          if (!w || !h) { stageCard.hidden = true; return; }
+          var cw = Math.min(w, 1400);
+          var ch = Math.round(h * cw / w);
+          stageCanvas.width = cw;
+          stageCanvas.height = ch;
+          stageScale = w / cw;
+          if (entry.crop) {
+            stageRect = {
+              x: entry.crop.x / stageScale,
+              y: entry.crop.y / stageScale,
+              w: entry.crop.w / stageScale,
+              h: entry.crop.h / stageScale
+            };
+          } else {
+            var auto = computeCrop(cw, ch, getCurrentSettings().aspect.w, getCurrentSettings().aspect.h, !!smartEl.checked);
+            stageRect = clampRect({ x: auto.cropX, y: auto.cropY, w: auto.cropW, h: auto.cropH }, stageAspect());
+          }
+          drawStage();
+        } catch (err) {
+          stageCard.hidden = true;
+        }
+        updateStageBar();
+      }
+
+      stageCanvas.addEventListener('pointerdown', function (e) {
+        if (!stageRect) return;
+        e.preventDefault();
+        try { stageCanvas.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+        var p = pointerPos(e);
+        dragMode = hitTest(p);
+        dragStart = { p: p, rect: { x: stageRect.x, y: stageRect.y, w: stageRect.w, h: stageRect.h } };
+        if (dragMode === 'new') {
+          dragStart.rect = { x: p.x, y: p.y, w: 24, h: 24 };
+        }
+      });
+
+      stageCanvas.addEventListener('pointermove', function (e) {
+        if (!dragMode) return;
+        var p = pointerPos(e);
+        var ar = stageAspect();
+        if (dragMode === 'move') {
+          var dx = p.x - dragStart.p.x;
+          var dy = p.y - dragStart.p.y;
+          var r = dragStart.rect;
+          stageRect = clampRect({ x: r.x + dx, y: r.y + dy, w: r.w, h: r.h }, ar);
+        } else if (dragMode === 'new') {
+          stageRect = rectFromAnchor(dragStart.p, p, ar);
+        } else {
+          stageRect = rectFromAnchor(anchorFor(dragMode, dragStart.rect), p, ar);
+        }
+        drawStage();
+      });
+
+      function endDrag(e) {
+        if (!dragMode) return;
+        dragMode = null;
+        try { stageCanvas.releasePointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+        saveStageCrop();
+      }
+      stageCanvas.addEventListener('pointerup', endDrag);
+      stageCanvas.addEventListener('pointercancel', endDrag);
+
+      if (stagePrevBtn) {
+        stagePrevBtn.addEventListener('click', function () {
+          if (stageIndex > 0) { stageIndex--; showStage(); }
+        });
+      }
+      if (stageNextBtn) {
+        stageNextBtn.addEventListener('click', function () {
+          var entries = stageEntries();
+          if (stageIndex < entries.length - 1) { stageIndex++; showStage(); }
+        });
+      }
+      if (stageResetBtn) {
+        stageResetBtn.addEventListener('click', function () {
+          var entries = stageEntries();
+          var entry = entries[stageIndex];
+          if (entry) { entry.crop = null; entry.cropAr = 0; }
+          showStage();
+        });
+      }
+      // changing the aspect re-frames the current photo
+      aspectEl.addEventListener('change', function () {
+        var entries = stageEntries();
+        var entry = entries[stageIndex];
+        if (entry && entry.crop) { entry.crop = null; entry.cropAr = 0; }
+        showStage();
       });
 
       qualityEl.addEventListener('input', function () { qualityVal.textContent = qualityEl.value; });
@@ -711,17 +1022,19 @@
       saveAllBtn.addEventListener('click', saveAll);
       clearBtn.addEventListener('click', clearAll);
 
-      list.addEventListener('wa-row-remove', Funktion (e) {
+      list.addEventListener('wa-row-remove', function (e) {
         var idx = parseInt((e.detail || '0'), 10);
         if (!isNaN(idx)) {
           var f = files[idx];
           if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
           files.splice(idx, 1);
           refreshUI();
+          showStage();
         }
       });
 
       refreshUI();
-    });</script>
+    });
+    </script>
 </body>
 </html>

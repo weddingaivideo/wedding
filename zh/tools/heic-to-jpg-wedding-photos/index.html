@@ -32,10 +32,10 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI Tools">
     <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -82,14 +82,8 @@
         {"@type":"ListItem","position":2,"name":"免费婚礼图片工具","item":"https://weddingai.video/tools/"},
         {"@type":"ListItem","position":3,"name":"HEIC 转 JPG 婚纱照转换器","item":"https://weddingai.video/zh/tools/heic-to-jpg-wedding-photos/"}
     ]}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"HEIC 转 JPG 婚纱照转换器","applicationCategory":"MultimediaApplication","operatingSystem":"WEB","browserRequirements":"需要 Safari 17 及以上原生解码 HEIC，其他浏览器会显示清晰的引导说明","softwareVersion":"1.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"免费浏览器内工具，将 iPhone HEIC 婚纱照转换为 JPG。Safari 原生解码；其他浏览器提供清晰的浏览器限制说明。支持调节画质和可选的最长边缩放。文件始终留在用户设备上。","url":"https://weddingai.video/zh/tools/heic-to-jpg-wedding-photos/","image":"https://weddingai.video/images/og-image-1200x630.jpg","publisher":{"@type":"Organization","name":"WeddingAI.video","url":"https://weddingai.video/"},"featureList":["拖拽批量上传 HEIC/HEIF 文件","可调节 JPG 画质（60–95）","可选最长边缩放","100% 客户端运行","无需上传、无需注册","批量下载"]}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"如何将 HEIC 婚纱照转换为 JPG","step":[
-        {"@type":"HowToStep","position":1,"name":"在 Safari 中打开以便原生解码","text":"本工具使用浏览器的内置图像解码器。Safari 17 及以上版本可直接解码 HEIC/HEIF。桌面端 Chrome、Firefox、Edge 不支持——请在同一设备的 Safari 中打开，或使用手机端操作流程。"},
-        {"@type":"HowToStep","position":2,"name":"拖入或选择 HEIC 文件","text":"拖拽 HEIC/HEIF 照片或点击浏览。批量友好。同时支持 .heic 和 .heif 扩展名。"},
-        {"@type":"HowToStep","position":3,"name":"设置 JPG 画质（默认 90）","text":"HEIC 本就是高效编码，我们默认保持较高画质。90 为默认值；若更看重体积，可降到 75–85。"},
-        {"@type":"HowToStep","position":4,"name":"可选：限制最长边","text":"当上传到上限 2048px 的相册时很有用。印刷母版留 4096，社交媒体留 1080。"},
-        {"@type":"HowToStep","position":5,"name":"点击转换并下载","text":"点击转换按钮。每张完成的照片会显示独立的下载按钮。使用一键全部保存可批量下载。"}
-    ]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "HEIC 转 JPG 婚纱照转换器", "applicationCategory": "MultimediaApplication", "operatingSystem": "WEB", "browserRequirements": "任何现代浏览器（Chrome、Edge、Firefox 或 Safari）", "softwareVersion": "1.0", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "免费浏览器内工具，将 iPhone HEIC 婚纱照转换为 JPG。Safari 原生解码；其他浏览器提供清晰的浏览器限制说明。支持调节画质和可选的最长边缩放。文件始终留在用户设备上。", "url": "https://weddingai.video/zh/tools/heic-to-jpg-wedding-photos/", "image": "https://weddingai.video/images/og-image-1200x630.jpg", "publisher": {"@type": "Organization", "name": "WeddingAI.video", "url": "https://weddingai.video/"}, "featureList": ["拖拽批量上传 HEIC/HEIF 文件", "可调节 JPG 画质（60–95）", "可选最长边缩放", "100% 客户端运行", "无需上传、无需注册", "批量下载"]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "如何将 HEIC 婚纱照转换为 JPG", "step": [{"@type": "HowToStep", "position": 1, "name": "添加你的 HEIC 照片", "text": "把 HEIC/HEIF 文件拖进工具。Chrome、Edge、Firefox 和 Safari 都会在浏览器里完成转换，全程不���传。"}, {"@type": "HowToStep", "position": 2, "name": "拖入或选择 HEIC 文件", "text": "拖拽 HEIC/HEIF 照片或点击浏览。批量友好。同时支持 .heic 和 .heif 扩展名。"}, {"@type": "HowToStep", "position": 3, "name": "设置 JPG 画质（默认 90）", "text": "HEIC 本就是高效编码，我们默认保持较高画质。90 为默认值；若更看重体积，可降到 75–85。"}, {"@type": "HowToStep", "position": 4, "name": "可选：限制最长边", "text": "当上传到上限 2048px 的相册时很有用。印刷母版留 4096，社交媒体留 1080。"}, {"@type": "HowToStep", "position": 5, "name": "点击转换并下载", "text": "点击转换按钮。每张完成的照片会显示独立的下载按钮。使用一键全部保存可批量下载。"}]}</script>
 <link rel="alternate" hreflang="en" href="https://weddingai.video/tools/heic-to-jpg-wedding-photos/">
 <link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/tools/heic-to-jpg-wedding-photos/">
 <link rel="alternate" hreflang="es" href="https://weddingai.video/es/tools/heic-to-jpg-wedding-photos/">
@@ -110,6 +104,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ywxiu97hg8");
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">跳到主内容</a>
@@ -175,7 +178,7 @@
         <section class="page-hero-mini">
             <div class="container">
                 <h1>HEIC 转 JPG 婚纱照转换器</h1>
-                <p>在浏览器内将 iPhone HEIC 婚纱照转换为 JPG。支持批量处理、画质保留；Safari 原生直转；其他浏览器会给出明确的引导说明。</p>
+                <p>在浏览器内将 iPhone HEIC 婚纱照转换为 JPG。支持批量处理、画质保留——而且现在 Chrome、Edge、Firefox 和 Safari 都能用。</p>
                 <p class="wa-tool-privacy">所有处理均在本地完成。文件不会被上传。</p>
             </div>
         </section>
@@ -194,9 +197,7 @@
                 </div>
                 <div class="wa-tool-empty" id="empty-state">还没有 HEIC 文件 — 在上方拖入一些开始转换。</div>
                 <div class="wa-tool-file-list" id="file-list" hidden></div>
-                <div class="wa-tool-heic-note">
-                    <strong>浏览器支持：</strong>Safari 17 及以上版本可在 <code>&lt;img&gt;</code> 中直接解码 HEIC/HEIF，可顺利转换。桌面端 Chrome、Firefox 和大多数 Edge 版本需要额外解码库才能解码 HEIC——若转换失败，请用同一设备上的 <strong>Safari</strong> 打开本页面，或在 iPhone 上预转（<em>设置 → 照片 → 最兼容</em>）。
-                </div>
+                <p><strong>浏览器支持：</strong>当前所有浏览器都能用。Safari 使用系统内置的 HEIC 解码器；Chrome、Edge 和 Firefox 则会在你首次转换时加载一个自托管的小型解码器（约 1.3 MB）。两种方式都不会上传任何文件。</p>
             </div>
 
             <div class="wa-tool-card">
@@ -236,9 +237,7 @@
 
                 <div class="wa-tool-summary" id="summary" hidden></div>
 
-                <div class="wa-tool-banner">
-                    <strong>隐私：</strong>每张照片都在浏览器标签页内使用 Canvas API 完成本地解码与重新编码。我们不会上传、存储或记录您的婚纱照，也不会用图像数据发起任何网络请求。在非 Safari 浏览器上，工具会显示清晰的限制说明，绝不会偷偷发送您的 HEIC 文件。
-                </div>
+                <p><strong>隐私：</strong>每张照片都在浏览器标签页内本地解码与重新编码。我们不会上传、存储或记录你的婚礼照片——这个页面绝不会带着图片数据发起网络请求。</p>
             </div>
 
             <div class="wa-tool-card">
@@ -340,12 +339,12 @@
 
                 <h3>为什么我们把它做成「优雅降级」工具，而不是 CDN 转换器</h3>
                 <p>网上大多数「HEIC 转 JPG」网站都会把您的文件发到服务器。对一般照片来说无所谓。但对 <strong>婚礼照片</strong> — 抓拍、家属互动、场地细节、有时还有新娘礼服揭晓 — 隐私是底线。我们不愿意上线任何会上传一个字节的版本。</p>
-                <p>所以我们使用浏览器的内置 <code>&lt;img&gt;</code> 解码器。<strong>Safari 17 及更新版本</strong>（macOS Sonoma、iOS 17、iPadOS 17）原生支持 HEIC 解码，这意味着无需上传、无需安装解码库、无需额外 JS 库就能批量转换。旧版 Safari、所有桌面版 Chrome/Firefox/Edge 和大多数安卓浏览器都无法解码 HEIC，工具会显示一条礼貌、清晰的提示信息，告诉您改用 Safari，或在 iPhone 上启用「最兼容」导出设置。我们考虑过引入 CDN 上的 <code>heic2any</code> 库让 Chrome 也能工作，但每加一个 CDN 都需要修改站点的 Content Security Policy — 我们不愿意只为单个工具做这种改动。</p>
-                <p>如果您现在在 Chrome 上看这篇文章、又急需转一次：两条不需要任何工具的快速方案：（1）在同台机器的 Safari 里打开本 URL；（2）在 iPhone 上，进入<em>设置 → 照片 → 传输到 Mac 或 PC → 自动</em>，然后 AirDrop 或 iCloud 把整批传到 Mac — Finder 会自动把 HEIC 转成 JPG。App Store 上也有 <em>iMazing HEIC Converter</em>、<em>CopyTrans HEIC</em> 等应用，但它们都会把数据发到某处 — 对我们来说，浏览器内是底线。</p>
+                <p>因此整个转换过程都在你的浏览器里完成。Safari 用内置图像解码器处理 HEIC；Chrome、Edge 和 Firefox 则加载一个本地运行的自托管解码器——没有 CDN，不上传，也不需要账号。</p>
+                <p>如果你不想等这一次性的下载，可以先在 iPhone 上预转（<em>设置 → 照片 → 兼容性最佳</em>）再传输 JPG。浏览器内转换这条路免费、私密，也不需要装任何额外应用。</p>
 
                 <h2>三步把 HEIC 婚纱照转成 JPG</h2>
                 <ol>
-                    <li><strong>在 Safari 中打开本页。</strong>Mac、iPhone 或 iPad 上 Safari 是默认浏览器，原生解码 HEIC。如果页面顶部已经显示「所有处理均在本地完成」字样，说明环境已经就绪。如果您当前在 Chrome，请点击分享按钮选择<em>在 Safari 中打开</em>，或复制 URL。</li>
+                    <li><strong>把 HEIC 文件拖进来即可。</strong>Chrome、Edge、Firefox 和 Safari 都能转换。在 Chrome、Edge 或 Firefox 上，解码器只下载一次（约 1.3 MB），之后会被缓存。</li>
                     <li><strong>把 HEIC 文件拖到上方框中。</strong>或者点击框，从相册中选择。同时支持 <code>.heic</code> 和 <code>.heif</code> 扩展名。整批同时加载；转换一张接一张执行，设备内存占用低。</li>
                     <li><strong>点击「转换为 JPG」并下载。</strong>每张照片处理完成就立刻显示独立的下载按钮。文件名统一改写为 <code>.jpg</code>，地球上任何程序都能打开它。点 <strong>全部保存</strong> 一键下载整批。</li>
                 </ol>
@@ -373,11 +372,11 @@
                 <div class="qa-block">
                     <details>
                         <summary>在 iPhone 上能用吗？</summary>
-                        <p>可以。iOS 17 及以上版本的 Safari 原生解码 HEIC，本工具完全在客户端运行。点击框打开相册，选好 HEIC 文件，点转换即可。输出的 JPG 通过 iOS 标准下载流程保存。</p>
+                        <p>可以。这个工具在当前所有浏览器（包括 iOS）上完全在客户端运行。点击框打开相册，选好 HEIC 文件，然后转换。输出的 JPG 会走 iOS 常规的下载流程保存。</p>
                     </details>
                     <details>
                         <summary>我在 Chrome / Firefox / Edge，转不出来怎么办？</summary>
-                        <p>这些浏览器不带 HEIC 解码器。您的 HEIC 文件哪儿也没去 — 我们从不主动上传。三种可用方案：（1）用同台设备的 Safari 打开同一个 URL（手边有 Mac 或 iPad 时很方便）；（2）在 iPhone 上将<em>设置 → 照片 → 最兼容</em>打开，再 AirDrop — 接收端拿到的就是 JPG；（3）如果您已安装了桌面 HEIC 转 JPG 应用，也可以用它。</p>
+                        <p>Chrome、Edge 和 Firefox 本身不带 HEIC 解码器，所以我们在你首次转换时加载一个自托管的小解码器（约 1.3 MB，之后会缓存）。你的 HEIC 文件哪儿也没去——我们从不主动上传。如果你想跳过这次下载，在 iPhone 上设置<em>设置 → 照片 → 兼容性最佳</em>并传输 JPG 即可。</p>
                     </details>
                     <details>
                         <summary>画质 90 转出的 JPG 会比原 HEIC 还大吗？</summary>
@@ -553,7 +552,7 @@
             error: null,
           });
         });
-        if (accepted === 0) { window.weddingAITool.toast('未检测到 HEIC/HEIF 文件。请拖入 .heic 或 .heif 文件。', 'error'); return; }
+        if (accepted === 0) { window.weddingAITool.toast(window.weddingAITool.t('noHeicFiles', 'No HEIC/HEIF files found. Drop .heic or .heif files.'), 'error'); return; }
         // Generate preview thumbnails (best-effort, run async). Safari will render; others will fail silently.
         files.forEach(function (entry, idx) {
           if (entry.previewUrl) return;
@@ -580,13 +579,38 @@
         };
       }
 
+      // HEIC decoding.
+      //
+      // Safari ships a HEIC decoder in the browser; Chrome, Edge and Firefox
+      // do not. heic2any (MIT, asm.js - no WebAssembly, so it needs no CSP
+      // change) is vendored under /js/vendor/heic2any/ and is loaded on
+      // demand by the shared layer. The native path is tried FIRST so that
+      // Safari never downloads the 1.3 MB decoder, and only the browsers
+      // that need it pay for it.
+      async function loadDecodableImage(file) {
+        try {
+          var loaded = await window.weddingAITool.fileToImage(file);
+          return { img: loaded.img, release: function () { URL.revokeObjectURL(loaded.url); } };
+        } catch (nativeErr) {
+          var blob = await window.weddingAITool.decodeHeic(file, { toType: 'image/jpeg', quality: 1 });
+          var url = URL.createObjectURL(blob);
+          var img = new Image();
+          await new Promise(function (resolve, reject) {
+            img.onload = resolve;
+            img.onerror = function () { reject(new Error('HEIC decode produced an unreadable image')); };
+            img.src = url;
+          });
+          return { img: img, release: function () { URL.revokeObjectURL(url); } };
+        }
+      }
+
       async function processOne(entry, settings) {
         entry.status = 'working';
         entry.error = null;
         refreshUI();
 
         try {
-          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          var loaded = await loadDecodableImage(entry.inputFile);
           var img = loaded.img;
           var w = img.naturalWidth, h = img.naturalHeight;
           var tw = w, th = h;
@@ -599,27 +623,23 @@
               tw = Math.round(w * (settings.maxDim / h));
             }
           }
-          var canvas = document.createElement('canvas');
-          canvas.width = tw;
-          canvas.height = th;
-          var ctx = canvas.getContext('2d');
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = 'high';
-          ctx.drawImage(img, 0, 0, tw, th);
+          // pica (MIT) does a proper multi-step resample; the browser's
+          // drawImage() bilinear filter visibly softens a large downscale.
+          var canvas = await window.weddingAITool.resizeCanvas(img, tw, th);
           var blob = await window.weddingAITool.canvasToBlob(canvas, settings.format, settings.quality);
-          if (!blob || blob.size === 0) throw new Error('转换结果为空文件。请尝试降低画质。');
+          if (!blob || blob.size === 0) throw new Error('Conversion returned an empty file. Try a lower quality.');
           entry.output = blob;
           entry.sizes.out = blob.size;
           entry.status = 'done';
           entry.outputName = window.weddingAITool.safeFileName(entry.name, '.jpg');
           // free the loaded image
-          URL.revokeObjectURL(loaded.url);
+          loaded.release();
         } catch (err) {
           entry.status = 'error';
           var rawMsg = (err && err.message) ? err.message : String(err);
           // Surface a friendlier message for the common browser-limitation case
           if (/decode|HEIC|HEIF/i.test(rawMsg)) {
-            entry.error = '您的浏览器无法解码 HEIC。请在 Safari 中打开本页面，或在 iPhone 设置 → 照片中预转。';
+            entry.error = window.weddingAITool.t('heicDecodeFailed', 'Could not decode this HEIC/HEIF file.');
           } else {
             entry.error = rawMsg;
           }
@@ -642,9 +662,9 @@
         var doneCount = files.filter(function (f) { return f.status === 'done' && f.output; }).length;
         var errCount = files.filter(function (f) { return f.status === 'error'; }).length;
         if (errCount > 0 && doneCount === 0) {
-          window.weddingAITool.toast('没有文件被转换 — 您的浏览器可能无法解码 HEIC。请改用 Safari。', 'error');
+          window.weddingAITool.toast(window.weddingAITool.t('heicDecodeFailed', 'No files converted — this HEIC/HEIF file could not be decoded.'), 'error');
         } else {
-          window.weddingAITool.toast('转换完成。');
+          window.weddingAITool.toast(window.weddingAITool.t('heicComplete', 'Conversion complete.'), 'success');
         }
       }
 
@@ -655,12 +675,13 @@
         var origTotal = done.reduce(function (s, f) { return s + f.sizes.orig; }, 0);
         var outTotal = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
         summaryEl.hidden = false;
+        var T = window.weddingAITool.t;
         summaryEl.innerHTML =
           (done.length > 0
-            ? '<div><strong>' + done.length + '</strong> 张已转为 JPG</div>' +
-              '<div><strong>现总大小：</strong> ' + window.weddingAITool.formatBytes(outTotal) + '（原 HEIC：' + window.weddingAITool.formatBytes(origTotal) + '）</div>'
-            : '<div style="color:#b00020"><strong>0 张转换成功</strong> — 您的浏览器很可能无法解码 HEIC。</div>') +
-          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' 张失败</strong> — 多为浏览器限制所致，请参考上方说明。</div>' : '');
+            ? '<div><strong>' + done.length + '</strong> ' + T('heicConvertedToJpg', 'converted to JPG') + '</div>' +
+              '<div><strong>' + T('heicTotalNow', 'Total now:') + '</strong> ' + window.weddingAITool.formatBytes(outTotal) + ' (was ' + window.weddingAITool.formatBytes(origTotal) + ' HEIC)</div>'
+            : '<div style="color:#b00020"><strong>0</strong> ' + T('heicZeroConverted', 'converted — this file could not be decoded.') + '</div>') +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + '</strong> ' + T('heicErrored', 'errored — this file could not be decoded.') + '</div>' : '');
       }
 
       function saveAll() {
@@ -669,7 +690,7 @@
           .map(function (f) { return { name: f.outputName, blob: f.output }; });
         if (outputs.length === 0) return;
         window.weddingAITool.downloadZip(outputs, 'heic_converted');
-        window.weddingAITool.toast('正在保存 ' + outputs.length + ' 个文件\u2026');
+        window.weddingAITool.toast(window.weddingAITool.t('heicSaving', 'Saving {n} file(s)…', { n: outputs.length }), 'success');
       }
 
       // wire up

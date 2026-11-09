@@ -60,9 +60,9 @@
     });
     </script>
     
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
     <link rel="stylesheet" href="/styles/i18n.css">
-<script defer src="/js/main.min.js?v=3.20"></script>
+<script defer src="/js/main.min.js?v=3.22"></script>
     <style>
         .page-hero-bg { background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%); }
         .page-hero-overlay { background: rgba(0,0,0,0.4); }
@@ -87,7 +87,7 @@
     <meta name="twitter:description" content="Ready to restore or create your wedding video? Submit your request and get a free personalized quote within 24 hours. No commitment!">
     <meta name="twitter:image" content="https://weddingai.video/images/order-form-mockup.png">
 <script src="/js/langs.js" defer></script>
-<script src="/js/i18n.js?v=4.28" defer></script>
+<script src="/js/i18n.js?v=4.29" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
@@ -224,6 +224,21 @@ if ('serviceWorker' in navigator) {
                     <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
                     <div id="form-error" class="form-error" role="alert" aria-live="assertive"></div>
 
+                    <!-- Runtime copy for this form's own validation messages.
+                         The middleware translates these server-side, so the
+                         shared script never has to load a dictionary to show
+                         them in the visitor's language. -->
+                    <div data-copy-set hidden>
+                        <span data-copy="required" data-i18n="order.validation.is_required.zzzzzz1">{field} is required</span>
+                        <span data-copy="invalidEmail" data-i18n="order.validation.invalid_email.zzzzzz2">Please enter a valid email address</span>
+                        <span data-copy="errorPrefix" data-i18n="order.validation.error_prefix.zzzzzz3">Please fix the following: </span>
+                        <span data-copy="errorSeparator" data-i18n="order.validation.error_separator.zzzzzz4">; </span>
+                        <span data-copy="sending" data-i18n="order.validation.sending.zzzzzz5">Sending your request…</span>
+                        <span data-copy="sendingButton" data-i18n="order.validation.sending_button.zzzzzz6">Sending…</span>
+                        <span data-copy="fillInPrefix" data-i18n="order.validation.fill_in_prefix.zzzzzz7">Please fill in: </span>
+                        <span data-copy="fillInSeparator" data-i18n="order.validation.fill_in_separator.zzzzzz8">, </span>
+                    </div>
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name" data-i18n="order.label_text.your_name.zzzzzz1">Your Name <span class="required-mark" aria-hidden="true">*</span></label>
@@ -335,6 +350,12 @@ if ('serviceWorker' in navigator) {
                     //   - Moves focus to the first invalid field for keyboard users
                     //   - Clears both on input (so the error vanishes as the user types)
                     // Form still submits normally on pass; we never preventDefault on success.
+                    // Runtime copy, translated by the middleware into the
+                    // hidden [data-copy-set] block further up this form.
+                    function copyOf(name, fallback) {
+                        var el = document.querySelector('[data-copy-set] [data-copy="' + name + '"]');
+                        return el ? el.textContent : fallback;
+                    }
                     var form = document.querySelector('form.order-form');
                     if (!form) return;
                     var errorEl = document.getElementById('form-error');
@@ -363,7 +384,7 @@ if ('serviceWorker' in navigator) {
                         if (invalid.length > 0) {
                             e.preventDefault();
                             if (errorEl) {
-                                errorEl.textContent = 'Please fill in: ' + invalid.join(', ');
+                                errorEl.textContent = copyOf('fillInPrefix', 'Please fill in: ') + invalid.join(copyOf('fillInSeparator', ', '));
                             }
                             var first = form.querySelector('[aria-invalid="true"]');
                             if (first) first.focus();
@@ -374,35 +395,45 @@ if ('serviceWorker' in navigator) {
 
                 <script>
                 (function() {
-                    // Each entry: price + delivery (still hardcoded en), best-for-key (i18n key) + best-for-en (fallback if dict missing).
+                    // Each entry: price (a currency, formatted by the middleware),
+                    // delivery + best-for, each with an i18n KEY and an English
+                    // fallback used when the dictionary has no entry yet.
+                    //
+                    // The delivery values reuse the pricing page's own delivery
+                    // strings (pricing.td_text.3ndash5_days and friends), so a
+                    // visitor sees the SAME wording on /pricing/ and on the
+                    // order form - and in their own language.
                     var HINTS = {
-                        'vintage-restoration': {price:'$9.9',  delivery:'5&ndash;7 days',  'best-for-key':'pricing.td_text.30_year_old_vhs_8mm_hi8_tapes.zzzzzz3',          'best-for-en':'30-year-old VHS, 8mm, Hi8 wedding tapes<br>Parents&rsquo; or grandparents&rsquo; wedding memories<br>Anniversary &amp; family legacy films'},
-                        'slow-motion':         {price:'$9.9',  delivery:'48&ndash;72 hrs', 'best-for-key':'pricing.td_text.first_dance_vows_ring_closeups.0bae226e',     'best-for-en':'First dance, vows, ring close-ups<br>4x&ndash;8x slow-motion playback<br>Cinematic emotional moments'},
-                        'family-message':      {price:'$9.9',  delivery:'5&ndash;7 days',  'best-for-key':'pricing.td_text.family_abroad_blended_ceremonies.4704defa',   'best-for-en':'Family abroad, blended ceremonies<br>Remote relatives who can&rsquo;t attend in person<br>Multi-generational wedding toasts'},
-                        'family-tribute':      {price:'$9.9',  delivery:'7&ndash;10 days', 'best-for-key':'pricing.td_text.honoring_a_loved_one_who_has_passed.9fa396ba', 'best-for-en':'Honoring a loved one who has passed<br>Memorial anniversary films<br>Wedding tribute &amp; memorial speeches'},
-                        'ai-video-generator':  {price:'$9.9',  delivery:'3&ndash;5 days',  'best-for-key':'pricing.td_text.photos_turned_into_a_cinematic_film.2cdbc4d7','best-for-en':'Photos turned into a cinematic film<br>Still photos only &rarr; motion video<br>Travel / engagement / proposal montages'},
-                        'wedding-trailer':     {price:'$9.9',  delivery:'3&ndash;5 days',  'best-for-key':'pricing.td_text.60ndash180_sec_socialready_highlight.719eb502', 'best-for-en':'60&ndash;180 sec social-ready highlight<br>Wedding trailer &amp; invite teaser<br>Reception opening screen on the big day'},
-                        'pet-wedding':         {price:'$9.9',  delivery:'3&ndash;5 days',  'best-for-key':'pricing.td_text.including_pets_in_the_celebration.021ceeda', 'best-for-en':'Including pets in the celebration<br>Pets as ring bearer / flower &ldquo;pawler&rdquo;<br>Heartwarming, fun wedding moments'},
-                        'multilingual':        {price:'$9.9',  delivery:'3&ndash;5 days',  'best-for-key':'pricing.td_text.multilanguage_families.e053d8ba',           'best-for-en':'Multi-language families<br>Bilingual &amp; cross-border weddings<br>Live broadcast for overseas guests'},
-                        'cartoon-style':       {price:'$9.9',  delivery:'5&ndash;7 days',  'best-for-key':'pricing.td_text.ghibli__pixar__anime_style_of_your_day.34dffac0', 'best-for-en':'Ghibli / Pixar / anime style of your day<br>Wedding invites &amp; reception short clips<br>Stylized animated keepsake'},
-                        'meme-generator':      {price:'$9.9',  delivery:'48 hrs',        'best-for-key':'pricing.td_text.group_chat_amp_social_shareables.3ef0cfcf', 'best-for-en':'Group chat &amp; social shareables<br>Wedding highlight memes &amp; reaction GIFs<br>Vertical short-video clips (Reels / TikTok / Shorts)'},
-                        'other':               {price:'$9.9',  delivery:'Reply within 24 hrs', 'best-for-en':'Not sure yet &mdash; Sofia will recommend the best fit'}
+                        'vintage-restoration': {price:'$9.9',  delivery:'5&ndash;7 days',  'delivery-key':'pricing.td_text.5ndash7_days.4364bb34',            'best-for-key':'pricing.td_text.30_year_old_vhs_8mm_hi8_tapes.zzzzzz3',          'best-for-en':'30-year-old VHS, 8mm, Hi8 wedding tapes<br>Parents&rsquo; or grandparents&rsquo; wedding memories<br>Anniversary &amp; family legacy films'},
+                        'slow-motion':         {price:'$9.9',  delivery:'48&ndash;72 hrs', 'delivery-key':'pricing.td_text.48ndash72_hrs.0f68d984',            'best-for-key':'pricing.td_text.first_dance_vows_ring_closeups.0bae226e',     'best-for-en':'First dance, vows, ring close-ups<br>4x&ndash;8x slow-motion playback<br>Cinematic emotional moments'},
+                        'family-message':      {price:'$9.9',  delivery:'5&ndash;7 days',  'delivery-key':'pricing.td_text.5ndash7_days.4364bb34',            'best-for-key':'pricing.td_text.family_abroad_blended_ceremonies.4704defa',   'best-for-en':'Family abroad, blended ceremonies<br>Remote relatives who can&rsquo;t attend in person<br>Multi-generational wedding toasts'},
+                        'family-tribute':      {price:'$9.9',  delivery:'7&ndash;10 days', 'delivery-key':'pricing.td_text.7ndash10_days.499c33ea',           'best-for-key':'pricing.td_text.honoring_a_loved_one_who_has_passed.9fa396ba', 'best-for-en':'Honoring a loved one who has passed<br>Memorial anniversary films<br>Wedding tribute &amp; memorial speeches'},
+                        'ai-video-generator':  {price:'$9.9',  delivery:'3&ndash;5 days',  'delivery-key':'pricing.td_text.3ndash5_days.220eca3e',            'best-for-key':'pricing.td_text.photos_turned_into_a_cinematic_film.2cdbc4d7','best-for-en':'Photos turned into a cinematic film<br>Still photos only &rarr; motion video<br>Travel / engagement / proposal montages'},
+                        'wedding-trailer':     {price:'$9.9',  delivery:'3&ndash;5 days',  'delivery-key':'pricing.td_text.3ndash5_days.220eca3e',            'best-for-key':'pricing.td_text.60ndash180_sec_socialready_highlight.719eb502', 'best-for-en':'60&ndash;180 sec social-ready highlight<br>Wedding trailer &amp; invite teaser<br>Reception opening screen on the big day'},
+                        'pet-wedding':         {price:'$9.9',  delivery:'3&ndash;5 days',  'delivery-key':'pricing.td_text.3ndash5_days.220eca3e',            'best-for-key':'pricing.td_text.including_pets_in_the_celebration.021ceeda', 'best-for-en':'Including pets in the celebration<br>Pets as ring bearer / flower &ldquo;pawler&rdquo;<br>Heartwarming, fun wedding moments'},
+                        'multilingual':        {price:'$9.9',  delivery:'3&ndash;5 days',  'delivery-key':'pricing.td_text.3ndash5_days.220eca3e',            'best-for-key':'pricing.td_text.multilanguage_families.e053d8ba',           'best-for-en':'Multi-language families<br>Bilingual &amp; cross-border weddings<br>Live broadcast for overseas guests'},
+                        'cartoon-style':       {price:'$9.9',  delivery:'5&ndash;7 days',  'delivery-key':'pricing.td_text.5ndash7_days.4364bb34',            'best-for-key':'pricing.td_text.ghibli__pixar__anime_style_of_your_day.34dffac0', 'best-for-en':'Ghibli / Pixar / anime style of your day<br>Wedding invites &amp; reception short clips<br>Stylized animated keepsake'},
+                        'meme-generator':      {price:'$9.9',  delivery:'48 hrs',        'delivery-key':'pricing.td_text.48_hrs.7ede133f',                  'best-for-key':'pricing.td_text.group_chat_amp_social_shareables.3ef0cfcf', 'best-for-en':'Group chat &amp; social shareables<br>Wedding highlight memes &amp; reaction GIFs<br>Vertical short-video clips (Reels / TikTok / Shorts)'},
+                        'other':               {price:'$9.9',  delivery:'Reply within 24 hrs', 'delivery-key':'pricing.td_text.reply_within_24_hrs.zzzzzz1',            'best-for-key':'pricing.td_text.not_sure_yet_sofia_recommends.zzzzzz1',  'best-for-en':'Not sure yet &mdash; Sofia will recommend the best fit'}
                     };
                     var lang = (document.documentElement.lang || 'en').split('-')[0].toLowerCase();
                     var i18nDict = null;
-                    // Load current-lang i18n JSON. en ships the keys inline (filled by us),
-                    // but we still fetch en.json so the source of truth is consistent.
+                    // Load ONLY the namespace shard this page needs.
+                    //
+                    // This used to fetch the WHOLE per-language dictionary -
+                    // 16.4 MB for hi, 14.3 MB for th - just to read a dozen
+                    // strings. The shard holding them is a few KB.
                     function loadI18n() {
                         if (!lang) return Promise.resolve(null);
-                        return fetch('/i18n/' + lang + '.json?v=4.26', { credentials: 'omit' })
+                        var url = '/i18n/shards/' + lang + '/pricing.td_text.json?v=4.27';
+                        return fetch(url, { credentials: 'omit' })
                             .then(function(r) { return r.ok ? r.json() : null; })
                             .then(function(d) { i18nDict = d; })
                             .catch(function() { /* keep null, fall back to en */ });
                     }
-                    function lookupBestFor(h) {
-                        var k = h['best-for-key'];
-                        if (k && i18nDict && i18nDict[k] != null) return i18nDict[k];
-                        return h['best-for-en'] || '';
+                    function lookup(key, fallback) {
+                        if (key && i18nDict && i18nDict[key] != null) return i18nDict[key];
+                        return fallback || '';
                     }
                     var sel = document.getElementById('service');
                     var hint = document.getElementById('service-hint');
@@ -412,13 +443,13 @@ if ('serviceWorker' in navigator) {
                         var h = HINTS[v];
                         if (!h) { hint.style.display = 'none'; return; }
                         hint.querySelector('[data-field="price"]').innerHTML = h.price;
-                        hint.querySelector('[data-field="delivery"]').innerHTML = h.delivery;
-                        hint.querySelector('[data-field="best-for"]').innerHTML = lookupBestFor(h);
+                        hint.querySelector('[data-field="delivery"]').innerHTML = lookup(h['delivery-key'], h.delivery);
+                        hint.querySelector('[data-field="best-for"]').innerHTML = lookup(h['best-for-key'], h['best-for-en']);
                         hint.style.display = 'block';
                     }
                     sel.addEventListener('change', update);
                     // First paint: try once with whatever we have (will use en fallback),
-                    // then re-render after the i18n JSON arrives.
+                    // then re-render after the i18n shard arrives.
                     update();
                     loadI18n().then(update);
                 })();

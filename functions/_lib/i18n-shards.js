@@ -146,7 +146,17 @@ async function fetchShard(origin, lang, version, file) {
 
 // Returns a dictionary holding ONLY the keys this page needs, or null when
 // the shards cannot serve it (caller falls back to the full dictionary).
-export async function loadI18nShards(origin, lang, version, html) {
+//
+// extraNamespaces (added 2026-11-09): namespaces to load in ADDITION to the
+// ones the page's own data-i18n attributes name. The tool pages need
+// "tools.copy" because js/tools/common.js creates buttons and raises toasts
+// at RUNTIME - after the middleware has already rewritten the static HTML -
+// so those strings cannot be resolved by the data-i18n mechanism. The
+// middleware injects that namespace as window.__WA_I18N__ instead.
+//
+// The extra namespaces are added only to the per-namespace path, AFTER the
+// bundle lookup, so the blog hub's bundle id is unchanged.
+export async function loadI18nShards(origin, lang, version, html, extraNamespaces) {
     const manifest = await loadManifest(origin, lang, version);
     if (!manifest) return null;
 
@@ -174,7 +184,10 @@ export async function loadI18nShards(origin, lang, version, html) {
     // ---- per-namespace shards --------------------------------------------
     const files = [];
     const seen = new Set();
-    for (const ns of nsList) {
+    const allNamespaces = extraNamespaces && extraNamespaces.length
+        ? [...nsList, ...extraNamespaces]
+        : nsList;
+    for (const ns of allNamespaces) {
         const list = manifest[ns];
         if (!Array.isArray(list)) continue;
         for (const f of list) {

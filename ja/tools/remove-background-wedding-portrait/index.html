@@ -31,11 +31,11 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI 工具">
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -104,6 +104,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ywxiu97hg8");
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">メインコンテンツにスキップ</a>
@@ -193,7 +202,15 @@
             <div class="wa-tool-card">
                 <h2 data-i18n="tools.remove-background-wedding-portrait.h2_text.602972ad">2. 背景颜色与控制</h2>
                 <div class="wa-tool-controls">
-                    <div class="wa-tool-control">
+                                        <div class="wa-tool-control">
+                        <label for="method" data-i18n="tools.copy.bgMethod.zzzzzz7a01">Background removal method</label>
+                        <select id="method">
+                            <option value="key" selected data-i18n="tools.copy.bgMethodColor.zzzzzz7a02">Smart colour key (instant, no download)</option>
+                            <option value="ai" data-i18n="tools.copy.bgMethodAi.zzzzzz7a03">AI matting (MODNet - one-time ~17 MB download, runs on your device)</option>
+                        </select>
+                        <small data-i18n="tools.copy.aiModelNotice.zzzzzz4c5d">The first AI run downloads the model (~17 MB) once and then works offline.</small>
+                    </div>
+<div class="wa-tool-control">
                         <label for="bg-color" data-i18n="tools.remove-background-wedding-portrait.label_text.4573a758">背景颜色</label>
                         <div class="wa-tool-color-row">
                             <input type="color" id="bg-color" value="#FFFFFF">
@@ -499,11 +516,13 @@
       var clearBtn = document.getElementById('clear-btn');
       var bgColorEl = document.getElementById('bg-color');
       var bgColorHex = document.getElementById('bg-color-hex');
+      var sampleBgBtn = document.getElementById('sample-bg-btn');
       var toleranceEl = document.getElementById('tolerance');
       var toleranceVal = document.getElementById('tolerance-val');
       var featherEl = document.getElementById('feather');
       var featherVal = document.getElementById('feather-val');
       var outputModeEl = document.getElementById('output-mode');
+      var methodEl = document.getElementById('method');
 
       var files = [];
 
@@ -512,6 +531,13 @@
         list.hidden = files.length === 0;
         runBtn.disabled = files.length === 0 || files.every(function (f) { return f.status === 'done' || f.status === 'working'; });
         saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        // Bug #12 fix: Sample-from-corners button enables as soon as any file
+        // is queued (uses the first file's image). Disable when no files or
+        // during processing — sampling mid-process could race with re-render.
+        if (sampleBgBtn) {
+          var hasFile = files.some(function (f) { return f.inputFile; });
+          sampleBgBtn.disabled = !hasFile;
+        }
         if (window.weddingAITool && window.weddingAITool.renderFileList) {
           window.weddingAITool.renderFileList(list, files, function () {});
           Array.prototype.forEach.call(list.children, function (row, i) {
@@ -535,7 +561,7 @@
             error: null,
           });
         });
-        if (files.length === 0) { window.weddingAITool.toast('没有支持的文件。请用 JPG、PNG 或 WebP。', 'error'); return; }
+        if (files.length === 0) { window.weddingAITool.toast('No supported files. Try a JPG, PNG, or WebP.', 'error'); return; }
         files.forEach(function (entry) {
           if (entry.previewUrl) return;
           entry.previewUrl = URL.createObjectURL(entry.inputFile);
@@ -567,10 +593,93 @@
         var bg = hexToRgb(bgColorEl.value);
         return {
           bg: bg,
+          bgHex: bgColorEl.value,
+          method: methodEl ? methodEl.value : 'key',
           tolerance: parseInt(toleranceEl.value, 10),
           feather: parseInt(featherEl.value, 10),
           mode: outputModeEl.value, // 'png' or 'jpg'
         };
+      }
+
+      // The colour key: strip every pixel that sits close to the sampled
+      // backdrop colour. Instant and free, but it can only remove a
+      // background it was told about - which is why the AI path exists.
+      function colorKeyCanvas(img, w, h, settings) {
+        var canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        var ctx = canvas.getContext('2d', { willReadFrequently: true });
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.clearRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0);
+
+        var imageData = ctx.getImageData(0, 0, w, h);
+        var data = imageData.data;
+        var bgR = settings.bg.r, bgG = settings.bg.g, bgB = settings.bg.b;
+        var tol = settings.tolerance;
+        var feather = settings.feather;
+        var innerT = tol;
+        // Feather band width: ~8 RGB units per 1 px of feathering (tunable constant)
+        var outerT = tol + feather * 8;
+        var bandWidth = outerT - innerT;
+        var mode = settings.mode;
+
+        // Single-pass pixel loop. Math.sqrt is the only expensive op here.
+        for (var i = 0; i < data.length; i += 4) {
+          var dr = data[i]     - bgR;
+          var dg = data[i + 1] - bgG;
+          var db = data[i + 2] - bgB;
+          var dist = Math.sqrt(dr * dr + dg * dg + db * db);
+          var alpha;
+          if (dist <= innerT) {
+            alpha = 0;
+          } else if (dist < outerT) {
+            alpha = Math.round(((dist - innerT) / bandWidth) * 255);
+          } else {
+            alpha = 255;
+          }
+          if (mode === 'png') {
+            // Multiply alpha into existing alpha (preserve any pre-existing transparency in source)
+            var prevA = data[i + 3];
+            data[i + 3] = Math.round((prevA / 255) * alpha);
+          } else {
+            // JPG mode: where we'd be transparent, fill with white
+            if (alpha < 255) {
+              // partial fade: blend toward white by (1 - alpha/255)
+              var k = 1 - (alpha / 255);
+              data[i]     = Math.round(data[i]     * (1 - k) + 255 * k);
+              data[i + 1] = Math.round(data[i + 1] * (1 - k) + 255 * k);
+              data[i + 2] = Math.round(data[i + 2] * (1 - k) + 255 * k);
+            }
+            data[i + 3] = 255;
+          }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+        return canvas;
+      }
+
+      // The AI path: MODNet predicts a matte for the subject, and the matte
+      // becomes the alpha channel. The backdrop colour is only used to fill
+      // the JPG output - PNG keeps the transparency.
+      async function aiMatteCanvas(img, w, h, settings) {
+        if (!window.weddingAITool.removeBackgroundAi) {
+          throw new Error(window.weddingAITool.t
+            ? window.weddingAITool.t('aiRemoveFailed', 'Could not remove the background')
+            : 'Could not remove the background');
+        }
+        var matte = await window.weddingAITool.removeBackgroundAi(img);
+        var canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        var ctx = canvas.getContext('2d');
+        if (settings.mode === 'jpg') {
+          ctx.fillStyle = settings.bgHex;
+          ctx.fillRect(0, 0, w, h);
+        }
+        ctx.drawImage(matte, 0, 0);
+        return canvas;
       }
 
       async function processOne(entry, settings) {
@@ -583,64 +692,21 @@
           var img = loaded.img;
           var w = img.naturalWidth, h = img.naturalHeight;
 
-          // Paint the original image (with its own alpha) onto the working canvas
-          var canvas = document.createElement('canvas');
-          canvas.width = w;
-          canvas.height = h;
-          var ctx = canvas.getContext('2d', { willReadFrequently: true });
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = 'high';
-          ctx.clearRect(0, 0, w, h);
-          ctx.drawImage(img, 0, 0);
-
-          var imageData = ctx.getImageData(0, 0, w, h);
-          var data = imageData.data;
-          var bgR = settings.bg.r, bgG = settings.bg.g, bgB = settings.bg.b;
-          var tol = settings.tolerance;
-          var feather = settings.feather;
-          var innerT = tol;
-          // Feather band width: ~8 RGB units per 1 px of feathering (tunable constant)
-          var outerT = tol + feather * 8;
-          var bandWidth = outerT - innerT;
           var mode = settings.mode;
-
-          // Single-pass pixel loop. Math.sqrt is the only expensive op here.
-          for (var i = 0; i < data.length; i += 4) {
-            var dr = data[i]     - bgR;
-            var dg = data[i + 1] - bgG;
-            var db = data[i + 2] - bgB;
-            var dist = Math.sqrt(dr * dr + dg * dg + db * db);
-            var alpha;
-            if (dist <= innerT) {
-              alpha = 0;
-            } else if (dist < outerT) {
-              alpha = Math.round(((dist - innerT) / bandWidth) * 255);
-            } else {
-              alpha = 255;
-            }
-            if (mode === 'png') {
-              // Multiply alpha into existing alpha (preserve any pre-existing transparency in source)
-              var prevA = data[i + 3];
-              data[i + 3] = Math.round((prevA / 255) * alpha);
-            } else {
-              // JPG mode: where we'd be transparent, fill with white
-              if (alpha < 255) {
-                // partial fade: blend toward white by (1 - alpha/255)
-                var k = 1 - (alpha / 255);
-                data[i]     = Math.round(data[i]     * (1 - k) + 255 * k);
-                data[i + 1] = Math.round(data[i + 1] * (1 - k) + 255 * k);
-                data[i + 2] = Math.round(data[i + 2] * (1 - k) + 255 * k);
-              }
-              data[i + 3] = 255;
-            }
+          var canvas;
+          if (settings.method === 'ai') {
+            window.weddingAITool.toast(
+              window.weddingAITool.t('aiModelLoading', 'Loading the AI model...'),
+              'success');
+            canvas = await aiMatteCanvas(img, w, h, settings);
+          } else {
+            canvas = colorKeyCanvas(img, w, h, settings);
           }
-
-          ctx.putImageData(imageData, 0, 0);
 
           var mime = (mode === 'jpg') ? 'image/jpeg' : 'image/png';
           var quality = (mode === 'jpg') ? 0.92 : undefined;
           var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
-          if (!blob || blob.size === 0) throw new Error('背景去除返回了空文件。请尝试其他输出格式。');
+          if (!blob || blob.size === 0) throw new Error('Background removal returned an empty file. Try a different mode.');
           entry.output = blob;
           entry.sizes.out = blob.size;
           entry.status = 'done';
@@ -664,7 +730,7 @@
         }
         runBtn.disabled = false;
         saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
-        window.weddingAITool.toast('背景去除完成。');
+        window.weddingAITool.toast('Background removal complete.');
       }
 
       function saveAllDownloads() {
@@ -673,7 +739,7 @@
           .map(function (f) { return { name: f.outputName, blob: f.output }; });
         if (outputs.length === 0) return;
         window.weddingAITool.downloadZip(outputs, 'nobg');
-        window.weddingAITool.toast('正在保存 ' + outputs.length + ' 个文件…');
+        window.weddingAITool.toast('Saving ' + outputs.length + ' file' + (outputs.length === 1 ? '' : 's') + '…');
       }
 
       // ---------- wire up ---------------------------------------------------------
@@ -685,6 +751,19 @@
         multiple: true,
         onFiles: addFiles,
       });
+
+      // The tolerance and feather sliders only drive the colour key.
+      function syncMethodControls() {
+        var isAi = methodEl && methodEl.value === 'ai';
+        toleranceEl.disabled = isAi;
+        featherEl.disabled = isAi;
+        toleranceEl.parentNode.style.opacity = isAi ? '0.45' : '1';
+        featherEl.parentNode.style.opacity = isAi ? '0.45' : '1';
+      }
+      if (methodEl) {
+        methodEl.addEventListener('change', syncMethodControls);
+        syncMethodControls();
+      }
 
       toleranceEl.addEventListener('input', function () { toleranceVal.textContent = toleranceEl.value; });
       featherEl.addEventListener('input', function () { featherVal.textContent = featherEl.value; });
@@ -725,6 +804,54 @@
       runBtn.addEventListener('click', runAll);
       saveAllBtn.addEventListener('click', saveAllDownloads);
       clearBtn.addEventListener('click', clearAll);
+
+      // Bug #12 fix: Sample the average backdrop color from the 4 corners
+      // of the first uploaded image. Heuristic, not magic — assumes backdrop
+      // reaches the edges (true for most studio shots) and that the couple
+      // doesn't extend into a corner. For complex compositions, prefer the
+      // color picker or a preset.
+      if (sampleBgBtn) {
+        sampleBgBtn.addEventListener('click', function () {
+          var first = files.find(function (f) { return f.inputFile; });
+          if (!first) return;
+          var T = window.weddingAITool;
+          if (!T) return;
+          T.fileToImage(first.inputFile).then(function (res) {
+            var img = res.img;
+            var w = img.naturalWidth, h = img.naturalHeight;
+            var corner = Math.max(8, Math.round(Math.min(w, h) * 0.05)); // ~5% of short side, min 8px
+            var canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            // Sample 4 corners, average per-channel.
+            var r = 0, g = 0, b = 0, n = 0;
+            [
+              [0, 0],
+              [w - corner, 0],
+              [0, h - corner],
+              [w - corner, h - corner],
+            ].forEach(function (xy) {
+              var data = ctx.getImageData(xy[0], xy[1], corner, corner).data;
+              for (var i = 0; i < data.length; i += 4) {
+                r += data[i]; g += data[i + 1]; b += data[i + 2]; n++;
+              }
+            });
+            URL.revokeObjectURL(res.url);
+            if (n === 0) return;
+            var avgR = Math.round(r / n), avgG = Math.round(g / n), avgB = Math.round(b / n);
+            var hex = '#' + [avgR, avgG, avgB].map(function (c) {
+              var s = c.toString(16); return s.length === 1 ? '0' + s : s;
+            }).join('').toUpperCase();
+            bgColorEl.value = hex;
+            bgColorHex.value = hex;
+            syncPresetButtons(hex);
+            if (T.toast) T.toast('Sampled backdrop color ' + hex + ' from 4 corners', 'success');
+          }).catch(function (err) {
+            if (T.toast) T.toast(err.message || 'Could not sample color', 'error');
+          });
+        });
+      }
 
       list.addEventListener('wa-row-remove', function (e) {
         var idx = parseInt((e.detail || '0'), 10);

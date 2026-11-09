@@ -31,11 +31,11 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI Werkzeuge">
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -97,6 +97,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ywxiu97hg8");
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
@@ -493,7 +502,7 @@
             error: null,
           });
         });
-        if (files.length === 0) { window.weddingAITool.toast('没有可处理的文件。请尝试 JPG、PNG 或 WebP。', 'error'); return; }
+        if (files.length === 0) { window.weddingAITool.toast('No supported files. Try a JPG, PNG, or WebP.', 'error'); return; }
         // Generate preview thumbnails (best-effort, run async)
         files.forEach(function (entry, idx) {
           if (entry.previewUrl) return;
@@ -532,44 +541,43 @@
           var tw = w, th = h;
           if (settings.maxDim > 0 && Math.max(w, h) > settings.maxDim) {
             if (w >= h) {
-              tw = Settings.maxDim;
+              tw = settings.maxDim;
               th = Math.round(h * (settings.maxDim / w));
-            } sonst {
-              th = Settings.maxDim;
+            } else {
+              th = settings.maxDim;
               tw = Math.round(w * (settings.maxDim / h));
             }
           }
-          var canvas = document.createElement('canvas');
-          canvas.width = tw;
-          canvas.height = th;
-          var ctx = canvas.getContext('2d');
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = 'high';
-          ctx.drawImage(img, 0, 0, tw, th);
-          var mime = Settings.format;
-          var qualität = Settings.quality;
-          // PNG ist verlustfrei, Qualität wird ignoriert
-          if (mime === 'image/png') qualität = undefiniert;
-          var blob = waiting window.weddingAITool.canvasToBlob(canvas, mime, quality);
-          if (!blob || blob.size === 0) throw new Error('Das Komprimierungsergebnis ist eine leere Datei. Bitte versuchen Sie es mit anderen Formaten.');
-          Eintrag.Ausgabe = Blob;
-          Eintrag.sizes.out = blob.size;
-          Eintrag.status = 'erledigt';
-          enter.outputName = window.weddingAITool.safeFileName(entry.name, '-min.' + (mime === 'image/png' ? 'png' : mime === 'image/webp' ? 'webp' : 'jpg'));
-          // das geladene Bild freigeben
+          // pica (MIT) does a proper multi-step resample. The browser's
+          // drawImage() bilinear filter visibly softens a large downscale -
+          // 6000 px down to 2048 px is exactly that case. pica is loaded on
+          // first use only, and common.js falls back to drawImage() when the
+          // WASM path is unavailable.
+          var canvas = await window.weddingAITool.resizeCanvas(img, tw, th);
+          var mime = settings.format;
+          var quality = settings.quality;
+          // PNG is lossless, quality is ignored
+          if (mime === 'image/png') quality = undefined;
+          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('Compression returned an empty file. Try a different format.');
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-min.' + (mime === 'image/png' ? 'png' : mime === 'image/webp' ? 'webp' : 'jpg'));
+          // free the loaded image
           URL.revokeObjectURL(loaded.url);
-        } fangen (irrt) {
-          Eintrag.status = 'Fehler';
-          enter.error = err && err.message ? err.message: String(err);
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
         }
         refreshUI();
       }
 
-      asynchrone Funktion runAll() {
-        var-Einstellungen = getCurrentSettings();
+      async function runAll() {
+        var settings = getCurrentSettings();
         runBtn.disabled = true;
-        // Sequentiell: Weniger Speicher für große Stapel
-        für (var i = 0; i< files.length; i++) {
+        // Sequential: easier on memory for huge batches
+        for (var i = 0; i < files.length; i++) {
           var f = files[i];
           if (f.status === 'done') continue;
           await processOne(f, settings);
@@ -577,7 +585,7 @@
         runBtn.disabled = false;
         saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
         renderSummary();
-        window.weddingAITool.toast('压缩完成。');
+        window.weddingAITool.toast('Compression complete.');
       }
 
       function renderSummary() {
@@ -590,27 +598,27 @@
         var ratio = origTotal > 0 ? (saved / origTotal * 100) : 0;
         summaryEl.hidden = false;
         summaryEl.innerHTML =
-          '<div><strong>' + done.length + '</strong>Zhang wurde komprimiert</div>' +
-          '<div><strong>Gesamteinsparungen:</strong> ' + window.weddingAITool.formatBytes(saved) + '（-' + ratio.toFixed(1) + '%）</div>' +
-          '<div><strong>Aktuelle Gesamtgröße:</strong>' + window.weddingAITool.formatBytes(outTotal) + ' (original ' + window.weddingAITool.formatBytes(origTotal) + ')</div>' +
-          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' Fehlgeschlagen</strong>— Bitte entfernen Sie es und versuchen Sie es erneut.</div>' : '');
+          '<div><strong>' + done.length + '</strong> compressed</div>' +
+          '<div><strong>Total saved:</strong> ' + window.weddingAITool.formatBytes(saved) + ' (-' + ratio.toFixed(1) + '%)</div>' +
+          '<div><strong>Total now:</strong> ' + window.weddingAITool.formatBytes(outTotal) + ' (was ' + window.weddingAITool.formatBytes(origTotal) + ')</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' errored</strong> — remove and retry.</div>' : '');
       }
 
-      Funktion saveAll() {
-        var-Ausgaben = Dateien
+      function saveAll() {
+        var outputs = files
           .filter(function (f) { return f.status === 'done' && f.output; })
           .map(function (f) { return { name: f.outputName, blob: f.output }; });
         if (outputs.length === 0) return;
         window.weddingAITool.downloadZip(outputs, 'compressed');
-        window.weddingAITool.toast('Speichern ' + Ausgaben.Länge + ' Dateien...');
+        window.weddingAITool.toast('Saving ' + outputs.length + ' file' + (outputs.length === 1 ? '' : 's') + '…');
       }
 
-      // verkabeln
+      // wire up
       window.weddingAITool.bindDropZone({
-        dropEl: Dropzone,
-        inputEl: Eingabe,
-        akzeptieren: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
-        mehrfach: wahr,
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
         onFiles: addFiles,
       });
 
@@ -619,7 +627,7 @@
       saveAllBtn.addEventListener('click', saveAll);
       clearBtn.addEventListener('click', clearAll);
 
-      list.addEventListener('wa-row-remove', Funktion (e) {
+      list.addEventListener('wa-row-remove', function (e) {
         var idx = parseInt((e.detail || '0'), 10);
         if (!isNaN(idx)) {
           var f = files[idx];
@@ -630,6 +638,7 @@
       });
 
       refreshUI();
-    });</script>
+    });
+    </script>
 </body>
 </html>

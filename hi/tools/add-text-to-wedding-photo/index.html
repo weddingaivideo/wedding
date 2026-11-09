@@ -31,11 +31,11 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI टूल्स">
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -175,6 +175,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ywxiu97hg8");
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">मुख्य सामग्री पर जाएँ</a>
@@ -667,8 +676,8 @@
       var previewEmpty = document.getElementById('preview-empty');
       var previewWrap = document.getElementById('preview-wrap');
 
-      var files = [];
-      var activeIndex = 0;
+      var files = [];           // [{ status, name, inputFile, sizes, output, outputName, previewUrl, img }]
+      var activeIndex = 0;        // which photo drives the live preview
       var renderTimer = null;
 
       // ---------- helpers ----------------------------------------------------------
@@ -687,6 +696,7 @@
         };
       }
 
+      // Position the (primary, secondary) pair as a block. Returns baseline Y for primary.
       function measureText(ctx, text, size, family) {
         ctx.font = size + 'px ' + family;
         var w = 0;
@@ -696,6 +706,7 @@
         return { width: w, ascent: size, lineHeight: Math.round(size * 1.18) };
       }
 
+      // Auto-shrink primary size so the rendered width fits the canvas with 8% padding.
       function fitSize(ctx, text, requestedSize, family, maxWidth) {
         var size = requestedSize;
         var minSize = 24;
@@ -707,6 +718,7 @@
         return minSize;
       }
 
+      // Draw text block onto ctx at the requested position. Returns nothing.
       function drawTextBlock(ctx, settings, canvasW, canvasH) {
         var family = fontStack(settings.fontName);
         var primary = settings.primary.trim();
@@ -741,6 +753,7 @@
             secondaryY = canvasH - padY;
           }
         } else {
+          // bottom-center (default)
           var gap = Math.round(canvasH * 0.04);
           if (primary && secondary) {
             secondaryY = canvasH - padY;
@@ -788,6 +801,7 @@
         previewCanvas.hidden = false;
 
         var img = entry.img;
+        // Cap preview display size to 720px longest edge; canvas pixels = image full size
         var maxEdge = 720;
         var scale = 1;
         if (Math.max(img.naturalWidth, img.naturalHeight) > maxEdge) {
@@ -814,136 +828,141 @@
 
       // ---------- file list -------------------------------------------------------
       function refreshUI() {
-        empty.hidden = files.length >0;
-        सूची.छिपी = फ़ाइलें.लंबाई === 0;
-        var hasRenderable =files.some(function (f) { return f.img; });
+        empty.hidden = files.length > 0;
+        list.hidden = files.length === 0;
+        var hasRenderable = files.some(function (f) { return f.img; });
         runBtn.disabled = !hasRenderable;
         saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
-        यदि (window.weddingAITool && window.weddingAITool.renderFileList) {
-          window.weddingAITool.renderFileList(सूची, फ़ाइलें, फ़ंक्शन () {});
-          Array.prototype.forEach.call(list.children, function (पंक्ति, i) {
-            यदि (i === सक्रिय इंडेक्स) row.classList.add('is-active');
-            window.weddingAITool.updateFileRow(पंक्ति, फ़ाइलें[i]);
-            यदि (i !== सक्रिय इंडेक्स) {
-              row.addEventListener('क्लिक', फ़ंक्शन (ev) {
-                यदि (ev.target.closest('बटन')) वापसी;
-                सक्रिय सूचकांक = मैं;
+        if (window.weddingAITool && window.weddingAITool.renderFileList) {
+          window.weddingAITool.renderFileList(list, files, function () {});
+          Array.prototype.forEach.call(list.children, function (row, i) {
+            // tag the active row for the preview
+            if (i === activeIndex) row.classList.add('is-active');
+            window.weddingAITool.updateFileRow(row, files[i]);
+            // wire click on the row (not the action button) to switch preview
+            if (i !== activeIndex) {
+              row.addEventListener('click', function (ev) {
+                if (ev.target.closest('button')) return;
+                activeIndex = i;
                 Array.prototype.forEach.call(list.children, function (r) { r.classList.remove('is-active'); });
                 row.classList.add('is-active');
-                रेंडरपूर्वावलोकन();
+                renderPreview();
               });
             }
           });
         }
       }
 
-      फ़ंक्शन ऐडफ़ाइलें(चुना गया) {
-        वर जोड़ा गया = 0;
-        उठाया गया। प्रत्येक के लिए (फ़ंक्शन (एफ) {
+      function addFiles(picked) {
+        var added = 0;
+        picked.forEach(function (f) {
           if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
-            वापसी;
+            return;
           }
-          फ़ाइलें.पुश({
-            स्थिति: 'कतारबद्ध',
-            नाम: एफ.नाम,
-            इनपुटफ़ाइल: एफ,
-            img: शून्य,
-            आकार: { मूल: f.आकार, बाहर: 0 },
-            आउटपुट: शून्य,
-            आउटपुटनाम: शून्य,
-            पूर्वावलोकनयूआरएल: URL.createObjectURL(f)
+          files.push({
+            status: 'queued',
+            name: f.name,
+            inputFile: f,
+            img: null,
+            sizes: { orig: f.size, out: 0 },
+            output: null,
+            outputName: null,
+            previewUrl: URL.createObjectURL(f)
           });
-          जोड़ा गया++;
+          added++;
         });
-        यदि (जोड़ा गया === 0) { window.weddingAITool.toast('यह फ़ाइल अभी तक समर्थित नहीं है। कृपया JPG, PNG या WebP आज़माएं।', 'त्रुटि'); वापस करना; }
-        var newStartIdx = फ़ाइलें.लंबाई - जोड़ा गया;
-        के लिए (var i = newStartIdx; i< files.length; i++) {
+        if (added === 0) { window.weddingAITool.toast('No supported files. Try a JPG, PNG, or WebP.', 'error'); return; }
+        // Async-decode all newly added entries (do not block addFiles)
+        var newStartIdx = files.length - added;
+        for (var i = newStartIdx; i < files.length; i++) {
           (function (idx) {
             window.weddingAITool.fileToImage(files[idx].inputFile).then(function (loaded) {
               files[idx].img = loaded.img;
               URL.revokeObjectURL(loaded.url);
-              if (idx === activeIndex || activeIndex >= फ़ाइलें.लंबाई - जोड़ा गया) {
-                यदि (idx === 0 || !files[activeIndex] || !files[activeIndex].img) {
-                  सक्रिय सूचकांक = आईडीएक्स;
+              if (idx === activeIndex || activeIndex >= files.length - added) {
+                // first decoded becomes the active preview
+                if (idx === 0 || !files[activeIndex] || !files[activeIndex].img) {
+                  activeIndex = idx;
                 }
-                रेंडरपूर्वावलोकन();
+                renderPreview();
               }
-              रिफ्रेशयूआई();
-            }).कैच(फ़ंक्शन (त्रुटि) {
-              फ़ाइलें[idx].status = 'त्रुटि';
-              फ़ाइलें[idx].error = err && err.message? err.message : स्ट्रिंग(त्रुटि);
-              रिफ्रेशयूआई();
+              refreshUI();
+            }).catch(function (err) {
+              files[idx].status = 'error';
+              files[idx].error = err && err.message ? err.message : String(err);
+              refreshUI();
             });
-          })(मैं);
+          })(i);
         }
-        रिफ्रेशयूआई();
+        refreshUI();
       }
 
-      फ़ंक्शन क्लियरऑल() {
-        फ़ाइलें.प्रत्येक के लिए(फ़ंक्शन (एफ) {
-          यदि (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+      function clearAll() {
+        files.forEach(function (f) {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
         });
-        फ़ाइलें = [];
-        सक्रिय सूचकांक = 0;
-        सारांशEl.hidden = सत्य;
-        पूर्वावलोकनEmpty.hidden = गलत;
-        पूर्वावलोकनकैनवस.छिपा हुआ = सत्य;
-        रिफ्रेशयूआई();
+        files = [];
+        activeIndex = 0;
+        summaryEl.hidden = true;
+        previewEmpty.hidden = false;
+        previewCanvas.hidden = true;
+        refreshUI();
       }
 
-      // -------- बैच रेंडर --------------------------------------------------
-      async फ़ंक्शन प्रोसेसवन(एंट्री, सेटिंग्स) {
-        प्रविष्टि.स्थिति = 'कार्यरत';
-        प्रविष्टि.त्रुटि = शून्य;
-        रिफ्रेशयूआई();
-        प्रयास करें {
-          अगर (!entry.img) {
-            var लोड किया गया = प्रतीक्षा करें window.weddingAITool.fileToImage(entry.inputFile);
-            प्रविष्टि.आईएमजी = लोडेड.आईएमजी;
+      // ---------- batch render ----------------------------------------------------
+      async function processOne(entry, settings) {
+        entry.status = 'working';
+        entry.error = null;
+        refreshUI();
+        try {
+          if (!entry.img) {
+            var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+            entry.img = loaded.img;
             URL.revokeObjectURL(loaded.url);
           }
-          var img = Entry.img;
-          var w = img.प्राकृतिक चौड़ाई, h = img.प्राकृतिक ऊँचाई;
-          var कैनवास = document.createElement('कैनवास');
-          कैनवास.चौड़ाई = डब्ल्यू;
-          कैनवास.ऊंचाई = एच;
-          var ctx = कैनवास.getContext('2d');
-          ctx.imageSmoothingEnabled = सत्य;
-          ctx.imageSmoothingQuality = 'उच्च';
+          var img = entry.img;
+          var w = img.naturalWidth, h = img.naturalHeight;
+          var canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
           ctx.drawImage(img, 0, 0, w, h);
-          ड्राटेक्स्टब्लॉक(सीटीएक्स, सेटिंग्स, डब्ल्यू, एच);
-          वर माइम = सेटिंग्स.प्रारूप;
-          var गुणवत्ता = (माइम === 'छवि/पीएनजी' || माइम === 'छवि/वेबपी')? अपरिभाषित : 0.92;
-          var बूँद = प्रतीक्षा window.weddingAITool.canvasToBlob(कैनवास, माइम, गुणवत्ता);
-          यदि (!blob || blob.size === 0) नई त्रुटि फेंकें ('रेंडरिंग परिणाम खाली है, कृपया अन्य प्रारूप आज़माएं।');
-          प्रविष्टि.आउटपुट = ब्लॉब;
-          प्रविष्टि.आकार.आउट = ब्लॉब.आकार;
-          प्रविष्टि.स्थिति = 'किया गया';
-          var ext = (माइम === 'छवि/पीएनजी')? 'पीएनजी': (माइम === 'इमेज/वेबपी')? 'वेबपी' : 'जेपीजी';
-          Entry.outputName = window.weddingAITool.safeFileName(entry.name, '-captioned.' + ext);
-          अगर (एंट्री.आउटपुट) {
-            Entry.previewUrl = URL.createObjectURL(entry.output);
+          drawTextBlock(ctx, settings, w, h);
+          var mime = settings.format;
+          var quality = (mime === 'image/png' || mime === 'image/webp') ? undefined : 0.92;
+          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('Render returned an empty file. Try a different format.');
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
+          var ext = (mime === 'image/png') ? 'png' : (mime === 'image/webp') ? 'webp' : 'jpg';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-captioned.' + ext);
+          // refresh row preview thumbnail to the new rendered image
+          if (entry.output) {
+            entry.previewUrl = URL.createObjectURL(entry.output);
           }
-        } पकड़ें (गलती से) {
-          प्रविष्टि.स्थिति = 'त्रुटि';
-          प्रविष्टि.त्रुटि = त्रुटि && त्रुटि.संदेश? err.message : स्ट्रिंग(त्रुटि);
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
         }
-        रिफ्रेशयूआई();
+        refreshUI();
       }
 
-      async फ़ंक्शन runAll() {
-        var सेटिंग्स = getSettings();
-        runBtn.अक्षम = सत्य;
-        के लिए (var i = 0; i< files.length; i++) {
+      async function runAll() {
+        var settings = getSettings();
+        runBtn.disabled = true;
+        for (var i = 0; i < files.length; i++) {
           var f = files[i];
           if (f.status === 'done') continue;
-          if (!f.img) continue;
+          if (!f.img) continue; // decode failed earlier; skip silently
           await processOne(f, settings);
         }
         runBtn.disabled = false;
         saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
         renderSummary();
-        window.weddingAITool.toast('渲染完成。');
+        window.weddingAITool.toast('Render complete.');
       }
 
       function renderSummary() {
@@ -954,10 +973,10 @@
         var outTotal = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
         summaryEl.hidden = false;
         summaryEl.innerHTML =
-          '<div><strong>' + done.length + '</strong>झांग ने पाठ जोड़ा है</div>' +
-          '<div><strong>मूल आकार:</strong> ' + window.weddingAITool.formatBytes(origTotal) + '</div>' +
-          '<div><strong>आउटपुट आकार:</strong> ' + window.weddingAITool.formatBytes(outTotal) + '</div>' +
-          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' झांग त्रुटि</strong>- कृपया हटाएं और पुनः प्रयास करें।</div>' : '');
+          '<div><strong>' + done.length + '</strong> captioned</div>' +
+          '<div><strong>Original total:</strong> ' + window.weddingAITool.formatBytes(origTotal) + '</div>' +
+          '<div><strong>Output total:</strong> ' + window.weddingAITool.formatBytes(outTotal) + '</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' errored</strong> — remove and retry.</div>' : '');
       }
 
       function saveAll() {
@@ -966,7 +985,7 @@
           .map(function (f) { return { name: f.outputName, blob: f.output }; });
         if (outputs.length === 0) return;
         window.weddingAITool.downloadZip(outputs, 'captioned');
-        window.weddingAITool.toast('正在保存 ' + outputs.length + ' 个文件…');
+        window.weddingAITool.toast('Saving ' + outputs.length + ' file' + (outputs.length === 1 ? '' : 's') + '…');
       }
 
       // ---------- wire up ---------------------------------------------------------
@@ -978,6 +997,7 @@
         onFiles: addFiles
       });
 
+      // live-preview triggers
       [primaryTextEl, secondaryTextEl, fontEl, positionEl, primarySizeEl, secondarySizeEl,
        colorEl, shadowToggleEl, shadowOffsetEl, formatEl].forEach(function (el) {
         el.addEventListener('input', function () {
@@ -989,6 +1009,7 @@
         el.addEventListener('change', schedulePreview);
       });
 
+      // color swatches
       Array.prototype.forEach.call(swatchRow.querySelectorAll('.wa-text-swatch'), function (sw) {
         sw.addEventListener('click', function () {
           var c = sw.getAttribute('data-color');
@@ -1000,6 +1021,7 @@
           schedulePreview();
         });
       });
+      // mark default swatch active on first paint
       var defaultSwatch = swatchRow.querySelector('.wa-text-swatch[data-color="' + colorEl.value + '"]');
       if (defaultSwatch) defaultSwatch.classList.add('is-active');
 

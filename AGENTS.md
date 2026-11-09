@@ -1479,3 +1479,698 @@ trailing comma.
 * `blog.*` and `services.*` still describe the AI video product's face
   detection. That is a server-side capability and cannot be verified from
   this repository, so it stays.
+
+## The cookie banner existed in TWO implementations (2026-11-02)
+
+### What was wrong
+
+`js/main.min.js` built its OWN hard-coded **English** banner with the id
+`wa-cookie-banner`. `js/cookie-consent.js` builds the **localized** one with
+the SAME id, and it guards on that id already existing:
+
+```js
+if (document.getElementById('wa-cookie-banner')) return;   // in render()
+```
+
+Every page lists `main.min.js` BEFORE `cookie-consent.js`, and both scripts
+are `defer` - so they execute in document order, and the **English** banner
+won on all 10 non-English sites. Consequences, proven by replaying the real
+load order for all 11 languages:
+
+* the localized dictionary was still FETCHED (`/i18n/cookie/<lang>.json`) and
+  then thrown away - one wasted request per first visit;
+* the privacy link always pointed at the ENGLISH `/privacy/`;
+* the banner read "We use cookies" / "Essential only" / "Accept all" on
+  every non-English site.
+
+`tests/cookie-consent-check.cjs` could not see it: it exercised
+`js/cookie-consent.js` ALONE. The defect only exists when both scripts run,
+in that order.
+
+### The fix
+
+The banner was REMOVED from `js/main.js` and `js/main.min.js` (both - the
+build step rewrites `main.js` -> `main.min.js`, so fixing one is not enough).
+`js/cookie-consent.js` is now the single source of truth. It is injected on
+every page by `functions/_middleware.js` -> `injectCookieConsent()`.
+
+### The lesson
+
+**Two implementations of the same UI can coexist and one can silently win.**
+The guard that was supposed to make the second one safe (`if the id exists,
+skip`) is exactly what made the LOSS silent: the localized banner was
+skipped, not the English one.
+
+A cleanup guard protects whoever runs SECOND. It protects nobody against a
+first implementation that should not have existed at all.
+
+### The gate
+
+`tests/cookie-consent-check.cjs` now has a 6th group that replays the REAL
+load order (`main.min.js` first, then `cookie-consent.js`) for all 11
+languages, and asserts that no second implementation exists in the shared
+scripts (comments are stripped before the check, so a comment that merely
+names the id does not trip it).
+
+`internal-tools/pre-deploy-check.ps1` step **9f** runs that test (FATAL).
+The stub's DOM needed `querySelector`/`querySelectorAll`/`addEventListener`
+added, because it had never loaded `main.min.js` before.
+
+### TRAP: a guard is not a licence to have two implementations
+
+The same reasoning applies to any "if it already exists, skip" pattern: check
+WHAT is being skipped, not only that something was skipped.
+
+## The `<html>` rewrite only matched the English page (2026-11-02)
+
+The middleware rewrote the document's language attribute with a single
+positional pattern:
+
+```js
+text.replace(/<html\s+lang="en"\s*>/i, `<html lang="${lang}"${rtl}>`);
+```
+
+That matches the **English source** page - the FALLBACK path, where a URL
+has no localized twin. But a **localized** Arabic page ships
+`<html lang="ar">`, which the pattern does not match. So **57 of the 63
+Arabic pages served their first HTML without `dir="rtl"`**; the direction was
+only applied later, at runtime, by `js/i18n.js` -> `setDir()`.
+
+The layout was therefore NOT broken for a human reader (the runtime fix plus
+`styles/i18n.css`'s `html[dir="rtl"]` rules handled it), but the first HTML
+the search engine saw had no direction semantics.
+
+### The fix
+
+The attribute list is now **parsed**, not matched positionally, and `lang` is
+forced to the language actually being served. Any attribute order and any
+quoting works, and the rewrite is idempotent:
+
+```
+<html lang="en">                  ->  <html lang="ar" dir="rtl">
+<html lang="ar">                  ->  <html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl">        ->  <html lang="ar" dir="rtl">
+<html lang="en" class="x">        ->  <html lang="ar" class="x" dir="rtl">
+```
+
+`tests/middleware-i18n-check.cjs` now asserts this against the real
+middleware for 8 URLs (Arabic localized pages, the Arabic fallback, and
+non-Arabic pages that must NOT get a `dir` attribute).
+
+### The lesson
+
+**The same trap as the hreflang block (2026-11-01), one layer up.** A
+cleanup/rewrite step that understands only ONE spelling of the markup it
+handles silently does nothing on the other spelling - and the result looks
+like "there was nothing to fix".
+
+## The gallery social card pointed at a file that did not exist (2026-11-02)
+
+`gallery/index.html` referenced `/images/og-gallery-1200x630.jpg` as its
+`og:image`, as its `twitter:image` variant, and as the JSON-LD
+`primaryImageOfPage` - but the repo only had `.avif` and `.webp`. The `.jpg`
+had never been generated, so the social card was a **404** (live-verified:
+HTTP 404 returning the 404 page body).
+
+Every other `og:image` on the site uses `.jpg` (2000 references), and social
+platforms handle `.jpg` most reliably, so the file was generated rather than
+the reference changed.
+
+### The source image had AI-generated garbled text
+
+The generated `.jpg` came from `og-gallery-1200x630.webp`, and that source
+is a crop of `gallery-collage.png` - which carries a **text band** whose
+typography is AI-mangled nonsense:
+
+```
+"Wedding ej portfolio"
+"WEDDING IDEIE"
+"A MERIAG CON-AIC CUREIN THE NVITORS"
+```
+
+That band was visible on the site's own gallery collage and on the social
+card. The card was rebuilt from the collage's photo rows (below the text
+band) with a correctly-spelled brand band composed by sharp:
+
+```
+WeddingAI.video
+WEDDING VIDEO PORTFOLIO```
+
+### The rule
+
+**A social card is published content, not a build artifact.** Before
+shipping an `og:image`, look at it. An AI-generated caption that reads as
+garbage is a visible brand defect on every share, and a missing file is
+worse - the card is simply blank.
+
+### The gate gap
+
+Nothing checked that an `og:image` target exists. `scripts/verify-image-404s.ps1`
+exists but did not cover the `og:image` / `twitter:image` references.
+
+## The Russian dictionary is 13.5% of the English one (2026-11-02)
+
+`i18n/ru.json` holds 5,979 keys; `i18n/en.json` holds 44,139 (13.5%).
+
+The consequence is not uniform across the two serving paths:
+
+| path | bound keys | missing in ru | translated |
+|---|---|---|---|
+| localized page (`/ru/x/` has a twin) | 657 | 54 | 91.8% |
+| fallback page (no twin) | 22,197 | **16,660** | **24.9%** |
+
+Live-verified: 32 of the first 40 Russian sitemap URLs still serve an
+**English** `<title>`, while the German equivalent is already German. The
+`og:locale` says `ru_RU` and the JSON-LD `inLanguage` says `ru-RU`, so the
+**metadata claims Russian while the page is English**.
+
+Every other language is at 94.4%-97.6% on the same fallback path.
+
+### What was done (2026-11-02)
+
+The 12 **SEO-critical** keys for the six top-level pages that have no Russian
+twin were translated by hand and added to `i18n/ru.json`:
+
+```
+gallery / privacy / resources / search / success / terms
+  -> title_text + meta_description
+```
+
+All 12 are within the house limits (title <= 60, description <= 160). The 6
+Russian page titles now render in Cyrillic (verified through the real
+middleware).
+
+### What is STILL open
+
+The **~15,200 blog BODY** keys are still missing. The title/description
+keys (200) and every core page are DONE - see below.
+
+### The Russian dictionary was 13.5% of the English one (2026-11-02)
+
+`i18n/ru.json` held **5,979 keys** against `i18n/en.json`'s 44,139. The
+consequence was not uniform across the two serving paths:
+
+| path | bound keys | missing in ru | translated |
+|---|---|---|---|
+| localized page (`/ru/x/` has a twin) | 657 | 54 | 91.8% |
+| fallback page (no twin) | 22,197 | **16,660** | **24.9%** |
+
+Every other language sits at **94.4%-97.6%** on the same fallback path
+(de/es/fr/pt 98.8%, ja/zh/ar/th/hi 97.5%). Russian was the outlier by an
+order of magnitude, and it was the ONLY language with **zero** pre-translated
+blog files (`de/blog/` has 50, `ru/blog/` has 0).
+
+So the Russian blog pages were never "partly translated" - the corpus simply
+did not exist. Live-verified before the fix: 32 of the first 40 Russian
+sitemap URLs served an English `<title>`, while `og:locale` already said
+`ru_RU` and the JSON-LD `inLanguage` said `ru-RU`. **The metadata claimed
+Russian while the page was English.**
+
+### What was translated (2026-11-02)
+
+| target | keys | result |
+|---|---|---|
+| 100 blog titles + 100 meta descriptions | 200 | 100/100 titles render in Cyrillic |
+| 6 top-level pages (gallery, privacy, terms, search, success, resources) | 12 + 120 | 100% |
+| order / pricing / about / tools / services | 56 + 41 + 8 + 26 + 7 | 100% |
+| shared values (table headers, CTA, competitor cells) | 1,794 | one translation covers up to 138 keys |
+| **total** | **~2,400** | `i18n/ru.json` 5,979 -> 8,547 |
+
+**All 12 core pages are now 100% translated**, verified through the real
+middleware.
+
+### The highest-leverage move was grouping by ENGLISH VALUE
+
+12,494 of the ~15,200 remaining keys were **unique to one page**, but 117
+English VALUES were repeated across up to 138 keys each - the shared table
+headers, the CTA buttons, the competitor cells of the SERP comparison
+tables. Translating those 117 values once covered **2,438 keys**.
+
+The comparison tables are the clearest case: the `th.*` headers ("Tool",
+"Style", "Languages", "Output", "Price", "Workflow") are **identical across
+40 pages**, and the `td.<competitor>` cells follow one naming scheme
+(`td.style_vidu`, `td.price_pollo`...). Only the per-competitor data
+differs.
+
+**A key identifies a source string, not a slot.** Grouping the missing keys
+by their English value turns a 15,000-key translation job into a 2,400-key
+one - and it is exactly how the other nine languages were built.
+
+### TRAP: do NOT hand-type the i18n keys
+
+The key name comes from the ORIGINAL source text, not from the current
+English string. `blog.wedding-video-trends-2026.title_text...` does not
+look like the title it holds. Writing the keys by hand produced wrong keys
+on the first attempt.
+
+Write a **`slug -> translation` map** and let a script take the real keys
+out of the source files. The slug is the key minus its hash suffix, which
+is stable and readable.
+
+### TRAP: a slug can map to TWO keys
+
+`resources.li_text.no_contract_always_walk_away` exists twice, with
+different hashes and slightly different English ("No contract. Always. Walk
+away." vs "No contract - always walk away."). A slug-indexed map silently
+picks one. Match on the ENGLISH VALUE when a slug is ambiguous.
+
+### TRAP: check the HTML entities survive the translation
+
+The pricing and gallery tables carry `&amp;`, `&ndash;`, `&mdash;`,
+`&ldquo;`, `&rdquo;` inside their values. Translating them and dropping an
+entity changes the rendered text (a bare `&` instead of `&amp;`, or a lost
+en-dash). Compare the ENGLISH value's entity set with the RU one before
+writing.
+
+### TRAP: check the tag skeleton too
+
+Some values carry markup (`<br>`, `<strong>`, a nested `<span>` with its
+own `data-i18n`). A translation that drops or reorders a tag breaks the
+render, and the key set looks fine. Compare the tag-name sequence of the
+EN and the RU value.
+
+### TRAP: an optional marker has no single grammatical gender
+
+`order.label_text.optional` was `(необязательный)` - masculine - but it
+follows three labels of different gender (Бюджет / Страна / Ссылка). The
+neutral `(необязательно)` is the standard form for such UI markers.
+
+### What is STILL open in Russian
+
+1. **~12,500 blog body keys.** Every Russian blog article now has a Russian
+   TITLE and a Russian meta description, but the body text is still
+   English. The articles are therefore "Russian headlines over English
+   articles" - better than before, but not a finished translation. This
+   wants a dedicated pass (it is ~100 full articles of prose).
+
+2. ~~**The `HINTS` table on `/order/` is hard-coded English.**~~ **DONE
+   (2026-11-02).** See "The order form no longer downloads a whole
+   dictionary" below.
+
+### The 200 blog title/description keys are DONE (2026-11-02, later pass)
+
+All 100 Russian blog pages had **no localized twin at all** (`ru/blog/` has
+none), so every one of them was served from the English source with an
+English `<title>`. All 200 keys (100 titles + 100 meta descriptions) are now
+translated and live.
+
+**Verified: 100/100 Russian blog titles render in Cyrillic** through the real
+middleware.
+
+Two things had to be right for that to show up on the live site:
+
+1. the dictionary edit, and
+2. the SHARDS - see the two traps below, both of which bit during this pass.
+
+### The order form no longer downloads a whole dictionary (2026-11-02)
+
+`/order/` shows a per-service hint (delivery time + what the service suits).
+The inline script used to fetch the **entire per-language dictionary**,
+`/i18n/<lang>.json`, to read about a dozen strings:
+
+| visitor | dictionary downloaded | strings needed |
+|---|---|---|
+| hi | **16.4 MB** | 12 |
+| th | 14.3 MB | 12 |
+| ar | 12.1 MB | 12 |
+| ru | 1.2 MB | 12 |
+
+That is the page that converts. The fix loads the **one namespace shard** that
+holds those strings - `i18n/shards/<lang>/pricing.td_text.json`, 3.5-6.3 KB -
+a 99.9% reduction.
+
+The same strings were also **hard-coded English**, so the hint read in English
+in every language. Ten of the eleven services already had translated
+equivalents: the pricing page's own delivery strings
+(`pricing.td_text.5ndash7_days` and friends). The "other / not sure yet"
+service had none, so it fell back to English everywhere; it now has two new
+keys (`pricing.td_text.reply_within_24_hrs`,
+`pricing.td_text.not_sure_yet_sofia_recommends`) in all 11 languages.
+
+`price` was always localized - the middleware's currency localizer rewrites
+`$9.9` inside the script literal into `$9.9 <span>(≈ EUR9)</span>`.
+
+**The gate**: `tests/order-hint-check.cjs`, wired into the pre-deploy check as
+step 9b. It checks statically that no page fetches a whole dictionary, that
+every hint key exists in all 11 shards, and behaviourally that the hint
+renders translated with an English fallback when the shard cannot be loaded.
+
+Two things the check had to get right:
+
+* **The old URL could be written two ways** - `'/i18n/${lang}.json'` and
+  `'/i18n/' + lang + '.json'`. A regex for the first missed the second, and
+  the second is what the code actually used. The check now normalises the
+  source (strip quotes, glue the string pieces) before matching.
+* **A comment that mentions the old path must not fail the gate.** The check
+  strips line comments first, keeping `://` intact so absolute URLs are not
+  truncated.
+
+### TRAP: a VALUE edit leaves the key set identical, so a key-set check misses it
+
+The incremental shard writer first compared the namespace's keys with the
+shard's keys. A **value** edit (shortening a title) does not change the key
+set, so the namespace was skipped and the shard kept the OLD value:
+
+```
+RESULT: 1 FAILURE(S)  - ru: 24 key(s) have a DIFFERENT value in the shard
+                        than in the dictionary (stale shards)
+```
+
+The freshness gate caught it - which is exactly what it is for. The fix is to
+compare values too:
+
+```python
+if set(kv).issuperset(have) and all(have.get(k) == v for k, v in kv.items()):
+    continue
+```
+
+**A stale shard and a missing key fail identically**: the page returns 200 and
+serves the old text. Checking "is the key there" is not enough.
+
+### TRAP: a page BUNDLE is a second copy of the page's keys
+
+The blog hub needs 111 namespaces, over the 40-shard budget, so it is served
+from ONE bundle file (`bundle.<hash>.json`) instead of the namespace shards.
+A new key on that page therefore has to land in **two** places:
+
+* the namespace shard (`blog.<slug>.json`), and
+* the bundle.
+
+Writing only the namespace shard leaves the hub on the old text while the
+individual articles are already translated - and the shard gate reports it:
+
+```
+- ru: bundle bundle.dfde240c30a6255f.json is missing 189 key(s) the page binds
+```
+
+The bundle is keyed by the hash of the page's NAMESPACE SET, and it must also
+carry the fixed-name keys the middleware looks up directly (`extra_keys`).
+`scripts/add-shards-for-keys.py` now rebuilds both.
+
+### The served title is LONGER than the dictionary value
+
+The static check measures the dictionary value; the live check measures what
+the middleware serves. The middleware rewrites every USD price into
+`$X <span>(≈ EURY)</span>`, so **a title containing a price grows** - `$9,9`
+adds ~17 characters of localised price text.
+
+24 of the 100 Russian titles were over the 60-character budget only AFTER
+that rewrite, so the static check passed and the live check failed. The
+rewrite that fixed them had to be measured with the live checker's own
+`served_title_length()`, not with `len()`.
+
+The practical rule: **a title that carries a price needs ~17 fewer
+characters** than one that does not.
+
+### TRAP: a dictionary edit without a shard rebuild serves the OLD text
+
+The shards under `i18n/shards/` are what the middleware reads first. Adding
+12 keys to `i18n/ru.json` and shipping without rebuilding the shards would
+have left the Russian pages English **with a 200 response** - the change
+would have looked like it did nothing.
+
+`qa/build-i18n-shards.py --lang ru` rebuilds the language, but it rewrites
+every shard and is slow enough to get interrupted. For a handful of added
+keys there is now a narrow alternative:
+
+```
+python scripts/add-shards-for-keys.py i18n/ru.json i18n/ru.manifest.json
+```
+
+It uses the builder's own `ns_of` rule and its own atomic write, so the
+result is byte-identical to a full rebuild, and it leaves complete
+namespaces untouched. It is idempotent. Always follow it with
+`python scripts/verify-i18n-shards.py` (the gate) - which reported
+`0 FAILURE(S), 0 WARNING(S)` for the result.
+
+Note: the shards ARE tracked by git (4,282 files), contrary to what an
+older note in this file says.
+
+## The 13 free tools: what they really are, and the library shortlist (2026-11-09)
+
+The `/tools/*` suite is **13 tools, all zero-dependency vanilla ES2018**, each page
+carrying its own inline `<script>` plus the shared `js/tools/common.js`
+(`window.weddingAITool`: `fileToImage`, `canvasToBlob`, `bindDropZone`,
+`renderFileList`, `download`, `downloadZip`, `toast`). No build step, no
+package.json, no framework. Tool pages are localized into 11 languages through
+the normal `data-i18n` bindings, so **any library with its own UI strings is a
+localisation liability**.
+
+### Measured gaps (not guesses - read from the pages)
+
+| tool | what it actually does | the gap |
+|---|---|---|
+| `heic-to-jpg-wedding-photos` | relies on the browser's native decoder | **only Safari decodes HEIC**; Chrome/Edge/Firefox cannot. The page says so honestly. |
+| `remove-background-wedding-portrait` | per-pixel RGB distance to a picked backdrop colour + feather band | chroma-key only. The page already states it "needs a full AI semantic segmentor" for real scenes. |
+| `crop-wedding-photo-for-reels` | fixed aspect ratios + an off-centre bias heuristic | no drag, no zoom, no rotate, no manual crop |
+| `add-text-to-wedding-photo` | 9 preset text positions, auto-shrink | no drag / rotate / free placement |
+| `wedding-photo-collage` | 6 fixed grids, photos auto-placed | no reordering, no per-cell drag |
+| `wedding-video-invitation-maker` | renders **5 PNG frames** | no MP4 at all (deliberate: ffmpeg.wasm rejected as 30 MB) |
+| `wedding-budget-calculator` | table + `Export CSV` + `Print` | no chart, no PDF |
+| `wedding-seating-chart-maker` | canvas render + `Export PNG` + `Print` | no drag-drop seats |
+| `compress-wedding-photos` | canvas re-encode, jpeg/png/webp | no AVIF, no HEIC input |
+| `wedding-photo-book-planner` / `save-the-date-maker` / `wedding-invitation-maker` | canvas render + PNG | no PDF |
+
+**TRAP: `downloadZip()` is not a zip.** `js/tools/common.js` implements "Save all"
+as sequential auto-downloads 120 ms apart. Browsers block or spam multiple
+downloads; the user gets N loose files, not one archive. A real zip is one
+small library away.
+
+**TRAP: the pages claim PDF and there is no PDF.** The comparison tables on
+`wedding-photo-collage` ("PNG + PDF + 4K + print + share"),
+`wedding-seating-chart-maker` and `wedding-budget-calculator` say PDF, but the
+only export buttons are `Download PNG` / `Export PNG` / `Export CSV` / `Print`.
+A printer-friendly page can be saved as PDF by hand, but the copy says the tool
+offers PDF. Same category of defect as the stale-figure traps elsewhere in this
+file - fix the copy or add the button, do not leave the gap.
+
+### The constraints any replacement must respect
+
+- **CSP**: `script-src 'self' 'nonce-…'` plus a few allowlisted origins.
+  **No CDN scripts are allowed** - a library must be self-hosted under `/js/`.
+  There is **no `'wasm-unsafe-eval'`** in either `functions/_middleware.js`
+  `buildCsp()` or `_headers`, so **WebAssembly libraries are blocked** until
+  that is added to both places. `default-src 'self'` covers `worker-src`, so
+  a same-origin Worker is allowed.
+- **No build step**: a library needs a UMD/global build (or an ESM file loaded
+  with `<script type="module">`).
+- **11 languages**: a library with visible UI strings needs 11-language
+  overrides or it leaks English.
+- **No price on a tool page** (see the tools section above) - this also rules
+  out any "free tier / upgrade" UI a library might ship.
+
+### Verified library shortlist (checked 2026-11-09 against the npm registry)
+
+| library | version / last publish | license | shipped size | wasm? | verdict |
+|---|---|---|---|---|---|
+| `heic2any` | 0.0.4, 2023-03 (stale) | MIT | 1.32 MB | **no - asm.js** | **use it.** The only HEIC decoder that passes the current CSP untouched. Vendor it, freeze the version, accept no-EXIF and no-animation limits. |
+| `libheif-js` | 1.23.5, 2026-10 (alive) | **LGPL-3.0** | 1.4 MB wasm + 2 MB glue | yes | not directly - LGPL + raw C API. Use heic2any's MIT-wrapped copy. |
+| `cropperjs` | 2.3.1, 2026-10 (alive) | MIT | 50 KB UMD | no | **yes, for the crop tool.** Verified zero user-facing strings. v2 is a Web-Components/shadow-DOM rewrite - the v1 API (`getCroppedCanvas`) is gone, so write new code. |
+| `fflate` | 0.8.3, 2026-07 (alive) | MIT | 32 KB UMD | no | **yes, to make `downloadZip` a real zip.** |
+| `jspdf` | 4.2.1, 2026-03 (alive) | MIT | 410 KB UMD | no | **yes, for the missing PDF export.** `addImage` with `image/png` verified in the shipped bundle. |
+| `modern-screenshot` | 4.7.0, 2026-04 (alive) | MIT | 29 KB UMD | no | **yes, for DOM -> PNG** (replaces hand-written canvas renderers). |
+| `pica` | 10.0.3, 2026-08 (alive) | MIT | 53 KB | wasm inlined | only with `wasm-unsafe-eval`; without it it silently falls back to the JS resampler. |
+| `mediabunny` | 1.65.2, 2026-11 (alive) | MPL-2.0 | 706 KB **ESM only** | no (WebCodecs) | right library for the video tool, wrong phase: no UMD build, and WebCodecs `VideoEncoder` is missing on Firefox for Android. |
+| `@imgly/background-removal` | 1.7.0 | **AGPL-3.0** | lib 167 KB + ORT wasm 11 MB + model ~44 MB | yes | **no.** Copyleft, ~45 MB, needs `wasm-unsafe-eval`. See below. |
+| `@huggingface/transformers` | 4.3.2, 2026-10 (alive) | Apache-2.0 | 574 KB + ORT wasm | yes | only if AI background removal is a product requirement; RMBG-1.4 q8 is ~42 MB and can be **self-hosted** (`env.allowRemoteModels=false`). |
+| `pdf-lib` | 1.17.1, 2021-11 (abandoned) | MIT | 513 KB | no | no - dead and bigger than jsPDF. |
+| `browser-image-compression` | 2.0.2, 2023-03 (abandoned) | MIT | 56 KB | no | no - dead; the canvas + quality loop is ~20 lines. |
+| `fabric` / `konva` | 7.4.0 / 10.9.1 (alive) | MIT | 292 KB / 193 KB | no | not yet - right for a future drag-and-drop sticker/collage editor, wrong for this pass. |
+
+### TRAP: the search results lie about `@imgly/background-removal`'s license
+
+Several 2026 blog posts and search snippets call it **MIT** ("the library is
+MIT-licensed"). Its own `LICENSE.md` inside the published package is the full
+**GNU AGPL-3.0** text, and `npm view` reports the license field as
+`SEE LICENSE IN LICENSE.md` - which is itself the tell. Do not let a search
+snippet decide a commercial site's dependency. Verify from
+`https://cdn.jsdelivr.net/npm/<pkg>@<ver>/LICENSE.md`.
+
+### The chart question has a 0-byte answer
+
+For the budget calculator's breakdown, do **not** pull in Chart.js (205 KB, and
+its tooltip/legend/axis defaults are English - 11 languages of overrides) or
+ECharts (1.07 MB). An inline SVG or a `conic-gradient` pie is 0 KB, needs no
+CSP change, and takes its labels straight from the existing `i18n/*.json`
+dictionary.
+
+### If the tool pages gain new UI strings
+
+They are localized through the normal `data-i18n` path, so the **shards must be
+rebuilt** - `scripts/verify-i18n-shards.py` is a fatal gate (pre-deploy step
+9d). For a handful of new keys use
+`python scripts/add-shards-for-keys.py i18n/<lang>.json i18n/<lang>.manifest.json`
+(atomic, idempotent, byte-identical to a full rebuild), then run the verifier.
+
+## The tool suite was rebuilt on 2026-11-09: the English page is now the single source of truth
+
+The audit section above (2026-11-09, "The 13 free tools") described what the
+tools could not do. That same day the fixes were implemented. This section
+records the architecture that resulted, because three of the rules are now
+load-bearing and a future edit that breaks one of them fails SILENTLY.
+
+### 44 of the 144 tool pages were DEAD, and the page still returned 200
+
+The localized copies of the tool pages carry a MACHINE-TRANSLATED copy of
+the English page's JavaScript. The translator translated the CODE, not only
+the strings:
+
+    de/tools/add-text-to-wedding-photo/index.html
+      226:  Funktion addFiles(picked) {        <- "function" translated
+      227:    var hinzugefügt = 0;             <- "added" translated
+
+A SyntaxError kills the WHOLE inline script, so the drop zone, the buttons
+and the file list were inert - while the page rendered perfectly and
+returned 200. Measured: 44 of 144 tool pages broken (every localized copy of
+add-text / compress / crop / heic / remove-background in es, fr, de, ar, th,
+hi; ALL ten localized budget calculators; three photo-book planners; the
+French seating chart). `ru/tools/heic-to-jpg-wedding-photos` had no script
+at all.
+
+**THE RULE: the English tool page owns the behaviour; the localized copies
+own only the prose.** `scripts/propagate-tool-js.py` copies the English
+inline script into the ten localized copies byte-for-byte. Run it after
+ANY change to an English tool page's script, before the syntax gate.
+
+    python scripts/propagate-tool-js.py --dry-run
+    python scripts/propagate-tool-js.py
+    python scripts/check-tool-script-syntax.py     # 286 scripts, 0 broken
+
+`check-tool-script-syntax.py` runs `node --check` on every inline script of
+every tool page and exits 1 on the first broken one. It is the gate that
+would have caught this in the first place.
+
+The price of the rule: a hardcoded English string in a localized copy's
+script comes back in English. That is why every runtime string now goes
+through `window.weddingAITool.t('alias', 'English fallback', params)`.
+
+### Runtime strings: `t()` and the injected dictionary
+
+`functions/_middleware.js` injects the `tools.copy` namespace into the page
+as `window.__WA_I18N__` (tool pages only). `js/tools/common.js` exposes
+`t(alias, fallback, params)`:
+
+* `alias` -> a key in the `tools.copy` namespace (the COPY alias table in
+  common.js maps the short alias to the full dotted key);
+* `fallback` -> the English text, used on an English page or if the
+  injection failed;
+* `params` -> optional `{name: value}` map; `{n}` in the result is
+  replaced (both in the translated string and in the fallback).
+
+A static label still uses `data-i18n`; only strings produced AFTER the page
+has loaded (toasts, per-file buttons, canvas titles) need `t()`.
+
+### The CSP now carries TWO new keywords, and one of them is easy to miss
+
+`functions/_middleware.js` `buildCsp()` AND `_headers` both carry:
+
+    'wasm-unsafe-eval'      WebAssembly compilation (pica, ONNX Runtime)
+    worker-src 'self' blob:  the vendored libraries' worker pools
+
+**TRAP: pica AND heic2any both create their Worker from a blob: URL.**
+`new Worker(URL.createObjectURL(new Blob([...])))`. Without `worker-src`,
+`worker-src` falls back to `default-src 'self'`, which does not allow
+`blob:` - so the Worker is blocked. pica does NOT crash: `has_wasm()`
+returns false and it silently falls back to its plain-JS resampler, i.e.
+the page keeps working and the quality quietly drops. heic2any's decoder
+fails the same way. Both keyword changes must stay in BOTH files.
+
+### The vendored libraries
+
+`scripts/vendor-libs.py` pins every third-party file to an exact version,
+downloads it, writes the upstream LICENSE beside it, and records the URL +
+SHA-256 + byte size in `js/vendor/vendor-manifest.json`. `--verify` fails on
+any drift. The `?v=` stamp in the URL must equal the manifest's version.
+
+| library | why | licence |
+|---|---|---|
+| fflate 0.8.3 | real ZIP for "Save all" | MIT |
+| jspdf 4.2.1 | real PDF export | MIT |
+| heic2any 0.0.4 | HEIC decode outside Safari (asm.js, no WASM) | MIT |
+| pica 10.0.3 | proper multi-step resample (WASM) | MIT |
+| onnxruntime-web 1.22.0 | runs MODNet on the device | MIT |
+| Xenova/modnet (quantized ONNX) | the matting model | Apache-2.0 |
+
+**TRAP: `ort.min.js` is the JSEP build.** Its WASM backend is
+`ort-wasm-simd-threaded.jsep.wasm` - **21.4 MB**. `ort.wasm.min.js` (47 KB)
+is the WASM-only build and its backend is `ort-wasm-simd-threaded.wasm` -
+**10.9 MB**. The site ships the second one. The runtime finds its backend
+and its `.wasm` through `ort.env.wasm.wasmPaths = '/js/vendor/onnxruntime/'`,
+because there is no CDN and no bundler.
+
+**TRAP: the site is not cross-origin isolated**, so `SharedArrayBuffer` is
+unavailable and the threaded build would fail. `ort.env.wasm.numThreads = 1`
+is required, not optional.
+
+### MODNet: what the browser actually has to do
+
+The model is `js/vendor/modnet/model_quantized.onnx` (6.3 MB quantized;
+the full-precision one is 24.7 MB). Verified with `onnxruntime` on the CPU
+AND end-to-end in Chromium under the production CSP:
+
+* graph input name `input`, output name `output`;
+* input shape `[1, 3, 512, 512]` float32, output `[1, 1, 512, 512]` in
+  `[0, 1]`;
+* preprocessing: resize to **512x512 WITHOUT keeping the aspect ratio**
+  (this is MODNet's own reference behaviour), then
+  `(x / 255 - 0.5) / 0.5` into NCHW;
+* the matte becomes the alpha channel via
+  `globalCompositeOperation = 'destination-in'`.
+
+Total first-run download: ~11 MB runtime + 6.3 MB model = **~17 MB**, from
+this origin, once, then cached by the browser. Nothing is uploaded.
+
+The colour key stays the DEFAULT so that nobody gets a surprise 17 MB
+download; AI matting is one dropdown away and says what it costs.
+
+### The crop frame is native, and cropper.js v2 was rejected on purpose
+
+Cropper.js v2 is a Web Components rewrite: the UI lives in shadow DOM, the
+package ships NO stylesheet, and the bundle contains ZERO
+aria-label / Reset / Confirm / Cancel strings. Its drag handles would have
+no accessible name and could not be translated into 11 languages. The frame
+is therefore a canvas + a shaded overlay + four corner handles + Pointer
+Events: zero extra bytes, fully localizable, mouse/touch/pen alike.
+`touch-action: none` on the canvas is REQUIRED - without it the phone
+scrolls the page instead of dragging the frame.
+
+### Verification harness: serve with the LIVE CSP, then drive the page
+
+A tool feature that needs a browser, a WASM runtime and a 17 MB model
+cannot be checked by reading the code. `scripts/verify-ai-background.py`
+and `scripts/verify-crop-stage.py` serve the repository over HTTP with the
+**exact Content-Security-Policy from `_headers`** (with a nonce injected
+into the inline scripts, exactly like `injectScriptNonce()` does), drive the
+page with Playwright, and assert that the assets were fetched from
+`/js/vendor/` and that the console carries no CSP violation.
+
+**TRAP when writing such a harness:** only the SCRIPT directive is
+nonce-based. `style-src 'self' 'unsafe-inline'` must keep `unsafe-inline`
+(the pages use `style=""` attributes). Replacing every `'unsafe-inline'`
+in the policy invents violations the production site does not have.
+
+### Small traps that cost real time
+
+* `pathlib.Path.rglob("*.html")` walks `.git` too. On this machine that
+  turned a 2-second cache-version bump into a 15-minute one (21 s of CPU in
+  14 min of wall clock - blocked on directory I/O, not computing).
+  `scripts/bump_cache_version.py` now uses `os.scandir` with explicit
+  pruning.
+* The cache stamp `?v=` is two-part on the old site assets (`3.21`) and
+  three-part on the tool assets (`1.0.1`). The bump helper handles both.
+* `scripts/add-tool-ui-keys.py` validates the key shape with a regex. The
+  per-tool namespace IS the tool's SLUG, so it contains hyphens:
+  `tools.wedding-seating-chart-maker.td_text.<name>.<hash>`. A regex that
+  forbids hyphens refuses to update half the site.
+* `tools.copy` values are looked up by the FULL dotted key. The alias table
+  in `js/tools/common.js` is what makes `t('seatSavedPng', ...)` work.
+* Machine translation does not preserve brand names either: the Hindi copy
+  of the HEIC page writes "Safari" as **सफ़ारी**. Never match a
+  localized page on an English word - match on the structure (ids, CSS
+  classes, the `<summary>` of the right `<details>`).
+* The Russian tool pages are an OLDER REVISION than the English ones
+  (691 lines vs 710, five FAQ questions instead of six). A patch that
+  assumes the same structure fails there; identify the blocks by ROLE, not
+  by position.
+
+

@@ -32,10 +32,10 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="เครื่องมือ WeddingAI">
     <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -97,6 +97,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ywxiu97hg8");
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">ข้ามไปที่เนื้อหาหลัก</a>
@@ -493,7 +502,7 @@
             error: null,
           });
         });
-        if (files.length === 0) { window.weddingAITool.toast('没有可处理的文件。请尝试 JPG、PNG 或 WebP。', 'error'); return; }
+        if (files.length === 0) { window.weddingAITool.toast('No supported files. Try a JPG, PNG, or WebP.', 'error'); return; }
         // Generate preview thumbnails (best-effort, run async)
         files.forEach(function (entry, idx) {
           if (entry.previewUrl) return;
@@ -531,45 +540,44 @@
           var w = img.naturalWidth, h = img.naturalHeight;
           var tw = w, th = h;
           if (settings.maxDim > 0 && Math.max(w, h) > settings.maxDim) {
-            if (w >= ชั่วโมง) {
-              tw = การตั้งค่า maxDim;
+            if (w >= h) {
+              tw = settings.maxDim;
               th = Math.round(h * (settings.maxDim / w));
-            } อื่น ๆ {
+            } else {
               th = settings.maxDim;
               tw = Math.round(w * (settings.maxDim / h));
             }
           }
-          var canvas = document.createElement('canvas');
-          ผ้าใบความกว้าง = tw;
-          canvas.height = th;
-          var ctx = canvas.getContext('2d');
-          ctx.imageSmoothingEnabled = จริง;
-          ctx.imageSmoothingQuality = 'สูง';
-          ctx.drawImage(img, 0, 0, tw, th);
+          // pica (MIT) does a proper multi-step resample. The browser's
+          // drawImage() bilinear filter visibly softens a large downscale -
+          // 6000 px down to 2048 px is exactly that case. pica is loaded on
+          // first use only, and common.js falls back to drawImage() when the
+          // WASM path is unavailable.
+          var canvas = await window.weddingAITool.resizeCanvas(img, tw, th);
           var mime = settings.format;
-          คุณภาพ var = settings.quality;
-          // PNG ไม่มีการสูญเสีย คุณภาพจะถูกละเว้น
-          ถ้า (mime === 'รูปภาพ / PNG') คุณภาพ = ไม่ได้กำหนด;
-          var blob = รอ window.weddingAITool.canvasToBlob (ผ้าใบ, mime, คุณภาพ);
-          if (!blob || blob.size === 0) Throw new Error('The Compression result is an Empty file. Please try other format.');
-          entry.output = หยด;
-          entry.sizes.out = หยดขนาด;
-          entry.status = 'เสร็จสิ้น';
+          var quality = settings.quality;
+          // PNG is lossless, quality is ignored
+          if (mime === 'image/png') quality = undefined;
+          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('Compression returned an empty file. Try a different format.');
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
           entry.outputName = window.weddingAITool.safeFileName(entry.name, '-min.' + (mime === 'image/png' ? 'png' : mime === 'image/webp' ? 'webp' : 'jpg'));
-          //ปล่อยภาพที่โหลดออกมา
-          URL.revoidObjectURL(loaded.url);
-        } จับ (ผิดพลาด) {
-          entry.status = 'ข้อผิดพลาด';
-          entry.error = ผิดพลาด && err.message ? err.message : สตริง(ผิดพลาด);
+          // free the loaded image
+          URL.revokeObjectURL(loaded.url);
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
         }
-        รีเฟรช UI();
+        refreshUI();
       }
 
-      ฟังก์ชัน async runAll () {
-        การตั้งค่า var = getCurrentSettings();
-        runBtn.disabled = จริง;
-        // Sequential: ง่ายกว่าในหน่วยความจำสำหรับแบตช์จำนวนมาก
-        สำหรับ (var i = 0; i< files.length; i++) {
+      async function runAll() {
+        var settings = getCurrentSettings();
+        runBtn.disabled = true;
+        // Sequential: easier on memory for huge batches
+        for (var i = 0; i < files.length; i++) {
           var f = files[i];
           if (f.status === 'done') continue;
           await processOne(f, settings);
@@ -577,7 +585,7 @@
         runBtn.disabled = false;
         saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
         renderSummary();
-        window.weddingAITool.toast('压缩完成。');
+        window.weddingAITool.toast('Compression complete.');
       }
 
       function renderSummary() {
@@ -590,46 +598,47 @@
         var ratio = origTotal > 0 ? (saved / origTotal * 100) : 0;
         summaryEl.hidden = false;
         summaryEl.innerHTML =
-          '<div><strong>' + done.length + '</strong>จางถูกบีบอัด</div>' +
-          '<div><strong>ประหยัดทั้งหมด:</strong> ' + window.weddingAITool.formatBytes(saved) + '（-' + ratio.toFixed(1) + '%）</div>' +
-          '<div><strong>ขนาดรวมปัจจุบัน:</strong>' + window.weddingAITool.formatBytes(outTotal) + ' (ต้นฉบับ ' + window.weddingAITool.formatBytes(origTotal) + ')</div>' +
-          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' ล้มเหลว</strong>— โปรดลบออกแล้วลองอีกครั้ง</div>' : '');
+          '<div><strong>' + done.length + '</strong> compressed</div>' +
+          '<div><strong>Total saved:</strong> ' + window.weddingAITool.formatBytes(saved) + ' (-' + ratio.toFixed(1) + '%)</div>' +
+          '<div><strong>Total now:</strong> ' + window.weddingAITool.formatBytes(outTotal) + ' (was ' + window.weddingAITool.formatBytes(origTotal) + ')</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' errored</strong> — remove and retry.</div>' : '');
       }
 
-      ฟังก์ชั่น saveAll() {
-        var เอาท์พุต = ไฟล์
+      function saveAll() {
+        var outputs = files
           .filter(function (f) { return f.status === 'done' && f.output; })
           .map(function (f) { return { name: f.outputName, blob: f.output }; });
-        ถ้า (outputs.length === 0) กลับ;
-        window.weddingAITool.downloadZip (เอาต์พุต 'บีบอัด');
-        window.weddingAITool.toast('กำลังบันทึก ' + outputs.length + ' ไฟล์...');
+        if (outputs.length === 0) return;
+        window.weddingAITool.downloadZip(outputs, 'compressed');
+        window.weddingAITool.toast('Saving ' + outputs.length + ' file' + (outputs.length === 1 ? '' : 's') + '…');
       }
 
-      //วางสาย
+      // wire up
       window.weddingAITool.bindDropZone({
-        dropEl: ดรอปโซน,
-        อินพุตEl: อินพุต,
-        ยอมรับ: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
-        หลายรายการ: จริง,
-        onFiles: เพิ่มไฟล์,
+        dropEl: dropzone,
+        inputEl: input,
+        accept: 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp',
+        multiple: true,
+        onFiles: addFiles,
       });
 
       qualityEl.addEventListener('input', function () { qualityVal.textContent = qualityEl.value; });
-      runBtn.addEventListener('คลิก', runAll);
-      saveAllBtn.addEventListener('คลิก', saveAll);
-      clearBtn.addEventListener('คลิก', clearAll);
+      runBtn.addEventListener('click', runAll);
+      saveAllBtn.addEventListener('click', saveAll);
+      clearBtn.addEventListener('click', clearAll);
 
-      list.addEventListener ('wa-row-remove', ฟังก์ชัน (e) {
+      list.addEventListener('wa-row-remove', function (e) {
         var idx = parseInt((e.detail || '0'), 10);
-        ถ้า (!isNaN(idx)) {
-          var f = ไฟล์ [idx];
-          ถ้า (f && f.previewUrl) URL.revoidObjectURL(f.previewUrl);
-          ไฟล์ประกบกัน (idx, 1);
-          รีเฟรช UI();
+        if (!isNaN(idx)) {
+          var f = files[idx];
+          if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          files.splice(idx, 1);
+          refreshUI();
         }
       });
 
-      รีเฟรช UI();
-    });</script>
+      refreshUI();
+    });
+    </script>
 </body>
 </html>

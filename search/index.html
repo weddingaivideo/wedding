@@ -57,9 +57,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI.video">
     
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
     <link rel="stylesheet" href="/styles/i18n.css">
-<script defer src="/js/main.min.js?v=3.20"></script>
+<script defer src="/js/main.min.js?v=3.22"></script>
     <style>
         .search-hero { background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%); }
         .search-hero-overlay { background: rgba(0,0,0,0.3); }
@@ -136,7 +136,7 @@
     });
     </script>
 <script src="/js/langs.js" defer></script>
-<script src="/js/i18n.js?v=4.28" defer></script>
+<script src="/js/i18n.js?v=4.29" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
@@ -236,6 +236,14 @@ if ('serviceWorker' in navigator) {
                         <input type="search" id="q" name="q" placeholder="e.g., slow motion, multilingual, restoration…" autocomplete="off" required data-i18n-attr="placeholder:search.input_placeholder.e_g_slow_motion_multilingual_restoration.60220537" />
                         <button type="submit" class="btn btn-primary"  data-i18n="search.label_text.search.19517806">Search</button>
                     </form>
+
+                    <!-- Runtime copy for the result headline and the empty
+                         state. The middleware translates these server-side. -->
+                    <div data-copy-set hidden>
+                        <span data-copy="resultsFor" data-i18n="search.copy.results_for.zzzzzz1">Results for &ldquo;{query}&rdquo;</span>
+                        <span data-copy="showing" data-i18n="search.copy.showing.zzzzzz2">Showing matching services and pages.</span>
+                        <span data-copy="noMatches" data-i18n="search.copy.no_matches.zzzzzz3">No matches for &ldquo;{query}&rdquo;. Try one of the popular searches above, or <a href="/order/" style="color: var(--color-primary); text-decoration: underline;">send us a quote request</a> and we&rsquo;ll point you to the right service.</span>
+                    </div>
 
                     <div class="search-suggestions" id="suggestions">
                         <p style="color: var(--color-text-light); font-size: 0.875rem; margin-bottom: var(--spacing-xs);"  data-i18n="search.p_text.popular_searches.65888893">Popular searches:</p>
@@ -379,6 +387,12 @@ if ('serviceWorker' in navigator) {
     </main>
 
     <script>
+    // Runtime copy, translated by the middleware into the hidden
+    // [data-copy-set] block above the search form.
+    function copyOf(name, fallback) {
+        var el = document.querySelector('[data-copy-set] [data-copy="' + name + '"]');
+        return el ? el.textContent : fallback;
+    }
     // Lightweight client-side site search
     // Index of searchable pages — keep in sync if you add/remove pages
     const INDEX = [
@@ -442,23 +456,23 @@ if ('serviceWorker' in navigator) {
         if (formInput && query) formInput.value = query;
 
         if (!query) {
-            titleEl.textContent = 'Search WeddingAI.video';
-            subEl.textContent = 'Find the perfect AI wedding video service for your day.';
+            // Leave the headline and the subtitle exactly as the server
+            // rendered them - they are already translated.
             if (suggestionsEl) suggestionsEl.style.display = 'block';
             return;
         }
 
         // Hide suggestions when there's a query
         if (suggestionsEl) suggestionsEl.style.display = 'none';
-        titleEl.innerHTML = 'Results for &ldquo;' + escapeHtml(query) + '&rdquo;';
-        subEl.textContent = 'Showing matching services and pages.';
+        titleEl.innerHTML = copyOf('resultsFor', 'Results for &ldquo;{query}&rdquo;').replace('{query}', escapeHtml(query));
+        subEl.textContent = copyOf('showing', 'Showing matching services and pages.');
 
         const scored = INDEX.map(item => ({ item, score: scoreResult(item, query) }))
                            .filter(x => x.score > 0)
                            .sort((a, b) => b.score - a.score);
 
         if (scored.length === 0) {
-            resultsEl.innerHTML = '<div class="no-results"><p>No matches for &ldquo;<strong>' + escapeHtml(query) + '</strong>&rdquo;. Try one of the popular searches above, or <a href="/order/" style="color: var(--color-primary); text-decoration: underline;">send us a quote request</a> and we&rsquo;ll point you to the right service.</p></div>';
+            resultsEl.innerHTML = '<div class="no-results"><p>' + copyOf('noMatches', 'No matches for &ldquo;{query}&rdquo;. Try one of the popular searches above, or <a href="/order/" style="color: var(--color-primary); text-decoration: underline;">send us a quote request</a> and we&rsquo;ll point you to the right service.').replace('{query}', '<strong>' + escapeHtml(query) + '</strong>') + '</p></div>';
             return;
         }
 

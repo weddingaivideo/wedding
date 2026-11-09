@@ -62,6 +62,31 @@
         });
     }
 
+    // ---------- Localised runtime copy ----------
+    // Some strings are written at runtime, so they cannot live in the
+    // dictionary as a plain data-i18n binding: the order form's validation
+    // messages, the success page's pending notice, the follow-up e-mail.
+    // Pages that need them ship a hidden [data-copy-set] block whose
+    // children the middleware has already translated server-side. Reading
+    // them from the DOM keeps this shared script from having to load a
+    // dictionary - which for some languages is several megabytes.
+    function readCopy() {
+        const out = {};
+        const hosts = document.querySelectorAll('[data-copy-set]');
+        hosts.forEach(function (host) {
+            host.querySelectorAll('[data-copy]').forEach(function (el) {
+                const k = el.getAttribute('data-copy');
+                if (k) out[k] = el.textContent;
+            });
+        });
+        return out;
+    }
+    const COPY = readCopy();
+    function copy(key, fallback) {
+        const v = COPY[key];
+        return (v !== undefined && v !== null && v !== '') ? v : fallback;
+    }
+
     // ---------- Form validation (order.html) ----------
     const orderForm = document.querySelector('.order-form');
     if (orderForm) {
@@ -84,7 +109,7 @@
                     field.setAttribute('aria-invalid', 'true');
                     const label = orderForm.querySelector('label[for="' + field.id + '"]');
                     const name = label ? label.textContent.replace(/\*/g, '').trim() : field.name;
-                    errors.push(name + ' is required');
+                    errors.push(copy('required', '{field} is required').replace('{field}', name));
                     if (!firstError) firstError = field;
                 } else {
                     field.classList.remove('error');
@@ -96,13 +121,13 @@
             if (emailField && emailField.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
                 emailField.classList.add('error');
                 emailField.setAttribute('aria-invalid', 'true');
-                errors.push('Please enter a valid email address');
+                errors.push(copy('invalidEmail', 'Please enter a valid email address'));
                 if (!firstError) firstError = emailField;
             }
 
             if (errors.length > 0) {
                 e.preventDefault();
-                setStatus('Please fix the following: ' + errors.join('; '), 'error');
+                setStatus(copy('errorPrefix', 'Please fix the following: ') + errors.join(copy('errorSeparator', '; ')), 'error');
                 if (firstError) {
                     firstError.focus();
                     firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -127,11 +152,11 @@
                 }
                 refInput.value = refId;
 
-                setStatus('Sending your request…', 'sending');
+                setStatus(copy('sending', 'Sending your request…'), 'sending');
                 const btn = orderForm.querySelector('[type="submit"]');
                 if (btn) {
                     btn.disabled = true;
-                    btn.textContent = 'Sending…';
+                    btn.textContent = copy('sendingButton', 'Sending…');
                 }
 
                 // Persist reference_id so success.html can show it after the
@@ -169,7 +194,7 @@
                 copyBtn.addEventListener('click', function () {
                     navigator.clipboard.writeText(ref).then(function () {
                         const orig = copyBtn.textContent;
-                        copyBtn.textContent = '✓ Copied';
+                        copyBtn.textContent = copy('copied', '✓ Copied');
                         setTimeout(function () { copyBtn.textContent = orig; }, 2000);
                     }).catch(function () { /* clipboard unavailable */ });
                 });
@@ -179,8 +204,8 @@
             const mailto = document.getElementById('pending-mailto');
             if (mailto) {
                 mailto.href = 'mailto:order@weddingai.video?subject=' +
-                    encodeURIComponent('Follow-up on my quote ' + ref) +
-                    '&body=' + encodeURIComponent('Hi,\n\nFollowing up on my quote request ' + ref + '. I haven\'t received a confirmation email yet.\n\nThanks!');
+                    encodeURIComponent(copy('followupSubject', 'Follow-up on my quote {ref}').replace('{ref}', ref)) +
+                    '&body=' + encodeURIComponent(copy('followupBody', 'Hi,\n\nFollowing up on my quote request {ref}. I haven\'t received a confirmation email yet.\n\nThanks!').replace('{ref}', ref));
             }
             // Show the pending notice if the server said the email send failed
             if (status === 'pending') {
@@ -189,9 +214,9 @@
                 const icon = document.getElementById('success-icon');
                 if (icon) icon.textContent = '⏳';
                 const headline = document.getElementById('success-headline');
-                if (headline) headline.textContent = "We've Got Your Request";
+                if (headline) headline.textContent = copy('pendingHeadline', "We've Got Your Request");
                 const summary = document.getElementById('success-summary');
-                if (summary) summary.textContent = "Your details are saved and our team will follow up within 24 hours. The automatic confirmation email didn't send on the first try — no action needed from you.";
+                if (summary) summary.textContent = copy('pendingSummary', "Your details are saved and our team will follow up within 24 hours. The automatic confirmation email didn't send on the first try — no action needed from you.");
             }
             // Clear session storage so refreshes don't show stale ID
             try { sessionStorage.removeItem('wa_ref_id'); } catch (e) { /* no-op */ }
@@ -199,47 +224,25 @@
     }
 
     // ---------- Cookie consent banner (GDPR / CCPA) ----------
-    // Minimal banner: shows on first visit, persists choice in localStorage for 180 days.
-    // Respects the user's prior choice; does not block page render (deferred via DOMContentLoaded).
-    const COOKIE_KEY = 'wa_cookie_consent';
-    const COOKIE_MAX_AGE = 180; // days
-    function getCookieConsent() {
-        try { return localStorage.getItem(COOKIE_KEY); } catch (e) { return null; }
-    }
-    function setCookieConsent(value) {
-        try { localStorage.setItem(COOKIE_KEY, value); } catch (e) { /* private mode */ }
-    }
-    function showCookieBanner() {
-        if (document.getElementById('wa-cookie-banner')) return;
-        const banner = document.createElement('div');
-        banner.id = 'wa-cookie-banner';
-        banner.setAttribute('role', 'region');
-        banner.setAttribute('aria-label', 'Cookie consent');
-        banner.style.cssText = 'position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;background:#2C2C2C;color:#fff;padding:1rem 1.25rem;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.25);display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;font-size:.875rem;max-width:920px;margin:0 auto;';
-        banner.innerHTML = [
-            '<div style="flex:1 1 320px;line-height:1.5;">',
-            '  <strong style="display:block;margin-bottom:.25rem;">🍪 We use cookies</strong>',
-            '  We use essential cookies to run this site and optional analytics cookies to understand how it performs. You can accept all, accept only essential, or read the details in our <a href="/privacy/" style="color:#D4AF37;text-decoration:underline;">privacy policy</a>.',
-            '</div>',
-            '<div style="display:flex;gap:.5rem;flex-wrap:wrap;">',
-            '  <button type="button" id="wa-cookie-reject" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);padding:.5rem 1rem;border-radius:6px;cursor:pointer;font:inherit;">Essential only</button>',
-            '  <button type="button" id="wa-cookie-accept" style="background:#D4AF37;color:#2C2C2C;border:0;padding:.5rem 1rem;border-radius:6px;cursor:pointer;font:inherit;font-weight:600;">Accept all</button>',
-            '</div>'
-        ].join('');
-        document.body.appendChild(banner);
-        document.getElementById('wa-cookie-accept').addEventListener('click', function () {
-            setCookieConsent('all');
-            banner.remove();
-        });
-        document.getElementById('wa-cookie-reject').addEventListener('click', function () {
-            setCookieConsent('essential');
-            banner.remove();
-        });
-    }
-    // Show banner if no prior choice
-    if (!getCookieConsent() && document.body) {
-        showCookieBanner();
-    }
+    // MOVED OUT 2026-11-02.
+    //
+    // This file used to build its OWN hard-coded ENGLISH banner with the id
+    // 'wa-cookie-banner'. js/cookie-consent.js builds the LOCALIZED one with
+    // the SAME id, and js/cookie-consent.js guards on that id existing
+    // (`if (document.getElementById('wa-cookie-banner')) return;`).
+    //
+    // The <script> order in every page put this file FIRST, and both scripts
+    // are `defer`, so they run in document order: this English banner won on
+    // every one of the 10 non-English sites. The localized dictionary was
+    // still fetched (wasted request) and then thrown away, and the privacy
+    // link always pointed at the ENGLISH /privacy/ page.
+    //
+    // js/cookie-consent.js is now the single source of truth. It is injected
+    // on every page by functions/_middleware.js -> injectCookieConsent(),
+    // and it fetches /i18n/cookie/<lang>.json for the page's language.
+    //
+    // Do NOT re-add a banner here. If you need to change the banner, edit
+    // js/cookie-consent.js and i18n/cookie/<lang>.json.
 
     // ---------- Auto-update copyright year ----------
     // The footer copyright text has a hardcoded year baked into each language's

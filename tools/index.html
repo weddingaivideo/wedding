@@ -64,8 +64,8 @@
  <meta name="apple-mobile-web-app-title" content="Free Wedding Photo Tools">
  <link rel="stylesheet" href="/styles.min.css?v=3.39">
  <link rel="stylesheet" href="/styles/i18n.css">
- <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-<script defer src="/js/main.min.js?v=3.20"></script>
+ <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+<script defer src="/js/main.min.js?v=3.22"></script>
  <style>
         /* === Tools catalog layout === */
         .hero-tools { padding: var(--spacing-2xl) 0 var(--spacing-xl); background: linear-gradient(180deg, #fff7e6 0%, var(--color-bg) 100%); }
@@ -412,6 +412,15 @@
  }
  }
 ]
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
 }
 </script>
 </head>

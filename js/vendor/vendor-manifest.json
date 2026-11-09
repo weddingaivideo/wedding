@@ -1,0 +1,116 @@
+{
+  "libraries": {
+    "fflate": {
+      "files": {
+        "LICENSE": {
+          "bytes": 1069,
+          "sha256": "0a1df3a083d0c010560aa342e87959c8c1070e6fd54545741f083f22d0c8b551",
+          "url": "https://cdn.jsdelivr.net/npm/fflate@0.8.3/LICENSE"
+        },
+        "fflate.min.js": {
+          "bytes": 33044,
+          "sha256": "462ef8041fc970e3615a20a9dd2b2e3047a073b2da729ef4f02b634bba8b7b83",
+          "url": "https://cdn.jsdelivr.net/npm/fflate@0.8.3/umd/index.js"
+        }
+      },
+      "license": "MIT",
+      "package": "fflate",
+      "version": "0.8.3"
+    },
+    "heic2any": {
+      "files": {
+        "LICENSE": {
+          "bytes": 1088,
+          "sha256": "17e4c847dac6cf3ba1f6846464160a749e020accf7dd9f412c6c55bc96285009",
+          "url": "https://cdn.jsdelivr.net/npm/heic2any@0.0.4/LICENSE.md"
+        },
+        "heic2any.min.js": {
+          "bytes": 1351840,
+          "sha256": "0963cfa50e9e1e7e6af929a40a81e3e898a673f1270eafa6917dd137e4968164",
+          "url": "https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"
+        }
+      },
+      "license": "MIT",
+      "package": "heic2any",
+      "version": "0.0.4"
+    },
+    "jspdf": {
+      "files": {
+        "LICENSE": {
+          "bytes": 1142,
+          "sha256": "dc388ec35ff463288cdde3588a36fd4ed12a45deff053243b37309acc9ef583b",
+          "url": "https://cdn.jsdelivr.net/npm/jspdf@4.2.1/LICENSE"
+        },
+        "jspdf.umd.min.js": {
+          "bytes": 420165,
+          "sha256": "e6551fcdc32f09d6853b2c5126d18d01d9447e0da618a41a11ebeee0f6c20d54",
+          "url": "https://cdn.jsdelivr.net/npm/jspdf@4.2.1/dist/jspdf.umd.min.js"
+        }
+      },
+      "license": "MIT",
+      "package": "jspdf",
+      "version": "4.2.1"
+    },
+    "modnet": {
+      "files": {
+        "model_quantized.onnx": {
+          "bytes": 6632188,
+          "sha256": "92e49898c3e05a6d7a944fc67a8cb87c4aad754ffb6ebd949528c7d1105fee3a",
+          "url": "https://huggingface.co/Xenova/modnet/resolve/main/onnx/model_quantized.onnx"
+        }
+      },
+      "license": "Apache-2.0",
+      "package": "Xenova/modnet",
+      "version": "quantized"
+    },
+    "onnxruntime": {
+      "files": {
+        "LICENSE": {
+          "bytes": 1073,
+          "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+          "url": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.22.0/LICENSE"
+        },
+        "ort-wasm-simd-threaded.mjs": {
+          "bytes": 20856,
+          "sha256": "30dd851d9c00622940500f71ddd2ff8820c5cb65270816080175b958705385a8",
+          "url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort-wasm-simd-threaded.mjs"
+        },
+        "ort-wasm-simd-threaded.wasm": {
+          "bytes": 11210254,
+          "sha256": "71aef04959c5c1b6de461b6538e2058e306610034a85aad2742d0c7fd4533fe4",
+          "url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort-wasm-simd-threaded.wasm"
+        },
+        "ort.min.js": {
+          "bytes": 357641,
+          "sha256": "924e4fcdfdf69acccff3d024d6e1ad3f41ca858d27fc4dd59fc4927dd933e7db",
+          "url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort.min.js"
+        },
+        "ort.wasm.min.js": {
+          "bytes": 48327,
+          "sha256": "65e09376df69107e881b5c34d2d37aed333a366b6d941073ec518168e269b87d",
+          "url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort.wasm.min.js"
+        }
+      },
+      "license": "MIT",
+      "package": "onnxruntime-web",
+      "version": "1.22.0"
+    },
+    "pica": {
+      "files": {
+        "LICENSE": {
+          "bytes": 1084,
+          "sha256": "55c3dde19ab8a9b9b23c576375fb7a48423124d76530a3ddeeb897a3c47223aa",
+          "url": "https://cdn.jsdelivr.net/npm/pica@10.0.3/LICENSE"
+        },
+        "pica.min.js": {
+          "bytes": 54023,
+          "sha256": "6ed5ed21172e715a9c20e1c1c0488beac5aa23f268454e51c6541473cb431708",
+          "url": "https://cdn.jsdelivr.net/npm/pica@10.0.3/dist/pica.min.js"
+        }
+      },
+      "license": "MIT",
+      "package": "pica",
+      "version": "10.0.3"
+    }
+  }
+}

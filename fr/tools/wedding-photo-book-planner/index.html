@@ -60,11 +60,11 @@
 
 
 
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -168,6 +168,15 @@
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Wedding Photo Book Planner", "url": "https://weddingai.video/tools/wedding-photo-book-planner/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Any (browser-based)", "browserRequirements": "Requires JavaScript", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Free online wedding photo book planner. Pick 8x8, 10x10, or 12x12 size, choose 20-60 pages, drop in photos, auto-distribute across 1/2/3/4-photo layouts, add captions, export print-ready PNG pages.", "inLanguage": "fr", "isAccessibleForFree": true, "creator": {"@type": "Organization", "name": "WeddingAI.video", "url": "https://weddingai.video/"}}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Comment fonctionne le planificateur de livre photo de mariage ?", "acceptedAnswer": {"@type": "Answer", "text": "Pick a book size (8x8, 10x10, 12x12, or A4 landscape) and page count (20/40/60). Drop in your wedding photos — the tool stores them in your browser only. Choose from 5 page layouts (1-photo, 2-photo split, 3-photo mosaic, 4-photo grid, title/cover). Distribution automatique distributes photos round-robin across pages. Add captions per photo, click any page to fine-tune, then export per-page PNG files ready to upload to any print service."}}, {"@type": "Question", "name": "Quelle taille de livre photo dois-je commander ?", "acceptedAnswer": {"@type": "Answer", "text": "8x8 inches is the classic square — most common, cheapest, fits 1-3 photos per page. 10x10 gives larger photos for grandparent-friendly viewing. 12x12 is the coffee-table album — best for hero shots with breathing room. A4 landscape is the European standard for magazine-style spreads."}}, {"@type": "Question", "name": "Combien de pages me faut-il ?", "acceptedAnswer": {"@type": "Answer", "text": "20 pages fits 40-60 photos with breathing room. 40 pages fits 80-120 photos — the typical wedding coverage. 60 pages fits 150+ photos — for the couple that wants every candid."}}, {"@type": "Question", "name": "Les données sont-elles privées ?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All photos and page data live in your browser's localStorage. The tool never uploads a single image to any server. Clear your browser storage to wipe the data."}}, {"@type": "Question", "name": "Quel est le format des pages exportées ?", "acceptedAnswer": {"@type": "Answer", "text": "PNG files at 300 DPI — 8x8 = 2400x2400, 10x10 = 3000x3000, 12x12 = 3600x3600, A4 landscape = 3508x2480. These upload directly to Blurb, Artifact, Shutterfly, or any print service."}}]}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "How to make a wedding photo book", "step": [{"@type": "HowToStep", "position": 1, "name": "Drop in your photos", "text": "Drag and drop or click to upload. Add a title, date, and hashtag for the cover. Photos are stored locally in your browser — nothing is uploaded."}, {"@type": "HowToStep", "position": 2, "name": "Drop in your photos", "text": "Drag and drop or click to upload. Add a title, date, and hashtag for the cover. Photos are stored locally in your browser — nothing is uploaded."}, {"@type": "HowToStep", "position": 3, "name": "Distribute photos across pages", "text": "Hit Distribution automatique to round-robin photos across pages based on each page's layout. Or click any page thumbnail to manually assign photos to specific slots and add per-photo captions."}, {"@type": "HowToStep", "position": 4, "name": "Export and print", "text": "Hit Download current page for a single page, or Télécharger toutes les pages for the full book. PNG files are 300 DPI, ready to upload to Blurb, Artifact, Shutterfly, or any print-on-demand service."}], "totalTime": "PT45M"}</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body class="page-tool">
 <a class="wa-skip-link" href="#main-content">Skip to main content</a>
@@ -597,11 +606,11 @@
     'a4':    { w: 3508, h: 2480, label: 'A4 landscape', cssAspect: '3508 / 2480' }
   };
   var LAYOUTS = {
-    '1photo': { slots: 1, label: '1 photo' },
-    '2photo': { slots: 2, label: '2 photos' },
-    '3photo': { slots: 3, label: '3 photos' },
-    '4photo': { slots: 4, label: '4 photos' },
-    'cover':  { slots: 0, label: 'Couverture / Title' }
+    '1photo': { slots: 1, label: '1 Photo' },
+    '2photo': { slots: 2, label: '2 Photo' },
+    '3photo': { slots: 3, label: '3 Photo' },
+    '4photo': { slots: 4, label: '4 Photo' },
+    'cover':  { slots: 0, label: 'Cover / Title' }
   };
   var DEFAULT_LAYOUT = '1photo';
   var state = loadState() || defaultState();
@@ -643,7 +652,7 @@
   }
 
   // --- DOM refs
-  var bookTailleEl = document.getElementById('book-size');
+  var bookSizeEl = document.getElementById('book-size');
   var bookPagesEl = document.getElementById('book-pages');
   var bookTitleEl = document.getElementById('book-title');
   var bookDateEl = document.getElementById('book-date');
@@ -662,8 +671,8 @@
   var templatePick = document.querySelectorAll('.pb-template-pick button');
   var pageEditor = document.getElementById('page-editor');
   var editorPageNum = document.getElementById('editor-page-num');
-  var editorMise en page = document.getElementById('editor-layout');
-  var editorLégende = document.getElementById('editor-caption');
+  var editorLayout = document.getElementById('editor-layout');
+  var editorCaption = document.getElementById('editor-caption');
   var editorSlots = document.getElementById('editor-slots');
   var downloadCurrentBtn = document.getElementById('download-current-btn');
   var downloadAllBtn = document.getElementById('download-all-btn');
@@ -671,7 +680,7 @@
   var currentPageIdx = -1;
 
   function init() {
-    bookTailleEl.value = state.size;
+    bookSizeEl.value = state.size;
     bookPagesEl.value = String(state.pages);
     bookTitleEl.value = state.title;
     bookDateEl.value = state.date;
@@ -760,7 +769,7 @@
       if (photo) {
         var img = new Image();
         img.onload = function () {
-          drawCouverture(ctx, img, sp.x, sp.y, sp.w, sp.h);
+          drawCover(ctx, img, sp.x, sp.y, sp.w, sp.h);
         };
         img.src = photo.url;
       } else {
@@ -783,7 +792,7 @@
     }
   }
 
-  function drawCouverture(ctx, img, x, y, w, h) {
+  function drawCover(ctx, img, x, y, w, h) {
     var imgAspect = img.width / img.height;
     var boxAspect = w / h;
     var dx, dy, dw, dh;
@@ -872,7 +881,7 @@
   });
 
   // --- Book settings
-  bookTailleEl.addEventListener('change', function () { state.size = bookTailleEl.value; saveState(); renderAll(); });
+  bookSizeEl.addEventListener('change', function () { state.size = bookSizeEl.value; saveState(); renderAll(); });
   bookPagesEl.addEventListener('change', function () {
     state.pages = parseInt(bookPagesEl.value, 10);
     rebuildPages();
@@ -902,8 +911,8 @@
     var p = state.pages_data[idx];
     pageEditor.hidden = false;
     editorPageNum.textContent = idx + 1;
-    editorMise en page.value = p.layout || DEFAULT_LAYOUT;
-    editorLégende.value = p.caption || '';
+    editorLayout.value = p.layout || DEFAULT_LAYOUT;
+    editorCaption.value = p.caption || '';
     renderEditorSlots();
     // Re-render grid to show active
     renderPagesGrid();
@@ -914,18 +923,18 @@
     pageEditor.hidden = true;
     renderPagesGrid();
   }
-  editorMise en page.addEventListener('change', function () {
+  editorLayout.addEventListener('change', function () {
     if (currentPageIdx < 0) return;
-    state.pages_data[currentPageIdx].layout = editorMise en page.value;
+    state.pages_data[currentPageIdx].layout = editorLayout.value;
     state.pages_data[currentPageIdx].slots = [];
     saveState();
     renderEditorSlots();
     renderPagesGrid();
     renderStats();
   });
-  editorLégende.addEventListener('input', function () {
+  editorCaption.addEventListener('input', function () {
     if (currentPageIdx < 0) return;
-    state.pages_data[currentPageIdx].caption = editorLégende.value;
+    state.pages_data[currentPageIdx].caption = editorCaption.value;
     saveState();
     renderPagesGrid();
   });
@@ -935,7 +944,7 @@
     var p = state.pages_data[currentPageIdx];
     var layout = LAYOUTS[p.layout] || LAYOUTS[DEFAULT_LAYOUT];
     if (layout.slots === 0) {
-      editorSlots.innerHTML = '<div class="pb-photo-empty">Couverture page — uses the title, date, and tagline.</div>';
+      editorSlots.innerHTML = '<div class="pb-photo-empty">Cover page — uses the title, date, and tagline.</div>';
       return;
     }
     var html = '';
@@ -1041,18 +1050,18 @@
     if (layout.slots === 0) {
       // cover
       ctx.fillStyle = '#2c2c2c';
-      var titleTaille = fitTaille(ctx, state.title || 'Wedding', size.w * 0.18, 'Georgia, serif', size.w * 0.85, size.w * 0.05);
-      ctx.font = '700 ' + titleTaille + 'px Georgia, serif';
+      var titleSize = fitSize(ctx, state.title || 'Wedding', size.w * 0.18, 'Georgia, serif', size.w * 0.85, size.w * 0.05);
+      ctx.font = '700 ' + titleSize + 'px Georgia, serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(state.title || 'Wedding', size.w/2, size.h * 0.42);
-      var dateTaille = titleTaille * 0.4;
-      ctx.font = '300 ' + dateTaille + 'px Georgia, serif';
+      var dateSize = titleSize * 0.4;
+      ctx.font = '300 ' + dateSize + 'px Georgia, serif';
       ctx.fillStyle = '#7a7a7a';
       ctx.fillText(state.date || '', size.w/2, size.h * 0.55);
       if (state.tag) {
         ctx.fillStyle = '#d4af37';
-        ctx.font = '300 ' + (dateTaille * 0.7) + 'px Georgia, serif';
+        ctx.font = '300 ' + (dateSize * 0.7) + 'px Georgia, serif';
         ctx.fillText(state.tag, size.w/2, size.h * 0.62);
       }
     } else {
@@ -1064,7 +1073,7 @@
         if (photo) {
           var img = new Image();
           img.onload = function () {
-            drawCouverture(ctx, img, sp.x, sp.y, sp.w, sp.h);
+            drawCover(ctx, img, sp.x, sp.y, sp.w, sp.h);
             pending--;
             if (pending === 0) finalizePageExport(c, idx);
           };
@@ -1088,14 +1097,14 @@
     if (layout.slots === 0) finalizePageExport(c, idx);
   }
 
-  function fitTaille(ctx, text, maxTaille, fontStack, maxWidth, minTaille) {
-    var size = maxTaille;
-    while (size > minTaille) {
+  function fitSize(ctx, text, maxSize, fontStack, maxWidth, minSize) {
+    var size = maxSize;
+    while (size > minSize) {
       ctx.font = '700 ' + size + 'px ' + fontStack;
       if (ctx.measureText(text).width <= maxWidth) return size;
       size -= 2;
     }
-    return minTaille;
+    return minSize;
   }
 
   function finalizePageExport(canvas, idx) {

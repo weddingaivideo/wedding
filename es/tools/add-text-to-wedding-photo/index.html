@@ -31,11 +31,11 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Herramientas WeddingAI">
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -175,6 +175,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ywxiu97hg8");
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
@@ -667,8 +676,8 @@
       var previewEmpty = document.getElementById('preview-empty');
       var previewWrap = document.getElementById('preview-wrap');
 
-      var files = [];
-      var activeIndex = 0;
+      var files = [];           // [{ status, name, inputFile, sizes, output, outputName, previewUrl, img }]
+      var activeIndex = 0;        // which photo drives the live preview
       var renderTimer = null;
 
       // ---------- helpers ----------------------------------------------------------
@@ -687,6 +696,7 @@
         };
       }
 
+      // Position the (primary, secondary) pair as a block. Returns baseline Y for primary.
       function measureText(ctx, text, size, family) {
         ctx.font = size + 'px ' + family;
         var w = 0;
@@ -696,6 +706,7 @@
         return { width: w, ascent: size, lineHeight: Math.round(size * 1.18) };
       }
 
+      // Auto-shrink primary size so the rendered width fits the canvas with 8% padding.
       function fitSize(ctx, text, requestedSize, family, maxWidth) {
         var size = requestedSize;
         var minSize = 24;
@@ -707,6 +718,7 @@
         return minSize;
       }
 
+      // Draw text block onto ctx at the requested position. Returns nothing.
       function drawTextBlock(ctx, settings, canvasW, canvasH) {
         var family = fontStack(settings.fontName);
         var primary = settings.primary.trim();
@@ -741,6 +753,7 @@
             secondaryY = canvasH - padY;
           }
         } else {
+          // bottom-center (default)
           var gap = Math.round(canvasH * 0.04);
           if (primary && secondary) {
             secondaryY = canvasH - padY;
@@ -788,6 +801,7 @@
         previewCanvas.hidden = false;
 
         var img = entry.img;
+        // Cap preview display size to 720px longest edge; canvas pixels = image full size
         var maxEdge = 720;
         var scale = 1;
         if (Math.max(img.naturalWidth, img.naturalHeight) > maxEdge) {
@@ -814,22 +828,24 @@
 
       // ---------- file list -------------------------------------------------------
       function refreshUI() {
-        empty.hidden = files.length >0;
-        lista.oculta = archivos.longitud === 0;
+        empty.hidden = files.length > 0;
+        list.hidden = files.length === 0;
         var hasRenderable = files.some(function (f) { return f.img; });
         runBtn.disabled = !hasRenderable;
-        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'hecho' && f.output; });
-        si (ventana.weddingAITool && ventana.weddingAITool.renderFileList) {
-          window.weddingAITool.renderFileList(lista, archivos, función () {});
-          Array.prototype.forEach.call(lista.niños, función (fila, i) {
+        saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
+        if (window.weddingAITool && window.weddingAITool.renderFileList) {
+          window.weddingAITool.renderFileList(list, files, function () {});
+          Array.prototype.forEach.call(list.children, function (row, i) {
+            // tag the active row for the preview
             if (i === activeIndex) row.classList.add('is-active');
-            window.weddingAITool.updateFileRow(fila, archivos[i]);
-            si (yo! == índice activo) {
-              fila.addEventListener('hacer clic', función (ev) {
-                si (ev.target.closest('botón')) regresa;
-                índiceactivo = i;
+            window.weddingAITool.updateFileRow(row, files[i]);
+            // wire click on the row (not the action button) to switch preview
+            if (i !== activeIndex) {
+              row.addEventListener('click', function (ev) {
+                if (ev.target.closest('button')) return;
+                activeIndex = i;
                 Array.prototype.forEach.call(list.children, function (r) { r.classList.remove('is-active'); });
-                row.classList.add('está-activo');
+                row.classList.add('is-active');
                 renderPreview();
               });
             }
@@ -837,113 +853,116 @@
         }
       }
 
-      función agregarArchivos (seleccionado) {
-        var agregado = 0;
-        elegido.forEach(función (f) {
-          if (!f || !f.type || !/^imagen\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
-            regresar;
+      function addFiles(picked) {
+        var added = 0;
+        picked.forEach(function (f) {
+          if (!f || !f.type || !/^image\/(jpeg|png|webp)$/.test(f.type) && !/\.(jpe?g|png|webp)$/i.test(f.name || '')) {
+            return;
           }
-          archivos.push({
-            estado: 'en cola',
-            nombre: f.nombre,
-            archivo de entrada: f,
-            img: nulo,
-            tamaños: { orig: f.size, out: 0 },
-            salida: nula,
-            nombre de salida: nulo,
-            URL de vista previa: URL.createObjectURL(f)
+          files.push({
+            status: 'queued',
+            name: f.name,
+            inputFile: f,
+            img: null,
+            sizes: { orig: f.size, out: 0 },
+            output: null,
+            outputName: null,
+            previewUrl: URL.createObjectURL(f)
           });
-          añadido++;
+          added++;
         });
-        if (agregado === 0) { window.weddingAITool.toast('Este archivo aún no es compatible. Pruebe con JPG, PNG o WebP.', 'error'); devolver; }
-        var newStartIdx = archivos.longitud - agregado;
-        para (var i = newStartIdx; i< files.length; i++) {
+        if (added === 0) { window.weddingAITool.toast('No supported files. Try a JPG, PNG, or WebP.', 'error'); return; }
+        // Async-decode all newly added entries (do not block addFiles)
+        var newStartIdx = files.length - added;
+        for (var i = newStartIdx; i < files.length; i++) {
           (function (idx) {
             window.weddingAITool.fileToImage(files[idx].inputFile).then(function (loaded) {
               files[idx].img = loaded.img;
               URL.revokeObjectURL(loaded.url);
-              if (idx === activeIndex || activeIndex >= archivos.longitud - agregado) {
-                if (idx === 0 || !archivos[activeIndex] || !archivos[activeIndex].img) {
-                  índiceactivo = idx;
+              if (idx === activeIndex || activeIndex >= files.length - added) {
+                // first decoded becomes the active preview
+                if (idx === 0 || !files[activeIndex] || !files[activeIndex].img) {
+                  activeIndex = idx;
                 }
                 renderPreview();
               }
-              actualizar UI();
-            }).catch(función (err) {
-              archivos[idx].status = 'error';
-              archivos[idx].error = err && err.message ? mensaje de error: Cadena (err);
-              actualizar UI();
+              refreshUI();
+            }).catch(function (err) {
+              files[idx].status = 'error';
+              files[idx].error = err && err.message ? err.message : String(err);
+              refreshUI();
             });
           })(i);
         }
-        actualizar UI();
+        refreshUI();
       }
 
-      función borrarTodo() {
-        archivos.forEach(función (f) {
-          si (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+      function clearAll() {
+        files.forEach(function (f) {
+          if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
         });
-        archivos = [];
-        índiceactivo = 0;
-        resumenEl.hidden = verdadero;
-        vista previaEmpty.hidden = falso;
-        vista previaCanvas.hidden = verdadero;
-        actualizar UI();
+        files = [];
+        activeIndex = 0;
+        summaryEl.hidden = true;
+        previewEmpty.hidden = false;
+        previewCanvas.hidden = true;
+        refreshUI();
       }
 
-      // ---------- renderizado por lotes --------------------------------------------------
-      función asíncrona procesoUno(entrada, configuración) {
-        entrada.status = 'trabajando';
-        entrada.error = nulo;
-        actualizar UI();
-        prueba {
-          si (!entrada.img) {
-            var cargado = esperar ventana.weddingAITool.fileToImage(entry.inputFile);
-            entrada.img = cargado.img;
-            URL.revokeObjectURL(cargado.url);
+      // ---------- batch render ----------------------------------------------------
+      async function processOne(entry, settings) {
+        entry.status = 'working';
+        entry.error = null;
+        refreshUI();
+        try {
+          if (!entry.img) {
+            var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+            entry.img = loaded.img;
+            URL.revokeObjectURL(loaded.url);
           }
-          var img = entrada.img;
+          var img = entry.img;
           var w = img.naturalWidth, h = img.naturalHeight;
-          var lienzo = document.createElement('lienzo');
-          lienzo.ancho = w;
-          lienzo.altura = h;
-          var ctx = lienzo.getContext('2d');
-          ctx.imageSmoothingEnabled = verdadero;
-          ctx.imageSmoothingQuality = 'alto';
+          var canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
           ctx.drawImage(img, 0, 0, w, h);
-          drawTextBlock(ctx, configuraciones, w, h);
-          var mime = configuración.formato;
-          var calidad = (mime === 'imagen/png' || mime === 'imagen/webp')? indefinido: 0,92;
-          var blob = esperar ventana.weddingAITool.canvasToBlob(lienzo, mimo, calidad);
-          if (!blob || blob.size === 0) throw new Error('El resultado de la representación está vacío, pruebe con otros formatos.');
-          entrada.salida = blob;
-          entrada.sizes.out = blob.size;
-          entrada.status = 'hecho';
-          var text = (mime === 'imagen/png')? 'png' : (mime === 'imagen/webp')? 'webp' : 'jpg';
-          entrada.nombreSalida = ventana.weddingAITool.safeFileName(entrada.nombre, '-captioned.' + ext);
-          si (entrada.salida) {
-            entrada.previewUrl = URL.createObjectURL(entrada.salida);
+          drawTextBlock(ctx, settings, w, h);
+          var mime = settings.format;
+          var quality = (mime === 'image/png' || mime === 'image/webp') ? undefined : 0.92;
+          var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
+          if (!blob || blob.size === 0) throw new Error('Render returned an empty file. Try a different format.');
+          entry.output = blob;
+          entry.sizes.out = blob.size;
+          entry.status = 'done';
+          var ext = (mime === 'image/png') ? 'png' : (mime === 'image/webp') ? 'webp' : 'jpg';
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-captioned.' + ext);
+          // refresh row preview thumbnail to the new rendered image
+          if (entry.output) {
+            entry.previewUrl = URL.createObjectURL(entry.output);
           }
-        } atrapar (errar) {
-          entrada.status = 'error';
-          entrada.error = err && err.mensaje? mensaje de error: Cadena (err);
+        } catch (err) {
+          entry.status = 'error';
+          entry.error = err && err.message ? err.message : String(err);
         }
-        actualizar UI();
+        refreshUI();
       }
 
-      función asíncrona ejecutarTodos() {
-        var configuración = getConfiguración();
-        runBtn.disabled = verdadero;
-        para (var i = 0; i< files.length; i++) {
+      async function runAll() {
+        var settings = getSettings();
+        runBtn.disabled = true;
+        for (var i = 0; i < files.length; i++) {
           var f = files[i];
           if (f.status === 'done') continue;
-          if (!f.img) continue;
+          if (!f.img) continue; // decode failed earlier; skip silently
           await processOne(f, settings);
         }
         runBtn.disabled = false;
         saveAllBtn.disabled = !files.some(function (f) { return f.status === 'done' && f.output; });
         renderSummary();
-        window.weddingAITool.toast('渲染完成。');
+        window.weddingAITool.toast('Render complete.');
       }
 
       function renderSummary() {
@@ -954,10 +973,10 @@
         var outTotal = done.reduce(function (s, f) { return s + f.sizes.out; }, 0);
         summaryEl.hidden = false;
         summaryEl.innerHTML =
-          '<div><strong>' + done.length + '</strong>Zhang ha añadido texto.</div>' +
-          '<div><strong>Tamaño original:</strong> ' + window.weddingAITool.formatBytes(origTotal) + '</div>' +
-          '<div><strong>Tamaño de salida:</strong> ' + window.weddingAITool.formatBytes(outTotal) + '</div>' +
-          (errs.length ? '<div style="color:#b00020"><strong>' + errores.longitud + ' Error de Zhang</strong>— Elimínelo y vuelva a intentarlo.</div>' : '');
+          '<div><strong>' + done.length + '</strong> captioned</div>' +
+          '<div><strong>Original total:</strong> ' + window.weddingAITool.formatBytes(origTotal) + '</div>' +
+          '<div><strong>Output total:</strong> ' + window.weddingAITool.formatBytes(outTotal) + '</div>' +
+          (errs.length ? '<div style="color:#b00020"><strong>' + errs.length + ' errored</strong> — remove and retry.</div>' : '');
       }
 
       function saveAll() {
@@ -966,7 +985,7 @@
           .map(function (f) { return { name: f.outputName, blob: f.output }; });
         if (outputs.length === 0) return;
         window.weddingAITool.downloadZip(outputs, 'captioned');
-        window.weddingAITool.toast('正在保存 ' + outputs.length + ' 个文件…');
+        window.weddingAITool.toast('Saving ' + outputs.length + ' file' + (outputs.length === 1 ? '' : 's') + '…');
       }
 
       // ---------- wire up ---------------------------------------------------------
@@ -978,6 +997,7 @@
         onFiles: addFiles
       });
 
+      // live-preview triggers
       [primaryTextEl, secondaryTextEl, fontEl, positionEl, primarySizeEl, secondarySizeEl,
        colorEl, shadowToggleEl, shadowOffsetEl, formatEl].forEach(function (el) {
         el.addEventListener('input', function () {
@@ -989,6 +1009,7 @@
         el.addEventListener('change', schedulePreview);
       });
 
+      // color swatches
       Array.prototype.forEach.call(swatchRow.querySelectorAll('.wa-text-swatch'), function (sw) {
         sw.addEventListener('click', function () {
           var c = sw.getAttribute('data-color');
@@ -1000,6 +1021,7 @@
           schedulePreview();
         });
       });
+      // mark default swatch active on first paint
       var defaultSwatch = swatchRow.querySelector('.wa-text-swatch[data-color="' + colorEl.value + '"]');
       if (defaultSwatch) defaultSwatch.classList.add('is-active');
 

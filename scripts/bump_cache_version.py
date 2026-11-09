@@ -17,6 +17,7 @@ Usage:
     python scripts/bump_cache_version.py --asset styles.min.css  # bump one
 """
 import argparse
+import os
 import re
 import sys
 from pathlib import Path
@@ -29,17 +30,51 @@ ASSETS = [
     ("i18n.js", re.compile(r"/js/i18n\.js\?v=(\d+(?:\.\d+)*)")),
     ("main.min.js", re.compile(r"/js/main\.min\.js\?v=(\d+(?:\.\d+)*)")),
     ("styles.min.css", re.compile(r"/styles\.min\.css\?v=(\d+(?:\.\d+)*)")),
+    # Added 2026-11-09: the shared tool layer. common.js gained the vendored
+    # library loader (ZIP / PDF / HEIC / pica) and tools.css gained the
+    # print rules, so both need a stamp bump whenever they change.
+    ("common.js", re.compile(r"/js/tools/common\.js\?v=(\d+(?:\.\d+)*)")),
+    ("tools.css", re.compile(r"/styles/tools\.css\?v=(\d+(?:\.\d+)*)")),
 ]
 
-EXCLUDE_DIRS = {"admin", "qa", "scripts", "__pycache__", "i18n", "js", "styles"}
+EXCLUDE_DIRS = {"admin", "qa", "scripts", "__pycache__", "i18n", "js", "styles",
+                ".git", ".tmp", "node_modules", "__MACOSX", ".github", "internal-docs",
+                "internal-tools", "private"}
+
+
+def iter_html(root: Path):
+    """Yield the project's HTML files, pruning excluded directories.
+
+    pathlib's rglob() walks EVERYTHING below the root - including .git,
+    which holds tens of thousands of loose objects. On this machine that
+    turned a two-second job into a fifteen-minute one (measured
+    2026-11-09: 21 s of CPU in 14 min of wall clock, i.e. blocked on
+    directory I/O rather than computing). os.scandir with explicit pruning
+    is an order of magnitude faster and cannot wander into .git.
+    """
+    stack = [root]
+    while stack:
+        current = stack.pop()
+        try:
+            entries = list(os.scandir(current))
+        except (PermissionError, OSError):
+            continue
+        for entry in entries:
+            try:
+                if entry.is_dir(follow_symlinks=False):
+                    if entry.name in EXCLUDE_DIRS or entry.name.startswith("."):
+                        if entry.name != ".":
+                            continue
+                    stack.append(Path(entry.path))
+                elif entry.name.endswith(".html"):
+                    yield Path(entry.path)
+            except OSError:
+                continue
 
 
 def find_current_versions() -> dict[str, str]:
     """Read version from index.html (or first HTML that has all three)."""
-    candidates = sorted(
-        p for p in ROOT.rglob("*.html")
-        if not (set(p.parts) & EXCLUDE_DIRS)
-    )
+    candidates = sorted(iter_html(ROOT))
     versions: dict[str, str] = {}
     for p in candidates:
         text = p.read_text(encoding="utf-8", errors="ignore")
@@ -58,11 +93,38 @@ def find_current_versions() -> dict[str, str]:
 
 
 def bump(version: str) -> str:
-    """Bump a semver-ish version: '3.18' -> '3.19', '3.21' -> '3.22'."""
-    if "." in version:
-        major, minor = version.split(".", 1)
-        return f"{major}.{int(minor) + 1}"
+    """Bump a semver-ish version.
+
+    '3.18' -> '3.19', '3.21' -> '3.22', '1.0.0' -> '1.0.1'.
+
+    The tool assets are stamped with a THREE-part version (common.js and
+    tools.css were introduced as 1.0.0), while the older site assets use
+    two parts (main.min.js 3.21). Both have to work: splitting '1.0.0' on
+    the first dot and calling int() on '0.0' raises ValueError.
+    """
+    parts = version.split(".")
+    if len(parts) >= 3:
+        parts[-1] = str(int(parts[-1]) + 1)
+        return ".".join(parts)
+    if len(parts) == 2:
+        return f"{parts[0]}.{int(parts[1]) + 1}"
     return str(int(version) + 1)
+
+
+def write_atomic(path: Path, text: str) -> None:
+    """Write via a temp file + os.replace.
+
+    A plain write_text() truncates the target BEFORE the write, so an
+    interrupted run leaves a 0-byte HTML file (this happened to i18n/ja.json
+    on 2026-10-30). os.replace() is atomic on Windows: the destination is
+    either the old content or the new content, never a half-written file.
+    """
+    tmp = path.with_name(path.name + ".tmpwrite")
+    with open(tmp, "w", encoding="utf-8", newline="") as fh:
+        fh.write(text)
+        fh.flush()
+        os.fsync(fh.fileno())
+    os.replace(tmp, path)
 
 
 def apply_to_file(path: Path, asset: str, new_version: str, dry: bool) -> int:
@@ -78,7 +140,7 @@ def apply_to_file(path: Path, asset: str, new_version: str, dry: bool) -> int:
 
     new_text = pat.sub(repl, text)
     if changes and not dry:
-        path.write_text(new_text, encoding="utf-8")
+        write_atomic(path, new_text)
     return changes
 
 
@@ -100,10 +162,7 @@ def main():
     for name in targets:
         print(f"  {name}: ?v={versions[name]} -> ?v={new_versions[name]}")
 
-    html_files = [
-        p for p in ROOT.rglob("*.html")
-        if not (set(p.parts) & EXCLUDE_DIRS)
-    ]
+    html_files = list(iter_html(ROOT))
     print(f"\nScanning {len(html_files)} HTML files")
 
     total = 0

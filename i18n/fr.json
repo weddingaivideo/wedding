@@ -44165,7 +44165,7 @@
   "tools.wedding-seating-chart-maker.th_text.video_tie_in.7q8r9s0t": "Lien vidéo",
   "tools.wedding-seating-chart-maker.td_text.unlimited_500_tested.5y6z7a8b": "<strong>Unlimited, 500+ tested</strong>",
   "tools.wedding-seating-chart-maker.td_text.ai_nooverlap_groups_vip.9c0d1e2f": "<strong>Auto-assignation par groupe + VIP, sans chevauchement</strong>",
-  "tools.wedding-seating-chart-maker.td_text.printable_png_pdf_share_link.3g4h5i6j": "PNG imprimable + PDF + lien de partage",
+  "tools.wedding-seating-chart-maker.td_text.printable_png_pdf_share_link.3g4h5i6j": "PNG imprimable + PDF",
   "tools.wedding-seating-chart-maker.td_text.seatplanio.1o2p3q4r": "SeatPlan.io (seatplan.io)",
   "tools.wedding-seating-chart-maker.td_text.unlimited_free_no_signup.5s6t7u8v": "Illimité, gratuit, sans inscription",
   "tools.wedding-seating-chart-maker.td_text.drag_drop_no_ai.9w0x1y2z": "Glisser-déposer, sans IA",
@@ -62621,4 +62621,157 @@
   "blog.make-first-ai-wedding-video.p_text.version_multilingueservicespersonalizationmultilin.40a9dcf4": "**🌍 <a href=\"/services/personalization/multilingual/\">Version multilingue</a>**",
   "blog.make-first-ai-wedding-video.p_text.hommage_familialservicesabsence_compensationfamily.4f3a9388": "**👵 <a href=\"/services/absence-compensation/family-tribute/\">Hommage familial</a>**",
   "tools.card.cta.video_link": "Vidéo →",
-  "tools.card.badge.edit.06": "14 polices"}
+  "tools.card.badge.edit.06": "14 polices",
+  "pricing.td_text.reply_within_24_hrs.zzzzzz1": "R&eacute;ponse sous 24 heures",
+  "pricing.td_text.not_sure_yet_sofia_recommends.zzzzzz1": "Pas encore s&ucirc;r (e) &mdash; Sofia vous proposera le meilleur ajustement",
+  "order.validation.is_required.zzzzzz1": "{field} est obligatoire",
+  "order.validation.invalid_email.zzzzzz2": "Veuillez saisir une adresse e-mail valide",
+  "order.validation.error_prefix.zzzzzz3": "Veuillez corriger ce qui suit : ",
+  "order.validation.error_separator.zzzzzz4": " ; ",
+  "order.validation.sending.zzzzzz5": "Envoi de votre demande…",
+  "order.validation.sending_button.zzzzzz6": "Envoi…",
+  "order.validation.fill_in_prefix.zzzzzz7": "Veuillez remplir : ",
+  "order.validation.fill_in_separator.zzzzzz8": ", ",
+  "success.validation.copied.zzzzzz1": "✓ Copié",
+  "success.validation.pending_headline.zzzzzz2": "Nous avons bien reçu votre demande",
+  "success.validation.pending_summary.zzzzzz3": "Vos informations sont enregistrées et notre équipe vous répondra sous 24 heures. L'e-mail de confirmation automatique n'a pas été envoyé à la première tentative — vous n'avez rien à faire.",
+  "success.validation.followup_subject.zzzzzz4": "Suivi de mon devis {ref}",
+  "success.validation.followup_body.zzzzzz5": "Bonjour,\n\nJe relance ma demande de devis {ref}. Je n'ai pas encore reçu d'e-mail de confirmation.\n\nMerci !",
+  "search.copy.results_for.zzzzzz1": "Résultats pour &ldquo;{query}&rdquo;",
+  "search.copy.showing.zzzzzz2": "Affichage des services et pages correspondants.",
+  "search.copy.no_matches.zzzzzz3": "Aucun résultat pour &ldquo;{query}&rdquo;. Essayez l&rsquo;une des recherches populaires ci-dessus ou <a href=\"/order/\" style=\"color: var(--color-primary); text-decoration: underline;\">envoyez-nous une demande</a> et nous vous indiquerons le bon service.",
+  "tools.copy.original.zzzzzz919c": "Original : ",
+  "tools.copy.output.zzzzzz78e6": "Sortie : ",
+  "tools.copy.download.zzzzzzfd45": "Télécharger",
+  "tools.copy.remove.zzzzzz0f69": "Retirer",
+  "tools.copy.working.zzzzzzc327": "Traitement",
+  "tools.copy.preview.zzzzzz5ebe": "aperçu",
+  "tools.copy.captioned.zzzzzz9233": "avec texte",
+  "tools.copy.errored.zzzzzzd787": "{n} en erreur",
+  "tools.copy.erroredHint.zzzzzz4100": " — retirez-les et réessayez.",
+  "tools.copy.originalTotal.zzzzzz1bb2": "Total original :",
+  "tools.copy.outputTotal.zzzzzz1011": "Total de sortie :",
+  "tools.copy.totalSaved.zzzzzz86d9": "Total économisé :",
+  "tools.copy.totalOutput.zzzzzz565d": "Sortie totale :",
+  "tools.copy.noSupportedFiles.zzzzzz19c5": "Aucun fichier pris en charge. Essayez un JPG, PNG ou WebP.",
+  "tools.copy.noSupportedFilesShort.zzzzzz3dae": "Aucun fichier pris en charge. Essayez un JPG, PNG ou WebP.",
+  "tools.copy.renderEmpty.zzzzzzbf0d": "Le rendu a renvoyé un fichier vide. Essayez un autre format.",
+  "tools.copy.renderComplete.zzzzzzfca1": "Rendu terminé.",
+  "tools.copy.compressEmpty.zzzzzz6fba": "La compression a renvoyé un fichier vide. Essayez un autre format.",
+  "tools.copy.compressComplete.zzzzzzd8f0": "Compression terminée.",
+  "tools.copy.imageNoDimensions.zzzzzz916e": "L'image n'a pas de dimensions. Essayez un autre fichier.",
+  "tools.copy.invalidOutputDims.zzzzzz0828": "Les dimensions de sortie calculées sont invalides.",
+  "tools.copy.cropEmpty.zzzzzzc76e": "Le recadrage a renvoyé un fichier vide. Essayez une autre image.",
+  "tools.copy.cropComplete.zzzzzz4d32": "Recadrage terminé.",
+  "tools.copy.photoLoaded.zzzzzz5d9b": "<strong>Photo chargéeée :</strong>",
+  "tools.copy.photoLoadedHint.zzzzzzcace": "s'affiche dans le canevas ci-dessous. Retirez cette carte pour effacer la photo à tout moment.",
+  "tools.copy.savedDot.zzzzzz2111": "Enregistré · ",
+  "tools.copy.resetFieldsConfirm.zzzzzze493": "Réinitialiser tous les champs et le modèle sélectionné ?",
+  "tools.copy.typeNameHint.zzzzzzee29": "Saisissez au moins un nom pour voir des idées.",
+  "tools.copy.noIdeasMatch.zzzzzz3f78": "Aucune idée ne correspond aux styles actifs — activez-en au moins un.",
+  "tools.copy.ideasEmpty.zzzzzz66f4": "Vos idées apparaîtront ici.",
+  "tools.copy.tryMoreStyles.zzzzzze8c3": "Essayez d'activer d'autres styles ci-dessus.",
+  "tools.copy.ideasCountHint.zzzzzz1e2c": "idées · cliquez pour copier · touchez un style pour filtrer.",
+  "tools.copy.copiedDot.zzzzzz5ccd": "Copié · ",
+  "tools.copy.savedPrint.zzzzzzcb0c": "5×7 (1500×2100) enregistré — prêt à imprimer",
+  "tools.copy.savedSocial.zzzzzz6a27": "1080×1350 enregistré — prêt pour WhatsApp/Instagram",
+  "tools.copy.resetBookConfirm.zzzzzzd17b": "Réinitialiser tout le livre ? Les photos seront effacées.",
+  "tools.copy.noMorePhotos.zzzzzze783": "Plus de photos disponibles. Ajoutez des photos ou libérez d'autres emplacements.",
+  "tools.copy.addPhotosFirst.zzzzzzbab5": "Ajoutez d'abord quelques photos.",
+  "tools.copy.clearAssignmentsConfirm.zzzzzz9ae9": "Effacer toutes les attributions de pages ?",
+  "tools.copy.noPhotosYet.zzzzzzc9c7": "Pas encore de photos. Déposez-en ci-dessus.",
+  "tools.copy.coverPage.zzzzzz4328": "Page de couverture — utilise le titre, la date et la devise.",
+  "tools.copy.distributed.zzzzzz8201": "{n} photos réparties sur les pages",
+  "tools.copy.downloadAllPages.zzzzzzb805": "Télécharger les {n} pages ? Les navigateurs peuvent mettre plusieurs téléchargements en file.",
+  "tools.copy.layoutUses.zzzzzzcbfc": "La mise en page utilise {n} photos",
+  "tools.copy.extrasIgnored.zzzzzz10de": "{n} supplémentaires ignorées.",
+  "tools.copy.buildCollage.zzzzzz5d82": "Créer le collage",
+  "tools.copy.building.zzzzzz1b20": "Création…",
+  "tools.copy.needTwoPhotos.zzzzzze83c": "Il faut au moins 2 photos lisibles.",
+  "tools.copy.addAtLeastTwo.zzzzzz82ea": "Ajoutez au moins 2 photos pour créer un collage.",
+  "tools.copy.encodePngFailed.zzzzzz8e47": "Impossible d'encoder la sortie PNG.",
+  "tools.copy.collageBuilt.zzzzzz34d2": "Collage créé. Cliquez sur Télécharger le PNG pour enregistrer.",
+  "tools.copy.savedFrames.zzzzzzf7f9": "5 images enregistrées — montez-les dans CapCut / iMovie",
+  "tools.copy.dropPhoto.zzzzzz1286": "Déposez une photo ici ou cliquez pour parcourir",
+  "tools.copy.zipFailed.zzzzzz4a1b": "Impossible de créer l'archive ZIP"
+,
+  "tools.copy.pdfFailed.zzzzzz4b2c": "Impossible de créer le PDF"
+,
+  "tools.copy.pdfReady.zzzzzz4c3d": "PDF prêt"
+,
+  "tools.copy.heicDecoding.zzzzzz4d4e": "Décodage HEIC…"
+,
+  "tools.copy.heicDecodeFailed.zzzzzz4e5f": "Impossible de décoder ce fichier HEIC"
+,
+  "tools.copy.aiModelLoading.zzzzzz4f6a": "Chargement du modèle IA…"
+,
+  "tools.copy.aiRemoveFailed.zzzzzz4a7b": "Impossible de supprimer l'arrière-plan"
+,
+  "tools.copy.videoEncoding.zzzzzz4b8c": "Encodage de la vidéo…"
+,
+  "tools.copy.videoEncodeFailed.zzzzzz4c9d": "Impossible d'encoder la vidéo"
+,
+  "tools.copy.browserNoWebcodecs.zzzzzz4d0e": "Votre navigateur ne peut pas encoder la vidéo dans la page (WebCodecs non pris en charge). Téléchargez les images PNG."
+,
+  "tools.copy.cropApply.zzzzzz4e1f": "Appliquer"
+,
+  "tools.copy.cropReset.zzzzzz4f2a": "Réinitialiser"
+,
+  "tools.copy.cropCancel.zzzzzz4a3b": "Annuler"
+,
+  "tools.copy.aiRemoveBackground.zzzzzz4b4c": "Supprimer l'arrière-plan par IA"
+,
+  "tools.copy.aiModelNotice.zzzzzz4c5d": "La première exécution télécharge le modèle d'IA (~17 Mo) une fois, puis fonctionne hors ligne. Votre photo ne quitte jamais cet appareil."
+,
+  "tools.copy.seatTemplateClassic.zzzzzz5a01": "Réception classique (8 tours de 8)"
+,
+  "tools.copy.seatTemplateLong.zzzzzz5a02": "Banquet long (3 tables de 12)"
+,
+  "tools.copy.seatTemplateIntimate.zzzzzz5a03": "Intime (5 tours de 6 + table des mariés)"
+,
+  "tools.copy.seatTemplateUShape.zzzzzz5a04": "En U avec table des mariés"
+,
+  "tools.copy.seatExportPng.zzzzzz5a05": "Exporter le PNG (1600×1200)"
+,
+  "tools.copy.seatPrint.zzzzzz5a06": "Imprimer"
+,
+  "tools.copy.seatDownloadPdf.zzzzzz5a07": "Télécharger le PDF"
+,
+  "tools.copy.seatChartTitle.zzzzzz5a08": "Plan de table du mariage"
+,
+  "tools.copy.seatSavedPng.zzzzzz5a09": "PNG 1600×1200 enregistré"
+,
+  "tools.copy.seatSavedPdf.zzzzzz5a0a": "PDF enregistré"
+,
+  "tools.copy.heicComplete.zzzzzz6b01": "Conversion terminée."
+,
+  "tools.copy.noHeicFiles.zzzzzz6b02": "Aucun fichier HEIC/HEIF trouvé. Déposez des fichiers .heic ou .heif."
+,
+  "tools.copy.heicSaving.zzzzzz6b03": "Enregistrement de {n} fichier(s)…"
+,
+  "tools.copy.heicConvertedToJpg.zzzzzz6b04": "convertis en JPG"
+,
+  "tools.copy.heicTotalNow.zzzzzz6b05": "Total maintenant :"
+,
+  "tools.copy.heicZeroConverted.zzzzzz6b06": "convertis — ce fichier n'a pas pu être décodé."
+,
+  "tools.copy.heicErrored.zzzzzz6b07": "en erreur — ce fichier n'a pas pu être décodé."
+,
+  "tools.copy.cropStageTitle.zzzzzz6c01": "Ajuster le recadrage"
+,
+  "tools.copy.cropStageHint.zzzzzz6c02": "Faites glisser les coins pour cadrer la photo. Celles que vous ne touchez pas conservent le recadrage automatique centré."
+,
+  "tools.copy.cropPrev.zzzzzz6c03": "Photo précédente"
+,
+  "tools.copy.cropNext.zzzzzz6c04": "Photo suivante"
+,
+  "tools.copy.cropPos.zzzzzz6c05": "Photo {n} sur {m}"
+,
+  "tools.copy.cropPosManual.zzzzzz6c06": "Photo {n} sur {m} — recadrage manuel"
+,
+  "tools.copy.bgMethod.zzzzzz7a01": "Méthode de suppression de l'arrière-plan"
+,
+  "tools.copy.bgMethodColor.zzzzzz7a02": "Clé de couleur intelligente (instantané, sans téléchargement)"
+,
+  "tools.copy.bgMethodAi.zzzzzz7a03": "Détourage par IA (MODNet : téléchargement unique d'environ 17 Mo, exécuté sur votre appareil)"
+}

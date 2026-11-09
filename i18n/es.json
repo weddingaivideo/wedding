@@ -42365,7 +42365,7 @@
   "tools.wedding-seating-chart-maker.td_text.weddingaivideo.1u2v3w4x": "<strong>WeddingAI.video Creador Plano de Mesas</strong> (esta herramienta)",
   "tools.wedding-seating-chart-maker.td_text.unlimited_500_tested.5y6z7a8b": "<strong>Ilimitado, 500+ probados</strong>",
   "tools.wedding-seating-chart-maker.td_text.ai_nooverlap_groups_vip.9c0d1e2f": "<strong>Auto-asignar por grupo + VIP, sin solapamiento</strong>",
-  "tools.wedding-seating-chart-maker.td_text.printable_png_pdf_share_link.3g4h5i6j": "PNG + PDF + enlace compartible",
+  "tools.wedding-seating-chart-maker.td_text.printable_png_pdf_share_link.3g4h5i6j": "PNG + PDF",
   "tools.wedding-seating-chart-maker.td_text.same_workflow_99_video.7k8l9m0n": "<strong>Mismo flujo que créditos video </strong>",
   "tools.wedding-seating-chart-maker.td_text.seatplanio.1o2p3q4r": "Planning.Wedding (planning.wedding/seating-chart)",
   "tools.wedding-seating-chart-maker.td_text.5_0_429.5s6t7u8v": "5.0★ (429 reseñas)",
@@ -62904,4 +62904,157 @@
   "blog.photographer-upsell-video.p_text.comienza_hoy_con_las_herramientas_de_video_ia_de_w.e49ba0fc": "👉 <a href=\"/services/personalization/ai-video-generator/\">Comienza hoy con las herramientas de video IA de WeddingAI</a> y descubre un nuevo flujo de ingresos que tus clientes van a amar.",
   "tools.card.cta.video_link": "Vídeo →",
   "blog.ai-editor-vs-traditional-editing.title_text.edicin_tradicional_vs_ia_la_revolucin_en_los_video.b3f253c3": "Edición Tradicional vs IA: ¿Cuál Elegir?",
-  "tools.card.badge.edit.06": "14 fuentes"}
+  "tools.card.badge.edit.06": "14 fuentes",
+  "pricing.td_text.reply_within_24_hrs.zzzzzz1": "Respuesta en 24 horas",
+  "pricing.td_text.not_sure_yet_sofia_recommends.zzzzzz1": "A&uacute;n no lo tienes claro &mdash; Sofia recomendar&aacute; el que mejor se adapte",
+  "order.validation.is_required.zzzzzz1": "{field} es obligatorio",
+  "order.validation.invalid_email.zzzzzz2": "Introduzca una dirección de correo electrónico válida",
+  "order.validation.error_prefix.zzzzzz3": "Corrija lo siguiente: ",
+  "order.validation.error_separator.zzzzzz4": "; ",
+  "order.validation.sending.zzzzzz5": "Enviando su solicitud…",
+  "order.validation.sending_button.zzzzzz6": "Enviando…",
+  "order.validation.fill_in_prefix.zzzzzz7": "Complete lo siguiente: ",
+  "order.validation.fill_in_separator.zzzzzz8": ", ",
+  "success.validation.copied.zzzzzz1": "✓ Copiado",
+  "success.validation.pending_headline.zzzzzz2": "Hemos recibido su solicitud",
+  "success.validation.pending_summary.zzzzzz3": "Sus datos están guardados y nuestro equipo se pondrá en contacto con usted en un plazo de 24 horas. El correo electrónico de confirmación automático no se envió en el primer intento: no necesita hacer nada.",
+  "success.validation.followup_subject.zzzzzz4": "Seguimiento de mi presupuesto {ref}",
+  "success.validation.followup_body.zzzzzz5": "Hola,\n\nSigo el estado de mi solicitud de presupuesto {ref}. Todavía no he recibido el correo de confirmación.\n\n¡Gracias!",
+  "search.copy.results_for.zzzzzz1": "Resultados para &ldquo;{query}&rdquo;",
+  "search.copy.showing.zzzzzz2": "Mostrando servicios y páginas coincidentes.",
+  "search.copy.no_matches.zzzzzz3": "Sin resultados para &ldquo;{query}&rdquo;. Pruebe una de las búsquedas populares de arriba o <a href=\"/order/\" style=\"color: var(--color-primary); text-decoration: underline;\">envíenos una solicitud</a> y le indicaremos el servicio adecuado.",
+  "tools.copy.original.zzzzzz919c": "Original: ",
+  "tools.copy.output.zzzzzz78e6": "Salida: ",
+  "tools.copy.download.zzzzzzfd45": "Descargar",
+  "tools.copy.remove.zzzzzz0f69": "Quitar",
+  "tools.copy.working.zzzzzzc327": "Procesando",
+  "tools.copy.preview.zzzzzz5ebe": "vista previa",
+  "tools.copy.captioned.zzzzzz9233": "con texto",
+  "tools.copy.errored.zzzzzzd787": "{n} con error",
+  "tools.copy.erroredHint.zzzzzz4100": " — quítelas y vuelve a intentarlo.",
+  "tools.copy.originalTotal.zzzzzz1bb2": "Total original:",
+  "tools.copy.outputTotal.zzzzzz1011": "Total de salida:",
+  "tools.copy.totalSaved.zzzzzz86d9": "Total ahorrado:",
+  "tools.copy.totalOutput.zzzzzz565d": "Salida total:",
+  "tools.copy.noSupportedFiles.zzzzzz19c5": "No hay archivos compatibles. Prueba con JPG, PNG o WebP.",
+  "tools.copy.noSupportedFilesShort.zzzzzz3dae": "No hay archivos compatibles. Prueba con JPG, PNG o WebP.",
+  "tools.copy.renderEmpty.zzzzzzbf0d": "La renderización devolvió un archivo vacío. Prueba con otro formato.",
+  "tools.copy.renderComplete.zzzzzzfca1": "Renderizado completado.",
+  "tools.copy.compressEmpty.zzzzzz6fba": "La compresión devolvió un archivo vacío. Prueba con otro formato.",
+  "tools.copy.compressComplete.zzzzzzd8f0": "Compresión completada.",
+  "tools.copy.imageNoDimensions.zzzzzz916e": "La imagen no tiene dimensiones. Prueba con otro archivo.",
+  "tools.copy.invalidOutputDims.zzzzzz0828": "Las dimensiones de salida calculadas no son válidas.",
+  "tools.copy.cropEmpty.zzzzzzc76e": "El recorte devolvió un archivo vacío. Prueba con otra imagen.",
+  "tools.copy.cropComplete.zzzzzz4d32": "Recorte completado.",
+  "tools.copy.photoLoaded.zzzzzz5d9b": "<strong>Foto cargada:</strong>",
+  "tools.copy.photoLoadedHint.zzzzzzcace": "se muestra en el lienzo de abajo. Puedes quitar esta tarjeta para borrar la foto en cualquier momento.",
+  "tools.copy.savedDot.zzzzzz2111": "Guardado · ",
+  "tools.copy.resetFieldsConfirm.zzzzzze493": "¿Restablecer todos los campos y la plantilla seleccionada?",
+  "tools.copy.typeNameHint.zzzzzzee29": "Escribe al menos un nombre para ver ideas.",
+  "tools.copy.noIdeasMatch.zzzzzz3f78": "Ninguna idea coincide con los estilos activos: activa al menos uno.",
+  "tools.copy.ideasEmpty.zzzzzz66f4": "Tus ideas aparecerán aquí.",
+  "tools.copy.tryMoreStyles.zzzzzze8c3": "Prueba a activar más estilos arriba.",
+  "tools.copy.ideasCountHint.zzzzzz1e2c": "ideas · haz clic en cualquiera para copiarla · toca un estilo para filtrar.",
+  "tools.copy.copiedDot.zzzzzz5ccd": "Copiado · ",
+  "tools.copy.savedPrint.zzzzzzcb0c": "5×7 (1500×2100) guardado: listo para imprimir",
+  "tools.copy.savedSocial.zzzzzz6a27": "1080×1350 guardado: listo para WhatsApp/Instagram",
+  "tools.copy.resetBookConfirm.zzzzzzd17b": "¿Restablecer todo el libro? Se borrarán las fotos.",
+  "tools.copy.noMorePhotos.zzzzzze783": "No quedan fotos disponibles. Añade más fotos o vacía otras casillas.",
+  "tools.copy.addPhotosFirst.zzzzzzbab5": "Añade primero algunas fotos.",
+  "tools.copy.clearAssignmentsConfirm.zzzzzz9ae9": "¿Borrar todas las asignaciones de página?",
+  "tools.copy.noPhotosYet.zzzzzzc9c7": "Todavía no hay fotos. Suelta algunas arriba.",
+  "tools.copy.coverPage.zzzzzz4328": "Página de portada: usa el título, la fecha y el lema.",
+  "tools.copy.distributed.zzzzzz8201": "{n} fotos repartidas entre las páginas",
+  "tools.copy.downloadAllPages.zzzzzzb805": "¿Descargar las {n} páginas? Los navegadores pueden encolar varias descargas.",
+  "tools.copy.layoutUses.zzzzzzcbfc": "La composición usa {n} fotos",
+  "tools.copy.extrasIgnored.zzzzzz10de": "Se ignoran {n} adicionales.",
+  "tools.copy.buildCollage.zzzzzz5d82": "Crear collage",
+  "tools.copy.building.zzzzzz1b20": "Creando…",
+  "tools.copy.needTwoPhotos.zzzzzze83c": "Se necesitan al menos 2 fotos legibles.",
+  "tools.copy.addAtLeastTwo.zzzzzz82ea": "Añade al menos 2 fotos para crear un collage.",
+  "tools.copy.encodePngFailed.zzzzzz8e47": "No se pudo codificar la salida PNG.",
+  "tools.copy.collageBuilt.zzzzzz34d2": "Collage creado. Pulsa Descargar PNG para guardarlo.",
+  "tools.copy.savedFrames.zzzzzzf7f9": "5 fotogramas guardados: compóntelos en CapCut / iMovie",
+  "tools.copy.dropPhoto.zzzzzz1286": "Suelta una foto aquí o haz clic para buscar",
+  "tools.copy.zipFailed.zzzzzz4a1b": "No se pudo crear el archivo ZIP"
+,
+  "tools.copy.pdfFailed.zzzzzz4b2c": "No se pudo crear el PDF"
+,
+  "tools.copy.pdfReady.zzzzzz4c3d": "PDF listo"
+,
+  "tools.copy.heicDecoding.zzzzzz4d4e": "Decodificando HEIC…"
+,
+  "tools.copy.heicDecodeFailed.zzzzzz4e5f": "No se pudo decodificar este archivo HEIC"
+,
+  "tools.copy.aiModelLoading.zzzzzz4f6a": "Cargando el modelo de IA…"
+,
+  "tools.copy.aiRemoveFailed.zzzzzz4a7b": "No se pudo quitar el fondo"
+,
+  "tools.copy.videoEncoding.zzzzzz4b8c": "Codificando vídeo…"
+,
+  "tools.copy.videoEncodeFailed.zzzzzz4c9d": "No se pudo codificar el vídeo"
+,
+  "tools.copy.browserNoWebcodecs.zzzzzz4d0e": "Tu navegador no puede codificar vídeo en la página (no admite WebCodecs). Descarga los fotogramas PNG."
+,
+  "tools.copy.cropApply.zzzzzz4e1f": "Aplicar"
+,
+  "tools.copy.cropReset.zzzzzz4f2a": "Restablecer"
+,
+  "tools.copy.cropCancel.zzzzzz4a3b": "Cancelar"
+,
+  "tools.copy.aiRemoveBackground.zzzzzz4b4c": "Quitar el fondo con IA"
+,
+  "tools.copy.aiModelNotice.zzzzzz4c5d": "La primera ejecución descarga el modelo de IA (~17 MB) una vez y luego funciona sin conexión. Tu foto nunca sale de este dispositivo."
+,
+  "tools.copy.seatTemplateClassic.zzzzzz5a01": "Recepción clásica (8 rondas de 8)"
+,
+  "tools.copy.seatTemplateLong.zzzzzz5a02": "Banquete largo (3 mesas de 12)"
+,
+  "tools.copy.seatTemplateIntimate.zzzzzz5a03": "Íntimo (5 rondas de 6 + mesa de novios)"
+,
+  "tools.copy.seatTemplateUShape.zzzzzz5a04": "Forma de U con mesa principal"
+,
+  "tools.copy.seatExportPng.zzzzzz5a05": "Exportar PNG (1600×1200)"
+,
+  "tools.copy.seatPrint.zzzzzz5a06": "Imprimir"
+,
+  "tools.copy.seatDownloadPdf.zzzzzz5a07": "Descargar PDF"
+,
+  "tools.copy.seatChartTitle.zzzzzz5a08": "Plano de asientos de la boda"
+,
+  "tools.copy.seatSavedPng.zzzzzz5a09": "PNG de 1600×1200 guardado"
+,
+  "tools.copy.seatSavedPdf.zzzzzz5a0a": "PDF guardado"
+,
+  "tools.copy.heicComplete.zzzzzz6b01": "Conversión completada."
+,
+  "tools.copy.noHeicFiles.zzzzzz6b02": "No se encontraron archivos HEIC/HEIF. Arrastra archivos .heic o .heif."
+,
+  "tools.copy.heicSaving.zzzzzz6b03": "Guardando {n} archivo(s)…"
+,
+  "tools.copy.heicConvertedToJpg.zzzzzz6b04": "convertidos a JPG"
+,
+  "tools.copy.heicTotalNow.zzzzzz6b05": "Total ahora:"
+,
+  "tools.copy.heicZeroConverted.zzzzzz6b06": "convertidos: no se pudo decodificar este archivo."
+,
+  "tools.copy.heicErrored.zzzzzz6b07": "con error: no se pudo decodificar este archivo."
+,
+  "tools.copy.cropStageTitle.zzzzzz6c01": "Ajustar el recorte"
+,
+  "tools.copy.cropStageHint.zzzzzz6c02": "Arrastra las esquinas para encuadrar la foto. Las que no toques conservan el recorte automático centrado."
+,
+  "tools.copy.cropPrev.zzzzzz6c03": "Foto anterior"
+,
+  "tools.copy.cropNext.zzzzzz6c04": "Foto siguiente"
+,
+  "tools.copy.cropPos.zzzzzz6c05": "Foto {n} de {m}"
+,
+  "tools.copy.cropPosManual.zzzzzz6c06": "Foto {n} de {m} — recorte manual"
+,
+  "tools.copy.bgMethod.zzzzzz7a01": "Método de eliminación de fondo"
+,
+  "tools.copy.bgMethodColor.zzzzzz7a02": "Clave de color inteligente (instantánea, sin descarga)"
+,
+  "tools.copy.bgMethodAi.zzzzzz7a03": "Recorte con IA (MODNet: descarga única de ~17 MB, se ejecuta en tu dispositivo)"
+}

@@ -43,11 +43,11 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Ferramentas WeddingAI">
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <!-- Caption fonts used on the rendered canvas. Loaded via Google Fonts. -->
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
@@ -136,6 +136,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ywxiu97hg8");
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
@@ -358,6 +367,7 @@
                 <div class="wa-tool-actions">
                     <button type="button" class="btn btn-primary" id="run-btn" disabled>Montar colagem</button>
                     <button type="button" class="btn btn-primary" id="download-btn" disabled>Baixar PNG</button>
+                    <button type="button" class="btn btn-primary" id="download-pdf-btn" disabled>Baixar PDF</button>
                     <button type="button" class="btn btn-secondary" id="clear-btn">Limpar</button>
                 </div>
                 <div class="wa-tool-summary" id="summary" hidden></div>
@@ -641,6 +651,7 @@
       var empty = document.getElementById('empty-state');
       var runBtn = document.getElementById('run-btn');
       var downloadBtn = document.getElementById('download-btn');
+      var downloadPdfBtn = document.getElementById('download-pdf-btn');
       var clearBtn = document.getElementById('clear-btn');
       var layoutGrid = document.getElementById('layout-grid');
       var layoutInput = document.getElementById('layout');
@@ -658,12 +669,12 @@
 
       // Layout definitions — rows × cols + count expected for each.
       var LAYOUTS = {
-        'grid-2x2':  { rows: 2, cols: 2, count: 4,  help: '2 × 2 — 4 fotos. Melhor para: save-the-dates, quadrados de redes sociais.' },
-        'grid-2x3':  { rows: 2, cols: 3, count: 6,  help: '2 × 3 — 6 fotos. Melhor para: cartões de agradecimento, presentes para os pais.' },
-        'grid-3x3':  { rows: 3, cols: 3, count: 9,  help: '3 × 3 — 9 fotos. Melhor para: carrosséis do Instagram, impressões clássicas 13×13 cm.' },
-        'grid-3x4':  { rows: 3, cols: 4, count: 12, help: '3 × 4 — 12 fotos. Melhor para: encartes de álbum dos pais, posts de recapitulação do dia inteiro.' },
-        'strip-h':   { rows: 1, cols: 5, count: 5,  help: 'Faixa horizontal — 5 em linha. Melhor para: cabeçalhos de blog, capas do Facebook, enquadres panorâmicos.' },
-        'strip-v':   { rows: 5, cols: 1, count: 5,  help: 'Faixa vertical — 5 em coluna. Melhor para: carrosséis verticais do Instagram, DMs de save-the-date.' }
+        'grid-2x2':  { rows: 2, cols: 2, count: 4,  help: '2 × 2 — 4 photos. Best for: save-the-date cards, social media squares.' },
+        'grid-2x3':  { rows: 2, cols: 3, count: 6,  help: '2 × 3 — 6 photos. Best for: thank-you cards, parent gifts.' },
+        'grid-3x3':  { rows: 3, cols: 3, count: 9,  help: '3 × 3 — 9 photos. Best for: Instagram carousels, classic 5×5 prints.' },
+        'grid-3x4':  { rows: 3, cols: 4, count: 12, help: '3 × 4 — 12 photos. Best for: parent album inserts, full-day recap posts.' },
+        'strip-h':   { rows: 1, cols: 5, count: 5,  help: 'Horizontal strip — 5 in a row. Best for: blog headers, Facebook covers, panoramic frames.' },
+        'strip-v':   { rows: 5, cols: 1, count: 5,  help: 'Vertical strip — 5 in a column. Best for: Instagram portrait carousels, save-the-date DMs.' }
       };
 
       // Aspect ratio → canvas pixel dimensions (long edge ~1440 px max for print quality).
@@ -696,6 +707,7 @@
         runBtn.disabled = files.length < 2;
         // Download is only enabled once we've built at least one collage successfully.
         downloadBtn.disabled = !lastBlob;
+        downloadPdfBtn.disabled = !lastBlob;
         if (window.weddingAITool && window.weddingAITool.renderFileList) {
           window.weddingAITool.renderFileList(list, files, function () {});
           Array.prototype.forEach.call(list.children, function (row, i) {
@@ -722,7 +734,7 @@
           });
         });
         if (files.length === before) {
-          window.weddingAITool.toast('Nenhum arquivo compatível. Tente JPG, PNG ou WebP.', 'error');
+          window.weddingAITool.toast('No supported files. Try JPG, PNG, or WebP.', 'error');
           return;
         }
         // Decoded images are loaded lazily inside runBuild() — keeps drop responsive on big batches.
@@ -894,18 +906,18 @@
 
       async function runBuild() {
         if (files.length < 2) {
-          window.weddingAITool.toast('Adicione pelo menos 2 fotos para montar uma colagem.', 'error');
+          window.weddingAITool.toast('Add at least 2 photos to build a collage.', 'error');
           return;
         }
         runBtn.disabled = true;
-        runBtn.textContent = 'Montando…';
+        runBtn.textContent = 'Building…';
 
         try {
           await loadAllImages();
           var okFiles = files.filter(function (f) { return f.status !== 'error' && f.img; });
           var errCount = files.length - okFiles.length;
           if (okFiles.length < 2) {
-            window.weddingAITool.toast('São necessárias pelo menos 2 fotos legíveis.', 'error');
+            window.weddingAITool.toast('Need at least 2 readable photos.', 'error');
             return;
           }
 
@@ -914,7 +926,7 @@
           var layout = LAYOUTS[key];
           var used = Math.min(images.length, layout.count);
           if (images.length > layout.count) {
-            window.weddingAITool.toast('O layout usa ' + layout.count + ' fotos — ' + (images.length - layout.count) + ' extras ignoradas.', 'info');
+            window.weddingAITool.toast('Layout uses ' + layout.count + ' photos — ' + (images.length - layout.count) + ' extras ignored.', 'info');
           }
 
           await ensureFontLoaded(captionFontEl.value);
@@ -935,7 +947,7 @@
 
           // Output PNG. PNG is lossless and preserves the typography exactly.
           var blob = await window.weddingAITool.canvasToBlob(previewCanvas, 'image/png');
-          if (!blob || blob.size === 0) throw new Error('Não foi possível codificar o PNG de saída.');
+          if (!blob || blob.size === 0) throw new Error('Could not encode PNG output.');
           lastBlob = blob;
           var layoutSlug = key.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
           var aspectSlug = aspectEl.value.replace(':', 'x');
@@ -943,18 +955,18 @@
 
           summaryEl.hidden = false;
           summaryEl.innerHTML =
-            '<div><strong>' + used + '</strong> fotos usadas</div>' +
-            '<div><strong>Layout:</strong> ' + layout.count + ' células · ' + aspectEl.value + '</div>' +
-            '<div><strong>Tamanho da saída:</strong> ' + previewCanvas.width + ' × ' + previewCanvas.height + ' px · ' +
+            '<div><strong>' + used + '</strong> photos used</div>' +
+            '<div><strong>Layout:</strong> ' + layout.count + ' cells · ' + aspectEl.value + '</div>' +
+            '<div><strong>Output size:</strong> ' + previewCanvas.width + ' × ' + previewCanvas.height + ' px · ' +
               window.weddingAITool.formatBytes(blob.size) + ' (PNG)</div>' +
-            (errCount ? '<div style="color:#b00020"><strong>' + errCount + '</strong> ignoradas (não puderam ser decodificadas).</div>' : '');
+            (errCount ? '<div style="color:#b00020"><strong>' + errCount + '</strong> skipped (could not decode).</div>' : '');
 
-          window.weddingAITool.toast('Colagem montada. Clique em Baixar PNG para salvar.');
+          window.weddingAITool.toast('Collage built. Click Download PNG to save.');
         } catch (err) {
-          window.weddingAITool.toast((err && err.message) ? err.message : 'Não foi possível montar a colagem.', 'error');
+          window.weddingAITool.toast((err && err.message) ? err.message : 'Could not build collage.', 'error');
         } finally {
           runBtn.disabled = false;
-          runBtn.textContent = 'Montar colagem';
+          runBtn.textContent = 'Build collage';
           refreshUI();
         }
       }
@@ -962,8 +974,23 @@
       function downloadCollage() {
         if (!lastBlob) return;
         window.weddingAITool.download(lastBlob, lastOutputName);
-        window.weddingAITool.toast('Salvando ' + lastOutputName + '…');
+        window.weddingAITool.toast('Saving ' + lastOutputName + '…');
       }
+      // PDF export - the very same canvas the PNG export uses, so the PDF page
+      // is exactly the collage size (no scaling, no second render). jsPDF is
+      // loaded on first use by window.weddingAITool.downloadPdf().
+      function downloadCollagePdf() {
+        if (!lastBlob) return;
+        var pdfName = lastOutputName.replace(/\.png$/i, '') + '.pdf';
+        window.weddingAITool.downloadPdf(previewCanvas, pdfName, { mime: 'image/png' })
+          .then(function () {
+            window.weddingAITool.toast(window.weddingAITool.t('pdfReady', 'PDF ready'));
+          })
+          .catch(function () {
+            // downloadPdf() has already raised the localized error toast.
+          });
+      }
+
 
       // ---------- wiring --------------------------------------------------------
 
@@ -992,6 +1019,7 @@
       paddingEl.addEventListener('input', function () { paddingVal.textContent = paddingEl.value; });
       runBtn.addEventListener('click', runBuild);
       downloadBtn.addEventListener('click', downloadCollage);
+      downloadPdfBtn.addEventListener('click', downloadCollagePdf);
       clearBtn.addEventListener('click', clearAll);
 
       list.addEventListener('wa-row-remove', function (e) {

@@ -61,10 +61,10 @@
 
 
     <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.0">
-    <script defer src="/js/main.min.js?v=3.20"></script>
-    <script defer src="/js/tools/common.js?v=1.0.0"></script>
-    <script defer src="/js/i18n.js?v=4.28"></script>
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <script defer src="/js/main.min.js?v=3.22"></script>
+    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
         .page-hero-mini h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
@@ -226,6 +226,15 @@
       "totalTime": "PT15M"
     }
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+      console.warn('[SW] registration failed', err);
+    });
+  });
+}
+</script>
 </head>
 <body class="page-tool">
 <a class="wa-skip-link" href="#main-content">Skip to main content</a>
@@ -365,19 +374,19 @@
                 </div>
 
                 <div class="seating-template-pick" role="radiogroup" aria-label="Layout template">
-                    <button type="button" data-template="classic" class="active">Classic Reception (8 rounds of 8)</button>
-                    <button type="button" data-template="long">Long Banquet (3 long of 12)</button>
-                    <button type="button" data-template="intimate">Intimate (5 rounds of 6 + sweetheart)</button>
-                    <button type="button" data-template="ushape">U-Shape with head table</button>
+                    <button type="button" data-template="classic" class="active" data-i18n="tools.copy.seatTemplateClassic.zzzzzz5a01">Classic Reception (8 rounds of 8)</button>
+                    <button type="button" data-template="long" data-i18n="tools.copy.seatTemplateLong.zzzzzz5a02">Long Banquet (3 long of 12)</button>
+                    <button type="button" data-template="intimate" data-i18n="tools.copy.seatTemplateIntimate.zzzzzz5a03">Intimate (5 rounds of 6 + sweetheart)</button>
+                    <button type="button" data-template="ushape" data-i18n="tools.copy.seatTemplateUShape.zzzzzz5a04">U-Shape with head table</button>
                 </div>
 
                 <div class="seating-canvas" id="seating-canvas">
                     <div class="seating-floor" id="seating-floor" aria-label="Floor plan"></div>
                 </div>
 
-                <div class="seating-export-row">
-                    <button type="button" class="seating-btn primary" id="export-png-btn">Export PNG (1600×1200)</button>
-                    <button type="button" class="seating-btn" id="print-btn">Print</button>
+                <div class="wa-tool-print-source">weddingai.video &middot; <span data-i18n="tools.copy.seatChartTitle.zzzzzz5a08">Wedding Seating Chart</span></div><div class="seating-export-row">
+                    <button type="button" class="seating-btn primary" id="export-png-btn" data-i18n="tools.copy.seatExportPng.zzzzzz5a05">Export PNG (1600×1200)</button>
+                    <button type="button" class="seating-btn" id="print-btn" data-i18n="tools.copy.seatPrint.zzzzzz5a06">Print</button> <button type="button" class="seating-btn" id="export-pdf-btn" data-i18n="tools.copy.seatDownloadPdf.zzzzzz5a07">Download PDF</button>
                 </div>
             </section>
         </div>
@@ -424,7 +433,7 @@
 <td data-i18n="tools.wedding-seating-chart-maker.td_text.weddingaivideo.1u2v3w4x"><strong>WeddingAI.video Seating Chart Maker</strong> (this tool)</td>
 <td data-i18n="tools.wedding-seating-chart-maker.td_text.unlimited_500_tested.5y6z7a8b"><strong>Unlimited, 500+ tested</strong></td>
 <td data-i18n="tools.wedding-seating-chart-maker.td_text.ai_nooverlap_groups_vip.9c0d1e2f"><strong>No-overlap auto-assign by group + VIP</strong></td>
-<td data-i18n="tools.wedding-seating-chart-maker.td_text.printable_png_pdf_share_link.3g4h5i6j">Printable PNG + PDF + share link</td>
+<td data-i18n="tools.wedding-seating-chart-maker.td_text.printable_png_pdf_share_link.3g4h5i6j">Printable PNG + PDF</td>
 <td data-i18n="tools.wedding-seating-chart-maker.td_text.same_workflow_99_video.7k8l9m0n"><strong>Same workflow as the AI wedding video</strong></td>
 </tr>
 <tr>
@@ -1145,9 +1154,11 @@ var SEAT_RADIUS = 56;       // px offset from table center
   exportPngBtn.addEventListener('click', function () {
     exportPNG();
   });
+  var exportPdfBtn = document.getElementById('export-pdf-btn');
+  if (exportPdfBtn) exportPdfBtn.addEventListener('click', function () { exportPDF(); });
   printBtn.addEventListener('click', function () { window.print(); });
 
-  function exportPNG() {
+  function buildChartCanvas() {
     var W = 1600, H = 1200;
     var c = document.createElement('canvas');
     c.width = W; c.height = H;
@@ -1159,7 +1170,9 @@ var SEAT_RADIUS = 56;       // px offset from table center
     ctx.fillStyle = '#2c2c2c';
     ctx.font = '700 36px Georgia, serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Wedding Seating Chart', W / 2, 56);
+    ctx.fillText(window.weddingAITool && window.weddingAITool.t
+      ? window.weddingAITool.t('seatChartTitle', 'Wedding Seating Chart')
+      : 'Wedding Seating Chart', W / 2, 56);
     ctx.font = '300 18px Georgia, serif';
     ctx.fillStyle = '#7a7a7a';
     ctx.fillText(new Date().toLocaleDateString(), W / 2, 86);
@@ -1238,12 +1251,21 @@ var SEAT_RADIUS = 56;       // px offset from table center
       ctx.fillText(legend[li], lx + 14, ly);
       lx += 110;
     }
-    // save
+    return c;
+  }
+
+  function exportPNG() {
+    var c = buildChartCanvas();
     if (window.weddingAITool && window.weddingAITool.canvasToBlob) {
       window.weddingAITool.canvasToBlob(c, 'image/png', 1.0).then(function (blob) {
         var name = 'wedding-seating-chart-' + Date.now() + '.png';
         window.weddingAITool.download(blob, name);
-        if (window.weddingAITool.toast) window.weddingAITool.toast('Saved 1600×1200 PNG', 'success');
+        if (window.weddingAITool.toast) {
+          window.weddingAITool.toast(
+            window.weddingAITool.t ? window.weddingAITool.t('seatSavedPng', 'Saved 1600×1200 PNG')
+                                   : 'Saved 1600×1200 PNG',
+            'success');
+        }
       });
     } else {
       var url = c.toDataURL('image/png');
@@ -1251,6 +1273,25 @@ var SEAT_RADIUS = 56;       // px offset from table center
       a.href = url; a.download = 'wedding-seating-chart.png';
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }
+  }
+
+  // PDF export (added 2026-11-09). The page's own comparison table claims
+  // "PNG + PDF + share link"; until now there was no PDF at all. jsPDF is
+  // loaded on demand by the shared layer and the page size is exactly the
+  // canvas size (1600x1200), so the PDF is a true print layout.
+  function exportPDF() {
+    if (!window.weddingAITool || !window.weddingAITool.downloadPdf) return;
+    var c = buildChartCanvas();
+    var name = 'wedding-seating-chart-' + Date.now() + '.pdf';
+    window.weddingAITool.downloadPdf(c, name, { mime: 'image/jpeg', quality: 0.92 })
+      .then(function () {
+        if (window.weddingAITool.toast) {
+          window.weddingAITool.toast(
+            window.weddingAITool.t ? window.weddingAITool.t('seatSavedPdf', 'Saved PDF') : 'Saved PDF',
+            'success');
+        }
+      })
+      .catch(function () { /* downloadPdf already surfaced the error */ });
   }
   function roundRect(ctx, x, y, w, h, r) {
     ctx.beginPath();

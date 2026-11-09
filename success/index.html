@@ -41,9 +41,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI.video">
     
-    <link rel="stylesheet" href="/styles.min.css?v=3.39">
+    <link rel="stylesheet" href="/styles.min.css?v=3.38">
     <link rel="stylesheet" href="/styles/i18n.css">
-<script defer src="/js/main.min.js?v=3.20"></script>
+<script defer src="/js/main.min.js?v=3.22"></script>
     <style>
         .page-hero-bg { background: linear-gradient(135deg, #D4AF37 0%, #B8962E 100%); }
         .page-hero-overlay { background: rgba(0,0,0,0.3); }
@@ -92,7 +92,7 @@
     <meta name="twitter:description" content="Your quote request has been received. We will reply within 24 hours with a personalized plan and free pricing — thank you!">
     <meta name="twitter:image" content="https://weddingai.video/images/pricing-cards.png">
 <script src="/js/langs.js" defer></script>
-<script src="/js/i18n.js?v=4.28" defer></script>
+<script src="/js/i18n.js?v=4.29" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
@@ -184,9 +184,23 @@ if ('serviceWorker' in navigator) {
             </div>
         </section>
 
-        <section class="section success-section">
-            <div class="container">
-                <div class="success-icon" id="success-icon">✅</div>
+            <section class="section success-section">
+                <div class="container">
+                    <!-- Runtime copy for the pending notice and the follow-up
+                         e-mail. The middleware translates these server-side, so
+                         the shared script never has to load a dictionary. -->
+                    <div data-copy-set hidden>
+                        <span data-copy="copied" data-i18n="success.validation.copied.zzzzzz1">✓ Copied</span>
+                        <span data-copy="pendingHeadline" data-i18n="success.validation.pending_headline.zzzzzz2">We've Got Your Request</span>
+                        <span data-copy="pendingSummary" data-i18n="success.validation.pending_summary.zzzzzz3">Your details are saved and our team will follow up within 24 hours. The automatic confirmation email didn't send on the first try — no action needed from you.</span>
+                        <span data-copy="followupSubject" data-i18n="success.validation.followup_subject.zzzzzz4">Follow-up on my quote {ref}</span>
+                        <span data-copy="followupBody" data-i18n="success.validation.followup_body.zzzzzz5">Hi,
+
+Following up on my quote request {ref}. I haven't received a confirmation email yet.
+
+Thanks!</span>
+                    </div>
+                    <div class="success-icon" id="success-icon">✅</div>
                 <h2 id="success-headline" data-i18n="success.h2_text.you_re_all_set.44652572">You're All Set!</h2>
                 <p id="success-summary" data-i18n="success.p_text.we_ve_received_your_project_details_and.66194895">We've received your project details and will review it carefully. A personalized quote will arrive in your inbox within 24 hours.</p>
 
