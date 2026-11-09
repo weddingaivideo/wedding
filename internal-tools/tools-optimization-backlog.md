@@ -23,6 +23,38 @@ decides item by item, so each row carries its own cost and its own cost of
 
 ---
 
+## EXECUTION STATUS (same day, commit `e2e9d1a8`)
+
+The owner approved the 🟢 and 🔵 classes for execution. Here is what landed.
+
+| item | status | note |
+|---|---|---|
+| **44 of 144 tool pages were dead** | ✅ **fixed** | not in this list — the machine translator had translated the CODE (`function` → `Funktion`), so the whole inline script was a SyntaxError and the tool was inert while the page still returned 200. The English page is now the single source of truth; `scripts/propagate-tool-js.py` + `scripts/check-tool-script-syntax.py` (286 scripts, 0 broken). |
+| §1.1 real ZIP | ✅ | fflate 0.8.3, `common.js downloadZip()` |
+| §1.2 PDF export | ✅ | collage + budget + seating chart (jsPDF 4.2.1); the tables claimed PDF and there was none |
+| §1.4 share-link claim | ✅ **aligned, not built** | the seating chart claimed a "share link" that does not exist → the claim now reads "Printable PNG + PDF". A server-side share link would break the no-upload promise, so it stays in §5 for the owner. |
+| §1.5 print styles | ✅ | full `@media print` block in `styles/tools.css` |
+| §2.1 interactive crop | ✅ | **native drag frame, not Cropper.js v2** — v2 keeps its UI in shadow DOM and ships zero aria-labels, so its handles could not be localized or named |
+| §2.10 Service Worker | ✅ | all 144 tool pages |
+| §2.5–2.9 engineering | ⏸️ **not done** | Worker / OffscreenCanvas / EXIF / memory / progress. None of it is user-visible; it is a follow-up. |
+| §3.1 HEIC decode | ✅ | heic2any + Safari-native-first; the "only works in Safari" prose was rewritten in 11 languages |
+| §3.2 real MP4 | ⏸️ **not done** | needs the owner's answer on §9.4 (Firefox/Android) — 706 KB ESM |
+| §3.3 pica resampling | ✅ | compress + HEIC |
+| §3.4 MODNet AI matting | ✅ | 6.3 MB quantized ONNX + ONNX Runtime Web. **First run downloads ~17 MB** from this origin. The colour key stays the default so nobody gets a surprise download. |
+| §3.5 CSP | ✅ | `'wasm-unsafe-eval'` **and** `worker-src 'self' blob:` in `functions/_middleware.js` + `_headers`. The second is not optional — pica and heic2any both build their Worker from a `blob:` URL, and without it pica silently degrades. |
+| runtime string i18n | ✅ | middleware injects `tools.copy`; `common.js` exposes `t(alias, fallback, params)`; 31 new keys × 11 languages |
+
+**Verification:** the AI path and the crop frame were driven end-to-end in
+Chromium under the **live** CSP (`scripts/verify-ai-background.py`,
+`scripts/verify-crop-stage.py`). The pre-deploy gate is green: 0 errors,
+0 warnings, READY TO DEPLOY.
+
+**Still needs the owner:** §4 (paid services) and §5 (promise-breaking
+options) were deliberately NOT executed, and §9 still has five open
+questions.
+
+---
+
 ## 0. The four constraints every option inherits
 
 These are not preferences; they are what the repo actually allows.
