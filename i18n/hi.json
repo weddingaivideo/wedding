@@ -64087,4 +64087,22 @@
   "tools.copy.bgMethodAi.zzzzzz7a03": "AI मैटिंग (MODNet — एक बार ~17 MB डाउनलोड, आपके डिवाइस पर ही चलता है)"
 ,
   "tools.copy.progress.zzzzzz8a01": "प्रगति"
+,
+  "tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q": "5 सेकंड का MP4 डाउनलोड करें"
+,
+  "tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w": "आपका ब्राउज़र यहाँ एक असली MP4 भी एन्कोड कर सकता है — 5 सेकंड, 1080×1920, 30 fps, और पाँच की-फ़्रेम के बीच की गति को इंटरपोलेट किया गया। इसमें लगभग 15 सेकंड लगते हैं और कुछ भी आपके डिवाइस से बाहर नहीं जाता। PNG फ़्रेम हमेशा की तरह उपलब्ध रहते हैं।"
+,
+  "tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g": "पाँच की-फ़्रेम क्यों, और MP4 कहाँ से आता है"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l": "यह टूल अपनी गति को <strong>5 की-फ़्रेम</strong> (1080×1920, 9:16) में बनाता है। इससे दो डाउनलोड मिलते हैं: पाँच PNG फ़्रेम, और — जब आपका ब्राउज़र वीडियो एन्कोड कर सके — एक असली 5 सेकंड का MP4, जिसमें की-फ़्रेम के बीच की गति 30 fps पर इंटरपोलेट होती है।"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q": "MP4 आपके अपने डिवाइस पर WebCodecs API से एन्कोड होता है। कुछ भी अपलोड नहीं होता, और 30 MB का ffmpeg.wasm डाउनलोड करने की ज़रूरत नहीं पड़ती। जो ब्राउज़र H.264 एन्कोड नहीं कर सकता, वह बस PNG फ़्रेम रख लेता है — आप कभी डाउनलोड से वंचित नहीं होते।"
+,
+  "tools.copy.mp4Encoding.zzzzzz9a02": "एन्कोड हो रहा है… {pct}%"
+,
+  "tools.copy.mp4Saved.zzzzzz9a03": "5 सेकंड का MP4 सहेज लिया गया।"
+,
+  "tools.copy.mp4Failed.zzzzzz9a04": "MP4 नहीं बन सका। PNG फ़्रेम फिर भी काम करते हैं।"
+,
+  "tools.copy.mp4Unsupported.zzzzzz9a05": "यह ब्राउज़र MP4 एन्कोड नहीं कर सकता। PNG फ़्रेम फिर भी काम करते हैं।"
 }

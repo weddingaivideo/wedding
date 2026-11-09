@@ -44302,4 +44302,22 @@
   "tools.copy.bgMethodAi.zzzzzz7a03": "AI matting (MODNet — one-time ~17 MB download, runs on your device)"
 ,
   "tools.copy.progress.zzzzzz8a01": "Progress"
+,
+  "tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q": "Download a 5-second MP4"
+,
+  "tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w": "Your browser can also encode a real MP4 here — 5 seconds, 1080×1920, 30 fps, with the motion interpolated between the five key frames. It takes about 15 seconds and nothing leaves your device. The PNG frames stay available either way."
+,
+  "tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g": "Why 5 key frames, and where the MP4 comes from"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l": "The tool draws its motion in <strong>5 key frames</strong> (1080×1920, 9:16). Two downloads come out of that: the five PNG frames, and — when your browser can encode video — a real 5-second MP4 with the motion interpolated between the key frames at 30 fps."
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q": "The MP4 is encoded on your own device with the WebCodecs API. Nothing is uploaded, and there is no 30 MB ffmpeg.wasm to download. A browser that cannot encode H.264 simply keeps the PNG frames — you never lose the download either way."
+,
+  "tools.copy.mp4Encoding.zzzzzz9a02": "Encoding… {pct}%"
+,
+  "tools.copy.mp4Saved.zzzzzz9a03": "Saved the 5-second MP4."
+,
+  "tools.copy.mp4Failed.zzzzzz9a04": "Could not make the MP4. The PNG frames still work."
+,
+  "tools.copy.mp4Unsupported.zzzzzz9a05": "This browser cannot encode MP4. The PNG frames still work."
 }

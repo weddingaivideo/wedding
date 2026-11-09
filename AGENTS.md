@@ -2284,4 +2284,103 @@ test drives a real run and watches the DOM for the bar.
 heic2any reports 0..1 while it decodes, so the HEIC tool shows a real
 bar; Safari's native decode is instant and shows none.
 
+## The video tool exports a real MP4 now, and the 1080×1920 PNG was the WRONG PICTURE (2026-11-11)
+
+Two things happened to `tools/wedding-video-invitation-maker` on 2026-11-11,
+and the first one was a bug that had been shipping all along.
+
+### The "1080×1920 frames" were the right pixel count and the wrong picture
+
+`renderFrameAt()` lays everything out in a **540×960 DESIGN space** with
+absolute pixel coordinates (`fillText(..., 360)`, `font = '18px ...'`,
+`BASE_H - 60`). The PNG export set `BASE_W = 1080; BASE_H = 1920` and
+re-rendered — which drew the 540×960 layout into the **top-left quarter**
+of a 1080×1920 canvas. The file was 1080×1920 pixels and the design
+occupied a quarter of it, in a different place than the preview the user
+had just designed. The code even admitted it in a comment ("this may look
+slightly blurry on text but is acceptable for v1", "Better: write a
+scaled-down version of renderFrameAt()").
+
+The fix is a `ctx.scale()` at the top of `renderFrameAt()` and a
+`ctx.restore()` at the end: the design stays in 540×960 units and is
+scaled to whatever canvas it is rendered into. `scripts/verify-mp4-export.py`
+proves it by comparing the exported PNG against the on-screen preview —
+the mean absolute difference has to stay under 12/255 (measured: **0.33**).
+
+**The lesson: "the output has the right dimensions" is not "the output is
+right".** A size assertion cannot catch a layout bug. Compare the export
+against the thing the user was looking at.
+
+### The MP4: mediabunny, ESM-only, loaded on demand
+
+mediabunny 1.65.2 (MPL-2.0) has **no UMD/global build** — it is ESM only.
+So it cannot be loaded the way the other vendored libraries are
+(`<script src>` + `window.global`). It needs `<script type="module">`.
+
+`js/tools/movie-loader.js` is that module, and it is tiny. The 706 KB
+encoder sits behind a **dynamic `import()`**, so a visitor who only wants
+the PNG frames never downloads it — the same "fetch it on first use" rule
+the other vendored libraries follow.
+
+`dynamic import()` is the one ES2020 feature in the repository. It lives
+in that one `.js` module file, NOT in a tool page's inline script, so the
+"no ES2020 syntax in the inline scripts" rule still holds where it
+matters. `window.weddingAIMovie` is the public surface.
+
+**TRAP: a module script is DEFERRED, so it runs AFTER a classic inline
+script.** The inline script cannot assume `window.weddingAIMovie` exists
+at load time. The loader dispatches a `weddingai-movie-ready` event and the
+tool waits for it.
+
+**TRAP: the MP4 needs an H.264 encoder, and not every browser has one.**
+The button is only offered where `window.VideoEncoder` exists, and the
+codec is confirmed on click with `canEncodeVideo('avc')`. **No browser
+loses a feature**: a browser without an encoder keeps the PNG sequence it
+has always had. That is why §9.4 (Firefox/Android) never became a
+blocking question — the answer is "nobody loses anything".
+
+**TRAP: the PNG export fires FIVE downloads in a row.** A Playwright
+`expect_download()` after clicking the PNG button catches whichever
+download is in flight — so a test that then clicks "Download MP4" can
+capture a PNG and report "the MP4 is not an MP4". The test has to take
+the MP4 FIRST.
+
+**TRAP: the bundled Playwright Chromium has NO H.264 encoder.** Measured
+2026-11-11 on a secure origin:
+
+| browser | `VideoEncoder` | H.264 encode | VP9 |
+|---|---|---|---|
+| Playwright's Chromium | yes | **no** (every level) | yes |
+| installed Chrome | yes | yes, **level 4.0 and up** | yes |
+| installed Edge | yes | yes, **level 4.0 and up** | yes |
+
+Two consequences:
+
+* A test of the MP4 path has to run in the **installed Chrome**
+  (`p.chromium.launch(channel="chrome")`), not the bundled Chromium.
+* **H.264 level 3.1 does not fit 1080×1920.** `avc1.42001f` is rejected
+  by Chrome with "not supported" even though the same browser encodes
+  `avc1.420028` (level 4.0) happily. The native probe in the tool asks
+  for `avc1.420028` on purpose.
+
+The probe is `VideoEncoder.isConfigSupported()` — a NATIVE call, so
+checking whether the browser can produce an MP4 costs nothing and does
+not fetch the 706 KB encoder. That is what makes the feature safe to
+offer: **a browser without an H.264 encoder keeps the PNG sequence it
+has always had**, so §9.4 (Firefox/Android) never became a blocking
+question.
+
+### The frame interpolation
+
+`renderFrameAt()` takes `frame` as a number, and `p = frame / 4`. The MP4
+export passes a **fractional** frame — `(i / 149) * 4` for the 150 frames
+of a 5-second 30 fps clip — so the motion between the five key frames is
+interpolated instead of stepped. The five PNG frames stay stepped; that
+is the difference between a sequence and a video.
+
+The MP4 is read back with **mediabunny itself** (it runs in Node too) by
+`scripts/verify-mp4-export.py`: the duration has to be 4–6 s and the frame
+1080×1920. On Windows an absolute path is not a valid ESM specifier — it
+has to be a `file://` URL (`Path.as_uri()`).
+
 

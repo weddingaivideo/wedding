@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="/styles.min.css?v=3.38">
     <link rel="stylesheet" href="/styles/tools.css?v=1.0.3">
     <script defer src="/js/main.min.js?v=3.22"></script>
-    <script defer src="/js/tools/common.js?v=1.0.3"></script>
+    <script defer src="/js/tools/common.js?v=1.0.4"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
@@ -345,8 +345,10 @@ if ('serviceWorker' in navigator) {
                 <div class="wa-vim-frame-strip" id="frame-strip"></div>
                 <div class="wa-tool-actions">
                     <button type="button" class="btn btn-primary" id="download-btn">Descargar 5 marcos PNG (1080×1920)</button>
+                    <button type="button" class="btn btn-primary" id="download-mp4-btn" data-i18n="tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q" hidden>Download a 5-second MP4</button>
                     <button type="button" class="btn btn-secondary" id="reset-btn">Reiniciar</button>
                 </div>
+                <p id="mp4-note" data-i18n="tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w" hidden style="margin-top: 12px;">Your browser can also encode a real MP4 here &mdash; 5 seconds, 1080&times;1920, 30 fps, with the motion interpolated between the five key frames. It takes about 15 seconds and nothing leaves your device. The PNG frames stay available either way.</p>
                 <div class="wa-vim-banner">
                     <strong>Tip:</strong> drop the 5 frames into <a href="/blog/wedding-video-music-guide/" target="_blank" rel="noopener">CapCut or iMovie</a>, set each frame to 1&nbsp;second, add a song, and you've got a 5-second Reel. Or hand the same photos to our <a href="/services/personalization/ai-video-generator/">AI Wedding Video Generator</a> for the full 60–90 second film.
                 </div>
@@ -437,9 +439,9 @@ if ('serviceWorker' in navigator) {
 <p data-i18n="tools.wedding-video-invitation-maker.p_text.most_video_invitation_makers.5s6t7u8v">Most video invitation makers require you to pick a template, drop in your details, and animate text. WeddingAI.video’s unique angle: drop 5-10 engagement photos and the AI assembles a 30-90 second cinematic invitation in 30 seconds. Plus a unique RSVP link is auto-generated for each invitation — guests RSVP in one tap:</p>
         </div>
 
-                <h2>Why 5 frames and not a "real" video?</h2>
-                <p>A "real" video renderer in the browser is heavy: ffmpeg.wasm is ~30&nbsp;MB, takes 10–30 seconds to compile, and pushes browsers hard on phones. Most wedding couples don't need that — they need a clean 5-second motion card they can post today.</p>
-                <p>Entonces esta herramienta representa<strong>5 fotogramas espaciados con 1 segundo de diferencia</strong>(1080×1920, 9:16) y permite que su editor de video existente realice el ensamblaje. CapCut, iMovie, Canva e InShot aceptan una secuencia PNG. Suelta los cinco cuadros, configura cada uno en 1 segundo, agrega música y listo. Tiempo total de pared: unos 3 minutos.</p>
+                <h2 data-i18n="tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g">Why 5 key frames, and where the MP4 comes from</h2>
+                <p data-i18n="tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l">The tool draws its motion in <strong>5 key frames</strong> (1080&times;1920, 9:16). Two downloads come out of that: the five PNG frames, and &mdash; when your browser can encode video &mdash; a real 5-second MP4 with the motion interpolated between the key frames at 30 fps.</p>
+                <p data-i18n="tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q">The MP4 is encoded on your own device with the WebCodecs API. Nothing is uploaded, and there is no 30 MB ffmpeg.wasm to download. A browser that cannot encode H.264 simply keeps the PNG frames &mdash; you never lose the download either way.</p>
 
                 <h2>The 5 templates</h2>
                 <h3>1. Classic — formal invites, traditional weddings</h3>
@@ -755,9 +757,22 @@ if ('serviceWorker' in navigator) {
       function getTemplate(id) { for (var i=0; i<TEMPLATES.length; i++) if (TEMPLATES[i].id===id) return TEMPLATES[i]; return TEMPLATES[0]; }
 
       function renderFrameAt(ctx, t, frame, txt) {
-        // frame: 0..4
-        // choreograph
+        // frame: 0..4 - it may be FRACTIONAL, which is how the MP4 export
+        // interpolates the motion between the five key frames.
+        //
+        // EVERYTHING below is laid out in a 540x960 DESIGN space (absolute
+        // pixel coordinates, font sizes in px). The canvas can be any size
+        // - the preview is 540x960, the exports are 1080x1920 - so the
+        // context is scaled to fit it.
+        //
+        // Before this, the export set BASE_W/BASE_H to 1080/1920 and
+        // re-rendered, which drew the 540x960 layout into the TOP-LEFT
+        // CORNER of a 1080x1920 canvas: the "1080x1920 frames" were
+        // 1080x1920 files with the design squeezed into a quarter of them.
         var p = frame / (NUM_FRAMES - 1); // 0..1
+        var cw = ctx.canvas.width, ch = ctx.canvas.height;
+        ctx.save();
+        ctx.scale(cw / BASE_W, ch / BASE_H);
         ctx.clearRect(0, 0, BASE_W, BASE_H);
         fillGradient(ctx, BASE_W, BASE_H, t.bg[0], t.bg[1]);
 
@@ -971,6 +986,7 @@ if ('serviceWorker' in navigator) {
             ctx.fillText('🎵 ' + (txt.music || 'Acoustic guitar'), BASE_W/2, BASE_H - 60);
           }
         }
+        ctx.restore();
       }
 
       function getText() {
@@ -1052,13 +1068,13 @@ if ('serviceWorker' in navigator) {
         // For now, draw the preview canvas at full size with a 2x scale; this may look slightly blurry on text but is acceptable for v1.
         // Better: write a scaled-down version of renderFrameAt that renders to 1080x1920 — but we already coded BASE_W=540.
         // We'll handle by setting BASE_W and BASE_H up temporarily.
-        var origW = BASE_W, origH = BASE_H;
-        BASE_W = 1080; BASE_H = 1920;
+        // The layout is a 540x960 design space; renderFrameAt() scales it to
+        // whatever canvas it is given, so the export is the SAME picture as
+        // the preview - just at twice the resolution.
         var octx = off.getContext('2d');
         var i = 0;
         function next() {
           if (i >= NUM_FRAMES) {
-            BASE_W = origW; BASE_H = origH;
             T.toast('Saved 5 frames — assemble in CapCut / iMovie', 'success');
             return;
           }
@@ -1072,6 +1088,133 @@ if ('serviceWorker' in navigator) {
           });
         }
         next();
+      }
+
+
+      // ---------- MP4 export (mediabunny, loaded on demand) -------------------
+      //
+      // WHY THE PNG FRAMES STAY
+      // -----------------------
+      // The MP4 needs an H.264 encoder, which only some browsers have
+      // (WebCodecs). So the MP4 button is only shown when
+      // `window.VideoEncoder` exists, and the PNG frames are always there.
+      // NO BROWSER LOSES A FEATURE: a browser without an encoder simply
+      // keeps the PNG sequence it has always had.
+      //
+      // The encoder (mediabunny, MPL-2.0) is 706 KB and is fetched ONLY
+      // when the visitor asks for the MP4 - see js/tools/movie-loader.mjs.
+      var mp4Btn = document.getElementById('download-mp4-btn');
+      var mp4Note = document.getElementById('mp4-note');
+      var mp4Busy = false;
+
+      function mp4Ready() {
+        if (window.weddingAIMovie) return Promise.resolve(window.weddingAIMovie);
+        // The loader module is deferred, so it may not have run yet.
+        return new Promise(function (resolve, reject) {
+          var timer = setTimeout(function () {
+            reject(new Error('The MP4 encoder did not load'));
+          }, 15000);
+          window.addEventListener('weddingai-movie-ready', function () {
+            clearTimeout(timer);
+            resolve(window.weddingAIMovie);
+          });
+        });
+      }
+
+      function showMp4(visible) {
+        if (mp4Btn) mp4Btn.hidden = !visible;
+        if (mp4Note) mp4Note.hidden = !visible;
+      }
+
+      async function downloadMp4() {
+        if (mp4Busy) return;
+        var T = window.weddingAITool;
+        if (!T) return;
+        mp4Busy = true;
+        var label = mp4Btn ? mp4Btn.textContent : '';
+        try {
+          var M = await mp4Ready();
+          var M2 = await M.load();
+          var canAvc = await M2.canEncodeVideo('avc');
+          if (!canAvc) {
+            showMp4(false);
+            T.toast(T.t('mp4Unsupported',
+              'This browser cannot encode MP4. The PNG frames still work.'), 'error');
+            return;
+          }
+          if (mp4Btn) mp4Btn.disabled = true;
+          var W = 1080, H = 1920, FPS = 30, SECONDS = 5;
+          var total = FPS * SECONDS;
+          var canvas = document.createElement('canvas');
+          canvas.width = W; canvas.height = H;
+          var ctx = canvas.getContext('2d');
+          var t = getTemplate(state.templateId);
+          var txt = getText();
+
+          var output = new M2.Output({
+            format: new M2.Mp4OutputFormat(),
+            target: new M2.BufferTarget()
+          });
+          var source = new M2.CanvasSource(canvas, {
+            codec: 'avc',
+            quality: new M2.Quality('high')
+          });
+          output.addVideoTrack(source);
+          await output.start();
+
+          for (var i = 0; i < total; i++) {
+            // A fractional key frame: the motion between the five key
+            // frames is interpolated instead of stepped.
+            renderFrameAt(ctx, t, (i / (total - 1)) * (NUM_FRAMES - 1), txt);
+            await source.add(i / FPS, 1 / FPS);
+            if (i % 5 === 0) {
+              var pct = Math.round(((i + 1) / total) * 100);
+              if (mp4Btn) mp4Btn.textContent = T.t('mp4Encoding', 'Encoding… {pct}%', { pct: pct });
+              await new Promise(function (r) { setTimeout(r, 0); });
+            }
+          }
+          await output.finalize();
+          var blob = new Blob([output.target.buffer], { type: 'video/mp4' });
+          var baseName = 'wedding-invitation-' +
+            (txt.couple || 'card').replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase().slice(0, 40);
+          T.download(blob, baseName + '.mp4');
+          T.toast(T.t('mp4Saved', 'Saved the 5-second MP4.'), 'success');
+        } catch (err) {
+          T.toast(T.t('mp4Failed',
+            'Could not make the MP4. The PNG frames still work.'), 'error');
+          if (window.console && console.warn) console.warn('[weddingai] MP4 export failed', err);
+        } finally {
+          mp4Busy = false;
+          if (mp4Btn) {
+            mp4Btn.disabled = false;
+            mp4Btn.textContent = label;
+          }
+        }
+      }
+
+      if (mp4Btn) {
+        mp4Btn.addEventListener('click', downloadMp4);
+        // Offer the MP4 only where an H.264 encoder can actually produce
+        // one. VideoEncoder.isConfigSupported() is a NATIVE call, so this
+        // check is free - it does not fetch the 706 KB encoder.
+        //
+        // Level 4.0 is the lowest that fits 1080x1920: level 3.1 caps out
+        // at 1280x720, and a browser asked for 1080x1920 at level 3.1
+        // simply reports "not supported" (measured 2026-11-11 in Chrome).
+        if (typeof window.VideoEncoder !== 'undefined' &&
+            typeof window.VideoEncoder.isConfigSupported === 'function') {
+          window.VideoEncoder.isConfigSupported({
+            codec: 'avc1.420028',
+            width: 1080, height: 1920,
+            bitrate: 4000000, framerate: 30
+          }).then(function (info) {
+            showMp4(!!(info && info.supported));
+          }).catch(function () {
+            showMp4(false);
+          });
+        } else {
+          showMp4(false);
+        }
       }
 
       // ---------- wire
@@ -1108,6 +1251,7 @@ if ('serviceWorker' in navigator) {
 
       render();
     });
-    </script>
+        </script>
+    <script type="module" src="/js/tools/movie-loader.js?v=1.0.1"></script>
 </body>
 </html>

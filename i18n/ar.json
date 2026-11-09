@@ -66784,4 +66784,22 @@
   "tools.copy.bgMethodAi.zzzzzz7a03": "القص بالذكاء الاصطناعي (MODNet — تنزيل مرة واحدة بحجم ~17 ميغابايت، يعمل على جهازك)"
 ,
   "tools.copy.progress.zzzzzz8a01": "التقدّم"
+,
+  "tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q": "تنزيل ملف MP4 مدته 5 ثوانٍ"
+,
+  "tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w": "يمكن لمتصفحك ترميز ملف MP4 حقيقي هنا — 5 ثوانٍ، 1080×1920، 30 إطارًا في الثانية، مع استيفاء الحركة بين الإطارات المفتاحية الخمسة. يستغرق ذلك نحو 15 ثانية ولا تغادر أي بيانات جهازك. وتبقى إطارات PNG متاحة في كل الأحوال."
+,
+  "tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g": "لماذا خمسة إطارات مفتاحية، ومن أين يأتي ملف MP4"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l": "ترسم الأداة حركتها في <strong>5 إطارات مفتاحية</strong> (1080×1920، 9:16). ومن ذلك يخرج تنزيلان: إطارات PNG الخمسة، و— عندما يسمح متصفحك بترميز الفيديو — ملف MP4 حقيقي مدته 5 ثوانٍ مع استيفاء الحركة بين الإطارات المفتاحية عند 30 إطارًا في الثانية."
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q": "يُرمَّز ملف MP4 على جهازك مباشرة عبر واجهة WebCodecs. لا يتم رفع أي شيء، ولا حاجة إلى تنزيل 30 ميغابايت من ffmpeg.wasm. أما المتصفح الذي لا يدعم ترميز H.264 فيكتفظ بإطارات PNG — لن تفقد إمكانية التنزيل في أي حال."
+,
+  "tools.copy.mp4Encoding.zzzzzz9a02": "جارٍ الترميز… {pct}%"
+,
+  "tools.copy.mp4Saved.zzzzzz9a03": "تم حفظ ملف MP4 مدته 5 ثوانٍ."
+,
+  "tools.copy.mp4Failed.zzzzzz9a04": "تعذّر إنشاء ملف MP4. لا تزال إطارات PNG تعمل."
+,
+  "tools.copy.mp4Unsupported.zzzzzz9a05": "لا يمكن لهذا المتصفح ترميز MP4. لا تزال إطارات PNG تعمل."
 }

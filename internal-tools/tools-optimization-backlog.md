@@ -38,7 +38,7 @@ The owner approved the 🟢 and 🔵 classes for execution. Here is what landed.
 | §2.10 Service Worker | ✅ | all 144 tool pages |
 | §2.5–2.9 engineering | ✅ | **Worker** for the pixel loop (`js/tools/pixel-worker.js`, buffer transferred, progress in ~24 chunks) · **createImageBitmap** with an explicit `{imageOrientation:'from-image'}` · **memory hygiene** — every decoded image is now released through `releaseImage()`, including on the error path (the release used to sit at the end of the `try` block, so an exception skipped it) · **real progress** — the rows show a percentage instead of an indefinite spinner. `fileToImage()` changed CONTRACT: it returns an `ImageBitmap`, `loaded.url` is `null`, and `loaded.release()` is the teardown call. |
 | §3.1 HEIC decode | ✅ | heic2any + Safari-native-first; the "only works in Safari" prose was rewritten in 11 languages |
-| §3.2 real MP4 | ⏸️ **not done** | needs the owner's answer on §9.4 (Firefox/Android) — 706 KB ESM |
+| §3.2 real MP4 | ✅ | **mediabunny 1.65.2 (MPL-2.0), 706 KB ESM** — loaded on demand from `/js/tools/movie-loader.js`, so nobody downloads it unless they ask for the MP4. The clip is 5 s, 1080×1920, 30 fps, with the motion **interpolated** between the five key frames (a fractional `frame` value). The button appears only where `VideoEncoder.isConfigSupported()` says H.264 is available — a native, free probe — so no browser loses the PNG frames. |
 | §3.3 pica resampling | ✅ | compress + HEIC |
 | §3.4 MODNet AI matting | ✅ | 6.3 MB quantized ONNX + ONNX Runtime Web. **First run downloads ~17 MB** from this origin. The colour key stays the default so nobody gets a surprise download. |
 | §3.5 CSP | ✅ | `'wasm-unsafe-eval'` **and** `worker-src 'self' blob:` in `functions/_middleware.js` + `_headers`. The second is not optional — pica and heic2any both build their Worker from a `blob:` URL, and without it pica silently degrades. |
@@ -57,6 +57,7 @@ four items can be verified by reading the code:
 | `scripts/verify-worker-progress.py` | the Worker's output is **byte-for-byte identical** to the main-thread maths (both `png` and `jpg` mode), the worker was actually **fetched**, and the progress bar appeared. Asserting only the output would pass with the worker disabled — the fallback produces the same bytes and the same green row. |
 | `scripts/verify-tool-suite-smoke.py` | all seven tools that decode a file through `fileToImage()` still work after the contract change. The contract change is silent: an `ImageBitmap` has no `.complete`, and `URL.revokeObjectURL(null)` is a no-op, so a tool that was not updated still shows a green row. |
 | `scripts/verify-exif-orientation.py` | a portrait phone photo is not rendered sideways: `<img>` → 100×200, `createImageBitmap(blob, {imageOrientation:'from-image'})` → 100×200. |
+| `scripts/verify-mp4-export.py` | the MP4 is a **real** file: it is read back with mediabunny itself (5.00 s, 1080×1920, `avc`), and the exported PNG is compared against the on-screen preview — the mean difference must stay under 12/255, because the export used to draw the 540×960 layout into the top-left quarter of a 1080×1920 canvas. |
 
 **Still needs the owner:** §4 (paid services) and §5 (promise-breaking
 options) were deliberately NOT executed, and §9 still has five open
@@ -398,5 +399,11 @@ benefit is removing a cap that has never been hit.
 4. **Is a real MP4 export worth the Firefox-Android gap?** `mediabunny` needs
    WebCodecs, which Firefox for Android does not have. Today the tool's
    "5 PNG frames" workaround is actually *more* universal.
+   → **RESOLVED 2026-11-11, no trade-off needed.** The MP4 is offered
+   ONLY where an H.264 encoder can actually produce one, and the native
+   `VideoEncoder.isConfigSupported()` probe costs nothing. A browser
+   without an encoder — Firefox for Android included — simply keeps the
+   PNG sequence it has always had. **No browser loses a feature**, so the
+   question does not have to be answered.
 5. **Should the PDF claim be met or dropped?** Met = `jspdf` 410 KB.
    Dropped = $0 and a slightly weaker comparison table.

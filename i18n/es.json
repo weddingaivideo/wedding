@@ -63059,4 +63059,22 @@
   "tools.copy.bgMethodAi.zzzzzz7a03": "Recorte con IA (MODNet: descarga única de ~17 MB, se ejecuta en tu dispositivo)"
 ,
   "tools.copy.progress.zzzzzz8a01": "Progreso"
+,
+  "tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q": "Descargar un MP4 de 5 segundos"
+,
+  "tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w": "Tu navegador también puede codificar un MP4 real aquí: 5 segundos, 1080×1920, 30 fps, con el movimiento interpolado entre los cinco fotogramas clave. Tardará unos 15 segundos y nada sale de tu dispositivo. Los fotogramas PNG siguen disponibles de todas formas."
+,
+  "tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g": "Por qué 5 fotogramas clave y de dónde sale el MP4"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l": "La herramienta dibuja su movimiento en <strong>5 fotogramas clave</strong> (1080×1920, 9:16). De ahí salen dos descargas: los cinco fotogramas PNG y — cuando tu navegador puede codificar vídeo — un MP4 real de 5 segundos con el movimiento interpolado entre los fotogramas clave a 30 fps."
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q": "El MP4 se codifica en tu propio dispositivo con la API WebCodecs. No se sube nada y no hay que descargar un ffmpeg.wasm de 30 MB. Un navegador que no pueda codificar H.264 simplemente conserva los fotogramas PNG: nunca pierdes la descarga."
+,
+  "tools.copy.mp4Encoding.zzzzzz9a02": "Codificando… {pct}%"
+,
+  "tools.copy.mp4Saved.zzzzzz9a03": "MP4 de 5 segundos guardado."
+,
+  "tools.copy.mp4Failed.zzzzzz9a04": "No se pudo crear el MP4. Los fotogramas PNG siguen funcionando."
+,
+  "tools.copy.mp4Unsupported.zzzzzz9a05": "Este navegador no puede codificar MP4. Los fotogramas PNG siguen funcionando."
 }

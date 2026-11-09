@@ -65645,4 +65645,22 @@
   "tools.copy.bgMethodAi.zzzzzz7a03": "ครอปด้วย AI (MODNet — ดาวน์โหลดครั้งเดียวประมาณ 17 MB ทำงานในเครื่องของคุณ)"
 ,
   "tools.copy.progress.zzzzzz8a01": "ความคืบหน้า"
+,
+  "tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q": "ดาวน์โหลด MP4 ความยาว 5 วินาที"
+,
+  "tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w": "เบราว์เซอร์ของคุณยังเข้ารหัส MP4 จริงได้ที่นี่ — 5 วินาที 1080×1920 30 fps โดยเติมการเคลื่อนไหวระหว่างเฟรมหลักห้าเฟรม ใช้เวลาราว 15 วินาที และไม่มีข้อมูลใดออกจากเครื่องของคุณ และเฟรม PNG ยังดาวน์โหลดได้ตามปกติ"
+,
+  "tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g": "ทำไมต้องมีเฟรมหลักห้าเฟรม และ MP4 มาจากไหน"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l": "เครื่องมือนี้วาดการเคลื่อนไหวไว้ใน <strong>เฟรมหลัก 5 เฟรม</strong> (1080×1920 9:16) จึงได้ไฟล์ดาวน์โหลดสองแบบ คือเฟรม PNG ห้าเฟรม และเมื่อเบราว์เซอร์ของคุณเข้ารหัสวิดีโอได้ ก็จะได้ MP4 จริงความยาว 5 วินาทีที่เติมการเคลื่อนไหวระหว่างเฟรมหลักด้วย 30 fps"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q": "MP4 ถูกเข้ารหัสบนอุปกรณ์ของคุณเองด้วย WebCodecs API ไม่มีการอัปโหลดอะไร และไม่ต้องดาวน์โหลด ffmpeg.wasm ขนาด 30 MB หากเบราว์เซอร์เข้ารหัส H.264 ไม่ได้ เฟรม PNG ก็ยังใช้ได้ตามปกติ คุณจึงไม่เสียสิทธิ์ในการดาวน์โหลด"
+,
+  "tools.copy.mp4Encoding.zzzzzz9a02": "กำลังเข้ารหัส… {pct}%"
+,
+  "tools.copy.mp4Saved.zzzzzz9a03": "บันทึก MP4 ความยาว 5 วินาทีแล้ว"
+,
+  "tools.copy.mp4Failed.zzzzzz9a04": "สร้าง MP4 ไม่สำเร็จ เฟรม PNG ยังใช้ได้ตามปกติ"
+,
+  "tools.copy.mp4Unsupported.zzzzzz9a05": "เบราว์เซอร์นี้เข้ารหัส MP4 ไม่ได้ เฟรม PNG ยังใช้ได้ตามปกติ"
 }

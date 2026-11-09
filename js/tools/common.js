@@ -147,6 +147,11 @@ function loadVendor(lib) {
     heicErrored: 'tools.copy.heicErrored.zzzzzz6b07',
     // progress bar (added 2026-11-09)
     progress: 'tools.copy.progress.zzzzzz8a01',
+    // MP4 export (added 2026-11-11)
+    mp4Encoding: 'tools.copy.mp4Encoding.zzzzzz9a02',
+    mp4Saved: 'tools.copy.mp4Saved.zzzzzz9a03',
+    mp4Failed: 'tools.copy.mp4Failed.zzzzzz9a04',
+    mp4Unsupported: 'tools.copy.mp4Unsupported.zzzzzz9a05',
   };
 
   // Replace {name} placeholders with values from `params`.

@@ -67547,4 +67547,22 @@
   "tools.copy.bgMethodAi.zzzzzz7a03": "AI 抠图（MODNet — 一次性下载约 17 MB，在你的设备上运行）"
 ,
   "tools.copy.progress.zzzzzz8a01": "进度"
+,
+  "tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q": "下载 5 秒 MP4"
+,
+  "tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w": "你的浏览器还可以在这里直接编码出真正的 MP4 —— 5 秒、1080×1920、30 fps，画面在 5 个关键帧之间做了插值。大约需要 15 秒，全程不离开你的设备。PNG 序列帧随时照常可用。"
+,
+  "tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g": "为什么是 5 个关键帧，MP4 从哪来"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l": "这个工具把动效画在 <strong>5 个关键帧</strong>里（1080×1920、9:16）。因此有两个下载：5 张 PNG 序列帧，以及 —— 当你的浏览器能编码视频时 —— 一段 5 秒的真实 MP4，动效在关键帧之间以 30 fps 插值。"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q": "MP4 用 WebCodecs API 在你自己的设备上编码。不会上传任何东西，也不需要下载 30 MB 的 ffmpeg.wasm。不支持 H.264 编码的浏览器仍然可以拿到 PNG 序列帧 —— 两种方式你都不会失去下载。"
+,
+  "tools.copy.mp4Encoding.zzzzzz9a02": "正在编码… {pct}%"
+,
+  "tools.copy.mp4Saved.zzzzzz9a03": "5 秒 MP4 已保存。"
+,
+  "tools.copy.mp4Failed.zzzzzz9a04": "无法生成 MP4。PNG 序列帧仍然可用。"
+,
+  "tools.copy.mp4Unsupported.zzzzzz9a05": "这个浏览器无法编码 MP4。PNG 序列帧仍然可用。"
 }

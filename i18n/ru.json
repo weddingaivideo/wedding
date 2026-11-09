@@ -8717,4 +8717,22 @@
   "tools.copy.bgMethodAi.zzzzzz7a03": "Удаление фона нейросетью (MODNet — разовая загрузка ~17 МБ, работает на вашем устройстве)"
 ,
   "tools.copy.progress.zzzzzz8a01": "Прогресс"
+,
+  "tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q": "Скачать 5-секундное MP4"
+,
+  "tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w": "Ваш браузер может прямо здесь закодировать настоящее MP4 — 5 секунд, 1080×1920, 30 fps, с интерполяцией движения между пятью ключевыми кадрами. Это занимает около 15 секунд, и ничего не покидает ваше устройство. Кадры PNG остаются доступными в любом случае."
+,
+  "tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g": "Почему пять ключевых кадров и откуда берётся MP4"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l": "Инструмент рисует движение в <strong>5 ключевых кадрах</strong> (1080×1920, 9:16). Отсюда два скачивания: пять кадров PNG и — если браузер умеет кодировать видео — настоящее 5-секундное MP4, где движение интерполировано между ключевыми кадрами при 30 fps."
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q": "MP4 кодируется на вашем устройстве через WebCodecs API. Ничего не загружается на сервер, и не нужно скачивать 30 МБ ffmpeg.wasm. Браузер, который не умеет кодировать H.264, просто оставляет кадры PNG — возможность скачать никуда не исчезает."
+,
+  "tools.copy.mp4Encoding.zzzzzz9a02": "Кодирование… {pct}%"
+,
+  "tools.copy.mp4Saved.zzzzzz9a03": "5-секундное MP4 сохранено."
+,
+  "tools.copy.mp4Failed.zzzzzz9a04": "Не удалось создать MP4. Кадры PNG по-прежнему работают."
+,
+  "tools.copy.mp4Unsupported.zzzzzz9a05": "Этот браузер не умеет кодировать MP4. Кадры PNG по-прежнему работают."
 }

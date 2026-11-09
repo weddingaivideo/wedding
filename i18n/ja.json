@@ -65269,4 +65269,22 @@
   "tools.copy.bgMethodAi.zzzzzz7a03": "AI マッティング（MODNet — 約17MBを一度だけダウンロードし、端末内で実行）"
 ,
   "tools.copy.progress.zzzzzz8a01": "進捗"
+,
+  "tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q": "5秒のMP4をダウンロード"
+,
+  "tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w": "お使いのブラウザはここでの実際のMP4のエンコードもできます。5秒、1080×1920、30fps、5つのキーフレームの間を補間した動きです。所要時間はおよそ15秒で、データが端末から出ることは一切ありません。PNGフレームはこれまでどおりいつでもダウンロードできます。"
+,
+  "tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g": "なぜ5つのキーフレームなのか、MP4はどこから来るのか"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l": "このツールは動きを<strong>5つのキーフレーム</strong>（1080×1920、9:16）で描きます。そこから2つのダウンロードが生まれます。5枚のPNGフレームと、ブラウザが動画エンコードに対応していれば、キーフレーム間を30fpsで補間した実際の5秒のMP4です。"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q": "MP4はWebCodecs APIを使ってお使いの端末上でエンコードされます。アップロードは行われず、30MBのffmpeg.wasmをダウンロードする必要もありません。H.264をエンコードできないブラウザでもPNGフレームはそのまま使えるので、ダウンロードできるものは減りません。"
+,
+  "tools.copy.mp4Encoding.zzzzzz9a02": "エンコード中… {pct}%"
+,
+  "tools.copy.mp4Saved.zzzzzz9a03": "5秒のMP4を保存しました。"
+,
+  "tools.copy.mp4Failed.zzzzzz9a04": "MP4を作成できませんでした。PNGフレームはそのまま使えます。"
+,
+  "tools.copy.mp4Unsupported.zzzzzz9a05": "このブラウザはMP4をエンコードできません。PNGフレームはそのまま使えます。"
 }

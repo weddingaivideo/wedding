@@ -51,6 +51,23 @@
       "package": "jspdf",
       "version": "4.2.1"
     },
+    "mediabunny": {
+      "files": {
+        "LICENSE": {
+          "bytes": 16726,
+          "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04",
+          "url": "https://cdn.jsdelivr.net/npm/mediabunny@1.65.2/LICENSE"
+        },
+        "mediabunny.min.mjs": {
+          "bytes": 723375,
+          "sha256": "08149edcc8cf980da65d94a0a54a8fc0fa85a65f89b66f55c906f33618363919",
+          "url": "https://cdn.jsdelivr.net/npm/mediabunny@1.65.2/dist/bundles/mediabunny.min.mjs"
+        }
+      },
+      "license": "MPL-2.0",
+      "package": "mediabunny",
+      "version": "1.65.2"
+    },
     "modnet": {
       "files": {
         "model_quantized.onnx": {

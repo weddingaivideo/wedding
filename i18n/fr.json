@@ -62776,4 +62776,22 @@
   "tools.copy.bgMethodAi.zzzzzz7a03": "Détourage par IA (MODNet : téléchargement unique d'environ 17 Mo, exécuté sur votre appareil)"
 ,
   "tools.copy.progress.zzzzzz8a01": "Progression"
+,
+  "tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q": "Télécharger un MP4 de 5 secondes"
+,
+  "tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w": "Votre navigateur peut aussi encoder un vrai MP4 ici : 5 secondes, 1080×1920, 30 fps, avec le mouvement interpolé entre les cinq images clés. Comptez environ 15 secondes, et rien ne quitte votre appareil. Les images PNG restent disponibles dans tous les cas."
+,
+  "tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g": "Pourquoi 5 images clés, et d'où vient le MP4"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l": "L'outil dessine son animation sur <strong>5 images clés</strong> (1080×1920, 9:16). Il en découle deux téléchargements : les cinq images PNG et — quand votre navigateur sait encoder la vidéo — un vrai MP4 de 5 secondes, le mouvement étant interpolé entre les images clés à 30 fps."
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q": "Le MP4 est encodé sur votre propre appareil via l'API WebCodecs. Rien n'est envoyé, et il n'y a pas 30 Mo de ffmpeg.wasm à télécharger. Un navigateur incapable d'encoder H.264 conserve simplement les images PNG — vous ne perdez jamais le téléchargement."
+,
+  "tools.copy.mp4Encoding.zzzzzz9a02": "Encodage… {pct}%"
+,
+  "tools.copy.mp4Saved.zzzzzz9a03": "MP4 de 5 secondes enregistré."
+,
+  "tools.copy.mp4Failed.zzzzzz9a04": "Impossible de créer le MP4. Les images PNG fonctionnent toujours."
+,
+  "tools.copy.mp4Unsupported.zzzzzz9a05": "Ce navigateur ne peut pas encoder le MP4. Les images PNG fonctionnent toujours."
 }

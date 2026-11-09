@@ -124,6 +124,26 @@ LIBS = {
                 "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.22.0/LICENSE",
         },
     },
+    "mediabunny": {
+        "pkg": "mediabunny",
+        "version": "1.65.2",
+        "license": "MPL-2.0",
+        "files": {
+            # ESM ONLY. mediabunny ships no UMD/global build, so it cannot
+            # be loaded with <script src="/js/vendor/..."> the way the other
+            # libraries are - it has to be imported by a
+            # <script type="module">. js/tools/movie-loader.mjs is that
+            # module; it imports mediabunny LAZILY, so the 723 KB only
+            # arrives when the visitor actually asks for an MP4.
+            #
+            # MPL-2.0 is a weak copyleft: using the library unmodified is
+            # fine, including in a commercial site. Shipping a modified
+            # copy would require publishing the modification - the site
+            # ships the upstream file byte-for-byte, so that never applies.
+            "mediabunny.min.mjs": "dist/bundles/mediabunny.min.mjs",
+            "LICENSE": "LICENSE",
+        },
+    },
     "modnet": {
         # The matting model itself. NOT an npm package: it is served from the
         # Hugging Face repository, so the URL is given explicitly.

@@ -63395,4 +63395,22 @@
   "tools.copy.bgMethodAi.zzzzzz7a03": "KI-Matting (MODNet – einmaliger Download von ~17 MB, läuft auf deinem Gerät)"
 ,
   "tools.copy.progress.zzzzzz8a01": "Fortschritt"
+,
+  "tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q": "5-Sekunden-MP4 herunterladen"
+,
+  "tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w": "Dein Browser kann hier auch ein echtes MP4 encodieren — 5 Sekunden, 1080×1920, 30 fps, mit der Bewegung zwischen den fünf Keyframes interpoliert. Das dauert etwa 15 Sekunden, und nichts verlässt dein Gerät. Die PNG-Frames bleiben ohnehin verfügbar."
+,
+  "tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g": "Warum 5 Keyframes — und woher das MP4 kommt"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l": "Das Tool zeichnet seine Bewegung in <strong>5 Keyframes</strong> (1080×1920, 9:16). Daraus kommen zwei Downloads: die fünf PNG-Frames und — wenn dein Browser Video encodieren kann — ein echtes 5-Sekunden-MP4, bei dem die Bewegung zwischen den Keyframes mit 30 fps interpoliert wird."
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q": "Das MP4 wird mit der WebCodecs-API direkt auf deinem Gerät encodiert. Es wird nichts hochgeladen, und du musst keine 30 MB ffmpeg.wasm herunterladen. Ein Browser, der H.264 nicht encodieren kann, behält einfach die PNG-Frames — den Download verlierst du nie."
+,
+  "tools.copy.mp4Encoding.zzzzzz9a02": "Encodieren… {pct}%"
+,
+  "tools.copy.mp4Saved.zzzzzz9a03": "5-Sekunden-MP4 gespeichert."
+,
+  "tools.copy.mp4Failed.zzzzzz9a04": "Das MP4 konnte nicht erstellt werden. Die PNG-Frames funktionieren weiterhin."
+,
+  "tools.copy.mp4Unsupported.zzzzzz9a05": "Dieser Browser kann kein MP4 encodieren. Die PNG-Frames funktionieren weiterhin."
 }

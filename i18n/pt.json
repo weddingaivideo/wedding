@@ -62192,4 +62192,22 @@
   "tools.copy.bgMethodAi.zzzzzz7a03": "Matting por IA (MODNet — download único de ~17 MB, roda no seu dispositivo)"
 ,
   "tools.copy.progress.zzzzzz8a01": "Progresso"
+,
+  "tools.wedding-video-invitation-maker.btn_text.download_mp4.8k3m1p7q": "Baixar um MP4 de 5 segundos"
+,
+  "tools.wedding-video-invitation-maker.p_text.mp4_note.4r6t8v0w": "O seu navegador também pode codificar um MP4 real aqui — 5 segundos, 1080×1920, 30 fps, com o movimento interpolado entre os cinco quadros-chave. Leva cerca de 15 segundos e nada sai do seu dispositivo. Os quadros PNG continuam disponíveis de qualquer forma."
+,
+  "tools.wedding-video-invitation-maker.h2_text.why_frames.2s5d7f1g": "Por que 5 quadros-chave e de onde vem o MP4"
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_1.6h9j2k3l": "A ferramenta desenha o movimento em <strong>5 quadros-chave</strong> (1080×1920, 9:16). Daí saem dois downloads: os cinco quadros PNG e — quando o seu navegador consegue codificar vídeo — um MP4 real de 5 segundos com o movimento interpolado entre os quadros-chave a 30 fps."
+,
+  "tools.wedding-video-invitation-maker.p_text.why_frames_2.0m4n6p8q": "O MP4 é codificado no seu próprio dispositivo com a API WebCodecs. Nada é enviado e não há 30 MB de ffmpeg.wasm para descarregar. Um navegador que não consiga codificar H.264 mantém simplesmente os quadros PNG — nunca perde a descarga."
+,
+  "tools.copy.mp4Encoding.zzzzzz9a02": "A codificar… {pct}%"
+,
+  "tools.copy.mp4Saved.zzzzzz9a03": "MP4 de 5 segundos guardado."
+,
+  "tools.copy.mp4Failed.zzzzzz9a04": "Não foi possível criar o MP4. Os quadros PNG continuam a funcionar."
+,
+  "tools.copy.mp4Unsupported.zzzzzz9a05": "Este navegador não consegue codificar MP4. Os quadros PNG continuam a funcionar."
 }
