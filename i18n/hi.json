@@ -64105,4 +64105,24 @@
   "tools.copy.mp4Failed.zzzzzz9a04": "MP4 नहीं बन सका। PNG फ़्रेम फिर भी काम करते हैं।"
 ,
   "tools.copy.mp4Unsupported.zzzzzz9a05": "यह ब्राउज़र MP4 एन्कोड नहीं कर सकता। PNG फ़्रेम फिर भी काम करते हैं।"
+,
+  "tools.compress-wedding-photos.label_text.target_size.5x7y9z1": "लक्षित आकार (MB) — वैकल्पिक"
+,
+  "tools.compress-wedding-photos.small_text.target_size.6a8b0c2d": "0 = बंद। इसे भरने पर क्वालिटी स्लाइडर अनदेखा हो जाती है और हर फ़ोटो को इस आकार से थोड़ा छोटा बनाया जाता है।"
+,
+  "tools.compress-wedding-photos.label_text.keep_exif.9e3f1a2b": "EXIF मेटाडेटा रखें (कैमरा, तारीख़)"
+,
+  "tools.compress-wedding-photos.small_text.keep_exif.0c4d2e3f": "मूल फ़ाइल से कॉपी होता है। केवल JPG आउटपुट के लिए। ओरिएंटेशन रीसेट कर दिया जाता है, इसलिए फ़ोटो कभी तिरछी नहीं होगी।"
+,
+  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "कंप्रेसर ब्राउज़र के अंदरूनी <strong>Canvas API</strong> का उपयोग करके आपकी चुनी हुई क्वालिटी पर डाली गई हर इमेज दोबारा एन्कोड करता है। इनपुट JPG, PNG और WebP है और आउटपुट JPG, WebP या PNG। वैकल्पिक \"अधिकतम लंबा किनारा\" सबसे लंबे किनारे को सीमित करता है — जब आपको गंतव्य का आकार सीमा पता हो तो काम का है। <strong>लक्षित आकार</strong> (MB) गुणवत्ता स्लाइडर की पूरी जगह ले लेता है: टूल वह सबसे ऊँची क्वालिटी ढूँढता है जो उस आकार में समा जाए, और फ़ोटो को तभी छोटा करता है जब सबसे कम क्वालिटी भी बहुत बड़ी हो।"
+,
+  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "यह क्या नहीं कर सकता: फ़ोटो से छोटा लक्ष्य तक नहीं पहुँच सकता, और PNG मेटाडेटा नहीं लिख सकता। EXIF मूल फ़ाइल से कॉपी होता है — कैमरा, लेंस, खींचने की तारीख़ — इसलिए कंप्रेस की गई फ़ोटो भी बताती है कि वह कब और कहाँ ली गई थी। ओरिएंटेशन जानबूझकर रीसेट किया जाता है, क्योंकि पिक्सेल पहले से सीधे हैं: मूल रोटेशन फ़्लैग रखने से हर व्यूअर फ़ोटो को तिरछा कर देगा।"
+,
+  "tools.compress-wedding-photos.td_text.40mb_upload_cap_1by1.5s6t7u8v": "<strong>40 MB अपलोड सीमा, एक-एक करके</strong>"
+,
+  "tools.compress-wedding-photos.td_text.weddingaivideo_faceaware.1u2v3w4x": "<strong>WeddingAI.video कंप्रेसर</strong> (यह टूल)"
+,
+  "tools.compress-wedding-photos.td_text.face_aware_ai_quality_6085.9c0d1e2f": "<strong>60–85% छोटा, एक क्लिक में बैच</strong>"
+,
+  "tools.compress-wedding-photos.td_text.same_workflow_as_9_9_video.7k8l9m0n": "<strong>वेडिंग वीडियो वाला ही वर्कफ़्लो</strong>"
 }

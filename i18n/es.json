@@ -63077,4 +63077,16 @@
   "tools.copy.mp4Failed.zzzzzz9a04": "No se pudo crear el MP4. Los fotogramas PNG siguen funcionando."
 ,
   "tools.copy.mp4Unsupported.zzzzzz9a05": "Este navegador no puede codificar MP4. Los fotogramas PNG siguen funcionando."
+,
+  "tools.compress-wedding-photos.label_text.target_size.5x7y9z1": "Tamaño objetivo (MB) — opcional"
+,
+  "tools.compress-wedding-photos.small_text.target_size.6a8b0c2d": "0 = desactivado. Cuando se rellena, se ignora el control de calidad y cada foto se ajusta para quedar justo por debajo de este tamaño."
+,
+  "tools.compress-wedding-photos.label_text.keep_exif.9e3f1a2b": "Conservar los metadatos EXIF (cámara, fecha)"
+,
+  "tools.compress-wedding-photos.small_text.keep_exif.0c4d2e3f": "Se copia del archivo original. Solo para salida JPG. La orientación se restablece, así que la foto nunca puede quedar tumbada."
+,
+  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "El compresor usa la <strong>Canvas API</strong> integrada del navegador para recodificar cada imagen que sueltas con la calidad que elijas. Admite JPG, PNG y WebP de entrada y produce JPG, WebP o PNG. El opcional \"Lado más largo máximo\" limita el lado más largo: útil si conoces el límite de tamaño del destino. Un <strong>tamaño objetivo</strong> en MB sustituye por completo el control de calidad: la herramienta busca la mayor calidad que aún cabe por debajo de ese tamaño y solo reduce la foto cuando incluso la calidad más baja es demasiado grande."
+,
+  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "Lo que no hace: no puede llegar a un objetivo más pequeño que la propia foto, y no puede escribir metadatos PNG. Los EXIF se copian del archivo original — cámara, objetivo, fecha de disparo — así que una foto comprimida sigue diciendo cuándo y dónde se tomó. La orientación se restablece a propósito, porque los píxeles ya están derechos: conservar el indicador de rotación original haría que cada visor girase la foto de lado."
 }

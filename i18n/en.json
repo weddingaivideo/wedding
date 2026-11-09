@@ -44320,4 +44320,16 @@
   "tools.copy.mp4Failed.zzzzzz9a04": "Could not make the MP4. The PNG frames still work."
 ,
   "tools.copy.mp4Unsupported.zzzzzz9a05": "This browser cannot encode MP4. The PNG frames still work."
+,
+  "tools.compress-wedding-photos.label_text.target_size.5x7y9z1": "Target size (MB) — optional"
+,
+  "tools.compress-wedding-photos.small_text.target_size.6a8b0c2d": "0 = off. When it is set, the quality slider is ignored and every photo is tuned to land just under this size."
+,
+  "tools.compress-wedding-photos.label_text.keep_exif.9e3f1a2b": "Keep EXIF metadata (camera, date)"
+,
+  "tools.compress-wedding-photos.small_text.keep_exif.0c4d2e3f": "Copied from the original file. JPG output only. The orientation is reset, so the photo can never end up sideways."
+,
+  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "The compressor uses the browser's built-in <strong>Canvas API</strong> to re-encode each dropped image at your chosen quality. It supports JPG, PNG, and WebP input and outputs JPG, WebP, or PNG. Optional \"Max longest edge\" caps the longest side — handy if you know the destination's size limit. A <strong>target size</strong> in MB replaces the quality slider entirely: the tool searches for the highest quality that still fits under it, and scales the photo down only when even the lowest quality is too big."
+,
+  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "What it does not do: it cannot reach a target smaller than the photo can be, and it cannot write PNG metadata. EXIF is copied over from the original file — camera, lens, shooting date — so a compressed photo still says when and where it was taken. The orientation is deliberately reset, because the pixels are already upright: keeping the original rotation flag would make every viewer turn the photo sideways."
 }

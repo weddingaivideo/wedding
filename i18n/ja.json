@@ -65287,4 +65287,16 @@
   "tools.copy.mp4Failed.zzzzzz9a04": "MP4を作成できませんでした。PNGフレームはそのまま使えます。"
 ,
   "tools.copy.mp4Unsupported.zzzzzz9a05": "このブラウザはMP4をエンコードできません。PNGフレームはそのまま使えます。"
+,
+  "tools.compress-wedding-photos.label_text.target_size.5x7y9z1": "目標サイズ（MB）— 任意"
+,
+  "tools.compress-wedding-photos.small_text.target_size.6a8b0c2d": "0 はオフです。入力すると品質スライダーは無視され、各写真がこのサイズをわずかに下回るよう調整されます。"
+,
+  "tools.compress-wedding-photos.label_text.keep_exif.9e3f1a2b": "EXIF メタデータを保持（カメラ、日付）"
+,
+  "tools.compress-wedding-photos.small_text.keep_exif.0c4d2e3f": "元のファイルからコピーされます。JPG 出力のみ。方向はリセットされるので、写真が横を向くことはありません。"
+,
+  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "圧縮ツールはブラウザ内蔵の <strong>Canvas API</strong> を使い、ドラッグした各画像を選んだ画質で再エンコードします。入力は JPG・PNG・WebP、出力は JPG・WebP・PNG に対応しています。任意の「最長辺の上限」は最長辺を制限するので、投稿先のサイズ上限が分かっているときに便利です。<strong>目標サイズ</strong>（MB）を指定すると画質スライダーは使われず、そのサイズに収まる 가장高い画質を自動で探します。最も低い画質でも大きいときだけ、写真を縮小します。"
+,
+  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "できないこと：写真自体より小さい目標サイズには届きませんし、PNG のメタデータも書き込めません。EXIF は元のファイルからコピーされ、カメラ・レンズ・撮影日が残るので、圧縮した写真でもいつどこで撮ったかが分かります。向きは意図的にリセットします。ピクセルはすでに正立しているためで、元の回転フラグを保持すると、どのビューアでも写真が横向きになってしまいます。"
 }

@@ -2383,4 +2383,97 @@ The MP4 is read back with **mediabunny itself** (it runs in Node too) by
 1080×1920. On Windows an absolute path is not a valid ESM specifier — it
 has to be a `file://` URL (`Path.as_uri()`).
 
+## The compressor now has a target-size mode and keeps EXIF (§2.13 / §2.14, 2026-11-11)
+
+`tools/compress-wedding-photos` gained two controls in all 11 languages:
+
+* `#target-size` — a number input in MB, `0 = off`. When it is set the
+  quality slider is ignored and the tool searches for the **highest
+  quality that still fits under the target** (binary search, LO 0.3 /
+  HI 0.95, 7 rounds). When even the lowest quality is too big the canvas
+  is scaled by `sqrt(target / size)` and the search runs again (max 5
+  rounds). PNG does not participate — it is lossless.
+* `#keep-exif` — a checkbox, on by default. The APP1 (Exif) segment of
+  the ORIGINAL file is copied verbatim into the re-encoded JPEG, right
+  after its SOI marker. No library is needed for this.
+
+`scripts/verify-compress-target-exif.py` proves both promises on the
+produced file, not on the code:
+
+| scenario | input | what is asserted |
+|---|---|---|
+| A | 200×100 JPEG tagged **Orientation=6** | the output frame is **100×200** (upright) AND it still has an APP1 whose Orientation reads **1** |
+| B | 1600×1200 noise JPEG, target 50 KB | the output is **≤ 52428 bytes** and still decodes (measured: 51964 bytes, downscaled to 524×393) |
+
+### TRAP: `ArrayBuffer` has no `.length` — it has `.byteLength`
+
+The EXIF splice builds the output by hand:
+
+```js
+var out = new Uint8Array(buf.length + seg.length);   // WRONG
+out.set(new Uint8Array(buf), 0);
+```
+
+`buf` is an **ArrayBuffer**, so `buf.length` is `undefined`.
+`undefined + seg.length` is `NaN`, `new Uint8Array(NaN)` is a
+**zero-length** array, and the `set()` then throws
+`RangeError: offset is out of bounds`.
+
+The fix is `buf.byteLength`. The general rule: **a typed array has
+`length`, an ArrayBuffer has `byteLength`**, and mixing them fails
+silently until the `set()` blows up.
+
+### TRAP: a caught error ends the row in `error` — which looks exactly like "still working"
+
+The compressor catches the failure and sets `entry.status = 'error'`.
+A test that waits for `.wa-tool-status-done` therefore waits the FULL
+timeout on a row that already failed — and a failed run and a slow run
+are indistinguishable from the outside.
+
+**Wait for both states and then assert which one it is:**
+
+```python
+page.wait_for_selector(".wa-tool-status-done, .wa-tool-status-error", timeout=120000)
+cls = page.evaluate("() => document.querySelector('#file-list .wa-tool-file-row').className")
+if "wa-tool-status-done" not in cls: fail(cls)
+```
+
+### TRAP: the i18n dictionaries are FLAT, and `data-i18n-attr` prefixes must be stripped
+
+`i18n/<lang>.json` is **not** nested. The top-level key IS the whole
+dotted path:
+
+```json
+"tools.compress-wedding-photos.label_text.target_size.5x7y9z1": "Target size (MB) — optional"
+```
+
+So `data["tools"]["compress-wedding-photos"]` is `{}` (or does not
+exist) and a lookup that walks the path segment by segment reports
+**every** key as missing. The `tools` key that does exist is the tools
+HUB page's namespace (`tools.a_text.*`, `tools.h3_text.*`,
+`tools.p_text.*`) — a different thing with the same prefix.
+
+`data-i18n-attr="title:about.a_text.couples_served_title.ddddddd3"`
+carries an **attribute prefix**; the dictionary key is everything after
+the first colon. Strip it before looking up, or the key looks missing.
+
+### How to tell a NEW i18n gap from an OLD one
+
+Compare three things, not two: the page's key set at HEAD vs now, and
+the dictionary at HEAD vs now. A key is **newly broken** only when the
+page now uses it AND neither the current nor the HEAD dictionary had it.
+On 2026-11-11 that check found **0** newly broken keys and **11**
+pre-existing gaps (2 in zh, 5 in ru, 4 in hi — all in the compressor's
+comparison table), which were filled in the same pass.
+
+Do NOT audit the union of the 11 pages against one dictionary: a key
+used only by the `hi` page is reported missing in `en`, which is noise.
+
+### Run the verification scripts with `python -u`
+
+A verification script that hangs produces **no output at all** when
+stdout is block-buffered into a pipe — a hung script and a slow script
+look identical. `python -u scripts/verify-compress-target-exif.py`
+flushes every line, so the last line printed tells you where it stopped.
+
 

@@ -62794,4 +62794,16 @@
   "tools.copy.mp4Failed.zzzzzz9a04": "Impossible de créer le MP4. Les images PNG fonctionnent toujours."
 ,
   "tools.copy.mp4Unsupported.zzzzzz9a05": "Ce navigateur ne peut pas encoder le MP4. Les images PNG fonctionnent toujours."
+,
+  "tools.compress-wedding-photos.label_text.target_size.5x7y9z1": "Taille cible (Mo) — facultatif"
+,
+  "tools.compress-wedding-photos.small_text.target_size.6a8b0c2d": "0 = désactivé. Lorsqu'il est renseigné, le curseur de qualité est ignoré et chaque photo est ajustée pour rester juste en dessous de cette taille."
+,
+  "tools.compress-wedding-photos.label_text.keep_exif.9e3f1a2b": "Conserver les métadonnées EXIF (appareil photo, date)"
+,
+  "tools.compress-wedding-photos.small_text.keep_exif.0c4d2e3f": "Copié depuis le fichier d'origine. Sortie JPG uniquement. L'orientation est réinitialisée, donc la photo ne peut jamais être de travers."
+,
+  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "Le compresseur utilise la <strong>Canvas API</strong> intégrée au navigateur pour réencoder chaque image déposée avec la qualité de votre choix. Il accepte les JPG, PNG et WebP en entrée et produit du JPG, du WebP ou du PNG. L'option « Long côté maximal » limite le côté le plus long — utile si vous connaissez la limite de taille de la destination. Une <strong>taille cible</strong> en Mo remplace complètement le curseur de qualité : l'outil cherche la qualité la plus haute qui tient encore sous cette taille, et ne réduit la photo que si même la qualité la plus basse est trop grande."
+,
+  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "Ce qu'il ne fait pas : il ne peut pas atteindre une cible plus petite que la photo elle-même, et il ne sait pas écrire de métadonnées PNG. Les EXIF sont recopiés depuis le fichier d'origine — appareil photo, objectif, date de prise de vue — si bien qu'une photo compressée indique toujours quand et où elle a été prise. L'orientation est volontairement réinitialisée, car les pixels sont déjà droits : conserver l'indicateur de rotation d'origine ferait pivoter la photo dans tous les visionneuses."
 }

@@ -8735,4 +8735,26 @@
   "tools.copy.mp4Failed.zzzzzz9a04": "Не удалось создать MP4. Кадры PNG по-прежнему работают."
 ,
   "tools.copy.mp4Unsupported.zzzzzz9a05": "Этот браузер не умеет кодировать MP4. Кадры PNG по-прежнему работают."
+,
+  "tools.compress-wedding-photos.label_text.target_size.5x7y9z1": "Целевой размер (МБ) — необязательно"
+,
+  "tools.compress-wedding-photos.small_text.target_size.6a8b0c2d": "0 = выключено. Если задано значение, ползунок качества игнорируется, и каждое фото подбирается так, чтобы быть чуть меньше этого размера."
+,
+  "tools.compress-wedding-photos.label_text.keep_exif.9e3f1a2b": "Сохранить метаданные EXIF (камера, дата)"
+,
+  "tools.compress-wedding-photos.small_text.keep_exif.0c4d2e3f": "Копируется из исходного файла. Только для вывода в JPG. Ориентация сбрасывается, поэтому фотография никогда не ляжет набок."
+,
+  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "Компрессор использует встроенный в браузер <strong>Canvas API</strong>, чтобы перекодировать каждое перетащенное изображение с выбранным качеством. Он принимает JPG, PNG и WebP на входе и выдаёт JPG, WebP или PNG. Необязательная настройка «Максимальная длинная сторона» ограничивает длинную сторону — пригодится, если вы знаете лимит размера у получателя. <strong>Целевой размер</strong> в МБ полностью заменяет ползунок качества: инструмент ищет максимальное качество, которое ещё укладывается в этот размер, и уменьшает фотографию только тогда, когда даже минимального качества слишком много."
+,
+  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "Чего он не умеет: достичь цели меньше, чем сам снимок, и записывать метаданные в PNG. EXIF переносятся из исходного файла — камера, объектив, дата съёмки — так что сжатое фото по-прежнему говорит, когда и где оно сделано. Ориентация намеренно сбрасывается, потому что пиксели уже стоят прямо: если сохранить исходный флаг поворота, любой просмотрщик повернёт фотографию боком."
+,
+  "tools.compress-wedding-photos.td_text.40mb_upload_cap_1by1.5s6t7u8v": "<strong>Лимит загрузки 40 МБ, по одному файлу</strong>"
+,
+  "tools.compress-wedding-photos.td_text.weddingaivideo_faceaware.1u2v3w4x": "<strong>WeddingAI.video Компрессор</strong> (этот инструмент)"
+,
+  "tools.compress-wedding-photos.td_text.face_aware_ai_quality_6085.9c0d1e2f": "<strong>На 60–85% меньше, пакетно в один клик</strong>"
+,
+  "tools.compress-wedding-photos.td_text.same_workflow_as_9_9_video.7k8l9m0n": "<strong>Тот же процесс, что и для видео свадьбы</strong>"
+,
+  "tools.compress-wedding-photos.td_text.unlimited_100plus_tested.5y6z7a8b": "<strong>Без ограничений, проверено на более чем 100 фото</strong>"
 }
