@@ -8715,4 +8715,6 @@
   "tools.copy.bgMethodColor.zzzzzz7a02": "Умный цветовой ключ (мгновенно, без загрузки)"
 ,
   "tools.copy.bgMethodAi.zzzzzz7a03": "Удаление фона нейросетью (MODNet — разовая загрузка ~17 МБ, работает на вашем устройстве)"
+,
+  "tools.copy.progress.zzzzzz8a01": "Прогресс"
 }

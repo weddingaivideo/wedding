@@ -36,7 +36,7 @@ The owner approved the 🟢 and 🔵 classes for execution. Here is what landed.
 | §1.5 print styles | ✅ | full `@media print` block in `styles/tools.css` |
 | §2.1 interactive crop | ✅ | **native drag frame, not Cropper.js v2** — v2 keeps its UI in shadow DOM and ships zero aria-labels, so its handles could not be localized or named |
 | §2.10 Service Worker | ✅ | all 144 tool pages |
-| §2.5–2.9 engineering | ⏸️ **not done** | Worker / OffscreenCanvas / EXIF / memory / progress. None of it is user-visible; it is a follow-up. |
+| §2.5–2.9 engineering | ✅ | **Worker** for the pixel loop (`js/tools/pixel-worker.js`, buffer transferred, progress in ~24 chunks) · **createImageBitmap** with an explicit `{imageOrientation:'from-image'}` · **memory hygiene** — every decoded image is now released through `releaseImage()`, including on the error path (the release used to sit at the end of the `try` block, so an exception skipped it) · **real progress** — the rows show a percentage instead of an indefinite spinner. `fileToImage()` changed CONTRACT: it returns an `ImageBitmap`, `loaded.url` is `null`, and `loaded.release()` is the teardown call. |
 | §3.1 HEIC decode | ✅ | heic2any + Safari-native-first; the "only works in Safari" prose was rewritten in 11 languages |
 | §3.2 real MP4 | ⏸️ **not done** | needs the owner's answer on §9.4 (Firefox/Android) — 706 KB ESM |
 | §3.3 pica resampling | ✅ | compress + HEIC |
@@ -48,6 +48,15 @@ The owner approved the 🟢 and 🔵 classes for execution. Here is what landed.
 Chromium under the **live** CSP (`scripts/verify-ai-background.py`,
 `scripts/verify-crop-stage.py`). The pre-deploy gate is green: 0 errors,
 0 warnings, READY TO DEPLOY.
+
+The §2.5–2.9 pass added three more browser checks, because none of those
+four items can be verified by reading the code:
+
+| script | what it proves |
+|---|---|
+| `scripts/verify-worker-progress.py` | the Worker's output is **byte-for-byte identical** to the main-thread maths (both `png` and `jpg` mode), the worker was actually **fetched**, and the progress bar appeared. Asserting only the output would pass with the worker disabled — the fallback produces the same bytes and the same green row. |
+| `scripts/verify-tool-suite-smoke.py` | all seven tools that decode a file through `fileToImage()` still work after the contract change. The contract change is silent: an `ImageBitmap` has no `.complete`, and `URL.revokeObjectURL(null)` is a no-op, so a tool that was not updated still shows a green row. |
+| `scripts/verify-exif-orientation.py` | a portrait phone photo is not rendered sideways: `<img>` → 100×200, `createImageBitmap(blob, {imageOrientation:'from-image'})` → 100×200. |
 
 **Still needs the owner:** §4 (paid services) and §5 (promise-breaking
 options) were deliberately NOT executed, and §9 still has five open
@@ -134,6 +143,25 @@ by grepping the shipped dist), so they cost 0 extra i18n work.
 | 2.13 | **EXIF read/keep/strip as a first-class option** | `exifr` is a small, dependency-free EXIF parser | Would let the compress tool *keep* EXIF instead of only documenting that it drops it |
 | 2.14 | **Target-size mode** | "Compress to exactly 2 MB" is what users actually ask for; today the control is a quality slider |
 | 2.15 | **DOM→PNG renderer** | `save-the-date`, `invitation`, `photo-book`, `seating-chart` all hand-roll canvas rendering. `modern-screenshot` (29 KB UMD, MIT) renders the DOM directly and keeps the HTML/CSS as the single source of truth |
+
+> ✅ **2.5 – 2.9 were implemented on 2026-11-09** (execution status above).
+> Three corrections to the analysis above, found while building them:
+>
+> * **2.5: `worker-src` was NOT covered by `default-src 'self'`.** The
+>   vendored libraries build their Worker from a `blob:` URL, and `blob:`
+>   is not `'self'`. The explicit `worker-src 'self' blob:` directive is
+>   required — without it pica silently degrades to its JS resampler.
+> * **2.6: `createImageBitmap` needs the EXPLICIT
+>   `{imageOrientation: 'from-image'}` option.** The plain call did not
+>   reliably apply the EXIF rotation, so a portrait phone photo would have
+>   been rendered sideways. `OffscreenCanvas` was NOT needed and is not
+>   used: the pixel buffer is transferred to a Worker instead, and the
+>   canvas has to stay on the main thread anyway to be encoded and
+>   downloaded.
+> * **2.8: the release used to sit at the END of the `try` block**, so an
+>   exception skipped it and the decoded image stayed alive for the rest
+>   of the session. It is now in a `finally`.
+
 
 ---
 

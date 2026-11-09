@@ -37,6 +37,22 @@ ASSETS = [
     ("tools.css", re.compile(r"/styles/tools\.css\?v=(\d+(?:\.\d+)*)")),
 ]
 
+# Assets whose stamp does NOT live in the HTML.
+#
+# The pixel worker (§2.5) is fetched at runtime by common.js, so its `?v=`
+# is a constant inside common.js. Bumping the HTML stamps would not reach
+# it, and Cloudflare Pages overrides Cache-Control on static assets - a
+# stale stamp would serve the OLD worker forever. Same trap, different
+# place.
+#
+# (name, file relative to ROOT, pattern with the version in group 2)
+JS_ASSETS = [
+    ("pixel-worker.js", "js/tools/common.js",
+     re.compile(r"(var PIXEL_WORKER_VERSION = ')(\d+(?:\.\d+)*)(')")),
+]
+
+ALL_ASSET_NAMES = [n for n, _ in ASSETS] + [n for n, _, _ in JS_ASSETS]
+
 EXCLUDE_DIRS = {"admin", "qa", "scripts", "__pycache__", "i18n", "js", "styles",
                 ".git", ".tmp", "node_modules", "__MACOSX", ".github", "internal-docs",
                 "internal-tools", "private"}
@@ -90,6 +106,21 @@ def find_current_versions() -> dict[str, str]:
         missing = [n for n, _ in ASSETS if n not in versions]
         raise SystemExit(f"[FAIL] Could not find version stamps for: {missing}")
     return versions
+
+
+def find_js_versions() -> dict[str, str]:
+    """Read the version stamps that live inside a JS file instead of the HTML."""
+    out: dict[str, str] = {}
+    for name, rel, pat in JS_ASSETS:
+        path = ROOT / rel
+        if not path.exists():
+            raise SystemExit(f"[FAIL] Missing {rel} (needed for the {name} stamp)")
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        m = pat.search(text)
+        if not m:
+            raise SystemExit(f"[FAIL] Could not find the {name} version stamp in {rel}")
+        out[name] = m.group(2)
+    return out
 
 
 def bump(version: str) -> str:
@@ -147,26 +178,37 @@ def apply_to_file(path: Path, asset: str, new_version: str, dry: bool) -> int:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="Show what would change without writing")
-    ap.add_argument("--asset", choices=[n for n, _ in ASSETS], help="Bump only this asset (default: all)")
+    ap.add_argument("--asset", choices=ALL_ASSET_NAMES, help="Bump only this asset (default: all)")
     args = ap.parse_args()
 
     versions = find_current_versions()
+    js_versions = find_js_versions()
     print("Current versions:")
     for name, v in versions.items():
         print(f"  {name}: ?v={v}")
+    for name, v in js_versions.items():
+        print(f"  {name}: ?v={v}  (in {JS_ASSETS[[n for n, _, _ in JS_ASSETS].index(name)][1]})")
 
-    targets = [args.asset] if args.asset else [n for n, _ in ASSETS]
-    new_versions = {name: bump(versions[name]) for name in targets}
+    targets = [args.asset] if args.asset else ALL_ASSET_NAMES
+    new_versions = {}
+    for name in targets:
+        cur = versions.get(name) or js_versions.get(name)
+        if cur is None:
+            raise SystemExit(f"[FAIL] No current version for {name}")
+        new_versions[name] = bump(cur)
 
     print("\nTarget versions:")
     for name in targets:
-        print(f"  {name}: ?v={versions[name]} -> ?v={new_versions[name]}")
+        cur = versions.get(name) or js_versions.get(name)
+        print(f"  {name}: ?v={cur} -> ?v={new_versions[name]}")
 
     html_files = list(iter_html(ROOT))
     print(f"\nScanning {len(html_files)} HTML files")
 
     total = 0
     for asset in targets:
+        if asset not in versions:
+            continue
         new_v = new_versions[asset]
         n_files = 0
         n_repl = 0
@@ -181,6 +223,24 @@ def main():
         flag = "[DRY] " if args.dry_run else ""
         print(f"  {flag}{asset} -> ?v={new_v}: {n_repl} replacement(s) in {n_files} file(s)")
         total += n_repl
+
+    # The stamps that live inside a JS file.
+    for name, rel, pat in JS_ASSETS:
+        if name not in targets:
+            continue
+        path = ROOT / rel
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        new_v = new_versions[name]
+
+        def repl(mm, new_v=new_v):
+            return mm.group(1) + new_v + mm.group(3)
+
+        new_text, n = pat.subn(repl, text)
+        flag = "[DRY] " if args.dry_run else ""
+        print(f"  {flag}{name} -> ?v={new_v}: {n} replacement(s) in {rel}")
+        total += n
+        if n and not args.dry_run:
+            write_atomic(path, new_text)
 
     if args.dry_run:
         print(f"\n[DRY RUN] Would have made {total} replacements. Re-run without --dry-run to apply.")

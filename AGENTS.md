@@ -2149,6 +2149,14 @@ nonce-based. `style-src 'self' 'unsafe-inline'` must keep `unsafe-inline`
 (the pages use `style=""` attributes). Replacing every `'unsafe-inline'`
 in the policy invents violations the production site does not have.
 
+**TRAP: `page.wait_for_function("...")` with a STRING is blocked by the
+live CSP.** Playwright evaluates a string expression with `eval`, and the
+policy has no `'unsafe-eval'` — the browser refuses it and the harness
+reports a *page error* that looks like a product bug. Pass a real
+function, or use a CSS selector (`page.wait_for_selector("#btn:not([disabled])")`).
+`page.evaluate(<function>)` is fine: it goes through the debugger
+protocol, not `eval`.
+
 ### Small traps that cost real time
 
 * `pathlib.Path.rglob("*.html")` walks `.git` too. On this machine that
@@ -2172,5 +2180,108 @@ in the policy invents violations the production site does not have.
   (691 lines vs 710, five FAQ questions instead of six). A patch that
   assumes the same structure fails there; identify the blocks by ROLE, not
   by position.
+
+## fileToImage() returns an ImageBitmap now, and that changed a CONTRACT (2026-11-09)
+
+§2.6 / §2.7 replaced the object-URL `<img>` with
+`createImageBitmap(file, { imageOrientation: 'from-image' })`. The return
+value changed shape:
+
+| field | before | now |
+|---|---|---|
+| `loaded.img` | `HTMLImageElement` | `ImageBitmap` |
+| `loaded.url` | the object URL | **`null`** |
+| `loaded.release` | did not exist | closes the bitmap / revokes the URL |
+
+Three consequences, and **all three are silent** - the page returns 200,
+the row turns green, and nothing complains:
+
+1. **An ImageBitmap has no `.complete`.** `if (entry.img && entry.img.complete)`
+   is always false, so the collage decoded every file again on every run.
+2. **`URL.revokeObjectURL(null)` is a no-op.** A tool that still revokes
+   `loaded.url` neither throws nor frees anything - the bitmap stays on
+   the GPU until the tab dies. The single teardown call is now
+   `window.weddingAITool.releaseImage(loaded)`.
+3. **`img.src` no longer exists.** The three "one photo" makers stored
+   `res.img._objectUrl = res.url`; with `res.url === null` that revoked
+   nothing. They now store `res.img._release = res.release`.
+
+`naturalWidth` / `naturalHeight` are MIRRORED onto the bitmap by
+`fileToImage()` so the tools that read them did not have to change - but
+`img.src` cannot be mirrored, and the `.complete` check had to go.
+
+**A contract change like this needs a SMOKE TEST over every caller.**
+`scripts/verify-tool-suite-smoke.py` drives all seven tools that decode a
+file through `fileToImage()` and requires the row to reach `done`, the
+console to stay clean, and the canvas to actually have pixels in it (a
+broken `naturalWidth` draws nothing). Note the collage needs TWO photos
+before its build button unlocks - that is the tool's own rule
+(`runBtn.disabled = files.length < 2`), not a regression.
+
+### The EXIF orientation is explicit, and `<img>` was already right
+
+Measured in Chromium with a 200x100 JPEG tagged Orientation=6
+(`scripts/verify-exif-orientation.py`):
+
+| path | result |
+|---|---|
+| `<img>` | 100x200 (rotated) |
+| `createImageBitmap(blob)` | 100x200 (rotated, in this browser) |
+| `createImageBitmap(blob, {imageOrientation: 'from-image'})` | 100x200 (rotated, ALWAYS) |
+
+The `<img>` path has applied the EXIF orientation since Chrome 81 /
+Safari 13.1 / Firefox 26, so the OLD code was already correct - but
+`createImageBitmap` did NOT reliably, and an early implementation would
+have turned a portrait phone photo sideways. The explicit option is the
+only guaranteed one, and it is why the loader changed at all.
+
+### The pixel loop runs in a Worker, and the fallback is INVISIBLE
+
+`js/tools/pixel-worker.js` runs the per-pixel colour-key loop off the main
+thread; the pixel buffer is TRANSFERRED in both directions, and the worker
+reports progress in chunks (~24 updates per image).
+
+**TRAP: if the Worker cannot start, the tool STILL WORKS.** The fallback
+runs the identical maths on the main thread - the output is byte-for-byte
+the same, the row still turns green, and the tab still freezes. Nothing in
+the UI says which path ran. The only evidence is the network log: a
+request for `/js/tools/pixel-worker.js?v=...`.
+
+So `scripts/verify-worker-progress.py` asserts three things SEPARATELY:
+the worker's OUTPUT equals the main-thread maths (byte for byte, in both
+`png` and `jpg` mode), the worker WAS fetched, and the progress bar
+appeared. Asserting only the output would pass with the worker disabled.
+
+The worker's cache stamp lives in `js/tools/common.js`
+(`PIXEL_WORKER_VERSION`), **not in the HTML**: the `?v=` stamps in the HTML
+do not reach a URL that is built at runtime. `bump_cache_version.py`
+therefore grew a second list (`JS_ASSETS`) for stamps that live inside a
+JS file. Cloudflare Pages overrides Cache-Control on static assets, so a
+stale stamp serves the OLD worker forever - the same trap as the vendor
+libraries, one level deeper.
+
+### Every decoded image is released, including on the error path
+
+`releaseImage(loaded)` is the single teardown call. The release used to
+sit at the END of the `try` block, so an exception skipped it and the
+decoded image stayed alive for the rest of the session - a batch of 12 MP
+photos is enough to kill a tab. The release now sits in a `finally`.
+
+Cached decodes (the collage's `entry.img`, add-text's `entry.img`, the
+crop stage's `entry.stageImg`) are released when the entry is removed or
+the list is cleared. `add-text` is the one tool that must NOT release its
+`loaded` right after decoding: the bitmap IS the preview, and the row
+reuses it.
+
+### The progress bar is real, and it is data-driven
+
+`common.js` renders a `.wa-tool-progress` bar ONLY while the row is in the
+`working` state AND `state.percent` is a number; the tools set
+`entry.percent` at each stage. A row that never sets it shows no bar at
+all - so "the progress bar exists in the stylesheet" proves nothing. The
+test drives a real run and watches the DOM for the bar.
+
+heic2any reports 0..1 while it decodes, so the HEIC tool shows a real
+bar; Safari's native decode is instant and shows none.
 
 

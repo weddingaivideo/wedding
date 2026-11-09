@@ -32,9 +32,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="เครื่องมือ WeddingAI">
     <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.3">
     <script defer src="/js/main.min.js?v=3.22"></script>
-    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/tools/common.js?v=1.0.3"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
@@ -534,10 +534,15 @@ if ('serviceWorker' in navigator) {
         entry.error = null;
         refreshUI();
 
+        var loaded = null;
         try {
-          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          entry.percent = 10;
+          refreshUI();
+          loaded = await window.weddingAITool.fileToImage(entry.inputFile);
           var img = loaded.img;
           var w = img.naturalWidth, h = img.naturalHeight;
+          entry.percent = 30;
+          refreshUI();
           var tw = w, th = h;
           if (settings.maxDim > 0 && Math.max(w, h) > settings.maxDim) {
             if (w >= h) {
@@ -554,6 +559,10 @@ if ('serviceWorker' in navigator) {
           // first use only, and common.js falls back to drawImage() when the
           // WASM path is unavailable.
           var canvas = await window.weddingAITool.resizeCanvas(img, tw, th);
+          entry.percent = 85;
+          refreshUI();
+          entry.percent = 85;
+          refreshUI();
           var mime = settings.format;
           var quality = settings.quality;
           // PNG is lossless, quality is ignored
@@ -564,11 +573,12 @@ if ('serviceWorker' in navigator) {
           entry.sizes.out = blob.size;
           entry.status = 'done';
           entry.outputName = window.weddingAITool.safeFileName(entry.name, '-min.' + (mime === 'image/png' ? 'png' : mime === 'image/webp' ? 'webp' : 'jpg'));
-          // free the loaded image
-          URL.revokeObjectURL(loaded.url);
         } catch (err) {
           entry.status = 'error';
           entry.error = err && err.message ? err.message : String(err);
+        } finally {
+          // free the loaded image
+          window.weddingAITool.releaseImage(loaded);
         }
         refreshUI();
       }

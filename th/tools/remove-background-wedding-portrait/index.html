@@ -32,9 +32,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="เครื่องมือ WeddingAI">
     <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.3">
     <script defer src="/js/main.min.js?v=3.22"></script>
-    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/tools/common.js?v=1.0.3"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
@@ -600,31 +600,9 @@ if ('serviceWorker' in navigator) {
         };
       }
 
-      // The colour key: strip every pixel that sits close to the sampled
-      // backdrop colour. Instant and free, but it can only remove a
-      // background it was told about - which is why the AI path exists.
-      function colorKeyCanvas(img, w, h, settings) {
-        var canvas = document.createElement('canvas');
-        canvas.width = w;
-        canvas.height = h;
-        var ctx = canvas.getContext('2d', { willReadFrequently: true });
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-        ctx.clearRect(0, 0, w, h);
-        ctx.drawImage(img, 0, 0);
-
-        var imageData = ctx.getImageData(0, 0, w, h);
-        var data = imageData.data;
-        var bgR = settings.bg.r, bgG = settings.bg.g, bgB = settings.bg.b;
-        var tol = settings.tolerance;
-        var feather = settings.feather;
-        var innerT = tol;
-        // Feather band width: ~8 RGB units per 1 px of feathering (tunable constant)
-        var outerT = tol + feather * 8;
-        var bandWidth = outerT - innerT;
-        var mode = settings.mode;
-
-        // Single-pass pixel loop. Math.sqrt is the only expensive op here.
+      // The per-pixel loop, kept in its own function so that the Worker path
+      // and the main-thread fallback run the SAME maths - byte for byte.
+      function applyPixelLoop(data, bgR, bgG, bgB, innerT, outerT, bandWidth, mode) {
         for (var i = 0; i < data.length; i += 4) {
           var dr = data[i]     - bgR;
           var dg = data[i + 1] - bgG;
@@ -654,8 +632,59 @@ if ('serviceWorker' in navigator) {
             data[i + 3] = 255;
           }
         }
+      }
 
-        ctx.putImageData(imageData, 0, 0);
+      // The colour key: strip every pixel that sits close to the sampled
+      // backdrop colour. Instant and free, but it can only remove a
+      // background it was told about - which is why the AI path exists.
+      //
+      // The loop runs in a Worker so a 12 MP photo does not freeze the tab
+      // (§2.5). If the Worker cannot start, the identical loop runs on the
+      // main thread instead - the result is the same either way.
+      async function colorKeyCanvas(img, w, h, settings, onProgress) {
+        var canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        var ctx = canvas.getContext('2d', { willReadFrequently: true });
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.clearRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0);
+
+        var imageData = ctx.getImageData(0, 0, w, h);
+        var data = imageData.data;
+        var bgR = settings.bg.r, bgG = settings.bg.g, bgB = settings.bg.b;
+        var tol = settings.tolerance;
+        var feather = settings.feather;
+        var innerT = tol;
+        // Feather band width: ~8 RGB units per 1 px of feathering (tunable constant)
+        var outerT = tol + feather * 8;
+        var bandWidth = outerT - innerT;
+        var mode = settings.mode;
+
+        // The buffer is transferred to the Worker, so it must hold exactly
+        // the pixel data - no extra bytes at the end.
+        var buffer = data.buffer.byteLength === data.length
+          ? data.buffer
+          : new Uint8ClampedArray(data).buffer;
+
+        try {
+          var outBuffer = await window.weddingAITool.runPixelLoop({
+            buffer: buffer,
+            bgR: bgR, bgG: bgG, bgB: bgB,
+            innerT: innerT, outerT: outerT, bandWidth: bandWidth,
+            mode: mode
+          }, onProgress);
+          var out = new Uint8ClampedArray(outBuffer);
+          ctx.putImageData(new ImageData(out, w, h), 0, 0);
+        } catch (err) {
+          // No Worker, or it failed: run the same maths here instead. The
+          // original buffer was transferred away, so read the pixels again.
+          var fresh = ctx.getImageData(0, 0, w, h);
+          applyPixelLoop(fresh.data, bgR, bgG, bgB, innerT, outerT, bandWidth, mode);
+          ctx.putImageData(fresh, 0, 0);
+        }
+
         return canvas;
       }
 
@@ -686,22 +715,32 @@ if ('serviceWorker' in navigator) {
         entry.error = null;
         refreshUI();
 
+        var loaded = null;
         try {
-          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          entry.percent = 5;
+          refreshUI();
+          loaded = await window.weddingAITool.fileToImage(entry.inputFile);
           var img = loaded.img;
           var w = img.naturalWidth, h = img.naturalHeight;
 
           var mode = settings.mode;
           var canvas;
+          entry.percent = 15;
+          refreshUI();
           if (settings.method === 'ai') {
             window.weddingAITool.toast(
               window.weddingAITool.t('aiModelLoading', 'Loading the AI model...'),
               'success');
             canvas = await aiMatteCanvas(img, w, h, settings);
           } else {
-            canvas = colorKeyCanvas(img, w, h, settings);
+            canvas = await colorKeyCanvas(img, w, h, settings, function (p) {
+              entry.percent = 15 + Math.round(p * 0.75);
+              refreshUI();
+            });
           }
 
+          entry.percent = 92;
+          refreshUI();
           var mime = (mode === 'jpg') ? 'image/jpeg' : 'image/png';
           var quality = (mode === 'jpg') ? 0.92 : undefined;
           var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
@@ -711,10 +750,11 @@ if ('serviceWorker' in navigator) {
           entry.status = 'done';
           var ext = (mode === 'jpg') ? 'jpg' : 'png';
           entry.outputName = window.weddingAITool.safeFileName(entry.name, '-nobg.' + ext);
-          URL.revokeObjectURL(loaded.url);
         } catch (err) {
           entry.status = 'error';
           entry.error = err && err.message ? err.message : String(err);
+        } finally {
+          window.weddingAITool.releaseImage(loaded);
         }
         refreshUI();
       }
@@ -836,7 +876,7 @@ if ('serviceWorker' in navigator) {
                 r += data[i]; g += data[i + 1]; b += data[i + 2]; n++;
               }
             });
-            URL.revokeObjectURL(res.url);
+            window.weddingAITool.releaseImage(res);
             if (n === 0) return;
             var avgR = Math.round(r / n), avgG = Math.round(g / n), avgB = Math.round(b / n);
             var hex = '#' + [avgR, avgG, avgB].map(function (c) {

@@ -48,6 +48,15 @@ var VENDOR = {
 
 var vendorPromises = {};
 
+// The pixel worker (§2.5) is a separate file, so it needs its own cache
+// stamp - the `?v=` on common.js does not bust it. Cloudflare Pages
+// overrides Cache-Control on static assets, so the query string is the only
+// cache-busting mechanism: a stale stamp serves the OLD worker forever.
+//
+// Bump this when /js/tools/pixel-worker.js changes.
+// `python scripts/bump_cache_version.py --asset pixel-worker.js` does it.
+var PIXEL_WORKER_VERSION = '1.0.1';
+
 function loadVendor(lib) {
   if (vendorPromises[lib]) return vendorPromises[lib];
   vendorPromises[lib] = new Promise(function (resolve, reject) {
@@ -136,6 +145,8 @@ function loadVendor(lib) {
     heicTotalNow: 'tools.copy.heicTotalNow.zzzzzz6b05',
     heicZeroConverted: 'tools.copy.heicZeroConverted.zzzzzz6b06',
     heicErrored: 'tools.copy.heicErrored.zzzzzz6b07',
+    // progress bar (added 2026-11-09)
+    progress: 'tools.copy.progress.zzzzzz8a01',
   };
 
   // Replace {name} placeholders with values from `params`.
@@ -182,24 +193,146 @@ function loadVendor(lib) {
     return suffix ? (base + suffix) : base;
   }
 
-  // ---------- file → image loader (with HEIC fallback notice) -------------------
-
+  // ---------- file → image loader (off-thread decode + explicit EXIF) ------
+  //
+  // §2.6 wants the decode off the main thread, §2.7 wants the EXIF
+  // orientation to be handled EXPLICITLY. Those two pull against each
+  // other, so the behaviour was measured instead of guessed
+  // (scripts/verify-exif-orientation.py, Chromium, a 200x100 JPEG tagged
+  // Orientation=6):
+  //
+  //   <img>                                   -> 100x200  (rotated)
+  //   createImageBitmap(blob)                 -> 100x200  (rotated, this browser)
+  //   createImageBitmap(blob, from-image)     -> 100x200  (rotated, ALWAYS)
+  //
+  // The <img> path has applied the EXIF orientation since Chrome 81 /
+  // Safari 13.1 / Firefox 26, so the CURRENT code was already correct -
+  // but createImageBitmap did not, and would have turned portrait phone
+  // photos sideways. The explicit option is the only guaranteed one.
+  //
+  // The returned object also carries release(): an ImageBitmap holds GPU
+  // memory and has to be closed, an object URL has to be revoked, and the
+  // caller should not have to know which one it got.
   function fileToImage(file) {
     return new Promise(function (resolve, reject) {
-      var url = URL.createObjectURL(file);
-      var img = new Image();
-      img.onload = function () { resolve({ img: img, url: url, file: file }); };
-      img.onerror = function () {
-        URL.revokeObjectURL(url);
-        var name = (file.name || '').toLowerCase();
-        var isHeic = /\.(heic|heif)$/i.test(name);
-        reject(new Error(
-          isHeic
-            ? 'This browser can\u2019t decode HEIC/HEIF directly. Use the HEIC \u2192 JPG tool, or open this file in Safari/Finder first to convert.'
-            : 'Could not decode this file. Try a JPG, PNG, or WebP.'
-        ));
+      var name = (file.name || '').toLowerCase();
+      var isHeic = /\.(heic|heif)$/i.test(name);
+
+      if (typeof createImageBitmap === 'function' && !isHeic) {
+        createImageBitmap(file, { imageOrientation: 'from-image' }).then(function (bitmap) {
+          // The tool pages read img.naturalWidth / img.naturalHeight; an
+          // ImageBitmap only has width / height. Mirror them so that no
+          // tool page has to change.
+          try {
+            bitmap.naturalWidth = bitmap.width;
+            bitmap.naturalHeight = bitmap.height;
+          } catch (e) { /* ignore */ }
+          resolve({
+            img: bitmap,
+            url: null,
+            release: function () { if (bitmap.close) bitmap.close(); },
+          });
+        }).catch(function () {
+          loadViaImageElement(file, resolve, reject);
+        });
+        return;
+      }
+      loadViaImageElement(file, resolve, reject);
+    });
+  }
+
+  function loadViaImageElement(file, resolve, reject) {
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function () {
+      resolve({
+        img: img,
+        url: url,
+        release: function () { URL.revokeObjectURL(url); },
+      });
+    };
+    img.onerror = function () {
+      URL.revokeObjectURL(url);
+      var name = (file.name || '').toLowerCase();
+      var isHeic = /\.(heic|heif)$/i.test(name);
+      reject(new Error(
+        isHeic
+          ? 'This browser can\u2019t decode HEIC/HEIF directly. Use the HEIC \u2192 JPG tool, or open this file in Safari/Finder first to convert.'
+          : 'Could not decode this file. Try a JPG, PNG, or WebP.'
+      ));
+    };
+    img.src = url;
+  }
+
+  // ---------- release a decoded image -----------------------------------------
+  //
+  // fileToImage() can hand back two different things: an ImageBitmap (the
+  // createImageBitmap path) or an <img> backed by an object URL. They need
+  // different teardown - bitmap.close() frees GPU memory, revokeObjectURL()
+  // frees the blob - and a tool page should not have to know which one it
+  // got. releaseImage() is the one teardown call.
+  function releaseImage(loaded) {
+    if (!loaded) return;
+    try {
+      if (typeof loaded.release === 'function') { loaded.release(); return; }
+      if (loaded.url) URL.revokeObjectURL(loaded.url);
+    } catch (e) { /* ignore */ }
+  }
+
+  // ---------- pixel loop in a Worker (§2.5) -------------------------------------
+  //
+  // The colour-key background removal walks every pixel of the photo. On a
+  // 12 MP wedding photo that is 12 million iterations of a sqrt - a few
+  // hundred milliseconds of blocked main thread during which the tab cannot
+  // scroll and the progress bar cannot move.
+  //
+  // The worker is a same-origin classic worker (/js/tools/pixel-worker.js),
+  // which `worker-src 'self' blob:` allows. The pixel buffer is TRANSFERRED
+  // in both directions, so nothing is copied, and the worker reports progress
+  // while it works so the row can show a real percentage (§2.9).
+  //
+  // A fresh Worker is created per call and terminated afterwards: the
+  // messages of two concurrent runs would otherwise interleave on one
+  // worker's onmessage handler.
+  function runPixelLoop(payload, onProgress) {
+    return new Promise(function (resolve, reject) {
+      if (typeof Worker !== 'function') {
+        reject(new Error('Worker is not available'));
+        return;
+      }
+      var worker = null;
+      try {
+        worker = new Worker('/js/tools/pixel-worker.js?v=' + PIXEL_WORKER_VERSION);
+      } catch (e) {
+        reject(new Error('Could not start the pixel worker: ' + (e && e.message ? e.message : e)));
+        return;
+      }
+      var settled = false;
+      function finish(err, value) {
+        if (settled) return;
+        settled = true;
+        try { worker.terminate(); } catch (e2) { /* ignore */ }
+        if (err) reject(err); else resolve(value);
+      }
+      worker.onmessage = function (e) {
+        var m = e.data || {};
+        if (typeof m.progress === 'number') {
+          if (typeof onProgress === 'function') {
+            try { onProgress(m.progress); } catch (e3) { /* ignore */ }
+          }
+          return;
+        }
+        if (m.buffer) finish(null, m.buffer);
+        else finish(new Error('The pixel worker returned no data'));
       };
-      img.src = url;
+      worker.onerror = function (e) {
+        finish(new Error(e && e.message ? e.message : 'The pixel worker failed'));
+      };
+      try {
+        worker.postMessage(payload, [payload.buffer]);
+      } catch (e4) {
+        finish(e4);
+      }
     });
   }
 
@@ -342,6 +475,29 @@ function loadVendor(lib) {
       meta.appendChild(err);
     }
 
+    // Real progress instead of a spinner (§2.9). The caller sets
+    // state.percent (0-100); the bar is only rendered while the row is
+    // working, so a finished row never shows a stale percentage.
+    if (state.status === 'working' && typeof state.percent === 'number' && isFinite(state.percent)) {
+      var pct = Math.max(0, Math.min(100, Math.round(state.percent)));
+      var bar = document.createElement('div');
+      bar.className = 'wa-tool-progress';
+      bar.setAttribute('role', 'progressbar');
+      bar.setAttribute('aria-valuemin', '0');
+      bar.setAttribute('aria-valuemax', '100');
+      bar.setAttribute('aria-valuenow', String(pct));
+      bar.setAttribute('aria-label', t('progress', 'Progress'));
+      var fill = document.createElement('div');
+      fill.className = 'wa-tool-progress-fill';
+      fill.style.width = pct + '%';
+      bar.appendChild(fill);
+      var pctText = document.createElement('span');
+      pctText.className = 'wa-tool-progress-text';
+      pctText.textContent = pct + '%';
+      meta.appendChild(bar);
+      meta.appendChild(pctText);
+    }
+
     row.appendChild(meta);
 
     var actions = document.createElement('div');
@@ -469,12 +625,20 @@ function loadVendor(lib) {
   function decodeHeic(file, opts) {
     opts = opts || {};
     return loadVendor('heic2any').then(function (heic2any) {
-      return heic2any({
+      var options = {
         blob: file,
         toType: opts.toType || 'image/jpeg',
         quality: typeof opts.quality === 'number' ? opts.quality : 0.92,
         multiple: false,
-      });
+      };
+      // heic2any reports 0..1 while it decodes - that is what the row shows
+      // instead of an indefinite spinner (§2.9).
+      if (typeof opts.onProgress === 'function') {
+        options.onProgress = function (p) {
+          try { opts.onProgress(typeof p === 'number' ? p : 0); } catch (e) { /* ignore */ }
+        };
+      }
+      return heic2any(options);
     }).then(function (out) {
       // heic2any returns an array when `multiple` is true.
       if (Array.isArray(out)) {
@@ -659,11 +823,13 @@ function loadVendor(lib) {
   // ---------- public namespace --------------------------------------------------
 
   window.weddingAITool = {
-    version: '1.1.0',
+    version: '1.2.0',
     formatBytes: formatBytes,
     formatPercent: formatPercent,
     safeFileName: safeFileName,
     fileToImage: fileToImage,
+    releaseImage: releaseImage,
+    runPixelLoop: runPixelLoop,
     canvasToBlob: canvasToBlob,
     bindDropZone: bindDropZone,
     renderFileList: renderFileList,

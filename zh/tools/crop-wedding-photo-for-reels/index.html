@@ -32,9 +32,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI 工具">
     <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.3">
     <script defer src="/js/main.min.js?v=3.22"></script>
-    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/tools/common.js?v=1.0.3"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
@@ -589,6 +589,7 @@ if ('serviceWorker' in navigator) {
       function clearAll() {
         files.forEach(function (f) {
           if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          if (f.stageRelease) f.stageRelease();
         });
         files = [];
         summaryEl.hidden = true;
@@ -673,8 +674,11 @@ if ('serviceWorker' in navigator) {
         entry.error = null;
         refreshUI();
 
+        var loaded = null;
         try {
-          var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
+          entry.percent = 10;
+          refreshUI();
+          loaded = await window.weddingAITool.fileToImage(entry.inputFile);
           var img = loaded.img;
           var W = img.naturalWidth;
           var H = img.naturalHeight;
@@ -711,6 +715,10 @@ if ('serviceWorker' in navigator) {
           ctx.fillRect(0, 0, outW, outH);
           ctx.drawImage(img, crop.cropX, crop.cropY, crop.cropW, crop.cropH, 0, 0, outW, outH);
 
+          entry.percent = 90;
+          refreshUI();
+          entry.percent = 90;
+          refreshUI();
           var blob = await window.weddingAITool.canvasToBlob(canvas, 'image/jpeg', settings.quality);
           if (!blob || blob.size === 0) throw new Error('Crop returned an empty file. Try a different image.');
 
@@ -720,10 +728,11 @@ if ('serviceWorker' in navigator) {
           var ext = '.jpg';
           var slug = (settings.aspect && settings.aspect.slug) ? settings.aspect.slug : 'crop';
           entry.outputName = window.weddingAITool.safeFileName(entry.name, '-' + slug + ext);
-          URL.revokeObjectURL(loaded.url);
         } catch (err) {
           entry.status = 'error';
           entry.error = err && err.message ? err.message : String(err);
+        } finally {
+          window.weddingAITool.releaseImage(loaded);
         }
         refreshUI();
       }
@@ -937,7 +946,7 @@ if ('serviceWorker' in navigator) {
           if (!entry.stageImg) {
             var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
             entry.stageImg = loaded.img;
-            entry.stageUrl = loaded.url;
+            entry.stageRelease = loaded.release;
           }
           stageImg = entry.stageImg;
           var w = stageImg.naturalWidth, h = stageImg.naturalHeight;
@@ -1040,6 +1049,7 @@ if ('serviceWorker' in navigator) {
         if (!isNaN(idx)) {
           var f = files[idx];
           if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          if (f && f.stageRelease) f.stageRelease();
           files.splice(idx, 1);
           refreshUI();
           showStage();

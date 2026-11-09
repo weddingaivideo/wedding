@@ -44300,4 +44300,6 @@
   "tools.copy.bgMethodColor.zzzzzz7a02": "Smart colour key (instant, no download)"
 ,
   "tools.copy.bgMethodAi.zzzzzz7a03": "AI matting (MODNet — one-time ~17 MB download, runs on your device)"
+,
+  "tools.copy.progress.zzzzzz8a01": "Progress"
 }

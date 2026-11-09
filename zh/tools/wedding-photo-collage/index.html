@@ -32,9 +32,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI Tools">
     <link rel="stylesheet" href="/styles.min.css?v=3.39">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.3">
     <script defer src="/js/main.min.js?v=3.22"></script>
-    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/tools/common.js?v=1.0.3"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <!-- Caption fonts used on the rendered canvas. Loaded via Google Fonts. -->
     <style>
@@ -743,6 +743,7 @@ if ('serviceWorker' in navigator) {
       function clearAll() {
         files.forEach(function (f) {
           if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          if (f.imgRelease) f.imgRelease();
         });
         files = [];
         lastBlob = null;
@@ -760,11 +761,14 @@ if ('serviceWorker' in navigator) {
       function loadAllImages() {
         // Sequential, so a single broken file doesn't swallow the batch.
         var promises = files.map(function (entry, i) {
-          if (entry.img && entry.img.complete) return Promise.resolve(i);
+          // An ImageBitmap has no .complete - the decoded image is simply
+          // there once it is set.
+          if (entry.img) return Promise.resolve(i);
           return window.weddingAITool.fileToImage(entry.inputFile)
             .then(function (loaded) {
               entry.img = loaded.img;
-              // We can keep the preview blob URL alive — the file list uses it.
+              entry.imgRelease = loaded.release;
+              // The preview blob URL stays alive - the file list uses it.
             })
             .catch(function (err) {
               entry.status = 'error';
@@ -1027,6 +1031,7 @@ if ('serviceWorker' in navigator) {
         var f = files[idx];
         if (!f) return;
         if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+        if (f.imgRelease) f.imgRelease();
         files.splice(idx, 1);
         refreshUI();
       });

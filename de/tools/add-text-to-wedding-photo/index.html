@@ -32,9 +32,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI Werkzeuge">
     <link rel="stylesheet" href="/styles.min.css?v=3.38">
-    <link rel="stylesheet" href="/styles/tools.css?v=1.0.2">
+    <link rel="stylesheet" href="/styles/tools.css?v=1.0.3">
     <script defer src="/js/main.min.js?v=3.22"></script>
-    <script defer src="/js/tools/common.js?v=1.0.2"></script>
+    <script defer src="/js/tools/common.js?v=1.0.3"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
@@ -878,7 +878,7 @@ if ('serviceWorker' in navigator) {
           (function (idx) {
             window.weddingAITool.fileToImage(files[idx].inputFile).then(function (loaded) {
               files[idx].img = loaded.img;
-              URL.revokeObjectURL(loaded.url);
+              files[idx].imgRelease = loaded.release;
               if (idx === activeIndex || activeIndex >= files.length - added) {
                 // first decoded becomes the active preview
                 if (idx === 0 || !files[activeIndex] || !files[activeIndex].img) {
@@ -900,6 +900,7 @@ if ('serviceWorker' in navigator) {
       function clearAll() {
         files.forEach(function (f) {
           if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          if (f.imgRelease) f.imgRelease();
         });
         files = [];
         activeIndex = 0;
@@ -915,10 +916,12 @@ if ('serviceWorker' in navigator) {
         entry.error = null;
         refreshUI();
         try {
+          entry.percent = 10;
+          refreshUI();
           if (!entry.img) {
             var loaded = await window.weddingAITool.fileToImage(entry.inputFile);
             entry.img = loaded.img;
-            URL.revokeObjectURL(loaded.url);
+            entry.imgRelease = loaded.release;
           }
           var img = entry.img;
           var w = img.naturalWidth, h = img.naturalHeight;
@@ -932,6 +935,10 @@ if ('serviceWorker' in navigator) {
           drawTextBlock(ctx, settings, w, h);
           var mime = settings.format;
           var quality = (mime === 'image/png' || mime === 'image/webp') ? undefined : 0.92;
+          entry.percent = 90;
+          refreshUI();
+          entry.percent = 90;
+          refreshUI();
           var blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
           if (!blob || blob.size === 0) throw new Error('Render returned an empty file. Try a different format.');
           entry.output = blob;
@@ -1034,6 +1041,7 @@ if ('serviceWorker' in navigator) {
         if (!isNaN(idx)) {
           var f = files[idx];
           if (f && f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+          if (f && f.imgRelease) f.imgRelease();
           files.splice(idx, 1);
           if (activeIndex >= files.length) activeIndex = Math.max(0, files.length - 1);
           refreshUI();
