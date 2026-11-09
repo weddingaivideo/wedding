@@ -161,6 +161,65 @@ LIBS = {
                 "https://huggingface.co/Xenova/modnet/resolve/main/onnx/model_quantized.onnx",
         },
     },
+    # ---------------------------------------------------------------------
+    # §2.12 - the two encoders the Canvas API does not have.
+    #
+    # MEASURED 2026-11-11 on this machine, bundled Chromium + installed
+    # Chrome + installed Edge:
+    #
+    #   canvas.toBlob(canvas, 'image/avif')  -> a blob whose type is
+    #       image/png. NO browser encodes AVIF. It does not fail, it
+    #       silently returns PNG bytes - so a feature probe that only
+    #       asks "did I get a blob?" is a FALSE POSITIVE.
+    #   canvas.toBlob(canvas, 'image/webp', 1.0) -> lossy. A flat 64x64
+    #       canvas came out at 520 bytes against PNG's 282, which is the
+    #       size of a lossy encode, not a lossless one.
+    #
+    # So both formats need a WebAssembly encoder. The directory names
+    # carry the version ON PURPOSE: the emscripten glue loads its .wasm
+    # through a RELATIVE url, and a relative url carries no ?v= stamp, so
+    # only a version change in the PATH busts the cache. A directory per
+    # version is the only way to bust it.
+    #
+    # Apache-2.0, verified from the LICENSE inside each package.
+    # ---------------------------------------------------------------------
+    "jsquash-avif-2.1.1": {
+        "pkg": "@jsquash/avif",
+        "version": "2.1.1",
+        "license": "Apache-2.0",
+        "files": {
+            # ESM ONLY, and encode.js imports the BARE specifier
+            # 'wasm-feature-detect' - so the page needs an import map.
+            # The encoder itself is 3.49 MB of WASM (the decoder, another
+            # 1.17 MB, is deliberately NOT shipped: the browser decodes
+            # the input on its own).
+            "encode.js": "encode.js",
+            "meta.js": "meta.js",
+            "utils.js": "utils.js",
+            "codec/enc/avif_enc.js": "codec/enc/avif_enc.js",
+            "codec/enc/avif_enc.wasm": "codec/enc/avif_enc.wasm",
+            "LICENSE": "LICENSE",
+        },
+    },
+    "jsquash-wfd-1.2.11": {
+        # The one dependency of both encoder packages: a 1.7 KB module
+        # that answers "does this browser have SIMD / threads?". Apache-2.0.
+        #
+        # PINNED TO 1.2.11 ON PURPOSE. The current 1.10.0 ships an
+        # `import.source(...)` call - the import-source proposal - which is
+        # a SYNTAX ERROR in every browser that does not implement it. The
+        # module then fails to parse, the encoder package that imports it
+        # fails to load, and the tool reports "Unexpected identifier
+        # 'source'". 1.2.11 is the version jsquash itself declares
+        # (^1.2.11) and it is clean.
+        "pkg": "wasm-feature-detect",
+        "version": "1.2.11",
+        "license": "Apache-2.0",
+        "files": {
+            "index.js": "dist/esm/index.js",
+            "LICENSE": "LICENSE",
+        },
+    },
 }
 
 

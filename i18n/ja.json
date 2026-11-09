@@ -65296,7 +65296,13 @@
 ,
   "tools.compress-wedding-photos.small_text.keep_exif.0c4d2e3f": "元のファイルからコピーされます。JPG 出力のみ。方向はリセットされるので、写真が横を向くことはありません。"
 ,
-  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "圧縮ツールはブラウザ内蔵の <strong>Canvas API</strong> を使い、ドラッグした各画像を選んだ画質で再エンコードします。入力は JPG・PNG・WebP、出力は JPG・WebP・PNG に対応しています。任意の「最長辺の上限」は最長辺を制限するので、投稿先のサイズ上限が分かっているときに便利です。<strong>目標サイズ</strong>（MB）を指定すると画質スライダーは使われず、そのサイズに収まる 가장高い画質を自動で探します。最も低い画質でも大きいときだけ、写真を縮小します。"
+  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "コンプレッサはブラウザの標準の <strong>Canvas API</strong> を使い、ドロップした画像を選んだ画質で再エンコードします。入力は JPG・PNG・WebP、出力は JPG・WebP・PNG・<strong>AVIF</strong>・<strong>WebP ロスレス</strong>。任意の「最長辺」は長い辺を制限するので、配信先のサイズ制限が分かっているときに便利です。<strong>目標サイズ</strong>（MB）を指定すると画質スライダーは完全に置き換わり、その下に収まる最高画質を探索します。最も低い画質でも収まらないときだけ写真を縮小します。AVIF は 5 つのうち最も小さいですが、どのブラウザも自前でエンコードできず、最初に選んだときだけ 3.4 MB のエンコーダーが一度ダウンロードされ、その後はブラウザのキャッシュに残ります。WebP ロスレスは均一なグラフィック向きです。写真に使うと小さくなるのではなく大きくなります。いずれの場合も処理はすべてお使いの端末上で行われ、アップロードはされません。"
 ,
-  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "できないこと：写真自体より小さい目標サイズには届きませんし、PNG のメタデータも書き込めません。EXIF は元のファイルからコピーされ、カメラ・レンズ・撮影日が残るので、圧縮した写真でもいつどこで撮ったかが分かります。向きは意図的にリセットします。ピクセルはすでに正立しているためで、元の回転フラグを保持すると、どのビューアでも写真が横向きになってしまいます。"
+  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "できないこと：写真そのものの大きさより小さい目標には到達できないこと、そして PNG のメタデータを書き込めないこと。EXIF は元ファイルから引き継がれます——カメラ、レンズ、撮影日——そのため压缩后的照片にも、いつどこで撮ったかがちゃんと残ります。方向は意図的にリセットされます。ピクセルはすでに正立しているためです。元の回転フラグを残すと、どのビューアも写真を横に倒してしまいます。EXIF ブロックは JPG にだけ付きます。AVIF と WebP の出力には書き込まれません。"
+,
+  "tools.compress-wedding-photos.label_text.output_format.a4b5c6d7": "出力形式"
+,
+  "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF（最小ファイル —— 3.4 MB のエンコーダーを一度だけダウンロードします）"
+,
+  "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP ロスレス（グラフィック向け — 写真は逆に大きくなります）"
 }

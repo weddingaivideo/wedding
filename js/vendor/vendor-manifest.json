@@ -51,6 +51,60 @@
       "package": "jspdf",
       "version": "4.2.1"
     },
+    "jsquash-avif-2.1.1": {
+      "files": {
+        "LICENSE": {
+          "bytes": 11343,
+          "sha256": "8c3690b09c168f196446cf5904332023bbc15eb92b6a7cee470ac829e6a65d20",
+          "url": "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1/LICENSE"
+        },
+        "codec/enc/avif_enc.js": {
+          "bytes": 39621,
+          "sha256": "c6805e62cae5c1b9870fcc0448437da9e4edfc58c3da264af52361281082c63c",
+          "url": "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1/codec/enc/avif_enc.js"
+        },
+        "codec/enc/avif_enc.wasm": {
+          "bytes": 3485872,
+          "sha256": "d9f2a95164362af48558d176e619becfd49dd97b50b86c679b47100860522b3d",
+          "url": "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1/codec/enc/avif_enc.wasm"
+        },
+        "encode.js": {
+          "bytes": 3554,
+          "sha256": "b12efc4bf99688b9a203e78db5ec0411653b195ecb8c84ad1c2cdbe724ac60d5",
+          "url": "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1/encode.js"
+        },
+        "meta.js": {
+          "bytes": 410,
+          "sha256": "d062b5f127754c61cebd2a9bf3ad381ad06494502eb931636561132c207a8570",
+          "url": "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1/meta.js"
+        },
+        "utils.js": {
+          "bytes": 1272,
+          "sha256": "e71535eeee820d68b68ece7c8af761c39f3ddec93d3d957d2f83b19191339e0d",
+          "url": "https://cdn.jsdelivr.net/npm/@jsquash/avif@2.1.1/utils.js"
+        }
+      },
+      "license": "Apache-2.0",
+      "package": "@jsquash/avif",
+      "version": "2.1.1"
+    },
+    "jsquash-wfd-1.2.11": {
+      "files": {
+        "LICENSE": {
+          "bytes": 11542,
+          "sha256": "45286bffeeb04f5707bb3cd7e079bf7f0db91d17596fb7401736e03e516500cf",
+          "url": "https://cdn.jsdelivr.net/npm/wasm-feature-detect@1.2.11/LICENSE"
+        },
+        "index.js": {
+          "bytes": 1755,
+          "sha256": "fa2307cd420ad1ef19cbacd3538a2c59a9083d549079704cc61c60972ad04aad",
+          "url": "https://cdn.jsdelivr.net/npm/wasm-feature-detect@1.2.11/dist/esm/index.js"
+        }
+      },
+      "license": "Apache-2.0",
+      "package": "wasm-feature-detect",
+      "version": "1.2.11"
+    },
     "mediabunny": {
       "files": {
         "LICENSE": {

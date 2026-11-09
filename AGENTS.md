@@ -2476,4 +2476,146 @@ stdout is block-buffered into a pipe — a hung script and a slow script
 look identical. `python -u scripts/verify-compress-target-exif.py`
 flushes every line, so the last line printed tells you where it stopped.
 
+## The browser cannot encode AVIF, and Safari cannot encode WebP (2026-11-11)
+
+§2.12 added AVIF and lossless-WebP output to the compress tool. Getting
+there required measuring what the Canvas API actually does, and two of
+the answers were surprises.
+
+### The Canvas API returns a PNG when you ask for a format it cannot make
+
+Measured 2026-11-11 on the bundled Chromium, the installed Chrome and
+the installed Edge, all on a secure origin:
+
+| call | result |
+|---|---|
+| `toBlob(c, 'image/avif')` | a blob whose `.type` is **`image/png`** — PNG bytes, no error |
+| `toBlob(c, 'image/webp')` (Safari/WebKit) | a blob whose `.type` is **`image/png`** — PNG bytes, no error |
+| `toBlob(c, 'image/webp', 1.0)` | a real **lossless** WebP (`VP8L` chunk, pixel-exact) |
+
+So **no browser encodes AVIF through the Canvas API**, and **WebKit
+cannot write WebP at all**. In both cases the browser does not fail — it
+quietly hands back PNG bytes.
+
+Two rules follow:
+
+* **A format probe must check `blob.type`, not "did I get a blob".**
+  Asking for a blob and getting one back proves nothing.
+* **The file name must match the bytes.** The compress tool used to write
+  whatever `toBlob` returned under a `.webp` name, so a Safari visitor
+  received **a PNG wearing a .webp extension**. The tool now probes the
+  browser at startup, offers only the formats the browser can really
+  produce, and every encode re-checks `blob.type` and falls back to JPG
+  honestly if it ever mismatches.
+
+### The browser's own WebP at quality 1.0 IS lossless
+
+Chromium and Firefox switch to the lossless VP8L encoder at quality 1.
+Measured on per-pixel noise (the only fixture that can tell lossless
+from lossy — a smooth synthetic image can come out of a lossy encoder
+pixel-identical):
+
+| quality | size | worst channel delta |
+|---|---|---|
+| 1.0 | 21340 bytes | **0** (pixel-exact, `VP8L` chunk) |
+| 0.8 | 5660 bytes | > 0 (lossy) |
+
+So lossless WebP needs **no second encoder** — the first plan (a
+libwebp WASM build, 320 KB) was dropped in favour of the browser's own.
+The one that stayed is AVIF, because no browser can do that.
+
+### A bare specifier needs an import map, and the nonce covers it
+
+`@jsquash/avif`'s `encode.js` imports the **bare specifier**
+`wasm-feature-detect`. A bare specifier only resolves through an import
+map:
+
+```html
+<script type="importmap">{"imports":{"wasm-feature-detect":"/js/vendor/jsquash-wfd-1.2.11/index.js"}}</script>
+<script type="module" src="/js/tools/image-codecs.js?v=1.0.0"></script>
+```
+
+The map has to come **before** any module script. The middleware's
+`injectScriptNonce()` adds a nonce to **every** `<script>` opening tag —
+`type="importmap"` included — so the inline map passes
+`script-src 'self' 'nonce-…'`.
+
+### TRAP: wasm-feature-detect 1.10.0 is a syntax error in every browser
+
+The current `wasm-feature-detect@1.10.0` ships an `import.source(...)`
+call (the import-source proposal). That is a **parse error** in every
+browser that does not implement the proposal, so the whole module fails
+to load and the encoder package that imports it fails with
+`Unexpected identifier 'source'`.
+
+**Pinned to 1.2.11** — the version jsquash itself declares (`^1.2.11`),
+and clean. When a vendored dependency is "the latest", check that its
+newest release still parses in the browsers you target.
+
+### The vendored encoder lives in a VERSIONED directory
+
+The emscripten glue loads its `.wasm` through a **relative** URL, and a
+relative URL carries no `?v=` stamp — so only a version change in the
+**path** busts the cache. The vendored packages therefore live in
+`js/vendor/jsquash-avif-2.1.1/` and `js/vendor/jsquash-wfd-1.2.11/`, and
+`scripts/vendor-libs.py` pins them under those names.
+
+### The i18n dictionaries are FLAT, and `data-i18n-attr` prefixes must be stripped
+
+`i18n/<lang>.json` is **not** nested. The top-level key IS the whole
+dotted path:
+
+```json
+"tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF (smallest files — downloads a 3.4 MB encoder once)"
+```
+
+So `data["tools"]["compress-wedding-photos"]` is `{}` (or does not
+exist) and a lookup that walks the path segment by segment reports
+**every** key as missing. The `tools` key that does exist is the tools
+HUB page's namespace (`tools.a_text.*`, `tools.h3_text.*`,
+`tools.p_text.*`) — a different thing with the same prefix.
+
+`data-i18n-attr="title:about.a_text.couples_served_title.ddddddd3"`
+carries an **attribute prefix**; the dictionary key is everything after
+the first colon. Strip it before looking up, or the key looks missing.
+
+### The format control was in THREE different states across the 11 languages
+
+Before this pass the output-format `<select>` was:
+
+* **en / zh / pt / ru** — not bound to the dictionary at all; the
+  inline `<option>` text was correct for that language but hard-coded.
+* **es / fr / de / ja / ar / th / hi** — bound with `data-i18n`, but the
+  **inline text was Chinese on every one of them** (the machine
+  translation had rewritten the markup). The page rendered correctly
+  only because the middleware replaced the Chinese with the dictionary
+  value; if the shard ever failed to load, a German visitor would have
+  read "输出格式".
+* the `<label for="format">` was bound in seven languages and not in
+  four, with the same Chinese-inline-text defect.
+
+Now every page carries the **same English source text** plus a
+`data-i18n` key, and every dictionary carries the translation. The
+static fallback is the English source, the rendered page is the
+visitor's language, and the two can no longer drift.
+
+### Verified on the bytes
+
+`scripts/verify-avif-lossless.py` proves the claims on the produced
+files, not on the absence of an error:
+
+* the browser's WebP at quality 1.0 carries a `VP8L` chunk and decodes
+  back pixel-for-pixel (worst channel delta 0 on per-pixel noise);
+* the browser's WebP at quality 0.8 does **not** (the contrast, so the
+  first test proves something);
+* the AVIF file's magic number is `ftypavif` and it decodes back to the
+  right size — and it is **60 % smaller** than the browser's own JPEG at
+  a comparable quality;
+* asking the browser for AVIF natively returns **PNG bytes**, which is
+  why the encoder exists at all;
+* end to end through the tool: the AVIF run downloads a real AVIF and
+  the lossless-WebP run downloads a real lossless WebP, and **the file
+  name matches the bytes**.
+
+
 

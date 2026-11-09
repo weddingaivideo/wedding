@@ -62219,7 +62219,19 @@
 ,
   "tools.compress-wedding-photos.small_text.keep_exif.0c4d2e3f": "Copiado do arquivo original. Apenas para saída JPG. A orientação é reposta, por isso a foto nunca fica de lado."
 ,
-  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "O compressor usa a <strong>Canvas API</strong> incorporada do navegador para recodificar cada imagem que solta com a qualidade que escolher. Aceita JPG, PNG e WebP na entrada e produz JPG, WebP ou PNG. O opcional \"Lado mais longo máximo\" limita o lado mais longo — útil se souber o limite de tamanho do destino. Um <strong>tamanho alvo</strong> em MB substitui por completo o controle de qualidade: a ferramenta procura a maior qualidade que ainda cabe abaixo desse tamanho e só reduz a foto quando até a qualidade mais baixa é grande demais."
+  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "O compressor usa a <strong>Canvas API</strong> integrada do navegador para recodificar cada imagem solta com a qualidade escolhida. Aceita entradas JPG, PNG e WebP e produz JPG, WebP, PNG, <strong>AVIF</strong> ou <strong>WebP sem perdas</strong>. A opção opcional \"Maior lado\" limita o lado mais comprido — útil se você conhece o limite de tamanho do destino. Um <strong>tamanho alvo</strong> em MB substitui completamente o controle de qualidade: a ferramenta procura a maior qualidade que ainda cabe abaixo dele e só reduz a foto quando até a menor qualidade é grande demais. O AVIF é o menor dos cinco, mas nenhum navegador consegue codificá-lo sozinho, então na primeira vez que você o escolher um codificador de 3,4 MB é baixado uma única vez e fica no cache do navegador. O WebP sem perdas é a escolha para gráficos chapados — em uma fotografia ele gera um arquivo maior, não menor. Em qualquer caso tudo roda no seu dispositivo; nada é enviado."
 ,
-  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "O que ele não faz: não consegue chegar a um alvo menor do que a própria foto, e não sabe escrever metadados PNG. O EXIF é copiado do arquivo original — câmera, lente, data da foto — então uma foto comprimida continua dizendo quando e onde foi tirada. A orientação é zerada de propósito, porque os pixels já estão em pé: manter a flag de rotação original faria todo visualizador virar a foto de lado."
+  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "O que ele não faz: atingir um alvo menor do que a própria foto, nem escrever metadados PNG. O EXIF é copiado do arquivo original — câmera, lente, data da foto — para que uma foto comprimida ainda diga quando e onde foi tirada. A orientação é redefinida de propósito, porque os pixels já estão na vertical: manter a marca de rotação original faria qualquer visualizador virar a foto de lado. O bloco EXIF acompanha apenas o JPG — as saídas AVIF e WebP são gravadas sem ele."
+,
+  "tools.compress-wedding-photos.label_text.output_format.a4b5c6d7": "Formato de saída"
+,
+  "tools.compress-wedding-photos.option_text.c06b8c68": "JPG (menor, recomendado para compartilhar)"
+,
+  "tools.compress-wedding-photos.option_text.1724a385": "WebP (menor, navegadores modernos)"
+,
+  "tools.compress-wedding-photos.option_text.babb5986": "PNG (sem perda, arquivos maiores)"
+,
+  "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF (os menores arquivos — baixa um codificador de 3,4 MB uma vez)"
+,
+  "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP sem perdas (para gráficos — uma foto fica maior)"
 }

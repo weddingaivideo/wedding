@@ -44329,7 +44329,19 @@
 ,
   "tools.compress-wedding-photos.small_text.keep_exif.0c4d2e3f": "Copied from the original file. JPG output only. The orientation is reset, so the photo can never end up sideways."
 ,
-  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "The compressor uses the browser's built-in <strong>Canvas API</strong> to re-encode each dropped image at your chosen quality. It supports JPG, PNG, and WebP input and outputs JPG, WebP, or PNG. Optional \"Max longest edge\" caps the longest side — handy if you know the destination's size limit. A <strong>target size</strong> in MB replaces the quality slider entirely: the tool searches for the highest quality that still fits under it, and scales the photo down only when even the lowest quality is too big."
+  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "The compressor uses the browser's built-in <strong>Canvas API</strong> to re-encode each dropped image at your chosen quality. It supports JPG, PNG, and WebP input and outputs JPG, WebP, PNG, <strong>AVIF</strong> or <strong>lossless WebP</strong>. Optional \"Max longest edge\" caps the longest side — handy if you know the destination's size limit. A <strong>target size</strong> in MB replaces the quality slider entirely: the tool searches for the highest quality that still fits under it, and scales the photo down only when even the lowest quality is too big. AVIF is the smallest of the five, but no browser can encode it on its own, so the first time you pick it a 3.4 MB encoder is downloaded once and then stays in your browser's cache. Lossless WebP is the right choice for flat graphics — on a photograph it produces a bigger file, not a smaller one. Either way it all runs on your device; nothing is uploaded."
 ,
-  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "What it does not do: it cannot reach a target smaller than the photo can be, and it cannot write PNG metadata. EXIF is copied over from the original file — camera, lens, shooting date — so a compressed photo still says when and where it was taken. The orientation is deliberately reset, because the pixels are already upright: keeping the original rotation flag would make every viewer turn the photo sideways."
+  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "What it does not do: it cannot reach a target smaller than the photo can be, and it cannot write PNG metadata. EXIF is copied over from the original file — camera, lens, shooting date — so a compressed photo still says when and where it was taken. The orientation is deliberately reset, because the pixels are already upright: keeping the original rotation flag would make every viewer turn the photo sideways. The EXIF block travels with the JPG only — AVIF and WebP outputs are written without it."
+,
+  "tools.compress-wedding-photos.label_text.output_format.a4b5c6d7": "Output format"
+,
+  "tools.compress-wedding-photos.option_text.c06b8c68": "JPG (smaller, recommended for sharing)"
+,
+  "tools.compress-wedding-photos.option_text.1724a385": "WebP (smaller, modern browsers)"
+,
+  "tools.compress-wedding-photos.option_text.babb5986": "PNG (lossless, biggest files)"
+,
+  "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF (smallest files — downloads a 3.4 MB encoder once)"
+,
+  "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP lossless (for graphics — a photo gets bigger)"
 }

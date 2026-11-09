@@ -39,6 +39,11 @@ ASSETS = [
     # tool page's HTML with a ?v= stamp, so the normal HTML sweep reaches
     # it - unlike the pixel worker, whose URL is built at runtime.
     ("movie-loader.js", re.compile(r"/js/tools/movie-loader\.js\?v=(\d+(?:\.\d+)*)")),
+    # Added 2026-11-11: the AVIF encoder loader (§2.12). It is referenced
+    # from the compress tool page's HTML with a ?v= stamp, like the MP4
+    # loader. The encoder package itself lives under a versioned directory,
+    # so its own cache key changes with the version.
+    ("image-codecs.js", re.compile(r"/js/tools/image-codecs\.js\?v=(\d+(?:\.\d+)*)")),
 ]
 
 # Assets whose stamp does NOT live in the HTML.

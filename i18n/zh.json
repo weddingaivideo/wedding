@@ -67574,11 +67574,23 @@
 ,
   "tools.compress-wedding-photos.small_text.keep_exif.0c4d2e3f": "从原文件复制。仅适用于 JPG 输出。方向标记会被重置，所以照片绝不会变成横躺。"
 ,
-  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "压缩器用浏览器内置的 <strong>Canvas API</strong> 按你选择的画质重新编码每一张拖入的图片。它支持 JPG、PNG、WebP 输入，输出 JPG、WebP 或 PNG。可选的「最长边上限」会限制最长边——知道目标平台的尺寸限制时很有用。<strong>目标体积</strong>（MB）会完全取代质量滑块：工具会自动搜索仍能塞进这个体积的最高画质，只有当连最低画质都超限时才会缩小照片。"
+  "tools.compress-wedding-photos.p_text.what_it_does.7h2k4m6n": "压缩器用浏览器内置的 <strong>Canvas API</strong> 按你选择的画质重新编码每一张拖入的图片。它支持 JPG、PNG、WebP 输入，输出 JPG、WebP、PNG、<strong>AVIF</strong> 或 <strong>WebP 无损</strong>。可选的「最长边上限」会限制最长边——知道目标平台的尺寸限制时很有用。<strong>目标体积</strong>（MB）会完全取代质量滑块：工具会自动搜索仍能塞进这个体积的最高画质，只有当连最低画质都超限时才会缩小照片。AVIF 是这五种里最小的，但没有任何浏览器能自己编码它，所以第一次选择它时会一次性下载 3.4 MB 的编码器，之后就留在你的浏览器缓存里。WebP 无损适合平面图形——用在照片上反而会生成更大的文件。无论选哪一种，处理都仍然在你的设备上完成，不会上传任何东西。"
 ,
-  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "它做不到的事：无法达到比照片本身更小的目标体积，也无法写入 PNG 元数据。EXIF 会从原文件复制过来——相机、镜头、拍摄日期——所以压缩后的照片仍然记录着它是在何时何地拍摄的。方向标记会被刻意重置，因为像素本身已经是正的：保留原来的旋转标记会让每个查看器把照片再转一次。"
+  "tools.compress-wedding-photos.p_text.what_it_does_not.8j3l5n7p": "它做不到的事：无法达到比照片本身更小的目标体积，也无法写入 PNG 元数据。EXIF 会从原文件复制过来——相机、镜头、拍摄日期——所以压缩后的照片仍然记录着它是在何时何地拍摄的。方向标记会被刻意重置，因为像素本身已经是正的：保留原来的旋转标记会让每个查看器把照片再转一次。EXIF 只会随 JPG 一起保留；AVIF 和 WebP 输出不写入这些信息。"
 ,
   "tools.compress-wedding-photos.td_text.40mb_upload_cap_1by1.5s6t7u8v": "<strong>单张上传上限 40 MB，逐个处理</strong>"
 ,
   "tools.compress-wedding-photos.td_text.weddingaivideo_faceaware.1u2v3w4x": "<strong>WeddingAI.video 压缩器</strong>（本工具）"
+,
+  "tools.compress-wedding-photos.label_text.output_format.a4b5c6d7": "输出格式"
+,
+  "tools.compress-wedding-photos.option_text.c06b8c68": "JPG（体积更小，推荐用于分享）"
+,
+  "tools.compress-wedding-photos.option_text.1724a385": "WebP（体积更小，现代浏览器）"
+,
+  "tools.compress-wedding-photos.option_text.babb5986": "PNG（无损，文件最大）"
+,
+  "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF（文件最小 —— 需一次性下载 3.4 MB 编码器）"
+,
+  "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP 无损（适合图形 —— 照片反而会变大）"
 }

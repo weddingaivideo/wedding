@@ -223,11 +223,13 @@ if ('serviceWorker' in navigator) {
                         <small data-i18n="tools.compress-wedding-photos.small_text.b631f0aa">先缩放，再重新编码。</small>
                     </div>
                     <div class="wa-tool-control">
-                        <label for="format" data-i18n="tools.compress-wedding-photos.label_text.e5593680">输出格式</label>
+                        <label for="format" data-i18n="tools.compress-wedding-photos.label_text.output_format.a4b5c6d7">Output format</label>
                         <select id="format">
-                            <option value="image/jpeg" selected data-i18n="tools.compress-wedding-photos.option_text.c06b8c68">JPG（体积更小，推荐用于分享）</option>
-                            <option value="image/webp" data-i18n="tools.compress-wedding-photos.option_text.1724a385">WebP（体积更小，现代浏览器）</option>
-                            <option value="image/png" data-i18n="tools.compress-wedding-photos.option_text.babb5986">PNG（无损，文件最大）</option>
+                            <option value="image/jpeg" selected data-i18n="tools.compress-wedding-photos.option_text.c06b8c68">JPG (smaller, recommended for sharing)</option>
+                            <option value="image/webp" data-i18n="tools.compress-wedding-photos.option_text.1724a385">WebP (smaller, modern browsers)</option>
+                            <option value="image/png" data-i18n="tools.compress-wedding-photos.option_text.babb5986">PNG (lossless, biggest files)</option>
+                            <option value="image/avif" data-i18n="tools.compress-wedding-photos.option_text.b6c7d8e9">AVIF (smallest files &mdash; downloads a 3.4 MB encoder once)</option>
+                            <option value="webp-lossless" data-i18n="tools.compress-wedding-photos.option_text.c7d8e9f0">WebP lossless (for graphics &mdash; a photo gets bigger)</option>
                         </select>
                     </div>
                 </div>
@@ -466,6 +468,16 @@ if ('serviceWorker' in navigator) {
         </div>
     </footer>
 
+    <!-- §2.12: the AVIF encoder is ESM, and its entry point imports the
+         bare specifier 'wasm-feature-detect'. A bare specifier only
+         resolves through an import map, and the map has to come BEFORE
+         the module script that uses it. The middleware adds a nonce to
+         every <script> opening tag - this one included - so the inline
+         map passes `script-src 'self' 'nonce-...'`. The encoder itself
+         (3.4 MB of WASM) is behind a dynamic import inside the module,
+         so it is only downloaded when a visitor picks AVIF. -->
+    <script type="importmap">{"imports":{"wasm-feature-detect":"/js/vendor/jsquash-wfd-1.2.11/index.js"}}</script>
+    <script type="module" src="/js/tools/image-codecs.js?v=1.0.0"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function () {
       'use strict';
@@ -544,6 +556,110 @@ if ('serviceWorker' in navigator) {
           targetBytes: Math.round((parseFloat(targetEl && targetEl.value) || 0) * 1024 * 1024),
           keepExif: !!(exifEl && exifEl.checked),
         };
+      }
+
+      // ---------- output formats (§2.12) -----------------------------------
+      //
+      // The Canvas API can encode JPG, PNG and WebP. It cannot encode AVIF
+      // at all, and WebKit cannot write WebP - it hands back a PNG and
+      // says nothing about it. So the browser is ASKED what it can do
+      // before the menu is built, and the menu only offers the truth.
+      //
+      // `webp-lossless` is this tool's own name for "lossless WebP". The
+      // browser's own encoder produces it at quality 1: Chromium and
+      // Firefox both switch to the lossless VP8L encoder there, and the
+      // result decodes back pixel-for-pixel (measured: worst channel
+      // delta 0 on per-pixel noise). No second encoder is needed for it.
+      var FORMATS = {
+        'image/jpeg': { mime: 'image/jpeg', ext: 'jpg' },
+        'image/webp': { mime: 'image/webp', ext: 'webp' },
+        'webp-lossless': { mime: 'image/webp', ext: 'webp', lossless: true, fixedQuality: 1.0 },
+        'image/png': { mime: 'image/png', ext: 'png' },
+        'image/avif': { mime: 'image/avif', ext: 'avif', wasm: 'avif' }
+      };
+
+      // What the browser can ACTUALLY encode. The answer is not the spec's
+      // answer: Safari returns a PNG when asked for WebP, and every
+      // browser returns a PNG when asked for AVIF. The only reliable test
+      // is to ask and look at what came back.
+      var CAN = { webp: false, avif: false };
+
+      function formatInfo(value) {
+        return FORMATS[value] || FORMATS['image/jpeg'];
+      }
+
+      function canEncode(mime) {
+        return new Promise(function (resolve) {
+          try {
+            var c = document.createElement('canvas');
+            c.width = 2; c.height = 2;
+            c.getContext('2d').fillRect(0, 0, 2, 2);
+            c.toBlob(function (b) {
+              resolve(!!b && b.type === mime);
+            }, mime);
+          } catch (e) { resolve(false); }
+        });
+      }
+
+      // Encode one canvas in the chosen format. `quality` is the 0..1
+      // slider value. Returns { blob, fmt } - the format can be swapped
+      // for JPG when the browser cannot produce what was asked for, and
+      // the caller has to be told.
+      async function encodeCanvas(canvas, fmt, quality) {
+        if (fmt.wasm && !CAN.avif) {
+          var codecs = window.weddingAIImageCodecs;
+          if (!codecs) {
+            throw new Error('The AVIF encoder did not load. Reload the page and try again.');
+          }
+          var ctx = canvas.getContext('2d');
+          var data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          // jsquash uses 0..100, the Canvas slider uses 0..1.
+          var avif = await codecs.encodeAvif(data, {
+            quality: Math.max(1, Math.round(quality * 100)),
+            speed: 6
+          });
+          return { blob: avif, fmt: fmt };
+        }
+        var q = fmt.fixedQuality !== undefined ? fmt.fixedQuality
+               : (fmt.mime === 'image/png' ? undefined : quality);
+        var out = await window.weddingAITool.canvasToBlob(canvas, fmt.mime, q);
+        if (!out || out.size === 0) {
+          throw new Error('The browser could not encode this photo. Try another format.');
+        }
+        if (out.type !== fmt.mime) {
+          // THE TRAP: a browser that cannot encode the requested format
+          // returns a PNG instead of failing. Writing that out under a
+          // .webp name would hand the user a PNG wearing the wrong
+          // extension, so it is saved as JPG and the row says so.
+          var jpg = await window.weddingAITool.canvasToBlob(canvas, 'image/jpeg', 0.85);
+          if (jpg && jpg.size) {
+            return { blob: jpg, fmt: FORMATS['image/jpeg'], fellBack: true };
+          }
+          throw new Error('This browser cannot encode ' + fmt.mime + '.');
+        }
+        return { blob: out, fmt: fmt };
+      }
+
+      // §2.12 - find out what this browser can really encode, then offer
+      // only that. Safari cannot write WebP and returns a PNG instead of
+      // saying so, so the WebP options are removed there.
+      async function detectFormatSupport() {
+        CAN.webp = await canEncode('image/webp');
+        CAN.avif = await canEncode('image/avif');
+        var haveAvifEncoder = !!window.weddingAIImageCodecs;
+        for (var i = 0; i < formatEl.options.length; i++) {
+          var o = formatEl.options[i];
+          if (o.value === 'image/webp' || o.value === 'webp-lossless') {
+            o.disabled = !CAN.webp;
+            if (!CAN.webp) o.title = 'This browser cannot write WebP.';
+          } else if (o.value === 'image/avif') {
+            o.disabled = !(CAN.avif || haveAvifEncoder);
+            if (o.disabled) o.title = 'The AVIF encoder could not be loaded.';
+          }
+        }
+        if (!CAN.webp && (formatEl.value === 'image/webp' || formatEl.value === 'webp-lossless')) {
+          formatEl.value = 'image/jpeg';
+        }
       }
 
 
@@ -654,23 +770,33 @@ if ('serviceWorker' in navigator) {
       // At a fixed quality the JPEG size scales roughly with the pixel
       // count, so when even the lowest quality is too big the canvas is
       // scaled by sqrt(target / size) and the search runs again.
-      async function encodeToTarget(canvas, mime, targetBytes) {
-        var T = window.weddingAITool;
+      async function encodeToTarget(canvas, fmt, targetBytes) {
         var LO = 0.3, HI = 0.95;
         var work = canvas;
         for (var round = 0; round < 5; round++) {
           var lo = LO, hi = HI, best = null, bestQ = LO;
-          for (var i = 0; i < 7; i++) {
-            var mid = (lo + hi) / 2;
-            var b = await T.canvasToBlob(work, mime, mid);
-            if (!b || b.size === 0) { hi = mid; continue; }
-            if (b.size <= targetBytes) { best = b; bestQ = mid; lo = mid; }
-            else { hi = mid; }
-            if (hi - lo < 0.01) break;
+          // A lossless encode has no quality dial, so the search is skipped
+          // for it - only the downscale can bring the file under the target.
+          // A WebAssembly encode is also much slower than a Canvas one, so
+          // it gets fewer rounds.
+          var rounds = fmt.wasm ? 5 : 7;
+          if (!fmt.lossless) {
+            for (var i = 0; i < rounds; i++) {
+              var mid = (lo + hi) / 2;
+              var enc = await encodeCanvas(work, fmt, mid);
+              var b = enc.blob;
+              if (enc.fellBack) return { blob: null, quality: LO };
+              if (!b || b.size === 0) { hi = mid; continue; }
+              if (b.size <= targetBytes) { best = b; bestQ = mid; lo = mid; }
+              else { hi = mid; }
+              if (hi - lo < 0.01) break;
+            }
+            if (best) return { blob: best, quality: bestQ };
           }
-          if (best) return { blob: best, quality: bestQ };
           // Nothing fits at the lowest quality: shrink the canvas.
-          var small = await T.canvasToBlob(work, mime, LO);
+          var smallEnc = await encodeCanvas(work, fmt, LO);
+          var small = smallEnc.blob;
+          if (smallEnc.fellBack) return { blob: null, quality: LO };
           if (!small || small.size === 0) break;
           var factor = Math.sqrt(targetBytes / small.size);
           if (factor >= 0.995) break;
@@ -721,33 +847,33 @@ if ('serviceWorker' in navigator) {
           refreshUI();
           entry.percent = 85;
           refreshUI();
-          var mime = settings.format;
+          var fmt = formatInfo(settings.format);
           var quality = settings.quality;
-          // PNG is lossless, quality is ignored
-          if (mime === 'image/png') quality = undefined;
-          var blob;
-          if (settings.targetBytes > 0 && mime !== 'image/png') {
+          var result = null;
+          if (settings.targetBytes > 0 && fmt.mime !== 'image/png' && !fmt.lossless) {
             // §2.14 - "compress to exactly 2 MB". The quality slider is
             // replaced by a search for the highest quality that still fits
             // under the target.
             entry.percent = 55;
             refreshUI();
-            var res = await encodeToTarget(canvas, mime, settings.targetBytes);
-            blob = res.blob;
-            if (!blob) {
+            result = await encodeToTarget(canvas, fmt, settings.targetBytes);
+            if (!result.blob) {
               // The target is unreachable for this photo: keep the smallest
               // file we could make and say so in the summary.
-              blob = await window.weddingAITool.canvasToBlob(canvas, mime, 0.3);
+              result = await encodeCanvas(canvas, fmt, 0.3);
               entry.targetMissed = true;
             } else {
-              quality = res.quality;
+              quality = result.quality;
             }
           } else {
-            blob = await window.weddingAITool.canvasToBlob(canvas, mime, quality);
+            result = await encodeCanvas(canvas, fmt, quality);
           }
+          var blob = result.blob;
+          var usedFmt = result.fmt || fmt;
+          if (result.fellBack) entry.fellBack = true;
           if (!blob || blob.size === 0) throw new Error('Compression returned an empty file. Try a different format.');
           // §2.13 - carry the EXIF block over from the original file.
-          if (settings.keepExif && mime === 'image/jpeg' && entry.inputFile) {
+          if (settings.keepExif && usedFmt.mime === 'image/jpeg' && entry.inputFile) {
             entry.percent = 92;
             refreshUI();
             var exif = await readExifBytes(entry.inputFile);
@@ -756,7 +882,7 @@ if ('serviceWorker' in navigator) {
           entry.output = blob;
           entry.sizes.out = blob.size;
           entry.status = 'done';
-          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-min.' + (mime === 'image/png' ? 'png' : mime === 'image/webp' ? 'webp' : 'jpg'));
+          entry.outputName = window.weddingAITool.safeFileName(entry.name, '-min.' + usedFmt.ext);
         } catch (err) {
           entry.status = 'error';
           entry.error = err && err.message ? err.message : String(err);
@@ -833,6 +959,7 @@ if ('serviceWorker' in navigator) {
         }
       });
 
+      detectFormatSupport();
       refreshUI();
     });
     </script>
