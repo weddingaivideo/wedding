@@ -2193,7 +2193,10 @@ because there is no CDN and no bundler.
 
 **TRAP: the site is not cross-origin isolated**, so `SharedArrayBuffer` is
 unavailable and the threaded build would fail. `ort.env.wasm.numThreads = 1`
-is required, not optional.
+is required, not optional. **This is deliberate and must stay that way:**
+adding `Cross-Origin-Opener-Policy` / `Cross-Origin-Embedder-Policy` would
+kill the AdSense ad frame and the Clarity collector — see "COOP/COEP is
+CLOSED on this site" further down.
 
 ### MODNet: what the browser actually has to do
 
@@ -2241,6 +2244,19 @@ page with Playwright, and assert that the assets were fetched from
 nonce-based. `style-src 'self' 'unsafe-inline'` must keep `unsafe-inline`
 (the pages use `style=""` attributes). Replacing every `'unsafe-inline'`
 in the policy invents violations the production site does not have.
+
+**TRAP: the harness must do BOTH halves of what the middleware does.**
+`injectScriptNonce()` adds the nonce attribute to every `<script>`, and the
+middleware ALSO replaces the literal placeholder `__CSP_NONCE__` in the
+HTML with the real nonce. A harness that only adds the attribute leaves
+the literal string in the page, the browser refuses every script that
+carries it, and the harness reports three CSP violations that the
+production site does not have. Both halves:
+
+```python
+html = SCRIPT_RE.sub(lambda m: m.group(1) + m.group(2) + ' nonce="%s"' % NONCE + ">", html)
+html = html.replace("__CSP_NONCE__", NONCE)
+```
 
 **TRAP: `page.wait_for_function("...")` with a STRING is blocked by the
 live CSP.** Playwright evaluates a string expression with `eval`, and the
