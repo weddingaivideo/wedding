@@ -65,6 +65,62 @@ questions.
 
 ---
 
+## EXECUTION STATUS — second pass (same day, `390301ee` … `929b12ff`)
+
+The remaining 🟢 items landed as six more commits. The pattern of every one
+of them was the same: **the tool did less than the page said it did**, and
+the fix was to make the tool do it — or, where the claim could not be made
+true for free, to change the claim in all 11 languages.
+
+| item | status | note |
+|---|---|---|
+| §2.2 add-text drag | ✅ | **native pointer drag, not Cropper.js / fabric.** The offset is stored in CANVAS pixels, so the preview and the exported file agree by construction. Measuring it also found a pre-existing defect: the JS set `style.width=720px` AND `style.height=540px`, and the CSS `max-height:420px` clamped the height without touching the width — a 1200×900 photo was **squashed** to 720×420 in the preview while the export was correct. |
+| §2.3 collage free placement | ✅ | **native, not fabric / konva** (see below). Click a cell to select, drag a photo onto another cell to swap, drag inside a cell to pan the crop, scroll to zoom one photo. The PNG is re-encoded whenever the arrangement changes, so the download cannot be a stale snapshot. |
+| §2.4 album free placement | ✅ | same interaction, plus **the print-ready PDF the page promised** — it exported N loose PNGs instead. One PDF now, with the page size in INCHES (8×8 book → 8×8 inch page → 2400 px = 300 DPI). `common.js downloadPdfPages()` renders page by page and frees each bitmap (40 pages held at once ≈ 900 MB). |
+| §2.12 AVIF + lossless WebP | ✅ | jsquash AVIF (WASM) + **native `toBlob('image/webp', 1.0)`**, which is already lossless — so the 4 MB libwebp WASM encoder was dropped again. Safari cannot WRITE WebP at all, so it degrades honestly to JPG. |
+| §2.13 keep the EXIF | ✅ | `exifr`; the compress tool now keeps the EXIF block and can strip it on request |
+| §2.14 target size | ✅ | "compress to exactly 2 MB" — the mode users actually ask for |
+| §3.2 real MP4 | ✅ | mediabunny, 5 s / 1080×1920 / 30 fps, motion interpolated between the key frames |
+
+### Why fabric / konva were not used for §2.3 and §2.4
+
+Both interactions are **constrained** — a grid of cells with one photo each,
+a swap, a pan and a zoom — so most of what those libraries exist for is
+unused. And the export IS the preview canvas: with konva the caption, the
+background, the cover page and the empty cells would all have to move into
+the scene graph, and the stage would have to be blitted back for the
+export. Zero bytes is the right price for this.
+
+### The claims that had to change with the tools
+
+A tool that gains a capability invalidates the copy that says it lacks one.
+All of these were rewritten in **all 11 languages**, not just in English:
+
+- the collage said *"WeddingAI.video fills the grid for you — **no dragging**"* → now it can be dragged;
+- the album said *"auto-fills the grid page by page **in upload order**"* → the order is now the user's to choose;
+- the album said *"exports the layout as a **print-ready PDF**"* and exported PNGs → it exports a PDF now.
+
+### Four browser traps these items ran into
+
+| trap | what it looked like |
+|---|---|
+| `html { scroll-behavior: smooth }` | a test measured the canvas rect **while the scroll animation was still running**, so the drag missed and the tool looked broken. `behavior: 'instant'` + wait for `scrollY` to settle. |
+| an explicit CSS `width` AND `height` | `max-height` clamps the height without touching the width → the preview was **squashed** and did not match the export. |
+| dragging an `<img>` | the browser's native image drag **swallows the pointermove events**: the drag dies after the first move, with no error anywhere. `draggable="false"` + a `dragstart` guard. |
+| `window.prompt` / `alert` | the album's only "assign a photo" path was a native dialog — untranslatable, unusable on touch. It stays as the click fallback, but the drag is the real path. |
+
+### New verification scripts
+
+| script | what it proves |
+|---|---|
+| `scripts/verify-add-text-drag.py` | the text moves by exactly the display-scaled distance, the reset button works, and the exported JPEG has the text at the same pixel as the preview |
+| `scripts/verify-collage-drag.py` | four solid-colour photos with a white stripe: the two cells swap, the exported PNG matches the preview cell for cell, the zoom crops the stripe away, the reset restores both |
+| `scripts/verify-book-placement.py` | a photo lands in a slot by drag, two slots swap, the zoom crops in, and the album PDF has 20 pages whose MediaBox is **576×576 pt = 8×8 inches = 300 DPI** |
+| `scripts/verify-avif-lossless.py` | the AVIF really is `ftypavif`, it is 60 % smaller than the JPEG, and the native WebP at q=1.0 is **pixel-identical** to the source |
+| `scripts/verify-compress-target-exif.py` | the target-size mode lands under the byte ceiling and the EXIF orientation survives |
+
+---
+
 ## 0. The four constraints every option inherits
 
 These are not preferences; they are what the repo actually allows.
