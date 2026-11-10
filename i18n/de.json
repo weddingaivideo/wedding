@@ -44881,7 +44881,7 @@
   "tools.wedding-photo-collage.td_text.unlimited_manual.5m6n7o8p": "Unbegrenzt, manuell",
   "tools.wedding-photo-collage.td_text.png_jpg_share.9q0r1s2t": "PNG + JPG + Teilen",
   "tools.wedding-photo-collage.td_text.not_offered.3u4v5w6x": "Nicht angeboten",
-  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "Die meisten Collage-Ersteller erfordern manuelles Ziehen jedes Fotos in eine Zelle. WeddingAI.video füllt die Zellen für Sie — ohne Ziehen — und ordnet die Fotos in 6 fertige Layouts an (2×2, 2×3, 3×3, 3×4, waagerechter Streifen, senkrechter Streifen). Dieselbe Collage dient auch als Kapitel-Cover im Hochzeitsvideo — gedruckt oder auf dem Bildschirm bleiben Ihre Fotos organisiert. Export PNG/PDF/4K, drucken oder per Link teilen; 11 Sprachen für Untertitel.",
+  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "Die meisten Collage-Maker lassen dich jedes Foto manuell in eine Rasterzelle ziehen. WeddingAI.video füllt das Raster mit 6 fertigen Layouts (2×2, 2×3, 3×3, 3×4, horizontaler Streifen, vertikaler Streifen) für dich — und du kannst trotzdem ziehen: Zieh ein Foto auf eine andere Zelle, um die beiden zu tauschen, zieh innerhalb einer Zelle, um den Ausschnitt zu verschieben, und zoome mit dem Mausrad ein einzelnes Foto, ohne die anderen zu verändern. Dieselbe Collage dient auch als Kapitelbild für das KI-Hochzeitsvideo — im Druck oder auf dem Bildschirm bleiben deine Fotos geordnet. Export als PNG/PDF/4K, drucken oder per Link teilen; 11 Sprachen für Bildunterschriften.",
   "tools.wedding-photo-collage.td_text.png_pdf_share.1i2j3k4l": "PNG + PDF + Teilen",
   "tools.wedding-photo-collage.td_text.not_offered.5m6n7o8p": "Nicht angeboten",
   "tools.wedding-photo-collage.td_text.pi7.9q0r1s2t": "Pi7-Collage (collage.pi7.org, über 100 Vorlagen)",
@@ -63435,4 +63435,10 @@
   "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "Ziehe den Text direkt auf dem Foto, um ihn zu verschieben – die Position gilt für jedes Foto im Stapel."
 ,
   "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "Position zurücksetzen"
+,
+  "tools.wedding-photo-collage.small_text.free_placement_hint.7q4v2m8x": "Klicke ein Foto an, um es auszuwählen. Zieh es auf eine andere Zelle, um die beiden zu tauschen, zieh innerhalb einer Zelle, um den Ausschnitt zu verschieben, und scrolle mit dem Mausrad über das ausgewählte Foto, um es zu vergrößern."
+,
+  "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "Ausgewähltes Foto vergrößern"
+,
+  "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "Layout zurücksetzen"
 }

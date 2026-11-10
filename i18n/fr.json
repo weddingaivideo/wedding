@@ -43715,7 +43715,7 @@
   "tools.wedding-photo-collage.td_text.collagevideo.1c2d3e4f": "WedShoots / Mariages.net (album partagé)",
   "tools.wedding-photo-collage.td_text.album_no_download_required.5g6h7i8j": "Album collaboratif invités",
   "tools.wedding-photo-collage.td_text.cloud_only_no_print.1o2p3q4r": "Cloud uniquement, pas d'impression",
-  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "La plupart des créateurs de collage mariage exigent glisser-déposer manuel chaque photo. WeddingAI.video remplit la grille à votre place — sans glisser-déposer — et dispose les photos en 6 mises en page prêtes (2×2, 2×3, 3×3, 3×4, bande horizontale, bande verticale). Le même collage sert aussi de couverture de chapitre dans la vidéo mariage — imprimé ou à l'écran, vos photos restent organisées. Export PNG/PDF/4K, imprimez ou partagez par lien; 11 langues pour légendes.",
+  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "La plupart des outils de collage vous obligent à glisser manuellement chaque photo dans une case de la grille. WeddingAI.video remplit la grille pour vous avec 6 mises en page prêtes à l'emploi (2×2, 2×3, 3×3, 3×4, bande horizontale, bande verticale) — et vous pouvez quand même tout glisser : déposez une photo sur une autre case pour les échanger, glissez à l'intérieur d'une case pour recadrer, et utilisez la molette sur la photo sélectionnée pour agrandir une seule photo sans toucher aux autres. Le même collage sert aussi de couverture de chapitre pour la vidéo de mariage IA : à l'impression ou à l'écran, vos photos restent bien ordonnées. Export PNG/PDF/4K, impression ou partage par lien ; 11 langues pour les légendes.",
   "tools.wedding-photo-collage.td_text.png_pdf_share.1i2j3k4l": "PNG + PDF + partager",
   "tools.wedding-photo-collage.td_text.not_offered.5m6n7o8p": "Non proposé",
   "tools.wedding-photo-collage.td_text.pi7.9q0r1s2t": "Pi7 Collage (collage.pi7.org, plus de 100 modèles)",
@@ -62816,4 +62816,10 @@
   "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "Faites glisser le texte directement sur la photo pour le déplacer — la position s'applique à toutes les photos du lot."
 ,
   "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "Réinitialiser la position"
+,
+  "tools.wedding-photo-collage.small_text.free_placement_hint.7q4v2m8x": "Cliquez sur une photo pour la sélectionner. Glissez-la sur une autre case pour échanger les deux, glissez à l'intérieur d'une case pour recadrer, et faites défiler la molette sur la photo sélectionnée pour l'agrandir."
+,
+  "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "Agrandir la photo sélectionnée"
+,
+  "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "Réinitialiser la mise en page"
 }

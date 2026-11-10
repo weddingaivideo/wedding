@@ -49343,7 +49343,7 @@
   "tools.wedding-photo-collage.td_text.2_to_30.5g6h7i8j": "2-30 张",
   "tools.wedding-photo-collage.td_text.png_jpg_share.9k0l1m2n": "PNG + JPG + 分享",
   "tools.wedding-photo-collage.td_text.not_offered.1o2p3q4r": "不提供",
-  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "大多数拼图工具要你手动把每张照片拖到网格里。WeddingAI.video 无需拖动，自动填满网格，把照片按 6 种版式排列（2×2 / 2×3 / 3×3 / 3×4 / 横向长条 / 纵向长条）。同一拼图还能直接当婚礼视频的章节封面 — 无论打印还是在屏幕上，你的照片都井井有条。支持 PNG / PDF / 4K 导出、打印或链接分享；标题支持 11 种语言。",
+  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "大多数拼贴工具都要你把照片一张张手动拖进网格单元。WeddingAI.video 会用 6 种现成版式（2×2、2×3、3×3、3×4、横向长条、纵向长条）直接帮你填满网格——而且你仍然可以拖动：把一张照片拖到另一个单元上即可互换两张，在单元内拖动可以调整裁切位置，滚轮可以单独放大某一张照片而不影响其它照片。同一张拼贴还能直接当作 AI 婚礼视频的章节封面——无论印刷还是屏幕播放，照片都井井有条。可导出 PNG/PDF/4K，可打印、可分享链接；字幕支持 11 种语言。",
   "tools.wedding-photo-collage.td_text.png_pdf_share.1i2j3k4l": "PNG + PDF + 分享",
   "tools.wedding-photo-collage.td_text.not_offered.5m6n7o8p": "不提供",
   "tools.wedding-photo-collage.td_text.pi7.9q0r1s2t": "好拼 (ops-coffee)",
@@ -67611,4 +67611,10 @@
   "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "直接在照片上拖动文字即可移动——这个位置会应用到批次里的每一张照片。"
 ,
   "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "重置位置"
+,
+  "tools.wedding-photo-collage.small_text.free_placement_hint.7q4v2m8x": "点一下照片即可选中。把一张照片拖到另一个单元上就会互换两张；在单元内拖动可以调整裁切位置；滚轮在选中的照片上滚动可以放大它。"
+,
+  "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "放大选中的照片"
+,
+  "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "重置排版"
 }

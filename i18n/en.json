@@ -37363,7 +37363,7 @@
   "tools.wedding-photo-collage.td_text.2_to_30.5g6h7i8j": "2-30 photos",
   "tools.wedding-photo-collage.td_text.png_jpg_share.9k0l1m2n": "PNG + JPG + share",
   "tools.wedding-photo-collage.td_text.not_offered.1o2p3q4r": "Not offered",
-  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "Most collage makers require you to manually drag each photo into a grid cell. WeddingAI.video fills the grid for you — no dragging — and lays the photos out in 6 ready-made layouts (2×2, 2×3, 3×3, 3×4, horizontal strip, vertical strip). Same collage also doubles as a chapter cover in the wedding video — in print or on screen, your photos stay organized. Export PNG/PDF/4K, print, or share via link; 11 languages for captions.",
+  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "Most collage makers require you to manually drag each photo into a grid cell. WeddingAI.video fills the grid for you in 6 ready-made layouts (2×2, 2×3, 3×3, 3×4, horizontal strip, vertical strip) — and you can still drag: drop a photo onto another cell to swap the two, drag inside a cell to reposition the crop, and zoom one photo without touching the others. The same collage also doubles as a chapter cover in the AI wedding video — in print or on screen, your photos stay organized. Export PNG/PDF/4K, print, or share via link; 11 languages for captions.",
   "tools.remove-background-wedding-portrait.h2_text.remove_bg_comparison_8_5t6u7v8": "Remove Background Comparison: 8 Tools vs WeddingAI.video BG + Video Bundle",
   "tools.remove-background-wedding-portrait.p_text.google_serp_for_remove_backg.w9x0y1z2": "Google SERPs for \"remove background wedding portrait free\" (Oct 2025) surface Remove.bg (+ Background > Photo chapel search), Fotor (free precise cutouts transparent PNG HD), Playground AI (Apr 20 2026 wedding-specific instant), Picsart (4.9★/6,942 reviews, 700M backgrounds removed), Canva BG Remover (Pro), Adobe Firefly (free), PhotoScissors (free automatic transparent / solid color / image), and RemoveBackgroundAI. WeddingAI.video bundles the BG removal with the wedding video same workflow:",
   "tools.remove-background-wedding-portrait.th_text.tool.1a2b3c4d": "Tool",
@@ -44362,4 +44362,10 @@
   "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "Drag the text straight on the photo to move it — the position applies to every photo in the batch."
 ,
   "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "Reset position"
+,
+  "tools.wedding-photo-collage.small_text.free_placement_hint.7q4v2m8x": "Click a photo to select it. Drag it onto another cell to swap the two, drag inside a cell to reposition the crop, and scroll over the selected photo to zoom it."
+,
+  "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "Zoom selected photo"
+,
+  "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "Reset layout"
 }

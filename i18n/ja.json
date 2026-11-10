@@ -50972,7 +50972,7 @@
   "tools.wedding-photo-collage.td_text.2_to_30.5g6h7i8j": "2-30枚",
   "tools.wedding-photo-collage.td_text.png_jpg_share.9k0l1m2n": "PNG/JPG/共有",
   "tools.wedding-photo-collage.td_text.not_offered.1o2p3q4r": "提供なし",
-  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "ほとんどのコラージュメーカーは写真を1枚ずつ手動配置し、グリッドを選んでテキストを重ねる必要があります。WeddingAI.videoの唯一の違い：ドラッグ不要でグリッドを自動埋め込み + 6レイアウト（2×2 / 2×3 / 3×3 / 3×4 / 横ストリップ / 縦ストリップ）+ 2-12枚対応 + 11言語キャプション + 同じ9.9€動画のチャプターカバー。",
+  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "ほとんどのコラージュメーカーでは、写真を1枚ずつ手作業でグリッドのセルへ配置する必要があります。WeddingAI.video は 6 つの既製レイアウト（2×2、2×3、3×3、3×4、横ストリップ、縦ストリップ）でグリッドを自動で埋めてくれます——しかもドラッグも引き続き使えます。写真を別のセルへドラッグすると 2 枚が入れ替わり、セルの中でドラッグすれば切り抜き位置を調整でき、選択した写真の上でホイールを操作すればその 1 枚だけを拡大できます。作成したコラージュはそのまま AI 結婚式動画のチャプター表紙にも使えます。印刷用でも画面でも、写真の並びはそのまま。PNG/PDF/4K 出力、印刷、リンク共有に対応。キャプションは 11 言語対応。",
   "tools.crop-wedding-photo-for-reels.h2_text.crop_tool_comparison_6_3a4b5c6d": "結婚式写真リール切り抜きツール比較：7ツールvs WeddingAI.video中央オフセット切り抜き + 6アスペクト比",
   "tools.crop-wedding-photo-for-reels.p_text.google_serp_for_crop_wedding_p.e7f8g9h0": "Google SERPs（2025年10月）「結婚式 写真 リール 切り抜き 無料」は主にCanva（canva.com/ja_jp/templates/wedding — 結婚式・ウェディングのインスタグラムリールテンプレート豊富、画像・写真・動画・ストック素材）、Instagram photoback.jp（ベールアップフォトリールまとめ）、Adobe Stock（stock.adobe.com/jp/search — 「結婚」の写真素材4966005件無料イラスト画像、商用利用可・Web・SNS・DTP）、エターナルムービー（liferom.wedding/crop-photo — ムービー切り抜き写真無料対応無制限）、guestpix（guestpix.com/weddings-off — 結婚式手軽に写真や動画を共有GUESTPIX QRコード式ゲストブック）、Google Play結婚式フォトエディター（結婚式の写真を変換ユニークにする写真アプリ）、Nikon（nij.nikon.com — 写真でリール動画を作ろうInstagramショートムービー機能）、Instagram piary_inst（前撮り結婚式当日大活躍 撮影指示書テンプレートCanva）、photoshushu.net（結婚式リアルタイム写真共有 フォトシュシュゲスト参加型演出）、ウェディングニュース（weddingnews.jp — Canvaで簡単DIYオリジナルフォトサイン5種類テンプレート）を表示。ほとんどのjaツールはリールテンプレート＋手動切り抜き。WeddingAI.videoは唯一の9:16/1:1/4:5/4:3/3:2アスペクト比 + 中央オフセット自動切り抜き + 結婚式特化9モデル + 11言語 + 9.9€動画同じワークフロー :",
   "tools.crop-wedding-photo-for-reels.th_text.tool.1a2b3c4d": "ツール",
@@ -65309,4 +65309,10 @@
   "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "写真の上のテキストを直接ドラッグすると動かせます。この位置はバッチ内のすべての写真に適用されます。"
 ,
   "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "位置をリセット"
+,
+  "tools.wedding-photo-collage.small_text.free_placement_hint.7q4v2m8x": "写真をクリックすると選択できます。別のセルへドラッグすると 2 枚が入れ替わり、セルの中でドラッグすれば切り抜き位置を調整でき、選択した写真の上でホイールを操作すると拡大できます。"
+,
+  "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "選択した写真を拡大"
+,
+  "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "レイアウトをリセット"
 }

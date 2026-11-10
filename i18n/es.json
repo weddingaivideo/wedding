@@ -41955,7 +41955,7 @@
   "tools.wedding-photo-collage.td_text.unlimited_manual.5m6n7o8p": "Ilimitado, manual",
   "tools.wedding-photo-collage.td_text.png_jpg_share.9q0r1s2t": "PNG + JPG + compartir",
   "tools.wedding-photo-collage.td_text.not_offered.3u4v5w6x": "No ofrecido",
-  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "La mayoría de creadores de collage requieren arrastrar manualmente cada foto a una celda. WeddingAI.video rellena la cuadrícula por ti — sin arrastrar — y coloca las fotos en 6 diseños listos para usar (2×2, 2×3, 3×3, 3×4, tira horizontal, tira vertical). El mismo collage también funciona como portada de capítulo en el video de boda — impreso o en pantalla, tus fotos permanecen organizadas. Exporta PNG/PDF/4K, imprime o comparte por enlace; 11 idiomas para captions.",
+  "tools.wedding-photo-collage.p_text.most_collage_makers_require_yo.5s6t7u8v": "La mayoría de los generadores de collages te obligan a arrastrar manualmente cada foto a una celda de la cuadrícula. WeddingAI.video llena la cuadrícula por ti con 6 diseños listos para usar (2×2, 2×3, 3×3, 3×4, tira horizontal, tira vertical) — y aun así puedes arrastrar: suelta una foto sobre otra celda para intercambiarlas, arrastra dentro de una celda para recolocar el recorte y usa la rueda sobre la foto seleccionada para ampliar una sola foto sin tocar las demás. El mismo collage también sirve de portada de capítulo para el vídeo de boda con IA: impreso o en pantalla, tus fotos quedan ordenadas. Exporta PNG/PDF/4K, imprime o comparte por enlace; 11 idiomas para los pies de foto.",
   "tools.wedding-photo-collage.td_text.png_pdf_share.1i2j3k4l": "PNG + PDF + compartir",
   "tools.wedding-photo-collage.td_text.not_offered.5m6n7o8p": "No ofrecido",
   "tools.wedding-photo-collage.td_text.pi7.9q0r1s2t": "Pi7 Collage (collage.pi7.org, más de 100 plantillas)",
@@ -63099,4 +63099,10 @@
   "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "Arrastra el texto directamente sobre la foto para moverlo: la posición se aplica a todas las fotos del lote."
 ,
   "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "Restablecer posición"
+,
+  "tools.wedding-photo-collage.small_text.free_placement_hint.7q4v2m8x": "Haz clic en una foto para seleccionarla. Arrástrala sobre otra celda para intercambiar las dos, arrastra dentro de una celda para recolocar el recorte y usa la rueda sobre la foto seleccionada para ampliarla."
+,
+  "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "Ampliar la foto seleccionada"
+,
+  "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "Restablecer el diseño"
 }
