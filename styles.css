@@ -2411,12 +2411,21 @@ a.case-img-link {
     margin-bottom: 0.75rem;
 }
 
+/* Wide tables live inside a .table-scroll wrapper.
+   The wrapper is the scroll container, NOT the table: a `display:block`
+   table shrink-wraps its inner anonymous table box to the content width,
+   so the table stops filling 100% of its column and the element's own
+   background paints the leftover width as a blank white column. */
 .comparison-table, .full-pricing-table {
     width: 100%;
     max-width: 100%;
+    min-width: max-content;
     border-collapse: collapse;
     margin: 1.5rem 0;
-    display: block;
+}
+
+.table-scroll {
+    max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }

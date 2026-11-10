@@ -36,7 +36,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
-    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles.min.css?v=3.40">
     <link rel="stylesheet" href="/styles/i18n.css">
 <script defer src="/js/main.min.js?v=3.22"></script>
     <style>
@@ -54,7 +54,7 @@
         .pricing-tier .btn { width: 100%; text-align: center; }
 
         .full-pricing-table { width: 100%; border-collapse: collapse; margin: var(--spacing-xl) 0; background: var(--color-white); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
-        .full-pricing-table thead { background: var(--color-secondary); color: var(--color-white); }
+        .full-pricing-table thead th { background: var(--color-secondary); color: var(--color-white); }
         .full-pricing-table th, .full-pricing-table td { padding: 0.875rem 1rem; text-align: left; border-bottom: 1px solid var(--color-border); }
         .full-pricing-table th { font-weight: 700; font-size: 0.875rem; letter-spacing: 0.05em; }
         .full-pricing-table td { font-size: 0.9375rem; }
@@ -195,6 +195,7 @@ if ('serviceWorker' in navigator) {
                 <p  class="section-intro" data-i18n="pricing.p_text.every_project_is_quoted_individually_bas.48f59c6e">Every project is quoted individually based on footage length, complexity, and turnaround.</p>
             </header>
 
+            <div class="table-scroll">
             <table class="full-pricing-table">
                 <thead>
                     <tr>
@@ -256,6 +257,7 @@ if ('serviceWorker' in navigator) {
                     </tr>
                 </tbody>
             </table>
+            </div>
 
             <p  style="text-align:center;color:var(--color-text-light);font-size:.875rem;margin-top:var(--spacing-md);" data-i18n="pricing.p_text.all_prices_in_usd_international_payment.5544efa2">All prices in USD. International payment accepted. EU/UK customers see equivalent pricing in local currency on the quote.</p>
         </div>
@@ -329,6 +331,7 @@ if ('serviceWorker' in navigator) {
                 <h2 data-i18n="pricing.h2_text.why_9_9_beats_free_ai_wedding_video_maker.d4e5f6a7">Why $9.9 Beats Free AI Wedding Video Makers</h2>
                 <p class="section-intro" data-i18n="pricing.p_text.google_serps_for_free_ai_wedding_video.07a1b2c3">Google SERPs for &ldquo;free AI wedding video maker&rdquo; surface Canva, ZSky AI, Vidpex AI, and Pollo AI &mdash; all free, all with trade-offs. Here&rsquo;s what you actually get when you pay $9.9.</p>
             </header>
+            <div class="table-scroll">
             <table class="full-pricing-table" style="margin-top: var(--spacing-md);">
                 <thead>
                     <tr>
@@ -375,6 +378,7 @@ if ('serviceWorker' in navigator) {
                     </tr>
                 </tbody>
             </table>
+            </div>
             <p style="margin-top: var(--spacing-md); color: var(--color-text-light); font-size: 0.9375rem;" data-i18n="pricing.p_text.based_on_google_serp_for_free_ai_wedding.7b8c9d0e">Based on Google SERP for &ldquo;free AI wedding video maker no watermark&rdquo; (Sep 2026) &mdash; Canva, ZSky AI, Vidpex AI, Pollo AI. Comparison shows typical trade-offs; specific competitor features may change.</p>
         </div>
     </section>
@@ -412,85 +416,87 @@ if ('serviceWorker' in navigator) {
             </details>
         </div>
     
-<section class="section serp-comparison-section" data-i18n="pricing.serp_comparison.section" id="pricing-serp_comparison-serp-comparison">
+<section class="section serp-comparison-section" id="pricing-serp_comparison-serp-comparison">
   <div class="container" style="max-width: 1080px;">
     <header class="section-header">
-      <h2 data-i18n="pricing.serp_comparison.h2"></h2>
-      <p data-i18n="pricing.serp_comparison.p_text"></p>
+      <h2 data-i18n="pricing.serp_comparison.h2">AI Wedding Video Price Comparison: WeddingAI.video vs Traditional Videographer vs AI Tools</h2>
+      <p data-i18n="pricing.serp_comparison.p_text">Google SERPs (October 2025) for 'AI wedding video price cost vs videographer' show: traditional wedding videographers $2000-5000+ (The Knot / Reddit r/weddingvideography), YouTube tutorials on wedding film pricing, Reddit discussions on AI vs videographer cost. Most couples spend $3000-8000 on a wedding videographer for 8-12 hours coverage + 4-6 minute highlight film. WeddingAI.video offers a 60-90s cinematic film from 10-50 photos for from $9.9 single payment — 99% cost saving vs traditional videographer :</p>
     </header>
     <div class="comparison-table-wrap">
-      <table class="comparison-table" data-i18n="pricing.serp_comparison.table">
+      <div class="table-scroll">
+      <table class="comparison-table">
         <thead>
           <tr>
-            <th data-i18n="pricing.serp_comparison.th.tool"></th>
-            <th data-i18n="pricing.serp_comparison.th.style"></th>
-            <th data-i18n="pricing.serp_comparison.th.languages"></th>
-            <th data-i18n="pricing.serp_comparison.th.output"></th>
-            <th data-i18n="pricing.serp_comparison.th.price"></th>
-            <th data-i18n="pricing.serp_comparison.th.workflow"></th>
+            <th data-i18n="pricing.serp_comparison.th.tool">Option</th>
+            <th data-i18n="pricing.serp_comparison.th.style">Output</th>
+            <th data-i18n="pricing.serp_comparison.th.languages">Hours/Coverage</th>
+            <th data-i18n="pricing.serp_comparison.th.output">Languages</th>
+            <th data-i18n="pricing.serp_comparison.th.price">Price</th>
+            <th data-i18n="pricing.serp_comparison.th.workflow">Turnaround</th>
           </tr>
         </thead>
         <tbody>
           <tr class="row-weddingai">
-            <td data-i18n="pricing.serp_comparison.td.weddingai"></td>
-            <td data-i18n="pricing.serp_comparison.td.style_weddingai"></td>
-            <td data-i18n="pricing.serp_comparison.td.languages_weddingai"></td>
-            <td data-i18n="pricing.serp_comparison.td.output_weddingai"></td>
-            <td data-i18n="pricing.serp_comparison.td.price_weddingai"></td>
-            <td data-i18n="pricing.serp_comparison.td.workflow_weddingai"></td>
+            <td data-i18n="pricing.serp_comparison.td.weddingai"><strong>WeddingAI.video</strong></td>
+            <td data-i18n="pricing.serp_comparison.td.style_weddingai"><strong>60-90s cinematic film from photos</strong></td>
+            <td data-i18n="pricing.serp_comparison.td.languages_weddingai"><strong>No on-site coverage needed</strong></td>
+            <td data-i18n="pricing.serp_comparison.td.output_weddingai"><strong>11 languages</strong></td>
+            <td data-i18n="pricing.serp_comparison.td.price_weddingai"><strong>From $9.9</strong></td>
+            <td data-i18n="pricing.serp_comparison.td.workflow_weddingai"><strong>48 hours</strong></td>
           </tr>
           <tr>
-            <td data-i18n="pricing.serp_comparison.td.trad_videographer"></td>
-            <td data-i18n="pricing.serp_comparison.td.style_trad_videographer"></td>
-            <td data-i18n="pricing.serp_comparison.td.languages_trad_videographer"></td>
-            <td data-i18n="pricing.serp_comparison.td.output_trad_videographer"></td>
-            <td data-i18n="pricing.serp_comparison.td.price_trad_videographer"></td>
-            <td data-i18n="pricing.serp_comparison.td.workflow_trad_videographer"></td>
+            <td data-i18n="pricing.serp_comparison.td.trad_videographer">Traditional Videographer</td>
+            <td data-i18n="pricing.serp_comparison.td.style_trad_videographer">4-6 minute highlight + 8-12 hour raw footage</td>
+            <td data-i18n="pricing.serp_comparison.td.languages_trad_videographer">8-12 hours on-site coverage</td>
+            <td data-i18n="pricing.serp_comparison.td.output_trad_videographer">English only</td>
+            <td data-i18n="pricing.serp_comparison.td.price_trad_videographer">$3000-8000</td>
+            <td data-i18n="pricing.serp_comparison.td.workflow_trad_videographer">3-6 months editing</td>
           </tr>
           <tr>
-            <td data-i18n="pricing.serp_comparison.td.ai_template"></td>
-            <td data-i18n="pricing.serp_comparison.td.style_ai_template"></td>
-            <td data-i18n="pricing.serp_comparison.td.languages_ai_template"></td>
-            <td data-i18n="pricing.serp_comparison.td.output_ai_template"></td>
-            <td data-i18n="pricing.serp_comparison.td.price_ai_template"></td>
-            <td data-i18n="pricing.serp_comparison.td.workflow_ai_template"></td>
+            <td data-i18n="pricing.serp_comparison.td.ai_template">AI Template Tools (Canva AI / InVideo)</td>
+            <td data-i18n="pricing.serp_comparison.td.style_ai_template">30-60s template clip</td>
+            <td data-i18n="pricing.serp_comparison.td.languages_ai_template">No on-site coverage</td>
+            <td data-i18n="pricing.serp_comparison.td.output_ai_template">Limited multilingual</td>
+            <td data-i18n="pricing.serp_comparison.td.price_ai_template">$0-30/mo subscription</td>
+            <td data-i18n="pricing.serp_comparison.td.workflow_ai_template">5-30 minutes</td>
           </tr>
           <tr>
-            <td data-i18n="pricing.serp_comparison.td.diy_phone"></td>
-            <td data-i18n="pricing.serp_comparison.td.style_diy_phone"></td>
-            <td data-i18n="pricing.serp_comparison.td.languages_diy_phone"></td>
-            <td data-i18n="pricing.serp_comparison.td.output_diy_phone"></td>
-            <td data-i18n="pricing.serp_comparison.td.price_diy_phone"></td>
-            <td data-i18n="pricing.serp_comparison.td.workflow_diy_phone"></td>
+            <td data-i18n="pricing.serp_comparison.td.diy_phone">DIY Phone Video</td>
+            <td data-i18n="pricing.serp_comparison.td.style_diy_phone">Raw phone footage</td>
+            <td data-i18n="pricing.serp_comparison.td.languages_diy_phone">Self-coverage</td>
+            <td data-i18n="pricing.serp_comparison.td.output_diy_phone">No language support</td>
+            <td data-i18n="pricing.serp_comparison.td.price_diy_phone">$0</td>
+            <td data-i18n="pricing.serp_comparison.td.workflow_diy_phone">Self-edit hours</td>
           </tr>
           <tr>
-            <td data-i18n="pricing.serp_comparison.td.hybrid_studio"></td>
-            <td data-i18n="pricing.serp_comparison.td.style_hybrid_studio"></td>
-            <td data-i18n="pricing.serp_comparison.td.languages_hybrid_studio"></td>
-            <td data-i18n="pricing.serp_comparison.td.output_hybrid_studio"></td>
-            <td data-i18n="pricing.serp_comparison.td.price_hybrid_studio"></td>
-            <td data-i18n="pricing.serp_comparison.td.workflow_hybrid_studio"></td>
+            <td data-i18n="pricing.serp_comparison.td.hybrid_studio">Hybrid Studio (Animator + AI)</td>
+            <td data-i18n="pricing.serp_comparison.td.style_hybrid_studio">30-60s animated clip</td>
+            <td data-i18n="pricing.serp_comparison.td.languages_hybrid_studio">No on-site coverage</td>
+            <td data-i18n="pricing.serp_comparison.td.output_hybrid_studio">English only</td>
+            <td data-i18n="pricing.serp_comparison.td.price_hybrid_studio">$200-800</td>
+            <td data-i18n="pricing.serp_comparison.td.workflow_hybrid_studio">1-2 weeks</td>
           </tr>
           <tr>
-            <td data-i18n="pricing.serp_comparison.td.freelance_editor"></td>
-            <td data-i18n="pricing.serp_comparison.td.style_freelance_editor"></td>
-            <td data-i18n="pricing.serp_comparison.td.languages_freelance_editor"></td>
-            <td data-i18n="pricing.serp_comparison.td.output_freelance_editor"></td>
-            <td data-i18n="pricing.serp_comparison.td.price_freelance_editor"></td>
-            <td data-i18n="pricing.serp_comparison.td.workflow_freelance_editor"></td>
+            <td data-i18n="pricing.serp_comparison.td.freelance_editor">Freelance Video Editor</td>
+            <td data-i18n="pricing.serp_comparison.td.style_freelance_editor">4-6 minute edited film</td>
+            <td data-i18n="pricing.serp_comparison.td.languages_freelance_editor">Self-shot raw footage</td>
+            <td data-i18n="pricing.serp_comparison.td.output_freelance_editor">English only</td>
+            <td data-i18n="pricing.serp_comparison.td.price_freelance_editor">$500-1500</td>
+            <td data-i18n="pricing.serp_comparison.td.workflow_freelance_editor">2-4 weeks</td>
           </tr>
           <tr>
-            <td data-i18n="pricing.serp_comparison.td.content_creator"></td>
-            <td data-i18n="pricing.serp_comparison.td.style_content_creator"></td>
-            <td data-i18n="pricing.serp_comparison.td.languages_content_creator"></td>
-            <td data-i18n="pricing.serp_comparison.td.output_content_creator"></td>
-            <td data-i18n="pricing.serp_comparison.td.price_content_creator"></td>
-            <td data-i18n="pricing.serp_comparison.td.workflow_content_creator"></td>
+            <td data-i18n="pricing.serp_comparison.td.content_creator">Content Creator / TikToker</td>
+            <td data-i18n="pricing.serp_comparison.td.style_content_creator">15-60s social clips</td>
+            <td data-i18n="pricing.serp_comparison.td.languages_content_creator">Self-coverage</td>
+            <td data-i18n="pricing.serp_comparison.td.output_content_creator">English captions</td>
+            <td data-i18n="pricing.serp_comparison.td.price_content_creator">$100-500</td>
+            <td data-i18n="pricing.serp_comparison.td.workflow_content_creator">1-2 weeks</td>
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
-    <p class="serp-trailing" data-i18n="pricing.serp_comparison.p_trailing"></p>
+    <p class="serp-trailing" data-i18n="pricing.serp_comparison.p_trailing">Most couples overspend on wedding videography when AI tools like WeddingAI.video deliver cinematic 60-90s films for $9.9 (99% cost saving vs $3000-8000 videographer).</p>
   </div>
 </section>
 

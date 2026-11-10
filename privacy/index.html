@@ -47,7 +47,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="WeddingAI.video">
     
-    <link rel="stylesheet" href="/styles.min.css?v=3.38">
+    <link rel="stylesheet" href="/styles.min.css?v=3.40">
     <link rel="stylesheet" href="/styles/i18n.css">
 <script defer src="/js/main.min.js?v=3.22"></script>
     <style>
@@ -280,85 +280,87 @@ if ('serviceWorker' in navigator) {
     </script>
 
     
-<section class="section serp-comparison-section" data-i18n="privacy.serp_comparison.section" id="privacy-serp_comparison-serp-comparison">
+<section class="section serp-comparison-section" id="privacy-serp_comparison-serp-comparison">
   <div class="container" style="max-width: 1080px;">
     <header class="section-header">
-      <h2 data-i18n="privacy.serp_comparison.h2"></h2>
-      <p data-i18n="privacy.serp_comparison.p_text"></p>
+      <h2 data-i18n="privacy.serp_comparison.h2">AI Wedding Video Privacy Comparison: WeddingAI.video vs Other AI Tools</h2>
+      <p data-i18n="privacy.serp_comparison.p_text">Google SERPs for AI wedding video privacy: GDPR compliance, CCPA, data retention policies, face data handling. WeddingAI.video is GDPR-compliant + CCPA-compliant with explicit data deletion on request + no face data retention :</p>
     </header>
     <div class="comparison-table-wrap">
-      <table class="comparison-table" data-i18n="privacy.serp_comparison.table">
+      <div class="table-scroll">
+      <table class="comparison-table">
         <thead>
           <tr>
-            <th data-i18n="privacy.serp_comparison.th.tool"></th>
-            <th data-i18n="privacy.serp_comparison.th.style"></th>
-            <th data-i18n="privacy.serp_comparison.th.languages"></th>
-            <th data-i18n="privacy.serp_comparison.th.output"></th>
-            <th data-i18n="privacy.serp_comparison.th.price"></th>
-            <th data-i18n="privacy.serp_comparison.th.workflow"></th>
+            <th data-i18n="privacy.serp_comparison.th.tool">Tool</th>
+            <th data-i18n="privacy.serp_comparison.th.style">Style</th>
+            <th data-i18n="privacy.serp_comparison.th.languages">Languages</th>
+            <th data-i18n="privacy.serp_comparison.th.output">Output</th>
+            <th data-i18n="privacy.serp_comparison.th.price">Price</th>
+            <th data-i18n="privacy.serp_comparison.th.workflow">Workflow</th>
           </tr>
         </thead>
         <tbody>
           <tr class="row-weddingai">
-            <td data-i18n="privacy.serp_comparison.td.weddingai"></td>
-            <td data-i18n="privacy.serp_comparison.td.style_weddingai"></td>
-            <td data-i18n="privacy.serp_comparison.td.languages_weddingai"></td>
-            <td data-i18n="privacy.serp_comparison.td.output_weddingai"></td>
-            <td data-i18n="privacy.serp_comparison.td.price_weddingai"></td>
-            <td data-i18n="privacy.serp_comparison.td.workflow_weddingai"></td>
+            <td data-i18n="privacy.serp_comparison.td.weddingai"><strong>WeddingAI.video</strong></td>
+            <td data-i18n="privacy.serp_comparison.td.style_weddingai"><strong>GDPR + CCPA + explicit deletion</strong></td>
+            <td data-i18n="privacy.serp_comparison.td.languages_weddingai"><strong>11 languages + privacy docs</strong></td>
+            <td data-i18n="privacy.serp_comparison.td.output_weddingai"><strong>No face data retention</strong></td>
+            <td data-i18n="privacy.serp_comparison.td.price_weddingai"><strong>Free sample</strong></td>
+            <td data-i18n="privacy.serp_comparison.td.workflow_weddingai"><strong>Transparent privacy policy</strong></td>
           </tr>
           <tr>
-            <td data-i18n="privacy.serp_comparison.td.runwayml"></td>
-            <td data-i18n="privacy.serp_comparison.td.style_runwayml"></td>
-            <td data-i18n="privacy.serp_comparison.td.languages_runwayml"></td>
-            <td data-i18n="privacy.serp_comparison.td.output_runwayml"></td>
-            <td data-i18n="privacy.serp_comparison.td.price_runwayml"></td>
-            <td data-i18n="privacy.serp_comparison.td.workflow_runwayml"></td>
+            <td data-i18n="privacy.serp_comparison.td.runwayml">RunwayML</td>
+            <td data-i18n="privacy.serp_comparison.td.style_runwayml">GDPR + ToS</td>
+            <td data-i18n="privacy.serp_comparison.td.languages_runwayml">English</td>
+            <td data-i18n="privacy.serp_comparison.td.output_runwayml">Face data retained for training</td>
+            <td data-i18n="privacy.serp_comparison.td.price_runwayml">$12/mo</td>
+            <td data-i18n="privacy.serp_comparison.td.workflow_runwayml">Generic</td>
           </tr>
           <tr>
-            <td data-i18n="privacy.serp_comparison.td.pika"></td>
-            <td data-i18n="privacy.serp_comparison.td.style_pika"></td>
-            <td data-i18n="privacy.serp_comparison.td.languages_pika"></td>
-            <td data-i18n="privacy.serp_comparison.td.output_pika"></td>
-            <td data-i18n="privacy.serp_comparison.td.price_pika"></td>
-            <td data-i18n="privacy.serp_comparison.td.workflow_pika"></td>
+            <td data-i18n="privacy.serp_comparison.td.pika">Pika Labs</td>
+            <td data-i18n="privacy.serp_comparison.td.style_pika">GDPR + ToS</td>
+            <td data-i18n="privacy.serp_comparison.td.languages_pika">English</td>
+            <td data-i18n="privacy.serp_comparison.td.output_pika">Face data retained</td>
+            <td data-i18n="privacy.serp_comparison.td.price_pika">Credit-based</td>
+            <td data-i18n="privacy.serp_comparison.td.workflow_pika">Generic</td>
           </tr>
           <tr>
-            <td data-i18n="privacy.serp_comparison.td.heygen"></td>
-            <td data-i18n="privacy.serp_comparison.td.style_heygen"></td>
-            <td data-i18n="privacy.serp_comparison.td.languages_heygen"></td>
-            <td data-i18n="privacy.serp_comparison.td.output_heygen"></td>
-            <td data-i18n="privacy.serp_comparison.td.price_heygen"></td>
-            <td data-i18n="privacy.serp_comparison.td.workflow_heygen"></td>
+            <td data-i18n="privacy.serp_comparison.td.heygen">HeyGen</td>
+            <td data-i18n="privacy.serp_comparison.td.style_heygen">GDPR + ToS</td>
+            <td data-i18n="privacy.serp_comparison.td.languages_heygen">English</td>
+            <td data-i18n="privacy.serp_comparison.td.output_heygen">Avatar data retained</td>
+            <td data-i18n="privacy.serp_comparison.td.price_heygen">$29/mo</td>
+            <td data-i18n="privacy.serp_comparison.td.workflow_heygen">Generic</td>
           </tr>
           <tr>
-            <td data-i18n="privacy.serp_comparison.td.synthesia"></td>
-            <td data-i18n="privacy.serp_comparison.td.style_synthesia"></td>
-            <td data-i18n="privacy.serp_comparison.td.languages_synthesia"></td>
-            <td data-i18n="privacy.serp_comparison.td.output_synthesia"></td>
-            <td data-i18n="privacy.serp_comparison.td.price_synthesia"></td>
-            <td data-i18n="privacy.serp_comparison.td.workflow_synthesia"></td>
+            <td data-i18n="privacy.serp_comparison.td.synthesia">Synthesia</td>
+            <td data-i18n="privacy.serp_comparison.td.style_synthesia">GDPR + ToS</td>
+            <td data-i18n="privacy.serp_comparison.td.languages_synthesia">English</td>
+            <td data-i18n="privacy.serp_comparison.td.output_synthesia">Avatar data retained</td>
+            <td data-i18n="privacy.serp_comparison.td.price_synthesia">$22/mo</td>
+            <td data-i18n="privacy.serp_comparison.td.workflow_synthesia">Generic</td>
           </tr>
           <tr>
-            <td data-i18n="privacy.serp_comparison.td.canva"></td>
-            <td data-i18n="privacy.serp_comparison.td.style_canva"></td>
-            <td data-i18n="privacy.serp_comparison.td.languages_canva"></td>
-            <td data-i18n="privacy.serp_comparison.td.output_canva"></td>
-            <td data-i18n="privacy.serp_comparison.td.price_canva"></td>
-            <td data-i18n="privacy.serp_comparison.td.workflow_canva"></td>
+            <td data-i18n="privacy.serp_comparison.td.canva">Canva</td>
+            <td data-i18n="privacy.serp_comparison.td.style_canva">GDPR + CCPA + ToS</td>
+            <td data-i18n="privacy.serp_comparison.td.languages_canva">Limited</td>
+            <td data-i18n="privacy.serp_comparison.td.output_canva">Content data retained</td>
+            <td data-i18n="privacy.serp_comparison.td.price_canva">$12.99/mo</td>
+            <td data-i18n="privacy.serp_comparison.td.workflow_canva">Generic</td>
           </tr>
           <tr>
-            <td data-i18n="privacy.serp_comparison.td.adobe"></td>
-            <td data-i18n="privacy.serp_comparison.td.style_adobe"></td>
-            <td data-i18n="privacy.serp_comparison.td.languages_adobe"></td>
-            <td data-i18n="privacy.serp_comparison.td.output_adobe"></td>
-            <td data-i18n="privacy.serp_comparison.td.price_adobe"></td>
-            <td data-i18n="privacy.serp_comparison.td.workflow_adobe"></td>
+            <td data-i18n="privacy.serp_comparison.td.adobe">Adobe</td>
+            <td data-i18n="privacy.serp_comparison.td.style_adobe">GDPR + CCPA + ToS</td>
+            <td data-i18n="privacy.serp_comparison.td.languages_adobe">Limited</td>
+            <td data-i18n="privacy.serp_comparison.td.output_adobe">Content data retained</td>
+            <td data-i18n="privacy.serp_comparison.td.price_adobe">$9.99+/mo</td>
+            <td data-i18n="privacy.serp_comparison.td.workflow_adobe">Generic</td>
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
-    <p class="serp-trailing" data-i18n="privacy.serp_comparison.p_trailing"></p>
+    <p class="serp-trailing" data-i18n="privacy.serp_comparison.p_trailing">WeddingAI.video has explicit GDPR + CCPA compliance with no face data retention + free sample + transparent privacy policy vs competitors that retain face data for training.</p>
   </div>
 </section>
 
