@@ -629,6 +629,45 @@ if (Test-Path $shardScript) {
     Warn "scripts\verify-i18n-shards.py not found; skipping i18n shard freshness check"
 }
 
+# ---------- 9g. Self-hosted web fonts ----------
+# The site names 'Playfair Display', 'Inter', 'Great Vibes' and 'Montserrat'
+# in its stylesheet and in the three design templates. Until 2026-11-12 NONE
+# of them ever loaded: there was no @font-face, no font file and no Google
+# Fonts <link>, and the CSP's `font-src 'self' data:` never allowed Google
+# Fonts either - so every one of those names fell through to the next entry
+# in the stack. The romantic template therefore rendered in Comic Sans on
+# Windows, and the exported PNG was different on every machine.
+#
+# That failure is INVISIBLE: a missing @font-face rule or a 404 on the woff2
+# produces a page that still renders, still returns 200 and still looks
+# like a website - in Georgia. Nothing else in this gate could see it.
+#
+# The step is FATAL: without the fonts the site renders in the fallback and
+# the printed invitation does not match the screen.
+Write-Host "[9g/9] Self-hosted web fonts"
+$fontScript = "$root\scripts\vendor-web-fonts.py"
+if (Test-Path $fontScript) {
+    $py = $null
+    foreach ($candidate in @("python", "python3", "py")) {
+        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($cmd) { $py = $candidate; break }
+    }
+    if ($py) {
+        $fontOutput = & $py $fontScript --verify 2>&1
+        $fontExit = $LASTEXITCODE
+        foreach ($line in ($fontOutput | Select-Object -Last 8)) { Write-Host "  $($line -replace '^\s*','')" }
+        if ($fontExit -eq 0) {
+            Pass "the self-hosted fonts are present, complete and referenced by both stylesheets"
+        } else {
+            Fail "The self-hosted web fonts are broken or missing. Run 'python scripts/vendor-web-fonts.py' to (re)install them and 'python scripts/vendor-web-fonts.py --verify' to check. Without them the whole site falls back to Georgia and the design tools export the fallback face."
+        }
+    } else {
+        Warn "Python not found in PATH; skipping web font check. Install Python or run 'python scripts/vendor-web-fonts.py --verify' manually."
+    }
+} else {
+    Warn "scripts\vendor-web-fonts.py not found; skipping web font check"
+}
+
 # ---------- 9e. hreflang graph ----------
 # Every page must advertise exactly one alternate per language (11) plus
 # x-default, and every href must match its hreflang.

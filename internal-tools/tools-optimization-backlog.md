@@ -296,9 +296,11 @@ These are not preferences; they are what the repo actually allows.
 
 1. **CSP** — `script-src 'self' 'nonce-…'` (`functions/_middleware.js:77`) plus a
    short allowlist. **No CDN script can be loaded.** A library must be
-   self-hosted under `/js/`. There is **no `'wasm-unsafe-eval'`** in either
-   `buildCsp()` or `_headers`, so **every WebAssembly library is blocked**
-   until that is added to *both* places.
+   self-hosted under `/js/`. **`'wasm-unsafe-eval'` is present** in both
+   `buildCsp()` and `_headers` (added 2026-11-09), so a WebAssembly library
+   compiles; `'unsafe-eval'` is still absent. `worker-src 'self' blob:` is
+   explicit as well — `default-src 'self'` does **not** cover it, and
+   without it pica silently degrades to its JS resampler.
 2. **No build step** — no `package.json`, no bundler. A library needs a
    UMD/global build, or an ESM file loaded with `<script type="module">`.
 3. **11 languages** — tool pages are localized through `data-i18n`; any library
@@ -311,6 +313,118 @@ These are not preferences; they are what the repo actually allows.
 file extension and for `/i18n/`, `/api/`, `/admin/`. So **static assets and
 shard fetches do not consume the Workers Free quota** — only HTML page views
 and API calls do.
+
+---
+
+## EXECUTION STATUS — fifth pass: §2.16 the fonts were never real, §2.17 the PDF had one page size, and the ffmpeg.wasm route is closed
+
+Three items, all of them consequences of the audit above rather than new
+ideas.
+
+### §2.16 — the site's fonts have never loaded
+
+`styles.css` declared `'Playfair Display'` and `'Inter'`; the three design
+templates declared `'Great Vibes'` and `'Montserrat'`. There was no
+`@font-face`, no font file and no Google Fonts `<link>`, and the CSP's
+`font-src 'self' data:` never allowed Google Fonts either. **Every one of
+those names fell through to the next entry in the stack.**
+
+The cost was not "the headings look a bit different" — it was that the
+romantic template fell back to `'Apple Chancery'` (macOS only) and then to
+`cursive`, which is **Comic Sans on Windows**. The same template therefore
+produced a **different PNG on every operating system**, and the preview was
+never the export.
+
+**What landed**
+
+| | |
+|---|---|
+| fonts | 13 woff2 + 4 OFL licences under `/fonts/<family>-5.3.0/` (Playfair Display, Inter, Montserrat variable; Great Vibes static) |
+| source | `@fontsource-variable/*` and `@fontsource/*` (OFL-1.1), extracted by `scripts/vendor-web-fonts.py` (idempotent) |
+| CSS | 13 `@font-face` rules in `styles.css` **and** in `styles.min.css`, `font-display: swap`, `unicode-range` from fontsource's own CSS |
+| gate | `fontsReady(families, text)` in `js/tools/common.js`; the three design tools await it before the first draw and again before the export |
+| verify | `scripts/verify-web-fonts.py` — real browser, live CSP, `measureText` against the same stack minus the webfont |
+
+Cost: **$0**, and the fonts never leave the origin. The subset system means
+an English page pulls ~135 KB, not the 558 KB on disk.
+
+**arab / th / hi / ja are not covered** — no OFL family exists for those
+writing systems. Those pages use the system face and the canvas uses the
+**same** stack, so the page and the paper still agree.
+
+**Two traps worth recording**
+
+* `styles.min.css` is **not** regenerated: clean-css 5.6.3 drops
+  `.hero-bg .hero-video` (the rule that hides the hero video for visitors
+  with vestibular disorders) and rewrites 77 other rules. The script only
+  INSERTS the `@font-face` block and leaves every other byte alone. The
+  reason the rule disappeared the first time was a stray `};` in
+  `styles.css:1498`, which clean-css swallowed — fixed in the source.
+* `document.fonts.check()` is **false for a family the page does not
+  render**. A test that asserts "this font was not fetched" has to switch
+  to the template that uses it first — and the browser only downloads a
+  font that is really used.
+
+### §2.17 — one PDF document, many page sizes
+
+`downloadPdfPages()` had a single `opts.pageWidth` / `opts.pageHeight` for
+the whole document. That is fine for the photo album and wrong for a
+wedding stationery pack, where an invitation is 5×7 in, a place card is
+3.5×2 in and a poster is 18×24 in **in the same file**.
+
+`js/tools/common.js` now exposes `buildPdfPages(items, opts)` (returns the
+jsPDF document, **no download**) and `downloadPdfPages()` (builds it and
+saves it), and a page factory may return
+`{ canvas, pageWidth, pageHeight }` to carry its own size. The legacy
+canvas-only shape still works unchanged, so the album is untouched.
+
+**Two jsPDF traps, measured rather than assumed** (`scripts/verify-pdf-page-sizes.py`):
+
+* the **orientation argument OVERRIDES the size array** —
+  `addPage([5,7],'landscape')` really produces a 7×5 in page. The
+  orientation must be derived from the same two numbers that are handed to
+  jsPDF, and a square page is passed as portrait.
+* the **first page's size comes from the constructor**, not from
+  `addPage()`, so the constructor has to be told it — not the largest and
+  not the smallest.
+
+The verifier reads every `/MediaBox` out of the generated bytes and runs the
+OLD algorithm side by side as a control: a control that produced mixed
+sizes would mean the comparison proves nothing.
+
+### The ffmpeg.wasm route is closed
+
+Decided and measured: **any proposal that needs `SharedArrayBuffer` is
+out.** The ffmpeg.wasm documentation is explicit — the multi-threaded core
+needs SharedArrayBuffer, which needs a cross-origin isolated document.
+
+`internal-tools/coop-coep-probe.py` measures what that would cost **this**
+site, with the real AdSense and the real Clarity script:
+
+| | plain | `require-corp` | `credentialless` |
+|---|---|---|---|
+| `crossOriginIsolated` | false | **true** | **true** |
+| `SharedArrayBuffer` | absent | **present** | **present** |
+| `window.adsbygoogle` / `window.clarity` | true | true | true |
+| AdSense ad frame | 5 182 bytes | **0 bytes** | **0 bytes** |
+| Clarity resources | 8 entries | **2 entries** | 7 entries |
+
+The top-level scripts keep loading, so **nothing looks broken** — while the
+ad frame (the revenue product) transfers zero bytes and, under
+`require-corp`, Clarity's session script and collection frame are gone.
+`credentialless` keeps Clarity alive but still kills the ad frame, and
+**Safari does not implement the directive at all** (MDN: "No support").
+
+On top of that, `@ffmpeg/core@0.12.10` is **`GPL-2.0-or-later`** on npm and
+the ffmpeg.wasm-core repository ships `COPYING.GPLv2` / `COPYING.GPLv3` — a
+GPL core inside the site's own JS is a licence question for the whole site,
+not a detail. The single-threaded core needs no SharedArrayBuffer but is a
+~31 MB download with no hardware encode, against **mediabunny** (MPL-2.0,
+already vendored, WebCodecs hardware encode).
+
+**`Cross-Origin-Opener-Policy` / `Cross-Origin-Embedder-Policy` must never
+appear in `_headers` or in `buildCsp()`.** The site's video work goes through
+mediabunny (WebCodecs) or the browser's own `MediaRecorder`.
 
 ---
 
@@ -369,6 +483,8 @@ by grepping the shipped dist), so they cost 0 extra i18n work.
 | 2.13 | **EXIF read/keep/strip as a first-class option** | `exifr` is a small, dependency-free EXIF parser | Would let the compress tool *keep* EXIF instead of only documenting that it drops it |
 | 2.14 | **Target-size mode** | "Compress to exactly 2 MB" is what users actually ask for; today the control is a quality slider |
 | 2.15 | **DOM→PNG renderer** | ✅ **DONE (fourth pass)** — no renderer was added: the two copies of each renderer were **merged** instead (the album's thumbnail and export now share one renderer, the seating chart has one `CHART` object). `modern-screenshot` was rejected because the seating chart's preview has to stay interactive DOM; see the fourth pass above |
+| 2.16 | **Self-hosted web fonts + a canvas font gate** | ✅ **DONE (fifth pass)** — the site named 'Playfair Display', 'Inter', 'Great Vibes' and 'Montserrat' and **never loaded any of them** (no `@font-face`, no file, no Google Fonts `<link>`, and `font-src 'self' data:` forbade it). 13 OFL woff2 under `/fonts/`, `fontsReady()` in `common.js`, the three design tools await it before drawing AND before exporting. $0 — and the fonts never leave the origin |
+| 2.17 | **Per-page PDF sizes** | ✅ **DONE (fifth pass)** — `downloadPdfPages()` had ONE page size for the whole document, so a 5×7 in invitation and a 3.5×2 in place card could never be in the same file. `buildPdfPages()` now returns the document and a page factory may carry `{ canvas, pageWidth, pageHeight }`. The album's single-size path is unchanged. This is the prerequisite for a mixed-size stationery pack |
 
 > ✅ **2.5 – 2.9 were implemented on 2026-11-09** (execution status above).
 > Three corrections to the analysis above, found while building them:
@@ -462,6 +578,18 @@ download + `'wasm-unsafe-eval'` in the CSP**.
 no upload. Every server-side option below also breaks the "100 % client-side"
 copy (AGENTS.md) for no capability gain.
 
+> ⚠️ **ffmpeg.wasm is not an option on this site — decided and measured.**
+> The multi-threaded core needs `SharedArrayBuffer`, which needs a
+> cross-origin isolated document (`COOP: same-origin` + `COEP`). Those
+> headers are document-wide, and turning them on **kills the AdSense ad
+> frame (5 182 bytes → 0) and, under `require-corp`, the whole Clarity
+> collector — while every top-level script keeps loading, so nothing looks
+> broken.** `credentialless` saves Clarity but still kills the ad frame, and
+> Safari does not implement it at all. On top of that the core is
+> **`GPL-2.0-or-later`**. Numbers and method:
+> `internal-tools/coop-coep-probe.py`; reasoning: AGENTS.md,
+> "COOP/COEP is CLOSED on this site".
+
 | Service | Price (VERIFIED) | Free tier | Notes |
 |---|---|---|---|
 | **mediabunny (browser)** | **$0** | — | 706 KB ESM, WebCodecs hardware encode. **The right answer** |
@@ -496,6 +624,12 @@ copy (AGENTS.md) for no capability gain.
 ### 4.5–4.7 — fonts, CDN, observability, email
 
 #### 4.5 Fonts (the tools render text onto canvas, so fonts must load in the browser)
+
+> ✅ **DONE (fifth pass) — $0, and no third party at all.** The fonts are
+> self-hosted: 13 OFL woff2 under `/fonts/<family>-5.3.0/`, taken from the
+> `@fontsource*` packages. No CDN, no key, no request to another origin —
+> which also keeps the CSP's `font-src 'self' data:` untouched. See §2.16
+> above.
 
 | Service | Price (VERIFIED) | Notes |
 |---|---|---|
@@ -615,6 +749,11 @@ benefit is removing a cap that has never been hit.
    Tier 4. It is a real (if small) widening of the security posture, and it
    must land in **both** `functions/_middleware.js` `buildCsp()` **and**
    `_headers`.
+   → **RESOLVED 2026-11-09: it is in.** Both `buildCsp()` and `_headers`
+   carry `'wasm-unsafe-eval'` (and `worker-src 'self' blob:`), and
+   `internal-tools/pre-deploy-check.ps1` now FAILS if the keyword ever
+   disappears from either one. `'unsafe-eval'` is still absent, and nothing
+   needs it.
 2. **Are the tool pages allowed to carry ads?** 0 of 13 do today. The tools
    are the free, high-intent entry point and currently earn nothing — but
    they are also the pages that say "free, no signup" loudest.
@@ -639,3 +778,22 @@ benefit is removing a cap that has never been hit.
    question does not have to be answered.
 5. **Should the PDF claim be met or dropped?** Met = `jspdf` 410 KB.
    Dropped = $0 and a slightly weaker comparison table.
+6. **Which of the five new tool directions ships first?** The owner picked
+   five directions on 2026-11-12 — a wedding stationery pack (invitation /
+   place card / table card / poster / menu), PDF merge / split / reorder, a
+   photo contact sheet, GIF export, and video editing / format conversion.
+   The technical choice for each is already made and written up in
+   `internal-tools/candidate-tools-research.md`; the **order** is still open.
+   The dependencies are not symmetric:
+   - the **stationery pack** is now unblocked by §2.17 (mixed page sizes in
+     one PDF) and adds **no new dependency** — it reuses the canvas + jsPDF
+     pipeline that already exists;
+   - the **contact sheet** also adds no new dependency (canvas + jsPDF);
+   - **PDF merge / split / reorder** needs `@cantoo/pdf-lib` (the only
+     option that can open an encrypted PDF with a password) — but note that
+     `buildPdfPages()` now returns the jsPDF document, which is the seam a
+     merge tool needs;
+   - **GIF export** needs `gifenc` (22 KB, per-frame independent
+     quantisation);
+   - **video editing** reuses **mediabunny**, which is already vendored —
+     and ffmpeg.wasm is ruled out for good (see the fifth pass above).

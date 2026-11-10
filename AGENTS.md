@@ -2039,10 +2039,12 @@ file - fix the copy or add the button, do not leave the gap.
 
 - **CSP**: `script-src 'self' 'nonce-…'` plus a few allowlisted origins.
   **No CDN scripts are allowed** - a library must be self-hosted under `/js/`.
-  There is **no `'wasm-unsafe-eval'`** in either `functions/_middleware.js`
-  `buildCsp()` or `_headers`, so **WebAssembly libraries are blocked** until
-  that is added to both places. `default-src 'self'` covers `worker-src`, so
-  a same-origin Worker is allowed.
+  **`'wasm-unsafe-eval'` IS present** in both `functions/_middleware.js`
+  `buildCsp()` and `_headers` (added 2026-11-09), so a WebAssembly library
+  compiles; `'unsafe-eval'` is still absent, so no `eval()` / `new Function`.
+  `worker-src 'self' blob:` is explicit too - `default-src 'self'` does NOT
+  cover it, and the vendored libraries build their Worker from a `blob:`
+  URL (without it pica silently degrades to its JS resampler).
 - **No build step**: a library needs a UMD/global build (or an ESM file loaded
   with `<script type="module">`).
 - **11 languages**: a library with visible UI strings needs 11-language
@@ -2707,6 +2709,239 @@ files, not on the absence of an error:
 * end to end through the tool: the AVIF run downloads a real AVIF and
   the lossless-WebP run downloads a real lossless WebP, and **the file
   name matches the bytes**.
+
+## The album's photo order was a race, not a list (2026-11-12)
+
+`addPhotos()` in `tools/wedding-photo-book-planner/index.html` pushed each
+photo onto `state.photos` **inside `FileReader.onload`**. The readers run in
+parallel, so the library ended up in **completion order, not the order the
+visitor picked** - two photos could swap places depending on how fast the
+disk answered.
+
+This was found by the placement verifier itself: one run reported "slot 0
+shows [40, 200, 60], expected (220, 40, 40)" and the next run passed. The
+two colours were exactly swapped, which is the signature of the order race
+and not of a coordinate problem.
+
+The fix reads every file into a slot **per input index** and appends the
+array once all readers have finished. The library now matches the pick
+order every time.
+
+**The rule: an async fan-out that produces a USER-VISIBLE ORDER must
+collect into an indexed array, not push into the live list from the
+callback.** The same shape appears in the other tools that accept multiple
+files; check them before trusting their order.
+
+## The site's fonts are self-hosted OFL files now (§2.16, 2026-11-12)
+
+### What was wrong
+
+`styles.css` declared `--font-heading: 'Playfair Display', Georgia, serif`
+and `--font-body: 'Inter', ...`, and the three design templates named
+'Great Vibes' and 'Montserrat' in their `fontStack`s. **None of them ever
+loaded**: there was no `@font-face`, no font file and no Google Fonts
+`<link>`, and the CSP's `font-src 'self' data:` never allowed Google Fonts
+either. Every name fell through to the next entry in the stack.
+
+So the site has been rendering Georgia + the system sans-serif since the
+day it launched, and the tools that draw text onto a canvas hard-code
+`Georgia, serif` for exactly that reason.
+
+### What is there now
+
+`/fonts/<family>-5.3.0/` holds 13 woff2 files + each family's OFL
+LICENSE (the licence has to travel with the font):
+
+| family | subsets | notes |
+|---|---|---|
+| Playfair Display | latin, latin-ext, cyrillic | variable, `font-weight: 400 900` |
+| Inter | latin, latin-ext, cyrillic × (normal, italic) | variable; the italic is a REAL italic file, not a synthesised oblique |
+| Montserrat | latin, latin-ext, cyrillic | variable |
+| Great Vibes | latin | static, 400 only |
+
+They came from the `@fontsource-variable/*` and `@fontsource/*` packages
+(OFL-1.1), extracted by `scripts/vendor-web-fonts.py`, which also injects
+the `@font-face` rules into BOTH `styles.css` and `styles.min.css`. The
+script is idempotent - running it twice leaves the bytes unchanged.
+
+**arab / th / hi / ja are NOT covered** - there is no OFL family for those
+writing systems. Those pages fall back to the system face, and the canvas
+uses the SAME stack, so the page and the paper still agree.
+
+### The subset system works
+
+`unicode-range` comes from fontsource's own CSS, so the browser only
+downloads the subset the text needs. Measured: the English home page pulls
+3 files (135 KB), the Russian tool page pulls the Cyrillic subset as well,
+and the Arabic page pulls no Cyrillic file.
+
+### TRAP: do NOT regenerate styles.min.css
+
+`npx clean-css-cli` 5.6.3 (the version that works on this box) rewrites
+77 rules and **drops `.hero-bg .hero-video`** - the rule that hides the
+hero video for visitors with vestibular disorders. Regenerating the file
+silently deletes an accessibility feature.
+
+So `scripts/vendor-web-fonts.py` only INSERTS the `@font-face` block into
+`styles.min.css` and leaves every other byte alone. The reason the rule
+disappeared in the first place was a stray `};` in `styles.css:1498`,
+which clean-css swallowed - that is fixed in the source now.
+
+## A canvas draws with whatever font is loaded AT THAT MOMENT
+
+The three design templates (save-the-date, invitation, video-invitation)
+name real families in their `fontStack`. Before the fonts were served, the
+romantic template fell back to 'Apple Chancery' (macOS only) and then to
+`cursive`, which is **Comic Sans on Windows** - so the SAME template
+produced a DIFFERENT PNG on every operating system, and the preview did
+not match the export.
+
+`js/tools/common.js` now exports `fontsReady(families, text)`:
+
+```js
+await window.weddingAITool.fontsReady(['Playfair Display'], 'Emma & Liam');
+```
+
+`text` is passed on purpose: `document.fonts.load(font, text)` only pulls
+the subset that the text needs, so an Arabic page never downloads the
+Latin subset. Each of the three tools waits for the fonts before its first
+draw and again before the export path bakes the file.
+
+### The rule
+
+**Any tool that draws text into a canvas must await the fonts before it
+draws - once for the preview and once for the export.** A missing await
+does not throw; it silently bakes the fallback face into the file.
+
+`scripts/verify-web-fonts.py` proves the whole chain in a real browser
+under the live CSP: the files come back 200, the families are loaded, and
+each template's stack is measured with `measureText` against the same
+stack with the webfont removed. A stack that measures the SAME resolves
+to the fallback - i.e. the export would be baked with it.
+
+### TRAP: the browser only downloads a font that is really USED
+
+`document.fonts.check('40px "Playfair Display"')` is false on a page that
+never renders Playfair. A test that asserts "the font was not fetched" has
+to switch to the template that uses it first. Same trap in reverse: a font
+that is fetched is not a font that is *used*.
+
+## The PDF pipeline can now mix page sizes in one document (§2.17)
+
+`downloadPdfPages()` had ONE page size for the whole document
+(`opts.pageWidth` / `opts.pageHeight`). The photo album is fine with that,
+but a wedding stationery pack is not: an invitation is 5x7 in, a place
+card is 3.5x2 in and a poster is 18x24 in, and they have to end up in one
+file.
+
+`js/tools/common.js` now has two functions:
+
+* `buildPdfPages(items, opts)` → the jsPDF document, **no download**
+* `downloadPdfPages(items, filename, opts)` → builds it and saves it
+
+and a page factory may return EITHER a canvas (legacy: the page is
+`opts.pageWidth × opts.pageHeight`) OR
+`{ canvas: <canvas>, pageWidth: n, pageHeight: n }` (the page is THAT
+size). All sizes are in the document's unit - jsPDF's unit belongs to the
+DOCUMENT, not to a page.
+
+### TRAP: jsPDF's orientation argument OVERRIDES the size array
+
+Measured on jsPDF 4.2.1:
+
+```
+addPage([5, 7])               -> 5 x 7 in
+addPage([5, 7], 'landscape')  -> 7 x 5 in     <- the array is SWAPPED
+```
+
+The constructor's `orientation` option behaves the same way. So the
+orientation must always be derived from the very same two numbers that are
+handed to jsPDF, and a square page is passed as portrait. Get it wrong and
+the page comes out rotated.
+
+### TRAP: the FIRST page's size comes from the constructor
+
+`addPage()` only ever sizes the SECOND and later pages. The constructor
+has to be told the first page's size - not the largest, not the smallest.
+A pack whose first page is a 3.5x2 in place card and whose second page is
+an 18x24 in poster gets a 3.5x2 in first page.
+
+`scripts/verify-pdf-page-sizes.py` proves both: it builds a mixed-size
+document, reads every `/MediaBox` out of the generated BYTES and compares
+it with the size that was asked for, and it runs the OLD algorithm side by
+side as a control - the old code can only ever produce one size, so a
+control that produced mixed sizes would mean the comparison proves
+nothing.
+
+## COOP/COEP is CLOSED on this site — ffmpeg.wasm is rejected (2026-11-12)
+
+**The rule: any proposal that needs `SharedArrayBuffer` is out. That
+includes ffmpeg.wasm, and it includes every "do the video editing in the
+browser" idea that leans on it.** This is a settled decision, not a
+preference to be re-litigated.
+
+### Why, in order
+
+1. **The headers are document-wide.** Cross-origin isolation needs
+
+   ```
+   Cross-Origin-Opener-Policy: same-origin
+   Cross-Origin-Embedder-Policy: require-corp
+   ```
+
+   on the HTML response. That is not a per-tool switch: all 722 pages get
+   them, and every third-party frame on every page falls under the embedder
+   policy.
+
+2. **It breaks the revenue product, SILENTLY.** Measured with the real
+   AdSense and the real Clarity script on a page that mirrors the site's
+   loader (`internal-tools/coop-coep-probe.py`, reproducible):
+
+   | | plain | `require-corp` | `credentialless` |
+   |---|---|---|---|
+   | `crossOriginIsolated` | false | **true** | **true** |
+   | `SharedArrayBuffer` | absent | **present** | **present** |
+   | `window.adsbygoogle` | true | true | true |
+   | `window.clarity` | true | true | true |
+   | AdSense ad frame (doubleclick) | 5 182 bytes | **0 bytes** | **0 bytes** |
+   | Clarity resources | 8 entries | **2 entries** | 7 entries |
+
+   The top-level scripts keep loading, so `window.adsbygoogle` and
+   `window.clarity` are still truthy and **nothing looks broken** - while
+   the ad frame transfers zero bytes and, under `require-corp`, Clarity's
+   session script and collection frame are gone. AdSense is the revenue
+   product; Clarity is the only analytics left after GA4 and Baidu Tongji
+   were removed (2026-10-28). Both die quietly, and neither one throws.
+
+3. **`credentialless` is not a way out.** It keeps Clarity alive, but the
+   AdSense ad frame is still 0 bytes, and **Safari does not implement the
+   directive at all** (MDN: Safari "No support"; Firefox for Android
+   neither). A Safari visitor would get neither SharedArrayBuffer nor a
+   working ad frame.
+
+4. **The licence is GPL.** `@ffmpeg/core@0.12.10` on npm carries
+   `"license": "GPL-2.0-or-later"`, and the ffmpeg.wasm-core repository
+   ships `COPYING.GPLv2` / `COPYING.GPLv3`. A GPL core inside the site's
+   own JS is a licence question for the whole site, not a detail.
+   (`@ffmpeg/ffmpeg`, the thin wrapper, is MIT - the core is not.)
+
+5. **The single-threaded core does not need SharedArrayBuffer**, so it is
+   technically possible - but it is a ~31 MB download with no hardware
+   encode, against **mediabunny** (MPL-2.0, already vendored, WebCodecs
+   hardware encode). It loses on every axis that matters here.
+
+### The rule
+
+The site's video work goes through **mediabunny** (WebCodecs) or the
+browser's own `MediaRecorder`. Both are $0, need no cross-origin
+isolation, and keep "nothing leaves the device" true.
+
+`Cross-Origin-Opener-Policy` / `Cross-Origin-Embedder-Policy` must never
+appear in `_headers` or in `buildCsp()` (`functions/_middleware.js`). If a
+tool ever needs them, it needs its own origin - and this site does not have
+one. A proposal that says "just use ffmpeg.wasm" is answered with this
+section.
+
 
 
 

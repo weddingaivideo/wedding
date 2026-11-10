@@ -1,7 +1,7 @@
 /*!
- * WeddingAI Free Tools — common.js (v1.2.0)
+ * WeddingAI Free Tools — common.js (v1.3.0)
  * Shared utilities for the /tools/* suite (wedding-photo processing).
- * Loaded as a deferred <script src="/js/tools/common.js?v=1.0.2"> on every tool page.
+ * Loaded as a deferred <script src="/js/tools/common.js?v=1.0.7"> on every tool page.
  *
  * Exports a single global `weddingAITool` namespace. No build step. Plain ES2018.
  *
@@ -12,6 +12,9 @@
  *   - Download result as a saved file
  *   - Toast notifications (success / error)
  *   - Simple progress UI updates (per-file spinner)
+ *   - PDF export: one page (downloadPdf) or many, each page its own size
+ *     (buildPdfPages / downloadPdfPages)
+ *   - Web-font readiness for the canvas renderers (fontsReady)
  *
  * What this file deliberately does NOT do:
  *   - Tool-specific logic (compress, collage, crop, etc live in their own pages)
@@ -617,15 +620,56 @@ function loadVendor(lib) {
     });
   }
 
-  // Multi-page PDF. `items` is an array of factories, each returning a
-  // canvas (or a promise of one); they are rendered ONE AT A TIME and the
-  // bitmap is released right after it goes into the PDF, because a 40-page
-  // album at 2400x2400 would otherwise hold ~900 MB of canvas.
+  // ---------- multi-page PDF -------------------------------------------------
+  //
+  // `items` is an array of factories, each returning a canvas (or a promise
+  // of one); they are rendered ONE AT A TIME and the bitmap is released
+  // right after it goes into the PDF, because a 40-page album at 2400x2400
+  // would otherwise hold ~900 MB of canvas.
   //
   // opts.pageWidth / opts.pageHeight are the PDF page size in the pdf's
   // unit. With unit 'in' and an 8x8 inch page, a 2400 px image lands at
   // 300 DPI - i.e. actually print-ready, not a 33-inch poster.
-  function downloadPdfPages(items, filename, opts) {
+  //
+  // PER-PAGE SIZE (§2.17)
+  // ----------------------
+  // A factory may return EITHER
+  //
+  //   - a canvas (the legacy shape). Its page is opts.pageWidth x
+  //     opts.pageHeight, or the canvas's own pixel size when those are
+  //     absent. This is what the photo album uses: one size for the whole
+  //     book.
+  //
+  //   - { canvas: <canvas>, pageWidth: n, pageHeight: n }. Its page is
+  //     THAT size. This is what makes a mixed-size pack possible: a 5x7 in
+  //     invitation, a 3.5x2 in place card and an 18x24 in poster in ONE
+  //     document, each page its own size.
+  //
+  // All sizes are in the document's unit (opts.unit). jsPDF's unit is a
+  // property of the DOCUMENT, not of a page, so a pack cannot mix inches
+  // and millimetres.
+  //
+  // TRAP: jsPDF's orientation argument OVERRIDES the size array. Measured
+  // on jsPDF 4.2.1: addPage([5,7],'landscape') produces a 7x5 in page -
+  // the array is SWAPPED to satisfy the orientation. The same is true of
+  // the constructor's `orientation` option. So the orientation is always
+  // derived from the very same two numbers that are handed to jsPDF, and a
+  // square page is passed as portrait (a square has no orientation to
+  // lose). Get this wrong and the page silently comes out rotated.
+  //
+  // TRAP: the first page's size comes from the CONSTRUCTOR, so the
+  // constructor has to be told the first page's size - not the largest and
+  // not the smallest. A pack whose first page is a 3.5x2 in card and whose
+  // second page is an 18x24 in poster gets a 3.5x2 in first page.
+  function isCanvasLike(o) {
+    return !!o && typeof o.getContext === 'function' && typeof o.width === 'number';
+  }
+
+  // Builds the PDF and hands back the jsPDF document, WITHOUT downloading
+  // it. Split out from downloadPdfPages() so the pipeline can be measured
+  // (a test needs the bytes, not a browser download) and so a later
+  // merge/split tool can reuse the same document builder.
+  function buildPdfPages(items, opts) {
     opts = opts || {};
     if (!items || !items.length) return Promise.reject(new Error('No pages to export'));
     return loadVendor('jspdf').then(function (ns) {
@@ -640,10 +684,21 @@ function loadVendor(lib) {
       items.forEach(function (make) {
         chain = chain.then(function () {
           return Promise.resolve(make());
-        }).then(function (canvas) {
-          if (!canvas) return;
-          var pw = opts.pageWidth || canvas.width;
-          var ph = opts.pageHeight || canvas.height;
+        }).then(function (out) {
+          if (!out) return;
+          var spec = isCanvasLike(out) ? null : out;
+          var canvas = spec ? spec.canvas : out;
+          if (!isCanvasLike(canvas)) {
+            throw new Error('A page factory must return a canvas or { canvas, pageWidth, pageHeight }');
+          }
+          // The page's own size wins; the opts size is the fallback; the
+          // canvas's pixel size is the last resort.
+          var pw = (spec && typeof spec.pageWidth === 'number' && spec.pageWidth > 0)
+            ? spec.pageWidth : opts.pageWidth;
+          var ph = (spec && typeof spec.pageHeight === 'number' && spec.pageHeight > 0)
+            ? spec.pageHeight : opts.pageHeight;
+          if (!(pw > 0)) pw = canvas.width;
+          if (!(ph > 0)) ph = canvas.height;
           var landscape = pw > ph;
           if (!pdf) {
             pdf = new Ctor({
@@ -665,13 +720,53 @@ function loadVendor(lib) {
       });
       return chain.then(function () {
         if (!pdf || pageIndex === 0) throw new Error('No pages were rendered');
-        pdf.save(filename || 'weddingai.pdf');
-        return true;
+        return pdf;
       });
+    });
+  }
+
+  function downloadPdfPages(items, filename, opts) {
+    if (!items || !items.length) return Promise.reject(new Error('No pages to export'));
+    return buildPdfPages(items, opts).then(function (pdf) {
+      pdf.save(filename || 'weddingai.pdf');
+      return true;
     }).catch(function (err) {
       toast(t('pdfFailed', 'Could not create the PDF') + ': ' + (err && err.message ? err.message : String(err)), 'error');
       throw err;
     });
+  }
+
+  // ---------- web fonts ------------------------------------------------------
+  //
+  // The design templates name web fonts: 'Playfair Display', 'Great Vibes'
+  // and 'Montserrat'. A canvas draws with whatever font is loaded AT THAT
+  // MOMENT, so a draw that happens before the font arrives bakes the
+  // FALLBACK into the file - and the fallback is not the same on every
+  // operating system: the romantic template fell back to 'Apple Chancery'
+  // on macOS and to Comic Sans on Windows, which meant the same template
+  // produced a different PNG on every machine.
+  //
+  // fontsReady() resolves once the families are loaded. `text` is passed on
+  // so the browser only fetches the subset that text needs: an Arabic page
+  // never pulls the Latin subset and falls back exactly like the page does.
+  var CANVAS_FONT_FAMILIES = ['Playfair Display', 'Great Vibes', 'Montserrat', 'Inter'];
+
+  function fontsReady(families, text) {
+    if (!document.fonts || !document.fonts.load) return Promise.resolve(false);
+    var list = families || CANVAS_FONT_FAMILIES;
+    var jobs = [];
+    list.forEach(function (name) {
+      try {
+        jobs.push(text
+          ? document.fonts.load('16px "' + name + '"', text)
+          : document.fonts.load('16px "' + name + '"'));
+      } catch (e) {
+        // An unknown family is not an error - the fallback is still valid.
+      }
+    });
+    if (!jobs.length) return Promise.resolve(false);
+    return Promise.all(jobs).then(function () { return true; })
+      .catch(function () { return false; });
   }
 
   // ---------- HEIC decoding --------------------------------------------------
@@ -885,7 +980,7 @@ function loadVendor(lib) {
   // ---------- public namespace --------------------------------------------------
 
   window.weddingAITool = {
-    version: '1.2.0',
+    version: '1.3.0',
     formatBytes: formatBytes,
     formatPercent: formatPercent,
     safeFileName: safeFileName,
@@ -899,7 +994,9 @@ function loadVendor(lib) {
     download: download,
     downloadZip: downloadZip,
     downloadPdf: downloadPdf,
+    buildPdfPages: buildPdfPages,
     downloadPdfPages: downloadPdfPages,
+    fontsReady: fontsReady,
     decodeHeic: decodeHeic,
     resizeCanvas: resizeCanvas,
     removeBackgroundAi: removeBackgroundAi,

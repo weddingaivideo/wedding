@@ -100,15 +100,38 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 COLORS = [(220, 40, 40), (40, 200, 60)]
 WHITE = (255, 255, 255)
 
+# The two photos must NOT be interchangeable in size, or the test cannot
+# tell a library that is in pick order from one that is in read-completion
+# order. The first photo therefore carries a big PNG metadata chunk: the
+# DECODED pixels are identical, but the FILE is ~270 KB instead of ~2 KB,
+# so its FileReader always finishes LAST.
+#
+# That is what makes the order assertion deterministic instead of a race:
+# with the old code (push inside FileReader.onload) the library came out
+# [photo1, photo0] and this test failed; with the order-preserving code it
+# is [photo0, photo1] every time.
+PAD_BYTES = 270000
 
-def make_photo(path: Path, base) -> None:
-    """Solid colour with a WHITE band across the top quarter."""
+
+def make_photo(path: Path, base, pad: int = 0) -> None:
+    """Solid colour with a WHITE band across the top quarter.
+
+    `pad` adds a PNG text chunk. It changes the FILE size, never the
+    pixels - so the colour assertions are unaffected while the read time
+    is.
+    """
     from PIL import Image
     im = Image.new("RGB", (400, 300), base)
     for y in range(0, 100):
         for x in range(400):
             im.putpixel((x, y), WHITE)
-    im.save(path, "PNG")
+    if pad:
+        from PIL.PngImagePlugin import PngInfo
+        info = PngInfo()
+        info.add_text("pad", "x" * pad)
+        im.save(path, "PNG", pnginfo=info)
+    else:
+        im.save(path, "PNG")
 
 
 RECT_JS = """(sel) => {
@@ -144,7 +167,8 @@ def main():
     photos = []
     for i, col in enumerate(COLORS):
         p = tmpdir / ("photo%d.png" % i)
-        make_photo(p, col)
+        # The FIRST photo is the slow one - see PAD_BYTES above.
+        make_photo(p, col, pad=PAD_BYTES if i == 0 else 0)
         photos.append(str(p))
 
     httpd = socketserver.TCPServer(("127.0.0.1", PORT), Handler)
@@ -171,6 +195,21 @@ def main():
             page.set_input_files("#photo-input", photos)
             page.wait_for_timeout(1200)
             print("two photos in the library")
+
+            # --- 0. the library is in PICK order, not read-completion order
+            # addPhotos() used to push inside FileReader.onload, so the
+            # library came out in completion order. photo0.png is the big
+            # file and therefore always reads LAST - with the old code the
+            # library was [photo1, photo0] and the drag below put the green
+            # photo into slot 0.
+            names = page.evaluate("""() => Array.prototype.map.call(
+                document.querySelectorAll('.pb-photo-item .pb-photo-name'),
+                function (el) { return el.textContent.trim(); })""")
+            print("  the library lists %r" % (names,))
+            if names != ["photo0.png", "photo1.png"]:
+                failures.append("the library is in the wrong order: %r - the "
+                                "photos must stay in the order they were "
+                                "picked" % (names,))
 
             # Open page 1 and make it a two-photo layout.
             page.click(".pb-page-thumb[data-page-idx='0']")
