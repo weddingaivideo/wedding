@@ -839,29 +839,26 @@ if ('serviceWorker' in navigator) {
     });
   }
 
+  // §2.15 - the page thumbnail and the exported page are now drawn by the
+  // SAME functions. Before this the thumbnail had its own copy of the cover
+  // and its own copy of the caption, and an empty slot was a bordered box
+  // labelled "Slot 3" in the thumbnail but a plain box in the export - so
+  // the grid showed a page the visitor never got.
+  //
+  // Every measurement below is a fraction of the page size, which is what
+  // makes the thumbnail the export at 1/12 scale rather than a lookalike.
   function drawPageCanvas(canvas, page) {
     var ctx = canvas.getContext('2d');
-    var W = canvas.width, H = canvas.height;
+    var size = { w: canvas.width, h: canvas.height };
     ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, W, H);
+    ctx.fillRect(0, 0, size.w, size.h);
     var layout = LAYOUTS[page.layout] || LAYOUTS[DEFAULT_LAYOUT];
     if (layout.slots === 0) {
-      // cover/title
-      ctx.fillStyle = '#2c2c2c';
-      ctx.font = '600 16px Georgia, serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(state.title || 'Wedding', W/2, H/2 - 14);
-      ctx.font = '300 11px Georgia, serif';
-      ctx.fillStyle = '#7a7a7a';
-      ctx.fillText(state.date || '', W/2, H/2 + 4);
-      if (state.tag) {
-        ctx.fillStyle = '#d4af37';
-        ctx.font = '300 9px Georgia, serif';
-        ctx.fillText(state.tag, W/2, H/2 + 22);
-      }
+      drawCoverPage(ctx, size);
+      drawPageCaption(ctx, size, page);
       return;
     }
-    var slotPositions = computeSlotPositions(layout.slots, W, H);
+    var slotPositions = computeSlotPositions(layout.slots, size.w, size.h);
     slotPositions.forEach(function (sp, i) {
       var pid = (page.slots || [])[i];
       var photo = pid ? state.photos.find(function (p) { return p.id === pid; }) : null;
@@ -873,23 +870,18 @@ if ('serviceWorker' in navigator) {
         };
         img.src = photo.url;
       } else {
-        ctx.fillStyle = '#f5f5f5';
-        ctx.strokeStyle = '#cccccc';
-        ctx.lineWidth = 1;
-        ctx.fillRect(sp.x, sp.y, sp.w, sp.h);
-        ctx.strokeRect(sp.x, sp.y, sp.w, sp.h);
-        ctx.fillStyle = '#999';
-        ctx.font = '300 9px Georgia, serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('Slot ' + (i+1), sp.x + sp.w/2, sp.y + sp.h/2);
+        drawEmptySlot(ctx, sp.x, sp.y, sp.w, sp.h);
       }
     });
-    if (page.caption) {
-      ctx.fillStyle = '#2c2c2c';
-      ctx.font = '300 9px Georgia, serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(page.caption, W/2, H - 12);
-    }
+    drawPageCaption(ctx, size, page);
+  }
+
+  // An empty slot. One function, so the thumbnail and the export draw the
+  // same empty slot. It is deliberately blank: an album page that is printed
+  // with "Slot 3" written on it is not what anybody wants.
+  function drawEmptySlot(ctx, x, y, w, h) {
+    ctx.fillStyle = '#fafafa';
+    ctx.fillRect(x, y, w, h);
   }
 
   // Cover-crop drawImage: fill the (x,y,w,h) box by cropping the source.
@@ -918,26 +910,39 @@ if ('serviceWorker' in navigator) {
     ctx.restore();
   }
 
+  // §2.15 - the gutters are a FRACTION of the page, not a fixed number of
+  // pixels.
+  //
+  // They used to be 6 px at every size, which meant the 200 px thumbnail
+  // had gutters twelve times too thick relative to the 2400 px export: the
+  // grid showed a page the visitor never got. A fraction of the page is
+  // also what makes the thumbnail the export at 1/12 scale.
+  //
+  // At the export sizes the numbers are unchanged - 2400/400 = 6 px of
+  // gutter, 2400/600 = 4 px between two slots - so the printed file does
+  // not change.
   function computeSlotPositions(n, W, H) {
-    var pad = 6;
+    var unit = Math.min(W, H);
+    var pad = unit / 400;
+    var gap = unit / 600;
     if (n === 1) return [{ x: pad, y: pad, w: W - 2*pad, h: H - 2*pad }];
     if (n === 2) return [
-      { x: pad, y: pad, w: W/2 - pad - 2, h: H - 2*pad },
-      { x: W/2 + 2, y: pad, w: W/2 - pad - 2, h: H - 2*pad }
+      { x: pad, y: pad, w: W/2 - pad - gap/2, h: H - 2*pad },
+      { x: W/2 + gap/2, y: pad, w: W/2 - pad - gap/2, h: H - 2*pad }
     ];
     if (n === 3) return [
       { x: pad, y: pad, w: W - 2*pad, h: H*0.55 },
-      { x: pad, y: H*0.55 + 4, w: W/2 - pad - 2, h: H*0.45 - pad - 4 },
-      { x: W/2 + 2, y: H*0.55 + 4, w: W/2 - pad - 2, h: H*0.45 - pad - 4 }
+      { x: pad, y: H*0.55 + gap, w: W/2 - pad - gap/2, h: H*0.45 - pad - gap },
+      { x: W/2 + gap/2, y: H*0.55 + gap, w: W/2 - pad - gap/2, h: H*0.45 - pad - gap }
     ];
     if (n === 4) {
-      var half = (H - 2*pad - 4) / 2;
-      var halfW = (W - 2*pad - 4) / 2;
+      var half = (H - 2*pad - gap) / 2;
+      var halfW = (W - 2*pad - gap) / 2;
       return [
         { x: pad, y: pad, w: halfW, h: half },
-        { x: pad + halfW + 4, y: pad, w: halfW, h: half },
-        { x: pad, y: pad + half + 4, w: halfW, h: half },
-        { x: pad + halfW + 4, y: pad + half + 4, w: halfW, h: half }
+        { x: pad + halfW + gap, y: pad, w: halfW, h: half },
+        { x: pad, y: pad + half + gap, w: halfW, h: half },
+        { x: pad + halfW + gap, y: pad + half + gap, w: halfW, h: half }
       ];
     }
     return [];
@@ -1475,9 +1480,9 @@ if ('serviceWorker' in navigator) {
   // started the export first and drew the caption afterwards, which only
   // worked because toBlob() happens to be asynchronous - and a page whose
   // slots were all empty exported WITHOUT its caption.
-  function renderPageCanvas(idx) {
+  function renderPageCanvas(idx, sizeOverride) {
     return new Promise(function (resolve) {
-      var size = SIZES[state.size];
+      var size = sizeOverride || SIZES[state.size];
       var p = state.pages_data[idx];
       var c = document.createElement('canvas');
       c.width = size.w; c.height = size.h;
@@ -1514,8 +1519,7 @@ if ('serviceWorker' in navigator) {
           img.onerror = function () { pending--; if (pending <= 0) finish(); };
           img.src = photo.url;
         } else {
-          ctx.fillStyle = '#fafafa';
-          ctx.fillRect(sp.x, sp.y, sp.w, sp.h);
+          drawEmptySlot(ctx, sp.x, sp.y, sp.w, sp.h);
           pending--;
           if (pending <= 0) finish();
         }
@@ -1590,6 +1594,54 @@ if ('serviceWorker' in navigator) {
       if (btn) { btn.disabled = false; btn.textContent = label; }
     });
   }
+
+  // §2.15 - a small read-only hook so the verification script can compare
+  // the page THUMBNAIL with the exported page.
+  //
+  // compare() renders the exported page AT THE THUMBNAIL'S SIZE with the
+  // very same renderer and returns the mean difference between the two
+  // canvases. It has to be 0: the thumbnail and the export are not two
+  // drawings that happen to look alike, they are the same drawing.
+  //
+  // layout() returns the slot rectangles as FRACTIONS of the page, for the
+  // thumbnail's size and for the export's size. The two lists have to be
+  // the same: that is what makes the thumbnail the export at 1/12 scale.
+  window.__waBookDebug = {
+    compare: function (idx) {
+      var small = pagesGridEl.querySelector('canvas[data-canvas-idx="' + idx + '"]');
+      if (!small) return Promise.resolve(null);
+      return renderPageCanvas(idx, { w: small.width, h: small.height }).then(function (same) {
+        var a = small.getContext('2d').getImageData(0, 0, small.width, small.height).data;
+        var b = same.getContext('2d').getImageData(0, 0, small.width, small.height).data;
+        var sum = 0;
+        var n = a.length / 4;
+        for (var i = 0; i < a.length; i += 4) {
+          sum += Math.abs(a[i] - b[i]) + Math.abs(a[i + 1] - b[i + 1]) + Math.abs(a[i + 2] - b[i + 2]);
+        }
+        return { diff: sum / n / 3, w: small.width, h: small.height };
+      });
+    },
+    layout: function (idx) {
+      var p = state.pages_data[idx];
+      var layout = LAYOUTS[p.layout] || LAYOUTS[DEFAULT_LAYOUT];
+      var size = SIZES[state.size];
+      var thumbW = 200;
+      var thumbH = Math.max(40, Math.round(thumbW * size.h / size.w));
+      function frac(list, w, h) {
+        return list.map(function (sp) {
+          return [sp.x / w, sp.y / h, sp.w / w, sp.h / h];
+        });
+      }
+      return {
+        slots: layout.slots,
+        big: frac(computeSlotPositions(layout.slots, size.w, size.h), size.w, size.h),
+        small: frac(computeSlotPositions(layout.slots, thumbW, thumbH), thumbW, thumbH)
+      };
+    },
+    thumbs: function () {
+      return pagesGridEl.querySelectorAll('canvas.pb-page-canvas').length;
+    }
+  };
 
   init();
 })();

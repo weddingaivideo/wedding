@@ -118,6 +118,7 @@ All of these were rewritten in **all 11 languages**, not just in English:
 | `scripts/verify-book-placement.py` | a photo lands in a slot by drag, two slots swap, the zoom crops in, and the album PDF has 20 pages whose MediaBox is **576×576 pt = 8×8 inches = 300 DPI** |
 | `scripts/verify-avif-lossless.py` | the AVIF really is `ftypavif`, it is 60 % smaller than the JPEG, and the native WebP at q=1.0 is **pixel-identical** to the source |
 | `scripts/verify-compress-target-exif.py` | the target-size mode lands under the byte ceiling and the EXIF orientation survives |
+| `scripts/verify-chart-parity.py` | the album's thumbnail and its exported page are the **same drawing** (difference 0.0000) with the **same layout** (0.000000 of the page), the seating chart's export paints every seat in the colour the preview paints it, the export really draws the "N/M seated" line, and the localized copies draw their seats at 36×24 like the English page |
 
 ---
 
@@ -189,7 +190,107 @@ that the crop still produces a file.
 
 ---
 
-## 0. The four constraints every option inherits
+## EXECUTION STATUS — fourth pass: §2.15 the export has to BE the preview
+
+The audit's proposal was a **DOM→PNG renderer** (`modern-screenshot`, 29 KB
+UMD, MIT): rasterise the preview, and "the HTML/CSS is the single source of
+truth" is true by construction. Checking the four tools it named showed the
+premise only holds for two of them, and that the renderer would have cost
+the one thing the seating chart cannot lose.
+
+### What the audit got right
+
+Three of the four tools do hand-roll canvas rendering, and in two of them
+the hand-rolled copy had **drifted away** from the preview.
+
+**The album (`wedding-photo-book-planner`)** — the thumbnail and the export
+were two different drawings:
+
+| | thumbnail (200 px) | export (2400 px) |
+|---|---|---|
+| the cover | its own font, `'600 16px Georgia, serif'` | proportional, `size.w * 0.18` |
+| the caption | its own copy | its own copy |
+| an empty slot | a bordered box labelled **"Slot 3"** | a plain grey box |
+| the gutters | **6 px** — 3 % of the page | **6 px** — 0.25 % of the page |
+
+The gutters are the one that mattered most: a **fixed** pixel value looks
+identical in the source and wrong in the result. The 200 px thumbnail had
+gutters twelve times too thick, so the grid in the editor showed a page the
+visitor never got.
+
+**The seating chart (`wedding-seating-chart-maker`)** — the preview is DOM
+(it has to be: the visitor clicks a seat to assign a guest) and the export
+is a canvas drawn by a second implementation, which had drifted:
+
+| | preview | export |
+|---|---|---|
+| the seat | 36×24, radius 4, `#e5e0d8` on `#f5f0ea` | radius **6**, `#cccccc` on **`#f5f5f5`** |
+| the font | Georgia | Georgia, but a different size rule |
+| the "N/M seated" line under every table | **there** | **gone** |
+| a long guest name | CSS ellipsis | **cut at 9 characters** |
+
+And the worst of it: **ten of the eleven localized copies had a CSS rule of
+64×36 with a 6 px radius** for a seat, while the geometry positions seats
+for 36×24. The machine translator had "improved" the number, so in those
+ten languages the seats were drawn too big and off their tables. The English
+page was the only correct one.
+
+### What landed — no new bytes
+
+- The album's thumbnail calls the **same** `drawCoverPage()`,
+  `drawPageCaption()` and `drawEmptySlot()` the export calls, and the
+  gutters are now a **fraction of the page** (`unit/400` and `unit/600`).
+  At the export sizes that is the same 6 px and 4 px as before, so **the
+  printed file does not change**; at the thumbnail's size it is now the
+  same *fraction*, which is what makes the thumbnail the export at 1/12
+  scale.
+- The seating chart has **one `CHART` object** holding every visual value.
+  `renderFloor()` writes those values into the DOM as inline styles and
+  `buildChartCanvas()` draws them, so the two cannot disagree. The seat's
+  width and height are written inline too, so a CSS rule can no longer
+  override the geometry.
+- A name that does not fit is truncated by the export with `ellipsize()` at
+  the same width the CSS leaves for it (30 px).
+
+### Why NOT modern-screenshot
+
+- The seating chart's preview **has to stay DOM** — it is interactive.
+- Rasterising it would lose the print chrome (title, date, legend) and
+  would make the export depend on the browser's `foreignObject` support.
+- The three invitation tools (`save-the-date`, `wedding-invitation`,
+  `wedding-video-invitation`) already render their preview **into** the
+  canvas they export — WYSIWYG already holds there.
+- Zero bytes is the right price for a fix that is a refactor.
+
+### Verification
+
+`scripts/verify-chart-parity.py` drives Chromium under the **live** CSP.
+
+- the album: the thumbnail and the export, rendered at the same size by the
+  same renderer, differ by **0.0000**; the slot rectangles as a fraction of
+  the page differ by **0.000000**;
+- the seating chart: every seat's computed style is the colour the export
+  actually paints there; the export really draws the "N/M seated" line
+  (**96 pixels of `#6b6b6b`**, and nothing else on the sheet is that
+  colour); a long name is truncated at the same width the CSS leaves;
+- the localized copies: `zh` / `ru` / `th` / `ar` draw their seats at 36×24
+  like the English page.
+
+Every assertion has a **provable opposite** in the old code, so the check
+is not vacuous: the old export contained no `#6b6b6b` at all, painted its
+seats `#f5f5f5`, cut names at 9 characters, and ten languages' CSS said
+64×36.
+
+### Three traps worth recording
+
+| trap | what it looked like |
+|---|---|
+| an idempotency marker that occurs **twice** | the marker for the export's empty slot was `drawEmptySlot(ctx, sp.x, …)` — a string that also occurs in the thumbnail. The script reported "already applied" while the export still had its own copy. The marker has to be the call **plus the line after it**. |
+| a hook replaced by a marker **inside** it | the marker lives inside the text that gets replaced, so "is it already applied?" could never be true and every run patched again. The hooks are replaced as a **block**, found by the comment that starts them and the line that follows them. |
+| a geometry helper shared by three callers | `computeSlotPositions` is used by the export, the editor and the thumbnail, so "the gutters" is a property of the **page**, not of a size. A fixed pixel value is the bug; a fraction is the fix. |
+
+---
+
 
 These are not preferences; they are what the repo actually allows.
 
@@ -267,7 +368,7 @@ by grepping the shipped dist), so they cost 0 extra i18n work.
 | 2.12 | **AVIF / WebP-lossless output** | `compress` emits jpeg/png/webp only. AVIF is the current best compression for delivery |
 | 2.13 | **EXIF read/keep/strip as a first-class option** | `exifr` is a small, dependency-free EXIF parser | Would let the compress tool *keep* EXIF instead of only documenting that it drops it |
 | 2.14 | **Target-size mode** | "Compress to exactly 2 MB" is what users actually ask for; today the control is a quality slider |
-| 2.15 | **DOM→PNG renderer** | `save-the-date`, `invitation`, `photo-book`, `seating-chart` all hand-roll canvas rendering. `modern-screenshot` (29 KB UMD, MIT) renders the DOM directly and keeps the HTML/CSS as the single source of truth |
+| 2.15 | **DOM→PNG renderer** | ✅ **DONE (fourth pass)** — no renderer was added: the two copies of each renderer were **merged** instead (the album's thumbnail and export now share one renderer, the seating chart has one `CHART` object). `modern-screenshot` was rejected because the seating chart's preview has to stay interactive DOM; see the fourth pass above |
 
 > ✅ **2.5 – 2.9 were implemented on 2026-11-09** (execution status above).
 > Three corrections to the analysis above, found while building them:

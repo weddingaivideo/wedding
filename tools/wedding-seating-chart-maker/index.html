@@ -143,12 +143,18 @@
 
         .seating-canvas { background: #fff; border: 1px dashed var(--color-border); border-radius: var(--radius-sm); padding: var(--spacing-md); min-height: 520px; position: relative; overflow: auto; }
         .seating-floor { position: relative; width: 100%; min-height: 480px; }
-        .seating-table { position: absolute; background: #fff; border: 2px solid var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--color-text-light); box-shadow: var(--shadow-sm); }
+        /* §2.15 - the chart's look lives in CHART (in the script below); these
+                   are the same values, so the preview matches the export. */
+                .seating-table { position: absolute; background: #ffffff; border: 2px solid #d4af37; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: Georgia, "Times New Roman", serif; font-size: 14px; color: #2c2c2c; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        
         .seating-table.long { border-radius: 12px; }
         .seating-table.sweetheart { border-radius: 12px; }
-        .seating-table-name { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.85rem; font-weight: 700; color: var(--color-secondary); pointer-events: none; text-align: center; line-height: 1.1; }
-        .seating-table-count { position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: var(--color-text-light); white-space: nowrap; }
-        .seating-seat { position: absolute; width: 36px; height: 24px; background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--color-text); text-align: center; padding: 1px 2px; line-height: 1.05; cursor: pointer; transition: background .15s ease, border-color .15s ease, transform .15s ease; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .seating-table-name { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: Georgia, "Times New Roman", serif; font-size: 14px; font-weight: 700; color: #2c2c2c; pointer-events: none; text-align: center; line-height: 1.1; }
+        
+        .seating-table-count { position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); font-family: Georgia, "Times New Roman", serif; font-size: 11px; font-weight: 400; color: #6b6b6b; white-space: nowrap; }
+        
+        .seating-seat { position: absolute; width: 36px; height: 24px; background: #f5f0ea; border: 1px solid #e5e0d8; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: Georgia, "Times New Roman", serif; font-size: 11px; color: #2c2c2c; text-align: center; padding: 1px 2px; line-height: 1.05; cursor: pointer; transition: background .15s ease, border-color .15s ease, transform .15s ease; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        
         .seating-seat:hover { border-color: var(--color-primary); transform: scale(1.1); z-index: 2; }
         .seating-seat.occupied { color: #fff; font-weight: 600; }
         .seating-seat.drop-target { background: #fff7e6; border-color: var(--color-primary); border-style: dashed; transform: scale(1.15); z-index: 3; }
@@ -658,6 +664,61 @@ if ('serviceWorker' in navigator) {
   // the hover title (already set). Floor width grows a bit but still fits
   // comfortably in the panel.
 var SEAT_RADIUS = 56;       // px offset from table center
+
+  // §2.15 - ONE source of truth for the chart's look.
+  //
+  // The preview is DOM (it has to be: the visitor clicks a seat to assign a
+  // guest) and the export is a canvas. Before this pass the two had drifted
+  // apart: the export drew a 6 px seat with a grey border on #f5f5f5 while
+  // the preview drew a 4 px seat with a warm border on #f5f0ea, both in a
+  // different font, and the export dropped the "N/M seated" line the preview
+  // shows under every table.
+  //
+  // renderFloor() writes these values into the DOM as inline styles and
+  // buildChartCanvas() draws them, so the preview and the export cannot
+  // disagree. The CSS in the page carries the same values as the default
+  // before the script runs; scripts/verify-chart-parity.py compares the
+  // preview's computed style with the exported pixels and fails if they
+  // ever drift again.
+  var CHART = {
+    font: 'Georgia, "Times New Roman", serif',
+    ink: '#2c2c2c',
+    muted: '#6b6b6b',
+    tableFill: '#ffffff',
+    tableBorder: '#d4af37',
+    tableBorderWidth: 2,
+    tableRadius: 12,
+    tableNameSize: 14,
+    tableCountSize: 11,
+    tableShadow: 'rgba(0,0,0,0.06)',
+    tableShadowBlur: 8,
+    tableShadowY: 2,
+    seatBorder: '#e5e0d8',
+    seatBorderWidth: 1,
+    seatEmpty: '#f5f0ea',
+    seatRadius: 4,
+    seatFontSize: 11,
+    seatInk: '#2c2c2c',
+    seatInkOccupied: '#ffffff',
+    canvasBg: '#fcfaf6'
+  };
+
+  // The inline style for a piece of chart text.
+  function chartFont(size, weight) {
+    return 'font-family:' + CHART.font + ';font-size:' + size + 'px;font-weight:' + weight + ';';
+  }
+
+  // CSS ellipsis, in canvas. The preview truncates a long guest name with
+  // "text-overflow: ellipsis"; the export used to cut it at 9 characters
+  // instead, so the two showed different names.
+  function ellipsize(ctx, text, maxWidth) {
+    if (ctx.measureText(text).width <= maxWidth) return text;
+    var s = text;
+    while (s.length > 1 && ctx.measureText(s + '\u2026').width > maxWidth) {
+      s = s.slice(0, -1);
+    }
+    return s + '\u2026';
+  }
   var TABLE_R = 38;           // round table radius
   var SEAT_W = 36, SEAT_H = 24;
   var state = loadState() || defaultState();
@@ -824,10 +885,15 @@ var SEAT_RADIUS = 56;       // px offset from table center
     state.tables.forEach(function (t) {
       var tw = (t.type === 'long' || t.type === 'sweetheart') ? 220 : (TABLE_R * 2);
       var th = (t.type === 'long' || t.type === 'sweetheart') ? 80 : (TABLE_R * 2);
+      var radius = t.type === 'round' ? '50%' : (CHART.tableRadius + 'px');
       html += '<div class="seating-table ' + t.type + '" data-table-id="' + t.id + '" '
-            + 'style="left:' + (t.cx - tw/2) + 'px; top:' + (t.cy - th/2) + 'px; width:' + tw + 'px; height:' + th + 'px;">'
-            + '<div class="seating-table-name">' + escapeHtml(t.name) + '</div>'
-            + '<div class="seating-table-count">' + countOccupied(t) + '/' + t.seats + ' seated</div>'
+            + 'style="left:' + (t.cx - tw/2) + 'px; top:' + (t.cy - th/2) + 'px; width:' + tw + 'px; height:' + th + 'px;'
+            + 'background:' + CHART.tableFill + ';'
+            + 'border:' + CHART.tableBorderWidth + 'px solid ' + CHART.tableBorder + ';'
+            + 'border-radius:' + radius + ';'
+            + 'box-shadow:0 ' + CHART.tableShadowY + 'px ' + CHART.tableShadowBlur + 'px ' + CHART.tableShadow + ';">'
+            + '<div class="seating-table-name" style="' + chartFont(CHART.tableNameSize, 700) + 'color:' + CHART.ink + ';">' + escapeHtml(t.name) + '</div>'
+            + '<div class="seating-table-count" style="' + chartFont(CHART.tableCountSize, 400) + 'color:' + CHART.muted + ';">' + countOccupied(t) + '/' + t.seats + ' seated</div>'
             + '</div>';
     });
     // seats
@@ -846,6 +912,17 @@ var SEAT_RADIUS = 56;       // px offset from table center
           // we use the seat index parity: if i+1 is the next seat, the plus-one is there
         }
         var style = 'left:' + sp.x + 'px; top:' + sp.y + 'px;';
+        // The size is written inline too. Ten of the eleven localized copies
+        // carried a CSS rule of 64x36 (the machine translator had "improved"
+        // it) while the geometry positions the seats for 36x24 - so those
+        // ten languages drew the seats too big and off their tables. The
+        // inline width and height make the CSS unable to override the
+        // geometry.
+        style += 'width:' + SEAT_W + 'px; height:' + SEAT_H + 'px;';
+        style += chartFont(CHART.seatFontSize, guest ? 600 : 400);
+        style += 'border-radius:' + CHART.seatRadius + 'px;';
+        style += 'border:' + CHART.seatBorderWidth + 'px solid ' + CHART.seatBorder + ';';
+        style += 'color:' + (guest ? CHART.seatInkOccupied : CHART.seatInk) + ';';
         if (guest) style += 'background:' + bgColor + ';border-color:' + bgColor + ';';
         html += '<div class="seating-seat' + occupiedClass + '" data-seat-key="' + seatKey + '" '
               + 'data-table-id="' + t.id + '" data-seat-index="' + i + '" '
@@ -1164,7 +1241,7 @@ var SEAT_RADIUS = 56;       // px offset from table center
     c.width = W; c.height = H;
     var ctx = c.getContext('2d');
     // bg
-    ctx.fillStyle = '#fcfaf6';
+    ctx.fillStyle = CHART.canvasBg;
     ctx.fillRect(0, 0, W, H);
     // title
     ctx.fillStyle = '#2c2c2c';
@@ -1189,24 +1266,36 @@ var SEAT_RADIUS = 56;       // px offset from table center
     state.tables.forEach(function (t) {
       var tw = (t.type === 'long' || t.type === 'sweetheart') ? 220 : (TABLE_R * 2);
       var th = (t.type === 'long' || t.type === 'sweetheart') ? 80 : (TABLE_R * 2);
-      ctx.fillStyle = '#fff';
-      ctx.strokeStyle = '#d4af37';
-      ctx.lineWidth = 2;
+      ctx.fillStyle = CHART.tableFill;
+      ctx.strokeStyle = CHART.tableBorder;
+      ctx.lineWidth = CHART.tableBorderWidth;
+      // The same soft shadow the preview has (--shadow-sm).
+      ctx.shadowColor = CHART.tableShadow;
+      ctx.shadowBlur = CHART.tableShadowBlur;
+      ctx.shadowOffsetY = CHART.tableShadowY;
       if (t.type === 'round') {
         ctx.beginPath();
         ctx.arc(t.cx, t.cy, TABLE_R, 0, Math.PI * 2);
         ctx.fill();
         ctx.stroke();
       } else {
-        roundRect(ctx, t.cx - tw/2, t.cy - th/2, tw, th, 12);
+        roundRect(ctx, t.cx - tw/2, t.cy - th/2, tw, th, CHART.tableRadius);
         ctx.fill();
         ctx.stroke();
       }
-      ctx.fillStyle = '#2c2c2c';
-      ctx.font = '700 14px Georgia, serif';
+      ctx.shadowColor = 'rgba(0,0,0,0)';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.fillStyle = CHART.ink;
+      ctx.font = '700 ' + CHART.tableNameSize + 'px ' + CHART.font;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(t.name, t.cx, t.cy);
+      // The "N/M seated" line under the table. The preview has always shown
+      // it; the export did not.
+      ctx.fillStyle = CHART.muted;
+      ctx.font = '400 ' + CHART.tableCountSize + 'px ' + CHART.font;
+      ctx.fillText(countOccupied(t) + '/' + t.seats + ' seated', t.cx, t.cy + th / 2 + 16);
     });
     // seats
     state.tables.forEach(function (t) {
@@ -1215,23 +1304,25 @@ var SEAT_RADIUS = 56;       // px offset from table center
         var seatKey = t.id + '-s' + i;
         var guestId = (t.assigned && t.assigned[seatKey]) || null;
         var guest = guestId ? state.guests.find(function (g) { return g.id === guestId; }) : null;
-        if (guest) {
-          ctx.fillStyle = (GROUPS[guest.group] || GROUPS.other).color;
-        } else {
-          ctx.fillStyle = '#f5f5f5';
-        }
-        ctx.strokeStyle = '#cccccc';
-        ctx.lineWidth = 1;
-        roundRect(ctx, sp.x, sp.y, SEAT_W, SEAT_H, 6);
+        var seatFill = guest ? (GROUPS[guest.group] || GROUPS.other).color : CHART.seatEmpty;
+        ctx.fillStyle = seatFill;
+        // An occupied seat is a solid block of its group colour in the
+        // preview - the border takes the group colour as well - so the
+        // export strokes it the same way. An empty seat keeps the soft
+        // border.
+        ctx.strokeStyle = guest ? seatFill : CHART.seatBorder;
+        ctx.lineWidth = CHART.seatBorderWidth;
+        roundRect(ctx, sp.x, sp.y, SEAT_W, SEAT_H, CHART.seatRadius);
         ctx.fill();
         ctx.stroke();
-        ctx.fillStyle = guest ? '#fff' : '#7a7a7a';
-        ctx.font = (guest ? '600 ' : '400 ') + '11px Georgia, serif';
+        ctx.fillStyle = guest ? CHART.seatInkOccupied : CHART.seatInk;
+        ctx.font = (guest ? '600 ' : '400 ') + CHART.seatFontSize + 'px ' + CHART.font;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        var txt = guest ? guest.name : (i + 1);
-        if (txt.length > 9) txt = txt.slice(0, 8) + '…';
-        ctx.fillText(txt, sp.x + SEAT_W / 2, sp.y + SEAT_H / 2);
+        var txt = guest ? guest.name : String(i + 1);
+        // The preview truncates with CSS ellipsis; the export has to do the
+        // same or the two show different names.
+        ctx.fillText(ellipsize(ctx, txt, SEAT_W - 6), sp.x + SEAT_W / 2, sp.y + SEAT_H / 2);
       });
     });
     ctx.restore();
@@ -1324,6 +1415,129 @@ var SEAT_RADIUS = 56;       // px offset from table center
     ];
     saveState();
   }
+  // §2.15 - a small read-only hook so the verification script can compare
+  // the PREVIEW with the exported PNG: the preview's computed style
+  // against the pixels the export actually draws.
+  window.__waSeatDebug = function () {
+    var W = 1600, H = 1200;
+    var c = buildChartCanvas();
+    var ctx = c.getContext('2d');
+    var floorW = maxFloorX() + 80, floorH = maxFloorY() + 80;
+    var scale = Math.min((W - 80) / floorW, (H - 140) / floorH);
+    var offX = (W - floorW * scale) / 2;
+    var offY = 120;
+
+    // Every colour the export contains, counted. The one that matters is
+    // the muted colour of the "N/M seated" line: the export used to drop
+    // that line entirely, and nothing else on the sheet is this colour.
+    var counts = {};
+    var data = ctx.getImageData(0, 0, W, H).data;
+    for (var i = 0; i < data.length; i += 4) {
+      var key = data[i] + ',' + data[i + 1] + ',' + data[i + 2];
+      counts[key] = (counts[key] || 0) + 1;
+    }
+
+    // The seats of the preview, each with the colour the EXPORT draws in
+    // the same place. The mode of a small window is used, not a single
+    // pixel: the middle of a seat holds its number.
+    var seats = [];
+    var nodes = floorEl.querySelectorAll('.seating-seat');
+    for (var s = 0; s < nodes.length && s < 8; s++) {
+      var el = nodes[s];
+      var cs = getComputedStyle(el);
+      var cx = Math.round(offX + (parseFloat(el.style.left) + SEAT_W / 2) * scale);
+      var cy = Math.round(offY + (parseFloat(el.style.top) + SEAT_H / 2) * scale);
+      seats.push({
+        bg: cs.backgroundColor,
+        border: cs.borderTopColor,
+        radius: cs.borderRadius,
+        fontSize: cs.fontSize,
+        font: cs.fontFamily,
+        fontWeight: cs.fontWeight,
+        color: cs.color,
+        width: cs.width,
+        height: cs.height,
+        exportColor: modeColor(ctx, cx, cy, Math.max(1, Math.round(SEAT_H * scale / 4)))
+      });
+    }
+
+    var tables = [];
+    var tnodes = floorEl.querySelectorAll('.seating-table');
+    for (var j = 0; j < tnodes.length && j < 3; j++) {
+      var tn = tnodes[j];
+      var tcs = getComputedStyle(tn);
+      var nameEl = tn.querySelector('.seating-table-name');
+      var countEl = tn.querySelector('.seating-table-count');
+      tables.push({
+        border: tcs.borderTopColor,
+        borderWidth: tcs.borderTopWidth,
+        radius: tcs.borderRadius,
+        bg: tcs.backgroundColor,
+        nameSize: nameEl ? getComputedStyle(nameEl).fontSize : null,
+        nameColor: nameEl ? getComputedStyle(nameEl).color : null,
+        countSize: countEl ? getComputedStyle(countEl).fontSize : null,
+        countColor: countEl ? getComputedStyle(countEl).color : null,
+        countText: countEl ? countEl.textContent : null,
+        countVisible: countEl ? !!countEl.offsetParent : false
+      });
+    }
+
+    // The width the CSS leaves for the text inside a seat: the box is 36 px
+    // wide, the border takes 1 px on each side and the padding 2 px on each
+    // side, so 30 px are left for the name.
+    var seatTextWidth = null;
+    if (nodes.length) {
+      var cs0 = getComputedStyle(nodes[0]);
+      seatTextWidth = nodes[0].clientWidth
+        - parseFloat(cs0.paddingLeft) - parseFloat(cs0.paddingRight);
+    }
+
+    return {
+      chart: CHART,
+      scale: scale,
+      offX: offX,
+      offY: offY,
+      seats: seats,
+      tables: tables,
+      // The width the CSS leaves for a seat's text. The export truncates a
+      // long name with the SAME width, so the preview and the export show
+      // the same name - the preview with CSS ellipsis, the export with
+      // ellipsize().
+      seatTextWidth: seatTextWidth,
+      truncate: function (name) {
+        var c = document.createElement('canvas');
+        var cx = c.getContext('2d');
+        cx.font = '400 ' + CHART.seatFontSize + 'px ' + CHART.font;
+        return ellipsize(cx, name, SEAT_W - 6);
+      },
+      mutedPixels: counts['107,107,107'] || 0,
+      goldPixels: counts['212,175,55'] || 0,
+      seatEmptyPixels: counts['245,240,234'] || 0,
+      seatBorderPixels: counts['229,224,216'] || 0,
+      canvasBgPixels: counts['252,250,246'] || 0
+    };
+  };
+
+  // The most common colour in a small window of the export. A single pixel
+  // would be useless: the middle of a seat is where its number is drawn.
+  function modeColor(ctx, cx, cy, r) {
+    var x0 = Math.max(0, cx - r);
+    var y0 = Math.max(0, cy - r);
+    var w = Math.min(ctx.canvas.width - x0, r * 2 + 1);
+    var h = Math.min(ctx.canvas.height - y0, r * 2 + 1);
+    if (w <= 0 || h <= 0) return null;
+    var d = ctx.getImageData(x0, y0, w, h).data;
+    var counts = {};
+    var best = null;
+    var bestN = 0;
+    for (var i = 0; i < d.length; i += 4) {
+      var key = d[i] + ',' + d[i + 1] + ',' + d[i + 2];
+      counts[key] = (counts[key] || 0) + 1;
+      if (counts[key] > bestN) { bestN = counts[key]; best = key; }
+    }
+    return best;
+  }
+
   render();
 })();
 </script>
