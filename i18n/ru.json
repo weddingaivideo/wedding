@@ -8769,4 +8769,22 @@
   "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF (самые маленькие файлы — один раз загружает кодировщик 3,4 МБ)"
 ,
   "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP без потерь (для графики — фотография станет больше)"
+,
+  "tools.add-text-to-wedding-photo.label_text.d4d2a668": "Положение"
+,
+  "tools.add-text-to-wedding-photo.option_text.c949729c": "Сверху"
+,
+  "tools.add-text-to-wedding-photo.option_text.f620edd1": "Сверху по центру"
+,
+  "tools.add-text-to-wedding-photo.option_text.c646a231": "По центру"
+,
+  "tools.add-text-to-wedding-photo.option_text.879e6d08": "Снизу по центру"
+,
+  "tools.add-text-to-wedding-photo.option_text.12c4c5e8": "Снизу"
+,
+  "tools.add-text-to-wedding-photo.small_text.943ad5ab": "«Снизу по центру» — классический формат save the date."
+,
+  "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "Перетащите текст прямо по фото, чтобы переместить его — положение применяется к каждой фотографии в пакете."
+,
+  "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "Сбросить положение"
 }

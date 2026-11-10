@@ -66820,4 +66820,8 @@
   "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF (أصغر الملفات — ينزّل مُرمِّزًا بحجم 3.4 ميغابايت مرة واحدة)"
 ,
   "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP بلا فقد (للرسوم — الصورة تصبح أكبر)"
+,
+  "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "اسحب النص مباشرة على الصورة لتحريكه — ينطبق الموضع على كل صورة في الدفعة."
+,
+  "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "إعادة تعيين الموضع"
 }

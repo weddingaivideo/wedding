@@ -64131,4 +64131,8 @@
   "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF (सबसे छोटी फ़ाइलें — एक बार 3.4 MB एन्कोडर डाउनलोड होता है)"
 ,
   "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP लॉसलेस (ग्राफ़िक्स के लिए — फ़ोटो बड़ी हो जाती है)"
+,
+  "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "टेक्स्ट को सीधे फ़ोटो पर खींचकर उसे हिलाएँ — यह स्थिति बैच की हर फ़ोटो पर लागू होती है।"
+,
+  "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "स्थिति रीसेट करें"
 }

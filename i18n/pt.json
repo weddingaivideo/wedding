@@ -62234,4 +62234,22 @@
   "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF (os menores arquivos — baixa um codificador de 3,4 MB uma vez)"
 ,
   "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP sem perdas (para gráficos — uma foto fica maior)"
+,
+  "tools.add-text-to-wedding-photo.label_text.d4d2a668": "Posição"
+,
+  "tools.add-text-to-wedding-photo.option_text.c949729c": "Topo"
+,
+  "tools.add-text-to-wedding-photo.option_text.f620edd1": "Centro no topo"
+,
+  "tools.add-text-to-wedding-photo.option_text.c646a231": "Centro"
+,
+  "tools.add-text-to-wedding-photo.option_text.879e6d08": "Centro embaixo"
+,
+  "tools.add-text-to-wedding-photo.option_text.12c4c5e8": "Embaixo"
+,
+  "tools.add-text-to-wedding-photo.small_text.943ad5ab": "Centro embaixo é o lugar clássico do save-the-date."
+,
+  "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "Arraste o texto direto sobre a foto para movê-lo — a posição vale para todas as fotos do lote."
+,
+  "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "Redefinir posição"
 }

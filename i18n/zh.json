@@ -67593,4 +67593,22 @@
   "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF（文件最小 —— 需一次性下载 3.4 MB 编码器）"
 ,
   "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP 无损（适合图形 —— 照片反而会变大）"
+,
+  "tools.add-text-to-wedding-photo.label_text.d4d2a668": "位置"
+,
+  "tools.add-text-to-wedding-photo.option_text.c949729c": "顶部"
+,
+  "tools.add-text-to-wedding-photo.option_text.f620edd1": "顶部居中"
+,
+  "tools.add-text-to-wedding-photo.option_text.c646a231": "正中"
+,
+  "tools.add-text-to-wedding-photo.option_text.879e6d08": "底部居中"
+,
+  "tools.add-text-to-wedding-photo.option_text.12c4c5e8": "底部"
+,
+  "tools.add-text-to-wedding-photo.small_text.943ad5ab": "「底部居中」是 Save the Date 最经典的写法。"
+,
+  "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "直接在照片上拖动文字即可移动——这个位置会应用到批次里的每一张照片。"
+,
+  "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "重置位置"
 }

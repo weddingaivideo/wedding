@@ -65681,4 +65681,8 @@
   "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF (ไฟล์เล็กที่สุด — ดาวน์โหลดตัวเข้ารหัส 3.4 MB ครั้งเดียว)"
 ,
   "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP แบบไม่สูญเสีย (สำหรับกราฟิก — ภาพถ่ายจะใหญ่ขึ้น)"
+,
+  "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "ลากข้อความบนรูปภาพโดยตรงเพื่อย้ายตำแหน่ง — ตำแหน่งนี้ใช้กับทุกภาพในชุด"
+,
+  "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "รีเซ็ตตำแหน่ง"
 }

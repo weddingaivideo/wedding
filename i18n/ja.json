@@ -65305,4 +65305,8 @@
   "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF（最小ファイル —— 3.4 MB のエンコーダーを一度だけダウンロードします）"
 ,
   "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP ロスレス（グラフィック向け — 写真は逆に大きくなります）"
+,
+  "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "写真の上のテキストを直接ドラッグすると動かせます。この位置はバッチ内のすべての写真に適用されます。"
+,
+  "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "位置をリセット"
 }

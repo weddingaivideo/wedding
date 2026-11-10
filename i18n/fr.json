@@ -62812,4 +62812,8 @@
   "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF (fichiers les plus petits ; télécharge un encodeur de 3,4 Mo une fois)"
 ,
   "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP sans perte (pour les graphismes : une photo devient plus lourde)"
+,
+  "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "Faites glisser le texte directement sur la photo pour le déplacer — la position s'applique à toutes les photos du lot."
+,
+  "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "Réinitialiser la position"
 }

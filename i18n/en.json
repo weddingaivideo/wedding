@@ -44344,4 +44344,22 @@
   "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF (smallest files — downloads a 3.4 MB encoder once)"
 ,
   "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP lossless (for graphics — a photo gets bigger)"
+,
+  "tools.add-text-to-wedding-photo.label_text.d4d2a668": "Position"
+,
+  "tools.add-text-to-wedding-photo.option_text.c949729c": "Top"
+,
+  "tools.add-text-to-wedding-photo.option_text.f620edd1": "Top-Center"
+,
+  "tools.add-text-to-wedding-photo.option_text.c646a231": "Center"
+,
+  "tools.add-text-to-wedding-photo.option_text.879e6d08": "Bottom-Center"
+,
+  "tools.add-text-to-wedding-photo.option_text.12c4c5e8": "Bottom"
+,
+  "tools.add-text-to-wedding-photo.small_text.943ad5ab": "Bottom-Center is the classic save-the-date spot."
+,
+  "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "Drag the text straight on the photo to move it — the position applies to every photo in the batch."
+,
+  "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "Reset position"
 }

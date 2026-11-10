@@ -306,16 +306,19 @@ if ('serviceWorker' in navigator) {
                     </div>
 
                     <div class="wa-tool-control">
-                        <label for="position" data-i18n="tools.add-text-to-wedding-photo.label_text.d4d2a668">位置</label>
-                        <select id="position">
-                            <option value="top" data-i18n="tools.add-text-to-wedding-photo.option_text.c949729c">顶部</option>
-                            <option value="top-center" selected data-i18n="tools.add-text-to-wedding-photo.option_text.f620edd1">顶部居中</option>
-                            <option value="center" data-i18n="tools.add-text-to-wedding-photo.option_text.c646a231">正中</option>
-                            <option value="bottom-center" data-i18n="tools.add-text-to-wedding-photo.option_text.879e6d08">底部居中</option>
-                            <option value="bottom" data-i18n="tools.add-text-to-wedding-photo.option_text.12c4c5e8">底部</option>
-                        </select>
-                        <small data-i18n="tools.add-text-to-wedding-photo.small_text.943ad5ab">「底部居中」是 Save the Date 最经典的写法。</small>
+                    <label for="position" data-i18n="tools.add-text-to-wedding-photo.label_text.d4d2a668">Position</label>
+                    <select id="position">
+                    <option value="top" data-i18n="tools.add-text-to-wedding-photo.option_text.c949729c">Top</option>
+                    <option value="top-center" selected data-i18n="tools.add-text-to-wedding-photo.option_text.f620edd1">Top-Center</option>
+                    <option value="center" data-i18n="tools.add-text-to-wedding-photo.option_text.c646a231">Center</option>
+                    <option value="bottom-center" data-i18n="tools.add-text-to-wedding-photo.option_text.879e6d08">Bottom-Center</option>
+                    <option value="bottom" data-i18n="tools.add-text-to-wedding-photo.option_text.12c4c5e8">Bottom</option>
+                    </select>
+                    <small data-i18n="tools.add-text-to-wedding-photo.small_text.943ad5ab">Bottom-Center is the classic save-the-date spot.</small>
+                    <small data-i18n="tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6">Drag the text straight on the photo to move it &mdash; the position applies to every photo in the batch.</small>
+                    <button type="button" class="btn btn-secondary btn-small" id="reset-position-btn" data-i18n="tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7">Reset position</button>
                     </div>
+                    
 
                     <div class="wa-tool-control">
                         <label for="primary-size">Tamaño de fuente del título principal:<span id="primary-size-val">56</span>px</label>
@@ -366,7 +369,7 @@ if ('serviceWorker' in navigator) {
                 <h2 data-i18n="tools.add-text-to-wedding-photo.h2_text.e0400439">3. 预览与下载</h2>
                 <div class="wa-text-preview-wrap" id="preview-wrap" aria-live="polite">
                     <div class="wa-text-preview-empty" id="preview-empty" data-i18n="tools.add-text-to-wedding-photo.div_text.108b0a88">拖入一张照片即可看到实时预览。</div>
-                    <canvas id="preview-canvas" class="wa-text-preview-canvas" hidden></canvas>
+                    <canvas id="preview-canvas" class="wa-text-preview-canvas" hidden style="touch-action:none"></canvas>
                 </div>
                 <div class="wa-tool-actions">
                     <button type="button" class="btn btn-primary" id="run-btn" disabled data-i18n="tools.add-text-to-wedding-photo.button_text.b8104e1e">应用全部</button>
@@ -673,6 +676,7 @@ if ('serviceWorker' in navigator) {
       var swatchRow = document.getElementById('swatch-row');
 
       var previewCanvas = document.getElementById('preview-canvas');
+      var resetPositionBtn = document.getElementById('reset-position-btn');
       var previewEmpty = document.getElementById('preview-empty');
       var previewWrap = document.getElementById('preview-wrap');
 
@@ -692,7 +696,13 @@ if ('serviceWorker' in navigator) {
           color: colorEl.value || '#FFFFFF',
           shadow: !!shadowToggleEl.checked,
           shadowOffset: parseInt(shadowOffsetEl.value, 10) || 0,
-          format: formatEl.value || 'image/png'
+          format: formatEl.value || 'image/png',
+          // §2.2 - the drag offset, in CANVAS pixels. Canvas pixels (not
+          // display pixels) are what makes the preview and the exported
+          // full-size image agree: processOne() renders onto a canvas of
+          // the same natural size and calls the same drawTextBlock().
+          textX: textOffsetX,
+          textY: textOffsetY
         };
       }
 
@@ -766,6 +776,25 @@ if ('serviceWorker' in navigator) {
           }
         }
 
+        // The block's measured width, so the drag can hit-test it and
+        // clamp it to the frame.
+        var blockW = 0;
+        if (primary) blockW = Math.max(blockW, measureText(ctx, primary, primarySize, family).width);
+        if (secondary) blockW = Math.max(blockW, measureText(ctx, secondary, secondarySize, family).width);
+
+        // Natural (un-dragged) geometry.
+        var natCenterX = Math.round(canvasW / 2);
+        var natTop = primary ? primaryY - primarySize : secondaryY - secondarySize;
+        var natBottom = secondary ? secondaryY + Math.round(secondarySize * 0.3)
+                                  : primaryY + Math.round(primarySize * 0.3);
+
+        // §2.2 - apply the drag offset.
+        var ox = settings.textX || 0;
+        var oy = settings.textY || 0;
+        var centerX = natCenterX + ox;
+        primaryY += oy;
+        secondaryY += oy;
+
         ctx.save();
         ctx.textAlign = 'center';
         ctx.textBaseline = 'alphabetic';
@@ -779,14 +808,104 @@ if ('serviceWorker' in navigator) {
         if (primary) {
           ctx.font = primarySize + 'px ' + family;
           ctx.fillStyle = settings.color;
-          ctx.fillText(primary, Math.round(canvasW / 2), primaryY);
+          ctx.fillText(primary, centerX, primaryY);
         }
         if (secondary) {
           ctx.font = secondarySize + 'px ' + family;
           ctx.fillStyle = settings.color;
-          ctx.fillText(secondary, Math.round(canvasW / 2), secondaryY);
+          ctx.fillText(secondary, centerX, secondaryY);
         }
         ctx.restore();
+
+        // The block's bounding box, with and without the offset. The drag
+        // uses it to hit-test and to clamp.
+        return {
+          left: centerX - blockW / 2,
+          right: centerX + blockW / 2,
+          top: primary ? primaryY - primarySize : secondaryY - secondarySize,
+          bottom: secondary ? secondaryY + Math.round(secondarySize * 0.3)
+                            : primaryY + Math.round(primarySize * 0.3),
+          natLeft: natCenterX - blockW / 2,
+          natRight: natCenterX + blockW / 2,
+          natTop: natTop,
+          natBottom: natBottom
+        };
+      }
+
+      // ---------- dragging the text (§2.2) ---------------------------------
+      //
+      // The preview canvas is FULL SIZE and DISPLAYED scaled down, so a
+      // pointer position has to be mapped through the display scale.
+      var textOffsetX = 0;
+      var textOffsetY = 0;
+      var lastBlock = null;
+      var dragState = null;
+
+      function canvasPoint(ev) {
+        var rect = previewCanvas.getBoundingClientRect();
+        if (!rect.width || !rect.height) return null;
+        return {
+          x: (ev.clientX - rect.left) * (previewCanvas.width / rect.width),
+          y: (ev.clientY - rect.top) * (previewCanvas.height / rect.height)
+        };
+      }
+
+      function hitBlock(p) {
+        if (!lastBlock) return false;
+        var rect = previewCanvas.getBoundingClientRect();
+        if (!rect.width) return false;
+        // A little slack, in canvas pixels.
+        var pad = 10 * (previewCanvas.width / rect.width);
+        return p.x >= lastBlock.left - pad && p.x <= lastBlock.right + pad &&
+               p.y >= lastBlock.top - pad && p.y <= lastBlock.bottom + pad;
+      }
+
+      function onPointerDown(ev) {
+        var p = canvasPoint(ev);
+        if (!p || !hitBlock(p)) return;
+        dragState = { startX: p.x, startY: p.y, offX: textOffsetX, offY: textOffsetY };
+        previewCanvas.style.cursor = 'grabbing';
+        if (previewCanvas.setPointerCapture) {
+          try { previewCanvas.setPointerCapture(ev.pointerId); } catch (e) { /* ignore */ }
+        }
+        ev.preventDefault();
+      }
+
+      function onPointerMove(ev) {
+        var p = canvasPoint(ev);
+        if (!p) return;
+        if (!dragState) {
+          previewCanvas.style.cursor = hitBlock(p) ? 'grab' : 'default';
+          return;
+        }
+        var nx = dragState.offX + (p.x - dragState.startX);
+        var ny = dragState.offY + (p.y - dragState.startY);
+        if (lastBlock) {
+          // Never let the block leave the frame - a dragged-away text is
+          // a lost text.
+          nx = Math.min(previewCanvas.width - lastBlock.natRight,
+                        Math.max(-lastBlock.natLeft, nx));
+          ny = Math.min(previewCanvas.height - lastBlock.natBottom,
+                        Math.max(-lastBlock.natTop, ny));
+        }
+        textOffsetX = Math.round(nx);
+        textOffsetY = Math.round(ny);
+        renderPreview();
+      }
+
+      function onPointerUp(ev) {
+        if (!dragState) return;
+        dragState = null;
+        previewCanvas.style.cursor = 'default';
+        if (previewCanvas.releasePointerCapture && ev.pointerId !== undefined) {
+          try { previewCanvas.releasePointerCapture(ev.pointerId); } catch (e) { /* ignore */ }
+        }
+      }
+
+      function resetTextPosition() {
+        textOffsetX = 0;
+        textOffsetY = 0;
+        renderPreview();
       }
 
       // ---------- preview ----------------------------------------------------------
@@ -801,24 +920,27 @@ if ('serviceWorker' in navigator) {
         previewCanvas.hidden = false;
 
         var img = entry.img;
-        // Cap preview display size to 720px longest edge; canvas pixels = image full size
-        var maxEdge = 720;
-        var scale = 1;
-        if (Math.max(img.naturalWidth, img.naturalHeight) > maxEdge) {
-          scale = maxEdge / Math.max(img.naturalWidth, img.naturalHeight);
-        }
-        var dispW = Math.round(img.naturalWidth * scale);
-        var dispH = Math.round(img.naturalHeight * scale);
+        // The canvas BITMAP is the photo at full size - that is what the
+        // export renders, and what the drag offset is measured in.
         previewCanvas.width = img.naturalWidth;
         previewCanvas.height = img.naturalHeight;
-        previewCanvas.style.width = dispW + 'px';
-        previewCanvas.style.height = dispH + 'px';
+        // The DISPLAY size is left to CSS (max-width:100%, max-height:420px).
+        //
+        // §2.2 - do NOT set style.width/style.height here. An explicit CSS
+        // width AND height on a replaced element makes max-height clamp the
+        // height WITHOUT touching the width, so a 1200x900 photo was laid out
+        // as 720x540 and then squashed to 720x420 - the preview showed a
+        // distorted photo that did not match the exported file. With
+        // width/height left auto, the max-* constraints keep the ratio.
         var ctx = previewCanvas.getContext('2d');
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
         ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
         ctx.drawImage(img, 0, 0, previewCanvas.width, previewCanvas.height);
-        drawTextBlock(ctx, getSettings(), previewCanvas.width, previewCanvas.height);
+        lastBlock = drawTextBlock(ctx, getSettings(), previewCanvas.width, previewCanvas.height);
+        if (resetPositionBtn) {
+          resetPositionBtn.disabled = (textOffsetX === 0 && textOffsetY === 0);
+        }
       }
 
       function schedulePreview() {
@@ -1048,6 +1170,18 @@ if ('serviceWorker' in navigator) {
           renderPreview();
         }
       });
+
+      // §2.2 - drag the text straight on the photo.
+      previewCanvas.addEventListener('pointerdown', onPointerDown);
+      previewCanvas.addEventListener('pointermove', onPointerMove);
+      previewCanvas.addEventListener('pointerup', onPointerUp);
+      previewCanvas.addEventListener('pointercancel', onPointerUp);
+      previewCanvas.addEventListener('pointerleave', function () {
+        if (!dragState) previewCanvas.style.cursor = 'default';
+      });
+      if (resetPositionBtn) {
+        resetPositionBtn.addEventListener('click', resetTextPosition);
+      }
 
       refreshUI();
     });

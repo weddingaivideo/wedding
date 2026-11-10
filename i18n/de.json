@@ -63431,4 +63431,8 @@
   "tools.compress-wedding-photos.option_text.b6c7d8e9": "AVIF (kleinste Dateien – lädt einmalig einen 3,4-MB-Encoder herunter)"
 ,
   "tools.compress-wedding-photos.option_text.c7d8e9f0": "WebP verlustfrei (für Grafiken – ein Foto wird größer)"
+,
+  "tools.add-text-to-wedding-photo.small_text.drag_to_move.k7m2n4p6": "Ziehe den Text direkt auf dem Foto, um ihn zu verschieben – die Position gilt für jedes Foto im Stapel."
+,
+  "tools.add-text-to-wedding-photo.button_text.reset_position.r9s3t5v7": "Position zurücksetzen"
 }
