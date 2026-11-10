@@ -1,5 +1,32 @@
 {
   "libraries": {
+    "face-api-0.22.2": {
+      "files": {
+        "LICENSE": {
+          "bytes": 1093,
+          "sha256": "a75d0c9ddf275d6e25f1e449cc8f8dfa8dab7756cc0e8a360dfedc9c7784d0a5",
+          "url": "https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/LICENSE"
+        },
+        "face-api.min.js": {
+          "bytes": 663829,
+          "sha256": "5d66ec95338d7fcc365ce15481b8599baf4b6e22c9a624b76d4ca821a669a659",
+          "url": "https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"
+        },
+        "models/tiny_face_detector_model-shard1": {
+          "bytes": 193321,
+          "sha256": "b7503ce7df31039b1c43316a9b865cab6a70dd748cc602d3fa28b551503c3871",
+          "url": "https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@v0.22.2/weights/tiny_face_detector_model-shard1"
+        },
+        "models/tiny_face_detector_model-weights_manifest.json": {
+          "bytes": 2953,
+          "sha256": "14c60659a31b6b7b1320077171b8f8adcb24ef0e62dde62ce603bcb49a1b49b5",
+          "url": "https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@v0.22.2/weights/tiny_face_detector_model-weights_manifest.json"
+        }
+      },
+      "license": "MIT",
+      "package": "face-api.js",
+      "version": "0.22.2"
+    },
     "fflate": {
       "files": {
         "LICENSE": {

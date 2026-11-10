@@ -47762,7 +47762,7 @@
   "tools.crop-wedding-photo-for-reels.th_text.video_tiein.7q8r9s0t": "วิดีโอรวม",
   "tools.crop-wedding-photo-for-reels.td_text.weddingaivideo.1u2v3w4x": "<strong>WeddingAI.video ครอบรีล</strong> (เครื่องมือนี้)",
   "tools.crop-wedding-photo-for-reels.td_text.916_11_11_45_43_1_1.5y6z7a8b": "<strong>9:16 / 1:1 / 4:5 / 4:3 / 3:2</strong>",
-  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>ครอบเบี่ยงกลาง, อัตโนมัติ</strong>",
+  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>ออฟเซ็นเตอร์ไบแอส + ตรวจจับใบหน้าบนเครื่อง</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.unlimited_100plus_tested.3g4h5i6j": "<strong>ไม่จำกัด, 100+ ภาพทดสอบ</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.same_workflow_99_video.7k8l9m0n": "<strong>เวิร์กโฟลว์ วิดีโอเดียวกัน</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.imagen_ai.1o2p3q4r": "Canva (canva.com/th_th)",
@@ -47795,7 +47795,7 @@
   "tools.crop-wedding-photo-for-reels.td_text.no_tool.5s6t7u8v": "ไม่มีใบหน้าอัตโนมัติ",
   "tools.crop-wedding-photo-for-reels.td_text.n_a.9w0x1y2z": "N/D",
   "tools.crop-wedding-photo-for-reels.td_text.not_offered.3a4b5c6d": "ไม่มี",
-  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "เครื่องมือครอบส่วนใหญ่ต้องตรงกลาง 9:16 ด้วยตนเองสำหรับรีล. ความแตกต่างเฉพาะของ WeddingAI.video: ครอบอัตโนมัติแบบเบี่ยงกลางแทนการตรวจจับใบหน้า (เลื่อนกรอบภาพลง 60% ในภาพแนวนอน ซึ่งเป็นจุดที่คู่บ่าวสาวมักยืนอยู่ คู่จึงยังอยู่ในเฟรม ไม่ถูกตัดออก) + 9:16 (รีล/Stories/YT Shorts) + 1:1 (IG feed) + 4:5 (IG portrait) + 4:3 + 3:2 + 9 โมเดลงานแต่งงาน (Save the Date/RSVP/บทวิดีโอ) + 11 ภาษา + เวิร์กโฟลว์วิดีโอ เดียวกัน.",
+  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "เครื่องมือตัดภาพส่วนใหญ่ต้องให้คุณจัดวางใบหน้าเจ้าบ่าวด้วยมือในแต่ละรูปจากกว่า 100 ภาพแต่งงาน เครื่องมือของ WeddingAI.video ใช้ออฟเซ็นเตอร์ไบแอสเป็นค่าเริ่มต้น โดยเลื่อนกรอบตัดลง 60% ในภาพแนวนอน (ตรงที่คู่บ่าสามักยืนอยู่) เพื่อให้คู่บ่าสาอยู่ในกรอบไม่ถูกตัดออก และคุณยังสลับไปใช้การตรวจจับใบหน้าจริงบนเครื่องตัวเองได้ เมื่ออยากให้กรอบตามใบหน้าจริง รองรับ 9:16 + 1:1 + 4:5 ในการส่งออกครั้งเดียว และชุดภาพเดียวกันนี้ยังป้อนเข้าการส่งออกสำหรับ IG ของวิดีโอ AI: Reels แนวตั้ง + YT Shorts แนวนอน + 1:1 สำหรับฟีด + 4:5 สำหรับแครอเซลล์ IG",
   "tools.save-the-date-maker.h2_text.invitation_comparison_5_1a2b3c4d": "เปรียบเทียบเครื่องมือสร้าง Save the Date: 7 เครื่องมือ vs WeddingAI.video วิดีโอ AI 30 วินาที + 9 ภาษา",
   "tools.save-the-date-maker.p_text.google_serp_for_save_the_da.5e6f7g8h": "Google SERPs (ตุลาคม 2025) สำหรับ «Save the Date งานแต่งงาน ฟรี» แสดงเป็นหลัก: Canva (canva.com/th_th — การ์ด Save the date 480+ แบบ หลากหลายสไตล์ แก้ไขข้อความ สี รูป ดาวน์โหลดได้ทันที), Facebook เตรียมงานแต่งงาน (Save The Date ป้ายสวย ๆ สำหรับถ่ายพรีเวดดิ้ง เก็บโมเมนต์ก่อนวันจริง สั่งทำตามสีธีม), RSVPify (rsvpify.com/weddings — การ์ดแจ้งวันงานล่วงหน้าฟรี สร้างและส่งการ์ด วางแผนงานแต่งงาน งานวันเกิดครบรอบ การรวมญาติ), Deciduous Press (deciduouspress.com.au/journal — การ์ดแจ้งวันแต่งงานล่วงหน้าเป็นตัวเลือกเสริมจากการ์ดเชิญทางการ), Minted (minted.com/save-the-date-wording — ตัวอย่างข้อความแจ้งวันสำคัญ 19 ส.ค. 2568), Paperlust (paperlust.co — ตัวอย่างข้อความแจ้งวันงาน 30 แบบ ทุกสไตล์ 5 อย่างที่การ์ดทุกใบต้องมี), Hitched (hitched.co.uk — คู่มือ 10-12 เดือนก่อนวันแต่งงานเริ่มสร้างเว็บไซต์ฟรี 8-10 เดือนส่งการ์ด). เครื่องมือ Save the Date th ส่วนใหญ่เป็นเทมเพลตนิ่งไม่มีภาพเคลื่อนไหว. WeddingAI.video เป็นเพียงเครื่องมือเดียวที่มี 9 ภาษา + ฟอนต์ไทยงานแต่งงาน 50 แบบ (บ่าวสาว / Save the Date / 14.09.2026 / กรุงเทพฯ) + วิดีโอ AI เคลื่อนไหว 30 วินาที + 11 ภาษา + เวิร์กโฟลว์วิดีโอ เดียวกัน:",
   "tools.save-the-date-maker.th_text.tool.9i0j1k2l": "เครื่องมือ",
@@ -62413,7 +62413,7 @@
   "tools.crop-wedding-photo-for-reels.option_text.43c3a9cd": "ไวด์สกรีน 16:9 (1920×1080)",
   "tools.crop-wedding-photo-for-reels.option_text.7686433a": "การพิมพ์ 4:3 (1600×1200)",
   "tools.crop-wedding-photo-for-reels.small_text.5cf54bc3": "ใช้สี่เหลี่ยมที่ใหญ่ที่สุดในรูปภาพของคุณที่สามารถรองรับอัตราส่วนนี้ได้ จากนั้นปรับขนาดเบราว์เซอร์เป็นพิกเซลดั้งเดิมของ Instagram",
-  "tools.crop-wedding-photo-for-reels.small_text.a6b24d1f": "หน้าต่างครอบตัดจะเอนเอียงไปยังตำแหน่งของผู้คนที่เห็นทั่วไปในภาพบุคคลงานแต่งงาน ใบหน้าของเจ้าสาวจะยังคงอยู่ในเฟรม แทนที่จะวางพื้นหลังไว้ตรงกลาง เลือกตัวเลือกนี้หากเปิดวัสดุเวอร์ชันแนวนอนไว้ หากภาพต้นฉบับมีการจัดองค์ประกอบภาพแนวตั้งแบบกะทัดรัดอยู่แล้ว คุณสามารถปิดภาพนั้นได้",
+  "tools.crop-wedding-photo-for-reels.small_text.a6b24d1f": "กำหนดจุดเริ่มต้นของกรอบตัด: 60% ลงไปตามแกน Y สำหรับภาพแนวนอน (ตรงที่คู่บ่าสามีมายืน) และกึ่งกลางจริงสำหรับภาพแนวตั้ง นี่คือกฎคงที่ ไม่ใช่การวัดจริง — เปิด “การตัดโดยรู้หน้า” ด้านล่างเพื่อให้การตัดตามใบหน้าจริง ลากกรอบในขั้นตอนที่ 3 เพื่อปรับสำหรับแต่ละรูป เปิดสำหรับภาพแนวนอน และปิดถ้าภาพต้นฉบับเป็นองค์ประกอบแนวตั้งที่กระชับอยู่แล้ว",
   "tools.crop-wedding-photo-for-reels.label_text.94cda6a5": "ความละเอียดของพืชผล",
   "tools.crop-wedding-photo-for-reels.option_text.6cfe245c": "Instagram (1080×X) — อัปโหลดโดยตรง",
   "tools.crop-wedding-photo-for-reels.option_text.67fc4815": "Native Max — รักษาความละเอียดของแหล่งที่มา",
@@ -65628,7 +65628,7 @@
 ,
   "tools.copy.cropStageTitle.zzzzzz6c01": "ปรับการครอป"
 ,
-  "tools.copy.cropStageHint.zzzzzz6c02": "ลากมุมเพื่อเลือกส่วนที่ต้องการ รูปที่คุณไม่ได้แตะจะยังใช้การครอปอัตโนมัติแบบกึ่งกลาง"
+  "tools.copy.cropStageHint.zzzzzz6c02": "ลากมุมเพื่อจัดเฟรม รูปที่คุณไม่ได้แตะจะยังคงใช้การตัดอัตโนมัติ — ออฟเซ็นเตอร์ไบแอส หรือตามใบหน้าเมื่อเปิดการตัดโดยรู้หน้า"
 ,
   "tools.copy.cropPrev.zzzzzz6c03": "รูปก่อนหน้า"
 ,
@@ -65701,4 +65701,26 @@
   "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "ดาวน์โหลดหน้านี้ (PNG 300 DPI)"
 ,
   "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "ดาวน์โหลดทุกหน้า (PDF พร้อมพิมพ์)"
+,
+  "tools.copy.cropFaceFailed.6f708192": "อุปกรณ์นี้ไม่รองรับการตรวจจับใบหน้า — ยังคงใช้ออฟเซ็นเตอร์ไบแอสเดิม"
+,
+  "tools.copy.cropFaceFound.4d5e6f70": "พบ {n} ใบหน้า — กรอบตัดจะเก็บทุกใบหน้าไว้ภายใน"
+,
+  "tools.copy.cropFaceLoading.2b3c4d5e": "กำลังโหลดตัวตรวจจับใบหน้า…"
+,
+  "tools.copy.cropFaceNone.5e6f7081": "ไม่พบใบหน้าในรูปนี้ — ยังคงใช้ออฟเซ็นเตอร์ไบแอสเดิม"
+,
+  "tools.copy.cropFaceOff.1a2b3c4d": "การตรวจจับใบหน้าปิดอยู่ เปิดใช้งานเพื่อจัดเฟรมคู่บ่าสาอัตโนมัติ"
+,
+  "tools.copy.cropFaceReady.3c4d5e6f": "ตัวตรวจจับใบหน้าพร้อมแล้ว — ทำงานบนเครื่องของคุณ รูปของคุณจะไม่ถูกอัปโหลด"
+,
+  "tools.crop-wedding-photo-for-reels.label_text.face_aware_framing.5d4c3b2a": "การตัดโดยรู้หน้า — ไม่บังคับ"
+,
+  "tools.crop-wedding-photo-for-reels.label_text.off_center_bias.9a8b7c6d": "ออฟเซ็นเตอร์ไบแอส — ตำแหน่งเริ่มต้นอัตโนมัติ"
+,
+  "tools.crop-wedding-photo-for-reels.p_text.face_aware_framing.2f3e4d5c": "ออฟเซ็นเตอร์ไบแอสเป็นเพียงการคาดเดาว่าคู่บ่าสามักยืนอยู่ตรงไหน หากอยากให้การตัดตามคนจริงในภาพ เปิด <strong>การตัดโดยรู้หน้า</strong>: เครื่องมือจะค้นหาใบหน้าในแต่ละรูปแล้วเลื่อนหน้าต่างตัดจนทุกใบหน้าอยู่ภายใน พร้อมเว้นขอบเล็กน้อย ตัวตรวจจับเป็นโมเดลเล็กๆ ที่ทำงานในเบราว์เซอร์ของคุณ — รูปถูกอ่านบนเครื่องของคุณและไม่ถูกอัปโหลด — ส่วนรูปที่ตรวจจับใบหน้าไม่ได้ก็ยังคงใช้ออฟเซ็นเตอร์ไบแอสเดิม"
+,
+  "tools.crop-wedding-photo-for-reels.p_text.why_off_center_beats_center.1b2c3d4e": "ภาพแต่งงานแทบไม่เคยวางวัตถุไว้ตรงกลางเป๊ะ กฎการจัดองค์ประกอบ (กฎสามส่วน เส้นนำสายตา) ผลักวัตถุออกจากกลาง — ในกรอบแนวนอนมักต่ำกว่ากลางเล็กน้อย ระบบตัดกลางแบบง่ายๆ จะแบ่งภาพครึ่งหนึ่งโดยไม่คิดอะไรแล้วส่งออกไป มักตัดใบหน้าเจ้าสาวหายไปจากกรอบ ออฟเซ็นเตอร์ไบแอสที่ใช้ที่นี่ตั้งใจให้เรียบง่าย — เป็นค่าคงที่ ไม่ใช่การวัด — แต่ยังตรงกับข้อตกลงทางการถ่ายภาพพอจะจัดการภาพแต่งงานได้ถูกต้องราว 85% ตั้งแต่ครั้งแรก และเมื่อคุณอยากให้กรอบตามใบหน้าจริงแทนที่จะตามข้อตกลง ให้เปิด “การตัดโดยรู้หน้า”"
+,
+  "tools.crop-wedding-photo-for-reels.small_text.face_aware_hint.6e7f8091": "ค้นหาใบหน้าในแต่ละรูปและเลื่อนกรอบตัดให้ทุกใบหน้าอยู่ภายในกรอบ ตัวตรวจจับ (ประมาณ 840 KB) จะดาวน์โหลดครั้งเดียว ตอนที่คุณเปิดใช้งานครั้งแรก จากนั้นทำงานทั้งหมดบนเครื่องของคุณ — รูปของคุณจะไม่ถูกอัปโหลด รูปที่ตรวจจับใบหน้าไม่ได้จะยังคงใช้ออฟเซ็นเตอร์ไบแอสเดิม"
 }

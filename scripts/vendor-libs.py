@@ -183,6 +183,63 @@ LIBS = {
     #
     # Apache-2.0, verified from the LICENSE inside each package.
     # ---------------------------------------------------------------------
+    # ---------------------------------------------------------------------
+    # §2.11 - the face detector for the crop tool.
+    #
+    # WHY face-api.js AND NOT MEDIAPIPE
+    # ---------------------------------
+    # The two obvious candidates were measured on this machine:
+    #
+    #   @mediapipe/tasks-vision@1.2.2   vision_bundle.mjs 156 KB
+    #                                   + vision_wasm_internal.wasm 14.6 MB
+    #                                   + the .tflite model on top
+    #   @mediapipe/face_detection@0.4   5.8 MB of WASM + 229 KB of model
+    #   face-api.js@0.22.2              648 KB of JS + 189 KB of model
+    #
+    # face-api.js is the only one of the three that fits this site's rules:
+    #
+    #   * MIT, and the LICENSE travels with the code.
+    #   * The UMD build sets window.faceapi, so a plain <script src> works -
+    #     there is no bundler on this site.
+    #   * MEASURED IN THE SHIPPED FILE: zero `eval(`, zero `new Function`,
+    #     zero `WebAssembly`, zero `importScripts`. So it runs under
+    #     script-src 'self' 'nonce-...' WITHOUT 'unsafe-eval', and it does not
+    #     need 'wasm-unsafe-eval' either.
+    #   * It has no UI strings, so it adds no translation debt to the 11
+    #     languages the tool pages ship in.
+    #   * It runs entirely in the browser, which is what keeps the site's
+    #     "your photos never leave your device" promise true.
+    #
+    # The model is the tiny face detector (190 KB, one shard). The bigger
+    # SSD MobileNet detector would be ~5 MB for no gain on wedding photos.
+    #
+    # The npm package does NOT ship the weights - they live in the GitHub
+    # repository, so the URLs are given explicitly and pinned to the same
+    # v0.22.2 tag as the code.
+    #
+    # The DIRECTORY carries the version on purpose. face-api resolves the
+    # weight shard as <modelBaseUri>/<shard>, and that fetch carries no
+    # ?v= stamp - only a version in the PATH busts the cache.
+    # ---------------------------------------------------------------------
+    "face-api-0.22.2": {
+        "pkg": "face-api.js",
+        "version": "0.22.2",
+        "license": "MIT",
+        "files": {
+            "face-api.min.js": "dist/face-api.min.js",
+            "LICENSE": "LICENSE",
+            "models/tiny_face_detector_model-weights_manifest.json":
+                "models/tiny_face_detector_model-weights_manifest.json",
+            "models/tiny_face_detector_model-shard1":
+                "models/tiny_face_detector_model-shard1",
+        },
+        "urls": {
+            "models/tiny_face_detector_model-weights_manifest.json":
+                "https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@v0.22.2/weights/tiny_face_detector_model-weights_manifest.json",
+            "models/tiny_face_detector_model-shard1":
+                "https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@v0.22.2/weights/tiny_face_detector_model-shard1",
+        },
+    },
     "jsquash-avif-2.1.1": {
         "pkg": "@jsquash/avif",
         "version": "2.1.1",

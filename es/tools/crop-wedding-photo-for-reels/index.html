@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="/styles/tools.css?v=1.0.3">
     <script defer src="/js/main.min.js?v=3.22"></script>
     <script defer src="/js/tools/common.js?v=1.0.5"></script>
+    <script defer src="/js/tools/face-detector.js?v=1.0.0"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <style>
         .page-hero-mini { background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md); }
@@ -231,9 +232,17 @@ if ('serviceWorker' in navigator) {
                     <div class="wa-tool-control">
                         <label class="wa-tool-toggle">
                             <input type="checkbox" id="smart-offset" checked>
-                            <span>Desplazamiento inteligente de seguridad facial<small data-i18n="tools.crop-wedding-photo-for-reels.small_text.a6b24d1f">裁剪窗口偏向婚纱人像常见的人物位置。新娘的脸会留在画面内，而不是把背景放到正中央。横版素材开启选此项，若源图已是紧凑的竖版构图则可关闭。</small>
-                            </span>
+                            <span data-i18n="tools.crop-wedding-photo-for-reels.label_text.off_center_bias.9a8b7c6d">Off-center bias &mdash; automatic starting position</span>
                         </label>
+                        <small data-i18n="tools.crop-wedding-photo-for-reels.small_text.a6b24d1f">Sets where the crop frame starts: 60% down the Y axis for landscape sources (where wedding couples typically stand) and true center for portrait sources. It is a fixed heuristic, not a measurement &mdash; switch on Face-aware framing below to have the crop follow the actual faces. Drag the frame in step 3 to override it for any photo. ON for landscape sources, OFF if your source is already a tight portrait composition.</small>
+                    </div>
+                    <div class="wa-tool-control">
+                        <label class="wa-tool-toggle" for="face-aware">
+                            <input type="checkbox" id="face-aware">
+                            <span data-i18n="tools.crop-wedding-photo-for-reels.label_text.face_aware_framing.5d4c3b2a">Face-aware framing &mdash; optional</span>
+                        </label>
+                        <small data-i18n="tools.crop-wedding-photo-for-reels.small_text.face_aware_hint.6e7f8091">Finds the faces in each photo and moves the crop frame so every face stays inside it. The detector (about 840&nbsp;KB) downloads once, the first time you switch this on, and then runs entirely on your device &mdash; your photos are never uploaded. A photo with no detectable face keeps the off-center bias.</small>
+                        <small id="face-status" class="wa-face-status"></small>
                     </div>
                     <div class="wa-tool-control">
                         <label for="output-res" data-i18n="tools.crop-wedding-photo-for-reels.label_text.94cda6a5">裁剪输出分辨率</label>
@@ -363,7 +372,8 @@ if ('serviceWorker' in navigator) {
                 <p>Cada plataforma superpone UI encima de tu foto. Reels: franja de leyenda/audio abajo (~13% del vertical). Story: barra de perfil superior más caja de mensaje inferior (~26% del vertical combinado). Publicaciones cuadradas: superposición mínima, pero la vista previa de recorte de perfil de la cuadrícula recorta cada borde. Nuestra herramienta calcula el rectángulo más grande dentro de tu imagen de origen que coincide con la proporción objetivo, sesgado hacia el sujeto, y salida en resolución nativa de la plataforma. De esa manera, cuando subes, la UI cubre espacio vacío (fondo, piso) y no la pareja.</p>
 
                 <h2>Por qué descentrado supera a centro ingenuo</h2>
-                <p>Una foto de boda casi nunca es "sujeto en centro exacto." Las reglas de composición (regla de los tercios, líneas guía) empujan el sujeto fuera del centro — generalmente ligeramente debajo del centro en un marco horizontal. Un sistema de recorte centrado ingenuo divide la imagen ciegamente por la mitad y la envía, frecuentemente cortando el rostro de la novia fuera del marco por completo. La heurística de descentrado usada aquí es intencionalmente simple (sin detección de rostros, sin aprendizaje automático), pero coincide lo suficientemente bien con la convención fotográfica para manejar ~85% de las tomas de boda correctamente a la primera.</p>
+                <p data-i18n="tools.crop-wedding-photo-for-reels.p_text.why_off_center_beats_center.1b2c3d4e">A wedding photo is almost never "subject at exact center." Composition rules (rule of thirds, leading lines) push the subject off-center &mdash; usually slightly below center on a horizontal frame. A naive center-crop system blindly halves the image and ships it, often cutting the bride&rsquo;s face out of the frame entirely. The off-center heuristic used here is intentionally simple &mdash; a fixed bias, not a measurement &mdash; but it matches the photographic convention well enough to handle ~85% of wedding shots correctly on the first try. When you want the frame to follow the real faces instead of the convention, switch on Face-aware framing.</p>
+<p data-i18n="tools.crop-wedding-photo-for-reels.p_text.face_aware_framing.2f3e4d5c">The off-center bias is a guess about where the couple usually stands. If you would rather the crop followed the actual people in the frame, switch on <strong>Face-aware framing</strong>: the tool finds the faces in each photo and slides the crop window so that every face stays inside it, with a little breathing room around them. The detector is a small model that runs in your browser &mdash; the photos are read on your device and never uploaded &mdash; and a photo with no detectable face simply keeps the off-center bias.</p>
 
                 <h2>Qué hacer con las fotos de boda recortadas</h2>
                 <p>Una vez que tengas un lote limpio y listo para la plataforma, aquí están los usos más comunes:</p>
@@ -513,6 +523,8 @@ if ('serviceWorker' in navigator) {
       var clearBtn = document.getElementById('clear-btn');
       var aspectEl = document.getElementById('aspect');
       var smartEl = document.getElementById('smart-offset');
+      var faceAwareEl = document.getElementById('face-aware');
+      var faceStatusEl = document.getElementById('face-status');
       var outputResEl = document.getElementById('output-res');
       var qualityEl = document.getElementById('quality');
       var qualityVal = document.getElementById('quality-val');
@@ -596,6 +608,7 @@ if ('serviceWorker' in navigator) {
         return {
           aspect: aspect,
           smart: !!smartEl.checked,
+          faceAware: !!faceAwareEl.checked,
           resolution: outputResEl.value,
           quality: parseInt(qualityEl.value, 10) / 100,
         };
@@ -654,6 +667,158 @@ if ('serviceWorker' in navigator) {
         if (cropX + cropW > W) cropW = W - cropX;
         if (cropY + cropH > H) cropH = H - cropY;
         return { cropX: cropX, cropY: cropY, cropW: cropW, cropH: cropH };
+      }
+
+      // ---------- face-aware framing (§2.11) --------------------------------
+      //
+      // computeCrop() picks a FIXED bias (60% down for a landscape source).
+      // computeCropWithFaces() keeps the SAME window size - the aspect ratio
+      // is locked either way - and only decides WHERE it sits, so that every
+      // detected face ends up inside the frame.
+      //
+      // The faces are placed horizontally centred, and vertically in the
+      // upper part of the frame, which is where a 9:16 platform keeps its
+      // safe zone. Both axes are then clamped so that no face is cut off.
+      function computeCropWithFaces(W, H, targetW, targetH, faces) {
+        var tgtAR = targetW / targetH;
+        var cropW, cropH;
+        if (W / H > tgtAR) {
+          cropH = H;
+          cropW = H * tgtAR;
+        } else {
+          cropW = W;
+          cropH = W / tgtAR;
+        }
+        if (!faces || !faces.length) {
+          return { cropX: 0, cropY: 0, cropW: Math.round(cropW), cropH: Math.round(cropH) };
+        }
+        var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+        for (var i = 0; i < faces.length; i++) {
+          var b = faces[i];
+          if (b.x < x0) x0 = b.x;
+          if (b.y < y0) y0 = b.y;
+          if (b.x + b.w > x1) x1 = b.x + b.w;
+          if (b.y + b.h > y1) y1 = b.y + b.h;
+        }
+        // A little breathing room around the faces.
+        var m = Math.max(2, cropW * 0.05);
+        var faceCx = (x0 + x1) / 2;
+        var faceCy = (y0 + y1) / 2;
+
+        var cropX;
+        if (x1 - x0 + 2 * m > cropW) {
+          // The faces are wider than the locked aspect allows: centre on
+          // them and accept the overflow.
+          cropX = faceCx - cropW / 2;
+        } else {
+          var loX = x1 + m - cropW;
+          var hiX = x0 - m;
+          var wantX = faceCx - cropW / 2;
+          cropX = loX > hiX ? wantX : Math.min(Math.max(wantX, loX), hiX);
+        }
+
+        var cropY;
+        var wantY = faceCy - cropH * 0.40;
+        if (y1 - y0 + 2 * m > cropH) {
+          cropY = faceCy - cropH / 2;
+        } else {
+          var loY = y1 + m - cropH;
+          var hiY = y0 - m;
+          cropY = loY > hiY ? wantY : Math.min(Math.max(wantY, loY), hiY);
+        }
+
+        cropX = Math.max(0, Math.min(cropX, W - cropW));
+        cropY = Math.max(0, Math.min(cropY, H - cropH));
+        cropX = Math.round(cropX);
+        cropY = Math.round(cropY);
+        cropW = Math.round(cropW);
+        cropH = Math.round(cropH);
+        if (cropX + cropW > W) cropW = W - cropX;
+        if (cropY + cropH > H) cropH = H - cropY;
+        return { cropX: cropX, cropY: cropY, cropW: cropW, cropH: cropH };
+      }
+
+      // The runtime copy for the face status line. The keys live in the
+      // "tools.copy" namespace, which the middleware hands to the client as
+      // window.__WA_I18N__ - so the fallback English is only ever shown on
+      // an English page.
+      var FACE_STATUS_KEYS = {
+        off: 'tools.copy.cropFaceOff.1a2b3c4d',
+        loading: 'tools.copy.cropFaceLoading.2b3c4d5e',
+        ready: 'tools.copy.cropFaceReady.3c4d5e6f',
+        found: 'tools.copy.cropFaceFound.4d5e6f70',
+        none: 'tools.copy.cropFaceNone.5e6f7081',
+        failed: 'tools.copy.cropFaceFailed.6f708192'
+      };
+
+      var FACE_STATUS_FALLBACK = {
+        off: 'Face detection is off. Switch it on to frame the couple automatically.',
+        loading: 'Loading the face detector\u2026',
+        ready: 'Face detector ready \u2014 it runs on your device, your photos are never uploaded.',
+        found: '{n} face(s) found \u2014 the crop frame keeps them all inside.',
+        none: 'No face found in this photo \u2014 keeping the off-center bias instead.',
+        failed: 'Face detection is not available on this device \u2014 keeping the off-center bias instead.'
+      };
+
+      function faceStatusText(kind, params) {
+        var T = window.weddingAITool && window.weddingAITool.t;
+        var fallback = FACE_STATUS_FALLBACK[kind] || '';
+        if (!T) return fallback;
+        return T(FACE_STATUS_KEYS[kind], fallback, params);
+      }
+
+      function setFaceStatus(text) {
+        if (faceStatusEl) faceStatusEl.textContent = text;
+      }
+
+      // Run the detector over one photo. The result is cached on the entry,
+      // so a photo is only ever scanned once - and a photo with no face is
+      // a normal answer, not an error.
+      async function detectFacesFor(entry, img) {
+        if (!entry) return [];
+        if (entry.facesDone) return entry.faces || [];
+        var facesApi = window.weddingAIFaces;
+        if (!facesApi || !facesApi.detect) {
+          entry.faces = [];
+          entry.facesDone = true;
+          setFaceStatus(faceStatusText('failed'));
+          return [];
+        }
+        setFaceStatus(faceStatusText('loading'));
+        var faces = [];
+        try {
+          faces = (await facesApi.detect(img)) || [];
+        } catch (err) {
+          faces = [];
+        }
+        entry.faces = faces;
+        entry.facesDone = true;
+        setFaceStatus(faces.length
+          ? faceStatusText('found', { n: faces.length })
+          : faceStatusText('none'));
+        return faces;
+      }
+
+      // The automatic crop for a photo: the faces when the visitor switched
+      // them on, the off-center bias otherwise. `faceScale` converts the
+      // cached face boxes from SOURCE pixels into the coordinate space the
+      // caller works in (the preview canvas is smaller than the photo).
+      function autoCropFor(entry, W, H, aspect, smart, faceAware, faceScale) {
+        if (faceAware && entry && entry.faces && entry.faces.length) {
+          var boxes = entry.faces;
+          if (faceScale && faceScale !== 1) {
+            boxes = entry.faces.map(function (b) {
+              return {
+                x: b.x * faceScale,
+                y: b.y * faceScale,
+                w: b.w * faceScale,
+                h: b.h * faceScale
+              };
+            });
+          }
+          return computeCropWithFaces(W, H, aspect.w, aspect.h, boxes);
+        }
+        return computeCrop(W, H, aspect.w, aspect.h, smart);
       }
 
       async function processOne(entry, settings) {
@@ -855,6 +1020,21 @@ if ('serviceWorker' in navigator) {
         ctx.rect(r.x, r.y, r.w, r.h);
         ctx.fill('evenodd');
         ctx.restore();
+        // The detected faces (§2.11). They are stored in SOURCE pixels, so
+        // they are scaled into the canvas' own coordinates here.
+        var sEntry = stageEntries()[stageIndex];
+        if (sEntry && sEntry.faces && sEntry.faces.length) {
+          ctx.save();
+          ctx.strokeStyle = 'rgba(74,222,128,0.95)';
+          ctx.lineWidth = 2;
+          for (var fi = 0; fi < sEntry.faces.length; fi++) {
+            var fb = sEntry.faces[fi];
+            ctx.strokeRect(
+              fb.x / stageScale, fb.y / stageScale,
+              fb.w / stageScale, fb.h / stageScale);
+          }
+          ctx.restore();
+        }
         // rule of thirds
         ctx.strokeStyle = 'rgba(255,255,255,0.45)';
         ctx.lineWidth = 1;
@@ -951,7 +1131,11 @@ if ('serviceWorker' in navigator) {
               h: entry.crop.h / stageScale
             };
           } else {
-            var auto = computeCrop(cw, ch, getCurrentSettings().aspect.w, getCurrentSettings().aspect.h, !!smartEl.checked);
+            var stageSettings = getCurrentSettings();
+            if (stageSettings.faceAware && !entry.facesDone) {
+              await detectFacesFor(entry, stageImg);
+            }
+            var auto = autoCropFor(entry, cw, ch, stageSettings.aspect, stageSettings.smart, stageSettings.faceAware, 1 / stageScale);
             stageRect = clampRect({ x: auto.cropX, y: auto.cropY, w: auto.cropW, h: auto.cropH }, stageAspect());
           }
           drawStage();
@@ -1042,6 +1226,35 @@ if ('serviceWorker' in navigator) {
           showStage();
         }
       });
+
+      // §2.11 - the face-aware switch. Turning it on re-scans the current
+      // photo and re-frames it; turning it off goes back to the bias.
+      if (faceAwareEl) {
+        faceAwareEl.addEventListener('change', function () {
+          var entries = stageEntries();
+          var entry = entries[stageIndex];
+          if (entry) { entry.faces = null; entry.facesDone = false; }
+          setFaceStatus(faceStatusText(faceAwareEl.checked ? 'loading' : 'off'));
+          showStage();
+        });
+      }
+      setFaceStatus(faceStatusText('off'));
+
+      // A small read-only hook so the verification script can see what the
+      // page actually computed (which backend answered, where the faces are,
+      // where the frame ended up). It exposes nothing a visitor can act on.
+      window.__waCropDebug = function () {
+        var entries = stageEntries();
+        var entry = entries[stageIndex];
+        return {
+          backend: window.weddingAIFaces ? window.weddingAIFaces.backend() : null,
+          faceAware: !!(faceAwareEl && faceAwareEl.checked),
+          faces: entry && entry.faces ? entry.faces : null,
+          rect: stageRect ? { x: stageRect.x, y: stageRect.y, w: stageRect.w, h: stageRect.h } : null,
+          scale: stageScale,
+          status: faceStatusEl ? faceStatusEl.textContent : ''
+        };
+      };
 
       refreshUI();
     });

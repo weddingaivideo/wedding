@@ -121,6 +121,74 @@ All of these were rewritten in **all 11 languages**, not just in English:
 
 ---
 
+## EXECUTION STATUS — third pass: §2.11 face-aware cropping
+
+The last 🟢/🔵 capability item. The crop tool framed the couple with a
+**fixed heuristic** (60 % down the Y axis for a landscape source) and said
+so honestly — but it could not follow a couple who were not standing where
+the convention says. It now has a **real face detector**, and the honest
+label became the switch that turns it on.
+
+### What landed
+
+| | |
+|---|---|
+| library | **face-api.js 0.22.2 (MIT)** + the tiny face detector model (190 KB, one shard) |
+| size | 648 KB of JS + 190 KB of model = **~840 KB**, downloaded **only** when the visitor switches the detector on |
+| where it runs | entirely in the browser — the photo is read on the device and never uploaded |
+| CSP | **no change at all.** The shipped bundle contains zero `eval(`, zero `new Function` and zero `WebAssembly`, so it runs under `script-src 'self' 'nonce-…'` without `'unsafe-eval'` and without `'wasm-unsafe-eval'` |
+
+**Why not MediaPipe.** Measured on this machine:
+`@mediapipe/tasks-vision@1.2.2` = 156 KB of JS + **14.6 MB** of WASM + a
+model; `@mediapipe/face_detection@0.4` = **5.8 MB** of WASM; face-api.js =
+**840 KB** in total, no WASM at all. face-api.js is also the only one of the
+three with **no UI strings**, so it adds no 11-language translation debt.
+
+**Two backends, one API.** Where the browser has the Shape Detection API
+(`FaceDetector`) it is used and **nothing is downloaded**; otherwise the
+library is fetched. The native detector can refuse a given image, so the
+library is the fallback — not the other way round.
+
+**What it does.** The crop window keeps the size the aspect ratio dictates;
+only its POSITION changes. The faces are centred horizontally and placed in
+the upper part of the frame (the Reels / Story safe zone) with a margin
+around them, and both axes are clamped so that no face is cut off. A photo
+with **no detectable face keeps the old off-center bias**, so the tool never
+gets worse than it was.
+
+### The claims that had to change with it
+
+The page used to say the tool did **no face detection** — in three places,
+in all 11 languages. A tool that gains a capability invalidates the copy
+that says it lacks one:
+
+- the toggle hint said *"It is a heuristic, not face detection — it doesn't detect faces."* → it now says the bias is a fixed heuristic and points at the switch;
+- the "why off-center beats naive center" paragraph said *"(no face detection, no machine learning)"* → it now separates the fixed bias from the detector;
+- the comparison table's "Auto Framing" column said *"Off-center bias, automatic"* → it now says both;
+- the HowTo JSON-LD step said *"It is a heuristic, not face detection — check the preview for each photo."* → rewritten;
+- the stage hint said *"keep the automatic **centre** crop"* → it was never the centre.
+
+15 keys × 11 languages, plus the runtime strings of the status line in the
+`tools.copy` namespace.
+
+### Two traps worth recording
+
+| trap | what it looked like |
+|---|---|
+| the weight shard carries **no `?v=` stamp** | face-api resolves the shard as `<modelBaseUri>/<shard>`, and that fetch has no query string — so only a version in the **PATH** busts the cache. The directory is `js/vendor/face-api-0.22.2/` for that reason, exactly like the jsquash encoders. |
+| HTML entities in a **runtime** string | the status line is written with `textContent`, so `&mdash;` would have been shown to the visitor **literally**. The values use real characters instead. |
+
+### Verification
+
+`scripts/verify-crop-face-aware.py` drives Chromium under the **live** CSP.
+It asserts that **nothing is fetched while the switch is off**, that the
+library AND both model files come back **200** from this origin, that the
+detector finds the face in a real portrait, that **every face ends up
+inside the crop frame**, that the face box is drawn on the preview, and
+that the crop still produces a file.
+
+---
+
 ## 0. The four constraints every option inherits
 
 These are not preferences; they are what the repo actually allows.
@@ -195,7 +263,7 @@ by grepping the shipped dist), so they cost 0 extra i18n work.
 | 2.8 | **Memory hygiene** | `URL.revokeObjectURL` is called on some paths but not all (e.g. `heic-to-jpg` `processOne` never revokes the preview URL it created in `addFiles`). Large batches leak |
 | 2.9 | **Real progress reporting** | Long operations show a spinner, not a percentage. `heic2any` and mediabunny both expose progress callbacks |
 | 2.10 | **Service Worker on tool pages** | `sw.js` exists and 1,428 pages register it, but **no tool page does** (`serviceWorker` hits = 0). Its precache list has no tool assets, so tools do not work offline |
-| 2.11 | **Face-aware auto-crop** | Replace the off-centre heuristic with actual face detection (mediapipe face detection / face-api.js) so the couple is always framed |
+| 2.11 | **Face-aware auto-crop** | ✅ **DONE (third pass)** — face-api.js (MIT) + the tiny face detector, ~840 KB, opt-in, on-device, no CSP change; see the third pass above |
 | 2.12 | **AVIF / WebP-lossless output** | `compress` emits jpeg/png/webp only. AVIF is the current best compression for delivery |
 | 2.13 | **EXIF read/keep/strip as a first-class option** | `exifr` is a small, dependency-free EXIF parser | Would let the compress tool *keep* EXIF instead of only documenting that it drops it |
 | 2.14 | **Target-size mode** | "Compress to exactly 2 MB" is what users actually ask for; today the control is a quality slider |
@@ -452,6 +520,13 @@ benefit is removing a cap that has never been hit.
 3. **Is "nothing leaves the device" a hard product promise, or a default that
    a paid HD mode may override?** Every cloud option in §5 hangs on this one
    answer.
+   → **RESOLVED 2026-11-11 by the owner: it is a HARD promise.** Every
+   option in §5 that uploads a photo to a third party is therefore out —
+   including the paid high-resolution mode. A tool page may only say
+   "nothing leaves your device" when it is true of the whole flow, and the
+   face-aware crop (§2.11) is the model to copy: the detector downloads
+   ~840 KB **from this origin**, runs in the browser, and the photo is
+   never sent anywhere.
 4. **Is a real MP4 export worth the Firefox-Android gap?** `mediabunny` needs
    WebCodecs, which Firefox for Android does not have. Today the tool's
    "5 PNG frames" workaround is actually *more* universal.

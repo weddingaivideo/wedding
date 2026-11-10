@@ -41973,7 +41973,7 @@
   "tools.crop-wedding-photo-for-reels.th_text.video_tiein.7q8r9s0t": "Video de boda incluido",
   "tools.crop-wedding-photo-for-reels.td_text.weddingaivideo.1u2v3w4x": "<strong>WeddingAI.video Recorte para Reels</strong> (esta herramienta)",
   "tools.crop-wedding-photo-for-reels.td_text.916_11_11_45_43_1_1.5y6z7a8b": "<strong>9:16, 1:1, 4:5, 4:3, 3:2, 1:1</strong>",
-  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>Sesgo descentrado, automático</strong>",
+  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>Sesgo fuera del centro + detección de rostros en tu dispositivo</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.unlimited_100plus_tested.3g4h5i6j": "<strong>Ilimitado, 100+ probadas</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.same_workflow_99_video.7k8l9m0n": "<strong>Mismo flujo que video </strong>",
   "tools.crop-wedding-photo-for-reels.td_text.imagen_ai.1o2p3q4r": "vidio.ai (vidio.ai/es-ES/blog)",
@@ -41996,7 +41996,7 @@
   "tools.crop-wedding-photo-for-reels.td_text.no_built_in.7e8f9g0h": "Sin incorporado",
   "tools.crop-wedding-photo-for-reels.td_text.editorial_916_jump.3u4v5w6x": "Editorial 9:16 jump",
   "tools.crop-wedding-photo-for-reels.td_text.no_tool.7y8z9a0b": "Sin herramienta",
-  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "La mayoría de herramientas de recorte requieren centrar manualmente a la novia y el novio para cada una de las 100+ fotos de boda. El recorte de WeddingAI.video aplica un sesgo descentrado: en fuentes apaisadas desplaza la ventana de recorte un 60 % hacia abajo, donde suelen situarse las parejas de boda, así la pareja queda dentro del encuadre y no se recorta. Exporta 9:16 + 1:1 + 4:5 en un lote. Además, el mismo lote alimenta la exportación lista para IG del video — Reels vertical + YT Shorts horizontal + 1:1 cuadrado para feed + 4:5 para carrusel IG.",
+  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "La mayoría de las herramientas de recorte te obligan a centrar a los novios a mano en cada una de más de 100 fotos de boda. El recorte de WeddingAI.video usa por defecto un sesgo fuera del centro: desplaza la ventana de recorte 60 % hacia abajo en las fuentes apaisadas, donde los novios suelen estar, para que la pareja se quede dentro del encuadre en lugar de ser recortada; y puedes cambiarlo a una detección real de rostros en tu propio dispositivo cuando quieras que el encuadre siga las caras de verdad. Exporta 9:16 + 1:1 + 4:5 en un solo lote. Además, ese mismo lote alimenta la exportación para IG del vídeo de IA: Reels verticales + YT Shorts horizontales + 1:1 para el feed + 4:5 para el carrusel de IG.",
   "tools.crop-wedding-photo-for-reels.td_text.no_tool.1i2j3k4l": "Sin herramienta",
   "tools.crop-wedding-photo-for-reels.td_text.not_offered.5m6n7o8p": "No ofrecido",
   "tools.crop-wedding-photo-for-reels.td_text.fstoppers_may_2022.9q0r1s2t": "Fstoppers (artículo de mayo de 2022)",
@@ -62087,7 +62087,7 @@
   "tools.crop-wedding-photo-for-reels.option_text.43c3a9cd": "Pantalla panorámica 16:9 (1920×1080)",
   "tools.crop-wedding-photo-for-reels.option_text.7686433a": "Impresión 4:3 (1600×1200)",
   "tools.crop-wedding-photo-for-reels.small_text.5cf54bc3": "Tome el rectángulo más grande de su foto que pueda acomodar esta proporción y luego escale el navegador a los píxeles nativos de Instagram.",
-  "tools.crop-wedding-photo-for-reels.small_text.a6b24d1f": "La ventana de recorte está sesgada hacia las posiciones de las personas que se ven comúnmente en los retratos de bodas. El rostro de la novia permanecerá en el marco, en lugar de que el fondo se coloque en el centro. Seleccione esta opción si la versión horizontal del material está activada. Si la imagen de origen ya está en una composición vertical compacta, se puede desactivar.",
+  "tools.crop-wedding-photo-for-reels.small_text.a6b24d1f": "Define dónde empieza el marco de recorte: 60 % hacia abajo en el eje Y para fuentes apaisadas (donde suelen situarse los novios) y el centro exacto para fuentes verticales. Es una regla fija, no una medición: activa el encuadre con detección de rostros más abajo para que el recorte siga las caras reales. Arrastra el marco en el paso 3 para anularlo en cualquier foto. Actívalo para fuentes apaisadas y desactívalo si tu original ya es una composición vertical ajustada.",
   "tools.crop-wedding-photo-for-reels.label_text.94cda6a5": "Resolución de producción de cultivos",
   "tools.crop-wedding-photo-for-reels.option_text.6cfe245c": "Instagram (1080×X) — carga directa",
   "tools.crop-wedding-photo-for-reels.option_text.67fc4815": "Native Max: conserva la resolución de origen",
@@ -63042,7 +63042,7 @@
 ,
   "tools.copy.cropStageTitle.zzzzzz6c01": "Ajustar el recorte"
 ,
-  "tools.copy.cropStageHint.zzzzzz6c02": "Arrastra las esquinas para encuadrar la foto. Las que no toques conservan el recorte automático centrado."
+  "tools.copy.cropStageHint.zzzzzz6c02": "Arrastra las esquinas para encuadrar. Las fotos que no toques conservan el recorte automático: el sesgo fuera del centro, o los rostros si el encuadre con detección está activo."
 ,
   "tools.copy.cropPrev.zzzzzz6c03": "Foto anterior"
 ,
@@ -63115,4 +63115,26 @@
   "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "Descargar esta página (PNG de 300 DPI)"
 ,
   "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "Descargar todas las páginas (PDF listo para imprimir)"
+,
+  "tools.copy.cropFaceFailed.6f708192": "La detección de rostros no está disponible en este dispositivo: se mantiene el sesgo fuera del centro."
+,
+  "tools.copy.cropFaceFound.4d5e6f70": "{n} rostro(s) encontrados: el marco de recorte los mantiene todos dentro."
+,
+  "tools.copy.cropFaceLoading.2b3c4d5e": "Cargando el detector de rostros…"
+,
+  "tools.copy.cropFaceNone.5e6f7081": "No se encontró ningún rostro en esta foto: se mantiene el sesgo fuera del centro."
+,
+  "tools.copy.cropFaceOff.1a2b3c4d": "La detección de rostros está desactivada. Actívala para encuadrar a la pareja automáticamente."
+,
+  "tools.copy.cropFaceReady.3c4d5e6f": "Detector de rostros listo: se ejecuta en tu dispositivo, tus fotos nunca se suben."
+,
+  "tools.crop-wedding-photo-for-reels.label_text.face_aware_framing.5d4c3b2a": "Encuadre con detección de rostros — opcional"
+,
+  "tools.crop-wedding-photo-for-reels.label_text.off_center_bias.9a8b7c6d": "Sesgo fuera del centro — posición de inicio automática"
+,
+  "tools.crop-wedding-photo-for-reels.p_text.face_aware_framing.2f3e4d5c": "El sesgo fuera del centro es una suposición sobre dónde suele estar la pareja. Si prefieres que el recorte siga a las personas reales del encuadre, activa el <strong>encuadre con detección de rostros</strong>: la herramienta encuentra los rostros en cada foto y desliza la ventana de recorte hasta que todas las caras quedan dentro, con un poco de margen alrededor. El detector es un modelo pequeño que se ejecuta en tu navegador: las fotos se leen en tu dispositivo y nunca se suben, y una foto sin rostros detectables simplemente conserva el sesgo fuera del centro."
+,
+  "tools.crop-wedding-photo-for-reels.p_text.why_off_center_beats_center.1b2c3d4e": "Una foto de boda casi nunca es «sujeto en el centro exacto». Las reglas de composición (regla de los tercios, líneas guía) empujan al sujeto fuera del centro — normalmente un poco por debajo del centro en un encuadre horizontal. Un recorte centrado ingenuo corta la imagen por la mitad a ciegas y la entrega, y a menudo se lleva por delante la cara de la novia. El sesgo fuera del centro que usamos aquí es intencionadamente simple — un sesgo fijo, no una medición — pero encaja con la convención fotográfica lo bastante bien como para acertar con aproximadamente el 85 % de las fotos de boda a la primera. Cuando quieras que el encuadre siga las caras reales en lugar de la convención, activa el encuadre con detección de rostros."
+,
+  "tools.crop-wedding-photo-for-reels.small_text.face_aware_hint.6e7f8091": "Encuentra los rostros en cada foto y mueve el marco de recorte para que todas las caras queden dentro. El detector (unos 840 KB) se descarga una sola vez, la primera vez que activas esta opción, y después funciona íntegramente en tu dispositivo: tus fotos nunca se suben. Una foto sin rostros detectables mantiene el sesgo fuera del centro."
 }

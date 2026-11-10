@@ -50982,7 +50982,7 @@
   "tools.crop-wedding-photo-for-reels.th_text.video_tiein.7q8r9s0t": "動画連携",
   "tools.crop-wedding-photo-for-reels.td_text.weddingaivideo.1u2v3w4x": "<strong>WeddingAI.videoリール切り抜き</strong>（このツール）",
   "tools.crop-wedding-photo-for-reels.td_text.916_11_11_45_43_1_1.5y6z7a8b": "<strong>9:16 / 1:1 / 4:5 / 4:3 / 3:2</strong>",
-  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>中央オフセット、自動</strong>",
+  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>オフセンターバイアス + デバイス上の顔検出</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.unlimited_100plus_tested.3g4h5i6j": "<strong>無制限、100枚+テスト済</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.same_workflow_99_video.7k8l9m0n": "<strong>9.9€動画と同じ</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.imagen_ai.1o2p3q4r": "Canva（canva.com/ja_jp/templates/wedding）",
@@ -51015,7 +51015,7 @@
   "tools.crop-wedding-photo-for-reels.td_text.no_tool.5s6t7u8v": "ツールなし",
   "tools.crop-wedding-photo-for-reels.td_text.n_a.9w0x1y2z": "N/D",
   "tools.crop-wedding-photo-for-reels.td_text.not_offered.3a4b5c6d": "提供なし",
-  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "ほとんどの切り抜きツールはリール用に9:16に手動で中央揃えが必要です。WeddingAI.videoの唯一の違い：固定オフセットの自動切り揃えで、横向きの画像では切り抜き枠を60%下へずらします（結婚式の新郎新婦が立つ位置）ため、新郎新婦がフレーム内に残ります。9:16（リール/Stories/YT Shorts）+ 1:1（IGフィード）+ 4:5（IGポートレート）+ 4:3 + 3:2に対応、結婚式特化9モデル（Save the Date/RSVP/動画チャプター）+ 11言語 + 9.9€動画と同じワークフロー。同じ一括処理の写真は IG 対応の出力（縦型Reels + 横型YT Shorts + 1:1 IGフィード + 4:5 IGカルーセル）にもそのまま使えます。",
+  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "ほとんどの切り抜きツールは、100枚以上の結婚写真のそれぞれで、新郎新婦を手作業で中央に配置させることを求めます。WeddingAI.videoの切り抜きは初期設定でオフセンターのバイアスを使います。横向きの画像では切り抜き枠を60%下へずらします（結婚式の新郎新婦が立つ位置）ため、新郎新婦がフレーム内に残り、切り落とされません。枠を実際の顔に追従させたいときは、デバイス上で動く顔検出に切り替えることもできます。9:16（リール/Stories/YT Shorts）+ 1:1（IGフィード）+ 4:5（IGポートレート）+ 4:3 + 3:2に対応、結婚式特化9モデル（Save the Date/RSVP/動画チャプター）+ 11言語 + 9.9€動画と同じワークフロー。同じ一括処理の写真は IG 対応の出力（縦型Reels + 横型YT Shorts + 1:1 IGフィード + 4:5 IGカルーセル）にもそのまま使えます。",
   "tools.save-the-date-maker.h2_text.savethedate_tool_comparison_8_7u8v9w0": "Save the Dateセーブザデート動画ツール比較：9ツールvs WeddingAI.video 5-10枚写真AI動画",
   "tools.save-the-date-maker.p_text.google_serp_for_save_the_date.x1y2z3a4": "Google SERPs（2025年10月）「結婚式Save the Date作り方 無料 メッセージ」は主にCanva（canva.com/ja_jp — Save the Date/日程案内状/結婚式案内状無料デザインテンプレート、手作り簡単、豊富なライブラリー）、アニヴェルセル（anniversaire.co.jp — 結婚式のプレ招待状Save The Dateの意味や文例、紙飛行機展開図デザイン）、Web招待状Weddingday（weddingday.jp/savethedate — オシャレなWeb案内状でゲスト住所リスト完成）、ゼクシィ（zexy.net — SAVE THE DATEが式招待に便利、アイデア次第で活用テク）、PIARY（piary.jp — 結婚式招待状手作りWordテンプレート、文面編集だけ）、ブライダルエステナビ（bridal-esthe.com — save the date無料アプリ＆テンプレート集、Canva、Phonto写真）、WEB招待状Dear（dear-guest.com/faq/save-the-date — セーブ・ザ・デート複数枚作成、ゲストリスト確認）、ゼクシィarticle（カードに盛り込む基本は日程と場所のみ）、マイナビウエディング（wedding.mynavi.jp — セーブザデート送る時期は6カ月前、新郎新婦名前と式日付）、ウェディングニュース（weddingnews.jp — save the date文例集、SNS共有テンプレート）を表示。ほとんどのjaツールは静的カードまたはテンプレートDIY。WeddingAI.videoは唯一のSave the Date AI動画5-10枚写真30秒 + 日本語定型文（挙式/Save the Date/14.09.2026/東京）+ RSVP link + 11言語 + 9.9€動画と同じ視覚スタイル :",
   "tools.save-the-date-maker.th_text.tool.1a2b3c4d": "ツール",
@@ -62578,7 +62578,7 @@
   "tools.crop-wedding-photo-for-reels.option_text.43c3a9cd": "16:9ワイドスクリーン (1920×1080)",
   "tools.crop-wedding-photo-for-reels.option_text.7686433a": "4:3印刷（1600×1200）",
   "tools.crop-wedding-photo-for-reels.small_text.5cf54bc3": "写真内でこの比率に対応できる最大の長方形を選択し、ブラウザをInstagramのネイティブピクセルに合わせて拡大縮小します。",
-  "tools.crop-wedding-photo-for-reels.small_text.a6b24d1f": "トリミングウィンドウは、結婚式のポートレートでよく見られる人物の位置に偏っています。背景が中央に配置されるのではなく、花嫁の顔がフレーム内に残ります。マテリアルの水平バージョンがオンになっている場合は、このオプションを選択します。ソース画像がすでにコンパクトな縦構図になっている場合は、オフにすることができます。",
+  "tools.crop-wedding-photo-for-reels.small_text.a6b24d1f": "トリミング枠の開始位置を決めます。横向きの素材では Y 軸の 60%（新人が立つことが多い位置）、縦向きの素材では真正中央ンターです。これは固定のヒューリスティックであり、測定ではありません。実際の顔に追従させたい場合は下の「顔認識トリミング」をオンにしてください。ステップ 3 で枠をドラッグすれば、写真ごとに上書きできます。横向きの素材ではオン、すでに締まった縦構図の素材ではオフにします。",
   "tools.crop-wedding-photo-for-reels.label_text.94cda6a5": "クロップ出力解像度",
   "tools.crop-wedding-photo-for-reels.option_text.6cfe245c": "Instagram (1080×X) — 直接アップロード",
   "tools.crop-wedding-photo-for-reels.option_text.67fc4815": "Native Max — ソース解像度を維持します",
@@ -65252,7 +65252,7 @@
 ,
   "tools.copy.cropStageTitle.zzzzzz6c01": "クロップを調整"
 ,
-  "tools.copy.cropStageHint.zzzzzz6c02": "四隅をドラッグして構図を選んでください。触らなかった写真は自動中央クロップのままです。"
+  "tools.copy.cropStageHint.zzzzzz6c02": "四隅をドラッグして画枠を決めます。触らなかった写真は自動トリミングのまま — オフセンターのバイアス、または顔認識トリミングをオンにしている場合は顔に追従します。"
 ,
   "tools.copy.cropPrev.zzzzzz6c03": "前の写真"
 ,
@@ -65325,4 +65325,26 @@
   "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "このページをダウンロード（300 DPI PNG）"
 ,
   "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "すべてのページをダウンロード（印刷用 PDF）"
+,
+  "tools.copy.cropFaceFailed.6f708192": "この端末では顔検出を使えません — オフセンターのバイアスをそのまま使います。"
+,
+  "tools.copy.cropFaceFound.4d5e6f70": "{n} 件の顔を検出しました — トリミング枠がすべてを内側に収めます。"
+,
+  "tools.copy.cropFaceLoading.2b3c4d5e": "顔検出モデルを読み込み中…"
+,
+  "tools.copy.cropFaceNone.5e6f7081": "この写真では顔が見つかりませんでした — オフセンターのバイアスをそのまま使います。"
+,
+  "tools.copy.cropFaceOff.1a2b3c4d": "顔検出はオフです。オンにすると新人を自動でフレーミングします。"
+,
+  "tools.copy.cropFaceReady.3c4d5e6f": "顔検出の準備ができました — お使いのデバイス上で動作し、写真がアップロードされることはありません。"
+,
+  "tools.crop-wedding-photo-for-reels.label_text.face_aware_framing.5d4c3b2a": "顔認識トリミング — 任意"
+,
+  "tools.crop-wedding-photo-for-reels.label_text.off_center_bias.9a8b7c6d": "オフセンターオフセット — 自動の開始位置"
+,
+  "tools.crop-wedding-photo-for-reels.p_text.face_aware_framing.2f3e4d5c": "オフセンターのバイアスは、新人がどこかにいるかを推測したものです。トリミング枠が実際の人物に従うようにするには、<strong>顔認識トリミング</strong>をオンにしてください。ツールは各写真の中から顔を見つけ、すべての顔が内側に収まり周囲に少し余裕が出るまでトリミング枠を滑らせます。検出はブラウザ内で動く小さなモデルで、写真はお使いのデバイス上で読み取られ、アップロードされることはありません。顔を検出できなかった写真はオフセンターのバイアスのままです。"
+,
+  "tools.crop-wedding-photo-for-reels.p_text.why_off_center_beats_center.1b2c3d4e": "結婚写真が「被写体が正確な中央にある」ことはほぼありません。構図のルール（三分法、リーディングライン）は被写体をオフセンターへ押し、横長のフレームではたいてい中央より少し下になります。中央トリミングの素朴な実装は画像の半分を機械的に切って出し、花嫁の顔ごとフレームから切り落としてしまいます。ここでのオフセンターヒューリスティックは意図的に単純で、測定ではなく固定のバイアスです。それでも写真の慣習に十分沿うので、最初の試行でおよそ 85% の結婚写真を正しく処理できます。慣習ではなく実際の顔に画枠を合わせたい場合は、顔認識トリミングをオンにしてください。"
+,
+  "tools.crop-wedding-photo-for-reels.small_text.face_aware_hint.6e7f8091": "各写真の中から顔を見つけ、すべての顔がフレーム内に収まるようトリミング枠を動かします。検出モデル（約 840 KB）は、この設定を初めてオンにしたときだけ一度ダウンロードされ、その後はすべてお使いのデバイス上で動作します。写真そのものがアップロードされることはありません。顔を検出できなかった写真はオフセンターのバイアスのままです。"
 }

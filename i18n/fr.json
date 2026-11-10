@@ -43733,7 +43733,7 @@
   "tools.crop-wedding-photo-for-reels.th_text.video_tiein.7q8r9s0t": "Vidéo mariage incluse",
   "tools.crop-wedding-photo-for-reels.td_text.weddingaivideo.1u2v3w4x": "<strong>WeddingAI.video Recadrage Reels</strong> (cet outil)",
   "tools.crop-wedding-photo-for-reels.td_text.916_11_11_45_43_1_1.5y6z7a8b": "<strong>9:16, 1:1, 4:5, 4:3, 3:2, 1:1</strong>",
-  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>Décentrement automatique</strong>",
+  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>Décalage hors centre + détection des visages sur l’appareil</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.unlimited_100plus_tested.3g4h5i6j": "<strong>Illimité, 100+ testées</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.same_workflow_99_video.7k8l9m0n": "<strong>Même flux que vidéo </strong>",
   "tools.crop-wedding-photo-for-reels.td_text.imagen_ai.1o2p3q4r": "Canva (canva.com/retouche-photo)",
@@ -43756,7 +43756,7 @@
   "tools.crop-wedding-photo-for-reels.td_text.no_built_in.7e8f9g0h": "Sans détection visage incorporée",
   "tools.crop-wedding-photo-for-reels.td_text.editorial_916_jump.3u4v5w6x": "Multi-référence + planche vignettes",
   "tools.crop-wedding-photo-for-reels.td_text.no_tool.7y8z9a0b": "Sans outil mariage",
-  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "La plupart des outils de recadrage exigent centrage manuel de la mariée et du marié pour chacune des 100+ photos. Le recadrage de WeddingAI.video utilise un décentrement au lieu de la détection de visage: il décale la fenêtre de recadrage de 60 % vers le bas sur les sources en paysage, là où les couples de mariage se tiennent généralement, afin que le couple reste dans le cadre au lieu d'être rogné, et exporte 9:16 + 1:1 + 4:5 en lot. De plus, le même lot alimente l'export prêt IG de la vidéo — Reels vertical + YT Shorts horizontal + 1:1 carré pour feed + 4:5 pour carrousel IG.",
+  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "La plupart des outils de recadrage vous obligent à centrer manuellement les mariés sur chacune des 100+ photos de mariage. Le recadrage de WeddingAI.video utilise par défaut un décalage hors centre : il déplace la fenêtre de recadrage de 60 % vers le bas sur les sources paysage, là où les mariés se tiennent en général, pour que le couple reste dans le cadre au lieu d’être coupé ; et vous pouvez passer à une vraie détection des visages sur votre appareil quand vous voulez que le cadre suive les visages réels. Il exporte 9:16 + 1:1 + 4:5 en un seul lot. Ce même lot alimente ensuite l’export IG du clip IA : Reels verticaux + YT Shorts horizontaux + 1:1 pour le fil + 4:5 pour le carrousel IG.",
   "tools.crop-wedding-photo-for-reels.td_text.no_tool.1i2j3k4l": "Sans outil",
   "tools.crop-wedding-photo-for-reels.td_text.not_offered.5m6n7o8p": "Non proposé",
   "tools.crop-wedding-photo-for-reels.td_text.fstoppers_may_2022.9q0r1s2t": "Fstoppers (article de mai 2022)",
@@ -62267,7 +62267,7 @@
   "tools.crop-wedding-photo-for-reels.option_text.43c3a9cd": "Écran large 16:9 (1920×1080)",
   "tools.crop-wedding-photo-for-reels.option_text.7686433a": "Impression 4:3 (1600×1200)",
   "tools.crop-wedding-photo-for-reels.small_text.5cf54bc3": "Prenez le plus grand rectangle de votre photo pouvant prendre en charge ce rapport, puis redimensionnez le navigateur en fonction des pixels natifs d'Instagram.",
-  "tools.crop-wedding-photo-for-reels.small_text.a6b24d1f": "La fenêtre de recadrage est orientée vers les positions des personnes couramment vues dans les portraits de mariage. Le visage de la mariée restera dans le cadre, plutôt que l'arrière-plan soit placé au centre. Sélectionnez cette option si la version horizontale du matériau est activée. Si l’image source se trouve déjà dans une composition verticale compacte, elle peut être désactivée.",
+  "tools.crop-wedding-photo-for-reels.small_text.a6b24d1f": "Définit où commence le cadre de recadrage : 60 % vers le bas sur l’axe Y pour les sources paysage (là où les mariés se tiennent en général) et le centre exact pour les sources verticales. C’est une règle fixe, pas une mesure — activez le cadrage avec détection des visages ci-dessous pour que le recadrage suive les vrais visages. Faites glisser le cadre à l’étape 3 pour le remplacer sur n’importe quelle photo. À activer pour les sources paysage, à désactiver si votre original est déjà un portrait serré.",
   "tools.crop-wedding-photo-for-reels.label_text.94cda6a5": "Résolution de sortie de recadrage",
   "tools.crop-wedding-photo-for-reels.option_text.6cfe245c": "Instagram (1080×X) — téléchargement direct",
   "tools.crop-wedding-photo-for-reels.option_text.67fc4815": "Native Max – préserve la résolution de la source",
@@ -62759,7 +62759,7 @@
 ,
   "tools.copy.cropStageTitle.zzzzzz6c01": "Ajuster le recadrage"
 ,
-  "tools.copy.cropStageHint.zzzzzz6c02": "Faites glisser les coins pour cadrer la photo. Celles que vous ne touchez pas conservent le recadrage automatique centré."
+  "tools.copy.cropStageHint.zzzzzz6c02": "Faites glisser les coins pour cadrer. Les photos que vous ne touchez pas conservent le recadrage automatique : le décalage hors centre, ou les visages si le cadrage avec détection est activé."
 ,
   "tools.copy.cropPrev.zzzzzz6c03": "Photo précédente"
 ,
@@ -62832,4 +62832,26 @@
   "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "Télécharger cette page (PNG 300 DPI)"
 ,
   "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "Télécharger toutes les pages (PDF prêt à imprimer)"
+,
+  "tools.copy.cropFaceFailed.6f708192": "La détection des visages n’est pas disponible sur cet appareil — le décalage hors centre est conservé."
+,
+  "tools.copy.cropFaceFound.4d5e6f70": "{n} visage(s) détecté(s) — le cadre de recadrage les garde tous à l’intérieur."
+,
+  "tools.copy.cropFaceLoading.2b3c4d5e": "Chargement du détecteur de visages…"
+,
+  "tools.copy.cropFaceNone.5e6f7081": "Aucun visage détecté sur cette photo — le décalage hors centre est conservé."
+,
+  "tools.copy.cropFaceOff.1a2b3c4d": "La détection des visages est désactivée. Activez-la pour cadrer automatiquement le couple."
+,
+  "tools.copy.cropFaceReady.3c4d5e6f": "Détecteur de visages prêt — il s’exécute sur votre appareil, vos photos ne sont jamais envoyées."
+,
+  "tools.crop-wedding-photo-for-reels.label_text.face_aware_framing.5d4c3b2a": "Cadrage avec détection des visages — facultatif"
+,
+  "tools.crop-wedding-photo-for-reels.label_text.off_center_bias.9a8b7c6d": "Décalage hors centre — position de départ automatique"
+,
+  "tools.crop-wedding-photo-for-reels.p_text.face_aware_framing.2f3e4d5c": "Le décalage hors centre est une supposition sur l’endroit où le couple se tient d’habitude. Si vous préférez que le recadrage suive les vraies personnes de l’image, activez le <strong>cadrage avec détection des visages</strong> : l’outil trouve les visages sur chaque photo et fait glisser la fenêtre de recadrage jusqu’à ce que tous les visages restent à l’intérieur, avec un peu de marge autour. Le détecteur est un petit modèle qui tourne dans votre navigateur — les photos sont lues sur votre appareil et ne sont jamais envoyées — et une photo sans visage détectable conserve simplement le décalage hors centre."
+,
+  "tools.crop-wedding-photo-for-reels.p_text.why_off_center_beats_center.1b2c3d4e": "Une photo de mariage n’est presque jamais « sujet au centre exact ». Les règles de composition (règle des tiers, lignes directrices) décalent le sujet hors centre — généralement un peu sous le centre sur un cadre horizontal. Un recadrage centré naïf coupe l’image en deux à l’aveugle et l’envoie, et emporte souvent le visage de la mariée. Le décalage hors centre utilisé ici est volontairement simple — un biais fixe, pas une mesure — mais il suit la convention photographique assez bien pour traiter correctement environ 85 % des photos de mariage du premier coup. Quand vous voulez que le cadre suive les vrais visages plutôt que la convention, activez le cadrage avec détection des visages."
+,
+  "tools.crop-wedding-photo-for-reels.small_text.face_aware_hint.6e7f8091": "Trouve les visages sur chaque photo et déplace le cadre de recadrage pour que tous les visages restent à l’intérieur. Le détecteur (environ 840 Ko) est téléchargé une seule fois, la première fois que vous activez cette option, puis fonctionne entièrement sur votre appareil : vos photos ne sont jamais envoyées. Une photo sans visage détectable conserve le décalage hors centre."
 }

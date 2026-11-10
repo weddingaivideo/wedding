@@ -49356,7 +49356,7 @@
   "tools.crop-wedding-photo-for-reels.th_text.video_tiein.7q8r9s0t": "婚礼视频打包",
   "tools.crop-wedding-photo-for-reels.td_text.weddingaivideo.1u2v3w4x": "<strong>WeddingAI.video 抖音/小红书裁剪（本工具）</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.916_11_11_45_43_1_1.5y6z7a8b": "<strong>9:16 + 3:4 + 1:1 + 4:5 + 4:3 + 3:2</strong>",
-  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>中心偏移，自动</strong>",
+  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>中心偏移 + 本地人脸检测</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.unlimited_100plus_tested.3g4h5i6j": "<strong>无限制，实测 100+ 张</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.same_workflow_99_video.7k8l9m0n": "<strong>同流程婚礼视频</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.imagen_ai.1o2p3q4r": "Adobe Express (adobe.com)",
@@ -49384,7 +49384,7 @@
   "tools.crop-wedding-photo-for-reels.td_text.no_tool.5s6t7u8v": "无",
   "tools.crop-wedding-photo-for-reels.td_text.n_a.9w0x1y2z": "不适用",
   "tools.crop-wedding-photo-for-reels.td_text.not_offered.3a4b5c6d": "不提供",
-  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "大多数裁剪工具要你为每张婚纱照手动居中新人。WeddingAI.video 的裁剪采用中心偏移：横版原图会把裁剪窗口下移 60%，也就是新人们通常站立的位置，因此新人会留在画面里而不是被裁掉。一次批量导出 9:16 + 1:1 + 4:5 + 4:3 + 3:2 + 3:4。同时这批裁剪好的照片直接送进 AI 婚礼视频的 IG 适配导出：竖屏抖音 + 9:16 YT Shorts + 1:1 IG Feed + 4:5 IG 轮播 + 3:4 小红书。",
+  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "大多数裁剪工具要你为每张婚纱照手动居中新人。WeddingAI.video 的裁剪默认采用中心偏移：横版原图会把裁剪窗口下移 60%，也就是新人们通常站立的位置，因此新人会留在画面里而不是被裁掉；如果你希望画框跟着真实人脸走，也可以切换到真正的本地人脸检测。一次批量导出 9:16 + 1:1 + 4:5。同时这批裁剪好的照片直接送进 AI 婚礼视频的 IG 适配导出：竖屏抖音 + 9:16 YT Shorts + 1:1 IG Feed + 4:5 IG 轮播。",
   "tools.crop-wedding-photo-for-reels.td_text.no_tool.1i2j3k4l": "无工具",
   "tools.crop-wedding-photo-for-reels.td_text.not_offered.5m6n7o8p": "不提供",
   "tools.crop-wedding-photo-for-reels.td_text.fstoppers_may_2022.9q0r1s2t": "Fstoppers 9:16 指南",
@@ -67530,7 +67530,7 @@
 ,
   "tools.copy.cropStageTitle.zzzzzz6c01": "调整裁剪范围"
 ,
-  "tools.copy.cropStageHint.zzzzzz6c02": "拖动四角框住想保留的画面。没有调整过的照片仍使用自动居中裁剪。"
+  "tools.copy.cropStageHint.zzzzzz6c02": "拖动四角来取景。没有手动调整过的照片会保留自动裁剪——默认是中心偏移，打开“人脸感知取景”后则跟着人脸走。"
 ,
   "tools.copy.cropPrev.zzzzzz6c03": "上一张"
 ,
@@ -67627,4 +67627,28 @@
   "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "下载本页（300 DPI PNG）"
 ,
   "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "下载全部页面（可印刷 PDF）"
+,
+  "tools.copy.cropFaceFailed.6f708192": "这台设备无法使用人脸检测——继续沿用中心偏移。"
+,
+  "tools.copy.cropFaceFound.4d5e6f70": "找到 {n} 张人脸——裁剪框会把它们全部留在画面里。"
+,
+  "tools.copy.cropFaceLoading.2b3c4d5e": "正在加载人脸检测模型…"
+,
+  "tools.copy.cropFaceNone.5e6f7081": "这张照片里没有找到人脸——继续沿用中心偏移。"
+,
+  "tools.copy.cropFaceOff.1a2b3c4d": "人脸检测未开启。打开它即可自动为新人取景。"
+,
+  "tools.copy.cropFaceReady.3c4d5e6f": "人脸检测模型已就绪——它在你自己的设备上运行，照片永远不会被上传。"
+,
+  "tools.crop-wedding-photo-for-reels.label_text.face_aware_framing.5d4c3b2a": "人脸感知取景 — 可选"
+,
+  "tools.crop-wedding-photo-for-reels.label_text.off_center_bias.9a8b7c6d": "中心偏移 — 自动起始位置"
+,
+  "tools.crop-wedding-photo-for-reels.p_text.face_aware_framing.2f3e4d5c": "中心偏移只是猜测新人通常站在哪里。如果你想让裁剪跟着画面里的真人走，请打开<strong>人脸感知取景</strong>：工具会在每张照片里找出人脸，并把裁剪窗口滑到让每一张脸都留在画面里、四周还留一点余量。检测是一个跑在你浏览器里的小模型——照片在你的设备上被读取，永远不会被上传——而找不到人脸的照片则继续沿用中心偏移。"
+,
+  "tools.crop-wedding-photo-for-reels.p_text.why_off_center_beats_center.1b2c3d4e": "婚纱照几乎从不把主体放在正中央。构图法则（三分法、引导线）会把主体推到偏中的位置——横版画框里通常还略低于正中。朴素的居中裁剪只会把照片对半切了就交付，结果经常把新娘的脸整个切出画面。这里用的中心偏移有意做得简单——它是一个固定的经验值，不是一次真实测量——但它足够贴合摄影惯例，第一次尝试就能把大约 85% 的婚纱照处理对。如果你希望画框跟着真实的人脸走，而不是跟着惯例走，请打开“人脸感知取景”。"
+,
+  "tools.crop-wedding-photo-for-reels.small_text.a6b24d1f": "决定裁剪框从哪里开始：横版原图沿 Y 轴下移 60%（新人通常站立的位置），竖版原图取正中。它只是一个固定的经验规则，并不是真正的测量——想让它跟着真实人脸走，请打开下方的“人脸感知取景”。第 3 步里拖动裁剪框可以为任意一张照片单独调整。横版素材建议开启；如果原图已经是紧凑的竖版构图，可以关闭。"
+,
+  "tools.crop-wedding-photo-for-reels.small_text.face_aware_hint.6e7f8091": "在每张照片里找出人脸，并移动裁剪框，让每一张脸都留在画面里。检测模型（约 840 KB）只在你第一次打开这个开关时下载一次，之后全部在你自己的设备上运行——照片永远不会被上传。找不到人脸的照片仍然沿用中心偏移。"
 }

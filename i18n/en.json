@@ -37171,7 +37171,7 @@
   "tools.crop-wedding-photo-for-reels.th_text.video_tiein.7q8r9s0t": "Bundled Video",
   "tools.crop-wedding-photo-for-reels.td_text.weddingaivideo.1u2v3w4x": "<strong>WeddingAI.video Crop for Reels</strong> (this tool)",
   "tools.crop-wedding-photo-for-reels.td_text.916_11_11_45_43_1_1.5y6z7a8b": "<strong>9:16, 1:1, 4:5, 4:3, 3:2, 1:1</strong>",
-  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>Off-center bias, automatic</strong>",
+  "tools.crop-wedding-photo-for-reels.td_text.ai_facecentered_auto.9c0d1e2f": "<strong>Off-center bias + on-device face detection</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.unlimited_100plus_tested.3g4h5i6j": "<strong>Unlimited, 100+ tested</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.same_workflow_99_video.7k8l9m0n": "<strong>Same workflow as wedding video</strong>",
   "tools.crop-wedding-photo-for-reels.td_text.imagen_ai.1o2p3q4r": "Imagen AI Resize for IG Story 9:16 (imagen-ai.com)",
@@ -37204,7 +37204,7 @@
   "tools.crop-wedding-photo-for-reels.td_text.no_tool.5s6t7u8v": "No tool",
   "tools.crop-wedding-photo-for-reels.td_text.n_a.9w0x1y2z": "n/a",
   "tools.crop-wedding-photo-for-reels.td_text.not_offered.3a4b5c6d": "Not offered",
-  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "Most crop tools require you to manually center the bride and groom for each of 100+ wedding photos. WeddingAI.video’s crop uses an off-center bias instead of face detection: it shifts the crop window 60% down on landscape sources, where wedding couples usually stand, so the couple stays inside the frame instead of being cropped out. It exports 9:16 + 1:1 + 4:5 in one batch. Plus, the same batch feeds into the AI video’s IG-ready export — vertical Reels + horizontal YT Shorts + 1:1 square for feed + 4:5 for IG carousel.",
+  "tools.crop-wedding-photo-for-reels.p_text.most_crop_tools_require_manu.5m6n7o8p": "Most crop tools require you to manually center the bride and groom for each of 100+ wedding photos. WeddingAI.video’s crop uses an off-center bias by default — it shifts the crop window 60% down on landscape sources, where wedding couples usually stand, so the couple stays inside the frame instead of being cropped out — and it can switch to real on-device face detection when you want the frame to follow the actual faces. It exports 9:16 + 1:1 + 4:5 in one batch. Plus, the same batch feeds into the AI video’s IG-ready export — vertical Reels + horizontal YT Shorts + 1:1 square for feed + 4:5 for IG carousel.",
   "tools.wedding-invitation-maker.h2_text.invitation_tool_comparison_8_3g4h5i6": "Invitation Maker Comparison: 8 Tools vs WeddingAI.video Auto-Design + Video",
   "tools.wedding-invitation-maker.p_text.google_serp_for_wedding_invit.e7f8g9h0": "Google SERPs for \"wedding invitation maker free\" (Oct 2025) surface Canva (4.2★/2.2K reviews, print, free delivery, 30-day returns), Adobe Express (free online), Greetings Island (1,000s designs + RSVP), Jukebox Print (free design + matching RSVP), Joy (free digital + RSVP tracking + paper), Pinterest (idea board), Paperless Post (50 free sends limit), and Reddit r/Weddingsunder10k (Paperless Post recommendation). WeddingAI.video ties the invitation to a video invitation:",
   "tools.wedding-invitation-maker.th_text.tool.1a2b3c4d": "Tool",
@@ -44285,7 +44285,7 @@
 ,
   "tools.copy.cropStageTitle.zzzzzz6c01": "Adjust the crop"
 ,
-  "tools.copy.cropStageHint.zzzzzz6c02": "Drag the corners to frame the shot. Photos you leave untouched keep the automatic centre crop."
+  "tools.copy.cropStageHint.zzzzzz6c02": "Drag the corners to frame the shot. Photos you leave untouched keep the automatic crop — the off-center bias, or the faces when Face-aware framing is on."
 ,
   "tools.copy.cropPrev.zzzzzz6c03": "Previous photo"
 ,
@@ -44378,4 +44378,28 @@
   "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "Download this page (300 DPI PNG)"
 ,
   "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "Download all pages (print-ready PDF)"
+,
+  "tools.copy.cropFaceFailed.6f708192": "Face detection is not available on this device — keeping the off-center bias instead."
+,
+  "tools.copy.cropFaceFound.4d5e6f70": "{n} face(s) found — the crop frame keeps them all inside."
+,
+  "tools.copy.cropFaceLoading.2b3c4d5e": "Loading the face detector…"
+,
+  "tools.copy.cropFaceNone.5e6f7081": "No face found in this photo — keeping the off-center bias instead."
+,
+  "tools.copy.cropFaceOff.1a2b3c4d": "Face detection is off. Switch it on to frame the couple automatically."
+,
+  "tools.copy.cropFaceReady.3c4d5e6f": "Face detector ready — it runs on your device, your photos are never uploaded."
+,
+  "tools.crop-wedding-photo-for-reels.label_text.face_aware_framing.5d4c3b2a": "Face-aware framing — optional"
+,
+  "tools.crop-wedding-photo-for-reels.label_text.off_center_bias.9a8b7c6d": "Off-center bias — automatic starting position"
+,
+  "tools.crop-wedding-photo-for-reels.p_text.face_aware_framing.2f3e4d5c": "The off-center bias is a guess about where the couple usually stands. If you would rather the crop followed the actual people in the frame, switch on <strong>Face-aware framing</strong>: the tool finds the faces in each photo and slides the crop window so that every face stays inside it, with a little breathing room around them. The detector is a small model that runs in your browser — the photos are read on your device and never uploaded — and a photo with no detectable face simply keeps the off-center bias."
+,
+  "tools.crop-wedding-photo-for-reels.p_text.why_off_center_beats_center.1b2c3d4e": "A wedding photo is almost never “subject at exact center.” Composition rules (rule of thirds, leading lines) push the subject off-center — usually slightly below center on a horizontal frame. A naive center-crop system blindly halves the image and ships it, often cutting the bride’s face out of the frame entirely. The off-center heuristic used here is intentionally simple — a fixed bias, not a measurement — but it matches the photographic convention well enough to handle ~85% of wedding shots correctly on the first try. When you want the frame to follow the real faces instead of the convention, switch on Face-aware framing."
+,
+  "tools.crop-wedding-photo-for-reels.small_text.a6b24d1f": "Sets where the crop frame starts: 60% down the Y axis for landscape sources (where wedding couples typically stand) and true center for portrait sources. It is a fixed heuristic, not a measurement — switch on Face-aware framing below to have the crop follow the actual faces. Drag the frame in step 3 to override it for any photo. ON for landscape sources, OFF if your source is already a tight portrait composition."
+,
+  "tools.crop-wedding-photo-for-reels.small_text.face_aware_hint.6e7f8091": "Finds the faces in each photo and moves the crop frame so every face stays inside it. The detector (about 840 KB) downloads once, the first time you switch this on, and then runs entirely on your device — your photos are never uploaded. A photo with no detectable face keeps the off-center bias."
 }
