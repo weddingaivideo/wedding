@@ -44049,7 +44049,7 @@
   "tools.wedding-photo-book-planner.td_text.editorial_recommendation.3a4b5c6d": "Recommandation éditoriale",
   "tools.wedding-photo-book-planner.td_text.links_out_to_other_vendors.7e8f9g0h": "Liens vers d'autres fournisseurs",
   "tools.wedding-photo-book-planner.td_text.not_offered.1i2j3k4l": "Non proposé",
-  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "La plupart des services d'impression nécessitent que vous disposiez manuellement chaque planche avec des modèles. Le planificateur de WeddingAI.video remplit la grille page par page dans l'ordre d'envoi, place des légendes en 11 langues et exporte la mise en page en PDF prêt à imprimer. Exportez le PDF de mise en page et téléchargez-le sur Artifact Uprising, Printerpix ou toute autre imprimante de votre choix.",
+  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "La plupart des services d’impression vous obligent à mettre en page chaque double avec des modèles. Le planificateur de WeddingAI.video remplit la grille page par page — et vous laisse ensuite glisser les photos dans les cases de votre choix, les recadrer et les agrandir — place les légendes en 11 langues et exporte tout l’album en pages de 300 DPI prêtes à imprimer. Exportez le PDF et envoyez-le à Artifact Uprising, Printerpix ou à l’imprimeur de votre choix.",
   "tools.wedding-hashtag-generator.h2_text.hashtag_tool_comparison_9_5t6u7v8": "Comparaison générateurs hashtag: 8 outils vs WeddingAI.video 25 hashtags bilingues FR/EN + 14 catégories",
   "tools.wedding-hashtag-generator.p_text.google_serp_for_wedding_hashtag.w9x0y1z2": "Les SERPs Google pour « générateur hashtag mariage gratuit » (oct. 2025) affichent principalement Wedibox (wedibox.com — générateur IA, 16 idées personnelles, sans inscription), Gatsby's party (gatsbys.party — générateur gratuit hashtags mariage, outil simple), YesLovey (yeslovey.com — hashtags uniques quelques secondes, prêt Instagram), JoinAlbum (joinalbum.com — hashtags à partir prénoms + année + ville, gratuit sans inscription), Wedding Hashtag Generator (Play Store, 26 sept. 2025 — prénoms + date), CapCut (Top 6 générateurs 15 mai 2025 — Hashers WeddingWire Mariage électronique), WeddingWire Facebook (180+ réactions il y a 7 ans, Wedding Hashtag Generator), Wedding.One (wedding.one/tools/ai-wedding-hashtag — Free AI Wedding Hashtag Generator, prénom couple). La plupart génèrent des hashtags basiques sans IA catégorisée ni bilinguisme. WeddingAI.video est le SEUL avec 25 hashtags bilingues FR/EN + 14 catégories (jeux de mots français #PourToujours/#NosCoeurs/MariageEnProvence) + même flux que vidéo:",
   "tools.wedding-hashtag-generator.th_text.tool.1a2b3c4d": "Outil",
@@ -62822,4 +62822,14 @@
   "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "Agrandir la photo sélectionnée"
 ,
   "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "Réinitialiser la mise en page"
+,
+  "tools.wedding-photo-book-planner.small_text.free_placement_hint.6b3n8q5x": "Glissez une photo de la bibliothèque vers une case, ou glissez une case sur une autre pour les échanger. Glissez à l'intérieur d'une case pour recadrer, et faites défiler la molette sur une case pour l'agrandir."
+,
+  "tools.wedding-photo-book-planner.label_text.zoom_selected.9k2v7m4w": "Agrandir la photo sélectionnée"
+,
+  "tools.wedding-photo-book-planner.button_text.reset_crop.4t6y1u8s": "Réinitialiser le recadrage"
+,
+  "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "Télécharger cette page (PNG 300 DPI)"
+,
+  "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "Télécharger toutes les pages (PDF prêt à imprimer)"
 }

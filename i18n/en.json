@@ -36987,7 +36987,7 @@
   "tools.wedding-photo-book-planner.td_text.editorial_recommendation.3a4b5c6d": "Editorial recommendation",
   "tools.wedding-photo-book-planner.td_text.links_out_to_other_vendors.7e8f9g0h": "Links out to other vendors",
   "tools.wedding-photo-book-planner.td_text.not_offered.1i2j3k4l": "Not offered",
-  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "Most print services require you to manually lay out each spread with templates. WeddingAI.video’s planner auto-fills the grid page by page in upload order, places captions in 11 languages, and exports the layout as a print-ready PDF. Export the layout PDF and upload to Artifact Uprising, Printerpix, or any printer of your choice.",
+  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "Most print services require you to manually lay out each spread with templates. WeddingAI.video’s planner auto-fills the grid page by page — and then lets you drag the photos into the slots you want, crop each one and zoom it — places captions in 11 languages, and exports the whole album as print-ready 300 DPI pages for any print shop.",
   "tools.wedding-seating-chart-maker.h2_text.seating_tool_comparison_8_5t6u7v8": "Seating Tool Comparison: 8 Drag-Drop Tools vs WeddingAI.video Auto-Assign",
   "tools.wedding-seating-chart-maker.p_text.google_serp_for_wedding_seatin.w9x0y1z2": "Google SERPs for \"wedding seating chart maker drag drop\" (Oct 2025) surface SeatPlan.io (free, no signup, unlimited guests), Wedding Studio (drag-drop + spreadsheet paste), Canva (drag-drop free), Table-plan.com (round + rectangular + QR share), WeddingWire (auto-sync with guest list), Planning.Wedding (free 5.0★/429 reviews), Brides’ Nov 2025 list (WeddingWire + Prismm + Zola), and WedSites (drag-drop builder). WeddingAI.video adds AI auto-no-overlap + video tie-in:",
   "tools.wedding-seating-chart-maker.th_text.tool.1a2b3c4d": "Tool",
@@ -44368,4 +44368,14 @@
   "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "Zoom selected photo"
 ,
   "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "Reset layout"
+,
+  "tools.wedding-photo-book-planner.small_text.free_placement_hint.6b3n8q5x": "Drag a photo from the library onto a slot, or drag one slot onto another to swap them. Drag inside a slot to reposition the crop, and scroll over a slot to zoom it."
+,
+  "tools.wedding-photo-book-planner.label_text.zoom_selected.9k2v7m4w": "Zoom selected photo"
+,
+  "tools.wedding-photo-book-planner.button_text.reset_crop.4t6y1u8s": "Reset crop"
+,
+  "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "Download this page (300 DPI PNG)"
+,
+  "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "Download all pages (print-ready PDF)"
 }

@@ -48069,7 +48069,7 @@
   "tools.wedding-photo-book-planner.td_text.editorial_recommendation.3a4b5c6d": "คำแนะนำบรรณาธิการ",
   "tools.wedding-photo-book-planner.td_text.links_out_to_other_vendors.7e8f9g0h": "ลิงค์ออกไปยังผู้ขายรายอื่น",
   "tools.wedding-photo-book-planner.td_text.not_offered.1i2j3k4l": "ไม่มี",
-  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "บริการพิมพ์ส่วนใหญ่ต้องการให้คุณจัดวางแต่ละสเปรดด้วยเทมเพลตด้วยตนเอง ผู้วางแผนของ WeddingAI.video เติมกริดทีละหน้าตามลำดับการอัปโหลด ใส่คำบรรยายใน 11 ภาษา และส่งออกเค้าโครงเป็น PDF ที่พร้อมพิมพ์ ส่งออกเค้าโครง PDF และอัปโหลดไปยัง Artifact Uprising, Printerpix หรือเครื่องพิมพ์ที่คุณเลือก",
+  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "บริการพิมพ์เกือบทั้งหมดต้องให้คุณจัดหน้าสองหน้าเองด้วยเทมเพลต เครื่องวางแผนของ WeddingAI.video เติมกริดให้ทีละหน้า — แล้วคุณยังลากรูปไปวางในช่องที่ต้องการ ครอปทีละรูปและซูมได้ — พร้อมใส่คำบรรยาย 11 ภาษา และส่งออกทั้งอัลบั้มเป็นหน้าความละเอียด 300 DPI ที่พร้อมพิมพ์ เอาต์ไฟล์ PDF ของเลย์เอาต์ไปอัปโหลดที่ Artifact Uprising, Printerpix หรือโรงพิมพ์ที่คุณชอบก็ได้",
   "tools.wedding-invitation-maker.h2_text.invitation_comparison_7_3a4b5c6d": "เปรียบเทียบเครื่องมือสร้างการ์ดเชิญงานแต่งงาน: 7 เครื่องมือ vs WeddingAI.video AI ฉลาด + 11 ภาษา",
   "tools.wedding-invitation-maker.p_text.google_serp_for_invitation.7e8f9g0h": "Google SERPs (ตุลาคม 2025) สำหรับ «การ์ดเชิญงานแต่งงาน ฟรี» แสดงเป็นหลัก: Canva (canva.com/th_th/wedding-invitations — การ์ดงานแต่งและการ์ดเชิญแต่งงานฟรี 480+ แบบ หลากหลายสไตล์ แก้ไขข้อความ สี รูปได้เอง ดาวน์โหลดได้ทันที), Planning.Wedding (planning.wedding/th — บัตรเชิญงานแต่งงานดิจิทัล สร้างการ์ดเชิญสวย ๆ จัดการรายชื่อแขก ส่งการ์ดเชิญได้ง่ายดาย ฟรีไม่มีค่าใช้จ่าย), Magnific (magnific.com — PSD การ์ดเชิญงานแต่งงานสไตล์วินเทจ Vector คำเชิญงานแต่งงานด้วยสีน้ำ), Pinterest knaruemonst (pinterest.com — ไอเดียแบบการ์ด 90 รายการ บัตรเชิญร่วมงานแต่งงาน ดอกไม้สี), temjaiservices.com (การ์ดเชิญออนไลน์ หลากหลายดีไซน์), BookPlus bookplus.co.th (การ์ดงานแต่งสไตล์มินิมอล /100 ใบ), WeddingKoon (weddingkoon.com — การ์ดเชิญออนไลน์ไทย). เครื่องมือสร้างการ์ดเชิญ th ส่วนใหญ่เป็นเทมเพลตนิ่ง. WeddingAI.video เป็นเพียงเครื่องมือเดียวที่มีวางเลย์เอาต์อัตโนมัติ + 8 สไตล์ + ข้อความไทยพร้อม (บ่าวสาว/Save the Date/14.09.2026/กรุงเทพฯ) + RSVP ลิงก์ + QR + WhatsApp + 11 ภาษา + เวิร์กโฟลว์วิดีโอ เดียวกัน:",
   "tools.wedding-invitation-maker.th_text.tool.1i2j3k4l": "เครื่องมือ",
@@ -65691,4 +65691,14 @@
   "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "ซูมรูปที่เลือกไว้"
 ,
   "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "รีเซ็ตเลย์เอาต์"
+,
+  "tools.wedding-photo-book-planner.small_text.free_placement_hint.6b3n8q5x": "ลากรูปจากคลังภาพไปวางบนช่อง หรือลากช่องหนึ่งไปทับอีกช่องเพื่อสลับกัน ลากภายในช่องเพื่อปรับตำแหน่งการครอป และเลื่อนเมาส์เหนือช่องเพื่อซูม"
+,
+  "tools.wedding-photo-book-planner.label_text.zoom_selected.9k2v7m4w": "ซูมรูปที่เลือกไว้"
+,
+  "tools.wedding-photo-book-planner.button_text.reset_crop.4t6y1u8s": "รีเซ็ตการครอป"
+,
+  "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "ดาวน์โหลดหน้านี้ (PNG 300 DPI)"
+,
+  "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "ดาวน์โหลดทุกหน้า (PDF พร้อมพิมพ์)"
 }

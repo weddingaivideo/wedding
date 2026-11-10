@@ -49613,7 +49613,7 @@
   "tools.wedding-photo-book-planner.td_text.editorial_recommendation.3a4b5c6d": "中文 P 图软件",
   "tools.wedding-photo-book-planner.td_text.links_out_to_other_vendors.7e8f9g0h": "模板 + 文字",
   "tools.wedding-photo-book-planner.td_text.not_offered.1i2j3k4l": "不提供",
-  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "大多数印刷服务要你用模板手动排版每个跨页。WeddingAI.video 的规划器按上传顺序逐页自动填充网格，11 种语言添加标题。导出排版 PDF，可以上传到创客贴、稿定、美图或任意你喜欢的打印店。",
+  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "大多数印刷服务都要求你自己用模板逐页排版。WeddingAI.video 的规划器会逐页自动填满网格——之后你还可以把照片拖进想要的格位、单独裁切并放大——同时用 11 种语言排版字幕，并把整本相册导出为可直接送印的 300 DPI 页面。导出 PDF 版面后即可上传到 Artifact Uprising、Printerpix 或任何你喜欢的印刷厂。",
   "tools.wedding-photo-book-planner.td_text.curated_templates_no_ai.3a4b5c6d": "模板精选，无 AI",
   "tools.wedding-photo-book-planner.td_text.not_offered.7e8f9g0h": "不提供",
   "tools.wedding-photo-book-planner.td_text.nations_photo_lab.1i2j3k4l": "国家摄影实验室 (nationsphotolab.com)",
@@ -67617,4 +67617,14 @@
   "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "放大选中的照片"
 ,
   "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "重置排版"
+,
+  "tools.wedding-photo-book-planner.small_text.free_placement_hint.6b3n8q5x": "把照片从素材库拖到格位上，或把一个格位拖到另一个上互换两张。在格位内部拖动可以调整裁切位置，滚轮在格位上滚动可以放大。"
+,
+  "tools.wedding-photo-book-planner.label_text.zoom_selected.9k2v7m4w": "放大选中的照片"
+,
+  "tools.wedding-photo-book-planner.button_text.reset_crop.4t6y1u8s": "重置裁切"
+,
+  "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "下载本页（300 DPI PNG）"
+,
+  "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "下载全部页面（可印刷 PDF）"
 }

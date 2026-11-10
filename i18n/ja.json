@@ -51236,7 +51236,7 @@
   "tools.wedding-photo-book-planner.td_text.editorial_recommendation.3a4b5c6d": "エディトリアル推奨",
   "tools.wedding-photo-book-planner.td_text.links_out_to_other_vendors.7e8f9g0h": "他業者リンク",
   "tools.wedding-photo-book-planner.td_text.not_offered.1i2j3k4l": "提供なし",
-  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "ほとんどの印刷サービスではテンプレートに手動で写真を配置し、テキストを重ねる必要があります。WeddingAI.videoの唯一の違い：アップロード順にページを1枚ずつ自動配置 + 印刷PDF出力 + 11言語キャプション国際ゲスト + リンク動画招待ゲスト距離対応 + プランニングGRÁTIS（印刷オプション）。",
+  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "ほとんどの印刷サービスは、テンプレートを使って見開きを自分で組む必要があります。WeddingAI.video のプランナーはページ単位でグリッドを自動で埋めてくれるだけでなく、その後写真を好きなスロットへドラッグしたり、1枚ずつトリミングや拡大ができるほか、11言語のキャプションを配置し、アルバム全体を印刷用の300 DPIページとして書き出せます。レイアウト PDF を書き出して、Artifact Uprising、Printerpix またはお好みの印刷会社に送ってください。",
   "tools.wedding-hashtag-generator.h2_text.hashtag_tool_comparison_9_5t6u7v8": "結婚式ハッシュタグジェネレーター比較：10ツールvs WeddingAI.video 14カテゴリ30+",
   "tools.wedding-hashtag-generator.p_text.google_serp_for_wedding_hashtag.w9x0y1z2": "Google SERPs（2025年10月）「結婚式 ハッシュタグ 作り方 無料 オリジナル」は主に株式会社TAIAN（blog.taian-inc.com — ブライダル業界Instagram運営ハッシュタグ活用ポイント）、szk-g.jp（結婚式ハッシュタグ作り方活用法、テーブルメニュー表・受付ウェルカムボードさりげなく記載）、Fotify（fotify.app/tools/wedding-hashtag-generator — 2026無料ウェディングハッシュタグジェネレーター、お名前入力で数秒アイデア）、Gathmo（gathmo.com/free-tools — 結婚式ハッシュタグ生成ツール、お二人の名前から、姓のみ・名のみ・姓＋名前などの組み合わせが無料で生成可能）、Reddit weddingplanning（結婚式のハッシュタグ作成手伝ってください）、スナップレイス（snaplace.biz/weddinginscamp — 「#テーマ」「#アニスタグラム」ハッシュタグ）、トキハナ（tokihana.net/articles — 結婚式準備インスタハッシュ活用法、入門編プレ花嫁）、Canva（canva.com/ja_jp — 結婚式インスタ投稿テンプレートおしゃれ無料）、雅-miyabi-京都本店（miyabi.mu/column/7507 — プレ花嫁ハッシュタグ：#ウェディングフォト #前撮り #和装前撮り #人前式）、arcenciel-g.jp（Instagram結婚式情報集め人気ハッシュタグ）を表示。ほとんどのjaツールは基本アイデアまたは業界向け、結婚式特化日本語ハッシュタグ不足。WeddingAI.videoは唯一の30+ハッシュタグ14カテゴリ（駄洒落/ロマンチック/クラシック/モダン/IG/WhatsApp/日付/季節/絵文字）+ 日本語結婚式特化モデル（#ハナヨメ/#ケッコンシキ/#オシキリ）+ 11言語 + 9.9€動画同じワークフロー + リンクRSVP :",
   "tools.wedding-hashtag-generator.th_text.tool.1a2b3c4d": "ツール",
@@ -65315,4 +65315,14 @@
   "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "選択した写真を拡大"
 ,
   "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "レイアウトをリセット"
+,
+  "tools.wedding-photo-book-planner.small_text.free_placement_hint.6b3n8q5x": "ライブラリから写真をスロットへドラッグすると配置されます。スロットを別のスロットへドラッグすると 2 枚が入れ替わります。スロットの中でドラッグすれば切り抜き位置を調整でき、ホイールで拡大できます。"
+,
+  "tools.wedding-photo-book-planner.label_text.zoom_selected.9k2v7m4w": "選択した写真を拡大"
+,
+  "tools.wedding-photo-book-planner.button_text.reset_crop.4t6y1u8s": "切り抜きをリセット"
+,
+  "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "このページをダウンロード（300 DPI PNG）"
+,
+  "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "すべてのページをダウンロード（印刷用 PDF）"
 }

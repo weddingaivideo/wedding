@@ -5847,7 +5847,7 @@
   "tools.wedding-photo-book-planner.td_text.editorial_recommendation.3a4b5c6d": "Рекомендация редакции",
   "tools.wedding-photo-book-planner.td_text.links_out_to_other_vendors.7e8f9g0h": "Ссылки на других поставщиков",
   "tools.wedding-photo-book-planner.td_text.not_offered.1i2j3k4l": "Не предлагается",
-  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "Большинство услуг печати требуют, чтобы вы вручную оформляли каждый разворот с помощью шаблонов. Планировщик WeddingAI.video заполняет сетку постранично в порядке загрузки, размещает подписи на 11 языках и экспортирует макет в PDF, готовый к печати. Экспортируйте макет в формате PDF и загрузите его в Artifact Uprising, Printerpix или на любой принтер по вашему выбору.",
+  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "Большинство типографий заставляют вручную сверстать каждый разворот по шаблонам. Планировщик WeddingAI.video заполняет сетку страница за страницей — а потом вы можете перетащить фото в нужные ячейки, обрезать каждое и увеличить его — ставит подписи на 11 языках и экспортирует весь альбом готовыми к печати страницами в 300 DPI. Экспортируйте PDF-развёртку и загрузите её в Artifact Uprising, Printerpix или в любую типографию.",
   "tools.wedding-photo-collage.h2_text.collage_tool_comparison_9_7u8v9w0": "Сравнение фотоколлажей: 9 инструментов против WeddingAI.video 6 макетов, автозаполнение",
   "tools.wedding-photo-collage.p_text.google_serp_for_wedding_photo.x1y2z3a4": "Поисковая выдача Google для «бесплатного онлайн-создателя свадебных фотоколлажей» (октябрь 2025 г.) поверхность Canva (богатый набор бесплатных шаблонов), Knipsmig (перетаскивание без регистрации, без водяных знаков, в браузере), Picsart (предварительно разработанные макеты), PhotoJoiner (тысячи шаблонов + сетки + наклейки), Pi7 Collage (более 100 шаблонов для 2–30 фотографий, экспорт 4K, в браузере), Adobe Express (бесплатно, без опыта), Photovisi (бесплатно в браузере) и PhotoCollage.com. WeddingAI.video объединяет 6 готовых макетов с обложкой главы свадебного видео:",
   "tools.wedding-photo-collage.th_text.tool.1a2b3c4d": "Инструмент",
@@ -8793,4 +8793,14 @@
   "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "Увеличить выбранное фото"
 ,
   "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "Сбросить макет"
+,
+  "tools.wedding-photo-book-planner.small_text.free_placement_hint.6b3n8q5x": "Перетащите фото из библиотеки в ячейку или перетащите одну ячейку на другую, чтобы поменять их местами. Перетаскивание внутри ячейки двигает кадрирование, а колесо мыши над ячейкой увеличивает фото."
+,
+  "tools.wedding-photo-book-planner.label_text.zoom_selected.9k2v7m4w": "Увеличить выбранное фото"
+,
+  "tools.wedding-photo-book-planner.button_text.reset_crop.4t6y1u8s": "Сбросить кадрирование"
+,
+  "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "Скачать эту страницу (PNG 300 DPI)"
+,
+  "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "Скачать все страницы (PDF, готовый к печати)"
 }

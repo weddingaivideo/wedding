@@ -42239,7 +42239,7 @@
   "tools.wedding-photo-book-planner.td_text.collaborative_review.9k0l1m2n": "Apps colaborativas (Google Photos, Eventocam, Dots)",
   "tools.wedding-photo-book-planner.td_text.layouts_collab_no_ai.1o2p3q4r": "Layouts colaborativos, sin IA",
   "tools.wedding-photo-book-planner.td_text.not_offered.5s6t7u8v": "No ofrecido",
-  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "La mayoría de servicios de impresión requieren colocar manualmente cada doble página con plantillas. El planificador de WeddingAI.video rellena la cuadrícula página por página en el orden de subida, coloca captions en 11 idiomas y exporta el layout como PDF listo para imprimir. Exporta el layout PDF y sube a MILK Books, Pixum, o cualquier imprenta de tu elección.",
+  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "La mayoría de los servicios de impresión te obligan a maquetar cada páginas con plantillas. El planificador de WeddingAI.video rellena la cuadrícula página por página — y además te deja arrastrar las fotos a las casillas que quieras, recortarlas y ampliarlas — coloca los pies en 11 idiomas y exporta todo el álbum como páginas de 300 DPI listas para imprimir. Exporta el PDF y súbelo a Artifact Uprising, Printerpix o la imprenta que prefieras.",
   "tools.wedding-photo-book-planner.td_text.15_to_239_1day_delivery.5s6t7u8v": ", entrega en 1 día",
   "tools.wedding-photo-book-planner.td_text.4_3_store_4_6k.9w0x1y2z": "4.3★ tienda (4,6K reseñas)",
   "tools.wedding-photo-book-planner.td_text.curated_templates_no_ai.3a4b5c6d": "Plantillas seleccionadas, sin IA",
@@ -63105,4 +63105,14 @@
   "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "Ampliar la foto seleccionada"
 ,
   "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "Restablecer el diseño"
+,
+  "tools.wedding-photo-book-planner.small_text.free_placement_hint.6b3n8q5x": "Arrastra una foto de la biblioteca a una casilla, o arrastra una casilla sobre otra para intercambiarlas. Arrastra dentro de una casilla para recolocar el recorte y usa la rueda sobre una casilla para ampliarla."
+,
+  "tools.wedding-photo-book-planner.label_text.zoom_selected.9k2v7m4w": "Ampliar la foto seleccionada"
+,
+  "tools.wedding-photo-book-planner.button_text.reset_crop.4t6y1u8s": "Restablecer el recorte"
+,
+  "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "Descargar esta página (PNG de 300 DPI)"
+,
+  "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "Descargar todas las páginas (PDF listo para imprimir)"
 }

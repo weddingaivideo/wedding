@@ -45210,7 +45210,7 @@
   "tools.wedding-photo-book-planner.td_text.editorial_recommendation.3a4b5c6d": "Redaktionelle Empfehlung",
   "tools.wedding-photo-book-planner.td_text.links_out_to_other_vendors.7e8f9g0h": "Verlinkt auf andere Anbieter",
   "tools.wedding-photo-book-planner.td_text.not_offered.1i2j3k4l": "Nicht angeboten",
-  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "Bei den meisten Druckdiensten müssen Sie jede Doppelseite manuell mit Vorlagen gestalten. Der Planer von WeddingAI.video füllt das Raster Seite für Seite in der Reihenfolge des Uploads, platziert Bildunterschriften in 11 Sprachen und exportiert das Layout als druckfertiges PDF. Exportieren Sie das Layout-PDF und laden Sie es auf Artifact Uprising, Printerpix oder einen beliebigen Drucker Ihrer Wahl hoch.",
+  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "Die meisten Druckdienstleister lassen dich jedes Spread mit Vorlagen selbst layouten. Der Planer von WeddingAI.video füllt das Raster Seite für Seite — und lässt dich danach die Fotos in die Slots ziehen, die du willst, sie zuschneiden und zoomen — setzt Bildunterschriften in 11 Sprachen und exportiert das ganze Album als druckfertige 300-DPI-Seiten. Exportiere das Layout-PDF und lade es bei Artifact Uprising, Printerpix oder bei der Druckerei deiner Wahl hoch.",
   "tools.wedding-hashtag-generator.h2_text.hashtag_tool_comparison_9_5t6u7v8": "Hashtag-Generatoren im Vergleich: 8 Tools vs WeddingAI.video 25 zweisprachige DE/EN + 14 Kategorien",
   "tools.wedding-hashtag-generator.p_text.google_serp_for_wedding_hashtag.w9x0y1z2": "Google-SERPs für „hashtag hochzeit generator kostenlos\" (Okt. 2025) zeigen hauptsächlich Canva (canva.com/de_de — kostenloser Instagram Hashtag-Generator, Reichweite Engagement), guestpix (guestpix.com — kostenlos, einzigartige Hochzeits-Hashtags, Namen eingeben lustige romantische klassische Vorschläge), Fotify (fotify.app — Kostenloser Hochzeits-Hashtag-Generator 2026, dutzende clevere süße lustige Ideen), Google Play Wedding Hashtag Generator (einzigartig unvergesslich, Name Partner Datum), Hootsuite (kostenloser Instagram-Hashtag-Generator KI spezifischen Eingaben), Etsy (hashtag generator wedding handgemachte Stücke Shops), und Wedding Studio (Free Wedding Hashtag Generator, 10+ einzigartige Hochzeits-Hashtags Wortspiel Alliteration). Die meisten de-Tools sind einfache Generatoren ohne KI-Kategorisierung. WeddingAI.video ist das EINZIGE mit 25 zweisprachigen DE/EN-Hashtags + 14 Kategorien (Wortspiele/Romantisch/Klassisch/Modern/IG/WhatsApp/Datum/Saison/Emoji) + deutschem Wortspiel-Modell (#WirHeiraten/#FürImmer/#UnsereLiebe/#JaIchWill) + 11 Sprachen + direktem Fluss zur Video-Einladung + RSVP-Link:",
   "tools.wedding-hashtag-generator.th_text.tool.1a2b3c4d": "Werkzeug",
@@ -63441,4 +63441,14 @@
   "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "Ausgewähltes Foto vergrößern"
 ,
   "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "Layout zurücksetzen"
+,
+  "tools.wedding-photo-book-planner.small_text.free_placement_hint.6b3n8q5x": "Zieh ein Foto aus der Bibliothek in einen Slot, oder zieh einen Slot auf einen anderen, um die beiden zu tauschen. Zieh innerhalb eines Slots, um den Ausschnitt zu verschieben, und scrolle mit dem Mausrad über einen Slot, um ihn zu vergrößern."
+,
+  "tools.wedding-photo-book-planner.label_text.zoom_selected.9k2v7m4w": "Ausgewähltes Foto vergrößern"
+,
+  "tools.wedding-photo-book-planner.button_text.reset_crop.4t6y1u8s": "Ausschnitt zurücksetzen"
+,
+  "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "Diese Seite herunterladen (300 DPI PNG)"
+,
+  "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "Alle Seiten herunterladen (druckfertiges PDF)"
 }

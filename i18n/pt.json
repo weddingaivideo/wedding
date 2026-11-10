@@ -43723,7 +43723,7 @@
   "tools.wedding-photo-book-planner.td_text.editorial_recommendation.3a4b5c6d": "Recomendação editorial",
   "tools.wedding-photo-book-planner.td_text.links_out_to_other_vendors.7e8f9g0h": "Links para outros fornecedores",
   "tools.wedding-photo-book-planner.td_text.not_offered.1i2j3k4l": "Não oferecido",
-  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "A maioria dos serviços de impressão exige que você organize manualmente cada página espelhada com modelos. O planejador do WeddingAI.video preenche a grade página por página na ordem de upload, coloca legendas em 11 idiomas e exporta o layout em PDF pronto para impressão. Exporte o PDF do layout e faça upload para Artifact Uprising, Printerpix ou qualquer impressora de sua escolha.",
+  "tools.wedding-photo-book-planner.p_text.most_print_services_require_yo.5m6n7o8p": "A maioria dos serviços de impressão exige que você monte cada página com modelos. O planejador do WeddingAI.video preenche a grade página por página — e depois deixa você arrastar as fotos para os espaços que quiser, recortar cada uma e dar zoom — aplica legendas em 11 idiomas e exporta o álbum inteiro como páginas de 300 DPI prontas para impressão. Exporte o PDF do layout e envie para Artifact Uprising, Printerpix ou para a gráfica que você preferir.",
   "tools.wedding-hashtag-generator.h2_text.hashtag_tool_comparison_9_5t6u7v8": "Comparação de geradores de hashtag: 6 ferramentas vs WeddingAI.video 25 hashtags bilíngues PT/EN",
   "tools.wedding-hashtag-generator.p_text.google_serp_for_wedding_hashtag.w9x0y1z2": "Google SERPs para „gerador hashtag casamento gratis\" (out. 2025) mostram principalmente Wedibox (wedibox.com — gerador hashtag casamento AI grátis, 16 ideias personalizadas segundos), Canva (canva.com/pt_br — gerador Hashtag Instagram Grátis, brainstorm série hashtags superar barulho), azurefd.net/Shutterfly (9 de out. de 2026, gerador hashtags casamento gratuito, hashtag única fácil compartilhar), Hitched (hitched.co.uk — 25 de set. de 2026, ideias hashtags casamento como criar perfeita), Wedd.ai (wedd.ai/tools/hashtag — gerador hashtags casamento com IA gratuito, exclusivas personalizadas segundos, casamentos indianos sangeet), e Casamentos.com.br (24 de nov. de 2021, como escolher hashtag perfeita, hashtags românticos #somosum #casoriomarinaejoao #casóriodosgordinhos #tachegandodia). A maioria dos geradores pt são simples sem categorização IA. WeddingAI.video é o ÚNICO com 25 hashtags bilíngues PT/EN + 14 categorias (trocadilhos/romântico/clássico/moderno/IG/WhatsApp/data/estação/emoji) + modelo de trocadilhos em pt (#VamosNosCasar/#ParaSempre/#NossoAmor/#SimEuAceito) + 11 idiomas + fluxo direto para vídeo de casamento + link RSVP:",
   "tools.wedding-hashtag-generator.th_text.tool.1a2b3c4d": "Ferramenta",
@@ -62258,4 +62258,14 @@
   "tools.wedding-photo-collage.label_text.zoom_selected.4n8k6p1w": "Ampliar a foto selecionada"
 ,
   "tools.wedding-photo-collage.button_text.reset_layout.2r9t5y7u": "Redefinir o layout"
+,
+  "tools.wedding-photo-book-planner.small_text.free_placement_hint.6b3n8q5x": "Arraste uma foto da biblioteca para um espaço, ou arraste um espaço sobre outro para trocar as duas. Arraste dentro de um espaço para reposicionar o corte e use a roda do mouse sobre um espaço para ampliá-lo."
+,
+  "tools.wedding-photo-book-planner.label_text.zoom_selected.9k2v7m4w": "Ampliar a foto selecionada"
+,
+  "tools.wedding-photo-book-planner.button_text.reset_crop.4t6y1u8s": "Redefinir o corte"
+,
+  "tools.wedding-photo-book-planner.button_text.download_page_png.7y2c5v8n": "Baixar esta página (PNG de 300 DPI)"
+,
+  "tools.wedding-photo-book-planner.button_text.download_all_pdf.3m8k1w6r": "Baixar todas as páginas (PDF pronto para impressão)"
 }

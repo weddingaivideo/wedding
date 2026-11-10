@@ -617,6 +617,63 @@ function loadVendor(lib) {
     });
   }
 
+  // Multi-page PDF. `items` is an array of factories, each returning a
+  // canvas (or a promise of one); they are rendered ONE AT A TIME and the
+  // bitmap is released right after it goes into the PDF, because a 40-page
+  // album at 2400x2400 would otherwise hold ~900 MB of canvas.
+  //
+  // opts.pageWidth / opts.pageHeight are the PDF page size in the pdf's
+  // unit. With unit 'in' and an 8x8 inch page, a 2400 px image lands at
+  // 300 DPI - i.e. actually print-ready, not a 33-inch poster.
+  function downloadPdfPages(items, filename, opts) {
+    opts = opts || {};
+    if (!items || !items.length) return Promise.reject(new Error('No pages to export'));
+    return loadVendor('jspdf').then(function (ns) {
+      var Ctor = (ns && ns.jsPDF) || (window.jspdf && window.jspdf.jsPDF);
+      if (!Ctor) throw new Error('jsPDF did not expose a jsPDF constructor');
+      var unit = opts.unit || 'px';
+      var mime = opts.mime || 'image/jpeg';
+      var quality = typeof opts.quality === 'number' ? opts.quality : 0.92;
+      var pdf = null;
+      var pageIndex = 0;
+      var chain = Promise.resolve();
+      items.forEach(function (make) {
+        chain = chain.then(function () {
+          return Promise.resolve(make());
+        }).then(function (canvas) {
+          if (!canvas) return;
+          var pw = opts.pageWidth || canvas.width;
+          var ph = opts.pageHeight || canvas.height;
+          var landscape = pw > ph;
+          if (!pdf) {
+            pdf = new Ctor({
+              orientation: landscape ? 'landscape' : 'portrait',
+              unit: unit,
+              format: [pw, ph],
+              compress: true,
+            });
+          } else {
+            pdf.addPage([pw, ph], landscape ? 'landscape' : 'portrait');
+          }
+          var dataUrl = canvas.toDataURL(mime, quality);
+          pdf.addImage(dataUrl, mime === 'image/png' ? 'PNG' : 'JPEG', 0, 0, pw, ph, undefined, 'FAST');
+          pageIndex++;
+          // Release the bitmap: only the compressed image stays in the PDF.
+          canvas.width = 0;
+          canvas.height = 0;
+        });
+      });
+      return chain.then(function () {
+        if (!pdf || pageIndex === 0) throw new Error('No pages were rendered');
+        pdf.save(filename || 'weddingai.pdf');
+        return true;
+      });
+    }).catch(function (err) {
+      toast(t('pdfFailed', 'Could not create the PDF') + ': ' + (err && err.message ? err.message : String(err)), 'error');
+      throw err;
+    });
+  }
+
   // ---------- HEIC decoding --------------------------------------------------
   //
   // Only Safari decodes HEIC natively; Chrome, Edge and Firefox cannot. The
@@ -842,6 +899,7 @@ function loadVendor(lib) {
     download: download,
     downloadZip: downloadZip,
     downloadPdf: downloadPdf,
+    downloadPdfPages: downloadPdfPages,
     decodeHeic: decodeHeic,
     resizeCanvas: resizeCanvas,
     removeBackgroundAi: removeBackgroundAi,
