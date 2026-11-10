@@ -68,18 +68,24 @@ jobs:
       - name: Verify sitemap has today's lastmod
         run: |
           if [ ! -f sitemap.xml ]; then
-            echo "❌ sitemap.xml missing — run python qa/gen_sitemap.py first"
+            echo "❌ sitemap.xml missing — run python scripts/_refresh_sitemap_lastmod.py first"
             exit 1
           fi
           today=$(date -u +%Y-%m-%d)
           if ! grep -q "<lastmod>${today}</lastmod>" sitemap.xml; then
-            echo "❌ sitemap.xml lastmod is not today (${today}). Run python qa/gen_sitemap.py"
+            echo "❌ sitemap.xml lastmod is not today (${today}). Run python scripts/_refresh_sitemap_lastmod.py"
+            echo "   (NOT qa/gen_sitemap.py — that script's URL set has drifted from the shipped artifacts; see the warning in its docstring)"
             exit 1
           fi
           echo "✅ sitemap.xml has lastmod=${today}"
 
       - name: Validate sitemap XML
-        run: python qa/verify_sitemap.py
+        # qa/verify_sitemap.py was removed in c7747902 (housekeeping) without
+        # this workflow being updated — the step then died with
+        # "can't open file ... verify_sitemap.py" (exit 1) on every push.
+        # qa/validate-sitemap.py is the retained production script: it parses
+        # every sitemap-<lang>.xml locally and reports image:image coverage.
+        run: python qa/validate-sitemap.py
 
   deploy-preview:
     needs: validate

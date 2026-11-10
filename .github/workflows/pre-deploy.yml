@@ -69,7 +69,13 @@ jobs:
       - name: Run qa/full_qa.py (Python QA scan)
         # Complements the PS check: i18n injection garbage, broken local
         # hrefs, i18n key shape, cross-tag dups, missing alt, etc.
-        # Known baseline: ~277 BROKEN_LOCAL_HREF + 675 I18N_KEY_MALFORMED
-        # + 14 TAG_BALANCE (all pre-existing, not failures of new code).
+        # The script only reports (it never exits non-zero), so these counts
+        # are a trend line, not a gate.
+        # Measured 2026-11-10 on the 721-page tree: ~7893 BROKEN_LOCAL_HREF
+        # + ~13854 I18N_KEY_MALFORMED + 12 TAG_BALANCE (all pre-existing,
+        # not failures of new code). Most BROKEN_LOCAL_HREF hits are
+        # middleware-served paths (/ar/services/ etc.) that have no index.html
+        # on disk, and most I18N_KEY_MALFORMED hits are the intentionally
+        # hand-written 404-page keys.
         shell: pwsh
         run: python qa/full_qa.py

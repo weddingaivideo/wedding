@@ -1,16 +1,19 @@
-"""Refresh sitemap.xml (index) lastmod."""
+"""Refresh sitemap.xml (index) lastmod.
+
+Kept for backwards compatibility — the index is now refreshed by
+scripts/_refresh_sitemap_lastmod.py, which handles the 11 per-language
+sitemaps AND the index in one atomic pass (same UTC date everywhere).
+
+This wrapper used to hardcode 2026-10-17 and the owner's absolute path,
+which meant running it could silently roll the index date backwards.
+"""
+import subprocess
+import sys
 from pathlib import Path
-import re, shutil
-p = Path("C:/Users/qiaoshan/.openclaw/workspace/weddingai/sitemap.xml")
-text = p.read_text(encoding="utf-8")
-new = re.sub(r"<lastmod>\d{4}-\d{2}-\d{2}</lastmod>", "<lastmod>2026-10-17</lastmod>", text)
-if new == text:
-    print("no change")
-else:
-    tmp = p.with_suffix(".xml.tmp")
-    tmp.write_text(new, encoding="utf-8", newline="")
-    if tmp.read_text(encoding="utf-8") != new:
-        tmp.unlink()
-        raise RuntimeError("tmp mismatch")
-    shutil.move(str(tmp), str(p))
-    print(f"sitemap.xml lastmod refreshed")
+
+REPO = Path(__file__).resolve().parent.parent
+subprocess.run(
+    [sys.executable, str(REPO / "scripts" / "_refresh_sitemap_lastmod.py")],
+    cwd=str(REPO),
+    check=True,
+)

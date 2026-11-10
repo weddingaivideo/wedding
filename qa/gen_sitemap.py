@@ -23,6 +23,20 @@ Changed 2026-07-28 (Mavis SEO audit):
   - All sitemaps now emit full 11-link hreflang graph (was: en-only)
   - Added <image:image> entries (was: namespace declared but unused)
   - Removed is_canonical branching (every sitemap is now canonical-shape)
+
+WARNING 2026-11-10 — DO NOT USE THIS SCRIPT TO REGENERATE THE SHIPPED
+SITEMAPS. The deployed artifacts (sitemap.xml + sitemap-<lang>.xml) each
+carry the 139-page ENGLISH canonical URL set, re-prefixed per language, with
+the full hreflang graph — every one of those URLs is backed by a real file.
+This script collects url_paths from ALL html files, so it now sees the 580
+localized pages too: for a language sitemap it maps both /blog/x/ and
+/zh/blog/x/ to the same /<lang>/blog/x/ loc and emits DUPLICATE <loc>
+entries, and it lists pages that have no twin in that language. The URL set
+it produces does not match what is deployed (139 vs ~720 per file).
+Until that is rewritten, refresh the dates only:
+    python scripts/_refresh_sitemap_lastmod.py
+which rewrites every <lastmod> in all 12 files and leaves the URL set, the
+hreflang graph and the image:image blocks byte-identical.
 """
 import re
 import sys
@@ -34,7 +48,16 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE_ORIGIN = "https://weddingai.video"
 LANGS_JS = ROOT / "js" / "langs.js"
 
-EXCLUDE_DIRS = {"admin", "functions", "tmp", "__pycache__", "qa", "i18n", "js", "styles", "scripts", "docs", "search"}
+# NOTE: ".tmp" (with the leading dot) is this repo's scratch directory, NOT
+# "tmp" — it holds ~1400 backup/one-off HTML files. The old set excluded
+# "tmp" only, so this script swept every scratch page into the sitemap and
+# would have published internal URLs to search engines. Keep both names.
+EXCLUDE_DIRS = {
+    "admin", "functions", "tmp", ".tmp", "__pycache__", "qa", "i18n",
+    "js", "styles", "scripts", "docs", "search",
+    ".git", ".workbuddy", ".wrangler", "internal-docs", "private",
+    "dist", "build", "node_modules",
+}
 
 
 def parse_langs() -> list[str]:
