@@ -103,6 +103,30 @@ STORED = [
     ("Print resolution", "Print resolution", "zh", None, False, "an untranslated label"),
     ("Free Tools", "Free Tools", "ru", None, False, "an untranslated label"),
     ("Output", "Output", "th", None, False, "an untranslated label"),
+
+    # --- a SIZE WRITTEN WITH AN "x" is a measurement ---
+    ("5x7", "5x7", "zh", None, True, "a size written with an x"),
+    ("3.5x5", "3.5x5", "ja", None, True, "a size written with an x"),
+    ("18x24", "18x24", "ru", None, True, "a size written with an x"),
+    ("print size 5x7 inch", "打印尺寸 5x7 inch", "zh", None, True,
+     "a size inside a phrase"),
+    ("Free in-browser wedding stationery set maker. Six pieces in four "
+     "coordinated styles, exported as ONE PDF where every page keeps its own "
+     "print size (5x7, 3.5x5, 3.5x2, 4.25x5.5 and 18x24 inch) at 300 DPI.",
+     "浏览器内的免费婚礼纸品套装制作工具。四个协调风格，导出一份 PDF，"
+     "每页保留自己的印刷尺寸（5x7、3.5x5、3.5x2、4.25x5.5 和 18x24 英寸），"
+     "300 DPI。",
+     "zh", None, True, "a description that quotes the sizes"),
+
+    # --- a word that is English AND a word of the target ---
+    ("On quantity: one invitation per household, plus 10 to 15 people.",
+     "Auf Menge: eine Einladung pro Haushalt, plus 10 bis 15 Personen, und "
+     "Sie können auch die Karte selbst gestalten.",
+     "de", None, True, "a German sentence with the German word 'also'"),
+    ("On quantity: one invitation per household, plus 10 to 15 people.",
+     "On quantity: one invitation per household, plus 10 to 15 people, and "
+     "you can also design the card yourself.",
+     "es", None, False, "an English sentence in a Spanish page"),
 ]
 
 # (source, value, lang, expected_ok, why)

@@ -789,6 +789,22 @@ ENGLISH_ONLY_WORDS = {
     "wedding",
 }
 
+# The words of ENGLISH_ONLY_WORDS that are ALSO a word of the target
+# language. The list above is shared by es/fr/de/pt, and a shared list
+# cannot be right for four languages at once.
+#
+# "also" was the one that bit: it is English for "as well" and German
+# for "therefore", and the German sentence the gate flagged was a
+# perfectly good German sentence. A false positive here costs a retry
+# in the middle of a long description - and the retry asks the model to
+# fix something that is not broken.
+#
+# The rule: a word stays out of the shared list when ONE of the four
+# languages uses it, and it is allowed back only for that language.
+LATIN_TARGET_KEEP = {
+    "de": {"also", "man", "so", "war", "hat", "mehr", "hier", "vor"},
+}
+
 LATIN_RUN_RE = re.compile(
     r"[A-Za-z0-9][A-Za-z0-9'\u2019./\-]*"
     r"(?:[ \u00a0]+[A-Za-z0-9][A-Za-z0-9'\u2019./\-]*)*")
@@ -822,6 +838,16 @@ def _run_is_allowed(run):
         if word.isdigit():
             continue
         if re.fullmatch(r"\d+(?:\.\d+)?", word):
+            continue
+        # A SIZE WRITTEN WITH AN "x": "5x7", "3.5x5", "18x24", "8x10".
+        #
+        # The print industry writes a size exactly like that, and the
+        # copy quotes it: the stationery description says "(5x7, 3.5x5,
+        # 3.5x2, 4.25x5.5 and 18x24 inch)". The tokenizer cannot split
+        # "5x7" into two numbers, so the run read as an English word and
+        # the gate called the WHOLE description untranslated - in six
+        # languages at once.
+        if re.fullmatch(r"\d+(?:\.\d+)?x\d+(?:\.\d+)?", word):
             continue
         if word in UNIT_WORDS:
             continue
@@ -972,8 +998,12 @@ def foreign_spans(text, lang):
         rest = text
         for phrase in MULTIWORD_KEEP:
             rest = re.sub(re.escape(phrase), " ", rest, flags=re.I)
+        allowed = LATIN_TARGET_KEEP.get(lang, set())
         for word in re.findall(r"[^\W\d_]+(?:-[^\W\d_]+)*", rest, re.UNICODE):
-            if word.lower() in ENGLISH_ONLY_WORDS:
+            low = word.lower()
+            if low in allowed:
+                continue
+            if low in ENGLISH_ONLY_WORDS:
                 bad.append(word)
         return bad
     # A non-Latin target: the defect is a whole Latin RUN inside a
@@ -2180,20 +2210,48 @@ def main():
     if outliers:
         print("\n[consistency] %d translation(s) have an impossible length:"
               % len(outliers))
-        for text, lang, value, reason in outliers:
-            print("   %s: %r (%s)" % (lang, value[:60], reason))
+
+        # The re-translations run CONCURRENTLY.
+        #
+        # Each outlier needs its own round trip to the gateway, and a
+        # round trip is 30-60 seconds. Done one after another, twenty
+        # outliers cost twenty minutes - and this pass runs at the END
+        # of every slug, so the cost is paid five times over. The calls
+        # are independent of each other, and the request gate still
+        # spaces them, so six at a time is the same rate with a sixth
+        # of the wall time.
+        def repair_one(item):
+            text, lang, value, reason = item
             kind, maxlen = kinds.get(text, ("body", None))
             masked, saved = mask(text)
-            item = {"id": 0, "kind": kind, "text": masked}
+            spec = {"id": 0, "kind": kind, "text": masked}
             if maxlen:
-                item["max"] = maxlen
-            retry = llm_translate_one_strict(item, lang)
+                spec["max"] = maxlen
+            retry = llm_translate_one_strict(spec, lang)
             candidate = unmask(retry, saved) if retry else ""
             low, high = EXPECTED_RATIO.get(lang, (0.4, 2.0))
             src_len = len(text)
             ok = (candidate
                   and src_len * low <= len(candidate) <= src_len * high
                   and not llm_verify(text, candidate, saved, maxlen, lang))
+            return text, lang, value, reason, candidate, ok
+
+        repaired = []
+        if len(outliers) > 1:
+            from concurrent.futures import ThreadPoolExecutor
+            with ThreadPoolExecutor(max_workers=6) as ex:
+                futures = [ex.submit(repair_one, it) for it in outliers]
+                for fut in futures:
+                    try:
+                        repaired.append(fut.result())
+                    except Exception:  # noqa: BLE001
+                        pass
+        else:
+            for it in outliers:
+                repaired.append(repair_one(it))
+
+        for text, lang, value, reason, candidate, ok in repaired:
+            print("   %s: %r (%s)" % (lang, value[:60], reason))
             if ok:
                 per_lang[lang][text] = candidate
                 print("      -> re-translated: %r" % candidate[:60])

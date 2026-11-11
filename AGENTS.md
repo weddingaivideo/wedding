@@ -3914,4 +3914,44 @@ file it was started from still works. After editing a script that a
 supervisor re-launches, run the script ONCE by hand and watch it get
 past its first checkpoint.
 
+### A size written "5x7" is a MEASUREMENT, and the tokenizer could not see it
+
+The consistency pass flagged the stationery description in SIX
+languages at once with the reason "untranslated English: '5x7'". The
+description says "(5x7, 3.5x5, 3.5x2, 4.25x5.5 and 18x24 inch)" -
+the print industry writes a size exactly like that, and the copy
+quotes it.
+
+The tokenizer split a Latin run into words with
+`[A-Za-z0-9.]+`, so "5x7" stayed one word. It is not a digit, it does
+not match `\d+(\.\d+)?`, and it is not in `UNIT_WORDS` - so the run read
+as an English word and the whole description was thrown away, in six
+languages at once, in every round.
+
+The fix is one line in `_run_is_allowed()`: a word that matches
+`\d+(?:\.\d+)?x\d+(?:\.\d+)?` is a size.
+
+### A shared English word list cannot be right for four languages at once
+
+`ENGLISH_ONLY_WORDS` is used for es, fr, de and pt together. "also" is
+English for "as well" and German for "therefore", and the German
+sentence the gate flagged was a perfectly good German sentence.
+
+The rule: a word stays out of the shared list when ONE of the four
+languages uses it, and it is allowed back only for that language
+(`LATIN_TARGET_KEEP`).
+
+### Two more traps in the pipeline itself
+
+* **The child's stdout was block-buffered.** The child's stdout is a
+  FILE, so Python buffers it and the log lags by up to 8 KB. A monitor
+  then reads a process that "stopped" while it is actually mid-request
+  - and the patch file is newer than the log that describes it. The
+  child now runs with `-u`.
+* **The consistency pass re-translated its outliers ONE AT A TIME.**
+  Each one is a gateway round trip of 30-60 seconds, and the pass runs
+  at the END of every slug, so twenty outliers cost twenty minutes,
+  five times over. The calls are independent, so they now run six at a
+  time. The request gate still spaces them.
+
 
