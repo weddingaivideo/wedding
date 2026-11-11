@@ -3762,4 +3762,107 @@ binding forms are read correctly.
 **The general rule**: a checker that reads a binding must read it the
 way the RUNTIME reads it. The runtime is the specification.
 
+## The translation gate threw away the CORRECT answer four different ways (2026-11-11)
+
+Found while finishing the five new tools' ten languages. All four bugs
+share one shape: **the gate judged a value that was right**.
+
+The symptom was invisible from the outside. The pages rendered, the
+dictionary was full, the deploy gate was green. What the gate could not
+see was that it was asking the model to translate the same string again
+and again - 14 to 17 strings per page, per language, per round - and
+that the completion metric could never reach its own target.
+
+### TRAP 1: `script_ok()` asks a Japanese value for a kana, so a measurement can never pass
+
+```python
+if lang == "ja":
+    return bool(re.search(r"[\u3040-\u309f\u30a0-\u30ff]", value))
+```
+
+`5 x 7 in`, `1500 x 2100 px`, `300 DPI`, `A2`, `4-bar (A1)`, `Canva`,
+`WeddingAI.video` - these are spelled the SAME in all ten languages. The
+English source IS the translation. But the Japanese value carries no
+kana, so `script_ok()` said no, `verify_stored()` dropped the stored
+value, and the runner asked the model for "5 x 7 in" again - in every
+language, in every round, forever.
+
+`script_independent(source)` is the new rule: every Latin run of the
+source must be a format, a brand, a unit, a paper size or a vendor
+domain. A source with an ordinary English word is NOT script
+independent, so an untranslated paragraph is still rejected. And the
+value must be IDENTICAL to the source, so a model that moved a digit is
+still rejected.
+
+The allow lists that make it work: `UNIT_WORDS` gained `a0`-`a7`,
+`LATIN_KEEP` gained `greetings island`, `4-bar`, `smallpdf` and
+`adobe acrobat`. A vendor column header is a product name, not copy.
+
+### TRAP 2: the kana rule is right for a sentence and WRONG for a label
+
+The kana rule exists because a Chinese sentence and a Japanese sentence
+can both be written in kanji. But a short Japanese label is often pure
+kanji - and every one of these is correct Japanese that the gate threw
+away:
+
+```
+挙式日  挙式会場  市区町村  披露宴会場  封筒  出力
+招待状  席札  印刷解像度  標準PDF  手動
+```
+
+The Chinese case is now caught EXACTLY instead of by a heuristic: the
+Chinese rendering of the same string is known - it is the Chinese pass
+of the same run - so a kanji-only value that IS the Chinese rendering is
+rejected, and one that is not, is the Japanese word. When the Chinese
+rendering is not known the value is rejected, which is the safe
+direction: a re-translation costs one request, a Chinese page costs a
+reader.
+
+**The general rule**: a rule that compares a translation against
+another language is better than a rule that guesses from the shape of
+the text. The site's own dictionary is the cheapest reference there is.
+
+### TRAP 3: `foreign_spans()` cannot see an English echo
+
+```python
+if not NON_LATIN_RE.search(text):
+    return []          # a value that is ENTIRELY Latin has no run
+```
+
+The untranslated-span gate looks for a Latin RUN inside a non-Latin
+sentence. A value that is entirely Latin has no such run, so the gate
+returns an empty list and sees nothing. For a non-Latin target that is
+how the model handing back the English source passed every check - the
+English phrase leak needs FIVE words, and a label is two.
+
+`llm_verify()` now asks `carries_target_script()`: a non-Latin target
+must carry its own script, unless the source is script independent. So
+an English echo is rejected and the model is asked again.
+
+### TRAP 4: the completion metric counted "identical" as "not translated"
+
+The runner's `coverage()` counted a key as translated only when the
+value DIFFERS from the English source. The 14-17 measurement strings per
+page never differ, so the coverage never reached 90% and the loop burned
+all twelve rounds. The metric now asks the GATE (`script_independent`)
+instead of guessing - one rule, one implementation, no drift.
+
+### The assemble gate and the translate gate disagreed
+
+`scripts/assemble-deploy-patch.py` has always treated `value == source`
+as "not broken". `scripts/translate-tool-page.py` treated it as broken.
+Two gates, two answers, and the translator was the wrong one: it threw
+away values the publisher would have shipped happily.
+
+**The general rule**: when two gates answer the same question, one of
+them is wrong, and the one that REJECTS more is usually the one that is
+wrong - a false rejection costs a request, a false acceptance costs a
+reader. Fix the stricter one, not the looser one.
+
+The regression test for all of this is
+`scripts/check-translation-gate.py` (40 cases, each ACCEPT twin with a
+REJECT twin). Its `--negative-control` turns `script_independent()` OFF
+and proves the test changes its verdict - a test that passes whether the
+rule is there or not proves nothing.
+
 

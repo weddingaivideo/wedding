@@ -642,6 +642,11 @@ LATIN_KEEP = {
     # brands and products
     "weddingai.video", "weddingai", "adobe", "lightroom", "lightroom classic",
     "acrobat", "canva", "ilovepdf", "compuserve", "iphone", "webcodecs",
+    # The vendor column headers of the comparison tables. A column header
+    # is a product name, and a product name is not copy: it is spelled the
+    # same in every language. Without these the gate threw the vendor
+    # name away in every non-Latin language and asked for it again.
+    "smallpdf", "adobe acrobat",
     "instagram", "whatsapp", "youtube", "youtube shorts", "tiktok", "reels",
     "pinterest", "google", "icloud", "dropbox", "mediabunny", "capcut",
     "ffmpeg", "imovie", "handbrake", "shotcut", "filmora", "vlc",
@@ -663,6 +668,12 @@ LATIN_KEEP = {
     # The photo-book vendor list is three separate runs, because the
     # slash does not glue two words into one run.
     "milk books", "artifact uprising",
+    # The stationery comparison table has one column per vendor, and the
+    # header is the product name. A column header is not copy: it is
+    # spelled the same in every language.
+    "greetings island",
+    # A paper size, written the way the paper industry writes it.
+    "4-bar",
 }
 
 # Words that may appear in a Latin run that is otherwise a measurement.
@@ -672,7 +683,8 @@ UNIT_WORDS = {
     "png", "webp", "svg", "mp3", "zip",
     "in", "inch", "inches", "mm", "cm", "px", "pixels", "pixel", "fps",
     "ms", "kbps", "mbps", "mb", "gb", "kb", "lb", "gsm", "dpi", "megapixel",
-    "megapixels", "x", "by", "a4", "a5", "a6", "a7", "us", "letter",
+    "megapixels", "x", "by", "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7",
+    "us", "letter",
 }
 
 # English words that are unmistakably English in ALL FOUR of es/fr/de/pt.
@@ -766,6 +778,86 @@ def script_ok(value, lang):
         return bool(re.search(r"[\u0e00-\u0e7f]", value))
     if lang == "hi":
         return bool(re.search(r"[\u0900-\u097f]", value))
+    return True
+
+
+def carries_target_script(value, lang):
+    """True when the value carries the target language's OWN script.
+
+    This is the WEAK version of script_ok(): it asks "is this written in
+    the target script at all", not "is this written the way this target
+    writes it".
+
+    WHY THE WEAK VERSION IS NEEDED
+    -------------------------------
+    Japanese is written with kanji AND kana, and a short label is often
+    pure kanji. Every one of those is correct Japanese, and script_ok()
+    - which demands a kana - throws all of them away.
+
+    But the WEAK version is what catches the defect script_ok() was
+    written for: the model handing back the ENGLISH source unchanged.
+    A value that is entirely Latin carries no non-Latin run, so
+    foreign_spans() returns an empty list and the untranslated-span
+    gate sees nothing at all. For a Japanese or Chinese or Thai page
+    that is how an English label used to get through.
+    """
+    if lang in LATIN_TARGETS:
+        return True
+    if lang == "ja":
+        return bool(re.search(r"[\u3040-\u30ff\u4e00-\u9fff]", value))
+    if lang == "zh":
+        return bool(re.search(r"[\u4e00-\u9fff]", value))
+    if lang == "ru":
+        return bool(re.search(r"[\u0400-\u04ff]", value))
+    if lang == "ar":
+        return bool(re.search(r"[\u0600-\u06ff\u0750-\u077f]", value))
+    if lang == "th":
+        return bool(re.search(r"[\u0e00-\u0e7f]", value))
+    if lang == "hi":
+        return bool(re.search(r"[\u0900-\u097f]", value))
+    return True
+
+
+def script_independent(source):
+    """True when the source has no word that a translation could change.
+
+    A measurement ("5 x 7 in"), a paper size ("A2", "4-bar (A1)"), a
+    format name ("PDF"), a brand ("Canva") and a domain
+    ("WeddingAI.video") are spelled the SAME in all ten languages. For
+    those strings the English source IS the translation.
+
+    WHY THIS HAS TO EXIST
+    ---------------------
+    script_ok() asks a Japanese value to carry at least one kana. A
+    measurement never can - so the gate threw away the CORRECT answer.
+    And because the gate re-checks the STORED value at the start of
+    every language and every round, the runner asked the model to
+    translate the same "5 x 7 in" again and again, for every language,
+    for every round. That is what kept the queue from ever finishing,
+    and it is why the completion metric counted a correctly kept
+    measurement as a missing translation.
+
+    The rule is deliberately narrow: every Latin run of the source must
+    be a format, a brand, a unit, a paper size or a vendor domain. A
+    source that carries an ordinary English word is NOT script
+    independent, so an untranslated paragraph still gets rejected.
+
+    The value must also be IDENTICAL to the source. A model that
+    mangled the measurement ("5 x 7 inches" with the digits moved) is
+    still rejected.
+    """
+    if not source or not source.strip():
+        return False
+    # A source that already carries another script is not a Latin-only
+    # string, so the "keep it verbatim" argument does not apply.
+    if NON_LATIN_RE.search(source):
+        return False
+    runs = LATIN_RUN_RE.findall(source)
+    if not runs:
+        return False
+    for run in runs:
+        if not _run_is_allowed(run):
+            return False
     return True
 
 
@@ -950,6 +1042,16 @@ def llm_verify(src, dst, saved, maxlen, lang=None):
             return "untranslated English: %r" % spans[0][:60]
         if english_ngram_leak(src, dst):
             return "copied a whole English phrase"
+        # AN ENGLISH ECHO. The model handed the source back unchanged,
+        # which for a non-Latin target is never a translation.
+        #
+        # foreign_spans() cannot see it: a value that is ENTIRELY Latin
+        # contains no non-Latin run, so the untranslated-span gate
+        # returns an empty list and the phrase leak needs five words.
+        # A two-word label came back as English and the gate called it
+        # good.
+        if not carries_target_script(dst, lang) and not script_independent(src):
+            return "still in English"
     if maxlen and len(dst) > maxlen:
         return "too long (%d > %d)" % (len(dst), maxlen)
     # A runaway is a string that grew out of all proportion. The floor
@@ -1061,7 +1163,7 @@ def llm_shorten(text, target, maxlen, tighter=False):
     return out
 
 
-def verify_stored(source, value, maxlen, lang=None):
+def verify_stored(source, value, maxlen, lang=None, zh_value=None):
     """Check a value that is being REUSED instead of translated.
 
     `--skip-existing` and the reuse map both take a value from elsewhere
@@ -1075,6 +1177,11 @@ def verify_stored(source, value, maxlen, lang=None):
     project already wrote into the dictionaries were produced by the
     thinking-off model, so the reuse map was pointing straight at the
     garbage.
+
+    `zh_value` is the Chinese rendering of this same string. It is only
+    used for Japanese, and only to answer one question: is this
+    kanji-only value the CHINESE word or the JAPANESE one? See the
+    Japanese branch below.
     """
     if not value or not value.strip():
         return False
@@ -1087,10 +1194,59 @@ def verify_stored(source, value, maxlen, lang=None):
     if lang and english_ngram_leak(source, value):
         return False
     if lang and not script_ok(value, lang):
-        return False
+        # A measurement, a paper size, a format name and a brand are
+        # spelled the same in every language, so the English source IS
+        # the translation. script_ok() can never be satisfied by them -
+        # asking a Japanese "5 x 7 in" for a kana is asking for a wrong
+        # answer. The value must be identical to the source, so a model
+        # that changed the digits is still rejected.
+        if value.strip() == source.strip() and script_independent(source):
+            pass
+        elif lang == "ja" and _ja_kanji_only_is_japanese(value, source, zh_value):
+            # A Japanese label written in pure kanji. Accept it.
+            pass
+        else:
+            return False
     if maxlen and len(value) > maxlen:
         return False
     return True
+
+
+def _ja_kanji_only_is_japanese(value, source, zh_value):
+    """True when a kanji-only Japanese value is Japanese and not Chinese.
+
+    WHY THE kana RULE IS NOT ENOUGH
+    --------------------------------
+    script_ok() asks a Japanese value to carry at least one kana,
+    because a Chinese sentence and a Japanese sentence can both be
+    written in kanji. That rule is right for a SENTENCE and wrong for a
+    LABEL: "挙式日", "披露宴会場", "封筒", "出力", "席札" and
+    "印刷解像度" are all pure kanji, all correct Japanese, and all of
+    them were thrown away - and then asked for again, in every round,
+    for every language.
+
+    HOW THE CHINESE CASE IS STILL CAUGHT
+    --------------------------------------
+    Not by a heuristic. The Chinese rendering of this very string is
+    known - it is the Chinese pass of the SAME run - so the test is
+    exact: a kanji-only value that is the Chinese rendering is the
+    Chinese word, and it is rejected. A kanji-only value that is NOT
+    the Chinese rendering is the Japanese one.
+
+    The one case this cannot decide is a string whose Chinese and
+    Japanese renderings are identical - "手動" is such a string, and
+    the site's own Japanese dictionary once handed out the Chinese
+    "常见问题" for a Japanese page. When the Chinese rendering is not
+    known the value is rejected, which is the safe direction: a
+    re-translation costs one request, a Chinese page costs a reader.
+    """
+    if not re.search(r"[\u4e00-\u9fff]", value):
+        return False
+    if value.strip() == source.strip():
+        return False
+    if not zh_value:
+        return False
+    return value.strip() != zh_value.strip()
 
 
 def ratio_outliers(source, per_lang, langs):
@@ -1795,9 +1951,15 @@ def main():
         # A reused value has to pass the same checks a fresh one does.
         if done:
             bad = []
+            # The Chinese pass of THIS run is the reference for the
+            # Japanese one: it is what tells a kanji-only Japanese label
+            # apart from a Chinese sentence. It only exists because the
+            # Chinese pass runs first.
+            zh_done = per_lang.get("zh", {})
             for text, value in list(done.items()):
                 limit = kinds.get(text, ("body", None))[1]
-                if not verify_stored(text, value, limit, lang):
+                if not verify_stored(text, value, limit, lang,
+                                     zh_done.get(text)):
                     bad.append(text)
             for text in bad:
                 del done[text]
