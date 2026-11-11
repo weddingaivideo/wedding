@@ -1471,7 +1471,20 @@ def llm_translate_all(texts, kinds, target, workers=3, batch=20):
                 if isinstance(entry, dict) and "id" in entry:
                     got[norm_id(entry["id"])] = entry.get("text", "")
 
-        absorb(llm_parse_json_array(llm_post(llm_prompt(group, target))))
+        # THE TIMEOUT SCALES WITH THE BATCH.
+        #
+        # A request that carries 25 long strings into Russian or Arabic
+        # makes the model think for a long time - and a read timeout at
+        # 300 s killed exactly that request three times in a row. The
+        # gateway was healthy the whole time: a single small request
+        # answered in 1.6 s.
+        #
+        # So the budget is a function of the work: 240 s plus 12 s per
+        # item. One item gets 252 s, a full batch gets 540 s, and the
+        # worst observed SUCCESS was 219 s.
+        timeout = 240 + 12 * len(group)
+        absorb(llm_parse_json_array(
+            llm_post(llm_prompt(group, target), timeout=timeout)))
         missing = [it for it in group if norm_id(it["id"]) not in got]
         if missing:
             # The model loses an item out of twenty now and then - it
@@ -1480,7 +1493,8 @@ def llm_translate_all(texts, kinds, target, workers=3, batch=20):
             # a lost sentence back into a translated one.
             for it in missing:
                 one = llm_parse_json_array(
-                    llm_post(llm_prompt([it], target), max_tokens=24000))
+                    llm_post(llm_prompt([it], target), max_tokens=24000,
+                             timeout=300))
                 if one and isinstance(one[0], dict):
                     got[norm_id(it["id"])] = one[0].get("text", "")
         return got
