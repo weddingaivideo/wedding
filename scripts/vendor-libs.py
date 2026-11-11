@@ -124,6 +124,59 @@ LIBS = {
                 "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.22.0/LICENSE",
         },
     },
+    # ---------------------------------------------------------------------
+    # gifenc - the GIF encoder for the photo-to-GIF tool.
+    #
+    # ESM ONLY. The CommonJS build (dist/gifenc.js) is the package's
+    # `main`, so `import` of the package root would work in a bundler -
+    # but there is no bundler here. dist/gifenc.esm.js is the esbuild
+    # ESM bundle, self-contained (no bare specifiers, so no import map
+    # is needed - unlike the jsquash packages), and it has to be
+    # imported by a `<script type="module">` the way mediabunny is:
+    # see js/tools/gif-loader.js.
+    #
+    # Exports: GIFEncoder, applyPalette, quantize, nearestColorIndex.
+    #
+    # The version is in the DIRECTORY on purpose: a file reached through
+    # a dynamic import() is cached by its URL, and a version change in
+    # the PATH is the only thing that busts it.
+    #
+    # MIT, verified from the LICENSE.md inside the package (the npm
+    # `license` field only says "MIT" - the text was read from the
+    # package, not from a search summary).
+    # ---------------------------------------------------------------------
+    "gifenc": {
+        "pkg": "gifenc",
+        "version": "1.0.3",
+        "license": "MIT",
+        "files": {
+            "1.0.3/gifenc.esm.js": "dist/gifenc.esm.js",
+            "1.0.3/LICENSE": "LICENSE.md",
+        },
+    },
+    # ---------------------------------------------------------------------
+    # pdf-lib - PDF merge / split / reorder / decrypt.
+    #
+    # UMD build (dist/pdf-lib.min.js), so it sets the global `PDFLib`
+    # and a plain <script src> works - there is no bundler on this
+    # site. It is loaded on FIRST USE through
+    # js/tools/common.js loadVendor('pdflib'), never on page load.
+    #
+    # The version is in the DIRECTORY for the same reason as gifenc.
+    #
+    # MIT, verified from the LICENSE.md inside the package (the npm
+    # `license` field only says "MIT" - the text was read from the
+    # package, not from a search summary).
+    # ---------------------------------------------------------------------
+    "pdflib": {
+        "pkg": "@cantoo/pdf-lib",
+        "version": "2.11.1",
+        "license": "MIT",
+        "files": {
+            "2.11.1/pdf-lib.min.js": "dist/pdf-lib.min.js",
+            "2.11.1/LICENSE": "LICENSE.md",
+        },
+    },
     "mediabunny": {
         "pkg": "mediabunny",
         "version": "1.65.2",

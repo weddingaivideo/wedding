@@ -449,6 +449,20 @@ Resolving the live bindings (525 title keys + 525 description keys across the
 11 dictionaries) shows **2 046 titles and 813 descriptions** over the limits
 that the gate applies to hard-coded pages. The gate reported "751 OK, 0 over".
 
+> **STATUS 2026-11-11: CLOSED — the numbers above are a 2026-10-28 snapshot,
+> not a live backlog.** The per-language rewrite finished on 2026-10-30 (see
+> the two "Result" sections below); the live check now reports **0 titles /
+> 0 descriptions over** in all 11 languages, re-proven with an injected
+> 220-char negative control so the zero is not a blind checker. Gate step 9b
+> was flipped from `Warn` to `Fail` on 2026-11-11.
+>
+> A fresh scan that still returns ~2 000 / ~800 is measuring **ORPHAN keys**
+> (the naive all-key scan currently gives 1 808 / 430). Each dictionary holds
+> ~63 k keys but only ~250 of them are live per language. Orphans never render,
+> so do NOT re-translate or truncate them — that is wasted work and repeats the
+> mid-word-cut failure this section documents. Always resolve OWN + FALLBACK
+> bindings first, the way `scripts/check-i18n-meta-lengths.py` does.
+
 ### The values are not merely long — they are machine-translation garbage
 
 Sampling them shows the real problem. An Arabic title:
@@ -483,9 +497,10 @@ pass (or a re-translation), not a regex.
   (`scripts/fix-static-meta.py`: 77 curated titles + 118 descriptions cut at a
   sentence, then clause, then word boundary).
 - `scripts/check-i18n-meta-lengths.py` resolves the live bindings and reports
-  the localized backlog. It is wired into the gate as step **9b** and is
-  **report-only** (`--strict` makes it fatal), because the backlog is a
-  translation job and must not block a deploy.
+  the localized backlog. It is wired into the gate as step **9b** and was
+  **report-only** until the backlog closed. Since 2026-11-11 the gate runs it
+  with `--strict` and **fails the deploy** on any over-limit live value; the
+  checker by itself still exits 0 unless `--strict` is passed.
 - `scripts/sync-en-json-meta.py` keeps `i18n/en.json` in step with the static
   html, so the English row of the backlog is zero.
 
@@ -903,8 +918,8 @@ dictionary value (`&#x27;` in the file, `'` in the JSON).
 
 All eleven languages: **0 titles over 60, 0 descriptions over 160, 0 missing
 keys**. 700 localized bindings agree across both layers. The static layer
-stays at `751 OK, 0 over`. The gate's step 9b is now clean but stays
-report-only.
+stays at `751 OK, 0 over`. The gate's step 9b is now clean — it stayed
+report-only for another 12 days, then became blocking on 2026-11-11.
 
 ## The currency tokenizer read three locales wrong (2026-10-30)
 
@@ -988,6 +1003,73 @@ keys** (ru still lacks 214 translation keys — a content gap, not a length
 one). 700 localized bindings agree across both layers, the static layer stays
 at `751 OK, 0 over`, all 11 dictionaries round-trip byte-identically, and the
 full pre-deploy gate reports **Errors 0, Warnings 1, READY TO DEPLOY**.
+
+## The blog hub says 100+, but its KEY still says 50 (2026-11-11)
+
+The canonical article count is **100+ articles in 11 languages**. There are
+100 posts under `blog/*/index.html`, commit `38091edd` deliberately picked the
+"100+ articles in 11 languages" SERP angle, and the `resources` / `search`
+pages plus the `hi` and `ru` titles already say 100+.
+
+**TRAP: `blog.meta_description.50_in_depth_articles_on_wedding_video_re.17313271`
+is a KEY NAME, not a claim.** It was never renamed, so a pass that "fixes" the
+value back to 50 to match the key reintroduces a stale number — exactly the
+`9_400` / `1_free_revision` trap. Trust the value. Until 2026-11-11 the ten
+non-English dictionaries still described the OLD 50-article source while the
+English `<title>` said 100+; they were rewritten per language, keeping each
+language's own sentence.
+
+**The blog hub has NO localized static file.** No `<lang>/blog/index.html`
+exists, so all 11 languages reach `/<lang>/blog/` through the FALLBACK path:
+the English file, with the title and description swapped from
+`i18n/<lang>.json`. Those two keys are therefore live in EVERY language, and
+a language that lacks them keeps the English copy. `ru` lacked both until
+2026-11-11.
+
+**Four layers, not two.** A fallback key of the blog hub must agree across:
+
+1. `i18n/<lang>.json`
+2. `i18n/shards/<lang>/bundle.dfde240c30a6255f.json` — the hub binds ~100
+   namespaces, so it is served from the page BUNDLE, not per-namespace shards
+3. `i18n/shards/<lang>/blog.{title_text,meta_description}.json`
+4. `i18n/<lang>.manifest.json` — both namespace entries
+
+Editing only the dictionary changes nothing a visitor sees, and
+`verify-i18n-shards.py` will report the drift. `ru` was missing all four.
+
+**TRAP: a mid-word cut can be UNDER the limit.** The English meta description
+had been cut to 155 characters ending in `9 styl`, so `check-seo-lengths.py`
+reported it as fine. It was rewritten as a complete 154-character sentence,
+and the `og:description` / `twitter:description` / Blog JSON-LD — which stay
+English on fallback pages and are NOT bound to the dictionary — had their
+stale "50 in-depth articles" bumped to 100+ too. Do not "normalise" those
+cards to the `<title>`; only the number was wrong.
+
+Step **9b** of `pre-deploy-check.ps1` now also fails on a missing live key
+(`total_m` had been computed but never used). Both failure modes have a
+negative control: inject a 220-char title, or delete one live key, and
+`--strict` must exit 1.
+
+### The SERP angle is now in all 11 `<title>` values
+
+Until 2026-11-11 only `en`, `hi` and `ru` carried "100+ / 11 languages" in the
+blog hub `<title>`; the other eight still used the older
+"tips, guides and AI insights" angle with no count at all. All eight were
+rewritten in their own house style:
+
+* sentence case for `de` / `es` / `fr` / `pt` (French keeps the space before
+  the colon), not English Title Case;
+* **no brand suffix** — only ~15 of ~450 `.title_text.*` values per language
+  carry `| WeddingAI.video`, so a suffix here would be the outlier;
+* head keyword first, then the 100+ / 11-languages angle. All 11 titles are
+  20-55 characters, so nothing had to be dropped to fit the 60-char budget.
+
+**The social card is deliberately NOT part of this.** `og:title` /
+`twitter:title` on the English hub still read
+"Wedding Video Blog: Tips, Guides & AI Insights | WeddingAI.video". They are
+not bound to the dictionary, stay English on every fallback page, and this
+site intentionally gives the card a different headline from the `<title>`.
+Do not "normalise" them to the SERP title.
 
 ## The 13 tools got a full bug-fix pass on 2026-10-16 — a bug report may describe the pre-fix build (2026-10-30)
 
@@ -2958,6 +3040,726 @@ tool ever needs them, it needs its own origin - and this site does not have
 one. A proposal that says "just use ffmpeg.wasm" is answered with this
 section.
 
+## The new-tool build pipeline (2026-11-10)
 
+A new tool page is NOT hand-written. It is five scripts, in this order.
+Each one exists because the step before it silently produced something
+wrong.
+
+```
+scripts/assemble-tool-page.py        # sibling blocks + .tmp/<slug>.frag.html -> the page
+scripts/add-tool-i18n-bindings.py    # data-i18n on every text element + the key map
+scripts/translate-tool-page.py       # 11 languages -> .tmp/<slug>-patch.json + -head.json
+scripts/apply-hand-curation.py       # hand-written strings over the machine translation
+scripts/make-tool-lang-copies.py     # the 10 static language copies
+scripts/add-tool-ui-keys.py          # the patch -> i18n/<lang>.json (11 files)
+scripts/add-shards-for-keys.py       # the shard rebuild (FATAL if skipped)
+scripts/verify-i18n-shards.py        # the freshness gate (FATAL)
+```
+
+`scripts/` is gitignored, so a new script there needs `git add -f`.
+
+### TRAP: the draw functions need the PIECE and the STYLE, and the style has no size
+
+`paint()` hands one object to the draw functions. If it is the STYLE, then
+`s.w` is `undefined`, so `cx = s.w / 2` is `NaN`, and **a NaN coordinate
+makes `fillText` draw nothing** (per the HTML spec). The result is a
+correctly sized but completely BLANK canvas: the page still shows
+"1500 x 2100 px", the buttons work, the PDF still has six pages of the
+right dimensions, and only the artwork is missing.
+
+The symptom is invisible everywhere except in the exported bytes. The fix
+is to hand the draw functions both:
+
+```js
+var spec = { w: piece.w, h: piece.h, dpi: piece.dpi,
+             ink: style.ink, accent: style.accent, rule: style.rule,
+             head: style.head, body: style.body, ornament: style.ornament };
+DRAW[piece.id](c, spec, scale);
+```
+
+### TRAP: `js/tools/common.js` is DEFERRED, so `window.weddingAITool` is undefined in an inline script
+
+A classic inline `<script>` in the body runs while the document is being
+parsed. The deferred `common.js` runs AFTER parsing. So at the top of an
+inline tool script:
+
+```js
+if (window.weddingAITool && window.weddingAITool.fontsReady) { ... }   // always false
+```
+
+The font gate never fires, and the exported file bakes whatever fallback
+face happened to be installed (Georgia on one machine, Comic Sans on
+another) - the exact problem §2.16 fixed.
+
+**The rule**: a tool page's inline script is wrapped in
+`document.addEventListener('DOMContentLoaded', function () { ... })`, and
+BOTH the preview and the export wait on the SAME promise. An export that
+does not await the fonts is still broken even when the preview waits.
+
+`tools/wedding-invitation-maker` and `tools/wedding-video-invitation-maker`
+do this. `tools/save-the-date-maker` uses `fontsReady` WITHOUT the guard -
+it is the same latent bug, still open.
+
+### TRAP: the assembler left TWO `<style>` tags in the page
+
+`head_mid` was sliced with an INCLUSIVE end marker, so it kept the
+sibling's opening `<style>`; the style block was then rebuilt with another
+`<style>`. The second tag is swallowed as CSS text, so the FIRST rule
+(`.page-hero-mini`) is dropped - the hero loses its gradient, its white
+text and its centering, and the page looks different from every other
+tool page. Nothing in the source shows it; only the computed style does.
+
+**The rule**: when a script copies a block out of another file, one of the
+two slices must be EXCLUSIVE of the boundary. `slice_upto()` exists for
+that.
+
+### TRAP: masking with `\x00<index>\x00` collides with the token being replaced
+
+The tool count lives in "13" - and the mask placeholder for attribute #13
+is `\x0013\x00`, which CONTAINS "13". The count replacement rewrote the
+placeholder, so the unmask put attribute #14's key into attribute #13's
+slot and dropped #13 entirely. One attribute in twenty changed; the page
+still rendered.
+
+**The rule**: a "protect then replace then restore" pipeline must split
+the text into segments and substitute only OUTSIDE the protected ones.
+No placeholder, no collision.
+
+### The i18n binding rules for a new tool page
+
+* The middleware's `applyDataI18n()` replaces an element's **whole inner
+  HTML**. So an element with nested tags loses them. Bind only elements
+  whose content is PURE TEXT.
+* For mixed content (`<p>text <a>link</a></p>`), wrap the loose text in
+  `<span data-i18n="...">` and leave the `<a>` alone. The dictionary then
+  holds plain text, which a machine translator can be trusted with, and
+  the link survives in every language.
+* The key is `tools.<slug>.<tag>_text.<snippet>.<hash8>`; the hash is
+  md5 of the text, so the same text always gets the same key.
+* `data-i18n` on a static element is the right way to translate it. The
+  `t('alias', 'fallback')` path is for strings JS creates AFTER load.
+
+### Runtime strings live in `tools.copy` + the COPY alias table
+
+`js/tools/common.js` has a `COPY` table mapping `t('alias', ...)` to a
+`tools.copy.<key>`; the middleware injects that namespace as
+`window.__WA_I18N__`. **A new alias needs BOTH the COPY entry AND the key
+in all 11 dictionaries** - `t()` falls back to `COPY[alias] || alias`, so
+a missing alias looks up a key that does not exist and silently returns
+English.
+
+### The FAQPage schema of a tool page is NOT translated by the middleware
+
+`replaceFaqJsonLd()` only knows two scopes: `homepage_faq` (10 questions)
+and `pricing_faq` (6). A tool page's FAQPage block is therefore served
+with ENGLISH questions and answers on every language page unless the
+language COPY carries a translated schema. The language copies are
+therefore built with the schema rewritten
+(`scripts/make-tool-lang-copies.py` -> `localize_schema()`), and the
+schema strings are translated from the SAME map as the visible FAQ, so
+the structured data and the copy cannot drift apart.
+
+### Google Translate: the free endpoint is the bottleneck
+
+* It answers **429** after a few thousand calls, and a retry storm turns
+  a two-minute cooldown into a twenty-minute one. The script now backs
+  off hard on 429 and writes its output after EVERY language, so a run
+  that gives up still leaves the work it did on disk.
+* **One request can carry many strings**: the endpoint accepts `q` more
+  than once and answers with one segment per `q`. That is the difference
+  between 1900 requests and 190.
+* The brand is masked with `ZXQPROT0ZXQ` - measured: it survives all ten
+  target languages, while a mask made of control characters (`\x00`) is
+  dropped by all ten.
+* Numbers are NOT masked: "5 x 7 in" comes back as "5 x 7 pulgadas", and
+  a digit check catches the case where a digit is dropped.
+* **Reuse what the site already has**: the dictionaries hold 44k-70k keys
+  per language, and phrases like "Home", "Free Tools" or "Frequently asked
+  questions" are already translated somewhere. `build_reuse_map()` finds
+  them by English value and spends no endpoint calls on them.
+* Machine translation gets the SHAPE right and some WORDS wrong. On the
+  stationery page it turned "The names of the hosts, if your families are
+  hosting" into "the landlords' names (if your family is renting out)".
+  The title, the H1, the section headings and the buttons are therefore
+  written by hand (`scripts/apply-hand-curation.py`).
+
+### `scripts/verify-tool-export.py` exports the file and reads the bytes
+
+A tool page can look perfect and still produce a broken file, so the
+check exports for real: it decodes the PNG and counts the distinct
+colours, it parses the PDF's `/MediaBox` and converts to inches, and it
+records every `document.fonts.load` call.
+
+**It has a negative control**: `--negative-control` puts the NaN bug back
+into the served HTML and requires the checker to FAIL. A checker that
+cannot fail on the bug it was written for proves nothing.
+
+
+
+
+
+## The translation backend was writing garbage, and NO gate could see it (2026-11-10)
+
+This is the most expensive finding of the five-tool batch, and it is
+worth reading before trusting any machine translation this project has
+ever produced.
+
+### `thinking: disabled` is what made the model copy English
+
+The MiniMax gateway (`https://agent.minimax.cn/mavis/api/v1/llm/v1/messages`)
+was called with `thinking: {"type": "disabled"}` because a 20-item batch
+then took 4.5 s instead of 76 s.
+
+Measured, same 4 items, 4 repeats, Japanese:
+
+| configuration | untranslated English spans | seconds per batch |
+|---|---|---|
+| MiniMax-M3, thinking disabled | **8 / 12 answers** | ~2 |
+| MiniMax-M3, thinking enabled | 0 / 16 answers | ~28 |
+| MiniMax-M3.1-Flash, thinking enabled | 0 / 16 answers | ~29 |
+| MiniMax-M3.1-Flash, plain | 0 / 16 answers | ~45 |
+
+With the thinking off, the model stops translating partway and copies the
+English source into the middle of the sentence:
+
+* `地元での結婚式なら6〜8週間前、infuseの結婚式は…` (Japanese with German)
+* `重厚な heavier feel 出す` (Japanese with English)
+* `Both ask for picture numbers, and both would rather have a numbered` (English)
+* `無料的Pete worldwide造的Pete wedding photos to GIF converter` (Chinese + English)
+* ` marrying a 和 bacteria` - and 112 of the 311 values the two shipped
+  tools had in the dictionaries were defective this way.
+
+**Speed was bought with a defect that nobody could see.** The length gate
+cannot see it (the string has a plausible length), the number gate cannot
+see it (the digits are all still there), the "same as English" check
+cannot see it (the string as a whole IS translated), and the FAQ parity
+check cannot see it (the schema and the visible copy agree - they are
+both garbage).
+
+The rule: **thinking stays ON**. `LLM_THINKING = "enabled"`.
+
+### TRAP: `budget_tokens` is not honoured, so `max_tokens` must leave room
+
+With `max_tokens=8000` and `budget_tokens=2000`, one 12-item batch
+answered with `output_tokens=6927` of which `thinking_tokens=6607` - the
+model ignored the budget, spent the whole allowance thinking, and the
+answer came back EMPTY. The run then sat in a retry loop.
+
+The batch calls now use `max_tokens=24000` and the single-item retries
+`max_tokens=12000`. The gateway's `usage.output_tokens_details` is the
+number to watch, not the budget you asked for.
+
+### The untranslated-span gate (`foreign_spans` + `english_ngram_leak`)
+
+The only thing that notices a half-English sentence is the WORDS. So the
+translation script now carries a second, deterministic gate:
+
+* `foreign_spans(text, lang)` - for a non-Latin target, every maximal
+  Latin run inside the sentence must be a format name, a brand, a unit, a
+  paper size, a domain, or nothing but numbers and unit words.
+* `english_ngram_leak(source, target)` - a translation may not contain
+  five consecutive English words from its own source. This is what
+  catches the wholesale copy in the four Latin-script targets, where
+  every word is already a Latin word.
+* `script_ok(value, lang)` - the reuse map copies a value out of another
+  language's dictionary, and this site's own Japanese dictionary hands
+  out the CHINESE `常见问题` for "Frequently asked questions". Both
+  languages use kanji, so only the script tells them apart.
+
+Both gates are wired into `llm_verify()` (a fresh translation), into
+`verify_stored()` (a reused one) and into `build_reuse_map()` (a value
+copied from another tool). A flagged item is re-done with the strict
+prompt, and if it still fails it is REPORTED rather than shipped in
+English.
+
+**The gate has a negative control in both directions**:
+`.tmp/test-foreign-gate.py` holds 35 cases - known garbage that MUST be
+flagged and known-good translations that MUST pass - and exits non-zero
+if any case lands on the wrong side. A gate that never fires proves
+nothing, and a gate that fires on "1 PDF" or on the German "Drag-Drop"
+costs a retry or an English fallback.
+
+### TRAP: `write_outputs()` must never fall back to English
+
+The patch writer used to write `per_lang[lang].get(en, en)` - so a
+string this run did not translate became the English source. One
+consistency pass over the video editor's patch therefore replaced **110
+finished Chinese translations with English**, silently, because a
+language that was translated in an EARLIER run looks exactly like a
+language that was never translated.
+
+The rule now: the previous value wins over English, and only a previous
+value that IS the English gets replaced.
+
+### TRAP: a rotated gateway token answers 401, and the run dies quietly
+
+The desktop runtime rewrites `~/.minimax/auth/*/*/*/auth.json` when it
+refreshes the token. A run that started a second earlier holds the token
+that just died, and every request answers `401 Unauthorized` - which the
+old retry loop treated as a normal back-off and then gave up on.
+
+`llm_post()` now catches `HTTPError` with code 401, re-reads the
+credential (`resolve_llm_token(force=True)`) and tries again.
+
+### TRAP: a video with no duration header is a video the tool cannot open
+
+The wedding video editor read the duration ONCE, in the `loadedmetadata`
+handler:
+
+```js
+state.duration = isFinite(videoEl.duration) ? videoEl.duration : 0;
+```
+
+A container that carries no duration header - a screen recording,
+anything `MediaRecorder` wrote, some MKV files - reports **Infinity**
+when the metadata arrives, and the browser only works the real duration
+out later. `isFinite(Infinity)` is false, so the duration became 0, the
+export button never enabled, and the tool was dead for exactly the files
+a couple records on a laptop.
+
+Measured: a one second WebM gave `duration=Infinity` at
+`loadedmetadata` and the button stayed disabled forever.
+
+The fix (`applyDuration()` + `probeDuration()`): apply the duration
+wherever it becomes known (`durationchange` as well), and when it is not
+finite, ask the browser for it by seeking past the end.
+
+`scripts/verify-tool-smoke.py` now has a `--file-type webm` mode that
+records a real clip with `MediaRecorder` and feeds it to the page,
+because a PNG is not a video and the page is right to ignore it.
+
+### TRAP: the tool count is not the only number on the hub page
+
+`scripts/sync-tool-count.py --count 18 --old 14` replaced every
+standalone `14` with `18`. Six of those were NOT the number of tools:
+
+* `"position": 14` - the 14th entry of the ItemList. The rebuild gives
+  positions 1..18, so the replacement left TWO items at position 18 and
+  none at 14.
+* `14 fonts` / `14 wedding fonts` - the add-text tool ships 14 fonts.
+* `14 categories` / `14 categories by region` - the budget calculator
+  splits a budget into 14 categories.
+* `14+ competitors` - a claim about other products.
+
+The script now masks those phrases before the replacement. The mask
+carries no DIGIT, because a placeholder containing "14" would be
+rewritten by the very replacement it is hiding from.
+
+The same sentence holds two counts: `✓ 14 tools, 3 categories` - the
+number of tools AND the number of sections. The hub grew a fourth
+section (Document tools) on 2026-11-10, so the section count is computed
+from the grids, like the section headings are.
+
+### The new gates
+
+* `scripts/build-hub-copy-patch.py` - translates the four new tool cards
+  and the four section headings. The section heading carries its own
+  count ("Photo editors (6)"), and the count is NOT translated: it is
+  stripped, the words are translated, the count is put back.
+* `scripts/publish-new-tools.py` - merges every patch into ONE file (the
+  dictionaries are 6-17 MB, so five writes become one), writes them,
+  syncs the count, writes the 10 language copies of every tool page,
+  propagates the English inline JS into them, rebuilds the shards and
+  verifies them.
+
+### The section headings were wrong in a way that changed the meaning
+
+"Makers and generators" came back as `制造商和发电机` in Chinese (a
+manufacturer and an electrical GENERATOR) and `ผู้ผลิตและเครื่องปั่นไฟ`
+in Thai (a producer and a BLENDER). A reader in those languages was
+told the site makes appliances. "Photo editors" came back as `写真編集者`
+in Japanese - a photo EDITOR, a person - and "Planners and calculators"
+as `プランナーと計算機`, a calculating MACHINE.
+
+### The hub's new cards are 14 to 18, not 15 to 18
+
+`scripts/build-hub-copy-patch.py` listed the cards to re-translate as
+`["15", "16", "17", "18"]`. The hub numbers its cards by POSITION, and
+the five new ones are **14, 15, 16, 17 and 18**:
+
+```
+11 save-the-date        14 stationery set   16 photo-to-gif
+12 invitation           15 contact sheet     17 video editor
+13 video invitation     18 pdf editor  (the only card in the docs section)
+```
+
+So the card that was left out was the stationery set maker - and it
+looked fine, because a missing card is not an error, it is a card whose
+name stays English in ten languages.
+
+The card number is the number in the i18n KEY (`tools.card.name.gen.14`),
+so the key namespace is a position, not a stable id. A card that is
+inserted in the middle renumbers every card after it.
+
+### The English of a page is the HTML, not en.json
+
+The middleware returns `null` for the default language, so for an
+English visitor **the static HTML is the English**. `i18n/en.json` is a
+copy of it, and the copy had drifted:
+
+| key | HTML | en.json |
+|---|---|---|
+| `tools.section.title.gen` | `Makers and generators (3)` | `Makers and generators (5)` |
+| `tools.section.desc.gen` | no stationery set | mentions the stationery set |
+| `tools.section.title.docs` | `Document tools (0)` | key absent |
+| `tools.card.{badge,name,tag}.gen.16/17` | present | key absent |
+| `tools.card.{badge,name,tag}.docs.18` | present | key absent |
+| `tools.card.cta.try_free.16/17/18` | present | key absent |
+
+The patch builder read its English from `en.json`, so it skipped the
+docs section (no key) and could not translate cards 16-18. It now reads
+the English from the HTML, which fixes the drift and makes the missing
+keys translatable in the same pass.
+
+The heading itself was wrong for the new grid: seven cards, of which
+three are converters (contact sheet, GIF, video editor). "Makers and
+generators" is now "Makers, generators and converters".
+
+### A key can be missing from nine of the eleven dictionaries
+
+`tools.card.badge.edit.02` ("HEIC") existed in **Russian only**. The
+middleware falls back to the static English, so the page renders and
+the dictionary looks complete - but a Russian reader got a Russian
+badge and everyone else got the English one.
+
+`.tmp/audit-page-keys.py` lists every `data-i18n` key a page uses, and
+for every language that does not have it. Run it over a page after any
+hub change.
+
+## The gateway has a request-rate ceiling, and it is a WALL (2026-11-11)
+
+Two runners of six workers each - twelve parallel requests - ran for
+two hours and then the gateway answered **429 to everything, for the
+rest of the run**: 1385 retry lines, no output, no recovery. The
+retries were not the problem; the account was already over the line
+and the backoff never got back in.
+
+Measured with a serial probe (10 heavy requests, one every 6 s, the
+same shape the translator uses - thinking on, 12 strings, 24000 max
+tokens): **0 failures**. So the budget is comfortable when the requests
+are spaced out.
+
+`scripts/translate-tool-page.py` now has a **global request gate**: one
+interval shared by every thread, so no two requests start less than
+5 s apart whatever the worker count is. A 429 makes the interval grow
+by half (up to 60 s), a success lets it shrink again by 2% per call.
+
+**The gate is per PROCESS.** Two runners are two gates and therefore
+twice the rate. The 429 wall is what made "run the five tools in two
+parallel groups" attractive in the first place, and it is exactly what
+made it fail. One runner, one gate.
+
+The gate sits in `llm_post()`, before the request, and the penalty is
+raised in the `HTTPError` branch on `exc.code == 429` - a rate limit
+has to slow down **everybody**, not just the thread that hit it.
+
+The token is also rotated by the desktop runtime under the running
+process: a 401 means the credential file changed, not that the
+credential is wrong. `resolve_llm_token(force=True)` re-reads it.
+
+### An empty answer is a BUDGET problem, not a bad prompt
+
+The gateway does not honour `budget_tokens`: the model thinks for as
+long as it likes and the thinking tokens come out of `max_tokens`. A
+15-string batch that came back with no text at all spent all 24000
+tokens thinking. The same batch with 48000 comes back with the answer.
+
+So `llm_post()` DOUBLES `max_tokens` on an empty answer (24000 → 48000
+→ 96000, capped) instead of just waiting and repeating the same
+request. The request body is built inside the retry loop for exactly
+that reason.
+
+## The hub held 32 tools, and every commit said a different number (2026-11-11)
+
+Found while fixing the count for the five new tools.
+
+### The truth
+
+| where | what it said | what the page held |
+|---|---|---|
+| the hub's `<title>` | "13 Free Wedding Photo Tools" | 32 cards |
+| the hub's H1 | "13 Free Wedding Photo Tools in One Catalog" | 32 cards |
+| the home page's H2 | "14 Free Wedding Tools for 2026" | 32 cards |
+| the ItemList's `name` | "27 Free Wedding Planning & Photo Tools" | 32 cards |
+| the hero badge | "27 free tools, 4 categories" | 32 cards, 5 sections |
+| the dictionaries | a fifth number | 32 cards |
+
+The hub grew three times in two days — the planning-tools batch added
+14 cards on 2026-11-11 04:18, and this session added 5 — and each
+commit touched only its own copy of the count. The section headings had
+drifted three ways at once as well: the HTML said "Makers and generators
+(3)" over a grid of seven cards, `en.json` said "(5)", and the hero
+badge said "3 categories" over four sections.
+
+### THE PAGE IS THE TRUTH
+
+`scripts/fix-hub-count.py` (2026-11-11) replaces
+`scripts/sync-tool-count.py` for this. The old script took the count as
+an ARGUMENT (`--count 18 --old 14`) — which is the wrong shape: a
+number typed in by hand goes stale the moment a card is added. The new
+one counts the `<a class="tool-card">` elements and the
+`<section class="tool-section">` blocks and rewrites every number from
+them.
+
+It also rewrites the WORDING, because the hub stopped being a photo
+tool catalogue: "13 Free Wedding Photo Tools" became "32 Free Wedding
+Planning & Photo Tools", the name the ItemList already used.
+
+### The hero badge holds TWO numbers
+
+`✓ 32 free tools, 5 categories` - the tool count and the CATEGORY
+count, in one sentence. A regex for the English word "categories"
+fixed the English and left the other ten languages saying three
+(`✓ 32 个工具，3 个类别`). The rule that works in every language: **the
+first number is the tool count, the second is the category count**.
+
+### The badge had no binding at all
+
+`tools.hero_badge.thirteen_tools.7a8b9c0d` was in the dictionaries but
+NOT on the element in the HTML, so the badge showed the English
+"27 free tools, 4 categories" in every language - and the dictionary's
+translation was dead. The binding is now on the element.
+
+### A working tree can be a REGRESSION against HEAD
+
+The planning-tools batch committed a newer hub at 04:18. A script that
+ran afterwards overwrote `tools/index.html` with an older copy, so the
+working tree had 32 cards but an 18-entry ItemList and a count of 14 —
+the opposite direction from the commit.
+
+The rule: **before editing a file another session has touched, compare
+it with HEAD.** `git diff HEAD -- <file>` shows whether the working copy
+is ahead or behind. Here it was behind, and the fix was to restore
+from HEAD and re-apply only the five cards.
+
+### The planning batch is English-only on purpose
+
+The 14 planning cards have NO i18n binding and their tool pages have
+NO language copies (0 of 10). So they show in English in the other ten
+languages on purpose — `scripts/check-hub.py` reports them as a note,
+not a failure. A card with SOME bindings and a missing field is still
+a failure.
+
+### The card numbers are positions, and the planning cards have none
+
+`tools.card.name.gen.14` — the number is the position in the grid. The
+planning cards are unbound, so they do not take a number and do not
+shift the numbering: the five new cards are 14-18 whether the planning
+cards sit before or after them. `scripts/check-hub.py` checks that the
+ItemList positions are 1..N with no gap and no duplicate, and that
+every card href and every ItemList url is a page that exists.
+
+## A print statement threw away three translation runs (2026-11-11)
+
+### What happened
+
+The timing line added to `scripts/translate-tool-page.py` was
+
+```python
+print("    [%s] %d strings, %d batches, %d repairs, translate %.0fs, "
+      "verify %.0fs" % (target, len(masked), len(groups), repairs,
+                        t_translate, time.time() - t0),
+      file=sys.stderr)
+```
+
+Six conversions, five arguments. `TypeError: not enough arguments for
+format string`.
+
+The exception fires **after** the language has been translated, so the
+work was already done — and then it was thrown away. The runner printed
+`wedding-stationery-set-maker finished in 2.3 min (exit 1)` and moved
+on to the next tool. Three tools in a row died the same way, and the
+log said "failed" without ever saying "the translations you just paid
+for are gone".
+
+### Why a static check is the right tool for it
+
+A "%"-format call with the wrong argument count is a pure static
+property. It does not need the gateway, the page, or the browser to
+prove.
+
+`scripts/check-py-format-strings.py` walks the AST of every python file
+and resolves the argument side through the enclosing scopes:
+
+| right-hand side | verdict |
+|---|---|
+| a tuple literal | its length must EQUAL the conversion count |
+| a name bound to a tuple | same rule |
+| a name bound to a scalar | exactly one conversion |
+| anything else | UNKNOWN — counted, never failed |
+
+Two rules, not one. **Too few** values is `not enough arguments`; **too
+many** values is `not all arguments converted`. Both raise, both kill a
+run, and the second one is the easier mistake to miss.
+
+An attribute is UNKNOWN, not "one value": `"%sx%s" % im.size` looks like
+one argument, but `im.size` is a `(width, height)` tuple at runtime and
+Python consumes two. Calling that a defect would have been wrong — the
+checker had to be corrected, not the code.
+
+### A gate that fires on 170-odd known-fine lines is a gate nobody reads
+
+The first version reported every call it could not prove, and found 172
+of them. All 172 were fine. The rule: **report a defect only when it is
+PROVEN, report an unknown as a count.** The checker now reports 438
+files, 0 defects, 293 unprovable calls — and the 293 are noise-free
+because they are not failures.
+
+### The negative control has to be checked too
+
+`--negative-control` writes a known-bad file and asserts the checker
+reports it. It caught a mistake in the control itself: the second case
+was `"%sx%s" % (100, 200)`, which is **correct** Python. The real
+"not all arguments converted" needs one conversion and two values. A
+control that does not fail proves nothing — including the control.
+
+The check is wired into `internal-tools/pre-deploy-check.ps1` as step
+**9h** and is FATAL.
+
+### The patch file is written after EVERY language
+
+`scripts/translate-tool-page.py` calls `write_outputs()` after each
+language, not once at the end. So a run that is killed mid-way keeps the
+languages it already finished, and the next run picks them up with
+`--skip-existing` (which reads the patch file, NOT the dictionary).
+
+Both writes were plain `write_text`, which is not atomic: a kill during
+the write leaves a truncated JSON file, and the next run then dies on
+`json.loads()` before it can repair anything. They now use the house
+pattern (temp file + fsync + `os.replace`), the same one
+`scripts/add-tool-ui-keys.py` and `scripts/fix-hub-count.py` use.
+
+### The dictionary already holds a tool's translations, and they can be GARBAGE
+
+`--skip-existing` reads the patch file, not the dictionary. The reuse map
+(`build_reuse_map`) reads the dictionary, but the runner excludes the five
+new tools' namespaces from it (`--reuse-exclude`). **That exclusion is
+load-bearing**, and it was measured, not guessed:
+
+Running the translator's own gates over the values the dictionaries
+already held for the new tools:
+
+| tool | zh | es | fr | de | pt | ja | ru | ar | th | hi |
+|---|---|---|---|---|---|---|---|---|---|---|
+| contact sheet | 7 | 1 | 0 | 2 | 0 | **48** | 0 | 12 | 7 | 3 |
+| stationery set | 2 | 0 | 0 | 1 | 1 | **40** | 0 | 15 | 1 | 2 |
+
+142 bad values in total. The failures are the `thinking: disabled`
+signature — English left in the middle of a translated sentence:
+
+```
+ja   Folder内の_numeric_photos_を        (a photo folder)
+ja   tricked                            (wedding website)
+ar   .code Dress                         (dress code)
+ar   أدوات-stationery                    (a wedding stationery set)
+ar   موقعedding                          (the wedding website)
+ar   هناك طريقتان لل doing ذلك           (there are two ways to do this)
+ar   ... bacterium ...                    (memory, in the 150 DPI paragraph)
+th   แผ่น proof sheet                    (a proof sheet)
+zh   请按 100 percent 打印                 (print at 100 percent)
+```
+
+So the dictionary is NOT a safe source of translations for a tool that
+is about to go live: it holds machine-translation garbage that a reader
+would see on the page. The pipeline re-translates from scratch, and the
+run's own output replaces the stored value
+(`add-tool-ui-keys.py` overwrites, and re-reads the file to confirm).
+
+Note that the gate also has FALSE POSITIVES on short technical strings:
+`家` (home), `1列` (1 column) and `A4（210 × 297 mm）` are all correct
+Japanese and Chinese, and the `script_ok` check flags them because they
+carry no kana / mix scripts. A false positive costs a re-translation, not
+a wrong page, which is the right way round for this gate.
+
+
+### One runner, one gate — including when the other runner is "finishing"
+
+On 2026-11-11 two runners were alive at the same time: the new one
+(started 08:42) and the old one (started 08:29) that had already been
+restarted once. They were working the **same five tools in the same
+order**, and they wrote to the **same log files**, so each one overwrote
+the other's progress report. Two runners are two request gates, which is
+exactly the configuration that built the 429 wall.
+
+Kill the old one before starting the new one. A `task_stop` on the
+runner does not always take the child `python.exe` with it — check
+`Get-CimInstance Win32_Process -Filter "Name='python.exe'"` and make
+sure exactly one `translate-tool-page.py` is left.
+
+### A background task has a 1-hour limit, and it takes the child with it
+
+The translation runner was started as a background task at 08:42 and was
+killed at exactly 3600 s, in the middle of the Russian pass. The work
+was not lost (the patch file is written after every language) but the
+process died with it, and with it the other four tools.
+
+**Start the long runner DETACHED**, not as a task:
+
+```powershell
+Start-Process python -ArgumentList "-u", ".tmp\run-retranslate-forever.py" \
+    -WorkingDirectory "<repo>" -WindowStyle Hidden
+```
+
+The wrapper loops: it restarts the runner whenever it stops, and it ends
+when every tool's patch holds a real translation for all ten languages.
+A detached process is not tied to a task's lifetime.
+
+### TRAP: the i18n MAP deduped by TEXT, so half the keys never existed
+
+`scripts/add-tool-i18n-bindings.py` builds the key -> English map the
+translator works from. It used to keep **one key per English text**:
+
+```python
+for key, text in keys:
+    if text in seen:
+        continue          # <- dropped the second key for the same text
+```
+
+That is wrong, because the same visible string is often bound under two
+element types:
+
+```
+h2_text.what_to_put_on_a_wedding_invitation.c45a79e9   (the section)
+h4_text.what_to_put_on_a_wedding_invitation.c45a79e9   (the related card)
+td_text.3_columns.7f6ed182                            (a table cell)
+option_text.3_columns.7f6ed182                        (a dropdown option)
+```
+
+The hash is derived from the TEXT, so both keys share it, and the
+text-dedup kept only one. The other one had no key in any dictionary and
+showed English in all ten languages. 22 keys were affected across the
+five new tools.
+
+The map now dedups by KEY. The translator already dedups by text on its
+own (`all_texts`), so the same string is still translated only once.
+
+**The convention, measured**: the thirteen existing tools keep BOTH keys
+in `en.json` - 13/13, 7/7, 13/13 collisions, all with both keys
+present. A tool that keeps one is the odd one out.
+
+### TRAP: `data-i18n-attr` carries "attr:key", and a checker that keeps the whole string fails on every page
+
+The two binding spellings carry different things:
+
+```
+data-i18n="blog.foo.p_text.bar"          -> the key IS the value
+data-i18n-attr="content:blog.foo.meta"   -> "attr:key", several pairs
+                                            separated by "|"
+```
+
+The middleware splits an attr pair on ":" and uses the part AFTER the
+colon (`functions/_middleware.js`, `applyDataI18nAttr`). A checker that
+keeps the whole `"title:about.a_text.couples_served_title.ddddddd3"`
+string looks for a key that exists in NO dictionary — and reports a
+defect on every page that binds an attribute, while the binding is in
+fact perfectly fine.
+
+`scripts/check-page-i18n-keys.py` now mirrors the middleware (split on
+"|", then on the first ":") and has a negative control that proves both
+binding forms are read correctly.
+
+**The general rule**: a checker that reads a binding must read it the
+way the RUNTIME reads it. The runtime is the specification.
 
 

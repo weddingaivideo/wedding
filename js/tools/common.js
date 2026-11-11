@@ -47,6 +47,16 @@ var VENDOR = {
   heic2any: { file: 'heic2any.min.js', version: '0.0.4', global: 'heic2any' },
   pica: { file: 'pica.min.js', version: '10.0.3', global: 'pica' },
   onnxruntime: { file: 'ort.wasm.min.js', version: '1.22.0', global: 'ort' },
+  // pdf-lib (@cantoo/pdf-lib, MIT) - PDF merge / split / reorder / decrypt.
+  // The UMD build, so it sets the global `PDFLib` and a plain <script src>
+  // works - there is no bundler on this site. 602 KB, fetched on first use.
+  //
+  // The version is part of `file` because loadVendor() composes the URL as
+  // /js/vendor/<key>/<file>?v=<version> - the library is pinned in a version
+  // DIRECTORY (js/vendor/pdflib/2.11.1/), so the directory has to be part
+  // of the path or the request 404s. The ?v= stamp still equals the
+  // manifest's "version" field for this library (2.11.1).
+  pdflib: { file: '2.11.1/pdf-lib.min.js', version: '2.11.1', global: 'PDFLib' },
 };
 
 var vendorPromises = {};
@@ -155,6 +165,41 @@ function loadVendor(lib) {
     mp4Saved: 'tools.copy.mp4Saved.zzzzzz9a03',
     mp4Failed: 'tools.copy.mp4Failed.zzzzzz9a04',
     mp4Unsupported: 'tools.copy.mp4Unsupported.zzzzzz9a05',
+    // wedding stationery set maker (added 2026-11-10)
+    setNoPieces: 'tools.copy.setNoPieces.zzzzzzb001',
+    setPdfMissing: 'tools.copy.setPdfMissing.zzzzzzb002',
+    setDone: 'tools.copy.setDone.zzzzzzb003',
+    setFailed: 'tools.copy.setFailed.zzzzzzb004',
+    setPiecesSelected: 'tools.copy.setPiecesSelected.zzzzzzb005',
+    setRendering: 'tools.copy.setRendering.zzzzzzb006',
+    setAllDone: 'tools.copy.setAllDone.zzzzzzb007',
+    pieceInvitation: 'tools.copy.pieceInvitation.zzzzzzb008',
+    pieceRsvp: 'tools.copy.pieceRsvp.zzzzzzb009',
+    piecePlace: 'tools.copy.piecePlace.zzzzzzb00a',
+    pieceTable: 'tools.copy.pieceTable.zzzzzzb00b',
+    pieceMenu: 'tools.copy.pieceMenu.zzzzzzb00c',
+    piecePoster: 'tools.copy.piecePoster.zzzzzzb00d',
+
+    // added 2026-11-10 (new tool pages)
+    veditLoading: 'tools.copy.veditLoading.zzzzzz6c342',
+    veditSaved: 'tools.copy.veditSaved.zzzzzzcc5e8',
+    veditNoEncode: 'tools.copy.veditNoEncode.zzzzzz80733',
+    veditUnreadable: 'tools.copy.veditUnreadable.zzzzzzc60ce',
+    gifEncoderMissing: 'tools.copy.gifEncoderMissing.zzzzzz2120b',
+    gifTooMany: 'tools.copy.gifTooMany.zzzzzzc5080',
+    gifMoveUp: 'tools.copy.gifMoveUp.zzzzzz7740c',
+    gifMoveDown: 'tools.copy.gifMoveDown.zzzzzzbbba3',
+    gifNoPhotos: 'tools.copy.gifNoPhotos.zzzzzze695a',
+    gifEncoding: 'tools.copy.gifEncoding.zzzzzz34135',
+    gifReady: 'tools.copy.gifReady.zzzzzz30515',
+    gifFailed: 'tools.copy.gifFailed.zzzzzz4d8e0',
+    gifStatus: 'tools.copy.gifStatus.zzzzzzf8841',
+    // added 2026-11-11 (runtime copy audit)
+    sizes: 'tools.copy.sizes.zzzzzze45a',
+    original: 'tools.copy.original.zzzzzz0419',
+    dropFiles: 'tools.copy.dropFiles.zzzzzz5e6e',
+    decodeFailed: 'tools.copy.decodeFailed.zzzzzzf06c',
+    heicUnsupported: 'tools.copy.heicUnsupported.zzzzzz1dcd',
   };
 
   // Replace {name} placeholders with values from `params`.
@@ -265,8 +310,8 @@ function loadVendor(lib) {
       var isHeic = /\.(heic|heif)$/i.test(name);
       reject(new Error(
         isHeic
-          ? 'This browser can\u2019t decode HEIC/HEIF directly. Use the HEIC \u2192 JPG tool, or open this file in Safari/Finder first to convert.'
-          : 'Could not decode this file. Try a JPG, PNG, or WebP.'
+          ? t('heicUnsupported', 'This browser can’t decode HEIC/HEIF directly. Use the HEIC → JPG tool, or open this file in Safari/Finder first to convert.')
+          : t('decodeFailed', 'Could not decode this file. Try a JPG, PNG, or WebP.')
       ));
     };
     img.src = url;
@@ -401,7 +446,7 @@ function loadVendor(lib) {
     });
     dropEl.setAttribute('tabindex', '0');
     dropEl.setAttribute('role', 'button');
-    dropEl.setAttribute('aria-label', dropEl.getAttribute('aria-label') || 'Drop files here or click to browse');
+    dropEl.setAttribute('aria-label', dropEl.getAttribute('aria-label') || t('dropFiles', 'Drop files here or click to browse'));
 
     ['dragenter', 'dragover'].forEach(function (ev) {
       dropEl.addEventListener(ev, function (e) {
@@ -466,10 +511,15 @@ function loadVendor(lib) {
     var sub = document.createElement('div');
     sub.className = 'wa-tool-sub';
     if (state.sizes && typeof state.sizes.orig === 'number') {
-      sub.textContent = 'Original: ' + formatBytes(state.sizes.orig);
+      var origSize = formatBytes(state.sizes.orig);
       if (typeof state.sizes.out === 'number' && state.sizes.out > 0) {
-        sub.textContent += '  •  Output: ' + formatBytes(state.sizes.out) +
-          '  (' + formatPercent((state.sizes.orig - state.sizes.out) / state.sizes.orig * 100) + ')';
+        sub.textContent = t('sizes', 'Original: {orig} • Output: {out} ({pct})', {
+          orig: origSize,
+          out: formatBytes(state.sizes.out),
+          pct: formatPercent((state.sizes.orig - state.sizes.out) / state.sizes.orig * 100)
+        });
+      } else {
+        sub.textContent = t('original', 'Original: {orig}', { orig: origSize });
       }
     } else if (state.message) {
       sub.textContent = state.message;
@@ -898,7 +948,7 @@ function loadVendor(lib) {
     }).then(function (session) {
       var w = source.naturalWidth || source.width;
       var h = source.naturalHeight || source.height;
-      if (!w || !h) throw new Error('Image has no dimensions. Try a different file.');
+      if (!w || !h) throw new Error(t('imageNoDimensions', 'Image has no dimensions. Try a different file.'));
 
       // MODNet's reference implementation resizes to 512x512 WITHOUT keeping
       // the aspect ratio, predicts a matte, and scales the matte back up.

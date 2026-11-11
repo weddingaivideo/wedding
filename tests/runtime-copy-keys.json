@@ -1,0 +1,71 @@
+{
+  "tools": {
+    "sizes": "tools.copy.sizes.zzzzzze45a",
+    "original": "tools.copy.original.zzzzzz0419",
+    "dropFiles": "tools.copy.dropFiles.zzzzzz5e6e",
+    "decodeFailed": "tools.copy.decodeFailed.zzzzzzf06c",
+    "heicUnsupported": "tools.copy.heicUnsupported.zzzzzz1dcd"
+  },
+  "search": [
+    {
+      "tk": "search.index.i0.title.zzzzzz20b3",
+      "dk": "search.index.i0.desc.zzzzzz7750"
+    },
+    {
+      "tk": "search.index.i1.title.zzzzzz9258",
+      "dk": "search.index.i1.desc.zzzzzz1ff1"
+    },
+    {
+      "tk": "search.index.i2.title.zzzzzz399e",
+      "dk": "search.index.i2.desc.zzzzzz753c"
+    },
+    {
+      "tk": "search.index.i3.title.zzzzzz3bc0",
+      "dk": "search.index.i3.desc.zzzzzz4619"
+    },
+    {
+      "tk": "search.index.i4.title.zzzzzz40b5",
+      "dk": "search.index.i4.desc.zzzzzz50f4"
+    },
+    {
+      "tk": "search.index.i5.title.zzzzzzd67d",
+      "dk": "search.index.i5.desc.zzzzzz5111"
+    },
+    {
+      "tk": "search.index.i6.title.zzzzzzfa3e",
+      "dk": "search.index.i6.desc.zzzzzz9721"
+    },
+    {
+      "tk": "search.index.i7.title.zzzzzz3440",
+      "dk": "search.index.i7.desc.zzzzzz13d8"
+    },
+    {
+      "tk": "search.index.i8.title.zzzzzz06a6",
+      "dk": "search.index.i8.desc.zzzzzze43e"
+    },
+    {
+      "tk": "search.index.i9.title.zzzzzz8ee0",
+      "dk": "search.index.i9.desc.zzzzzz75b7"
+    },
+    {
+      "tk": "search.index.i10.title.zzzzzzc0f4",
+      "dk": "search.index.i10.desc.zzzzzz4d2e"
+    },
+    {
+      "tk": "search.index.i11.title.zzzzzze530",
+      "dk": "search.index.i11.desc.zzzzzz2cd5"
+    },
+    {
+      "tk": "search.index.i12.title.zzzzzz77a9",
+      "dk": "search.index.i12.desc.zzzzzz23a2"
+    },
+    {
+      "tk": "search.index.i13.title.zzzzzzc416",
+      "dk": "search.index.i13.desc.zzzzzzdacb"
+    },
+    {
+      "tk": "search.index.i14.title.zzzzzzbd2a",
+      "dk": "search.index.i14.desc.zzzzzz92d3"
+    }
+  ]
+}

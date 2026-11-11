@@ -44,6 +44,23 @@
       "package": "fflate",
       "version": "0.8.3"
     },
+    "gifenc": {
+      "files": {
+        "1.0.3/LICENSE": {
+          "bytes": 1083,
+          "sha256": "47bc590c39d8ccccfc544875a9faebf44bafa828ef20315b396b5d0629f0cfd6",
+          "url": "https://cdn.jsdelivr.net/npm/gifenc@1.0.3/LICENSE.md"
+        },
+        "1.0.3/gifenc.esm.js": {
+          "bytes": 9098,
+          "sha256": "217761244379253ba5815510d3048a4fb1f4c4dbe9fb51a5cfbfe26f34eec093",
+          "url": "https://cdn.jsdelivr.net/npm/gifenc@1.0.3/dist/gifenc.esm.js"
+        }
+      },
+      "license": "MIT",
+      "package": "gifenc",
+      "version": "1.0.3"
+    },
     "heic2any": {
       "files": {
         "LICENSE": {
@@ -192,6 +209,23 @@
       "license": "MIT",
       "package": "onnxruntime-web",
       "version": "1.22.0"
+    },
+    "pdflib": {
+      "files": {
+        "2.11.1/LICENSE": {
+          "bytes": 1070,
+          "sha256": "f2c9fc00fdb66eb99ac156ba52d734af66d8d309f65753ae809ad34ee2883bcb",
+          "url": "https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.11.1/LICENSE.md"
+        },
+        "2.11.1/pdf-lib.min.js": {
+          "bytes": 616746,
+          "sha256": "2294a0bb8742d8948ae2d49a60cb6a3600c0b5deae6de198e57fb368d1b79ba9",
+          "url": "https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.11.1/dist/pdf-lib.min.js"
+        }
+      },
+      "license": "MIT",
+      "package": "@cantoo/pdf-lib",
+      "version": "2.11.1"
     },
     "pica": {
       "files": {

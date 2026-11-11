@@ -243,6 +243,38 @@ if ('serviceWorker' in navigator) {
                         <span data-copy="resultsFor" data-i18n="search.copy.results_for.zzzzzz1">Results for &ldquo;{query}&rdquo;</span>
                         <span data-copy="showing" data-i18n="search.copy.showing.zzzzzz2">Showing matching services and pages.</span>
                         <span data-copy="noMatches" data-i18n="search.copy.no_matches.zzzzzz3">No matches for &ldquo;{query}&rdquo;. Try one of the popular searches above, or <a href="/order/" style="color: var(--color-primary); text-decoration: underline;">send us a quote request</a> and we&rsquo;ll point you to the right service.</span>
+                        <!-- 15 result titles/descriptions, translated by
+                             the middleware into the visitor's language. -->
+                        <span data-copy="i0t" data-i18n="search.index.i0.title.zzzzzz20b3">AI Slow Motion Enhancement</span>
+                        <span data-copy="i0d" data-i18n="search.index.i0.desc.zzzzzz7750">Turn standard wedding footage into buttery-smooth cinematic slow motion. 60–240 fps AI frame interpolation.</span>
+                        <span data-copy="i1t" data-i18n="search.index.i1.title.zzzzzz9258">AI Wedding Video Generator — From Photos</span>
+                        <span data-copy="i1d" data-i18n="search.index.i1.desc.zzzzzz1ff1">Turn your photos into a cinematic wedding film using AI. 20–100+ photos supported.</span>
+                        <span data-copy="i2t" data-i18n="search.index.i2.title.zzzzzz399e">Multilingual Wedding Video — 20+ Languages</span>
+                        <span data-copy="i2d" data-i18n="search.index.i2.desc.zzzzzz753c">Subtitles and AI voiceover in 20+ languages for international family and friends.</span>
+                        <span data-copy="i3t" data-i18n="search.index.i3.title.zzzzzz3bc0">Cartoon / Animated Style — Ghibli, Pixar, Anime</span>
+                        <span data-copy="i3d" data-i18n="search.index.i3.desc.zzzzzz4619">Turn your wedding video into a Ghibli, Pixar, anime, or watercolor animation.</span>
+                        <span data-copy="i4t" data-i18n="search.index.i4.title.zzzzzz40b5">Pet Wedding Video — For Your Furry Family</span>
+                        <span data-copy="i4d" data-i18n="search.index.i4.desc.zzzzzz50f4">Include your furry family members in the celebration. Save-the-dates, proposal stories, and full pet wedding films.</span>
+                        <span data-copy="i5t" data-i18n="search.index.i5.title.zzzzzzd67d">Wedding Trailer — Cinematic in 48 Hours</span>
+                        <span data-copy="i5d" data-i18n="search.index.i5.desc.zzzzzz5111">Hollywood-style 1–3 minute trailer with licensed music. Perfect for sharing on social media.</span>
+                        <span data-copy="i6t" data-i18n="search.index.i6.title.zzzzzzfa3e">Meme &amp; GIF Generator — Share the Joy</span>
+                        <span data-copy="i6d" data-i18n="search.index.i6.desc.zzzzzz9721">Custom shareable wedding GIFs, memes, and short clips for social media and group chats.</span>
+                        <span data-copy="i7t" data-i18n="search.index.i7.title.zzzzzz3440">Family Tribute — Honor a Loved One</span>
+                        <span data-copy="i7d" data-i18n="search.index.i7.desc.zzzzzz13d8">Respectfully include deceased family members in your wedding video. Photo activation, voice reconstruction, memorial montage.</span>
+                        <span data-copy="i8t" data-i18n="search.index.i8.title.zzzzzz06a6">Family Message — Seamlessly Integrated</span>
+                        <span data-copy="i8d" data-i18n="search.index.i8.desc.zzzzzze43e">Integrate video messages from family who can't attend in person. Up to 4+ messages per ceremony.</span>
+                        <span data-copy="i9t" data-i18n="search.index.i9.title.zzzzzz8ee0">About WeddingAI.video</span>
+                        <span data-copy="i9d" data-i18n="search.index.i9.desc.zzzzzz75b7">Filmmakers and AI engineers building AI-powered wedding video services.</span>
+                        <span data-copy="i10t" data-i18n="search.index.i10.title.zzzzzzc0f4">Gallery — Case Studies &amp; Before/After</span>
+                        <span data-copy="i10d" data-i18n="search.index.i10.desc.zzzzzz4d2e">Real before-and-after examples of our wedding video restoration, AI generation, and personalization work.</span>
+                        <span data-copy="i11t" data-i18n="search.index.i11.title.zzzzzze530">Get a Free Quote</span>
+                        <span data-copy="i11d" data-i18n="search.index.i11.desc.zzzzzz2cd5">Submit your project details and get a personalized quote within 24 hours.</span>
+                        <span data-copy="i12t" data-i18n="search.index.i12.title.zzzzzz77a9">Privacy Policy</span>
+                        <span data-copy="i12d" data-i18n="search.index.i12.desc.zzzzzz23a2">How we collect, use, and protect your personal data — GDPR &amp; CCPA compliant.</span>
+                        <span data-copy="i13t" data-i18n="search.index.i13.title.zzzzzzc416">Terms of Service</span>
+                        <span data-copy="i13d" data-i18n="search.index.i13.desc.zzzzzzdacb">Terms of service for WeddingAI.video customers.</span>
+                        <span data-copy="i14t" data-i18n="search.index.i14.title.zzzzzzbd2a">All Wedding Video Services</span>
+                        <span data-copy="i14d" data-i18n="search.index.i14.desc.zzzzzz92d3">Browse all 10 of our AI-powered wedding video services: restoration, multilingual, AI generation, trailers, and more.</span>
                     </div>
 
                     <div class="search-suggestions" id="suggestions">
@@ -397,23 +429,35 @@ if ('serviceWorker' in navigator) {
     }
     // Lightweight client-side site search
     // Index of searchable pages — keep in sync if you add/remove pages
-    const INDEX = [
-        { title: "AI Slow Motion Enhancement", url: "/services/video-enhancement/slow-motion/", desc: "Turn standard wedding footage into buttery-smooth cinematic slow motion. 60–240 fps AI frame interpolation.", tags: ["slow motion", "slowmo", "smooth", "60fps", "120fps", "240fps", "video enhancement", "first dance"] },
-        { title: "AI Wedding Video Generator — From Photos", url: "/services/personalization/ai-video-generator/", desc: "Turn your photos into a cinematic wedding film using AI. 20–100+ photos supported.", tags: ["ai", "ai video", "ai video generator", "ai film", "photos", "from photos", "images"] },
-        { title: "Multilingual Wedding Video — 20+ Languages", url: "/services/personalization/multilingual/", desc: "Subtitles and AI voiceover in 20+ languages for international family and friends.", tags: ["multilingual", "language", "translation", "dub", "dubbing", "subtitles", "voiceover", "international"] },
-        { title: "Cartoon / Animated Style — Ghibli, Pixar, Anime", url: "/services/personalization/cartoon-style/", desc: "Turn your wedding video into a Ghibli, Pixar, anime, or watercolor animation.", tags: ["cartoon", "animated", "animation", "ghibli", "pixar", "anime", "style", "watercolor"] },
-        { title: "Pet Wedding Video — For Your Furry Family", url: "/services/personalization/pet-wedding/", desc: "Include your furry family members in the celebration. Save-the-dates, proposal stories, and full pet wedding films.", tags: ["pet", "pet wedding", "dog", "cat", "furry", "animal"] },
-        { title: "Wedding Trailer — Cinematic in 48 Hours", url: "/services/personalization/wedding-trailer/", desc: "Hollywood-style 1–3 minute trailer with licensed music. Perfect for sharing on social media.", tags: ["trailer", "wedding trailer", "cinematic", "hollywood", "movie", "social media", "instagram", "tiktok"] },
-        { title: "Meme & GIF Generator — Share the Joy", url: "/services/personalization/meme-generator/", desc: "Custom shareable wedding GIFs, memes, and short clips for social media and group chats.", tags: ["meme", "memes", "gif", "gifs", "share", "social", "tiktok", "instagram", "funny"] },
-        { title: "Family Tribute — Honor a Loved One", url: "/services/absence-compensation/family-tribute/", desc: "Respectfully include deceased family members in your wedding video. Photo activation, voice reconstruction, memorial montage.", tags: ["tribute", "family tribute", "memorial", "passed", "loved one", "honor", "remember", "absence"] },
-        { title: "Family Message — Seamlessly Integrated", url: "/services/absence-compensation/family-message/", desc: "Integrate video messages from family who can't attend in person. Up to 4+ messages per ceremony.", tags: ["family message", "remote", "video message", "integrate", "ceremony", "reception"] },
-        { title: "About WeddingAI.video", url: "/about/", desc: "Filmmakers and AI engineers building AI-powered wedding video services.", tags: ["about", "team", "company", "story"] },
-        { title: "Gallery — Case Studies & Before/After", url: "/gallery/", desc: "Real before-and-after examples of our wedding video restoration, AI generation, and personalization work.", tags: ["gallery", "case studies", "before", "after", "examples", "portfolio", "showcase"] },
-        { title: "Get a Free Quote", url: "/order/", desc: "Submit your project details and get a personalized quote within 24 hours.", tags: ["quote", "order", "price", "pricing", "contact", "request", "free"] },
-        { title: "Privacy Policy", url: "/privacy/", desc: "How we collect, use, and protect your personal data — GDPR & CCPA compliant.", tags: ["privacy", "policy", "data", "gdpr", "ccpa"] },
-        { title: "Terms of Service", url: "/terms/", desc: "Terms of service for WeddingAI.video customers.", tags: ["terms", "tos", "service", "legal"] },
-        { title: "All Wedding Video Services", url: "/services/", desc: "Browse all 10 of our AI-powered wedding video services: restoration, multilingual, AI generation, trailers, and more.", tags: ["services", "all", "browse", "catalog"] }
+        const INDEX = [
+        { tk: "i0t", dk: "i0d", title: "AI Slow Motion Enhancement", url: "/services/video-enhancement/slow-motion/", desc: "Turn standard wedding footage into buttery-smooth cinematic slow motion. 60–240 fps AI frame interpolation.", tags: ["slow motion", "slowmo", "smooth", "60fps", "120fps", "240fps", "video enhancement", "first dance"] },
+        { tk: "i1t", dk: "i1d", title: "AI Wedding Video Generator — From Photos", url: "/services/personalization/ai-video-generator/", desc: "Turn your photos into a cinematic wedding film using AI. 20–100+ photos supported.", tags: ["ai", "ai video", "ai video generator", "ai film", "photos", "from photos", "images"] },
+        { tk: "i2t", dk: "i2d", title: "Multilingual Wedding Video — 20+ Languages", url: "/services/personalization/multilingual/", desc: "Subtitles and AI voiceover in 20+ languages for international family and friends.", tags: ["multilingual", "language", "translation", "dub", "dubbing", "subtitles", "voiceover", "international"] },
+        { tk: "i3t", dk: "i3d", title: "Cartoon / Animated Style — Ghibli, Pixar, Anime", url: "/services/personalization/cartoon-style/", desc: "Turn your wedding video into a Ghibli, Pixar, anime, or watercolor animation.", tags: ["cartoon", "animated", "animation", "ghibli", "pixar", "anime", "style", "watercolor"] },
+        { tk: "i4t", dk: "i4d", title: "Pet Wedding Video — For Your Furry Family", url: "/services/personalization/pet-wedding/", desc: "Include your furry family members in the celebration. Save-the-dates, proposal stories, and full pet wedding films.", tags: ["pet", "pet wedding", "dog", "cat", "furry", "animal"] },
+        { tk: "i5t", dk: "i5d", title: "Wedding Trailer — Cinematic in 48 Hours", url: "/services/personalization/wedding-trailer/", desc: "Hollywood-style 1–3 minute trailer with licensed music. Perfect for sharing on social media.", tags: ["trailer", "wedding trailer", "cinematic", "hollywood", "movie", "social media", "instagram", "tiktok"] },
+        { tk: "i6t", dk: "i6d", title: "Meme & GIF Generator — Share the Joy", url: "/services/personalization/meme-generator/", desc: "Custom shareable wedding GIFs, memes, and short clips for social media and group chats.", tags: ["meme", "memes", "gif", "gifs", "share", "social", "tiktok", "instagram", "funny"] },
+        { tk: "i7t", dk: "i7d", title: "Family Tribute — Honor a Loved One", url: "/services/absence-compensation/family-tribute/", desc: "Respectfully include deceased family members in your wedding video. Photo activation, voice reconstruction, memorial montage.", tags: ["tribute", "family tribute", "memorial", "passed", "loved one", "honor", "remember", "absence"] },
+        { tk: "i8t", dk: "i8d", title: "Family Message — Seamlessly Integrated", url: "/services/absence-compensation/family-message/", desc: "Integrate video messages from family who can't attend in person. Up to 4+ messages per ceremony.", tags: ["family message", "remote", "video message", "integrate", "ceremony", "reception"] },
+        { tk: "i9t", dk: "i9d", title: "About WeddingAI.video", url: "/about/", desc: "Filmmakers and AI engineers building AI-powered wedding video services.", tags: ["about", "team", "company", "story"] },
+        { tk: "i10t", dk: "i10d", title: "Gallery — Case Studies & Before/After", url: "/gallery/", desc: "Real before-and-after examples of our wedding video restoration, AI generation, and personalization work.", tags: ["gallery", "case studies", "before", "after", "examples", "portfolio", "showcase"] },
+        { tk: "i11t", dk: "i11d", title: "Get a Free Quote", url: "/order/", desc: "Submit your project details and get a personalized quote within 24 hours.", tags: ["quote", "order", "price", "pricing", "contact", "request", "free"] },
+        { tk: "i12t", dk: "i12d", title: "Privacy Policy", url: "/privacy/", desc: "How we collect, use, and protect your personal data — GDPR & CCPA compliant.", tags: ["privacy", "policy", "data", "gdpr", "ccpa"] },
+        { tk: "i13t", dk: "i13d", title: "Terms of Service", url: "/terms/", desc: "Terms of service for WeddingAI.video customers.", tags: ["terms", "tos", "service", "legal"] },
+        { tk: "i14t", dk: "i14d", title: "All Wedding Video Services", url: "/services/", desc: "Browse all 10 of our AI-powered wedding video services: restoration, multilingual, AI generation, trailers, and more.", tags: ["services", "all", "browse", "catalog"] }
     ];
+
+    // Resolve the server-translated title/description for every result.
+    // The middleware rewrites the hidden [data-copy-set] spans; nothing is
+    // fetched client-side. copyOf() returns textContent, so any inline markup
+    // in a dictionary value is already flattened. English tags stay as extra
+    // match tokens; the localised title/desc make native queries work.
+    const LOCAL_INDEX = INDEX.map(item => ({
+        title: copyOf(item.tk, item.title) || item.title,
+        desc: copyOf(item.dk, item.desc) || item.desc,
+        url: item.url,
+        tags: item.tags
+    }));
 
     function getQuery() {
         const params = new URLSearchParams(window.location.search);
@@ -469,7 +513,7 @@ if ('serviceWorker' in navigator) {
         titleEl.innerHTML = copyOf('resultsFor', 'Results for &ldquo;{query}&rdquo;').replace('{query}', escapeHtml(query));
         subEl.textContent = copyOf('showing', 'Showing matching services and pages.');
 
-        const scored = INDEX.map(item => ({ item, score: scoreResult(item, query) }))
+        const scored = LOCAL_INDEX.map(item => ({ item, score: scoreResult(item, query) }))
                            .filter(x => x.score > 0)
                            .sort((a, b) => b.score - a.score);
 

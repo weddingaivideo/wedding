@@ -27,6 +27,7 @@ overstates the backlog by roughly 8×.
 Usage:
     python scripts/check-i18n-meta-lengths.py            # report (exit 0)
     python scripts/check-i18n-meta-lengths.py --strict   # exit 1 when over
+                                                        # OR a live key is missing
 """
 
 import argparse
@@ -257,6 +258,7 @@ def main():
         total_m += miss
 
     print(f"\nlive values over the limit: {total_t} titles, {total_d} descriptions")
+    print(f"live bindings with no dictionary value: {total_m}")
 
     for (lang, kind), items in sorted(examples.items()):
         if not items:
@@ -269,7 +271,8 @@ def main():
     if total_t or total_d:
         print("\nNOTE: these are the values the middleware serves to that "
               "language's visitors. The static-file check cannot see them. "
-              "They are a translation/rewriting job, not a deploy blocker.")
+              "They are a translation/rewriting job, never a truncation job. "
+              "The deploy gate runs this with --strict, so they now block it.")
     # ---- og:description / twitter:description (live, never blocking) ------
     for kind in sorted(social_owner):
         n_over = 0
@@ -294,7 +297,9 @@ def main():
             print(f"    [{ln:>4}] {lang} {key[:66]}")
             print(f"           {v[:140]}")
 
-    if args.strict and (total_t or total_d):
+    # A missing live key is as bad as an over-long one: the page keeps the
+    # English source while every other language gets a translation.
+    if args.strict and (total_t or total_d or total_m):
         return 1
     return 0
 

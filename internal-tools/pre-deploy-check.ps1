@@ -548,9 +548,12 @@ if (Test-Path $schemaScript) {
 # i18n/<lang>.json — the static file only holds the English source. That
 # layer was completely invisible to this gate until now.
 #
-# REPORT-ONLY on purpose: the backlog is a translation/rewriting job per
-# language, not a deploy blocker. Switch this step to Fail once a language
-# has been cleaned up (the script also accepts --strict).
+# BLOCKING since 2026-11-11. This step was report-only while the 2 046 / 813
+# localized backlog was being rewritten by hand, language by language. That
+# rewrite finished 2026-10-30 (0 / 0 in all 11 languages), and the zero was
+# re-proven with a known-positive negative control, so the temporary
+# report-only exemption is gone. A length regression now stops the deploy.
+# Never "fix" an over-limit value by truncating it - these are translations.
 Write-Host "[9b/9] Live i18n title/description lengths"
 $i18nMetaScript = "$root\scripts\check-i18n-meta-lengths.py"
 if (Test-Path $i18nMetaScript) {
@@ -560,12 +563,12 @@ if (Test-Path $i18nMetaScript) {
         if ($cmd) { $py = $candidate; break }
     }
     if ($py) {
-        $i18nMetaOutput = & $py $i18nMetaScript 2>&1
+        $i18nMetaOutput = & $py $i18nMetaScript --strict 2>&1
         $i18nMetaExit = $LASTEXITCODE
         $key = $i18nMetaOutput | Select-String -Pattern 'bound title keys|live values over|^\S+\s+\d+\s+\d+$' | Select-Object -First 16
         foreach ($line in $key) { Write-Host "  $($line -replace '^\s*','')" }
-        # Decide on the COUNTS, not on the exit code: the script is report-only
-        # by default, so a non-zero exit never happens here.
+        # Decide on the COUNTS, not on the exit code alone: --strict exits 1
+        # when a live value is over, but the counts say how many and which.
         # NB: MatchInfo.Matches.Count is the number of MATCHES (1), not the
         # number of capture groups - test the groups themselves.
         $overCount = 0
@@ -573,10 +576,15 @@ if (Test-Path $i18nMetaScript) {
         if ($overLine -and $overLine.Matches[0].Groups[1].Success -and $overLine.Matches[0].Groups[2].Success) {
             $overCount = [int]$overLine.Matches[0].Groups[1].Value + [int]$overLine.Matches[0].Groups[2].Value
         }
-        if ($i18nMetaExit -eq 0 -and $overCount -eq 0) {
-            Pass "All live i18n title/description values within limits"
+        $missCount = 0
+        $missLine = $i18nMetaOutput | Select-String -Pattern 'live bindings with no dictionary value:\s*(\d+)' | Select-Object -First 1
+        if ($missLine -and $missLine.Matches[0].Groups[1].Success) {
+            $missCount = [int]$missLine.Matches[0].Groups[1].Value
+        }
+        if ($i18nMetaExit -eq 0 -and $overCount -eq 0 -and $missCount -eq 0) {
+            Pass "All live i18n title/description values within limits and present"
         } else {
-            Warn "Live i18n metadata over the limit ($overCount values). These are the values the middleware serves to non-English visitors - see scripts/check-i18n-meta-lengths.py. Report-only by design."
+            Fail "Live i18n metadata: $overCount over the limit, $missCount missing keys. These are the values the middleware serves to non-English visitors - see scripts/check-i18n-meta-lengths.py. Rewrite per language; do NOT truncate a machine translation."
         }
     } else {
         Warn "Python not found in PATH; skipping live i18n metadata check."
@@ -750,6 +758,47 @@ if (Test-Path $cookieTest) {
     Warn "tests\cookie-consent-check.cjs not found; skipping the cookie consent check"
 }
 
+# ---------- 9h. Python %-format integrity ----------
+# On 2026-11-11 a timing print in scripts/translate-tool-page.py raised
+# "TypeError: not enough arguments for format string" AFTER the translations
+# had finished. The exception killed three translation runs in a row: a whole
+# tool's ten languages were thrown away, and the runner reported "failed" and
+# moved on, so the loss was invisible until the deploy.
+#
+# "%"-formatting has two ways to fail, and both are static properties:
+# fewer values than conversions ("not enough arguments") and more values
+# than conversions ("not all arguments converted"). The checker resolves the
+# argument side through the enclosing scopes and fails only on a PROVEN
+# mismatch; calls it cannot prove are counted, never failed.
+#
+# The step is FATAL: a broken print can take a whole run's work with it.
+Write-Host "[9h/9] Python %-format integrity"
+$fmtScript = "$root\scripts\check-py-format-strings.py"
+if (Test-Path $fmtScript) {
+    $py = $null
+    foreach ($candidate in @("python", "python3", "py")) {
+        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($cmd) { $py = $candidate; break }
+    }
+    if ($py) {
+        # --negative-control proves the checker can actually fail, so its
+        # zero is evidence rather than a checker that never fires.
+        $fmtOutput = & $py $fmtScript --negative-control 2>&1
+        $fmtExit = $LASTEXITCODE
+        $fmtKey = $fmtOutput | Select-String -Pattern '\[OK\]|\[FAIL\]|conversions but|not all arguments' | Select-Object -First 12
+        foreach ($line in $fmtKey) { Write-Host "  $($line -replace '^\s*','')" }
+        if ($fmtExit -eq 0) {
+            Pass "Every proven %-format call has exactly the right number of arguments"
+        } else {
+            Fail "A %-format call has the wrong number of arguments and will raise TypeError at runtime. See lines above."
+        }
+    } else {
+        Warn "Python not found in PATH; skipping the %-format integrity check."
+    }
+} else {
+    Warn "scripts\check-py-format-strings.py not found; skipping the %-format integrity check"
+}
+
 # ---------- 9b. /order/ hint: no whole-dictionary download, no English-only hint ----------
 # The order form used to fetch the entire per-language i18n dictionary
 # client-side - 16.4 MB for hi, 14.3 MB for th - just to read the dozen
@@ -783,6 +832,43 @@ if (Test-Path $orderHintTest) {
     }
 } else {
     Warn "tests\order-hint-check.cjs not found; skipping the order hint check"
+}
+
+# ---------- 9h. Runtime copy: real middleware render ----------
+# The 2026-11 audit found English leftovers that a static "is there
+# translated text" scan cannot catch: labels common.js builds AFTER the
+# middleware has run, and the 15 hard-coded search-result cards. Both now
+# resolve from server-translated shards. These tests replay the REAL
+# middleware for several languages and fail on a single missing key.
+foreach ($spec in @(
+    @{ File = "tests\middleware-i18n-check.cjs"; Label = "middleware i18n / RTL / shard path" },
+    @{ File = "tests\runtime-copy-check.cjs";   Label = "tool + search runtime copy" }
+)) {
+    $testPath = Join-Path $root $spec.File
+    if (-not (Test-Path $testPath)) {
+        Warn "$($spec.File) not found; skipping"
+        continue
+    }
+    $node = $null
+    foreach ($candidate in @("node", "nodejs")) {
+        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($cmd) { $node = $candidate; break }
+    }
+    if (-not $node) {
+        Warn "Node not found in PATH; skipping $($spec.File)"
+        continue
+    }
+    $testOutput = & $node $testPath 2>&1
+    $testExit = $LASTEXITCODE
+    $failLines = @($testOutput | Select-String -Pattern 'FAIL|RESULT:')
+    foreach ($line in ($failLines | Select-Object -First 8)) {
+        Write-Host "  $($line -replace '^\s*','')" -ForegroundColor DarkGray
+    }
+    if ($testExit -eq 0) {
+        Pass "$($spec.Label): all checks passed"
+    } else {
+        Fail "$($spec.Label) regressed - run 'node $($spec.File)' for the full report"
+    }
 }
 
 # ---------- 9c. Lead mail routing + delivery truth ----------
