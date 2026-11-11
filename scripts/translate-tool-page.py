@@ -435,7 +435,7 @@ def resolve_llm_token(force=False):
     raise SystemExit("[FAIL] no gateway token found - set MAVIS_LLM_TOKEN")
 
 
-def llm_post(user_text, max_tokens=24000, timeout=600, retries=4):
+def llm_post(user_text, max_tokens=48000, timeout=300, retries=4):
     """One gateway round trip. Returns the assistant's text or None."""
     token = resolve_llm_token()
     budget = max_tokens
@@ -477,6 +477,14 @@ def llm_post(user_text, max_tokens=24000, timeout=600, retries=4):
             #
             # So an empty answer DOUBLES the budget for the next attempt
             # instead of just waiting and repeating the same request.
+            #
+            # AND THE STARTING BUDGET IS 48000, not 24000, because the
+            # first attempt at 24000 is the one that comes back empty:
+            # starting at 24000 spent two requests on every batch that
+            # thought too long. Measured 2026-11-11: a single small
+            # request answered in 4.2 s with 93 thinking tokens, so the
+            # gateway was HEALTHY while the batches were failing - the
+            # failure was the budget, and the fix is the budget.
             budget = min(96000, budget * 2)
             print("    [retry] llm empty answer - raising the budget to %d"
                   % budget, file=sys.stderr)
@@ -676,15 +684,81 @@ LATIN_KEEP = {
     "4-bar",
 }
 
+# -------------------------------------------------------
+# The wedding-planning sources and products.
+#
+# WHY THIS LIST IS SEPARATE
+# --------------------------
+# The planning tools quote their sources BY NAME - "The Knot's 2026 Real
+# Weddings Study", "Zola", "WedBuild", "Calculator City" - and a translator
+# is right to keep those names in the original script. A brand name that
+# gets transliterated ("Zola" -> "佐拉") is a wrong brand name on a page
+# whose whole job is to be credible.
+#
+# But the untranslated-span gate below reads a Latin run inside a
+# translated sentence as a leftover English phrase, so every one of these
+# names made the gate REJECT a perfectly good translation and revert the
+# string to English. The article then stayed in English in all ten
+# languages - exactly the failure this gate was built to prevent, pointing
+# the other way.
+#
+# These are matched by CONTAINMENT rather than by equality, because the
+# name rarely stands alone: "The Knot's 2026 Real Weddings Study" is one
+# Latin run that contains the name and a number, and "State DMV" contains
+# "dmv". Equality would not catch either.
+#
+# The names are listed in lower case because the comparison is done on the
+# normalised run.
+ENTITY_KEEP = {
+    # the sources and the products the copy names
+    "the knot", "zola", "vogue", "ourvows", "real weddings study",
+    "wedbuild", "calculator city", "plana", "weddingcakeshub",
+    "wedcalc", "pix.wedding", "rosevow", "myweddingkit",
+    "weddingnotepad", "mysetplan", "simplifycalc",
+    "weddingtimeline.org", "eventrundown.com", "digitalrsvps",
+    "toolaspect", "moneydeck", "weddingcardboxes", "easyregistry",
+    "text my wedding", "thebestmanspeech.com", "weddingshub",
+    "theperfectwedding", "bespoke bride", "emily post", "marie claire",
+    "the perfect wedding", "our vows",
+    # US government and standards bodies
+    "national institute on alcohol abuse and alcoholism", "niaaa",
+    "social security administration", "social security",
+    "us department of state", "state department", "usa.gov",
+    "travel.state.gov", "namechange.com", "legalhelp.us",
+    "us rsvp", "rsvp", "real id", "form ss-5", "state dmv", "dmv",
+    # the studies the copy quotes
+    "first look report", "wedding spend survey", "wedding guests study",
+    "wedding registry", "registry",
+}
+
 # Words that may appear in a Latin run that is otherwise a measurement.
 UNIT_WORDS = {
     # a format name may sit right next to a number: "1 PDF", "PDF 1"
     "pdf", "gif", "mp4", "webm", "mkv", "mov", "heic", "jpg", "jpeg",
     "png", "webp", "svg", "mp3", "zip",
+    # The text and document formats the tools offer for download. The
+    # button says "Download .txt", and the extension is not translated in
+    # any language.
+    "txt", "csv", "json", "md", "doc", "docx", "xls", "xlsx", "ppt", "pptx",
+    "rtf", "odt", "ods", "ical", "ics", "vcf", "svgz", "avif", "tif", "tiff",
     "in", "inch", "inches", "mm", "cm", "px", "pixels", "pixel", "fps",
     "ms", "kbps", "mbps", "mb", "gb", "kb", "lb", "gsm", "dpi", "megapixel",
     "megapixels", "x", "by", "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7",
     "us", "letter",
+    # ---------------------------------------------------------
+    # The units the wedding copy measures in.
+    #
+    # The bar and cake tools are tables of servings: "5 oz (150 ml)",
+    # "12 oz can or bottle", "1.5 oz shot". A translator that keeps the
+    # unit in Latin script is doing the RIGHT thing - the unit is the
+    # unit in every language - but the gate read the run as untranslated
+    # English and threw the sentence away.
+    "oz", "ml", "fl", "floz", "cl", "dl", "l", "litre", "liter",
+    "litres", "liters", "g", "kg", "gram", "grams", "gramme", "grammes",
+    "tsp", "tbsp", "cups", "cup", "quarts", "pint", "pints", "gallons",
+    "ozs", "mls", "cc", "min", "mins", "minutes", "hr", "hrs", "hours",
+    "sec", "secs", "seconds", "days", "day", "weeks", "week", "months",
+    "month", "years", "year", "thousand", "k",
 }
 
 # English words that are unmistakably English in ALL FOUR of es/fr/de/pt.
@@ -733,6 +807,15 @@ def _run_is_allowed(run):
     # a vendor domain
     if re.fullmatch(r"[a-z0-9\-]+(\.[a-z0-9\-]+)+", norm):
         return True
+    # A run that CONTAINS a name the copy quotes by name. Equality is not
+    # enough: "The Knot's 2026 Real Weddings Study" is one run, and it
+    # contains "the knot" and "real weddings study".
+    #
+    # The name has to sit on a WORD boundary, otherwise "rsvp" would match
+    # inside "reserved" and a plain English word would slip through.
+    for name in ENTITY_KEEP:
+        if re.search(r"(?<![a-z0-9])%s(?![a-z0-9])" % re.escape(name), norm):
+            return True
     # only numbers, unit words and the glue between them
     words = re.findall(r"[A-Za-z0-9.]+", norm)
     for word in words:
@@ -741,6 +824,12 @@ def _run_is_allowed(run):
         if re.fullmatch(r"\d+(?:\.\d+)?", word):
             continue
         if word in UNIT_WORDS:
+            continue
+        # A number glued to a unit: "750ml", "12oz", "1.5oz". The wedding
+        # copy writes its servings that way, and the unit is the unit in
+        # every language - so a translated sentence is allowed to keep it.
+        m2 = re.fullmatch(r"(\d+(?:\.\d+)?)([a-z]+)", word)
+        if m2 and m2.group(2) in UNIT_WORDS:
             continue
         return False
     return True
@@ -911,6 +1000,27 @@ MULTIWORD_KEEP = [
     # A list of photo-book vendors that the copy keeps verbatim. Five
     # words, so it WOULD trip the n-gram rule in every language.
     "milk books / pixum / artifact uprising",
+    # -------------------------------------------------------
+    # The names the wedding-planning copy quotes.
+    #
+    # In the four Latin-script languages the check is per WORD, and "the"
+    # is an English word. A German sentence that keeps the source name -
+    # "Die Real Weddings Study von The Knot" - therefore fired on "The",
+    # and the good German translation was thrown away.
+    #
+    # These phrases are cut out of the text before the word check, exactly
+    # like the UI labels above: the name is not copy, it is a name.
+    "the knot", "real weddings study", "wedding spend survey",
+    "first look report", "social security administration",
+    "national institute on alcohol abuse and alcoholism",
+    "us department of state", "state department of state",
+    "travel.state.gov", "namechange.com", "legalhelp.us", "usa.gov",
+    "the perfect wedding", "text my wedding", "weddingnotepad",
+    "weddingtimeline.org", "eventrundown.com", "digitalrsvps",
+    "thebestmanspeech.com", "weddingshub", "theperfectwedding",
+    "calculator city", "weddingcakeshub", "pix.wedding", "rosevow",
+    "myweddingkit", "simplifycalc", "mysetplan", "weddingcardboxes",
+    "easyregistry", "ourvows", "toolaspect", "moneydeck",
 ]
 
 
@@ -1102,7 +1212,7 @@ def llm_strict_prompt(item, target):
 def llm_translate_one_strict(item, target):
     """Re-do ONE item with the strict prompt. Returns the text or None."""
     arr = llm_parse_json_array(
-        llm_post(llm_strict_prompt(item, target), max_tokens=12000))
+        llm_post(llm_strict_prompt(item, target), max_tokens=24000))
     if not arr:
         return None
     for entry in arr:
@@ -1141,7 +1251,7 @@ def llm_shorten(text, target, maxlen, tighter=False):
         "clause. Answer with a JSON object of the form {\"text\": \"...\"} "
         "and nothing else.\n\nTEXT:\n%s"
         % (LANG_NAME[target], maxlen, extra, text),
-        max_tokens=12000)
+        max_tokens=24000)
     if not answer:
         return None
     out = ""
@@ -1340,7 +1450,7 @@ def llm_translate_all(texts, kinds, target, workers=3, batch=20):
             # a lost sentence back into a translated one.
             for it in missing:
                 one = llm_parse_json_array(
-                    llm_post(llm_prompt([it], target), max_tokens=12000))
+                    llm_post(llm_prompt([it], target), max_tokens=24000))
                 if one and isinstance(one[0], dict):
                     got[norm_id(it["id"])] = one[0].get("text", "")
         return got
@@ -1587,6 +1697,60 @@ def build_reuse_map(texts, langs, namespace=None, exclude=()):
     return out
 
 
+def build_sibling_reuse_map(texts, langs, patch_paths):
+    """Reuse the translations a SIBLING tool page already paid for.
+
+    WHY
+    ---
+    A set of tool pages shares most of its chrome. The fourteen planning
+    tools repeat the same strings - "Reset", "Print / PDF", "Download .txt",
+    "Free Tools", the whole footer - so the same sentence was about to be
+    sent to the gateway once per tool, fourteen times, and each answer was
+    paid for in the one currency that runs out first: the rate limit.
+
+    The site's own dictionaries cannot help here, because these strings are
+    NEW copy that no dictionary holds yet. But the sibling tool's patch
+    file does: it holds the English source next to its translation for
+    every language.
+
+    So: read the sibling patches, and for a string this page also needs,
+    take the translation the sibling already got. The wording is then the
+    site's own - which is exactly what the dictionary reuse is for.
+
+    The value still has to pass the same gate a fresh one does. A sibling
+    patch written by an older, looser gate can hold a value that the
+    current gate would reject, and reusing that would put a bad
+    translation into the dictionary.
+    """
+    wanted = set(texts)
+    out = {}
+    for path in patch_paths:
+        try:
+            data = json.loads(Path(path).read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            continue
+        if not isinstance(data, dict):
+            continue
+        for entry in data.values():
+            if not isinstance(entry, dict):
+                continue
+            source = entry.get("en")
+            if not isinstance(source, str) or source not in wanted:
+                continue
+            for lang in langs:
+                value = entry.get(lang)
+                if not isinstance(value, str) or not value or value == source:
+                    continue
+                if foreign_spans(value, lang):
+                    continue
+                if not script_ok(value, lang):
+                    continue
+                if english_ngram_leak(source, value):
+                    continue
+                out.setdefault(source, {})[lang] = value
+    return out
+
+
 def extract_schema_strings(html):
     """Pull the human-readable strings out of the FAQPage and HowTo schema.
 
@@ -1650,11 +1814,16 @@ def main():
                          "carries the wrong context.")
     ap.add_argument("--reuse-exclude", default="",
                     help="comma separated key prefixes to keep OUT of the "
-                         "reuse pool. The tools that are being translated "
-                         "right now live in the dictionaries already, and "
-                         "their values came from a model that was writing "
-                         "garbage - so reusing them would feed the garbage "
-                         "back in.")
+                    "reuse pool. The tools that are being translated "
+                    "right now live in the dictionaries already, and "
+                    "their values came from a model that was writing "
+                    "garbage - so reusing them would feed the garbage "
+                    "back in.")
+    ap.add_argument("--reuse-siblings", default="",
+                    help="comma separated paths of sibling patch files. A "
+                    "string a sibling tool already translated is reused "
+                    "instead of being asked for again - the shared chrome "
+                    "of a tool set is otherwise paid for once per tool.")
     args = ap.parse_args()
 
     map_path = Path(args.map) if args.map else ROOT / ".tmp" / ("%s-i18n-map.json" % args.slug)
@@ -1815,6 +1984,19 @@ def main():
     if reuse:
         print("reusing %d strings the site already has in the %s namespace"
               % (len(reuse), args.reuse_ns))
+
+    # Translations a SIBLING tool page already paid for. The planning
+    # tools share most of their chrome, and the gateway is the scarce
+    # resource - so a string one of them has already translated is
+    # reused instead of asked for again.
+    sibling_paths = [p for p in (args.reuse_siblings or "").split(",") if p.strip()]
+    if sibling_paths:
+        sibling = build_sibling_reuse_map(all_texts, langs, sibling_paths)
+        if sibling:
+            print("reusing %d strings from %d sibling patch file(s)"
+                  % (len(sibling), len(sibling_paths)))
+            for text, values in sibling.items():
+                reuse.setdefault(text, {}).update(values)
 
     def write_outputs():
         """Write the patch + head files from whatever is translated so far.

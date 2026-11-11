@@ -3865,4 +3865,53 @@ REJECT twin). Its `--negative-control` turns `script_independent()` OFF
 and proves the test changes its verdict - a test that passes whether the
 rule is there or not proves nothing.
 
+## The empty answer was the TOKEN BUDGET, not the gateway (2026-11-11)
+
+The translator's log was full of two lines - "llm empty answer" and
+"llm HTTP 502" - and the obvious reading is that the gateway is down.
+It was not. Three measurements, in this order:
+
+| measurement | result |
+|---|---|
+| ONE request, one string | HTTP 200 in **4.2 s**, 93 thinking tokens |
+| ONE 25-string batch at max_tokens=48000 | HTTP 200 in **73.8 s**, **25/25 items** |
+| SIX 25-string batches at once | **6/6 succeeded**, 57 s to 219 s each, wall 219 s |
+
+So the gateway was healthy, concurrency was NOT the limit (six heavy
+batches at once all came back), and the failure was the budget: the
+gateway does not honour `budget_tokens`, the model thinks for as long
+as it likes, and the thinking tokens come out of `max_tokens`. A
+25-string batch thought past 24000 tokens and returned no text at all.
+
+The fix is the STARTING budget: `llm_post()` now opens at 48000
+instead of 24000, and the single-item retry path opens at 24000
+instead of 12000. Every batch that used to cost two requests (one
+empty, one successful) now costs one.
+
+**The general rule**: when a batch API returns an empty answer, raise
+the budget instead of repeating the same request - and measure with
+ONE request before blaming the service. Two cheap probes (one small
+request, one concurrent batch) cost two requests and saved hours of
+guessing.
+
+The workers went from 6 to 10 in the same pass, because six workers at
+a 74 s latency produce one batch every 12 s - well under the request
+gate's 5 s floor, so the gate never engages. Ten workers produce one
+batch every 7 s and stay above the 6 s spacing that was measured safe.
+**One runner, one gate**: two runners are two gates and twice the rate,
+and that is what produced the 429 wall.
+
+### A rewrite dropped a function and only the NEXT run noticed
+
+Rewriting `.tmp/run-retranslate-forever.py` with `write` lost its
+`done()` function. The runner that was already running kept going - it
+had the old code in memory - and the crash appeared only when the NEXT
+runner started, three minutes later, with a `NameError` on a line that
+had been there all along.
+
+**The general rule**: a long-running process does not prove that the
+file it was started from still works. After editing a script that a
+supervisor re-launches, run the script ONCE by hand and watch it get
+past its first checkpoint.
+
 
