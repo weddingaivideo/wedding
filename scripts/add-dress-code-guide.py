@@ -34,6 +34,18 @@ BASE = "https://weddingai.video"
 TITLE = "Wedding Dress Codes, Decoded: What Guests Should Wear"
 DESC = ("Black tie, cocktail, semi-formal, beach: what each wedding dress code really means, "
         "and the three questions to ask the couple.")
+# Single source of truth for both the visible <details> and the FAQPage graph.
+FAQS = [
+    ("Can I wear black to a wedding?",
+     "Yes in most Western settings. All-black reads as evening-appropriate; add texture or "
+     "a colour accent if the ceremony is daytime."),
+    ("What does 'festive' or 'creative black tie' mean?",
+     "Keep the formality of black tie but allow personality — a velvet jacket, a coloured "
+     "gown, a statement accessory."),
+    ("Is it safe to ask the couple?",
+     "Always. Ask what the venue floor is like and whether there is a ceremony dress "
+     "requirement; those two answers settle most outfit decisions."),
+]
 TEXT: dict[str, str] = {}
 
 
@@ -105,20 +117,11 @@ def body() -> str:
         out.append(bound("h2_text", head, "h2"))
         out.append(bound("p_text", para))
     out.append(bound("h2_text", "Quick answers", "h2"))
-    faq = [
-        ("Can I wear black to a wedding?",
-         "Yes in most Western settings. All-black reads as evening-appropriate; add texture or "
-         "a colour accent if the ceremony is daytime."),
-        ("What does 'festive' or 'creative black tie' mean?",
-         "Keep the formality of black tie but allow personality — a velvet jacket, a coloured "
-         "gown, a statement accessory."),
-        ("Is it safe to ask the couple?",
-         "Always. Ask what the venue floor is like and whether there is a ceremony dress "
-         "requirement; those two answers settle most outfit decisions."),
-    ]
     out.append('<div class="faq-list">')
-    for q, a in faq:
-        out.append('<details><summary data-i18n="%s">%s</summary>%s</details>'
+    for q, a in FAQS:
+        # class="faq-item" is the canonical visible-FAQ form the schema gate
+        # counts; without it the FAQPage graph looks like invisible markup.
+        out.append('<details class="faq-item"><summary data-i18n="%s">%s</summary>%s</details>'
                    % (key("summary_text", q), q, bound("p_text", a)))
     out.append('</div>')
     out.append('<p><a class="ft-btn ft-btn-primary" href="/tools/%s/" data-i18n="%s">'
@@ -128,23 +131,30 @@ def body() -> str:
     return "\n".join(out)
 
 
-def new_jsonld() -> str:
+def new_jsonld(lang: str, tr: dict[str, str] | None) -> str:
+    def local(text: str, tag: str) -> str:
+        return (tr or {}).get(key(tag, text), text)
+
+    prefix = "" if lang == "en" else "/" + lang
     data = {
         "@context": "https://schema.org", "@type": "BlogPosting",
-        "headline": TITLE, "description": DESC,
-        "url": f"{BASE}/blog/{SLUG}/", "datePublished": "2026-11-11",
-        "dateModified": "2026-11-11", "inLanguage": "en",
+        "headline": (tr or {}).get(f"blog.{SLUG}.title_text", TITLE),
+        "description": (tr or {}).get(f"blog.{SLUG}.meta_description", DESC),
+        "url": f"{BASE}{prefix}/blog/{SLUG}/",
+        "datePublished": "2026-11-12", "dateModified": "2026-11-12",
+        "inLanguage": LOCALE[lang],
         "author": {"@type": "Organization", "name": "WeddingAI.video Editorial"},
         "publisher": {"@type": "Organization", "name": "WeddingAI.video"},
-        "mainEntityOfPage": {"@type": "WebPage", "@id": f"{BASE}/blog/{SLUG}/"},
+        "mainEntityOfPage": {"@type": "WebPage", "@id": f"{BASE}{prefix}/blog/{SLUG}/"},
     }
+    # Build the FAQ graph from the SAME list the visible <details> use, so
+    # schema and copy can never drift in count or wording again.
     faq = {
         "@context": "https://schema.org", "@type": "FAQPage",
         "mainEntity": [
-            {"@type": "Question", "name": "Can I wear black to a wedding?",
-             "acceptedAnswer": {"@type": "Answer", "text": "Yes in most Western settings; all-black reads as evening-appropriate."}},
-            {"@type": "Question", "name": "What does creative black tie mean?",
-             "acceptedAnswer": {"@type": "Answer", "text": "Keep black-tie formality but allow personality in colour or texture."}},
+            {"@type": "Question", "name": local(q, "summary_text"),
+             "acceptedAnswer": {"@type": "Answer", "text": local(a, "p_text")}}
+            for q, a in FAQS
         ],
     }
     return "".join('<script type="application/ld+json">\n%s\n</script>\n' % json.dumps(d, ensure_ascii=False, indent=2)
@@ -165,7 +175,7 @@ def fit(text: str, limit: int) -> str:
 def build_head(html: str, lang: str, tr: dict[str, str] | None) -> str:
     html = html.replace("choose-wedding-videographer", SLUG)
     html = re.sub(r'<script type="application/ld\+json">[\s\S]*?</script>\s*', "", html)
-    html = html.replace("</head>", new_jsonld() + "</head>", 1)
+    html = html.replace("</head>", new_jsonld(lang, tr) + "</head>", 1)
     html = html.replace('<html lang="en">', f'<html lang="{lang}">', 1)
     t = fit(tr.get(f"blog.{SLUG}.title_text", TITLE) if tr else TITLE, 60)
     d = fit(tr.get(f"blog.{SLUG}.meta_description", DESC) if tr else DESC, 155)
@@ -209,7 +219,7 @@ def replace_main(html: str, content: str) -> str:
 def sitemap_entry(lang: str) -> str:
     prefix = "" if lang == "en" else "/" + lang
     lines = ["    <url>", f"        <loc>{BASE}{prefix}/blog/{SLUG}/</loc>",
-             "        <lastmod>2026-11-11</lastmod>", "        <changefreq>monthly</changefreq>",
+             "        <lastmod>2026-11-12</lastmod>", "        <changefreq>monthly</changefreq>",
              "        <priority>0.7</priority>"]
     for l in ["en"] + LANGS:
         p = "" if l == "en" else "/" + l
