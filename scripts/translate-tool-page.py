@@ -362,6 +362,29 @@ EXPECTED_RATIO = {
     "hi": (0.50, 1.60),
 }
 
+# A pure ratio has no floor. On a SHORT string it turns a correct
+# translation into an "impossible length": English "Beer" is 4 chars and
+# its Spanish is "Cerveza" (7) - 4 x 1.70 = 6.8, so the good answer was
+# thrown away and re-asked of the gateway. The 2026-11-11 alcohol run hit
+# 79 such false positives; with the gateway at 429 the repair pass then
+# sat for five hours without producing a file.
+#
+# Two guards:
+#   * below MIN_RATIO_LEN, character count carries no signal at all, so
+#     the ratio check does not run. Garbage values ("#", "_|{_") are
+#     already caught by llm_verify / foreign_spans / script_ok.
+#   * everywhere else, allow an ABSOLUTE slack on both sides. A 100-char
+#     English rule that becomes 77 Russian characters is not a defect;
+#     it is 7 characters over a 70-char ceiling.
+LENGTH_SLACK = 8
+MIN_RATIO_LEN = 8
+
+
+def length_bounds(src_len, lang):
+    """The usable character range for a translation of this length."""
+    low, high = EXPECTED_RATIO.get(lang, (0.4, 2.0))
+    return max(1, int(src_len * low) - LENGTH_SLACK), int(src_len * high) + LENGTH_SLACK
+
 LLM_SYSTEM = (
     "You are a senior SEO localizer for WeddingAI.video, a service that "
     "turns a couple's wedding photos into an AI wedding video. You "
@@ -1417,18 +1440,17 @@ def ratio_outliers(source, per_lang, langs):
     """
     out = []
     src_len = len(source)
-    if src_len < 4:
+    if src_len < MIN_RATIO_LEN:
         return out
     for lang in langs:
         value = per_lang.get(lang, {}).get(source)
         if not value or value == source:
             continue
-        low, high = EXPECTED_RATIO.get(lang, (0.4, 2.0))
+        lo, hi = length_bounds(src_len, lang)
         n = len(value)
-        if n < src_len * low or n > src_len * high:
+        if n < lo or n > hi:
             out.append((source, lang, value,
-                        "%d chars, expected %d-%d"
-                        % (n, src_len * low, src_len * high)))
+                        "%d chars, expected %d-%d" % (n, lo, hi)))
     return out
 
 
@@ -2241,12 +2263,20 @@ def main():
             spec = {"id": 0, "kind": kind, "text": masked}
             if maxlen:
                 spec["max"] = maxlen
-            retry = llm_translate_one_strict(spec, lang)
-            candidate = unmask(retry, saved) if retry else ""
-            low, high = EXPECTED_RATIO.get(lang, (0.4, 2.0))
-            src_len = len(text)
+            # The repair has to use the SAME backend as the translation.
+            # It used to call llm_translate_one_strict() unconditionally,
+            # so a --backend gtx run still queued every repair on the LLM
+            # gateway - and when that gateway answers 429, the pass never
+            # finishes even though the translations are already on disk.
+            if args.backend == "llm":
+                retry = llm_translate_one_strict(spec, lang)
+                candidate = unmask(retry, saved) if retry else ""
+            else:
+                got, usable = translate_one(masked, GTL[lang])
+                candidate = unmask(got, saved) if usable else ""
+            lo, hi = length_bounds(len(text), lang)
             ok = (candidate
-                  and src_len * low <= len(candidate) <= src_len * high
+                  and lo <= len(candidate) <= hi
                   and not llm_verify(text, candidate, saved, maxlen, lang))
             return text, lang, value, reason, candidate, ok
 
