@@ -54,6 +54,12 @@ Disallow: /functions
 Disallow: /functions/
 Disallow: /private
 Disallow: /private/
+# Self-hosted umami analytics proxy (added 2026-11-12). /stats/script.js is
+# the tracker and /stats/api/send is the collection beacon. Neither is
+# content, and the tracker does not modify the DOM, so letting crawlers
+# fetch them only wastes origin requests.
+Disallow: /stats
+Disallow: /stats/
 Disallow: /_redirects
 Disallow: /_headers.bak
 Disallow: /indexnow-key.txt
