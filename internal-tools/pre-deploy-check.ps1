@@ -841,8 +841,9 @@ if (Test-Path $orderHintTest) {
 # resolve from server-translated shards. These tests replay the REAL
 # middleware for several languages and fail on a single missing key.
 foreach ($spec in @(
-    @{ File = "tests\middleware-i18n-check.cjs"; Label = "middleware i18n / RTL / shard path" },
-    @{ File = "tests\runtime-copy-check.cjs";   Label = "tool + search runtime copy" }
+    @{ File = "tests\middleware-i18n-check.cjs";       Label = "middleware i18n / RTL / shard path" },
+    @{ File = "tests\runtime-copy-check.cjs";         Label = "tool + search runtime copy" },
+    @{ File = "tests\tool-extras-export-check.cjs";   Label = "tool .pdf / .ics export writers" }
 )) {
     $testPath = Join-Path $root $spec.File
     if (-not (Test-Path $testPath)) {
