@@ -135,6 +135,11 @@ COMMIT_MSG_*.txt
 COMMIT_MSG.txt
 
 # ---- Local-only working files that must never be committed -------------
+# .workbuddy/ holds local agent notes and working memory. The monthly i18n
+# cron does a blanket `git add -A` + push, so without this rule those notes
+# would be committed and shipped in the deploy payload. Ignore, never delete.
+.workbuddy/
+
 # private/ holds internal audits, probes and scan scripts (~220 files). It is
 # already in .assetsignore, so it is not published - but it IS untracked, so a
 # blanket `git add`/`git add -A` (the monthly i18n cron does exactly that in
