@@ -27,15 +27,22 @@
  *
  * GEOGRAPHY
  * ---------
- * Umami resolves country/region/city from Cloudflare's edge headers
- * (cf-ipcountry, cf-region, cf-city — see src/lib/detect.ts
- * PROVIDER_HEADERS) and falls back to a MaxMind database. When we
- * proxy, the request that reaches Umami originates from Cloudflare's
- * network, NOT the visitor's. So the visitor's CF geo headers would
- * be lost. We therefore copy the geo-relevant headers from the
- * incoming request onto the proxied request, and also pass through
- * CF-Connecting-IP so Umami sees the real client IP for session
- * uniqueness and IP blocking.
+ * Umami resolves country/region/city from the edge provider's headers
+ * (see src/lib/detect.ts PROVIDER_HEADERS) and falls back to a MaxMind
+ * database. When we proxy, the request that reaches Umami originates
+ * from Cloudflare's network, NOT the visitor's — so the visitor's geo
+ * headers must be copied across, or every visitor would be geo-located
+ * to Cloudflare's PoP.
+ *
+ * The header names below are the ones Umami actually reads. For
+ * Cloudflare that is cf-ipcountry / cf-region-code / cf-ipcity —
+ * NOT cf-region / cf-city. (Verified against src/lib/detect.ts
+ * PROVIDER_HEADERS, 2026-11-12. The first version of this proxy
+ * forwarded the wrong names, so country was read but region and city
+ * always came back empty.)
+ *
+ * We also pass through CF-Connecting-IP so Umami sees the real client
+ * IP for session uniqueness and IP blocking.
  *
  * SETUP
  * -----
@@ -58,10 +65,21 @@ const FORWARD_REQUEST_HEADERS = [
     "x-forwarded-for",
     "user-agent",
     "accept-language",
-    // Geography. Umami reads these exact names (src/lib/detect.ts).
+    // Geography. These are the EXACT header names umami reads
+    // (src/lib/detect.ts -> PROVIDER_HEADERS). Cloudflare's are
+    // cf-ipcountry / cf-region-code / cf-ipcity.
+    //
+    // We forward BOTH naming variants for region and city. Cloudflare
+    // exposes the location of the visitor as cf-region / cf-city in
+    // some edge configurations and cf-region-code / cf-ipcity in
+    // others, and umami only reads one spelling. Forwarding both costs
+    // nothing and guarantees the lookup hits whichever pair the edge
+    // actually sent.
     "cf-ipcountry",
     "cf-region",
+    "cf-region-code",
     "cf-city",
+    "cf-ipcity",
     "cf-vercel-ip-country",
     "cf-vercel-ip-country-region",
     "cf-vercel-ip-city",
