@@ -44,6 +44,7 @@
     <script defer src="/js/tools/common.js?v=1.0.8"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <script defer src="/js/tools/free-tools.js?v=1.0.0"></script>
+<script defer src="/js/tools/extras.js?v=1.0.0"></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,6 +79,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+    <!-- ft-extras:v1 -->
 </head>
 <body class="page-tool">
 <a class="wa-skip-link" href="#main-content">Skip to main content</a>
@@ -176,6 +178,8 @@ if ('serviceWorker' in navigator) {
                     <button type="button" class="ft-btn" id="ft-print" data-i18n="tools.wedding-countdown-widget.button_text.print_pdf.963ace37">Print / PDF</button>
                     <button type="button" class="ft-btn" id="ft-again" style="display:none;" data-i18n="tools.wedding-countdown-widget.button_text.another_version.647b4bc0">Another version</button>
                     <button type="button" class="ft-btn" id="ft-reset" data-i18n="tools.wedding-countdown-widget.button_text.reset.526d688f">Reset</button>
+                
+                    <button type="button" class="ft-btn" id="ft-pdf" data-i18n="tools.wedding-countdown-widget.button_text.save_pdf.71ddc50b" >Save .pdf</button>
                 </div>
             </div>
         </div>
@@ -251,6 +255,7 @@ if ('serviceWorker' in navigator) {
             <a href="/ru/order/" class="btn btn-primary btn-large" data-i18n="tools.wedding-countdown-widget.a_text.get_a_free_quote.076af0bf">Get a Free Quote &rarr;</a>
         </div>
     </section>
+<div class="ft-serp-sources"><h2 data-i18n="tools.wedding-countdown-widget.h2_text.sources_further_reading.3984f4c5">Sources & further reading</h2><ul><li><a href="https://www.theknot.com/content/average-engagement-length" rel="nofollow noopener" target="_blank">The Knot</a> <span data-i18n="tools.wedding-countdown-widget.li_text.the_knot_2025_real_weddings_study_su.480aa5b6">— The Knot 2025 Real Weddings Study surveyed nearly 17,000 couples and reports a 15-month average US engagement.</span></li><li><a href="https://www.brides.com/story/how-long-should-you-be-engaged-before-marriage" rel="nofollow noopener" target="_blank">Brides</a> <span data-i18n="tools.wedding-countdown-widget.li_text.brides_planner_panel_puts_the_typica.ab35a074">— Brides' planner panel puts the typical US engagement at 12 to 18 months, the window this countdown is designed for.</span></li></ul></div>
 </main>
 <footer class="site-footer">
         <div class="container footer-inner">
@@ -376,6 +381,8 @@ window.FT_INIT = function (api) {
   if (params.get('embed') === '1') document.body.classList.add('ft-embed');
   setInterval(function () { api.recompute(); }, 1000);
 };
+
+window.FT_EXTRAS = {"slug": "wedding-countdown-widget", "pdf": true};
 </script>
 </body>
 </html>

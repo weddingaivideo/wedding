@@ -44,6 +44,7 @@
     <script defer src="/js/tools/common.js?v=1.0.8"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <script defer src="/js/tools/free-tools.js?v=1.0.0"></script>
+<script defer src="/js/tools/extras.js?v=1.0.0"></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,6 +79,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+    <!-- ft-extras:v1 -->
 </head>
 <body class="page-tool">
 <a class="wa-skip-link" href="#main-content">Skip to main content</a>
@@ -147,7 +149,8 @@ if ('serviceWorker' in navigator) {
         <a href="/ar/" data-i18n="tools.wedding-gift-calculator.a_text.home.8cf04a97">Home</a><span> / </span><a href="/ar/tools/" data-i18n="tools.wedding-gift-calculator.a_text.free_tools.c746326b">Free Tools</a><span> / </span>Wedding Gift Calculator
     </nav>
     <section class="ft-shell" aria-label="Wedding Gift Calculator tool">
-        <div class="ft-grid">
+        <div class="ft-region-note" id="ft-region-note" role="note"><span data-i18n="tools.wedding-gift-calculator.p_text.us_cash_gift_etiquette_the_cover_you.557630cf">US cash-gift etiquette. The 'cover your plate' range is an American custom. Across much of Europe a registry gift or a smaller cash amount is the norm, and some couples state 'no gifts'.</span><button type="button" class="ft-region-dismiss" aria-label="Dismiss">×</button></div>
+            <div class="ft-grid">
             <div class="ft-panel">
                 <div class="ft-card">
                     <h2 data-i18n="tools.wedding-gift-calculator.h2_text.your_situation.3f2ca5bc">Your situation</h2>
@@ -177,6 +180,8 @@ if ('serviceWorker' in navigator) {
                     <button type="button" class="ft-btn" id="ft-print" data-i18n="tools.wedding-gift-calculator.button_text.print_pdf.963ace37">Print / PDF</button>
                     <button type="button" class="ft-btn" id="ft-again" style="display:none;" data-i18n="tools.wedding-gift-calculator.button_text.another_version.647b4bc0">Another version</button>
                     <button type="button" class="ft-btn" id="ft-reset" data-i18n="tools.wedding-gift-calculator.button_text.reset.526d688f">Reset</button>
+                
+                    <button type="button" class="ft-btn" id="ft-pdf" data-i18n="tools.wedding-gift-calculator.button_text.save_pdf.71ddc50b" >Save .pdf</button>
                 </div>
             </div>
         </div>
@@ -348,6 +353,8 @@ window.FT_COMPUTE = function (v) {
     text: lines.join('\n')
   };
 };
+
+window.FT_EXTRAS = {"slug": "wedding-gift-calculator", "pdf": true};
 </script>
 </body>
 </html>

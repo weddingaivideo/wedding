@@ -44,6 +44,7 @@
     <script defer src="/js/tools/common.js?v=1.0.8"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <script defer src="/js/tools/free-tools.js?v=1.0.0"></script>
+<script defer src="/js/tools/extras.js?v=1.0.0"></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,6 +79,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+    <!-- ft-extras:v1 -->
 </head>
 <body class="page-tool">
 <a class="wa-skip-link" href="#main-content">Skip to main content</a>
@@ -177,6 +179,8 @@ if ('serviceWorker' in navigator) {
                     <button type="button" class="ft-btn" id="ft-print" data-i18n="tools.wedding-guest-count-calculator.button_text.print_pdf.963ace37">Print / PDF</button>
                     <button type="button" class="ft-btn" id="ft-again" style="display:none;" data-i18n="tools.wedding-guest-count-calculator.button_text.another_version.647b4bc0">Another version</button>
                     <button type="button" class="ft-btn" id="ft-reset" data-i18n="tools.wedding-guest-count-calculator.button_text.reset.526d688f">Reset</button>
+                
+                    <button type="button" class="ft-btn" id="ft-pdf" data-i18n="tools.wedding-guest-count-calculator.button_text.save_pdf.71ddc50b" >Save .pdf</button>
                 </div>
             </div>
         </div>
@@ -265,6 +269,7 @@ if ('serviceWorker' in navigator) {
             <a href="/pt/order/" class="btn btn-primary btn-large" data-i18n="tools.wedding-guest-count-calculator.a_text.get_a_free_quote.076af0bf">Get a Free Quote &rarr;</a>
         </div>
     </section>
+<div class="ft-serp-sources"><h2 data-i18n="tools.wedding-guest-count-calculator.h2_text.sources_further_reading.3984f4c5">Sources & further reading</h2><ul><li><a href="https://www.theknot.com/content/how-many-people-rsvp-no" rel="nofollow noopener" target="_blank">The Knot</a> <span data-i18n="tools.wedding-guest-count-calculator.li_text.the_knot_s_senior_editor_puts_rsvp_a.32ebf264">— The Knot's senior editor puts RSVP acceptance near 80% and the decline rule of thumb at 20%, before last-minute drop-outs.</span></li><li><a href="https://www.theknot.com/content/average-wedding-guest-list-size" rel="nofollow noopener" target="_blank">The Knot</a> <span data-i18n="tools.wedding-guest-count-calculator.li_text.the_2025_real_weddings_study_10_474.921964c1">— The 2025 Real Weddings Study (10,474 US couples) reports 123 guests for hometown weddings versus 92 for domestic destination ones.</span></li></ul></div>
 </main>
 <footer class="site-footer">
         <div class="container footer-inner">
@@ -370,6 +375,8 @@ window.FT_COMPUTE = function (v) {
     text: lines.join('\n')
   };
 };
+
+window.FT_EXTRAS = {"slug": "wedding-guest-count-calculator", "pdf": true};
 </script>
 </body>
 </html>

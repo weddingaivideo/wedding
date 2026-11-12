@@ -44,6 +44,7 @@
     <script defer src="/js/tools/common.js?v=1.0.8"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <script defer src="/js/tools/free-tools.js?v=1.0.0"></script>
+<script defer src="/js/tools/extras.js?v=1.0.0"></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,6 +79,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+    <!-- ft-extras:v1 -->
 </head>
 <body class="page-tool">
 <a class="wa-skip-link" href="#main-content">Skip to main content</a>
@@ -174,6 +176,8 @@ if ('serviceWorker' in navigator) {
                     <button type="button" class="ft-btn" id="ft-print" data-i18n="tools.wedding-vendor-questions-checklist.button_text.print_pdf.963ace37">Print / PDF</button>
                     <button type="button" class="ft-btn" id="ft-again" style="display:none;" data-i18n="tools.wedding-vendor-questions-checklist.button_text.another_version.647b4bc0">Another version</button>
                     <button type="button" class="ft-btn" id="ft-reset" data-i18n="tools.wedding-vendor-questions-checklist.button_text.reset.526d688f">Reset</button>
+                
+                    <button type="button" class="ft-btn" id="ft-pdf" data-i18n="tools.wedding-vendor-questions-checklist.button_text.save_pdf.71ddc50b" >Save .pdf</button>
                 </div>
             </div>
         </div>
@@ -259,6 +263,7 @@ if ('serviceWorker' in navigator) {
             <a href="/ar/order/" class="btn btn-primary btn-large" data-i18n="tools.wedding-vendor-questions-checklist.a_text.get_a_free_quote.076af0bf">Get a Free Quote &rarr;</a>
         </div>
     </section>
+<div class="ft-serp-sources"><h2 data-i18n="tools.wedding-vendor-questions-checklist.h2_text.sources_further_reading.3984f4c5">Sources & further reading</h2><ul><li><a href="https://www.theknot.com/content/wedding-vendor-checklist" rel="nofollow noopener" target="_blank">The Knot</a> <span data-i18n="tools.wedding-vendor-questions-checklist.li_text.the_knot_s_vendor_checklist_breaks_i.69aa51cc">— The Knot's vendor checklist breaks interview questions down by supplier category, from catering and DJs to transport and stationery.</span></li><li><a href="https://www.theknot.com/content/questions-to-ask-your-wedding-caterer" rel="nofollow noopener" target="_blank">The Knot</a> <span data-i18n="tools.wedding-vendor-questions-checklist.li_text.its_40_question_caterer_guide_starts.3d5459a8">— Its 40-question caterer guide starts with availability, liability insurance, venue experience and client references.</span></li></ul></div>
 </main>
 <footer class="site-footer">
         <div class="container footer-inner">
@@ -389,6 +394,8 @@ window.FT_INIT = function (api) {
     note.textContent = 'Ask the same questions of two to three vendors per category so the answers are comparable. Get every answer in the contract, not just in an email.';
   }
 };
+
+window.FT_EXTRAS = {"slug": "wedding-vendor-questions-checklist", "pdf": true};
 </script>
 </body>
 </html>

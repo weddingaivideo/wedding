@@ -43,6 +43,7 @@
     <script defer src="/js/tools/common.js?v=1.0.8"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <script defer src="/js/tools/free-tools.js?v=1.0.0"></script>
+<script defer src="/js/tools/extras.js?v=1.0.0"></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -132,6 +133,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+    <!-- ft-extras:v1 -->
 </head>
 <body class="page-tool">
 <a class="wa-skip-link" href="#main-content">Skip to main content</a>
@@ -233,6 +235,8 @@ if ('serviceWorker' in navigator) {
                     <button type="button" class="ft-btn" id="ft-print" data-i18n="tools.wedding-speech-writer.button_text.print_pdf.963ace37">Print / PDF</button>
                     <button type="button" class="ft-btn" id="ft-again" style="display:none;" data-i18n="tools.wedding-speech-writer.button_text.another_version.647b4bc0">Another version</button>
                     <button type="button" class="ft-btn" id="ft-reset" data-i18n="tools.wedding-speech-writer.button_text.reset.526d688f">Reset</button>
+                
+                    <button type="button" class="ft-btn" id="ft-pdf" data-i18n="tools.wedding-speech-writer.button_text.save_pdf.71ddc50b" >Save .pdf</button>
                 </div>
             </div>
         </div>
@@ -310,6 +314,7 @@ if ('serviceWorker' in navigator) {
             <a href="/order/" class="btn btn-primary btn-large" data-i18n="tools.wedding-speech-writer.a_text.get_a_free_quote.076af0bf">Get a Free Quote &rarr;</a>
         </div>
     </section>
+<div class="ft-serp-sources"><h2 data-i18n="tools.wedding-speech-writer.h2_text.sources_further_reading.3984f4c5">Sources & further reading</h2><ul><li><a href="https://www.zola.com/expert-advice/how-long-should-the-best-man-speech-be" rel="nofollow noopener" target="_blank">Zola</a> <span data-i18n="tools.wedding-speech-writer.li_text.zola_s_ranked_guide_puts_a_best_man.8f82bb4f">— Zola's ranked guide puts a best-man speech at two to five minutes, the ceiling this tool's word budget is built around.</span></li><li><a href="https://www.zola.com/expert-advice/wedding-planning-101/wedding-day/how-to-give-a-great-wedding-toast" rel="nofollow noopener" target="_blank">Zola</a> <span data-i18n="tools.wedding-speech-writer.li_text.ranked_us_toast_guides_converge_on_a.5afe07a3">— Ranked US toast guides converge on an introduction, two or three anecdotes, then a wish for the couple and the raise of a glass.</span></li></ul></div>
 </main>
 <footer class="site-footer">
         <div class="container footer-inner">
@@ -433,6 +438,8 @@ window.FT_INIT = function () {
   var again = document.getElementById('ft-again');
   if (again) { again.style.display = 'none'; again.textContent = 'Rephrase'; }
 };
+
+window.FT_EXTRAS = {"slug": "wedding-speech-writer", "pdf": true};
 </script>
 </body>
 </html>

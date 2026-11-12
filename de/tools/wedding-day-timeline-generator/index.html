@@ -44,6 +44,7 @@
     <script defer src="/js/tools/common.js?v=1.0.8"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <script defer src="/js/tools/free-tools.js?v=1.0.0"></script>
+<script defer src="/js/tools/extras.js?v=1.0.0"></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,6 +79,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+    <!-- ft-extras:v1 -->
 </head>
 <body class="page-tool">
 <a class="wa-skip-link" href="#main-content">Skip to main content</a>
@@ -174,12 +176,16 @@ if ('serviceWorker' in navigator) {
                     <div class="ft-progress"><div class="ft-progress-fill" id="ft-progress-fill"></div></div>
                     <p class="ft-hint" id="ft-progress-label" data-i18n="tools.wedding-day-timeline-generator.p_text.0_of_0_done.c7d9bf0c">0 of 0 done</p>
                 </div>
+                <div class="ft-field ft-export-field"><label for="ft-date" data-i18n="tools.wedding-day-timeline-generator.label_text.wedding_date_for_calendar_export_and.40972a0a">Wedding date (for calendar export and countdown weeks)</label><input class="ft-input" type="date" id="ft-date" data-ft="date"></div><p class="ft-hint"><span data-i18n="tools.wedding-day-timeline-generator.p_text.drag_rows_to_reorder_or_use_the_arro.ef3a7c86">Drag rows to reorder, or use the arrows. Edit a time directly; every export stays in sync.</span></p>
                 <div class="ft-actions">
                     <button type="button" class="ft-btn ft-btn-primary" id="ft-copy" data-i18n="tools.wedding-day-timeline-generator.button_text.copy_result.76cfa6f1">Copy result</button>
                     <button type="button" class="ft-btn" id="ft-download" data-i18n="tools.wedding-day-timeline-generator.button_text.download_txt.5f29b5ba">Download .txt</button>
                     <button type="button" class="ft-btn" id="ft-print" data-i18n="tools.wedding-day-timeline-generator.button_text.print_pdf.963ace37">Print / PDF</button>
                     <button type="button" class="ft-btn" id="ft-again" style="display:none;" data-i18n="tools.wedding-day-timeline-generator.button_text.another_version.647b4bc0">Another version</button>
                     <button type="button" class="ft-btn" id="ft-reset" data-i18n="tools.wedding-day-timeline-generator.button_text.reset.526d688f">Reset</button>
+                
+                    <button type="button" class="ft-btn" id="ft-pdf" data-i18n="tools.wedding-day-timeline-generator.button_text.save_pdf.71ddc50b" >Save .pdf</button>
+                    <button type="button" class="ft-btn" id="ft-ics" data-i18n="tools.wedding-day-timeline-generator.button_text.add_to_calendar_ics.ab2d43db" >Add to calendar (.ics)</button>
                 </div>
             </div>
         </div>
@@ -388,6 +394,8 @@ window.FT_COMPUTE = function (v) {
     note: note, text: lines.join('\n')
   };
 };
+
+window.FT_EXTRAS = {"slug": "wedding-day-timeline-generator", "pdf": true, "ics": true, "editable": true, "eventTitle": "Wedding day timeline"};
 </script>
 </body>
 </html>

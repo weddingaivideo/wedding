@@ -44,6 +44,7 @@
     <script defer src="/js/tools/common.js?v=1.0.8"></script>
     <script defer src="/js/i18n.js?v=4.29"></script>
     <script defer src="/js/tools/free-tools.js?v=1.0.0"></script>
+<script defer src="/js/tools/extras.js?v=1.0.0"></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,6 +79,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+    <!-- ft-extras:v1 -->
 </head>
 <body class="page-tool">
 <a class="wa-skip-link" href="#main-content">Skip to main content</a>
@@ -165,9 +167,12 @@ if ('serviceWorker' in navigator) {
                         </select>
                     </div>
                     <p class="ft-hint" data-i18n="tools.wedding-checklist-generator.p_text.the_knot_s_2026_real_weddings_study_puts.f0cd2ff4">The Knot's 2026 Real Weddings Study puts the average US engagement at 15 months. This checklist covers 12+ months but adapts to however long you have.</p>
-                    <div class="ft-actions">
+                    <div class="ft-field ft-export-field"><label for="ft-date" data-i18n="tools.wedding-checklist-generator.label_text.wedding_date_for_calendar_export_and.40972a0a">Wedding date (for calendar export and countdown weeks)</label><input class="ft-input" type="date" id="ft-date" data-ft="date"></div><div class="ft-week-controls"><button type="button" class="ft-week-toggle" id="ft-week-toggle" data-i18n="tools.wedding-checklist-generator.button_text.view_by_countdown_week.72a3777b" aria-pressed="false">View by countdown week</button><p class="ft-week-hint" id="ft-week-hint" style="display:none;"><span id="ft-week-hint-nodate"><span data-i18n="tools.wedding-checklist-generator.p_text.add_your_wedding_date_to_highlight_t.536764c1">Add your wedding date to highlight the current week.</span></span><span id="ft-week-hint-yesdate" style="display:none;"><span data-i18n="tools.wedding-checklist-generator.p_text.your_current_countdown_block_is_high.7f55403e">Your current countdown block is highlighted below.</span></span></p></div>
+                <div class="ft-actions">
                         <button type="button" class="ft-btn" id="ft-print" data-i18n="tools.wedding-checklist-generator.button_text.print_checklist.b12996ea">Print checklist</button>
-                    </div>
+                    
+                    <button type="button" class="ft-btn" id="ft-pdf" data-i18n="tools.wedding-checklist-generator.button_text.save_pdf.71ddc50b" >Save .pdf</button>
+                </div>
                 </div>
                 <div class="ft-privacy">Runs entirely in your browser. Nothing you type is uploaded, saved to a server, or shared. Your inputs stay in this device's local storage.</div>
             </div>
@@ -410,6 +415,8 @@ window.FT_INIT = function (api) {
     });
   }
 };
+
+window.FT_EXTRAS = {"slug": "wedding-checklist-generator", "pdf": true, "weekView": true, "weekMap": [52, 40, 28, 16, 8, 4, 1]};
 </script>
 </body>
 </html>
