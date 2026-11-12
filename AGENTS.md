@@ -3955,3 +3955,52 @@ languages uses it, and it is allowed back only for that language
   time. The request gate still spaces them.
 
 
+
+## Three quotas, and the one that batching is NOT available on (2026-11-11)
+
+By 21:00 on 2026-11-11 the two known backends were both shut:
+
+* the MiniMax gateway answered **429** after a four-worker burst, then
+  **401** (the desktop runtime rotates the `mmoat_` token, and the
+  rotated one was not the one on disk);
+* `translate.googleapis.com` answered **429 for every request from this
+  IP for over an hour** - the burst that did it was ~2 000 requests in
+  30 minutes, i.e. about five minutes of `--workers 4 --pace 0.25`.
+
+`www.bing.com/translator` is a **third quota** and it was live. Its
+`ttranslatev3` endpoint wants the pair from `params_AbusePreventionHelper`
+on the translator page (`[timestamp, token, ms]`) plus the page's `IG`;
+re-read them hourly and on any `statusCode: 205`.
+
+### TRAP: neither endpoint takes several `text` parameters
+
+Both look like they do, and both answer with **only the first one**:
+
+* gtx with three `q` parameters returns an 8-element array whose `[0]`
+  holds ONE segment - not three;
+* Bing with three `text` parameters returns ONE result entry.
+
+A driver that assumes "one segment per q" therefore translates one
+string, reports a batch of twenty as done, and writes the first
+translation into twenty keys. The length check is what catches it:
+`len(answer) != len(items)` must be a hard failure, never a silent
+accept.
+
+### The way that does work: a sentinel
+
+    "How it works\n@@@\nFree download\n@@@\nWedding Vow Writer"
+
+Bing preserves the sentinel, and the answer splits back into the right
+number of parts (measured 5/5 in ja, de and ar, correct segmentation and
+correct copy). The count is checked before the split is trusted; a
+mismatch falls back to halves, then to single strings.
+
+### The residue that is NOT a defect
+
+After the 1 299 tool keys landed, 24 unique strings still equalled the
+English. Twenty of them are correct: `Style` (fr), `Cocktail` (fr, de),
+`Formal` (es, pt), `DJ`, `Neon` (de), `Florist` (de), `Band` (de),
+`Editorial` (es, pt), `Minimal` (fr, de), `Situation` (fr, de), `Note`
+(fr) and `5 oz (150 ml)` (de) are the words those languages use. Forcing
+a translation there creates the defect it claims to fix. Judge residue by
+"is this the word a local reader expects", not by "is it Latin script".
