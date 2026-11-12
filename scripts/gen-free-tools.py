@@ -260,6 +260,41 @@ __LOGIC__
 """
 
 
+def normalize_checkboxes(html: str) -> str:
+    """Wrap the TEXT of a checkbox label in its own <span>.
+
+    WHY
+    ---
+    A checkbox line looks like this:
+
+        <label class="ft-checkline"><input type="checkbox" data-ft="toast"
+        checked> Include one glass of bubbles each for the toast</label>
+
+    The i18n binder walks the tree and skips the elements it must not
+    translate - <input> is one of them. So a <label> whose only child is
+    an <input> looks like a text-only element, and the binder puts a
+    single data-i18n key on the LABEL. The dictionary value is then the
+    label's whole inner markup, "<input type=...> Include one glass of
+    bubbles each for the toast".
+
+    The middleware replaces the inner HTML of a bound element with the
+    dictionary value, so in every one of the ten languages that label
+    would have been rewritten into a text line with a stray "<input
+    type=...>" printed in front of it - and the checkbox itself would be
+    gone, so the option could no longer be turned on.
+
+    Putting the text in a <span> gives the binder a text-only element to
+    bind. The <input> stays a sibling of the span and survives; the span's
+    text is what gets translated.
+
+    The label keeps its "for"/wrapping relationship, so clicking the text
+    still toggles the checkbox.
+    """
+    pattern = re.compile(
+        r'(<label\b[^>]*>\s*<input\b[^>]*>)(\s*)([^<]+?)(</label>)')
+    return pattern.sub(lambda m: "%s%s<span>%s</span>%s" % (m.group(1), m.group(2), m.group(3), m.group(4)), html)
+
+
 def render(t: dict) -> str:
     canon = f"{ORIGIN}/tools/{t['slug']}/"
     html = TEMPLATE
@@ -283,6 +318,7 @@ def render(t: dict) -> str:
         "__LOGIC__": t["logic"].strip(),
     }.items():
         html = html.replace(key, value)
+    html = normalize_checkboxes(html)
     return html
 
 

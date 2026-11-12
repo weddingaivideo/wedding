@@ -194,31 +194,31 @@ if ('serviceWorker' in navigator) {
     </header>
 <main id="main-content">
     <section class="page-hero-mini" style="background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md);">
-        <h1 style="color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: .5rem;">Wedding Day Timeline Generator</h1>
-        <p style="color: rgba(255,255,255,.85); max-width: 720px; margin: 0 auto;">Your ceremony time is the anchor. Everything else — hair and makeup, first look, photos, dinner, toasts, last dance — is worked backwards and forwards from it.</p>
+        <h1 style="color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: .5rem;" data-i18n="tools.wedding-day-timeline-generator.h1_text.wedding_day_timeline_generator.7fe092dd">Wedding Day Timeline Generator</h1>
+        <p style="color: rgba(255,255,255,.85); max-width: 720px; margin: 0 auto;" data-i18n="tools.wedding-day-timeline-generator.p_text.your_ceremony_time_is_the_anchor_everyth.77b530b5">Your ceremony time is the anchor. Everything else — hair and makeup, first look, photos, dinner, toasts, last dance — is worked backwards and forwards from it.</p>
     </section>
     <nav class="breadcrumb" aria-label="Breadcrumb" style="max-width: 1140px; margin: 0 auto; padding: var(--spacing-md); font-size: .875rem; color: var(--color-text-light);">
-        <a href="/">Home</a><span> / </span><a href="/tools/">Free Tools</a><span> / </span>Wedding Day Timeline Generator
+        <a href="/" data-i18n="tools.wedding-day-timeline-generator.a_text.home.8cf04a97">Home</a><span> / </span><a href="/tools/" data-i18n="tools.wedding-day-timeline-generator.a_text.free_tools.c746326b">Free Tools</a><span> / </span>Wedding Day Timeline Generator
     </nav>
     <section class="ft-shell" aria-label="Wedding Day Timeline Generator tool">
         <div class="ft-grid">
             <div class="ft-panel">
                 <div class="ft-card">
-                    <h2>Your day</h2>
-                    <div class="ft-row-2"><div class="ft-row"><label class="ft-label" for="ft-ceremony">Ceremony start</label><input class="ft-input" type="time" value="16:00" data-ft="ceremony" data-ft-default="16:00"></div>
-                    <div class="ft-row"><label class="ft-label" for="ft-length">Ceremony length</label><select class="ft-select" id="ft-length" data-ft="length"><option value="20">20 min</option><option value="30" selected>30 min</option><option value="45">45 min</option><option value="60">60 min</option></select></div></div>
-                    <div class="ft-row"><label class="ft-label" for="ft-reception">Reception length (hours)</label><select class="ft-select" id="ft-reception" data-ft="reception"><option value="3">3 hours</option><option value="4" selected>4 hours</option><option value="5">5 hours</option><option value="6">6 hours</option></select></div>
-                    <div class="ft-row"><label class="ft-label" for="ft-cocktail">Cocktail hour</label><select class="ft-select" id="ft-cocktail" data-ft="cocktail"><option value="45">45 min</option><option value="60" selected>60 min</option><option value="75">75 min</option></select></div>
-                    <label class="ft-checkline"><input type="checkbox" data-ft="firstlook" checked> We are doing a first look</label>
-                    <label class="ft-checkline"><input type="checkbox" data-ft="golden" checked> Add golden-hour portraits (20 min)</label>
-                    <label class="ft-checkline"><input type="checkbox" data-ft="toss" checked> Include bouquet / garter toss</label>
-                    <label class="ft-checkline"><input type="checkbox" data-ft="travel"> 20 min drive between ceremony and reception</label>
-                    <p class="ft-hint">The default here is the classic 4pm ceremony used in the free templates on Bespoke Bride and WeddingTimeline.org.</p>
+                    <h2 data-i18n="tools.wedding-day-timeline-generator.h2_text.your_day.7721e18e">Your day</h2>
+                    <div class="ft-row-2"><div class="ft-row"><label class="ft-label" for="ft-ceremony" data-i18n="tools.wedding-day-timeline-generator.label_text.ceremony_start.c54546cf">Ceremony start</label><input class="ft-input" type="time" value="16:00" data-ft="ceremony" data-ft-default="16:00"></div>
+                    <div class="ft-row"><label class="ft-label" for="ft-length" data-i18n="tools.wedding-day-timeline-generator.label_text.ceremony_length.51bef518">Ceremony length</label><select class="ft-select" id="ft-length" data-ft="length"><option value="20" data-i18n="tools.wedding-day-timeline-generator.option_text.20_min.cb1a708a">20 min</option><option value="30" selected data-i18n="tools.wedding-day-timeline-generator.option_text.30_min.3cbe8173">30 min</option><option value="45" data-i18n="tools.wedding-day-timeline-generator.option_text.45_min.33eb3492">45 min</option><option value="60" data-i18n="tools.wedding-day-timeline-generator.option_text.60_min.6d711be6">60 min</option></select></div></div>
+                    <div class="ft-row"><label class="ft-label" for="ft-reception" data-i18n="tools.wedding-day-timeline-generator.label_text.reception_length_hours.7a47761a">Reception length (hours)</label><select class="ft-select" id="ft-reception" data-ft="reception"><option value="3" data-i18n="tools.wedding-day-timeline-generator.option_text.3_hours.6e9461ab">3 hours</option><option value="4" selected data-i18n="tools.wedding-day-timeline-generator.option_text.4_hours.adc66a06">4 hours</option><option value="5" data-i18n="tools.wedding-day-timeline-generator.option_text.5_hours.20828d8a">5 hours</option><option value="6" data-i18n="tools.wedding-day-timeline-generator.option_text.6_hours.88f1efb2">6 hours</option></select></div>
+                    <div class="ft-row"><label class="ft-label" for="ft-cocktail" data-i18n="tools.wedding-day-timeline-generator.label_text.cocktail_hour.c587018f">Cocktail hour</label><select class="ft-select" id="ft-cocktail" data-ft="cocktail"><option value="45" data-i18n="tools.wedding-day-timeline-generator.option_text.45_min.33eb3492">45 min</option><option value="60" selected data-i18n="tools.wedding-day-timeline-generator.option_text.60_min.6d711be6">60 min</option><option value="75" data-i18n="tools.wedding-day-timeline-generator.option_text.75_min.a05eebd8">75 min</option></select></div>
+                    <label class="ft-checkline"><input type="checkbox" data-ft="firstlook" checked> <span data-i18n="tools.wedding-day-timeline-generator.span_text.we_are_doing_a_first_look.9989e2df">We are doing a first look</span></label>
+                    <label class="ft-checkline"><input type="checkbox" data-ft="golden" checked> <span data-i18n="tools.wedding-day-timeline-generator.span_text.add_golden_hour_portraits_20_min.d96758c1">Add golden-hour portraits (20 min)</span></label>
+                    <label class="ft-checkline"><input type="checkbox" data-ft="toss" checked> <span data-i18n="tools.wedding-day-timeline-generator.span_text.include_bouquet_garter_toss.c2b448e0">Include bouquet / garter toss</span></label>
+                    <label class="ft-checkline"><input type="checkbox" data-ft="travel"> <span data-i18n="tools.wedding-day-timeline-generator.span_text.20_min_drive_between_ceremony_and_recept.87c226c6">20 min drive between ceremony and reception</span></label>
+                    <p class="ft-hint" data-i18n="tools.wedding-day-timeline-generator.p_text.the_default_here_is_the_classic_4pm_cere.ec0f9e76">The default here is the classic 4pm ceremony used in the free templates on Bespoke Bride and WeddingTimeline.org.</p>
                 </div>
                 <div class="ft-privacy">Runs entirely in your browser. Nothing you type is uploaded, saved to a server, or shared. Your inputs stay in this device's local storage.</div>
             </div>
             <div class="ft-results">
-                <h2>Your hour-by-hour schedule</h2>
+                <h2 data-i18n="tools.wedding-day-timeline-generator.h2_text.your_hour_by_hour_schedule.c5d3e5e3">Your hour-by-hour schedule</h2>
                 <div class="ft-stats" id="ft-stats"></div>
                 <div class="ft-table-wrap" id="ft-table"></div>
                 <div id="ft-output"></div>
@@ -226,96 +226,96 @@ if ('serviceWorker' in navigator) {
                 <div class="ft-callout" id="ft-note" style="display:none;"></div>
                 <div id="ft-progress-wrap" style="display:none;">
                     <div class="ft-progress"><div class="ft-progress-fill" id="ft-progress-fill"></div></div>
-                    <p class="ft-hint" id="ft-progress-label">0 of 0 done</p>
+                    <p class="ft-hint" id="ft-progress-label" data-i18n="tools.wedding-day-timeline-generator.p_text.0_of_0_done.c7d9bf0c">0 of 0 done</p>
                 </div>
                 <div class="ft-actions">
-                    <button type="button" class="ft-btn ft-btn-primary" id="ft-copy">Copy result</button>
-                    <button type="button" class="ft-btn" id="ft-download">Download .txt</button>
-                    <button type="button" class="ft-btn" id="ft-print">Print / PDF</button>
-                    <button type="button" class="ft-btn" id="ft-again" style="display:none;">Another version</button>
-                    <button type="button" class="ft-btn" id="ft-reset">Reset</button>
+                    <button type="button" class="ft-btn ft-btn-primary" id="ft-copy" data-i18n="tools.wedding-day-timeline-generator.button_text.copy_result.76cfa6f1">Copy result</button>
+                    <button type="button" class="ft-btn" id="ft-download" data-i18n="tools.wedding-day-timeline-generator.button_text.download_txt.5f29b5ba">Download .txt</button>
+                    <button type="button" class="ft-btn" id="ft-print" data-i18n="tools.wedding-day-timeline-generator.button_text.print_pdf.963ace37">Print / PDF</button>
+                    <button type="button" class="ft-btn" id="ft-again" style="display:none;" data-i18n="tools.wedding-day-timeline-generator.button_text.another_version.647b4bc0">Another version</button>
+                    <button type="button" class="ft-btn" id="ft-reset" data-i18n="tools.wedding-day-timeline-generator.button_text.reset.526d688f">Reset</button>
                 </div>
             </div>
         </div>
     </section>
     <section class="ft-article">
 
-        <h2>Why the ceremony time is the anchor</h2>
-        <p>The free timeline generators that rank in the US all work the same way: <strong>start at "I do" and build outwards</strong>. Bespoke Bride's generator plans hair and makeup chair-by-chair backwards from the ceremony, then runs the reception forwards in a fixed order. WeddingTimeline.org and DigitalRSVPs ship near-identical 29-row templates covering setup, florist arrival, first look, family photos, guest seating, grand entrance, first dance, toasts, cake cutting, open dancing and the send-off.</p>
-        <p>This tool follows that order and flags the conflicts the ranked tools warn about: photos that push the couple's own entrance late, hair and makeup starting in the middle of the night, or a reception too short for the moments you picked.</p>
-        <h2>The standard running order</h2>
+        <h2 data-i18n="tools.wedding-day-timeline-generator.h2_text.why_the_ceremony_time_is_the_anchor.4e48d0b0">Why the ceremony time is the anchor</h2>
+        <p><span data-i18n="tools.wedding-day-timeline-generator.span_text.the_free_timeline_generators_that_rank_i.e7fce173">The free timeline generators that rank in the US all work the same way:</span> <strong data-i18n="tools.wedding-day-timeline-generator.strong_text.start_at_i_do_and_build_outwards.5dcd7457">start at "I do" and build outwards</strong><span data-i18n="tools.wedding-day-timeline-generator.span_text.bespoke_bride_s_generator_plans_hair_and.ed897a6c">. Bespoke Bride's generator plans hair and makeup chair-by-chair backwards from the ceremony, then runs the reception forwards in a fixed order. WeddingTimeline.org and DigitalRSVPs ship near-identical 29-row templates covering setup, florist arrival, first look, family photos, guest seating, grand entrance, first dance, toasts, cake cutting, open dancing and the send-off.</span></p>
+        <p data-i18n="tools.wedding-day-timeline-generator.p_text.this_tool_follows_that_order_and_flags_t.c0b7bdd6">This tool follows that order and flags the conflicts the ranked tools warn about: photos that push the couple's own entrance late, hair and makeup starting in the middle of the night, or a reception too short for the moments you picked.</p>
+        <h2 data-i18n="tools.wedding-day-timeline-generator.h2_text.the_standard_running_order.a3a27a02">The standard running order</h2>
         <div class="ft-table-wrap"><table class="ft-table">
-            <thead><tr><th>Block</th><th>Typical duration</th><th>Who needs to know</th></tr></thead>
+            <thead><tr><th data-i18n="tools.wedding-day-timeline-generator.th_text.block.e1e4c8c9">Block</th><th data-i18n="tools.wedding-day-timeline-generator.th_text.typical_duration.f4f73e42">Typical duration</th><th data-i18n="tools.wedding-day-timeline-generator.th_text.who_needs_to_know.915fbb68">Who needs to know</th></tr></thead>
             <tbody>
-                <tr><td>Hair &amp; makeup (per person)</td><td>45–60 min each</td><td>Stylists, wedding party</td></tr>
-                <tr><td>Getting dressed + detail shots</td><td>45 min</td><td>Photographer</td></tr>
-                <tr><td>First look &amp; couple portraits</td><td>30–45 min</td><td>Photographer, videographer</td></tr>
-                <tr><td>Wedding party + family photos</td><td>45–60 min</td><td>Family, wedding party</td></tr>
-                <tr><td>Guest arrival / ceremony</td><td>30 min + service</td><td>Ushers, officiant, musicians</td></tr>
-                <tr><td>Cocktail hour</td><td>45–60 min</td><td>Bar, caterer, photographer</td></tr>
-                <tr><td>Grand entrance → first dance</td><td>15 min</td><td>DJ / MC</td></tr>
-                <tr><td>Dinner service</td><td>60–75 min</td><td>Caterer</td></tr>
-                <tr><td>Toasts → parent dances → cake</td><td>45 min</td><td>DJ, speakers, photographer</td></tr>
-                <tr><td>Open dancing → last dance → exit</td><td>Remaining time</td><td>Everyone</td></tr>
+                <tr><td data-i18n="tools.wedding-day-timeline-generator.td_text.hair_makeup_per_person.f5439325">Hair &amp; makeup (per person)</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.45_60_min_each.4fc8a148">45–60 min each</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.stylists_wedding_party.97a6e2b1">Stylists, wedding party</td></tr>
+                <tr><td data-i18n="tools.wedding-day-timeline-generator.td_text.getting_dressed_detail_shots.c57fa04f">Getting dressed + detail shots</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.45_min.33eb3492">45 min</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.photographer.a0cceed7">Photographer</td></tr>
+                <tr><td data-i18n="tools.wedding-day-timeline-generator.td_text.first_look_couple_portraits.6c05259e">First look &amp; couple portraits</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.30_45_min.c726fae3">30–45 min</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.photographer_videographer.0ca63726">Photographer, videographer</td></tr>
+                <tr><td data-i18n="tools.wedding-day-timeline-generator.td_text.wedding_party_family_photos.a61179fc">Wedding party + family photos</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.45_60_min.54d5f4f2">45–60 min</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.family_wedding_party.f597528c">Family, wedding party</td></tr>
+                <tr><td data-i18n="tools.wedding-day-timeline-generator.td_text.guest_arrival_ceremony.eddddcb3">Guest arrival / ceremony</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.30_min_service.bd1759bb">30 min + service</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.ushers_officiant_musicians.1eafd951">Ushers, officiant, musicians</td></tr>
+                <tr><td data-i18n="tools.wedding-day-timeline-generator.td_text.cocktail_hour.c587018f">Cocktail hour</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.45_60_min.54d5f4f2">45–60 min</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.bar_caterer_photographer.97b661f6">Bar, caterer, photographer</td></tr>
+                <tr><td data-i18n="tools.wedding-day-timeline-generator.td_text.grand_entrance_first_dance.7ce963f3">Grand entrance → first dance</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.15_min.17ddc0b9">15 min</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.dj_mc.996875fc">DJ / MC</td></tr>
+                <tr><td data-i18n="tools.wedding-day-timeline-generator.td_text.dinner_service.d54029b2">Dinner service</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.60_75_min.c566e402">60–75 min</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.caterer.f7da9b96">Caterer</td></tr>
+                <tr><td data-i18n="tools.wedding-day-timeline-generator.td_text.toasts_parent_dances_cake.8a070b86">Toasts → parent dances → cake</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.45_min.33eb3492">45 min</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.dj_speakers_photographer.53dbbfe7">DJ, speakers, photographer</td></tr>
+                <tr><td data-i18n="tools.wedding-day-timeline-generator.td_text.open_dancing_last_dance_exit.9d7cc248">Open dancing → last dance → exit</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.remaining_time.e097ef46">Remaining time</td><td data-i18n="tools.wedding-day-timeline-generator.td_text.everyone.f9ae5e5c">Everyone</td></tr>
             </tbody>
         </table></div>
-        <h2>Three rules the ranked guides repeat</h2>
+        <h2 data-i18n="tools.wedding-day-timeline-generator.h2_text.three_rules_the_ranked_guides_repeat.fc5914d4">Three rules the ranked guides repeat</h2>
         <ul>
-            <li><strong>Build in 15-minute buffers.</strong> Transitions between ceremony, cocktail hour and reception always take longer than expected.</li>
-            <li><strong>Finish hair and makeup 30 minutes before the photographer arrives.</strong> Otherwise the detail shots slip and the whole morning compresses.</li>
-            <li><strong>Send the timeline to the DJ, photographer and venue at least five days out.</strong> They will spot conflicts you missed, and one person other than the couple should own the schedule on the day.</li>
+            <li><strong data-i18n="tools.wedding-day-timeline-generator.strong_text.build_in_15_minute_buffers.86d4f7b6">Build in 15-minute buffers.</strong> <span data-i18n="tools.wedding-day-timeline-generator.span_text.transitions_between_ceremony_cocktail_ho.8cee7ebd">Transitions between ceremony, cocktail hour and reception always take longer than expected.</span></li>
+            <li><strong data-i18n="tools.wedding-day-timeline-generator.strong_text.finish_hair_and_makeup_30_minutes_before.ece35570">Finish hair and makeup 30 minutes before the photographer arrives.</strong> <span data-i18n="tools.wedding-day-timeline-generator.span_text.otherwise_the_detail_shots_slip_and_the.63e26e05">Otherwise the detail shots slip and the whole morning compresses.</span></li>
+            <li><strong data-i18n="tools.wedding-day-timeline-generator.strong_text.send_the_timeline_to_the_dj_photographer.2bfb3da4">Send the timeline to the DJ, photographer and venue at least five days out.</strong> <span data-i18n="tools.wedding-day-timeline-generator.span_text.they_will_spot_conflicts_you_missed_and.a5c7c2f4">They will spot conflicts you missed, and one person other than the couple should own the schedule on the day.</span></li>
         </ul>
-        <p>If you are adding a sunset portrait slot, look up the sunset time for your venue's town and date — golden hour moves the photo block, not the ceremony. And if you are still months away, start with the <a href="/tools/wedding-checklist-generator/">month-by-month planning checklist</a> before drilling into the day itself.</p>
+        <p><span data-i18n="tools.wedding-day-timeline-generator.span_text.if_you_are_adding_a_sunset_portrait_slot.f14a5232">If you are adding a sunset portrait slot, look up the sunset time for your venue's town and date — golden hour moves the photo block, not the ceremony. And if you are still months away, start with the</span> <a href="/tools/wedding-checklist-generator/" data-i18n="tools.wedding-day-timeline-generator.a_text.month_by_month_planning_checklist.99b364fe">month-by-month planning checklist</a> <span data-i18n="tools.wedding-day-timeline-generator.span_text.before_drilling_into_the_day_itself.1cd74324">before drilling into the day itself.</span></p>
     
-            <h2>Frequently asked questions</h2>
+            <h2 data-i18n="tools.wedding-day-timeline-generator.h2_text.frequently_asked_questions.af2a4d28">Frequently asked questions</h2>
             <div class="qa-block ft-faq">
                 <details>
-                    <summary>What time should hair and makeup start for a 4pm ceremony?</summary>
-                    <p>With five people in hair and one stylist plus one makeup artist, most templates start around 9:00am. The generator works backwards from your ceremony time, allowing 45–60 minutes per person and a 30-minute buffer before the photographer arrives.</p>
+                    <summary data-i18n="tools.wedding-day-timeline-generator.summary_text.what_time_should_hair_and_makeup_start_f.1433b4b1">What time should hair and makeup start for a 4pm ceremony?</summary>
+                    <p data-i18n="tools.wedding-day-timeline-generator.p_text.with_five_people_in_hair_and_one_stylist.450da5fa">With five people in hair and one stylist plus one makeup artist, most templates start around 9:00am. The generator works backwards from your ceremony time, allowing 45–60 minutes per person and a 30-minute buffer before the photographer arrives.</p>
                 </details>
                 <details>
-                    <summary>Should we do a first look?</summary>
-                    <p>A first look moves couple portraits before the ceremony and frees the cocktail hour for family photos. Skip it and you will need 45–60 minutes of portraits after the ceremony — which pushes dinner later. Toggle it above and compare.</p>
+                    <summary data-i18n="tools.wedding-day-timeline-generator.summary_text.should_we_do_a_first_look.b6cc8e09">Should we do a first look?</summary>
+                    <p data-i18n="tools.wedding-day-timeline-generator.p_text.a_first_look_moves_couple_portraits_befo.addeaa96">A first look moves couple portraits before the ceremony and frees the cocktail hour for family photos. Skip it and you will need 45–60 minutes of portraits after the ceremony — which pushes dinner later. Toggle it above and compare.</p>
                 </details>
                 <details>
-                    <summary>When should the cake cutting happen?</summary>
-                    <p>Most US timelines place cake cutting about 30 minutes after the dance floor opens, following toasts and parent dances. It is also the photographer's cue that the formal coverage is nearly done.</p>
+                    <summary data-i18n="tools.wedding-day-timeline-generator.summary_text.when_should_the_cake_cutting_happen.614523be">When should the cake cutting happen?</summary>
+                    <p data-i18n="tools.wedding-day-timeline-generator.p_text.most_us_timelines_place_cake_cutting_abo.cad0cb09">Most US timelines place cake cutting about 30 minutes after the dance floor opens, following toasts and parent dances. It is also the photographer's cue that the formal coverage is nearly done.</p>
                 </details>
                 <details>
-                    <summary>How far in advance should I create the day-of timeline?</summary>
-                    <p>Two to four weeks before the wedding, once vendor arrival times and ceremony details are confirmed. Share it with the wedding party and all vendors at least one week before the day.</p>
+                    <summary data-i18n="tools.wedding-day-timeline-generator.summary_text.how_far_in_advance_should_i_create_the_d.fc9c6bba">How far in advance should I create the day-of timeline?</summary>
+                    <p data-i18n="tools.wedding-day-timeline-generator.p_text.two_to_four_weeks_before_the_wedding_onc.108090ed">Two to four weeks before the wedding, once vendor arrival times and ceremony details are confirmed. Share it with the wedding party and all vendors at least one week before the day.</p>
                 </details>
                 <details>
-                    <summary>Can I give this to my vendors?</summary>
-                    <p>Yes. Copy result produces plain text you can paste into an email, and Print / PDF gives a clean vendor-ready sheet. Name a point person other than the couple to keep the day on schedule.</p>
+                    <summary data-i18n="tools.wedding-day-timeline-generator.summary_text.can_i_give_this_to_my_vendors.8588ea10">Can I give this to my vendors?</summary>
+                    <p data-i18n="tools.wedding-day-timeline-generator.p_text.yes_copy_result_produces_plain_text_you.52e24b8c">Yes. Copy result produces plain text you can paste into an email, and Print / PDF gives a clean vendor-ready sheet. Name a point person other than the couple to keep the day on schedule.</p>
                 </details>
                 <details>
-                    <summary>What if my reception is at a different venue?</summary>
-                    <p>Enable the 20-minute drive option. Travel time eats the cocktail hour, so either extend cocktail or move family photos before the ceremony — the tool shows the collision in the note under the results.</p>
+                    <summary data-i18n="tools.wedding-day-timeline-generator.summary_text.what_if_my_reception_is_at_a_different_v.92269d52">What if my reception is at a different venue?</summary>
+                    <p data-i18n="tools.wedding-day-timeline-generator.p_text.enable_the_20_minute_drive_option_travel.2bb1029e">Enable the 20-minute drive option. Travel time eats the cocktail hour, so either extend cocktail or move family photos before the ceremony — the tool shows the collision in the note under the results.</p>
                 </details>
             </div>
-            <h2>More free wedding tools</h2>
+            <h2 data-i18n="tools.wedding-day-timeline-generator.h2_text.more_free_wedding_tools.511ec8cc">More free wedding tools</h2>
             <div class="ft-siblings" aria-label="More free wedding tools">
-                <a href="/tools/wedding-budget-calculator/">Budget Calculator</a>
-                <a href="/tools/wedding-seating-chart-maker/">Seating Chart</a>
-                <a href="/tools/wedding-hashtag-generator/">Hashtag Generator</a>
-                <a href="/tools/wedding-invitation-maker/">Invitation Maker</a>
-                <a href="/tools/save-the-date-maker/">Save the Date</a>
-                <a href="/tools/wedding-photo-book-planner/">Photo Book Planner</a>
-                <a href="/tools/wedding-photo-collage/">Photo Collage</a>
-                <a href="/tools/heic-to-jpg-wedding-photos/">HEIC to JPG</a>
-                <a href="/tools/wedding-checklist-generator/">Planning Checklist</a>
-                <a href="/tools/wedding-alcohol-calculator/">Alcohol Calculator</a>
-                <a href="/tools/wedding-vow-writer/">Vow Writer</a>
-                <a href="/tools/wedding-speech-writer/">Speech Writer</a>
-                <a href="/tools/wedding-guest-count-calculator/">Guest Count Calculator</a>
+                <a href="/tools/wedding-budget-calculator/" data-i18n="tools.wedding-day-timeline-generator.a_text.budget_calculator.4a2217e0">Budget Calculator</a>
+                <a href="/tools/wedding-seating-chart-maker/" data-i18n="tools.wedding-day-timeline-generator.a_text.seating_chart.0aa1b5db">Seating Chart</a>
+                <a href="/tools/wedding-hashtag-generator/" data-i18n="tools.wedding-day-timeline-generator.a_text.hashtag_generator.f0d774ee">Hashtag Generator</a>
+                <a href="/tools/wedding-invitation-maker/" data-i18n="tools.wedding-day-timeline-generator.a_text.invitation_maker.eaa060de">Invitation Maker</a>
+                <a href="/tools/save-the-date-maker/" data-i18n="tools.wedding-day-timeline-generator.a_text.save_the_date.f3ad2c82">Save the Date</a>
+                <a href="/tools/wedding-photo-book-planner/" data-i18n="tools.wedding-day-timeline-generator.a_text.photo_book_planner.a9887dd0">Photo Book Planner</a>
+                <a href="/tools/wedding-photo-collage/" data-i18n="tools.wedding-day-timeline-generator.a_text.photo_collage.942e207a">Photo Collage</a>
+                <a href="/tools/heic-to-jpg-wedding-photos/" data-i18n="tools.wedding-day-timeline-generator.a_text.heic_to_jpg.67ca8d18">HEIC to JPG</a>
+                <a href="/tools/wedding-checklist-generator/" data-i18n="tools.wedding-day-timeline-generator.a_text.planning_checklist.8d9c7c04">Planning Checklist</a>
+                <a href="/tools/wedding-alcohol-calculator/" data-i18n="tools.wedding-day-timeline-generator.a_text.alcohol_calculator.aa6ed7fc">Alcohol Calculator</a>
+                <a href="/tools/wedding-vow-writer/" data-i18n="tools.wedding-day-timeline-generator.a_text.vow_writer.90e3a3d2">Vow Writer</a>
+                <a href="/tools/wedding-speech-writer/" data-i18n="tools.wedding-day-timeline-generator.a_text.speech_writer.7bd24d35">Speech Writer</a>
+                <a href="/tools/wedding-guest-count-calculator/" data-i18n="tools.wedding-day-timeline-generator.a_text.guest_count_calculator.3713f2ea">Guest Count Calculator</a>
             </div>
     </section>
     <section class="cta-section" style="background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0;">
         <div class="container">
-            <h2 style="color: #fff;">The day goes fast. The film stays.</h2>
-            <p style="color: rgba(255,255,255,.78); margin-bottom: var(--spacing-md);">A 60–90 second cinematic wedding film built from your photos — delivered in 48 hours.</p>
-            <a href="/order/" class="btn btn-primary btn-large">Get a Free Quote &rarr;</a>
+            <h2 style="color: #fff;" data-i18n="tools.wedding-day-timeline-generator.h2_text.the_day_goes_fast_the_film_stays.6a2ed063">The day goes fast. The film stays.</h2>
+            <p style="color: rgba(255,255,255,.78); margin-bottom: var(--spacing-md);" data-i18n="tools.wedding-day-timeline-generator.p_text.a_60_90_second_cinematic_wedding_film_bu.18ad8cf6">A 60–90 second cinematic wedding film built from your photos — delivered in 48 hours.</p>
+            <a href="/order/" class="btn btn-primary btn-large" data-i18n="tools.wedding-day-timeline-generator.a_text.get_a_free_quote.076af0bf">Get a Free Quote &rarr;</a>
         </div>
     </section>
 </main>

@@ -194,28 +194,28 @@ if ('serviceWorker' in navigator) {
     </header>
 <main id="main-content">
     <section class="page-hero-mini" style="background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md);">
-        <h1 style="color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: .5rem;">Wedding Gift Calculator</h1>
-        <p style="color: rgba(255,255,255,.85); max-width: 720px; margin: 0 auto;">For guests, not couples. Pick your relationship and circumstances for a cash-gift range grounded in published US etiquette guidance.</p>
+        <h1 style="color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: .5rem;" data-i18n="tools.wedding-gift-calculator.h1_text.wedding_gift_calculator.6c568907">Wedding Gift Calculator</h1>
+        <p style="color: rgba(255,255,255,.85); max-width: 720px; margin: 0 auto;" data-i18n="tools.wedding-gift-calculator.p_text.for_guests_not_couples_pick_your_relatio.99d00d5d">For guests, not couples. Pick your relationship and circumstances for a cash-gift range grounded in published US etiquette guidance.</p>
     </section>
     <nav class="breadcrumb" aria-label="Breadcrumb" style="max-width: 1140px; margin: 0 auto; padding: var(--spacing-md); font-size: .875rem; color: var(--color-text-light);">
-        <a href="/">Home</a><span> / </span><a href="/tools/">Free Tools</a><span> / </span>Wedding Gift Calculator
+        <a href="/" data-i18n="tools.wedding-gift-calculator.a_text.home.8cf04a97">Home</a><span> / </span><a href="/tools/" data-i18n="tools.wedding-gift-calculator.a_text.free_tools.c746326b">Free Tools</a><span> / </span>Wedding Gift Calculator
     </nav>
     <section class="ft-shell" aria-label="Wedding Gift Calculator tool">
         <div class="ft-grid">
             <div class="ft-panel">
                 <div class="ft-card">
-                    <h2>Your situation</h2>
-                    <div class="ft-row"><label class="ft-label" for="ft-relation">Relationship to the couple</label><select class="ft-select" id="ft-relation" data-ft="relation"><option value="100">Coworker / acquaintance</option><option value="150" selected>Friend or extended family</option><option value="200">Close friend or close relative</option><option value="275">Immediate family / wedding party</option></select></div>
-                    <div class="ft-row"><label class="ft-label" for="ft-attend">Attendance</label><select class="ft-select" id="ft-attend" data-ft="attend"><option value="1" selected>Attending alone</option><option value="1.75">Attending with a plus-one</option><option value="0.7">Not attending, sending a gift</option></select></div>
-                    <div class="ft-row"><label class="ft-label" for="ft-travel">Travel cost</label><select class="ft-select" id="ft-travel" data-ft="travel"><option value="1" selected>Local, no hotel</option><option value="0.9">Overnight / short drive</option><option value="0.8">Flight + hotel</option><option value="0.7">Destination wedding, significant cost</option></select></div>
-                    <div class="ft-row"><label class="ft-label" for="ft-plate">Estimated cost per head (optional)</label><input class="ft-input" type="number" min="0" max="1000" value="110" data-ft="plate" data-ft-default="110"></div>
-                    <label class="ft-checkline"><input type="checkbox" data-ft="preevents"> Already gave at a shower or engagement party</label>
-                    <label class="ft-checkline"><input type="checkbox" data-ft="budget"> My budget is tight right now</label>
+                    <h2 data-i18n="tools.wedding-gift-calculator.h2_text.your_situation.3f2ca5bc">Your situation</h2>
+                    <div class="ft-row"><label class="ft-label" for="ft-relation" data-i18n="tools.wedding-gift-calculator.label_text.relationship_to_the_couple.fa167e76">Relationship to the couple</label><select class="ft-select" id="ft-relation" data-ft="relation"><option value="100" data-i18n="tools.wedding-gift-calculator.option_text.coworker_acquaintance.98a4bba3">Coworker / acquaintance</option><option value="150" selected data-i18n="tools.wedding-gift-calculator.option_text.friend_or_extended_family.c3bcee5d">Friend or extended family</option><option value="200" data-i18n="tools.wedding-gift-calculator.option_text.close_friend_or_close_relative.281e32fd">Close friend or close relative</option><option value="275" data-i18n="tools.wedding-gift-calculator.option_text.immediate_family_wedding_party.83ce8c70">Immediate family / wedding party</option></select></div>
+                    <div class="ft-row"><label class="ft-label" for="ft-attend" data-i18n="tools.wedding-gift-calculator.label_text.attendance.6d1460aa">Attendance</label><select class="ft-select" id="ft-attend" data-ft="attend"><option value="1" selected data-i18n="tools.wedding-gift-calculator.option_text.attending_alone.392be3ff">Attending alone</option><option value="1.75" data-i18n="tools.wedding-gift-calculator.option_text.attending_with_a_plus_one.f7f944b9">Attending with a plus-one</option><option value="0.7" data-i18n="tools.wedding-gift-calculator.option_text.not_attending_sending_a_gift.33361994">Not attending, sending a gift</option></select></div>
+                    <div class="ft-row"><label class="ft-label" for="ft-travel" data-i18n="tools.wedding-gift-calculator.label_text.travel_cost.02fe3e0c">Travel cost</label><select class="ft-select" id="ft-travel" data-ft="travel"><option value="1" selected data-i18n="tools.wedding-gift-calculator.option_text.local_no_hotel.982159bf">Local, no hotel</option><option value="0.9" data-i18n="tools.wedding-gift-calculator.option_text.overnight_short_drive.faa93f70">Overnight / short drive</option><option value="0.8" data-i18n="tools.wedding-gift-calculator.option_text.flight_hotel.29ebebb2">Flight + hotel</option><option value="0.7" data-i18n="tools.wedding-gift-calculator.option_text.destination_wedding_significant_cost.8141fc6e">Destination wedding, significant cost</option></select></div>
+                    <div class="ft-row"><label class="ft-label" for="ft-plate" data-i18n="tools.wedding-gift-calculator.label_text.estimated_cost_per_head_optional.79b3b0c5">Estimated cost per head (optional)</label><input class="ft-input" type="number" min="0" max="1000" value="110" data-ft="plate" data-ft-default="110"></div>
+                    <label class="ft-checkline"><input type="checkbox" data-ft="preevents"> <span data-i18n="tools.wedding-gift-calculator.span_text.already_gave_at_a_shower_or_engagement_p.60f556bd">Already gave at a shower or engagement party</span></label>
+                    <label class="ft-checkline"><input type="checkbox" data-ft="budget"> <span data-i18n="tools.wedding-gift-calculator.span_text.my_budget_is_tight_right_now.87be01e7">My budget is tight right now</span></label>
                 </div>
                 <div class="ft-privacy">Runs entirely in your browser. Nothing you type is uploaded, saved to a server, or shared. Your inputs stay in this device's local storage.</div>
             </div>
             <div class="ft-results">
-                <h2>A sensible range</h2>
+                <h2 data-i18n="tools.wedding-gift-calculator.h2_text.a_sensible_range.cb9d292f">A sensible range</h2>
                 <div class="ft-stats" id="ft-stats"></div>
                 <div class="ft-table-wrap" id="ft-table"></div>
                 <div id="ft-output"></div>
@@ -223,87 +223,87 @@ if ('serviceWorker' in navigator) {
                 <div class="ft-callout" id="ft-note" style="display:none;"></div>
                 <div id="ft-progress-wrap" style="display:none;">
                     <div class="ft-progress"><div class="ft-progress-fill" id="ft-progress-fill"></div></div>
-                    <p class="ft-hint" id="ft-progress-label">0 of 0 done</p>
+                    <p class="ft-hint" id="ft-progress-label" data-i18n="tools.wedding-gift-calculator.p_text.0_of_0_done.c7d9bf0c">0 of 0 done</p>
                 </div>
                 <div class="ft-actions">
-                    <button type="button" class="ft-btn ft-btn-primary" id="ft-copy">Copy result</button>
-                    <button type="button" class="ft-btn" id="ft-download">Download .txt</button>
-                    <button type="button" class="ft-btn" id="ft-print">Print / PDF</button>
-                    <button type="button" class="ft-btn" id="ft-again" style="display:none;">Another version</button>
-                    <button type="button" class="ft-btn" id="ft-reset">Reset</button>
+                    <button type="button" class="ft-btn ft-btn-primary" id="ft-copy" data-i18n="tools.wedding-gift-calculator.button_text.copy_result.76cfa6f1">Copy result</button>
+                    <button type="button" class="ft-btn" id="ft-download" data-i18n="tools.wedding-gift-calculator.button_text.download_txt.5f29b5ba">Download .txt</button>
+                    <button type="button" class="ft-btn" id="ft-print" data-i18n="tools.wedding-gift-calculator.button_text.print_pdf.963ace37">Print / PDF</button>
+                    <button type="button" class="ft-btn" id="ft-again" style="display:none;" data-i18n="tools.wedding-gift-calculator.button_text.another_version.647b4bc0">Another version</button>
+                    <button type="button" class="ft-btn" id="ft-reset" data-i18n="tools.wedding-gift-calculator.button_text.reset.526d688f">Reset</button>
                 </div>
             </div>
         </div>
     </section>
     <section class="ft-article">
 
-        <h2>The question every US wedding guest googles</h2>
-        <p>The Knot's guest study puts the <strong>average US wedding gift at about $150</strong>, with roughly half of guests giving a physical gift, 40% cash and 10% a gift card. Etiquette pages that rank for this query publish near-identical bands by relationship — which is what the calculator above uses as its starting point.</p>
+        <h2 data-i18n="tools.wedding-gift-calculator.h2_text.the_question_every_us_wedding_guest_goog.a09419f0">The question every US wedding guest googles</h2>
+        <p><span data-i18n="tools.wedding-gift-calculator.span_text.the_knot_s_guest_study_puts_the.345810c0">The Knot's guest study puts the</span> <strong data-i18n="tools.wedding-gift-calculator.strong_text.average_us_wedding_gift_at_about_150.0df48a74">average US wedding gift at about $150</strong><span data-i18n="tools.wedding-gift-calculator.span_text.with_roughly_half_of_guests_giving_a_phy.646e5f9d">, with roughly half of guests giving a physical gift, 40% cash and 10% a gift card. Etiquette pages that rank for this query publish near-identical bands by relationship — which is what the calculator above uses as its starting point.</span></p>
         <div class="ft-table-wrap"><table class="ft-table">
-            <thead><tr><th>Relationship</th><th>Widely cited range</th></tr></thead>
+            <thead><tr><th data-i18n="tools.wedding-gift-calculator.th_text.relationship.fbc97786">Relationship</th><th data-i18n="tools.wedding-gift-calculator.th_text.widely_cited_range.3fe28fef">Widely cited range</th></tr></thead>
             <tbody>
-                <tr><td>Coworker, neighbour, acquaintance</td><td>$50–$75 (up to $150 in some guides)</td></tr>
-                <tr><td>Friend or extended family</td><td>$75–$125</td></tr>
-                <tr><td>Good friend / close relative</td><td>$100–$200</td></tr>
-                <tr><td>Immediate family / wedding party</td><td>$200–$300</td></tr>
+                <tr><td data-i18n="tools.wedding-gift-calculator.td_text.coworker_neighbour_acquaintance.45a0dfcb">Coworker, neighbour, acquaintance</td><td data-i18n="tools.wedding-gift-calculator.td_text.50_75_up_to_150_in_some_guides.b44f210d">$50–$75 (up to $150 in some guides)</td></tr>
+                <tr><td data-i18n="tools.wedding-gift-calculator.td_text.friend_or_extended_family.c3bcee5d">Friend or extended family</td><td data-i18n="tools.wedding-gift-calculator.td_text.75_125.2b56ed17">$75–$125</td></tr>
+                <tr><td data-i18n="tools.wedding-gift-calculator.td_text.good_friend_close_relative.2c8f8d82">Good friend / close relative</td><td data-i18n="tools.wedding-gift-calculator.td_text.100_200.a873bba7">$100–$200</td></tr>
+                <tr><td data-i18n="tools.wedding-gift-calculator.td_text.immediate_family_wedding_party.83ce8c70">Immediate family / wedding party</td><td data-i18n="tools.wedding-gift-calculator.td_text.200_300.6e6e1c2f">$200–$300</td></tr>
             </tbody>
         </table></div>
-        <h2>What actually changes the number</h2>
-        <p>Ranked calculators (ToolAspect, MoneyDeck, Wedding Card Boxes) apply the same handful of adjustments: a plus-one adds roughly $50 because the couple is feeding two of you; a destination wedding lowers the range by about $40 because your flights and hotel are already part of your generosity; not attending cuts it by roughly 30%; and gifts already given at a shower count toward the total. Your budget is the only figure that really matters — no etiquette guide says anyone should go into debt over a gift.</p>
-        <h2>The "cover your plate" rule is obsolete</h2>
-        <p>The old rule said your gift should equal the cost of your meal. Most modern etiquette writers now reject it: a gift is a token of celebration, not a transaction. It is still useful as a sanity check — The Knot's 2026 Real Weddings Study puts the average US wedding at about $34,200 for 117 guests, roughly $292 per guest all-in, with catering around $80 a head — but no one is auditing your envelope.</p>
-        <h2>Cash, cheque, registry or fund?</h2>
-        <p>Cash is simplest for the couple; a cheque is safer if the card box is unattended; gift cards and honeymoon funds suit couples who have said what they want. Put the gift in a card with both your names and leave it at the card box rather than handing it to a busy couple. If you are the couple reading this, the <a href="/tools/wedding-thank-you-note-generator/">thank-you note generator</a> is the other end of this exact process.</p>
+        <h2 data-i18n="tools.wedding-gift-calculator.h2_text.what_actually_changes_the_number.8f7c05c8">What actually changes the number</h2>
+        <p data-i18n="tools.wedding-gift-calculator.p_text.ranked_calculators_toolaspect_moneydeck.6a3f2c11">Ranked calculators (ToolAspect, MoneyDeck, Wedding Card Boxes) apply the same handful of adjustments: a plus-one adds roughly $50 because the couple is feeding two of you; a destination wedding lowers the range by about $40 because your flights and hotel are already part of your generosity; not attending cuts it by roughly 30%; and gifts already given at a shower count toward the total. Your budget is the only figure that really matters — no etiquette guide says anyone should go into debt over a gift.</p>
+        <h2 data-i18n="tools.wedding-gift-calculator.h2_text.the_cover_your_plate_rule_is_obsolete.85af8402">The "cover your plate" rule is obsolete</h2>
+        <p data-i18n="tools.wedding-gift-calculator.p_text.the_old_rule_said_your_gift_should_equal.27b96204">The old rule said your gift should equal the cost of your meal. Most modern etiquette writers now reject it: a gift is a token of celebration, not a transaction. It is still useful as a sanity check — The Knot's 2026 Real Weddings Study puts the average US wedding at about $34,200 for 117 guests, roughly $292 per guest all-in, with catering around $80 a head — but no one is auditing your envelope.</p>
+        <h2 data-i18n="tools.wedding-gift-calculator.h2_text.cash_cheque_registry_or_fund.6a5bd27f">Cash, cheque, registry or fund?</h2>
+        <p><span data-i18n="tools.wedding-gift-calculator.span_text.cash_is_simplest_for_the_couple_a_cheque.164b3c6d">Cash is simplest for the couple; a cheque is safer if the card box is unattended; gift cards and honeymoon funds suit couples who have said what they want. Put the gift in a card with both your names and leave it at the card box rather than handing it to a busy couple. If you are the couple reading this, the</span> <a href="/tools/wedding-thank-you-note-generator/" data-i18n="tools.wedding-gift-calculator.a_text.thank_you_note_generator.dddca890">thank-you note generator</a> <span data-i18n="tools.wedding-gift-calculator.span_text.is_the_other_end_of_this_exact_process.4c6ad404">is the other end of this exact process.</span></p>
     
-            <h2>Frequently asked questions</h2>
+            <h2 data-i18n="tools.wedding-gift-calculator.h2_text.frequently_asked_questions.af2a4d28">Frequently asked questions</h2>
             <div class="qa-block ft-faq">
                 <details>
-                    <summary>How much should I give as a wedding gift in 2026?</summary>
-                    <p>The Knot's guest study puts the US average at about $150. Widely cited bands run $50–$75 for a coworker, $75–$125 for a friend, $125–$200 for a close friend or relative, and $200–$300 for immediate family or the wedding party.</p>
+                    <summary data-i18n="tools.wedding-gift-calculator.summary_text.how_much_should_i_give_as_a_wedding_gift.00143d94">How much should I give as a wedding gift in 2026?</summary>
+                    <p data-i18n="tools.wedding-gift-calculator.p_text.the_knot_s_guest_study_puts_the_us_avera.266b336f">The Knot's guest study puts the US average at about $150. Widely cited bands run $50–$75 for a coworker, $75–$125 for a friend, $125–$200 for a close friend or relative, and $200–$300 for immediate family or the wedding party.</p>
                 </details>
                 <details>
-                    <summary>Is the cover-your-plate rule still a thing?</summary>
-                    <p>Most etiquette writers now consider it obsolete. A gift is a celebration, not payment for a meal. It can still be a useful floor — catering averages around $80 a head — but your budget and your relationship matter more.</p>
+                    <summary data-i18n="tools.wedding-gift-calculator.summary_text.is_the_cover_your_plate_rule_still_a_thi.413c699a">Is the cover-your-plate rule still a thing?</summary>
+                    <p data-i18n="tools.wedding-gift-calculator.p_text.most_etiquette_writers_now_consider_it_o.41d4aa0b">Most etiquette writers now consider it obsolete. A gift is a celebration, not payment for a meal. It can still be a useful floor — catering averages around $80 a head — but your budget and your relationship matter more.</p>
                 </details>
                 <details>
-                    <summary>Do I give more if I bring a plus-one?</summary>
-                    <p>Usually a single joint gift, larger than a solo gift but not double. Ranked calculators add roughly $50 to each end of the range for a plus-one, since the couple is hosting two people.</p>
+                    <summary data-i18n="tools.wedding-gift-calculator.summary_text.do_i_give_more_if_i_bring_a_plus_one.f403e5a8">Do I give more if I bring a plus-one?</summary>
+                    <p data-i18n="tools.wedding-gift-calculator.p_text.usually_a_single_joint_gift_larger_than.4cbb1c9e">Usually a single joint gift, larger than a solo gift but not double. Ranked calculators add roughly $50 to each end of the range for a plus-one, since the couple is hosting two people.</p>
                 </details>
                 <details>
-                    <summary>Should I give less for a destination wedding?</summary>
-                    <p>Yes, and couples expect it. Etiquette guidance broadly agrees that heavy travel and hotel costs count toward your generosity; the calculator reduces the range accordingly.</p>
+                    <summary data-i18n="tools.wedding-gift-calculator.summary_text.should_i_give_less_for_a_destination_wed.653cdf9c">Should I give less for a destination wedding?</summary>
+                    <p data-i18n="tools.wedding-gift-calculator.p_text.yes_and_couples_expect_it_etiquette_guid.c6fb0f85">Yes, and couples expect it. Etiquette guidance broadly agrees that heavy travel and hotel costs count toward your generosity; the calculator reduces the range accordingly.</p>
                 </details>
                 <details>
-                    <summary>Do I have to give a gift if I cannot attend?</summary>
-                    <p>Not always. A card alone is acceptable for a distant acquaintance, and many guides suggest scaling a gift down by about 30% if you do send one. Close family and friends usually still send something.</p>
+                    <summary data-i18n="tools.wedding-gift-calculator.summary_text.do_i_have_to_give_a_gift_if_i_cannot_att.1808f5e3">Do I have to give a gift if I cannot attend?</summary>
+                    <p data-i18n="tools.wedding-gift-calculator.p_text.not_always_a_card_alone_is_acceptable_fo.90210813">Not always. A card alone is acceptable for a distant acquaintance, and many guides suggest scaling a gift down by about 30% if you do send one. Close family and friends usually still send something.</p>
                 </details>
                 <details>
-                    <summary>Should I give cash or a physical gift?</summary>
-                    <p>Both are normal. In The Knot's guest study about half gave a physical gift, 40% cash and 10% a gift card. Follow the registry or honeymoon fund if the couple has shared one.</p>
+                    <summary data-i18n="tools.wedding-gift-calculator.summary_text.should_i_give_cash_or_a_physical_gift.14122a79">Should I give cash or a physical gift?</summary>
+                    <p data-i18n="tools.wedding-gift-calculator.p_text.both_are_normal_in_the_knot_s_guest_stud.d37a615a">Both are normal. In The Knot's guest study about half gave a physical gift, 40% cash and 10% a gift card. Follow the registry or honeymoon fund if the couple has shared one.</p>
                 </details>
             </div>
-            <h2>More free wedding tools</h2>
+            <h2 data-i18n="tools.wedding-gift-calculator.h2_text.more_free_wedding_tools.511ec8cc">More free wedding tools</h2>
             <div class="ft-siblings" aria-label="More free wedding tools">
-                <a href="/tools/wedding-budget-calculator/">Budget Calculator</a>
-                <a href="/tools/wedding-seating-chart-maker/">Seating Chart</a>
-                <a href="/tools/wedding-hashtag-generator/">Hashtag Generator</a>
-                <a href="/tools/wedding-invitation-maker/">Invitation Maker</a>
-                <a href="/tools/save-the-date-maker/">Save the Date</a>
-                <a href="/tools/wedding-photo-book-planner/">Photo Book Planner</a>
-                <a href="/tools/wedding-photo-collage/">Photo Collage</a>
-                <a href="/tools/heic-to-jpg-wedding-photos/">HEIC to JPG</a>
-                <a href="/tools/wedding-checklist-generator/">Planning Checklist</a>
-                <a href="/tools/wedding-alcohol-calculator/">Alcohol Calculator</a>
-                <a href="/tools/wedding-vow-writer/">Vow Writer</a>
-                <a href="/tools/wedding-speech-writer/">Speech Writer</a>
-                <a href="/tools/wedding-guest-count-calculator/">Guest Count Calculator</a>
+                <a href="/tools/wedding-budget-calculator/" data-i18n="tools.wedding-gift-calculator.a_text.budget_calculator.4a2217e0">Budget Calculator</a>
+                <a href="/tools/wedding-seating-chart-maker/" data-i18n="tools.wedding-gift-calculator.a_text.seating_chart.0aa1b5db">Seating Chart</a>
+                <a href="/tools/wedding-hashtag-generator/" data-i18n="tools.wedding-gift-calculator.a_text.hashtag_generator.f0d774ee">Hashtag Generator</a>
+                <a href="/tools/wedding-invitation-maker/" data-i18n="tools.wedding-gift-calculator.a_text.invitation_maker.eaa060de">Invitation Maker</a>
+                <a href="/tools/save-the-date-maker/" data-i18n="tools.wedding-gift-calculator.a_text.save_the_date.f3ad2c82">Save the Date</a>
+                <a href="/tools/wedding-photo-book-planner/" data-i18n="tools.wedding-gift-calculator.a_text.photo_book_planner.a9887dd0">Photo Book Planner</a>
+                <a href="/tools/wedding-photo-collage/" data-i18n="tools.wedding-gift-calculator.a_text.photo_collage.942e207a">Photo Collage</a>
+                <a href="/tools/heic-to-jpg-wedding-photos/" data-i18n="tools.wedding-gift-calculator.a_text.heic_to_jpg.67ca8d18">HEIC to JPG</a>
+                <a href="/tools/wedding-checklist-generator/" data-i18n="tools.wedding-gift-calculator.a_text.planning_checklist.8d9c7c04">Planning Checklist</a>
+                <a href="/tools/wedding-alcohol-calculator/" data-i18n="tools.wedding-gift-calculator.a_text.alcohol_calculator.aa6ed7fc">Alcohol Calculator</a>
+                <a href="/tools/wedding-vow-writer/" data-i18n="tools.wedding-gift-calculator.a_text.vow_writer.90e3a3d2">Vow Writer</a>
+                <a href="/tools/wedding-speech-writer/" data-i18n="tools.wedding-gift-calculator.a_text.speech_writer.7bd24d35">Speech Writer</a>
+                <a href="/tools/wedding-guest-count-calculator/" data-i18n="tools.wedding-gift-calculator.a_text.guest_count_calculator.3713f2ea">Guest Count Calculator</a>
             </div>
     </section>
     <section class="cta-section" style="background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0;">
         <div class="container">
-            <h2 style="color: #fff;">Here for the couple? Make it a film.</h2>
-            <p style="color: rgba(255,255,255,.78); margin-bottom: var(--spacing-md);">If you are planning rather than attending, turn the day's photos into a cinematic wedding film.</p>
-            <a href="/order/" class="btn btn-primary btn-large">Get a Free Quote &rarr;</a>
+            <h2 style="color: #fff;" data-i18n="tools.wedding-gift-calculator.h2_text.here_for_the_couple_make_it_a_film.06632a7e">Here for the couple? Make it a film.</h2>
+            <p style="color: rgba(255,255,255,.78); margin-bottom: var(--spacing-md);" data-i18n="tools.wedding-gift-calculator.p_text.if_you_are_planning_rather_than_attendin.3a768253">If you are planning rather than attending, turn the day's photos into a cinematic wedding film.</p>
+            <a href="/order/" class="btn btn-primary btn-large" data-i18n="tools.wedding-gift-calculator.a_text.get_a_free_quote.076af0bf">Get a Free Quote &rarr;</a>
         </div>
     </section>
 </main>

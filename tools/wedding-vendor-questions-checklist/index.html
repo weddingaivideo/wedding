@@ -194,25 +194,25 @@ if ('serviceWorker' in navigator) {
     </header>
 <main id="main-content">
     <section class="page-hero-mini" style="background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #d4af37 100%); color: #fff; text-align: center; padding: var(--spacing-xl) var(--spacing-md);">
-        <h1 style="color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: .5rem;">Wedding Vendor Questions Checklist</h1>
-        <p style="color: rgba(255,255,255,.85); max-width: 720px; margin: 0 auto;">Before you sign anything: the questions ranked US planning guides say to ask each vendor, plus the red flags that should end the conversation.</p>
+        <h1 style="color: #fff; font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: .5rem;" data-i18n="tools.wedding-vendor-questions-checklist.h1_text.wedding_vendor_questions_checklist.47403e82">Wedding Vendor Questions Checklist</h1>
+        <p style="color: rgba(255,255,255,.85); max-width: 720px; margin: 0 auto;" data-i18n="tools.wedding-vendor-questions-checklist.p_text.before_you_sign_anything_the_questions_r.1d7e3302">Before you sign anything: the questions ranked US planning guides say to ask each vendor, plus the red flags that should end the conversation.</p>
     </section>
     <nav class="breadcrumb" aria-label="Breadcrumb" style="max-width: 1140px; margin: 0 auto; padding: var(--spacing-md); font-size: .875rem; color: var(--color-text-light);">
-        <a href="/">Home</a><span> / </span><a href="/tools/">Free Tools</a><span> / </span>Wedding Vendor Questions Checklist
+        <a href="/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.home.8cf04a97">Home</a><span> / </span><a href="/tools/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.free_tools.c746326b">Free Tools</a><span> / </span>Wedding Vendor Questions Checklist
     </nav>
     <section class="ft-shell" aria-label="Wedding Vendor Questions Checklist tool">
         <div class="ft-grid">
             <div class="ft-panel">
                 <div class="ft-card">
-                    <h2>Your shortlist</h2>
-                    <div class="ft-row"><label class="ft-label" for="ft-vendor">Vendor you are meeting</label><input class="ft-input" type="text" value="Venue" data-ft="vendor" data-ft-default="Venue" placeholder="e.g. Riverside Hall"></div>
-                    <div class="ft-row"><label class="ft-label" for="ft-date">Wedding date (optional)</label><input class="ft-input" type="date" data-ft="date"></div>
-                    <p class="ft-hint">Tick questions as you ask them. Progress is saved in this browser only — print the list and take it to the meeting.</p>
+                    <h2 data-i18n="tools.wedding-vendor-questions-checklist.h2_text.your_shortlist.eaa6b715">Your shortlist</h2>
+                    <div class="ft-row"><label class="ft-label" for="ft-vendor" data-i18n="tools.wedding-vendor-questions-checklist.label_text.vendor_you_are_meeting.f47b5024">Vendor you are meeting</label><input class="ft-input" type="text" value="Venue" data-ft="vendor" data-ft-default="Venue" placeholder="e.g. Riverside Hall"></div>
+                    <div class="ft-row"><label class="ft-label" for="ft-date" data-i18n="tools.wedding-vendor-questions-checklist.label_text.wedding_date_optional.d5bc2abb">Wedding date (optional)</label><input class="ft-input" type="date" data-ft="date"></div>
+                    <p class="ft-hint" data-i18n="tools.wedding-vendor-questions-checklist.p_text.tick_questions_as_you_ask_them_progress.a31df9b7">Tick questions as you ask them. Progress is saved in this browser only — print the list and take it to the meeting.</p>
                 </div>
                 <div class="ft-privacy">Runs entirely in your browser. Nothing you type is uploaded, saved to a server, or shared. Your inputs stay in this device's local storage.</div>
             </div>
             <div class="ft-results">
-                <h2>Questions to ask</h2>
+                <h2 data-i18n="tools.wedding-vendor-questions-checklist.h2_text.questions_to_ask.099e31eb">Questions to ask</h2>
                 <div class="ft-stats" id="ft-stats"></div>
                 <div class="ft-table-wrap" id="ft-table"></div>
                 <div id="ft-output"></div>
@@ -220,97 +220,97 @@ if ('serviceWorker' in navigator) {
                 <div class="ft-callout" id="ft-note" style="display:none;"></div>
                 <div id="ft-progress-wrap" style="display:none;">
                     <div class="ft-progress"><div class="ft-progress-fill" id="ft-progress-fill"></div></div>
-                    <p class="ft-hint" id="ft-progress-label">0 of 0 done</p>
+                    <p class="ft-hint" id="ft-progress-label" data-i18n="tools.wedding-vendor-questions-checklist.p_text.0_of_0_done.c7d9bf0c">0 of 0 done</p>
                 </div>
                 <div class="ft-actions">
-                    <button type="button" class="ft-btn ft-btn-primary" id="ft-copy">Copy result</button>
-                    <button type="button" class="ft-btn" id="ft-download">Download .txt</button>
-                    <button type="button" class="ft-btn" id="ft-print">Print / PDF</button>
-                    <button type="button" class="ft-btn" id="ft-again" style="display:none;">Another version</button>
-                    <button type="button" class="ft-btn" id="ft-reset">Reset</button>
+                    <button type="button" class="ft-btn ft-btn-primary" id="ft-copy" data-i18n="tools.wedding-vendor-questions-checklist.button_text.copy_result.76cfa6f1">Copy result</button>
+                    <button type="button" class="ft-btn" id="ft-download" data-i18n="tools.wedding-vendor-questions-checklist.button_text.download_txt.5f29b5ba">Download .txt</button>
+                    <button type="button" class="ft-btn" id="ft-print" data-i18n="tools.wedding-vendor-questions-checklist.button_text.print_pdf.963ace37">Print / PDF</button>
+                    <button type="button" class="ft-btn" id="ft-again" style="display:none;" data-i18n="tools.wedding-vendor-questions-checklist.button_text.another_version.647b4bc0">Another version</button>
+                    <button type="button" class="ft-btn" id="ft-reset" data-i18n="tools.wedding-vendor-questions-checklist.button_text.reset.526d688f">Reset</button>
                 </div>
             </div>
         </div>
     </section>
     <section class="ft-article">
 
-        <h2>Why a written list beats a friendly chat</h2>
-        <p>The ranking US guides — A Practical Wedding, Plan In Love, Edel Ryan, Precious Moments Events — all make the same point: <strong>vendors are interviewed before contracts are signed, and the questions that matter are about deliverables, backups and cancellation terms</strong>, not the portfolio. A good vendor answers clearly and in writing; a vague one is a red flag.</p>
+        <h2 data-i18n="tools.wedding-vendor-questions-checklist.h2_text.why_a_written_list_beats_a_friendly_chat.85d49e22">Why a written list beats a friendly chat</h2>
+        <p><span data-i18n="tools.wedding-vendor-questions-checklist.span_text.the_ranking_us_guides_a_practical_weddin.4cfe3da5">The ranking US guides — A Practical Wedding, Plan In Love, Edel Ryan, Precious Moments Events — all make the same point:</span> <strong data-i18n="tools.wedding-vendor-questions-checklist.strong_text.vendors_are_interviewed_before_contracts.14127f66">vendors are interviewed before contracts are signed, and the questions that matter are about deliverables, backups and cancellation terms</strong><span data-i18n="tools.wedding-vendor-questions-checklist.span_text.not_the_portfolio_a_good_vendor_answers.030d886f">, not the portfolio. A good vendor answers clearly and in writing; a vague one is a red flag.</span></p>
         <div class="ft-table-wrap"><table class="ft-table">
-            <thead><tr><th>Category</th><th>The question couples most often forget</th></tr></thead>
+            <thead><tr><th data-i18n="tools.wedding-vendor-questions-checklist.th_text.category.3adbdb3a">Category</th><th data-i18n="tools.wedding-vendor-questions-checklist.th_text.the_question_couples_most_often_forget.981daed3">The question couples most often forget</th></tr></thead>
             <tbody>
-                <tr><td>Venue</td><td>What is the strict music curfew, and what is the rain plan?</td></tr>
-                <tr><td>Photographer</td><td>Can we see one full wedding gallery, not just highlights?</td></tr>
-                <tr><td>Videographer</td><td>Do you capture clean audio of the vows and toasts?</td></tr>
-                <tr><td>Caterer</td><td>What exactly is included — staff, linens, tableware, cake cutting?</td></tr>
-                <tr><td>Florist</td><td>What happens if the flowers we chose are unavailable?</td></tr>
-                <tr><td>DJ / band</td><td>Do you bring backup equipment, and do you act as MC?</td></tr>
-                <tr><td>Planner</td><td>How many weddings do you manage that weekend?</td></tr>
-                <tr><td>Hair &amp; makeup</td><td>How long per person, and is there a travel fee?</td></tr>
-                <tr><td>Cake baker</td><td>Is delivery and setup included, and is there a tasting fee?</td></tr>
+                <tr><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.venue.be993d10">Venue</td><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.what_is_the_strict_music_curfew_and_what.663e3ce4">What is the strict music curfew, and what is the rain plan?</td></tr>
+                <tr><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.photographer.a0cceed7">Photographer</td><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.can_we_see_one_full_wedding_gallery_not.1759371f">Can we see one full wedding gallery, not just highlights?</td></tr>
+                <tr><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.videographer.ee074105">Videographer</td><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.do_you_capture_clean_audio_of_the_vows_a.c3cf0d68">Do you capture clean audio of the vows and toasts?</td></tr>
+                <tr><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.caterer.f7da9b96">Caterer</td><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.what_exactly_is_included_staff_linens_ta.eaad9465">What exactly is included — staff, linens, tableware, cake cutting?</td></tr>
+                <tr><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.florist.6b17f1d4">Florist</td><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.what_happens_if_the_flowers_we_chose_are.6a3b6661">What happens if the flowers we chose are unavailable?</td></tr>
+                <tr><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.dj_band.85786dba">DJ / band</td><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.do_you_bring_backup_equipment_and_do_you.e942d707">Do you bring backup equipment, and do you act as MC?</td></tr>
+                <tr><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.planner.85be6ace">Planner</td><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.how_many_weddings_do_you_manage_that_wee.6bf2059d">How many weddings do you manage that weekend?</td></tr>
+                <tr><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.hair_makeup.e9e357a1">Hair &amp; makeup</td><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.how_long_per_person_and_is_there_a_trave.831da486">How long per person, and is there a travel fee?</td></tr>
+                <tr><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.cake_baker.d90deb61">Cake baker</td><td data-i18n="tools.wedding-vendor-questions-checklist.td_text.is_delivery_and_setup_included_and_is_th.6afc61b0">Is delivery and setup included, and is there a tasting fee?</td></tr>
             </tbody>
         </table></div>
-        <h2>Start every conversation with the same five</h2>
+        <h2 data-i18n="tools.wedding-vendor-questions-checklist.h2_text.start_every_conversation_with_the_same_f.7496a289">Start every conversation with the same five</h2>
         <ol>
-            <li>Are you available on our date, and have you worked at our venue before?</li>
-            <li>What exactly is included in this quote or package?</li>
-            <li>Do you carry liability insurance and any required permits?</li>
-            <li>What is the payment schedule, cancellation and refund policy?</li>
-            <li>What is your backup plan if you, your equipment or a key supplier fails?</li>
+            <li data-i18n="tools.wedding-vendor-questions-checklist.li_text.are_you_available_on_our_date_and_have_y.6a5ac1d8">Are you available on our date, and have you worked at our venue before?</li>
+            <li data-i18n="tools.wedding-vendor-questions-checklist.li_text.what_exactly_is_included_in_this_quote_o.2783616e">What exactly is included in this quote or package?</li>
+            <li data-i18n="tools.wedding-vendor-questions-checklist.li_text.do_you_carry_liability_insurance_and_any.974e995a">Do you carry liability insurance and any required permits?</li>
+            <li data-i18n="tools.wedding-vendor-questions-checklist.li_text.what_is_the_payment_schedule_cancellatio.c75ff593">What is the payment schedule, cancellation and refund policy?</li>
+            <li data-i18n="tools.wedding-vendor-questions-checklist.li_text.what_is_your_backup_plan_if_you_your_equ.1fe791e5">What is your backup plan if you, your equipment or a key supplier fails?</li>
         </ol>
-        <h2>Red flags the ranked guides agree on</h2>
-        <p>Vague or missing contracts; no insurance or business licence; slow or evasive communication; pressure to sign on the spot; no online presence or references; and refusal to show a full gallery or a full film rather than a highlight reel. Ask for two recent references and actually call them — the question to ask is not "were they good?" but "how did they handle something going wrong?"</p>
-        <p>Once vendors are booked, put their arrival times into the <a href="/tools/wedding-day-timeline-generator/">day-of timeline</a>, their costs into the <a href="/tools/wedding-budget-calculator/">budget calculator</a>, and their envelopes into the <a href="/tools/wedding-vendor-tipping-calculator/">tip calculator</a>.</p>
+        <h2 data-i18n="tools.wedding-vendor-questions-checklist.h2_text.red_flags_the_ranked_guides_agree_on.edc1d1b9">Red flags the ranked guides agree on</h2>
+        <p data-i18n="tools.wedding-vendor-questions-checklist.p_text.vague_or_missing_contracts_no_insurance.07797c2a">Vague or missing contracts; no insurance or business licence; slow or evasive communication; pressure to sign on the spot; no online presence or references; and refusal to show a full gallery or a full film rather than a highlight reel. Ask for two recent references and actually call them — the question to ask is not "were they good?" but "how did they handle something going wrong?"</p>
+        <p><span data-i18n="tools.wedding-vendor-questions-checklist.span_text.once_vendors_are_booked_put_their_arriva.535573be">Once vendors are booked, put their arrival times into the</span> <a href="/tools/wedding-day-timeline-generator/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.day_of_timeline.ae892e92">day-of timeline</a><span data-i18n="tools.wedding-vendor-questions-checklist.span_text.their_costs_into_the.f67e67ac">, their costs into the</span> <a href="/tools/wedding-budget-calculator/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.budget_calculator.060f44a9">budget calculator</a><span data-i18n="tools.wedding-vendor-questions-checklist.span_text.and_their_envelopes_into_the.d0bf8a87">, and their envelopes into the</span> <a href="/tools/wedding-vendor-tipping-calculator/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.tip_calculator.37436518">tip calculator</a>.</p>
     
-            <h2>Frequently asked questions</h2>
+            <h2 data-i18n="tools.wedding-vendor-questions-checklist.h2_text.frequently_asked_questions.af2a4d28">Frequently asked questions</h2>
             <div class="qa-block ft-faq">
                 <details>
-                    <summary>What should I ask a wedding venue before booking?</summary>
-                    <p>Ask what is included in the rental (tables, chairs, linens, lighting), how many hours it covers, the noise curfew and decor restrictions, the indoor rain backup, the alcohol policy, whether other events run simultaneously, and the cancellation terms.</p>
+                    <summary data-i18n="tools.wedding-vendor-questions-checklist.summary_text.what_should_i_ask_a_wedding_venue_before.1298e802">What should I ask a wedding venue before booking?</summary>
+                    <p data-i18n="tools.wedding-vendor-questions-checklist.p_text.ask_what_is_included_in_the_rental_table.db324bb8">Ask what is included in the rental (tables, chairs, linens, lighting), how many hours it covers, the noise curfew and decor restrictions, the indoor rain backup, the alcohol policy, whether other events run simultaneously, and the cancellation terms.</p>
                 </details>
                 <details>
-                    <summary>What should I ask a wedding photographer?</summary>
-                    <p>Ask to see one complete wedding gallery rather than highlights, who will personally shoot your day, whether a second shooter is included, the turnaround time, whether you get full printing rights to high-resolution images, and the backup-equipment plan.</p>
+                    <summary data-i18n="tools.wedding-vendor-questions-checklist.summary_text.what_should_i_ask_a_wedding_photographer.dd1f5051">What should I ask a wedding photographer?</summary>
+                    <p data-i18n="tools.wedding-vendor-questions-checklist.p_text.ask_to_see_one_complete_wedding_gallery.b309f12e">Ask to see one complete wedding gallery rather than highlights, who will personally shoot your day, whether a second shooter is included, the turnaround time, whether you get full printing rights to high-resolution images, and the backup-equipment plan.</p>
                 </details>
                 <details>
-                    <summary>What are the biggest wedding vendor red flags?</summary>
-                    <p>A vague or missing contract, no liability insurance, slow or evasive replies, pressure to sign immediately, no reviews or references, and refusing to show full deliverables. Any one of these is worth walking away from.</p>
+                    <summary data-i18n="tools.wedding-vendor-questions-checklist.summary_text.what_are_the_biggest_wedding_vendor_red.7bce97fe">What are the biggest wedding vendor red flags?</summary>
+                    <p data-i18n="tools.wedding-vendor-questions-checklist.p_text.a_vague_or_missing_contract_no_liability.7d4d4cb0">A vague or missing contract, no liability insurance, slow or evasive replies, pressure to sign immediately, no reviews or references, and refusing to show full deliverables. Any one of these is worth walking away from.</p>
                 </details>
                 <details>
-                    <summary>Should I ask about cancellation and refund policies?</summary>
-                    <p>Always, and get the answer in the contract. Ask about the payment schedule, what happens if the vendor cannot fulfil the commitment, and whether the deposit is transferable to a new date.</p>
+                    <summary data-i18n="tools.wedding-vendor-questions-checklist.summary_text.should_i_ask_about_cancellation_and_refu.9230f3b2">Should I ask about cancellation and refund policies?</summary>
+                    <p data-i18n="tools.wedding-vendor-questions-checklist.p_text.always_and_get_the_answer_in_the_contrac.4ea2f6ac">Always, and get the answer in the contract. Ask about the payment schedule, what happens if the vendor cannot fulfil the commitment, and whether the deposit is transferable to a new date.</p>
                 </details>
                 <details>
-                    <summary>How many vendors should I interview?</summary>
-                    <p>Two to three per category is a sensible shortlist for a US wedding. Use the same question list for each so you can compare answers directly rather than relying on who gave the best sales pitch.</p>
+                    <summary data-i18n="tools.wedding-vendor-questions-checklist.summary_text.how_many_vendors_should_i_interview.dc40ff0a">How many vendors should I interview?</summary>
+                    <p data-i18n="tools.wedding-vendor-questions-checklist.p_text.two_to_three_per_category_is_a_sensible.7a9ac745">Two to three per category is a sensible shortlist for a US wedding. Use the same question list for each so you can compare answers directly rather than relying on who gave the best sales pitch.</p>
                 </details>
                 <details>
-                    <summary>Can I print this checklist for the meeting?</summary>
-                    <p>Yes. Print / PDF gives a clean list of every question with tick boxes, and Copy result gives plain text for a shared note. Your ticks are saved only in this browser.</p>
+                    <summary data-i18n="tools.wedding-vendor-questions-checklist.summary_text.can_i_print_this_checklist_for_the_meeti.848bfc7d">Can I print this checklist for the meeting?</summary>
+                    <p data-i18n="tools.wedding-vendor-questions-checklist.p_text.yes_print_pdf_gives_a_clean_list_of_ever.4d8d1376">Yes. Print / PDF gives a clean list of every question with tick boxes, and Copy result gives plain text for a shared note. Your ticks are saved only in this browser.</p>
                 </details>
             </div>
-            <h2>More free wedding tools</h2>
+            <h2 data-i18n="tools.wedding-vendor-questions-checklist.h2_text.more_free_wedding_tools.511ec8cc">More free wedding tools</h2>
             <div class="ft-siblings" aria-label="More free wedding tools">
-                <a href="/tools/wedding-budget-calculator/">Budget Calculator</a>
-                <a href="/tools/wedding-seating-chart-maker/">Seating Chart</a>
-                <a href="/tools/wedding-hashtag-generator/">Hashtag Generator</a>
-                <a href="/tools/wedding-invitation-maker/">Invitation Maker</a>
-                <a href="/tools/save-the-date-maker/">Save the Date</a>
-                <a href="/tools/wedding-photo-book-planner/">Photo Book Planner</a>
-                <a href="/tools/wedding-photo-collage/">Photo Collage</a>
-                <a href="/tools/heic-to-jpg-wedding-photos/">HEIC to JPG</a>
-                <a href="/tools/wedding-checklist-generator/">Planning Checklist</a>
-                <a href="/tools/wedding-alcohol-calculator/">Alcohol Calculator</a>
-                <a href="/tools/wedding-vow-writer/">Vow Writer</a>
-                <a href="/tools/wedding-speech-writer/">Speech Writer</a>
-                <a href="/tools/wedding-guest-count-calculator/">Guest Count Calculator</a>
+                <a href="/tools/wedding-budget-calculator/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.budget_calculator.4a2217e0">Budget Calculator</a>
+                <a href="/tools/wedding-seating-chart-maker/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.seating_chart.0aa1b5db">Seating Chart</a>
+                <a href="/tools/wedding-hashtag-generator/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.hashtag_generator.f0d774ee">Hashtag Generator</a>
+                <a href="/tools/wedding-invitation-maker/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.invitation_maker.eaa060de">Invitation Maker</a>
+                <a href="/tools/save-the-date-maker/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.save_the_date.f3ad2c82">Save the Date</a>
+                <a href="/tools/wedding-photo-book-planner/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.photo_book_planner.a9887dd0">Photo Book Planner</a>
+                <a href="/tools/wedding-photo-collage/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.photo_collage.942e207a">Photo Collage</a>
+                <a href="/tools/heic-to-jpg-wedding-photos/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.heic_to_jpg.67ca8d18">HEIC to JPG</a>
+                <a href="/tools/wedding-checklist-generator/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.planning_checklist.8d9c7c04">Planning Checklist</a>
+                <a href="/tools/wedding-alcohol-calculator/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.alcohol_calculator.aa6ed7fc">Alcohol Calculator</a>
+                <a href="/tools/wedding-vow-writer/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.vow_writer.90e3a3d2">Vow Writer</a>
+                <a href="/tools/wedding-speech-writer/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.speech_writer.7bd24d35">Speech Writer</a>
+                <a href="/tools/wedding-guest-count-calculator/" data-i18n="tools.wedding-vendor-questions-checklist.a_text.guest_count_calculator.3713f2ea">Guest Count Calculator</a>
             </div>
     </section>
     <section class="cta-section" style="background: var(--color-secondary); color: #fff; text-align: center; padding: var(--spacing-xl) 0;">
         <div class="container">
-            <h2 style="color: #fff;">Planning done? Let's make the film.</h2>
-            <p style="color: rgba(255,255,255,.78); margin-bottom: var(--spacing-md);">Turn the photos and words from your planning into a 60–90 second cinematic wedding film.</p>
-            <a href="/order/" class="btn btn-primary btn-large">Get a Free Quote &rarr;</a>
+            <h2 style="color: #fff;" data-i18n="tools.wedding-vendor-questions-checklist.h2_text.planning_done_let_s_make_the_film.acbc362d">Planning done? Let's make the film.</h2>
+            <p style="color: rgba(255,255,255,.78); margin-bottom: var(--spacing-md);" data-i18n="tools.wedding-vendor-questions-checklist.p_text.turn_the_photos_and_words_from_your_plan.8830dc77">Turn the photos and words from your planning into a 60–90 second cinematic wedding film.</p>
+            <a href="/order/" class="btn btn-primary btn-large" data-i18n="tools.wedding-vendor-questions-checklist.a_text.get_a_free_quote.076af0bf">Get a Free Quote &rarr;</a>
         </div>
     </section>
 </main>
