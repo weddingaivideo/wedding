@@ -170,6 +170,37 @@ function injectCookieConsent(html) {
     return tag + html;
 }
 
+// --- Umami analytics tracker (self-hosted, privacy-first) ------------------
+// Added 2026-11-12. The tracker script is served from OUR OWN domain at
+// /stats/script.js; Cloudflare Pages proxies /stats/* to the self-hosted
+// umami deployment (see _redirects). Two reasons for the proxy instead of
+// loading the umami origin directly:
+//   1. Ad blockers block *.vercel.app aggressively — a first-party path is
+//      not on any blocklist, so the traffic actually arrives.
+//   2. The tracker derives its beacon endpoint from the script's own URL
+//      (src/tracker/index.ts: `host = currentScript.src.split('/').slice(0,-1)`),
+//      so a same-origin script automatically posts to /stats/api/send — also
+//      proxied. No cross-origin connect-src is needed, so the site's CSP
+//      script-src/connect-src stay untouched ('self' already covers it).
+//
+// WEBSITE_ID is the umami website UUID. It is the one value that must match
+// the row in the umami database; keep the two in sync.
+const UMAMI_WEBSITE_ID = "c4e1b2a7-9d3f-4e6a-8b15-7f2c9a4e1d80";
+const UMAMI_SCRIPT_PATH = "/stats/script.js";
+
+// Idempotency: never double-inject.
+function injectUmamiTracker(html) {
+    if (html.includes(UMAMI_SCRIPT_PATH)) return html;
+    const tag = `<script defer src="${UMAMI_SCRIPT_PATH}" data-website-id="${UMAMI_WEBSITE_ID}"></script>`;
+    if (/<\/head>/i.test(html)) {
+        return html.replace(/(<\/head>)/i, `    ${tag}\n$1`);
+    }
+    if (/<head[^>]*>/i.test(html)) {
+        return html.replace(/(<head[^>]*>)/i, `$1\n    ${tag}`);
+    }
+    return tag + html;
+}
+
 function injectMetaCsp(html, cspContent) {
     // Escape any " in the content attribute. buildCsp output contains
     // base64 (nonce) and hostnames — no " in practice, but escape anyway
@@ -218,6 +249,7 @@ function withCspHeaders(response, text, nonce) {
     //    per-request nonce. This is the active CSP for HTML pages —
     //    browsers honor meta-delivered CSP identically to header CSP.
     let newText = injectCookieConsent(text);
+    newText = injectUmamiTracker(newText);
     newText = injectScriptNonce(newText, nonce).split(CSP_PLACEHOLDER).join(nonce);
     newText = injectMetaCsp(newText, buildCsp(nonce));
     // Wrap the transformed body in a new Response with the same status.
