@@ -46,7 +46,7 @@ NONCE = "weddingaiverify123456"
 def build_csp():
     # The live policy carries a per-request nonce. The test page is served
     # statically, so the same nonce is used for the policy and the markup.
-    csp = CSP_TEMPLATE.replace("'unsafe-inline' 'wasm-unsafe-eval'",
+    csp = CSP_TEMPLATE.replace("'wasm-unsafe-eval'",
                                 f"'nonce-{NONCE}' 'wasm-unsafe-eval'")
     csp = re.sub(r"'nonce-[^']+'", f"'nonce-{NONCE}'", csp)
     if "wasm-unsafe-eval" not in csp:

@@ -329,3 +329,25 @@ CF Pages 会自动 deploy revert 的版本。
 - ❌ **直接 `git push` 大视频文件** — 必须通过 LFS（看 `.gitattributes`，已经配好了）
 - ❌ **把 secret token 写到代码里** — `internal-tools/pre-deploy-check.ps1` 第 8 步会 grep 扫；CI 也会扫
 - ❌ **commit `100 blog/` 那种 scratch dir** — 误提交垃圾会污染 repo
+
+---
+
+## 10. robots.txt 运维说明（内部，2026-11-12 从公开文件迁出）
+
+公开 `robots.txt` 只保留规则。以下说明曾写在文件注释里，测试报告指出其暴露内部文件名、审计记录与 Dashboard 待办，故迁入本文档（本目录 `.md` 由 `.assetsignore` 排除，不部署到边缘）。
+
+**Cloudflare 托管 robots 注入冲突（高风险，需人工确认）**
+
+Cloudflare zone 级 `Crawler Hints → Add Cloudflare's robots.txt template to your existing robots.txt` 开启时，会在文件头部 **PREPEND** 一段托管块：`User-agent: *` 带 Content-Signal，并为 ClaudeBot / GPTBot 等逐条写入 `Disallow: /`。这与站点显式写的 `User-agent: ClaudeBot Allow: /` 冲突。按 RFC 9309 §2.2.2 最具体 User-agent 组优先，理论上本文件的 per-bot Allow 覆盖托管块；但解析器行为不一（Google 首匹配、Yandex 最长匹配、其它在同层级取最后匹配），存在真实歧义（2026-08-04 Mavis audit pass 2，风险「中」）。
+
+处理动作（一次性，无法用代码完成）：Cloudflare Dashboard → weddingai.video → SEO → Crawler Hints → 关闭 `Add Cloudflare's robots.txt template to your existing robots.txt`。关闭后本文件成为唯一事实来源。
+
+2026-11-12 复核：线上 `robots.txt` 首行即本站文件头，未见 Content-Signal 托管块，说明当前开关为关闭状态，AI 爬虫的显式 Allow 生效。每次改 zone 级 SEO 设置后需重新 `curl https://weddingai.video/robots.txt | head -30` 确认。
+
+**规则维护约定**
+
+- `Disallow` 规则应与 `_redirects` 的 404 规则、`.assetsignore` 保持一致：新增内部目录时三处同步更新。
+- `Disallow: /stats`、`/stats/` 屏蔽自托管 umami 代理（`/stats/script.js` 追踪脚本 + `/stats/api/send` 采集端点），避免爬虫浪费回源请求。2026-11-12 加入。
+- 注释里曾列出的 `netlify.toml`（Netlify 遗留，本仓库从未存在）、`AGENTS.md`、`CHANGELOG.md`、`RESEND_SETUP.md`、`TESTING-PLAN.md` 均为「若将来重新加入则补 Disallow」的备忘；这些文件由 `.assetsignore` 排除，`README.md` 是唯一会部署的 `.md`。
+- Sitemap 共 12 条：1 个索引 + 11 个语言子图（en/zh/es/fr/de/pt/ja/ru/ar/th/hi）。旧注释写「10 language sitemaps」是过时数字。
+- AI 爬虫（GPTBot / ChatGPT-User / Claude-Web / ClaudeBot / anthropic-ai / PerplexityBot / Google-Extended / Applebot-Extended）显式 `Allow: /` 是产品策略：希望被 AI 引擎引用。激进 SEO 抓取器（AhrefsBot / SemrushBot / MJ12bot / DotBot / BLEXBot）整站 `Disallow`。

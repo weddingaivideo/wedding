@@ -12,32 +12,26 @@
 # ---------- Security headers (applied to every page) -------------------------
 
 /*
-  # Content-Security-Policy: STATIC FALLBACK (active policy is in HTML).
-  # The effective CSP for HTML pages is the per-request nonce-bearing
-  # <meta http-equiv="Content-Security-Policy"> injected by
-  # functions/_middleware.js (injectMetaCsp + buildCsp). CF Pages drops
-  # CSP headers set from middleware (verified 2026-08-04), so the only
-  # way to get a per-request nonce to the client is via the HTML body
-  # that the middleware already mutates for i18n/nonce/etc.
+  # Content-Security-Policy: STATIC POLICY for non-HTML responses
+  # (CSS/JS/images). For HTML pages the active policy is the per-request
+  # nonce-bearing <meta http-equiv="Content-Security-Policy"> injected by
+  # functions/_middleware.js (injectMetaCsp + buildCsp); CF Pages drops
+  # CSP headers set from middleware (verified 2026-08-04).
   #
-  # Why this static policy still has 'unsafe-inline' in script-src:
-  #   - Non-HTML responses (CSS/JS/images) have no <meta> CSP, so only
-  #     this header applies. They have no inline scripts anyway, so
-  #     'unsafe-inline' is harmless there.
-  #   - For HTML, this header is intersected with the meta-delivered
-  #     nonce policy. CSP3 says: when a nonce is present in ANY active
-  #     policy, 'unsafe-inline' is IGNORED. Net effect on modern browsers:
-  #     nonce-only enforcement → no XSS via un-nonced inline script.
-  #   - Old browsers (no meta CSP, or no nonce semantics) get the
-  #     'unsafe-inline' fallback so the page still works.
+  # 2026-11-12: removed 'unsafe-inline' from script-src. The meta/nonce
+  # path has been in production for several deploy cycles, static assets
+  # contain no inline scripts, and deployed HTML has no inline event
+  # handlers. script-src-attr in the meta policy already gates those.
+  # KEEP 'unsafe-inline' in style-src — pages use style="" attributes and
+  # inline <style id="critical-css">; removing it invents CSP violations
+  # (see AGENTS.md "TRAP when writing such a harness").
   #
-  # If you tighten this (drop 'unsafe-inline' here), DO NOT also tighten
-  # the meta CSP — you need at least one of the two policies to allow
-  # the existing inline event handler patterns (we currently have none
-  # in deployed HTML, so dropping 'unsafe-inline' from the static
-  # policy is now safe; only do it after auditing the meta path works
-  # in production for at least one deploy cycle).
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://www.clarity.ms https://f.clarity.ms https://scripts.clarity.ms; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.clarity.ms https://c.clarity.ms https://c.bing.com https://pagead2.googlesyndication.com https://www.google.com; media-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' https://cloudflareinsights.com https://*.cloudflareinsights.com https://www.clarity.ms https://c.clarity.ms https://f.clarity.ms https://u.clarity.ms https://e.clarity.ms https://t.clarity.ms https://*.clarity.ms https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.googleadservices.com https://ep1.adtrafficquality.google; frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net; form-action 'self'
+  # This file applies to the static-asset response path only. HTML responses
+  # rebuilt by the middleware get their security headers from the
+  # HTML_SECURITY_HEADERS object in functions/_middleware.js — keep the two
+  # in sync when changing HSTS / XFO / XCTO / Referrer / Permissions / COOP /
+  # COEP / Reporting-Endpoints.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://www.clarity.ms https://f.clarity.ms https://scripts.clarity.ms; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.clarity.ms https://c.clarity.ms https://c.bing.com https://pagead2.googlesyndication.com https://www.google.com; media-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' https://cloudflareinsights.com https://*.cloudflareinsights.com https://www.clarity.ms https://c.clarity.ms https://f.clarity.ms https://u.clarity.ms https://e.clarity.ms https://t.clarity.ms https://*.clarity.ms https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.googleadservices.com https://ep1.adtrafficquality.google; frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net; form-action 'self'
   #
   # 'wasm-unsafe-eval' (added 2026-11-09) must stay in BOTH this static
   # fallback and the per-request meta policy in functions/_middleware.js

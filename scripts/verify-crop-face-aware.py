@@ -44,7 +44,7 @@ if not _m:
     raise SystemExit("[FAIL] no Content-Security-Policy in _headers")
 NONCE = "weddingaiverify123456"
 CSP = re.sub(r"'nonce-[^']+'", f"'nonce-{NONCE}'", _m.group(1).strip())
-CSP = CSP.replace("'unsafe-inline' 'wasm-unsafe-eval'",
+CSP = CSP.replace("'wasm-unsafe-eval'",
                   f"'nonce-{NONCE}' 'wasm-unsafe-eval'")
 
 SCRIPT_RE = re.compile(r"(<script\b)([^>]*)>", re.I)

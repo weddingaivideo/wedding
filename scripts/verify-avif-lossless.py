@@ -54,7 +54,7 @@ NONCE = "weddingaiverify123456"
 
 
 def build_csp():
-    csp = CSP_TEMPLATE.replace("'unsafe-inline' 'wasm-unsafe-eval'",
+    csp = CSP_TEMPLATE.replace("'wasm-unsafe-eval'",
                                 f"'nonce-{NONCE}' 'wasm-unsafe-eval'")
     return re.sub(r"'nonce-[^']+'", f"'nonce-{NONCE}'", csp)
 

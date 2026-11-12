@@ -39,8 +39,8 @@
 // `python scripts/vendor-libs.py --verify` checks the hashes.
 //
 // CSP: 'self' is in script-src, so a dynamically inserted same-origin
-// <script src> loads without a nonce. ('unsafe-inline' is ignored because the
-// policy carries a nonce, but that only affects inline code.)
+// <script src> loads without a nonce. Inline code needs the per-request
+// nonce; script-src has no 'unsafe-inline' in either policy (2026-11-12).
 var VENDOR = {
   fflate: { file: 'fflate.min.js', version: '0.8.3', global: 'fflate' },
   jspdf: { file: 'jspdf.umd.min.js', version: '4.2.1', global: 'jspdf' },

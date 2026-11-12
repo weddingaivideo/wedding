@@ -10,7 +10,8 @@
    5. JSON-LD inLanguage rewrite (per language)
    6. og:url trailing-slash normalization
    7. /success/ noindex injection
-   8. CSP nonce injection — replace __CSP_NONCE__ in all HTML, set CSP header
+   8. CSP nonce injection — replace __CSP_NONCE__ in all HTML, inject the
+     nonce-bearing <meta> CSP and restore the security response headers
    ============================================= */
 
 import { LANGS, DEFAULT_LANG, RTL } from "./_lib/langs.js";
@@ -32,9 +33,10 @@ function generateNonce() {
 // Build the full CSP value for the given nonce.
 // Used for <meta http-equiv="Content-Security-Policy"> injection (not
 // response header — CF Pages drops middleware-set headers, see withCspHeaders).
-// Differences from the static _headers CSP:
-//   - 'unsafe-inline' removed from script-src
+// Differences from the static _headers CSP (both now omit script-src
+// 'unsafe-inline'; style-src keeps it on both sides):
 //   - 'nonce-XXX' added (one-time per request)
+//   - script-src-attr and report-to added (header policy has neither)
 //   - 'strict-dynamic' was REMOVED 2026-10-16 (Bug #17): Cloudflare's Web
 //     Analytics beacon is injected by CF Pages as a plain <script src="
 //     static.cloudflareinsights.com/beacon.js"> in the HTML, which has no
@@ -217,28 +219,49 @@ function injectMetaCsp(html, cspContent) {
     return tag + html;
 }
 
-// Replace the placeholder in HTML text and return new Response.
+// Replace the placeholder in HTML text and return a new Response.
 //
-// IMPORTANT (2026-08-04): this function no longer sets
-// Content-Security-Policy or Reporting-Endpoints on the response. We
-// tried three patterns (plain object, `new Headers(response.headers)`,
-// and `new Response(newText, response)`) and none of them reach the
-// client — Cloudflare Pages drops custom headers set from middleware
-// on the static-asset response path. Additionally, `new Headers(headers)`
-// inherits the source guard, so a fetch() response (which has the
-// "response" guard = immutable) makes the clone immutable too, and
-// subsequent .set() throws "Can't modify immutable headers" and 500s
-// the request.
+// 2026-11-12 audit fix: Cloudflare Pages applies the `/*` block from
+// `_headers` ONLY on the static-asset response path. Every HTML page goes
+// through this middleware, which rebuilds the body with `new Response()`;
+// that rebuilt response reached the browser with Content-Type only —
+// HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy,
+// Permissions-Policy, COOP/COEP, Reporting-Endpoints and Cache-Control
+// were ALL missing on GET. HEAD requests and CSS/JS/images still had the
+// full set, which is why earlier "security headers look fine" audits
+// missed this. Verified with curl on /, /tools/ and a blog page.
 //
-// NEW ARCHITECTURE (2026-08-04): the per-request nonce-bearing CSP is
-// delivered via <meta http-equiv="Content-Security-Policy"> injected
-// directly into the HTML body (see injectMetaCsp). The static _headers
-// CSP is kept as a fallback — it has 'unsafe-inline' for backwards
-// compat with non-HTML responses (CSS/JS/images) and for browsers that
-// don't honor meta CSP, but on modern browsers the meta tag with nonce
-// overrides it (intersection + CSP3's "nonce disables unsafe-inline"
-// rule). Reporting-Endpoints is in _headers so the meta's `report-to`
-// directive has a destination.
+// This function now sets every non-CSP security header explicitly. The
+// values deliberately mirror the `/*` block in `_headers`: if you change
+// one, change the other (`_headers` still governs CSS/JS/images).
+// CSP is deliberately NOT set here: CF Pages drops CSP headers set from
+// middleware (verified 2026-08-04), so HTML pages get their nonce-bearing
+// policy from the injected <meta> tag. Reporting-Endpoints IS set here so
+// that meta policy's `report-to csp-endpoint` has a destination.
+//
+// Do NOT use `new Headers(response.headers)`: a fetch() response carries an
+// immutable "response" guard, the clone inherits it, and any .set() throws
+// "Can't modify immutable headers" → 500. A plain object literal is safe.
+const HTML_SECURITY_HEADERS = Object.freeze({
+    "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-XSS-Protection": "0",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
+    "Cross-Origin-Opener-Policy": "same-origin",
+    "Cross-Origin-Embedder-Policy": "credentialless",
+    "Reporting-Endpoints": 'csp-endpoint="https://weddingai.video/__csp_report"',
+    // Same preconnect hints as _headers (AdSense + CF Web Analytics).
+    "Link": "<https://pagead2.googlesyndication.com>; rel=preconnect; crossorigin, <https://static.cloudflareinsights.com>; rel=preconnect; crossorigin",
+    // HTML must stay uncached at the edge: each response carries a fresh
+    // per-request CSP nonce and a language-specific body. The transformed
+    // body itself is cached for 5 min inside caches.default (see below).
+    // Deliberately no Content-Length either — CF's email obfuscation
+    // rewrites the body at the edge, so a stale length would truncate it.
+    "Cache-Control": "public, max-age=0, must-revalidate",
+});
+
 function withCspHeaders(response, text, nonce) {
     // 1) Inject nonce on any <script> that doesn't already have one.
     //    This makes external scripts (e.g. /js/main.min.js) match the
@@ -252,23 +275,14 @@ function withCspHeaders(response, text, nonce) {
     newText = injectUmamiTracker(newText);
     newText = injectScriptNonce(newText, nonce).split(CSP_PLACEHOLDER).join(nonce);
     newText = injectMetaCsp(newText, buildCsp(nonce));
-    // Wrap the transformed body in a new Response with the same status.
-    // We intentionally don't copy other headers — the static _headers
-    // file is the source of truth for non-CSP headers, and mutating
-    // headers from middleware on CF Pages is unreliable at best, 500ing
-    // at worst (see comment above about frozen Headers).
-    // BUT: we MUST explicitly set Content-Type. Without it, new Response()
-    // defaults to "text/plain;charset=UTF-8", and the browser then renders
-    // the HTML body as plain text source — the page looks completely broken
-    // (raw <!DOCTYPE html>...</html> dumped to screen, no styling, no JS).
-    // (Bug introduced 2026-08-04 when we dropped header copying to fix
-    // the "frozen Headers" 500 error; Content-Type was lost in the process.
-    // Fix 2026-08-04: re-add Content-Type explicitly. CSP/permissions-policy
-    // etc. still come from the static _headers file.)
+    // Rebuild the body with the same status and the full header set.
+    // Content-Type must be explicit: without it new Response() defaults to
+    // text/plain and the browser renders the raw HTML source instead of a page.
     return new Response(newText, {
         status: response.status,
         statusText: response.statusText,
         headers: {
+            ...HTML_SECURITY_HEADERS,
             "Content-Type": "text/html; charset=utf-8",
         },
     });
@@ -1779,6 +1793,26 @@ export const onRequest = async (context) => {
         const path = url.pathname;
 
         if (context.request.method !== "GET") return context.next();
+
+        // Canonicalize www → apex with a real 301 (canonical/hreflang point at
+        // the apex, but the www hostname used to serve a duplicate 200).
+        // Runs before the lowercase/i18n paths, and never for this
+        // middleware's own internal fetches: those carry
+        // X-Middleware-Internal and must reach the static-asset path instead
+        // of being redirected (a 301 there would break localized pages).
+        if (url.hostname === "www.weddingai.video" &&
+            context.request.headers.get("x-middleware-internal") !== "1") {
+            const apex = new URL(url.toString());
+            apex.hostname = "weddingai.video";
+            return new Response(null, {
+                status: 301,
+                headers: {
+                    Location: apex.toString(),
+                    "Cache-Control": "public, max-age=3600",
+                },
+            });
+        }
+
         // Lowercase redirect runs BEFORE shouldSkip so that /FAVICON.ICO,
         // /STYLES.MIN.CSS, etc. also normalize (shouldSkip bypasses
         // middleware for static assets, which is fine for our lowercase
@@ -2092,7 +2126,11 @@ export const onRequest = async (context) => {
         if (!response.ok) {
             if (rest !== "/" && !rest.endsWith("/")) {
                 const altUrl = url.origin + rest + "/" + url.search;
-                const altResp = await fetch(altUrl, { redirect: "manual" });
+                const altResp = await fetch(altUrl, {
+                    method: "GET",
+                    headers: { Accept: "text/html", "X-Middleware-Internal": "1" },
+                    redirect: "manual",
+                });
                 if (altResp.status >= 300 && altResp.status < 400) {
                     let loc = altResp.headers.get("Location") || "/";
                     if (lang && lang !== DEFAULT_LANG && loc.startsWith("/") && !loc.startsWith(`/${lang}/`)) {
