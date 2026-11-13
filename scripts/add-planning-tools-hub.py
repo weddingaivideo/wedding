@@ -594,7 +594,8 @@ def body(lang: str) -> str:
     out.append('<section class="pt-section pt-faq">')
     out.append("  " + bound("faq_h2", lang, "h2"))
     for q, a in FAQS:
-        out.append('  <details>')
+        # The schema gate counts <details class="faq-item"> as a visible FAQ.
+        out.append('  <details class="faq-item">')
         out.append("    <summary data-i18n=\"%s\">%s</summary>" % (k(q), esc(c[q])))
         out.append("    <p data-i18n=\"%s\">%s</p>" % (k(a), esc(c[a])))
         out.append('  </details>')
