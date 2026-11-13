@@ -40324,6 +40324,7 @@
   "index.summary_text.what_video_formats_do_you_accept.50403317": "¿Qué formatos de vídeo aceptas?",
   "index.summary_text.who_owns_the_final_video.99999993": "¿Quién es el dueño del video final y puedo usarlo comercialmente?",
   "index.title_text.ai_powered_wedding_video_services_weddin.58583865": "Vídeos de Boda con IA | Desde $9.9 | WeddingAI.video",
+  "index.title_text.ai_wedding_video_generators_compared_7_tools.zzzzzz1": "Generadores de vídeo de boda con IA: 7 herramientas",
   "index.twitter_description": "Crea vídeos de boda con IA: películas, multilingüe, restauración, cámara lenta y más. Desde $9.9. Cotización gratis →",
   "index.twitter_title": "Crea Vídeos de Boda con IA | Desde $9.9 | WeddingAI.video",
   "nav.a_text.view_all_services.91827365": "Ver todos los servicios →",
@@ -40490,6 +40491,7 @@
   "pricing.p_text.trailer_cinematic_1ndash3_min__meme_gene.f2f29725": "Tráiler (cinemática 1&ndash;3 min) + Generador de memes (10 clips sociales) + Boda de mascotas (apertura divertida). Optimizado para diferentes plataformas.",
   "pricing.p_text.vintage_restoration_parents_old_foot.bbbbbbb2": "Restauración vintage (metraje antiguo de padres o abuelos) + Homenaje familiar (momentos en la memoria) + Generador de video AI (fotos fijas de la película &rarr;). Ideal para películas de 30/40/50 aniversario y preservación de recuerdos familiares.",
   "pricing.p_text.yes_two_free_revisions_are_included_with.47c01c4f": "Sí. Se incluyen dos revisiones gratuitas con cada servicio. Si después de las revisiones aún no está satisfecho, le ofrecemos un reembolso completo. Hemos procesado más de 500 proyectos y reembolsado menos de 5.",
+  "pricing.page_title": "Precios de vídeo de boda con IA | Desde $9.9",
   "pricing.span_text.2.66754317": "▾",
   "pricing.strong_text.2_services.2239cfde": "2 servicios:",
   "pricing.strong_text.3_services.5fe1eeb6": "3 servicios:",
@@ -41757,6 +41759,7 @@
   "tools.h4.build_a_wedding_photo_slideshow_that_cap.3baf8b02": "Crea una presentación de diapositivas de fotos de boda que cautive",
   "tools.h4.how_to_make_a_wedding_video_from_your_ph.e35cdd4e": "Cómo hacer un vídeo de boda a partir de tus fotos (Guía AI)",
   "tools.h4.restore_old_wedding_photos_with_ai_2026.ed491889": "Restaurar fotos de bodas antiguas con IA (Guía 2026)",
+  "tools.meta_description": "32 herramientas de boda gratuitas en el navegador: fotos, invitaciones, PDF, listas, votos, discursos y plannings. Sin registro.",
   "tools.p.2026_weddingai_video_all_rights_reserve.c2b1e143": "© 2026 WeddingAI.video. Reservados todos los derechos.",
   "tools.p.a_modern_dslr_shot_in_raw_uncompressed_c.e98069ff": "Una cámara DSLR moderna tomada en RAW sin comprimir puede ejecutar entre 25 y 40 MB por imagen. Una vez que haya convertido y reducido el tamaño para compartir, comprimir es la forma más rápida de colocar cientos de fotos en un correo electrónico, una carga o una carpeta de almacenamiento en la nube. La diferencia visual es invisible en tamaños de visualización normales: normalmente una reducción del tamaño del archivo del 70 al 80 % sin pérdida de calidad perceptible.",
   "tools.p.add_captions_dates_quotes_names_or_save.12a459c3": "Agregue títulos, fechas, citas, nombres o anotaciones para guardar la fecha. 14 fuentes, a todo color y control de opacidad.",
@@ -41792,6 +41795,7 @@
   "tools.p.yes_all_six_tools_work_on_ios_safari_and.a5a883d8": "Sí. Las seis herramientas funcionan en iOS Safari y en el moderno Android Chrome. La zona de caída responde al toque para seleccionar desde el carrete de su cámara. La descarga de resultados se maneja mediante el mismo flujo de guardado del navegador que utiliza para cualquier otro archivo.",
   "tools.p.yes_free_the_catch_if_you_can_call_it_th.a83a49e0": "Sí, gratis. El problema, si se le puede llamar así, es que después de preparar tus fotos, nos encantaría que consideraras nuestro generador de videos de bodas con IA de pago para convertir esas fotos en una película. No se requiere correo electrónico para utilizar las herramientas gratuitas ni ningún empujón para actualizar.",
   "tools.p.your_photographer_delivered_3_2_landscap.044ad604": "Su fotógrafo entregó fotografías de paisajes 3:2: magníficas para impresiones, incómodas para Instagram. Recorte para carretes, cuadrados o retratos con un encuadre ponderado central inteligente para que el rostro de la novia permanezca en la pantalla. Ideal para guardar la fecha, publicaciones en cuadrícula de Instagram y avances de TikTok.",
+  "tools.page_title": "32 herramientas gratuitas para bodas | Sin registro",
   "tools.span.100_in_your_browser_no_upload_no_signup.a0fe5f5f": "100% en tu navegador: sin cargar, sin registrarte",
   "tools.span.all_tools.cefb316f": "Todas las herramientas",
   "tools.span.free_tools.c69684a7": "Herramientas gratuitas",
@@ -48286,16 +48290,16 @@
   "success.serp_comparison.td.workflow_capterra": "Genérico",
   "resources.serp_comparison.section": "Recursos de vídeos de bodas con IA",
   "resources.serp_comparison.h2": "Recursos de vídeos de bodas con IA: WeddingAI.video frente a otras herramientas",
-  "resources.serp_comparison.p_text": "SERP de Google para recursos de vídeos de bodas con IA: guías de The Knot, recursos de WeddingWire, artículos de Brides.com, blog WeddingAI.video (100 publicaciones), wiki de Reddit r/weddingvideography. WeddingAI.video ofrece más de 100 publicaciones de blog + 13 herramientas gratuitas + guías de precios:",
+  "resources.serp_comparison.p_text": "SERP de Google para recursos de vídeos de bodas con IA: guías de The Knot, recursos de WeddingWire, artículos de Brides.com, blog WeddingAI.video (100 publicaciones), wiki de Reddit r/weddingvideography. WeddingAI.video ofrece más de 100 publicaciones de blog + 32 herramientas gratuitas + guías de precios:",
   "resources.serp_comparison.th.tool": "Herramienta",
   "resources.serp_comparison.th.style": "Estilo",
   "resources.serp_comparison.th.languages": "Idiomas",
   "resources.serp_comparison.th.output": "Producción",
   "resources.serp_comparison.th.price": "Precio",
   "resources.serp_comparison.th.workflow": "Flujo de trabajo",
-  "resources.serp_comparison.p_trailing": "WeddingAI.video ofrece los recursos de vídeos de bodas con IA más completos: más de 100 publicaciones de blog + 13 herramientas gratuitas + guías de precios + muestra gratuita, todo en 11 idiomas.",
+  "resources.serp_comparison.p_trailing": "WeddingAI.video ofrece los recursos de vídeos de bodas con IA más completos: más de 100 publicaciones de blog + 32 herramientas gratuitas + guías de precios + muestra gratuita, todo en 11 idiomas.",
   "resources.serp_comparison.td.weddingai": "<strong>WeddingAI.video Resources</strong>",
-  "resources.serp_comparison.td.style_weddingai": "<strong>100+ blog posts + 13 free tools</strong>",
+  "resources.serp_comparison.td.style_weddingai": "<strong>100+ blog posts + 32 free tools</strong>",
   "resources.serp_comparison.td.languages_weddingai": "<strong>11 idiomas con votos nativos</strong>",
   "resources.serp_comparison.td.output_weddingai": "<strong>Free sample + guides</strong>",
   "resources.serp_comparison.td.price_weddingai": "<strong>Free + from $9.9</strong>",
@@ -48494,16 +48498,16 @@
   "terms.serp_comparison.td.workflow_synthesia": "Subscription",
   "search.serp_comparison.section": "Comparación de herramientas de búsqueda de vídeos de bodas con IA",
   "search.serp_comparison.h2": "Comparación de herramientas de búsqueda de vídeos de bodas con IA: WeddingAI.video frente a otras herramientas de IA",
-  "search.serp_comparison.p_text": "SERP de Google para la búsqueda de vídeos de bodas con IA: bibliotecas de búsqueda, herramientas gratuitas, búsqueda con IA. WeddingAI.video ofrece 13 herramientas gratuitas + más de 100 publicaciones de blog + biblioteca de contenido con capacidad de búsqueda:",
+  "search.serp_comparison.p_text": "SERP de Google para la búsqueda de vídeos de bodas con IA: bibliotecas de búsqueda, herramientas gratuitas, búsqueda con IA. WeddingAI.video ofrece 32 herramientas gratuitas + más de 100 publicaciones de blog + biblioteca de contenido con capacidad de búsqueda:",
   "search.serp_comparison.th.tool": "Herramienta",
   "search.serp_comparison.th.style": "Estilo",
   "search.serp_comparison.th.languages": "Idiomas",
   "search.serp_comparison.th.output": "Producción",
   "search.serp_comparison.th.price": "Precio",
   "search.serp_comparison.th.workflow": "Flujo de trabajo",
-  "search.serp_comparison.p_trailing": "WeddingAI.video ofrece una biblioteca de contenido con capacidad de búsqueda: 13 herramientas gratuitas + más de 100 publicaciones de blog + búsqueda con IA, todo en 11 idiomas en comparación con motores de búsqueda genéricos.",
+  "search.serp_comparison.p_trailing": "WeddingAI.video ofrece una biblioteca de contenido con capacidad de búsqueda: 32 herramientas gratuitas + más de 100 publicaciones de blog + búsqueda con IA, todo en 11 idiomas en comparación con motores de búsqueda genéricos.",
   "search.serp_comparison.td.weddingai": "<strong>WeddingAI.video</strong>",
-  "search.serp_comparison.td.style_weddingai": "<strong>13 free tools + 100+ blog + search</strong>",
+  "search.serp_comparison.td.style_weddingai": "<strong>32 free tools + 100+ blog + search</strong>",
   "search.serp_comparison.td.languages_weddingai": "<strong>11 idiomas con votos nativos</strong>",
   "search.serp_comparison.td.output_weddingai": "<strong>Searchable content library</strong>",
   "search.serp_comparison.td.price_weddingai": "<strong>Free + from $9.9</strong>",
@@ -48547,7 +48551,7 @@
   "not_found.serp_comparison.section": "Páginas populares de vídeos de bodas con IA",
   "not_found.serp_comparison.h2": "Páginas populares de vídeos de bodas con IA: encuentre lo que necesita",
   "not_found.serp_comparison.p_text": "Google SERPs (octubre 2025) para «video de boda AI» muestran WeddingAI.video liderando con 500+ parejas. Páginas más populares:",
-  "not_found.serp_comparison.p_trailing": "WeddingAI.video ofrece la plataforma de vídeos de bodas con IA más completa, con 13 herramientas gratuitas + más de 100 publicaciones de blog + guías de precios + centros de servicios, todo en 11 idiomas.",
+  "not_found.serp_comparison.p_trailing": "WeddingAI.video ofrece la plataforma de vídeos de bodas con IA más completa, con 32 herramientas gratuitas + más de 100 publicaciones de blog + guías de precios + centros de servicios, todo en 11 idiomas.",
   "not_found.serp_comparison.popular.es./tools/compress-wedding-photos/": "Wedding Photo Compressor",
   "not_found.serp_comparison.popular.es./tools/wedding-photo-collage/": "Wedding Photo Collage",
   "not_found.serp_comparison.popular.es./tools/wedding-video-invitation-maker/": "Wedding Video Invitation",
@@ -50361,7 +50365,7 @@
   "tools.card.tag.gen.11": "Tarjeta para guardar la fecha + 8 estilos de videos de bodas a uno, 11 idiomas, tiempo de entrega de 9 minutos",
   "tools.card.tag.plan.08": "Tablas de arrastrar y soltar con detección de superposición (corrige el error en más de 14 competidores), asignación automática, exportación PNG/PDF",
   "tools.card.tag.plan.10": "Rellena automáticamente más de 100 fotografías en un diseño de libro de fotos imprimible y las exporta a MILK Books / Pixum / Artifact Uprising",
-  "tools.faq.a.01": "Sí. Todas las herramientas de esta página son gratuitas, sin registro, sin cuenta y sin correo electrónico. Los archivos se procesan en su navegador y nunca se cargan. El precio(solo en la pestaña 'Generar') cubre los estilos de videos de bodas con IA y es el único artículo pago en las 13 herramientas.",
+  "tools.faq.a.01": "Sí. Todas las herramientas de esta página son gratuitas, sin registro, sin cuenta y sin correo electrónico. Los archivos se procesan en su navegador y nunca se cargan. El precio(solo en la pestaña 'Generar') cubre los estilos de videos de bodas con IA y es el único artículo pago en las 32 herramientas.",
   "tools.faq.a.02": "No. Abra cualquiera de las 32 herramientas, úsela, cierre la pestaña. Nada te sigue. Si opta por el flujo de videos de bodas AI, crea una cuenta solo en el paso del pedido; esa cuenta es solo para entregar sus archivos de video.",
   "tools.faq.a.03": "En tu navegador. Las fotos permanecen en su dispositivo (nunca las recibimos, ni entrenamos IA en ellas ni tenemos riesgo de infracción de nuestra parte). La tabla de asientos y la calculadora de presupuesto se guardan en el almacenamiento local de su navegador; borre los datos de su navegador y desaparecerán, así que exporte un CSV cuando tenga algo que valga la pena conservar.",
   "tools.faq.a.04": "Tres diferencias: (1) nos centramos en el flujo de trabajo de fotografía y vídeo de la boda, no en las herramientas de planificación de lista de invitados/RSVP que cubren esos sitios. (2) Cada herramienta fotográfica aquí puede enviar las mismas fotos al generador de videos de bodas con IA a una: 8 estilos en 9 minutos, en 11 idiomas. Ese flujo de un extremo a otro es único. (3) No tenemos anuncios, ni embudos de afiliados, ni ventas adicionales con las herramientas gratuitas.",
@@ -50397,7 +50401,7 @@
   "tools.section.desc.gen": "Genera reserva de fecha, tarjeta de invitación, un set completo de papelería y vídeo de invitación. Diseños automáticos de IA a partir de tus fotos en 9 minutos.",
   "tools.section.desc.plan": "Planifique el presupuesto, los asientos, el hashtag y el diseño del libro de fotografías. Del lado del navegador, sin registro, exportaciones a formatos amigables para los proveedores.",
   "tools.section.title.edit": "Editores de fotos (6)",
-  "tools.section.title.gen": "Fabricantes y generadores (5)",
+  "tools.section.title.gen": "Herramientas de diseño y generación (7)",
   "tools.section.title.plan": "Planificadores y calculadoras (4)",
   "tools.video.cta.try_ai_video": "Prueba el vídeo de boda con IA →",
   "tools.video.styles.ai_auto_style": "Estilo automático de IA",
@@ -63580,994 +63584,500 @@
   "blog.why-wedding-video-important.expansion.p.science_of_regret": "La investigación del comportamiento llama a esto la \"regla del pico final\": recordamos el pico emocional de un evento y cómo termina. Las parejas que se saltan el vídeo pierden ambos: el pico (un momento conmovedor) y el final (su primer baile), y en su lugar se quedan con un conjunto de fotografías fragmentadas.",
   "blog.why-wedding-video-important.expansion.li.1": "<strong>\"I forgot my dad's voice.\"</strong> The #1 regret. Parents age, pass, or move. The audio of \"I now pronounce you\" is irreplaceable. Photos show faces; video captures voices.",
   "blog.why-wedding-video-important.expansion.li.2": "<strong>\"Los brindis de mis amigos se acabaron\".</strong> Discursos de padrino, brindis de dama de honor, chistes de papá en la recepción: estos fueron solo una vez. Las fotos no los capturan.",
-  "blog.why-wedding-video-important.expansion.li.3": "<strong>\"Vi mi propia boda como un extraño\".</strong> Las parejas dicen que el video les ayudó a REVIVIR el día. Las fotos muestran las perspectivas de otros; El video muestra lo que TÚ sentiste en ese momento."
-,
-  "tools.wedding-stationery-set-maker.th_text.envelope.5a4d5cec": "Sobre"
-,
-  "tools.wedding-stationery-set-maker.td_text.a7_5_25_7_25_in.adb3af32": "A7 (5.25 × 7.25 in)"
-,
-  "tools.wedding-stationery-set-maker.td_text.4_bar_a1.50a11aac": "4 barras (A1)"
-,
-  "tools.wedding-stationery-set-maker.td_text.none_it_stands_on_the_table.53651548": "Ninguna: se mantiene de pie sobre la mesa"
-,
-  "tools.wedding-stationery-set-maker.td_text.a2.c6bdf6f6": "A2"
-,
-  "tools.wedding-stationery-set-maker.td_text.none_it_is_a_sign.1fd2cb20": "Ninguna: es un cartel"
-,
-  "tools.wedding-stationery-set-maker.p_text.the_limits_up_front_one_set_is_one_pdf_o.3f20d8a4": "Los límites, de entrada: un conjunto es un PDF de seis páginas, el póster se imprime a 150 DPI en lugar de 300 y la página más grande está limitada por la memoria de tu propio dispositivo: un lienzo de 5400 × 7200 pixels ya excede lo que un móvil puede almacenar cómodamente. No tienes que subir nada ni preocuparte por el tamaño del archivo."
-,
-  "tools.wedding-stationery-set-maker.strong_text.print_at_100_or_actual_size_never_fit_to.0dd15e8d": "Imprime al 100% o en «Tamaño real», nunca en «Ajustar a la página»"
-,
-  "tools.wedding-stationery-set-maker.span_text.a_scaled_sheet_turns_a_5_7_invitation_in.9a19e982": "Al cambiar la escala de una hoja, una invitación de 5 × 7 cambia de tamaño, las guías de corte dejan de coincidir con el papel y una tarjeta de 4 × 6 acaba saliendo de un sobre de 5 × 7."
-,
-  "tools.wedding-stationery-set-maker.p_text.eight_to_ten_weeks_before_the_wedding_fo.c65035e5": "Para una boda local, lo ideal es de ocho a diez semanas antes de la boda: seis semanas es el mínimo absoluto, el tiempo justo para que los invitados reserven un hotel, pero lo bastante cerca para que no parezca un anuncio. Para una boda de destino, con tres meses de antelación, porque la gente necesita organizar el viaje y el alojamiento. Los avisos de «Guarda la fecha» se envían por separado, con seis a ocho meses de antelación."
-,
-  "tools.wedding-stationery-set-maker.p_text.eight_to_ten_weeks_before_a_local_weddin.9c5fd0ef": "Para una boda local, hazlo de ocho a diez semanas antes; el mínimo absoluto son seis semanas. Para una boda de destino, hazlo con tres meses de antelación, para que los invitados puedan reservar sus viajes. Los avisos para reservar la fecha se envían por separado, con seis a ocho meses de antelación."
-,
-  "tools.wedding-stationery-set-maker.summary_text.should_i_print_at_100_or_fit_to_page.48e8fb23": "¿Debo imprimir al 100% o ajustar a la página?"
-,
-  "tools.wedding-stationery-set-maker.p_text.at_100_or_on_the_setting_your_printer_ca.2de0d900": "Al 100%, o en la opción que tu impresora denomina «Tamaño real». «Ajustar a la página» reescala la hoja para adaptarla al papel que haya en la bandeja, por lo que la invitación sale con el tamaño equivocado y las marcas de corte ya no coinciden con el corte final."
-,
-  "tools.wedding-pdf-editor.h1_text.wedding_pdf_editor_merge_split_reorder_a.da2a1926": "Editor de PDF para bodas: combina, divide, reordena y rota páginas"
-,
-  "tools.wedding-pdf-editor.p_text.combine_vendor_contracts_seating_charts.8ef98896": "Combina contratos con proveedores, planos de asientos, borradores de invitaciones y listas de comprobación en un solo PDF. Reordena las páginas, corrige la orientación de las que están de lado, divide un documento en archivos independientes y guarda una copia sin su contraseña"
-,
-  "tools.wedding-pdf-editor.p_text.your_file_never_leaves_your_device_the_p.02493bf6": "Tu archivo nunca sale de tu dispositivo. El PDF se abre, se reorganiza y se escribe dentro de tu propio navegador. Sin subir archivos, sin cuenta y sin marca de agua"
-,
-  "tools.wedding-pdf-editor.a_text.home.8cf04a97": "Hogar"
-,
-  "tools.wedding-pdf-editor.a_text.free_tools.c746326b": "Herramientas gratuitas"
-,
-  "tools.wedding-pdf-editor.span_text.wedding_pdf_editor.cb955046": "Editor de PDF para bodas"
-,
-  "tools.wedding-pdf-editor.h2_text.1_add_your_pdf_files.6010bfa3": "1. Añade tus archivos PDF"
-,
-  "tools.wedding-pdf-editor.label_text.pdf_files.ab8574a2": "Archivos PDF"
-,
-  "tools.wedding-pdf-editor.small_text.one_run_takes_up_to_20_files_and_up_to_1.86ec116e": "Una ejecución admite hasta 20 archivos y hasta 1,500 páginas. El límite real es la memoria de tu dispositivo, por lo que un trabajo muy grande es mejor realizarlo en dos ejecuciones"
-,
-  "tools.wedding-pdf-editor.h2_text.2_arrange_the_pages.a0b0dc2c": "2. Organiza las páginas"
-,
-  "tools.wedding-pdf-editor.p_text.drag_a_page_to_move_it_or_use_the_arrow.99e1eb05": "Arrastra una página para moverla o utiliza los botones de flecha. Desmarca una página para excluirla del PDF. Los botones de rotación giran una página 90 grados cada vez"
-,
-  "tools.wedding-pdf-editor.h2_text.3_export.878f26dc": "3. Exporta"
-,
-  "tools.wedding-pdf-editor.label_text.page_groups_for_the_split.134d2020": "Grupos de páginas para la división"
-,
-  "tools.wedding-pdf-editor.small_text.one_pdf_per_group_delivered_in_one_zip_a.950e20ec": "Un PDF por grupo, entregado en un único archivo ZIP. Los números cuentan las páginas del orden combinado que aparece arriba"
-,
-  "tools.wedding-pdf-editor.button_text.merge_into_one_pdf.df912a30": "Combinar en un PDF"
-,
-  "tools.wedding-pdf-editor.button_text.split_into_separate_pdfs_zip.d5efab74": "Dividir en PDF independientes (ZIP)"
-,
-  "tools.wedding-pdf-editor.button_text.save_a_copy_without_a_password.2d1fb60d": "Guardar una copia sin contraseña"
-,
-  "tools.wedding-pdf-editor.button_text.start_over.129b767a": "Empezar de nuevo"
-,
-  "tools.wedding-pdf-editor.h2_text.what_this_wedding_pdf_editor_actually_do.62349c46": "Qué hace realmente este editor de PDF para bodas"
-,
-  "tools.wedding-pdf-editor.p_text.a_wedding_produces_paperwork_in_pieces_t.64d6b589": "Una boda genera documentos dispersos: el contrato del fotógrafo, el plano del recinto, el plano de asientos, el número de invitados confirmado por el catering, el borrador de las invitaciones y el cronograma que la organizadora guarda en su teléfono. Después, todo el mundo pide un único PDF. Esta herramienta reúne esas páginas en un solo archivo, en el orden que quieras, sin enviar ni un solo byte a un servidor"
-,
-  "tools.wedding-pdf-editor.p_text.it_does_five_jobs_and_it_does_all_five_o.10d41777": "Hace cinco tareas y las realiza todas en la misma página:"
-,
-  "tools.wedding-pdf-editor.strong_text.merge.68be4837": "Combinar"
-,
-  "tools.wedding-pdf-editor.span_text.several_pdf_files_into_one_document_in_a.99467f0b": "varios archivos PDF en un solo documento, en el orden que elijas."
-,
-  "tools.wedding-pdf-editor.strong_text.split.8a9e64d8": "Dividir"
-,
-  "tools.wedding-pdf-editor.span_text.a_document_into_separate_pdfs_by_page_gr.58635f1b": "un documento en PDF separados por grupos de páginas como"
-,
-  "tools.wedding-pdf-editor.span_text.delivered_as_one_zip_archive.c484e011": ", entregado como un único archivo ZIP."
-,
-  "tools.wedding-pdf-editor.strong_text.reorder.332c80b1": "Reordenar"
-,
-  "tools.wedding-pdf-editor.span_text.pages_by_dragging_them_and_untick_the_on.6e6b1195": "las páginas arrastrándolas y desmarcando las que no quieras incluir en el archivo."
-,
-  "tools.wedding-pdf-editor.strong_text.rotate.8d2de536": "Girar"
-,
-  "tools.wedding-pdf-editor.span_text.any_page_by_90_180_or_270_degrees_which.b359873e": "cualquier página en 90, 180 o 270 degrees, que es la solución para el escaneo que salió de lado."
-,
-  "tools.wedding-pdf-editor.strong_text.unlock.7e7123b0": "Desbloquear"
-,
-  "tools.wedding-pdf-editor.span_text.a_file_that_opens_but_blocks_printing_or.1b1e5605": "un archivo que se abre pero bloquea la impresión o la edición, y guardar una copia sin las restricciones."
-,
-  "tools.wedding-pdf-editor.p_text.everything_runs_inside_your_browser_ther.dce918e1": "Todo funciona dentro de tu navegador. No necesitas una cuenta, no tienes que subir archivos, no hay marca de agua y no hay ningún límite en la cantidad de archivos que puedes procesar a lo largo del tiempo."
-,
-  "tools.wedding-pdf-editor.h2_text.how_to_merge_pdf_files.34706597": "Cómo combinar archivos PDF"
-,
-  "tools.wedding-pdf-editor.li_text.drop_the_pdf_files_into_the_box_or_click.6c6f893e": "Arrastra los archivos PDF al recuadro o haz clic en el recuadro para buscar y seleccionar los archivos. La herramienta identifica el número de páginas y el tamaño real de cada página."
-,
-  "tools.wedding-pdf-editor.li_text.check_the_order_in_the_page_list_the_fil.269218cc": "Comprueba el orden de la lista de páginas. Los archivos se conservan en el orden en que los elegiste, por lo que todas las páginas del primer archivo aparecen antes que todas las páginas del segundo."
-,
-  "tools.wedding-pdf-editor.li_text.drag_any_page_up_or_down_until_the_list.924fcb51": "Arrastra cualquier página hacia arriba o hacia abajo hasta que la lista quede como quieras."
-,
-  "tools.wedding-pdf-editor.span_text.press.0610123b": "Pulsa"
-,
-  "tools.wedding-pdf-editor.span_text.the_file_is_written_in_your_browser_and.8836c12a": ". El archivo se crea en tu navegador y se guarda directamente en tu dispositivo."
-,
-  "tools.wedding-pdf-editor.p_text.merging_copies_the_page_content_as_it_is.804276f0": "La combinación copia el contenido de las páginas tal cual. Los escaneos no se recomprimen, los dibujos vectoriales no se convierten en imágenes y cada página conserva su propio tamaño, por lo que un documento con páginas A4 y Letter conserva la mezcla de tamaños."
-,
-  "tools.wedding-pdf-editor.h2_text.how_to_split_a_pdf_into_separate_files.ec569b58": "Cómo dividir un PDF en archivos separados"
-,
-  "tools.wedding-pdf-editor.span_text.type_the_page_groups_into_the.9f180655": "Introduce los grupos de páginas en el"
-,
-  "tools.wedding-pdf-editor.span_text.box_a_group_is_a_page_number_a_range_suc.c3811671": "casilla. Un grupo es un número de página, un intervalo como"
-,
-  "tools.wedding-pdf-editor.span_text.or_an_open_range_such_as.0d2b6ea1": ", o un intervalo abierto como"
-,
-  "tools.wedding-pdf-editor.span_text.for_everything_from_page_5_to_the_end_se.73f2fad6": "para todo desde la página 5 hasta el final. Separa los grupos con comas:"
-,
-  "tools.wedding-pdf-editor.span_text.gives_you_three_files.bcd91ac3": "te entrega tres archivos."
-,
-  "tools.wedding-pdf-editor.p_text.the_page_numbers_count_the_pages_of_the.b838579e": "Los números de página cuentan las páginas del orden combinado, así que desmarca primero las páginas que no quieras y los números coincidirán con lo que ves. Cada grupo se convierte en su propio PDF y todos llegan dentro de un único archivo ZIP, porque los navegadores bloquean una página que intenta guardar cinco archivos separados a la vez."
-,
-  "tools.wedding-pdf-editor.h2_text.how_to_reorder_and_rotate_pdf_pages.2c972e86": "Cómo reordenar y girar páginas PDF"
-,
-  "tools.wedding-pdf-editor.p_text.drag_a_page_by_its_handle_on_the_left_or.6cfb7160": "Arrastra una página por el asa situada a la izquierda o utiliza las flechas hacia arriba y hacia abajo. Los botones con flechas hacen lo mismo que arrastrar y funcionan en un teléfono, donde arrastrar resulta incómodo. Desmarca una página y quedará fuera del archivo combinado."
-,
-  "tools.wedding-pdf-editor.p_text.the_rotate_buttons_turn_a_page_90_degree.50aef9c8": "Los botones de rotación giran una página 90 degrees en cada pulsación, por lo que dos pulsaciones dan 180 y tres te devuelven a 360. La rotación se aplica a la copia exportada; el archivo de tu dispositivo nunca se modifica. Cada fila también muestra el nombre del archivo y el número de página de origen, justo lo que necesitas cuando buscas una página concreta en una lista larga."
-,
-  "tools.wedding-pdf-editor.h2_text.two_types_of_pdf_password_and_which_one.c2bb573a": "Dos tipos de contraseña de PDF, y cuál tienes"
-,
-  "tools.wedding-pdf-editor.p_text.almost_every_question_about_locked_pdfs.3926d3a6": "Casi todas las preguntas sobre los PDF bloqueados mezclan dos cosas distintas. Saber cuál tienes te ahorra mucho tiempo."
-,
-  "tools.wedding-pdf-editor.strong_text.type_1_the_file_needs_a_password_to_open.e355e987": "Tipo 1: el archivo necesita una contraseña para abrirse."
-,
-  "tools.wedding-pdf-editor.span_text.the_password_is_the_key_to_the_whole_doc.8469f815": "La contraseña es la clave de todo el documento. No hay forma de saltártela y ninguna herramienta, en línea o sin conexión, puede leer las páginas sin ella. Si tienes la contraseña, introdúcela en la casilla situada debajo de ese archivo y las páginas se incorporarán a la lista. La exportación quedará sin contraseña, así que podrás enviar el archivo combinado a tu fotógrafo sin enviarle la clave."
-,
-  "tools.wedding-pdf-editor.strong_text.type_2_the_file_opens_but_printing_copyi.ec7b96ce": "Tipo 2: el archivo se abre, pero la impresión, la copia o la edición están bloqueadas."
-,
-  "tools.wedding-pdf-editor.span_text.this_is_an_owner_password_and_it_does_no.96e0ff0e": "Esta es una contraseña de propietario y no te impide leer el archivo. Las páginas se abren con normalidad aquí y el"
-,
-  "tools.wedding-pdf-editor.span_text.button_writes_the_same_pages_out_as_a_ne.a3ebf98c": "botón exporta las mismas páginas en un archivo nuevo sin esas restricciones."
-,
-  "tools.wedding-pdf-editor.p_text.there_is_a_third_limit_worth_naming_the.af98688a": "Hay un tercer límite que merece la pena mencionar. El cifrado que se puede abrir en un navegador corresponde al estándar más antiguo: RC4 y AES-128, hasta PDF 1.6. Muchos PDF más recientes utilizan AES-256, que llegó con PDF 2.0, y esos archivos no se pueden abrir aquí en absoluto. La herramienta lo indica exactamente en lugar de fallar en silencio, porque un fallo silencioso te dejaría pensando que el archivo estaba vacío."
-,
-  "tools.wedding-pdf-editor.h2_text.common_wedding_use_cases.f6c2196b": "Casos de uso habituales en bodas"
-,
-  "tools.wedding-pdf-editor.strong_text.one_file_for_the_venue.3d175560": "Un único archivo para el lugar de la boda."
-,
-  "tools.wedding-pdf-editor.span_text.the_ceremony_plan_the_floor_plan_the_sea.0e7e6a05": "El plan de la ceremonia, el plano de distribución, el mapa de asientos, la hoja de ruta del día y los recuentos del catering, en ese orden, en un único PDF que el recinto podrá imprimir de una sola vez."
-,
-  "tools.wedding-pdf-editor.strong_text.contracts_for_the_planner.2104b279": "Contratos para quien organiza la boda."
-,
-  "tools.wedding-pdf-editor.span_text.the_photographer_the_caterer_the_florist.93ced02a": "El fotógrafo, la empresa de catering, la floristería y la empresa de alquiler en un solo documento, con las páginas giradas para que cada contrato quede en vertical."
-,
-  "tools.wedding-pdf-editor.strong_text.the_print_packet.3158f495": "El cuadernillo para imprimir."
-,
-  "tools.wedding-pdf-editor.span_text.the_invitation_draft_the_rsvp_card_the_m.36e3500a": "El borrador de la invitación, la tarjeta de respuesta, el menú y el cronograma, listos para entregar al impresor en un solo archivo."
-,
-  "tools.wedding-pdf-editor.strong_text.scans_from_the_phone.97d25cb2": "Escaneos realizados con el teléfono."
-,
-  "tools.wedding-pdf-editor.span_text.the_phone_s_note_app_or_scanner_makes_a.f3e794e5": "La aplicación de notas del teléfono o el escáner generan un PDF con una página por foto, a menudo en horizontal. Combina los archivos, gira las páginas mal orientadas y el archivo estará listo para imprimir."
-,
-  "tools.wedding-pdf-editor.strong_text.the_gift_and_thank_you_list.b5a66931": "La lista de regalos y de agradecimientos."
-,
-  "tools.wedding-pdf-editor.span_text.a_long_checklist_split_into_a_few_pages.07193c07": "Una lista de control extensa, repartida en unas pocas páginas para que pueda imprimirse por secciones y entregarse a dos personas."
-,
-  "tools.wedding-pdf-editor.h2_text.wedding_pdf_editor_compared_with_the_onl.e31a88bd": "Comparativa del editor de PDF para bodas con los sitios de PDF en línea"
-,
-  "tools.wedding-pdf-editor.p_text.most_of_the_pages_that_rank_for_these_se.bfd292a7": "La mayoría de las páginas que aparecen en los resultados de estas búsquedas son sitios de PDF en línea: el archivo se sube, se procesa en un servidor y después se elimina. Es una forma válida de trabajar, pero implica que tus contratos quedan alojados en el ordenador de otra persona. Este editor opta por el camino contrario, y la tabla siguiente indica qué hace realmente cada uno."
-,
-  "tools.wedding-pdf-editor.th_text.what_it_does.b12c51b9": "Qué hace"
-,
-  "tools.wedding-pdf-editor.th_text.weddingai_video.7ba80bb9": "WeddingAI.video"
-,
-  "tools.wedding-pdf-editor.th_text.adobe_acrobat_online.3f8c0c2f": "Adobe Acrobat en línea"
-,
-  "tools.wedding-pdf-editor.th_text.ilovepdf.72a74b85": "iLovePDF"
-,
-  "tools.wedding-pdf-editor.th_text.smallpdf.cd6e7b62": "Smallpdf"
-,
-  "tools.wedding-pdf-editor.td_text.where_your_file_is_processed.7525c876": "Dónde se procesa tu archivo"
-,
-  "tools.wedding-pdf-editor.td_text.in_your_browser_the_file_never_leaves_yo.9d857182": "En tu navegador. El archivo nunca sale de tu dispositivo."
-,
-  "tools.wedding-pdf-editor.td_text.on_adobe_servers_the_file_is_deleted_unl.33098c33": "En los servidores de Adobe. El archivo se elimina salvo que inicies sesión para guardarlo."
-,
-  "tools.wedding-pdf-editor.td_text.on_their_servers_files_are_deleted_after.8c687c11": "En sus servidores. Los archivos se eliminan después de dos horas."
-,
-  "tools.wedding-pdf-editor.td_text.on_their_servers.c1edd08b": "En sus servidores."
-,
-  "tools.wedding-pdf-editor.td_text.use_without_an_account.857ca9be": "Se puede usar sin una cuenta"
-,
-  "tools.wedding-pdf-editor.td_text.yes_no_account_no_email_no_limit_on_use.45fa5d48": "Sí. Sin cuenta, sin correo electrónico y sin límite de uso."
-,
-  "tools.wedding-pdf-editor.td_text.yes_for_a_one_off_merge.1b99ccae": "Sí, para una combinación única."
-,
-  "tools.wedding-pdf-editor.td_text.yes.b127099c": "Sí."
-,
-  "tools.wedding-pdf-editor.td_text.the_free_plan_is_tied_to_an_account.b4d48e6c": "El plan gratuito requiere una cuenta."
-,
-  "tools.wedding-pdf-editor.td_text.watermark_on_the_merged_file.51194aa1": "Marca de agua en el archivo combinado"
-,
-  "tools.wedding-pdf-editor.td_text.none.983e45d9": "Ninguna."
-,
-  "tools.wedding-pdf-editor.td_text.none_the_page_shows_a_no_watermark_added.24a645bf": "Ninguna. La página muestra un distintivo de «sin marca de agua añadida»."
-,
-  "tools.wedding-pdf-editor.td_text.free_use_is_limited_to_small_files_and_a.e2a96b93": "El uso gratuito está limitado a archivos pequeños y unas pocas tareas al día."
-,
-  "tools.wedding-pdf-editor.td_text.size_in_one_run.626dc54e": "Tamaño en una sola ejecución"
-,
-  "tools.wedding-pdf-editor.td_text.up_to_20_files_of_up_to_200_mb_each_and.f64fe244": "Hasta 20 archivos de hasta 200 MB cada uno y hasta 1,500 páginas. El límite real es la memoria de tu dispositivo."
-,
-  "tools.wedding-pdf-editor.td_text.up_to_100_files_up_to_500_pages_each_and.fb877cd0": "Hasta 100 archivos, con hasta 500 páginas cada uno y hasta 1,500 páginas en total."
-,
-  "tools.wedding-pdf-editor.td_text.up_to_100_mb_and_25_files_at_once.214dfbc4": "Hasta 100 MB y 25 archivos a la vez."
-,
-  "tools.wedding-pdf-editor.td_text.5_mb_in_total_and_2_tasks_a_day.22899b1f": "5 MB en total y 2 tareas al día."
-,
-  "tools.wedding-pdf-editor.td_text.a_locked_pdf.6f9109b1": "Un PDF bloqueado"
-,
-  "tools.wedding-pdf-editor.td_text.opens_the_older_rc4_and_aes_128_encrypti.c22704ea": "Abre el cifrado más antiguo RC4 y AES-128 cuando conoces la contraseña y elimina los bloqueos que solo imponen permisos. AES-256 no se puede abrir."
-,
-  "tools.wedding-pdf-editor.td_text.yes_password_protected_pdfs_can_be_merge.1f2d0bd3": "Sí, los PDF protegidos con contraseña se pueden combinar."
-,
-  "tools.wedding-pdf-editor.p_text.the_limits_above_are_as_published_on_the.5163ad38": "Los límites anteriores son los publicados en las páginas de los propios proveedores y se comprobaron el 2026-11-10. Fuentes de los límites gratuitos: la página de combinación de Adobe (página fechada el 29 de enero de 2025) para las cifras de 100 archivos y 1,500 páginas y la promesa de gestión de archivos, la página de precios de iLovePDF a través de pixeltools.io (comprobada el 2026-11-04) para las cifras de 100 MB y 25 archivos, y las páginas comparativas de 2026 sobre el plan gratuito de Smallpdf y los distintivos de «sin marca de agua». El límite gratuito propio de iLovePDF se cita de manera distinta en distintas fuentes, por lo que debes considerar ese número como no verificado. Los marcadores, los campos de formulario y los botones interactivos no se reconstruyen al copiar páginas entre archivos; se conservan el contenido de la página y su tamaño."
-,
-  "tools.wedding-pdf-editor.h2_text.frequently_asked_questions.af2a4d28": "Preguntas frecuentes"
-,
-  "tools.wedding-pdf-editor.summary_text.are_my_files_uploaded_does_my_file_never.aba9baad": "¿Se suben mis archivos? ¿Mi archivo nunca sale de mi dispositivo?"
-,
-  "tools.wedding-pdf-editor.p_text.no_your_pdfs_are_opened_rearranged_and_w.c86a465c": "No. Tus PDF se abren, reordenan y guardan mediante un pequeño programa que se ejecuta dentro de tu propio navegador, por lo que el archivo nunca sale de tu dispositivo. No se envía nada a un servidor, no hace falta una cuenta y no se añade ninguna marca de agua."
-,
-  "tools.wedding-pdf-editor.summary_text.is_there_a_limit_to_how_many_pdfs_i_can.d7bbdfee": "¿Hay un límite para la cantidad de PDF que puedo combinar a la vez?"
-,
-  "tools.wedding-pdf-editor.p_text.yes_one_run_takes_up_to_20_files_of_up_t.106e7cb9": "Sí. Una ejecución admite hasta 20 archivos de hasta 200 MB cada uno y hasta 1,500 páginas en el documento combinado. El límite real es la memoria de tu propio dispositivo: una pestaña del navegador que se queda sin memoria detiene el proceso. Unas pocas centenas de páginas se procesan sin problemas y, cuando superes esa cantidad, es mejor hacerlo en dos ejecuciones."
-,
-  "tools.wedding-pdf-editor.summary_text.in_what_order_will_my_merged_pdf_files_a.8c500576": "¿En qué orden aparecerán mis archivos PDF combinados?"
-,
-  "tools.wedding-pdf-editor.p_text.in_the_order_you_see_in_the_page_list_th.b9c6e829": "En el orden en que los ves en la lista de páginas. Los archivos se añaden en el orden en que los seleccionaste, de modo que todas las páginas del primer archivo aparecen antes que todas las páginas del segundo. Puedes arrastrar cualquier página hacia arriba o hacia abajo, así que el orden del PDF exportado siempre coincide con el de la pantalla."
-,
-  "tools.wedding-pdf-editor.summary_text.can_i_delete_and_reorder_pages_after_i_m.202676ea": "¿Puedo eliminar y reordenar páginas después de combinar archivos?"
-,
-  "tools.wedding-pdf-editor.p_text.yes_and_you_do_it_before_the_export_rath.8ec4e848": "Sí, y debes hacerlo antes de exportar, no después. Arrastra una página para moverla, usa los botones con flechas o desmarca la casilla para excluirla por completo del PDF. Cada fila muestra el nombre del archivo y el número de la página de la que procede, para que puedas encontrar la página que quieras en una lista larga."
-,
-  "tools.wedding-pdf-editor.summary_text.will_the_formatting_of_my_merged_documen.625072f7": "¿Se conservará el formato de mis documentos combinados?"
-,
-  "tools.wedding-pdf-editor.p_text.the_page_content_and_the_page_size_are_k.c9cbfc62": "El contenido y el tamaño de las páginas se conservan exactamente como estaban: no se redimensiona ni se recorta nada, y el texto vectorial mantiene su formato vectorial, por lo que el archivo combinado se imprime con la misma nitidez que los originales. Lo que no se reconstruye es la estructura adicional que rodea la página, como marcadores, campos de formulario y botones interactivos, porque la herramienta copia el contenido de las páginas en lugar de editar el documento original."
-,
-  "tools.wedding-pdf-editor.summary_text.does_merging_pdfs_reduce_the_quality_of.db27ebbe": "¿Combinar archivos PDF reduce la calidad de mis archivos?"
-,
-  "tools.wedding-pdf-editor.p_text.no_merging_copies_the_page_content_as_it.ba7b20ce": "No. Al combinar archivos, el contenido de las páginas se copia tal cual, por lo que un escaneo no se comprime de nuevo y un dibujo vectorial no se convierte en una imagen. Lo único que cambia es el tamaño del archivo resultante, porque las páginas de todos los archivos se guardan en un único documento."
-,
-  "tools.wedding-pdf-editor.summary_text.can_i_merge_password_protected_pdfs.5c115d35": "¿Puedo combinar archivos PDF protegidos con contraseña?"
-,
-  "tools.wedding-pdf-editor.p_text.yes_as_long_as_you_know_the_password_whe.46c140b3": "Sí, siempre que conozcas la contraseña. Cuando un archivo no se puede abrir, la herramienta muestra un campo de contraseña debajo de ese archivo; escribe la contraseña y las páginas se incorporarán a la lista. Sin esa contraseña, ninguna herramienta puede leer un PDF que la necesite para abrirse, incluida esta."
-,
-  "tools.wedding-pdf-editor.summary_text.can_i_unlock_a_pdf_without_the_password.d8ef3450": "¿Puedo desbloquear un PDF sin la contraseña?"
-,
-  "tools.wedding-pdf-editor.p_text.it_depends_on_which_kind_of_lock_the_fil.99b1f3a3": "Depende del tipo de bloqueo del archivo. Un PDF que se abre con normalidad pero impide imprimir, copiar o editar puede guardarse aquí como un archivo nuevo sin esas restricciones, y para ello no hace falta ninguna contraseña. Un PDF que necesita una contraseña para abrirse no puede desbloquearse sin ella, y esta herramienta no intenta adivinar contraseñas. La compatibilidad con cifrados se limita al estándar anterior: RC4 y AES-128, hasta PDF 1.6. Muchos PDF más recientes utilizan AES-256 (PDF 2.0), y esos no se pueden abrir aquí; la herramienta lo indica en lugar de fallar silenciosamente."
-,
-  "tools.wedding-pdf-editor.summary_text.what_page_sizes_and_resolutions_does_the.2af1f1dc": "¿Qué tamaños de página y resoluciones admite el editor?"
-,
-  "tools.wedding-pdf-editor.p_text.every_page_size_there_is_the_tool_reads.14da3568": "Admite todos los tamaños de página posibles. La herramienta lee el tamaño real de cada página, como Letter, A4, Legal, A5 o Tabloid, y la página exportada conserva ese tamaño, por lo que un documento con páginas A4 y Letter mantiene la mezcla de tamaños. No hay ninguna resolución que elegir, porque una página PDF no es una fotografía y el texto vectorial sigue nítido a cualquier tamaño. La herramienta solo funciona con archivos PDF, así que una foto en formato HEIC o AVIF debe convertirse primero en PDF."
-,
-  "tools.wedding-pdf-editor.summary_text.how_is_this_different_from_an_image_tile.22b0bbf7": "¿En qué se diferencia de un generador de mosaicos de imágenes y en qué formato se exporta?"
-,
-  "tools.wedding-pdf-editor.p_text.an_image_tiler_lays_separate_photos_out.dde59795": "Un generador de mosaicos de imágenes distribuye fotos distintas en una página nueva, como una hoja de contactos. Esta herramienta nunca dibuja nada ni modifica una imagen: toma las páginas que ya están en un PDF y las coloca en el orden que quieras. La exportación es en PDF. La combinación produce un archivo, y la división genera un archivo ZIP con un PDF por grupo."
-,
-  "tools.wedding-pdf-editor.h2_text.more_free_wedding_tools.511ec8cc": "Más herramientas gratuitas para bodas"
-,
-  "tools.wedding-pdf-editor.a_text.wedding_invitation_maker.5db6b040": "Creador de invitaciones de boda"
-,
-  "tools.wedding-pdf-editor.a_text.stationery_set_maker.ac7a26d7": "Creador de sets de papelería"
-,
-  "tools.wedding-pdf-editor.a_text.seating_chart_maker.c3981dda": "Creador de planos de mesas"
-,
-  "tools.wedding-pdf-editor.a_text.save_the_date_maker.b3e21618": "Guarde el creador de fechas"
-,
-  "tools.wedding-pdf-editor.a_text.photo_book_planner.a9887dd0": "Planificador de libros de fotos"
-,
-  "tools.wedding-pdf-editor.a_text.heic_to_jpg.67ca8d18": "HEIC a JPG"
-,
-  "tools.wedding-pdf-editor.a_text.compress_photos.f1d8a20b": "Comprimir fotos"
-,
-  "tools.wedding-pdf-editor.a_text.all_tools.03153f40": "Todas las herramientas"
-,
-  "tools.wedding-pdf-editor.h2_text.related_guides.19ba9bbd": "Guías relacionadas"
-,
-  "tools.wedding-pdf-editor.h4_text.make_a_matching_stationery_set.9d9d85da": "Crear un conjunto de papelería a juego"
-,
-  "tools.wedding-pdf-editor.span_text.read_article.034b8746": "Leer artículo →"
-,
-  "tools.wedding-pdf-editor.h4_text.build_the_seating_chart.7d44b2cd": "Crear el plano de asientos"
-,
-  "tools.wedding-pdf-editor.h4_text.wedding_invitation_video_guide.4e944d3a": "Guía en vídeo para invitaciones de boda"
-,
-  "tools.wedding-pdf-editor.h4_text.ai_wedding_video_from_photos.01d216e6": "Vídeo de boda con IA a partir de fotos"
-,
-  "tools.wedding-pdf-editor.h2_text.paperwork_in_one_file_now_the_film.7c613b58": "El papeleo en un archivo. Ahora, la película."
-,
-  "tools.wedding-pdf-editor.p_text.the_same_photos_and_names_become_a_weddi.a4f78132": "Las mismas fotos y nombres se convierten en un vídeo de boda que tus invitados ven de verdad. Funciona en el mismo navegador y tampoco se sube nada."
-,
-  "tools.wedding-pdf-editor.a_text.make_the_wedding_video.21d5caa0": "Crear el vídeo de boda →"
-,
-  "tools.wedding-photo-to-gif.h1_text.wedding_photo_to_gif_free_animated_gif_m.de70dfd0": "Foto de boda a GIF: creador de GIF animados gratis"
-,
-  "tools.wedding-photo-to-gif.p_text.turn_a_set_of_wedding_photos_into_a_loop.314c1633": "Convierte una serie de fotos de boda en un GIF animado en bucle. Aplica fundidos, desplazamientos o zooms entre las imágenes, ajusta la velocidad, previsualiza la animación y descárgala. Gratis y en tu navegador."
-,
-  "tools.wedding-photo-to-gif.p_text.your_photos_stay_on_your_device_nothing.69e0acc7": "Tus fotos permanecen en tu dispositivo. No se sube nada."
-,
-  "tools.wedding-photo-to-gif.a_text.home.8cf04a97": "Hogar"
-,
-  "tools.wedding-photo-to-gif.a_text.free_tools.c746326b": "Herramientas gratuitas"
-,
-  "tools.wedding-photo-to-gif.span_text.wedding_photo_to_gif.8fc416cf": "Foto de boda a GIF"
-,
-  "tools.wedding-photo-to-gif.h2_text.1_add_your_photos.353bce8a": "1. Añade tus fotos"
-,
-  "tools.wedding-photo-to-gif.button_text.remove_all_photos.6d8e2f06": "Eliminar todas las fotos"
-,
-  "tools.wedding-photo-to-gif.h2_text.2_animation_settings.197ef8f1": "2. Ajustes de animación"
-,
-  "tools.wedding-photo-to-gif.label_text.transition_between_photos.562406ed": "Transición entre fotos"
-,
-  "tools.wedding-photo-to-gif.option_text.fade.04e0385c": "Fundido"
-,
-  "tools.wedding-photo-to-gif.option_text.slide.6160a53e": "Desplazamiento"
-,
-  "tools.wedding-photo-to-gif.option_text.zoom.4252b72e": "Zoom"
-,
-  "tools.wedding-photo-to-gif.option_text.none_hard_cut.f18a9d19": "Ninguna (corte seco)"
-,
-  "tools.wedding-photo-to-gif.label_text.time_on_each_photo.a10dd9d3": "Tiempo por foto"
-,
-  "tools.wedding-photo-to-gif.span_text.each_photo_is_held_for.ce0a46ac": "Each photo is held for"
-,
-  "tools.wedding-photo-to-gif.strong_text.800.7a53928f": "800"
-,
-  "tools.wedding-photo-to-gif.span_text.ms_800_to_1000_ms_reads_as_a_calm_slides.8727606b": "ms. 800 to 1000 ms reads as a calm slideshow; 200 to 400 ms is roughly 10 frames per second."
-,
-  "tools.wedding-photo-to-gif.label_text.output_size.2e422b9d": "Tamaño de salida"
-,
-  "tools.wedding-photo-to-gif.option_text.320_px_email_signature_small_sticker.ee649d64": "320 px (firma de correo, pegatina pequeña)"
-,
-  "tools.wedding-photo-to-gif.option_text.480_px_chat_email_social_post.d3d1fce9": "480 px (chat, correo, publicación social)"
-,
-  "tools.wedding-photo-to-gif.option_text.800_px_big_screen.735bb80e": "800 px (pantalla grande)"
-,
-  "tools.wedding-photo-to-gif.label_text.how_a_photo_fills_the_frame.78ede154": "Cómo encaja la foto en el encuadre"
-,
-  "tools.wedding-photo-to-gif.option_text.fit_whole_photo_bars_may_show.bb87e80c": "Mostrar la foto completa (pueden aparecer barras)"
-,
-  "tools.wedding-photo-to-gif.option_text.fill_the_frame_edges_are_cropped.2c6961c1": "Llenar el encuadre (los bordes se recortan)"
-,
-  "tools.wedding-photo-to-gif.label_text.looping.a56d66d7": "Repetición"
-,
-  "tools.wedding-photo-to-gif.option_text.loop_forever.70ab55fc": "Repetir indefinidamente"
-,
-  "tools.wedding-photo-to-gif.option_text.play_once.f8f5fb71": "Reproducir una vez"
-,
-  "tools.wedding-photo-to-gif.p_text.drag_a_photo_in_the_list_to_change_the_o.361302a7": "Arrastra una foto de la lista para cambiar el orden o utiliza los botones de flecha. El orden de la lista es el orden de la animación."
-,
-  "tools.wedding-photo-to-gif.h2_text.3_preview_and_download.eb6494ae": "3. Previsualiza y descarga"
-,
-  "tools.wedding-photo-to-gif.strong_text.0.cfcd2084": "0"
-,
-  "tools.wedding-photo-to-gif.span_text.photos.d68f0b43": "fotos"
-,
-  "tools.wedding-photo-to-gif.span_text.px.21de26ca": "px"
-,
-  "tools.wedding-photo-to-gif.span_text.frames.dcdc1ac0": "fotogramas"
-,
-  "tools.wedding-photo-to-gif.span_text.file_size.1908624a": "Tamaño del archivo"
-,
-  "tools.wedding-photo-to-gif.p_text.build_the_gif_to_see_the_animation_exact.548d09e2": "Crea el GIF para ver la animación exactamente como se guardará."
-,
-  "tools.wedding-photo-to-gif.button_text.build_the_gif.e6d28fb5": "Crear el GIF"
-,
-  "tools.wedding-photo-to-gif.button_text.download_the_gif.bda4db1c": "Descargar el GIF"
-,
-  "tools.wedding-photo-to-gif.h2_text.how_to_make_a_wedding_photo_gif.8e8c20fb": "Cómo crear un GIF con fotos de boda"
-,
-  "tools.wedding-photo-to-gif.p_text.a_still_photo_set_on_a_screen_is_lovely.3728bdf6": "Una foto fija en una pantalla es preciosa, pero dura poco. Un GIF animado hace una cosa más: se mueve. Desvanece la primera imagen hacia la segunda, mantén cada foto el tiempo suficiente para poder contemplarla y toda la galería se convertirá en un bucle que podrás enviar a alguien que no estuvo en la boda."
-,
-  "tools.wedding-photo-to-gif.strong_text.add_the_photos.539126ea": "Añade las fotos."
-,
-  "tools.wedding-photo-to-gif.span_text.drop_a_folder_into_the_box_or_click_it_a.c02f2569": "Arrastra una carpeta al recuadro o haz clic y búscala. Se admiten JPG, PNG y WebP. No se sube nada: el navegador lee los archivos directamente de tu disco duro."
-,
-  "tools.wedding-photo-to-gif.strong_text.put_them_in_order.932fc1b5": "Ponlas en orden."
-,
-  "tools.wedding-photo-to-gif.span_text.drag_a_photo_up_or_down_or_use_the_arrow.4577237c": "Arrastra una foto hacia arriba o hacia abajo, o utiliza los botones de flecha. La lista de la izquierda muestra el orden de reproducción de la animación."
-,
-  "tools.wedding-photo-to-gif.strong_text.choose_the_movement.8b09d447": "Elige el movimiento."
-,
-  "tools.wedding-photo-to-gif.span_text.a_fade_is_the_quietest_and_works_for_alm.9f246124": "El desvanecimiento es el efecto más discreto y funciona con casi cualquier conjunto de fotos de boda. El desplazamiento parece una presentación de diapositivas. El zoom atrae la mirada hacia el centro de la imagen."
-,
-  "tools.wedding-photo-to-gif.strong_text.set_the_speed_and_the_size.93fc9ee0": "Elige la velocidad y el tamaño."
-,
-  "tools.wedding-photo-to-gif.span_text.the_speed_control_sets_how_long_each_pho.f35dad65": "El control de velocidad determina cuánto tiempo se muestra cada foto. El control de tamaño determina el ancho del GIF final en píxeles."
-,
-  "tools.wedding-photo-to-gif.strong_text.build_watch_download.f401b2dd": "Crea, visualiza y descarga."
-,
-  "tools.wedding-photo-to-gif.span_text.the_preview_is_the_real_gif_encoded_in_t.81a911ef": "La vista previa es el GIF real, codificado en la página, así que lo que ves es exactamente el archivo que guardarás. El tamaño del archivo aparece encima antes de descargar nada."
-,
-  "tools.wedding-photo-to-gif.span_text.if_you_want_the_stills_as_well_for_print.3ee356a4": "Si también quieres las imágenes fijas para imprimirlas, crear un álbum o reducir una foto de teléfono de 12 megapíxeles antes de enviarla"
-,
-  "tools.wedding-photo-to-gif.a_text.compress_wedding_photos.dccfc1f5": "Comprimir fotos de boda"
-,
-  "tools.wedding-photo-to-gif.span_text.handles_that_and.07dc968f": "WeddingAI.video lo gestiona y"
-,
-  "tools.wedding-photo-to-gif.a_text.heic_to_jpg.67ca8d18": "HEIC a JPG"
-,
-  "tools.wedding-photo-to-gif.span_text.turns_iphone_files_into_something_every.ad37d691": "convierte los archivos del iPhone en algo que cualquier navegador puede abrir."
-,
-  "tools.wedding-photo-to-gif.h2_text.what_each_setting_does.8b2d6382": "Qué hace cada ajuste"
-,
-  "tools.wedding-photo-to-gif.th_text.setting.51ac4bf6": "Ajuste"
-,
-  "tools.wedding-photo-to-gif.th_text.what_it_changes.630c6897": "Qué modifica"
-,
-  "tools.wedding-photo-to-gif.th_text.what_to_pick.fa332a62": "Qué elegir"
-,
-  "tools.wedding-photo-to-gif.td_text.transition.afedf9af": "Transición"
-,
-  "tools.wedding-photo-to-gif.td_text.how_one_photo_becomes_the_next.dece8d0a": "Cómo se pasa de una foto a la siguiente"
-,
-  "tools.wedding-photo-to-gif.td_text.fade_for_portraits_slide_for_a_sequence.b6f4a8bd": "Fundido para retratos, deslizamiento para una secuencia y zoom para una toma individual"
-,
-  "tools.wedding-photo-to-gif.td_text.how_long_a_photo_is_held_on_screen.8e205b01": "Tiempo que aparece cada foto en pantalla"
-,
-  "tools.wedding-photo-to-gif.td_text.800_to_1000_ms_for_a_calm_slideshow.a59908b7": "800 a 1000 ms para una presentación tranquila"
-,
-  "tools.wedding-photo-to-gif.td_text.the_width_of_the_gif_in_pixels.31cffbb4": "Ancho del GIF en píxeles"
-,
-  "tools.wedding-photo-to-gif.td_text.480_px_for_a_chat_app_320_px_for_a_signa.1f1b9c03": "480 px para una app de chat y 320 px para una firma"
-,
-  "tools.wedding-photo-to-gif.td_text.fill_or_fit.f0563a0f": "Rellenar o ajustar"
-,
-  "tools.wedding-photo-to-gif.td_text.what_happens_to_a_photo_whose_shape_diff.d68317d2": "Qué ocurre con una foto cuya forma es diferente"
-,
-  "tools.wedding-photo-to-gif.td_text.fit_whole_for_a_portrait_fill_for_a_grid.af75e5c0": "Ideal para un retrato, perfecto para una cuadrícula"
-,
-  "tools.wedding-photo-to-gif.td_text.whether_the_gif_repeats.cffa1851": "Si el GIF se repite"
-,
-  "tools.wedding-photo-to-gif.td_text.forever_for_chat_and_social_once_for_a_s.23476a8c": "Para siempre en chats y redes sociales, por un momento en pantalla"
-,
-  "tools.wedding-photo-to-gif.td_text.order.a240fa27": "Orden"
-,
-  "tools.wedding-photo-to-gif.td_text.the_sequence_of_the_photos.fe9d9ddb": "La secuencia de las fotos"
-,
-  "tools.wedding-photo-to-gif.td_text.story_order_getting_ready_the_ceremony_t.b6f24f6d": "Orden narrativo: los preparativos, la ceremonia y la fiesta"
-,
-  "tools.wedding-photo-to-gif.h2_text.picking_the_right_size_and_speed.45a7b1f0": "Cómo elegir el tamaño y la velocidad adecuados"
-,
-  "tools.wedding-photo-to-gif.p_text.two_numbers_decide_how_a_gif_feels_the_w.06a80fc1": "2 números determinan la sensación de un GIF: el ancho del archivo y el tiempo que se muestra cada foto. Si los eliges bien, la animación parecerá intencionada; si los eliges mal, parecerá una presentación de fotos que ha perdido el hilo."
-,
-  "tools.wedding-photo-to-gif.strong_text.200_to_400_milliseconds_per_photo.908d44c7": "200 a 400 milisegundos por foto"
-,
-  "tools.wedding-photo-to-gif.span_text.is_roughly_10_frames_per_second_and_it_s.817992b5": "equivale aproximadamente a 10 fotogramas por segundo y funciona bien en secuencias rápidas con imágenes similares: confeti, una pista de baile o las cajas de los anillos apareciendo una tras otra."
-,
-  "tools.wedding-photo-to-gif.strong_text.800_to_1000_milliseconds_per_photo.0724fbf6": "800 a 1000 milisegundos por foto"
-,
-  "tools.wedding-photo-to-gif.span_text.is_the_slideshow_pace_and_it_is_the_righ.f862647b": "corresponde al ritmo de una presentación de fotos y es la mejor opción para las imágenes tranquilas: los retratos de los preparativos, la ceremonia o el primer baile. Una guía publicada recomienda entre 100 y 200 ms para un movimiento fluido y entre 500 y 1000 ms para GIF con estilo de presentación."
-,
-  "tools.wedding-photo-to-gif.strong_text.320_pixels_wide.ea1a4f58": "320 píxeles de ancho"
-,
-  "tools.wedding-photo-to-gif.span_text.is_enough_for_an_email_signature_and_kee.8f0c988c": "es suficiente para una firma de correo electrónico y mantiene el archivo muy pequeño."
-,
-  "tools.wedding-photo-to-gif.strong_text.480_pixels.db47e397": "480 píxeles"
-,
-  "tools.wedding-photo-to-gif.span_text.is_the_safe_default_for_a_chat_app_or_a.2acf15c1": "es la opción más segura para una aplicación de chat o una publicación en redes sociales: un creadorAdvice publicado señala que una animación de 480 píxeles y 10 fotogramas sigue siendo pequeña y se carga rápido."
-,
-  "tools.wedding-photo-to-gif.strong_text.800_pixels.8f701e0b": "800 píxeles"
-,
-  "tools.wedding-photo-to-gif.span_text.is_for_a_big_screen.8a73329e": "es ideal para una pantalla grande."
-,
-  "tools.wedding-photo-to-gif.strong_text.keep_the_finished_file_under_5_mb.5d13b8f1": "Mantén el archivo final por debajo de 5 MB."
-,
-  "tools.wedding-photo-to-gif.span_text.that_is_the_figure_a_published_size_guid.0261cacd": "Esa es la cifra que recomienda una guía de tamaño publicada para un uso web práctico y queda muy por debajo del límite que aceptan las aplicaciones de mensajería."
-,
-  "tools.wedding-photo-to-gif.strong_text.keep_it_short.63be30be": "Que sea breve."
-,
-  "tools.wedding-photo-to-gif.span_text.two_to_six_seconds_is_the_length_most_pe.7de05e49": "De dos a seis segundos es el tiempo que la mayoría ve antes de dejar de mirar. Un conjunto de 20 fotos a 900 milisegundos por foto ya dura 18 segundos, así que usa menos fotos para un mensaje de chat y reserva el conjunto completo para una pantalla."
-,
-  "tools.wedding-photo-to-gif.h2_text.why_gif_colours_look_flatter_than_your_p.a1291dfd": "Por qué los colores de los GIF se ven más apagados que tus fotos"
-,
-  "tools.wedding-photo-to-gif.p_text.a_gif_holds_only_256_colours_that_is_the.760bf3ce": "Un GIF solo admite 256 colores. Es una limitación del formato, no de tus fotografías: el formato la lleva desde que CompuServe lo introdujo en 1987, y todos los GIF de las aplicaciones de chat actuales siguen funcionando igual. Una foto de boda con tonos de piel suaves, un cielo delicate o un velo con degradado debe comprimirse en un rango mucho más limitado, por lo que el resultado puede parecer ligeramente granulado o plano."
-,
-  "tools.wedding-photo-to-gif.p_text.this_tool_builds_one_shared_palette_of_2.09eddf86": "Esta herramienta crea una paleta común de 256 colores a partir de todas tus fotos, que es la forma más fiel de hacerlo. Cada fotograma usa la misma gama de colores, así que la animación no parpadea entre fotogramas. La contrapartida es que una imagen muy cálida y otra muy fría dentro del mismo conjunto deben ponerse de acuerdo en un punto intermedio, y una de ellas puede cambiar ligeramente de tono. Es la misma limitación que tiene cualquier creador de GIF y no se puede evitar sin cambiar el formato."
-,
-  "tools.wedding-photo-to-gif.p_text.two_practical_tips_keep_the_set_to_photo.15b787f5": "Dos consejos prácticos. Limita el conjunto a fotos tomadas con la misma luz: una serie de fotos a la hora dorada se ve mucho mejor que cinco series de cinco habitaciones diferentes. Y, si alguna foto es más importante que las demás, reduce su tamaño excluyéndola del bucle y publícala por separado."
-,
-  "tools.wedding-photo-to-gif.h2_text.why_some_frames_have_bars_around_them.32305864": "Por qué algunos fotogramas tienen barras alrededor"
-,
-  "tools.wedding-photo-to-gif.p_text.a_gif_cannot_change_its_size_in_the_midd.487340f6": "Un GIF no puede cambiar de tamaño durante una animación, por lo que el lienzo queda determinado por la primera foto que añades. Si la segunda foto tiene otra proporción, como un retrato vertical después de una foto grupal horizontal, debe ajustarse al mismo marco. Ahí aparecen las barras. Es la pregunta más habitual que recibe cualquier creador gratuito de GIF, porque la herramienta nunca la explica."
-,
-  "tools.wedding-photo-to-gif.span_text.there_are_only_two_honest_answers_and_th.d07f1ae6": "Solo hay dos respuestas honestas, y esta herramienta te ofrece las dos."
-,
-  "tools.wedding-photo-to-gif.strong_text.fit_whole_photo.fe553f8b": "Ajustar la foto completa"
-,
-  "tools.wedding-photo-to-gif.span_text.keeps_every_pixel_and_shows_the_empty_sp.91ff7d0e": "Conserva todos los píxeles y muestra el espacio vacío como barras alrededor de la imagen."
-,
-  "tools.wedding-photo-to-gif.strong_text.fill_the_frame.76556aac": "Rellenar el marco"
-,
-  "tools.wedding-photo-to-gif.span_text.covers_the_empty_space_by_cropping_the_p.7e66067d": "Cubre el espacio vacío recortando la foto según la proporción del lienzo. Esto pierde una franja de la imagen, pero ofrece una animación limpia y sin bordes. En un conjunto de boda que mezcla un retrato vertical con fotos horizontales, rellenar el marco suele verse mejor en un móvil, donde las barras destacarían mucho más."
-,
-  "tools.wedding-photo-to-gif.p_text.order_helps_too_the_first_photo_sets_the.8eea5e33": "El orden también ayuda. La primera foto determina la proporción de toda la animación, así que coloca primero una foto con una proporción similar a la de la mayoría de las demás y las barras desaparecerán casi por completo."
-,
-  "tools.wedding-photo-to-gif.h2_text.where_a_wedding_gif_works_best.4102fcfb": "Dónde funciona mejor un GIF de boda"
-,
-  "tools.wedding-photo-to-gif.p_text.a_gif_is_a_good_fit_for_a_short_still_lo.ef4d5cbb": "Un GIF es ideal para un momento breve, estático y en bucle: la entrada, el beso, el primer baile o los confeti. En cambio, no es adecuado para una ceremonia larga, porque un GIF no tiene sonido ni controles de reproducción."
-,
-  "tools.wedding-photo-to-gif.strong_text.chat_apps.819cacdc": "Aplicaciones de chat."
-,
-  "tools.wedding-photo-to-gif.span_text.a_short_loop_is_exactly_what_these_are_b.7d95d032": "Un bucle breve es exactamente lo que estas aplicacionesDesigned para mostrar, y un archivo de 480 píxeles de menos de unos megabytes llega al instante."
-,
-  "tools.wedding-photo-to-gif.strong_text.social_posts.532046c2": "Publicaciones en redes sociales."
-,
-  "tools.wedding-photo-to-gif.span_text.a_silent_looping_self_contained_file_nee.240074cb": "Un archivo silencioso, en bucle y autónomo no necesita un reproductor de vídeo ni un enlace: empieza a reproducirse justo donde lo publicas."
-,
-  "tools.wedding-photo-to-gif.strong_text.a_screen_or_a_digital_frame.c40b9d28": "Una pantalla o un marco digital"
-,
-  "tools.wedding-photo-to-gif.span_text.at_the_venue_or_at_home_here_a_gif_that.015d872d": "en el lugar de la boda o en casa. Aquí, un GIF que se reproduce una sola vez suele ser mejor que uno en bucle, porque si el bucle salta en el momento equivocado es justo lo que más llama la atención."
-,
-  "tools.wedding-photo-to-gif.strong_text.email_signatures_and_messages_to_older_r.c19bd7ec": "Firmas de correo electrónico y mensajes para familiares mayores"
-,
-  "tools.wedding-photo-to-gif.span_text.where_a_video_file_is_too_heavy_and_a_li.bb3f902e": ", donde un archivo de vídeo pesa demasiado y un enlace implica un clic más."
-,
-  "tools.wedding-photo-to-gif.span_text.if_the_moment_deserves_sound_the_vows_th.03602ed6": "If the moment deserves sound - the vows, the speeches, the first dance - a GIF cannot carry it."
-,
-  "tools.wedding-photo-to-gif.a_text.the_wedding_invitation_video_maker.8b68300b": "the wedding invitation video maker"
-,
-  "tools.wedding-photo-to-gif.span_text.and.be5d5d37": "and"
-,
-  "tools.wedding-photo-to-gif.a_text.ai_wedding_video_from_photos.b250bd63": "Vídeo de boda con IA a partir de fotos"
-,
-  "tools.wedding-photo-to-gif.span_text.build_a_film_from_the_same_pictures_and.86335a6a": "build a film from the same pictures, and"
-,
-  "tools.wedding-photo-to-gif.a_text.the_wedding_photo_slideshow_guide.4216f8fc": "the wedding photo slideshow guide"
-,
-  "tools.wedding-photo-to-gif.span_text.covers_how_to_sequence_them.da297fe8": "covers how to sequence them."
-,
-  "tools.wedding-photo-to-gif.h2_text.frequently_asked_questions.af2a4d28": "Preguntas frecuentes"
-,
-  "tools.wedding-photo-to-gif.summary_text.how_do_i_make_a_gif_from_wedding_photos.a6cc7855": "¿Cómo hago un GIF con fotos de boda?"
-,
-  "tools.wedding-photo-to-gif.p_text.add_your_photos_choose_how_they_should_m.9e993cdf": "Añade tus fotos, elige cómo quieres que se transformen unas en otras —un fundido, un deslizamiento o un zoom—, decide cuánto tiempo permanece cada foto en pantalla y, después, crea el GIF y descárgalo. Todo funciona en tu navegador, así que las pictures nunca se suben a ningún servidor y el archivo final llega a tu dispositivo en unos segundos."
-,
-  "tools.wedding-photo-to-gif.summary_text.are_my_photos_uploaded_to_a_server.c40be310": "¿Se suben mis fotos a un servidor?"
-,
-  "tools.wedding-photo-to-gif.p_text.no_your_photos_are_read_resized_and_anim.09cf7642": "No. Tus fotos las lee, redimensiona y anima tu propio navegador, que también codifica el GIF. No se envía nada a ningún servidor, no necesitas una cuenta y el archivo no lleva marca de agua."
-,
-  "tools.wedding-photo-to-gif.summary_text.which_image_formats_can_i_use.b76c256c": "¿Qué formatos de imagen puedo usar?"
-,
-  "tools.wedding-photo-to-gif.p_text.jpg_png_and_webp_work_everywhere_heic_fi.72203a7c": "Los archivos JPG, PNG y WebP funcionan en todas partes. Los archivos HEIC de un iPhone se pueden convertir primero con la herramienta HEIC a JPG de este sitio, y los archivos RAW de la cámara deben exportarse como JPG antes de que cualquier navegador pueda abrirlos."
-,
-  "tools.wedding-photo-to-gif.summary_text.how_many_photos_can_i_put_in_one_gif.17720914": "¿Cuántas fotos puedo incluir en un GIF?"
-,
-  "tools.wedding-photo-to-gif.p_text.up_to_20_photos_at_a_time_a_published_gu.5e8a1be3": "Hasta 20 fotos a la vez. Una guía publicada para creadores de GIF gratuitos recomienda entre 3 y 20 imágenes por animación; superar esa cantidad aumenta el peso del archivo y el tiempo de espera."
-,
-  "tools.wedding-photo-to-gif.summary_text.why_do_my_photos_look_grainy_in_the_gif.d23e1cac": "¿Por qué mis fotos parecen con grano en el GIF?"
-,
-  "tools.wedding-photo-to-gif.p_text.a_gif_holds_only_256_colours_so_a_weddin.58c4d8a9": "Un GIF solo admite 256 colores, por lo que una foto de boda con tonos de piel suaves o un cielo delicate debe comprimirse en un rango de colores mucho más limitado. Todo este GIF comparte una paleta de 256 colores elegida entre todas tus fotos, así que las imágenes con tonos muy diferentes pueden variar ligeramente de color."
-,
-  "tools.wedding-photo-to-gif.summary_text.why_do_some_frames_have_bars_around_them.69251bbe": "¿Por qué algunos fotogramas tienen barras alrededor?"
-,
-  "tools.wedding-photo-to-gif.p_text.the_gif_canvas_takes_its_shape_from_your.63e665d0": "El lienzo del GIF adopta la forma de tu primera foto, porque un GIF no puede cambiar de tamaño durante la animación. Una foto con otra forma se ajusta completa, por lo que el espacio vacío aparece como barras, o se recorta para llenar el fotograma, por lo que se cortan los bordes de la foto. Puedes alternar entre ambas opciones cuando quieras."
-,
-  "tools.wedding-photo-to-gif.summary_text.can_i_make_the_gif_loop_forever_or_play.95b4d3d3": "¿Puedo hacer que el GIF se repita indefinidamente o que se reproduzca solo una vez?"
-,
-  "tools.wedding-photo-to-gif.p_text.both_loop_forever_is_the_default_and_is.977a1ddc": "Ambas cosas. La repetición indefinida es la opción predeterminada y es la que esperan las apps de chat o las publicaciones sociales. Reproducir una vez guarda el archivo sin una instrucción de repetición, por lo que se detiene en la última foto: la opción ideal para una pantalla o un marco digital."
-,
-  "tools.wedding-photo-to-gif.summary_text.how_do_i_make_the_gif_faster_or_slower.eb27898a": "¿Cómo hago que el GIF sea más rápido o más lento?"
-,
-  "tools.wedding-photo-to-gif.p_text.the_speed_control_sets_how_long_each_pho.35bd0e50": "El control de velocidad define cuánto tiempo se muestra cada foto, desde 200 milisegundos hasta 2 segundos. Para una presentación tranquila de retratos de boda, usa de 800 a 1000 milisegundos por foto. Para una secuencia de movimiento rápida, usa de 200 a 400 milisegundos, aproximadamente 10 fotogramas por segundo."
-,
-  "tools.wedding-photo-to-gif.summary_text.what_size_should_my_wedding_gif_be.31d8e0ac": "¿Qué tamaño debe tener mi GIF de boda?"
-,
-  "tools.wedding-photo-to-gif.p_text.480_pixels_is_the_safe_choice_for_a_chat.599e6a10": "480 píxeles es una opción segura para una app de chat o un correo electrónico, y es el tamaño que recomienda una guía publicada para una animación pequeña y rápida. Usa 320 píxeles para una firma de correo electrónico o una pegatina pequeña, y 800 píxeles cuando el archivo se vaya a mostrar en una pantalla grande. Mantén el archivo final por debajo de 5 MB para un uso web práctico."
-,
-  "tools.wedding-photo-to-gif.summary_text.is_the_wedding_photo_to_gif_maker_free.96ad8fb6": "¿El conversor de fotos de boda a GIF es gratis?"
-,
-  "tools.wedding-photo-to-gif.p_text.yes_there_is_no_account_no_watermark_no.e78d9965": "Sí. No hay cuenta, marca de agua, límite diario ni ningún coste. El GIF se codifica y se guarda en tu propio dispositivo, y todas las herramientas de este sitio funcionan de la misma manera."
-,
-  "tools.wedding-photo-to-gif.h2_text.more_free_wedding_tools.511ec8cc": "Más herramientas de boda gratis"
-,
-  "tools.wedding-photo-to-gif.a_text.photo_collage.942e207a": "Collage de fotos"
-,
-  "tools.wedding-photo-to-gif.a_text.contact_sheet.bee56ad6": "Hoja de contactos"
-,
-  "tools.wedding-photo-to-gif.a_text.photo_book_planner.a9887dd0": "Planificador de libros de fotos"
-,
-  "tools.wedding-photo-to-gif.a_text.compress_photos.f1d8a20b": "Comprimir fotos"
-,
-  "tools.wedding-photo-to-gif.a_text.crop_for_reels.46822554": "Recorte para Reels"
-,
-  "tools.wedding-photo-to-gif.a_text.all_tools.03153f40": "Todas las herramientas"
-,
-  "tools.wedding-photo-to-gif.h2_text.related_guides.19ba9bbd": "Guías relacionadas"
-,
-  "tools.wedding-photo-to-gif.h4_text.wedding_photo_slideshow.eebf0a40": "Presentación de fotos de boda"
-,
-  "tools.wedding-photo-to-gif.span_text.read_article.034b8746": "Leer artículo →"
-,
-  "tools.wedding-photo-to-gif.h4_text.ai_wedding_video_from_photos.01d216e6": "Vídeo de boda con IA a partir de fotos"
-,
-  "tools.wedding-photo-to-gif.h4_text.couple_slideshow_video.ecb31003": "Vídeo de presentación de la pareja"
-,
-  "tools.wedding-photo-to-gif.h4_text.wedding_video_formats.9d967d63": "Formatos de vídeo de boda"
-,
-  "tools.wedding-photo-to-gif.h2_text.want_it_with_sound.9bf5f2d7": "¿Lo quieres con sonido?"
-,
-  "tools.wedding-photo-to-gif.p_text.the_same_photographs_become_a_wedding_vi.ae81e6b4": "Las mismas fotografías se convierten en un vídeo de boda con música que tus invitados podrán ver desde el principio. Se reproduce en el mismo navegador y tampoco se sube nada."
-,
-  "tools.wedding-photo-to-gif.a_text.make_the_wedding_video.21d5caa0": "Crear el vídeo de boda →"
-,
-  "tools.wedding-video-editor.h1_text.wedding_video_editor_trim_and_convert_vi.075332c4": "Editor de vídeo de boda: recorta y convierte gratis"
-,
-  "tools.wedding-video-editor.p_text.cut_your_wedding_video_down_to_the_part.7f4ab55d": "Recorta tu vídeo de boda a lo esencial, ajústalo para Reels o WhatsApp y expórtalo como MP4, WebM o MKV. Todo funciona directamente en tu navegador."
-,
-  "tools.wedding-video-editor.p_text.your_video_is_never_uploaded_no_signup_n.f997cf69": "Tu vídeo nunca se sube. Sin registro, sin marca de agua y sin esperas."
-,
-  "tools.wedding-video-editor.a_text.home.8cf04a97": "Hogar"
-,
-  "tools.wedding-video-editor.a_text.free_tools.c746326b": "Herramientas gratuitas"
-,
-  "tools.wedding-video-editor.span_text.wedding_video_editor.b693a808": "Editor de vídeo de boda"
-,
-  "tools.wedding-video-editor.h2_text.1_load_your_wedding_video.cd8335be": "1. Carga tu vídeo de boda"
-,
-  "tools.wedding-video-editor.p_text.drop_your_wedding_video_here_or_click_to.9f04c9af": "Arrastra aquí tu vídeo de boda o haz clic para buscarlo"
-,
-  "tools.wedding-video-editor.p_text.mp4_mov_webm_or_mkv_one_file_at_a_time.7baf2f40": "MP4, MOV, WebM o MKV. Un archivo a la vez."
-,
-  "tools.wedding-video-editor.p_text.nothing_is_uploaded_the_file_is_read_by.4a9b61af": "No se sube nada. Tu navegador lee el archivo y nunca sale de este dispositivo."
-,
-  "tools.wedding-video-editor.h2_text.2_preview_and_trim.edc44502": "2. Previsualiza y recorta"
-,
-  "tools.wedding-video-editor.label_text.in_point_seconds.38a4f314": "Punto de inicio (segundos)"
-,
-  "tools.wedding-video-editor.label_text.out_point_seconds.d8779555": "Punto de final (segundos)"
-,
-  "tools.wedding-video-editor.button_text.set_the_in_point_from_the_playhead.d8bb2879": "Define el punto de inicio con el cursor de reproducción"
-,
-  "tools.wedding-video-editor.button_text.set_the_out_point_from_the_playhead.ade8948e": "Define el punto de final con el cursor de reproducción"
-,
-  "tools.wedding-video-editor.span_text.video_length.5f6bf905": "Duración del vídeo"
-,
-  "tools.wedding-video-editor.span_text.clip_length.ac790719": "Duración del clip"
-,
-  "tools.wedding-video-editor.span_text.source_frame_size.f92a8fd7": "Tamaño del fotograma de origen"
-,
-  "tools.wedding-video-editor.span_text.file.8c7dd922": "Archivo"
-,
-  "tools.wedding-video-editor.p_text.type_the_in_and_out_point_in_seconds_or.1b0d5c5d": "Escribe el punto de inicio y el punto de final en segundos, o reproduce el vídeo y pulsa los 2 botones. La barra amarilla de la línea de tiempo indica la parte que conservarás."
-,
-  "tools.wedding-video-editor.h2_text.3_export.878f26dc": "3. Exportar"
-,
-  "tools.wedding-video-editor.label_text.output_frame_size.8c57ce5b": "Tamaño del fotograma de salida"
-,
-  "tools.wedding-video-editor.option_text.original_size_no_re_encode_when_possible.c4d5465f": "Tamaño original (sin volver a codificar cuando sea posible)"
-,
-  "tools.wedding-video-editor.option_text.1920_1080_full_hd_landscape.eb77d51d": "1920 × 1080 - Full HD horizontal"
-,
-  "tools.wedding-video-editor.option_text.1080_1920_vertical_for_reels_and_tiktok.d124a281": "1080 × 1920 - vertical, para Reels y TikTok"
-,
-  "tools.wedding-video-editor.option_text.1280_720_hd_smaller_file.60a4148d": "1280 × 720 - HD, archivo más pequeño"
-,
-  "tools.wedding-video-editor.option_text.854_480_sd_smallest_file.51b65912": "854 × 480 - SD, archivo más pequeño"
-,
-  "tools.wedding-video-editor.label_text.when_the_frame_size_changes.8cad5e21": "Al cambiar el tamaño del fotograma"
-,
-  "tools.wedding-video-editor.option_text.letterbox_keep_the_whole_frame.adba8fa7": "Barras laterales: conserva todo el fotograma"
-,
-  "tools.wedding-video-editor.option_text.crop_to_fill_the_frame.c71b0335": "Recorte para llenar el fotograma"
-,
-  "tools.wedding-video-editor.label_text.output_format.b1fd524d": "Formato de salida"
-,
-  "tools.wedding-video-editor.option_text.mp4_best_for_phones_and_whatsapp.e62d50c8": "MP4: la mejor opción para móviles y WhatsApp"
-,
-  "tools.wedding-video-editor.option_text.webm_smallest_files_for_the_web.cb651fe6": "WebM: archivos más pequeños para la web"
-,
-  "tools.wedding-video-editor.option_text.mkv_keeps_every_stream.1186166d": "MKV: conserva todas las pistas"
-,
-  "tools.wedding-video-editor.button_text.export_the_video.4e80a9c2": "Exportar el vídeo"
-,
-  "tools.wedding-video-editor.h2_text.what_the_wedding_video_editor_does.2f56b08c": "Qué hace el editor de vídeos de boda"
-,
-  "tools.wedding-video-editor.p_text.a_full_wedding_video_is_long_three_hours.9a6ad76e": "Un vídeo de boda completo es largo. Tres horas de ceremonia no son algo que envíes a nadie. El clip que la gente realmente quiere suele durar cuarenta segundos, y el trabajo de verdad consiste en encontrar esos cuarenta segundos y hacerlos lo bastante pequeños para poder enviarlos."
-,
-  "tools.wedding-video-editor.p_text.this_editor_does_three_jobs_and_stops_th.9a024ade": "Este editor hace tres cosas y nada más. Recorta el vídeo entre un punto de inicio y un punto de final que tú eliges. Cambia el tamaño del fotograma cuando el clip debe adaptarse a la pantalla de un móvil o a un feed. Y guarda el resultado como MP4, WebM o MKV. Todo ocurre en tu propio dispositivo, así que no hay cargas, colas ni esperas por el servidor de otra persona."
-,
-  "tools.wedding-video-editor.p_text.the_engine_is_mediabunny_which_drives_th.9645f036": "El motor es mediabunny, que controla el codificador WebCodecs ya integrado en tu navegador. Por eso, el límite depende de la memoria libre de tu dispositivo y no de un límite de carga impuesto por otra persona. También por eso es importante el navegador que utilices."
-,
-  "tools.wedding-video-editor.h3_text.what_it_does.b12c51b9": "Qué ofrece"
-,
-  "tools.wedding-video-editor.li_text.cuts_a_video_to_an_in_point_and_an_out_p.0888f4f7": "Recorta un vídeo entre un punto de inicio y un punto de final, en segundos."
-,
-  "tools.wedding-video-editor.li_text.sets_the_frame_size_to_1920_1080_1080_19.59188e92": "Establece el tamaño del fotograma en 1920 × 1080, 1080 × 1920, 1280 × 720 o 854 × 480."
-,
-  "tools.wedding-video-editor.li_text.fits_the_frame_either_by_letterboxing_so.82e79f95": "Adapta el fotograma con barras laterales para que no se corte nada, o lo recorta para llenarlo por completo."
-,
-  "tools.wedding-video-editor.li_text.writes_mp4_webm_or_mkv_and_downloads_one.d80ef249": "Guarda el vídeo como MP4, WebM o MKV y descarga un único archivo final."
-,
-  "tools.wedding-video-editor.li_text.shows_the_length_of_the_source_the_lengt.f9d22824": "Muestra la duración del archivo de origen, la duración del clip y las dimensiones del fotograma de origen mientras trabajas."
-,
-  "tools.wedding-video-editor.h3_text.what_it_does_not_do.287a070b": "Lo que no hace"
-,
-  "tools.wedding-video-editor.li_text.no_music_no_subtitles_no_speed_change.4e5dd4f7": "Sin música, sin subtítulos, sin cambios de velocidad."
-,
-  "tools.wedding-video-editor.li_text.it_does_not_join_several_clips_into_one.179ad40e": "No une varios clips en uno."
-,
-  "tools.wedding-video-editor.li_text.no_filters_no_transitions_no_text_no_tim.271ef180": "Sin filtros, sin transiciones, sin texto, sin línea de tiempo."
-,
-  "tools.wedding-video-editor.li_text.no_account_no_cloud_rendering_no_waterma.15f457c2": "Sin cuenta, sin renderizado en la nube, sin marca de agua."
-,
-  "tools.wedding-video-editor.h2_text.how_to_trim_a_wedding_video.e9d73838": "Cómo recortar un video de boda"
-,
-  "tools.wedding-video-editor.p_text.three_steps_and_the_middle_one_is_the_on.b71ff54d": "Tres pasos, y el del medio es el importante."
-,
-  "tools.wedding-video-editor.strong_text.load_the_file.e3470a38": "Carga el archivo."
-,
-  "tools.wedding-video-editor.span_text.drop_it_on_the_box_or_click_the_box_to_b.17d91716": "Arrástralo hasta el recuadro o haz clic en él para buscarlo. El video aparecerá de inmediato y la duración del origen se mostrará debajo del reproductor."
-,
-  "tools.wedding-video-editor.strong_text.set_the_two_points.4a35b1aa": "Define los dos puntos."
-,
-  "tools.wedding-video-editor.span_text.type_the_in_point_and_the_out_point_in_s.0cb129c8": "Escribe el punto de inicio y el punto de final en segundos, o reproduce el video y pulsa los dos botones para tomar el punto de inicio y el punto de final desde donde estés en ese momento."
-,
-  "tools.wedding-video-editor.strong_text.pick_the_size_and_the_format_then_export.2783125e": "Elige el tamaño y el formato y, después, exporta."
-,
-  "tools.wedding-video-editor.span_text.choose_a_frame_size_choose_whether_a_sma.407d1c67": "Elige las dimensiones del fotograma, decide si un fotograma más pequeño se mostrará con barras negras o recortado, selecciona MP4, WebM o MKV y pulsa el botón de exportación. Se descargará un archivo."
-,
-  "tools.wedding-video-editor.p_text.one_thing_is_worth_knowing_before_you_st.a9ae1278": "Conviene saber una cosa antes de empezar. Si el clip ya está en el formato que has elegido y no has cambiado las dimensiones del fotograma, el editor copia el flujo de video original en lugar de volver a codificarlo. Es rápido y no altera la imagen. En cuanto cambias el tamaño o el contenedor, el video debe volver a codificarse, y eso siempre supone una pequeña pérdida de calidad."
-,
-  "tools.wedding-video-editor.p_text.the_in_point_snaps_to_the_nearest_keyfra.b32af6b5": "El punto de inicio se ajusta al fotograma clave más cercano anterior. Es intencionado, porque un fotograma clave contiene una imagen completa, de modo que el primer fotograma de tu clip nunca está a medias. Por eso, el clip puede comenzar un instante antes del segundo que has escrito."
-,
-  "tools.wedding-video-editor.h2_text.which_format_should_you_export_for_whats.e4511fda": "¿Qué formato deberías exportar para WhatsApp, Instagram y YouTube?"
-,
-  "tools.wedding-video-editor.p_text.the_format_is_the_wrapper_around_the_vid.511e22e8": "El formato es el contenedor del video y el audio. Es lo primero que debes acertar, porque determina dónde se podrá reproducir el archivo."
-,
-  "tools.wedding-video-editor.th_text.format.520d0db3": "Formato"
-,
-  "tools.wedding-video-editor.th_text.video_inside.1adbf083": "Video incluido"
-,
-  "tools.wedding-video-editor.th_text.audio_inside.bc78d377": "Audio integrado"
-,
-  "tools.wedding-video-editor.th_text.best_for.422390fc": "Ideal para"
-,
-  "tools.wedding-video-editor.td_text.mp4.96e814dc": "MP4"
-,
-  "tools.wedding-video-editor.td_text.h_264_wherever_your_browser_can_encode_i.7e0e021f": "H.264 siempre que tu navegador pueda codificarlo; de lo contrario, el mejor códec que admita"
-,
-  "tools.wedding-video-editor.td_text.copied_from_your_original_when_mp4_can_c.bc462f35": "Se copia desde el archivo original cuando el formato MP4 lo permite"
-,
-  "tools.wedding-video-editor.td_text.phones_whatsapp_instagram_youtube_email.30fad532": "Móviles, WhatsApp, Instagram, YouTube, correo electrónico y cualquier televisor o proyector"
-,
-  "tools.wedding-video-editor.td_text.webm.84f150cd": "WebM"
-,
-  "tools.wedding-video-editor.td_text.vp9.ae4cfaa9": "VP9"
-,
-  "tools.wedding-video-editor.td_text.opus_or_vorbis_copied_when_it_fits.64af7e91": "Opus o Vorbis, copiados cuando el formato lo permite"
-,
-  "tools.wedding-video-editor.td_text.smaller_files_for_the_web_email_and_clou.4a1420a3": "Archivos más pequeños para la web, el correo electrónico y el almacenamiento en la nube"
-,
-  "tools.wedding-video-editor.td_text.mkv.bc5a0dfb": "MKV"
-,
-  "tools.wedding-video-editor.td_text.any_codec_your_browser_can_encode.a88e4e61": "Cualquier códec que tu navegador pueda codificar"
-,
-  "tools.wedding-video-editor.td_text.keeping_a_master_copy_with_every_stream.f5cf8796": "Conserva una copia maestra con todas sus pistas"
-,
-  "tools.wedding-video-editor.p_text.for_a_phone_use_mp4_convertbox_app_recom.840b7c02": "Para un móvil, usa MP4. convertbox.app recomienda MP4 con H.264 para Reels, TikTok y YouTube Shorts, y feelthefile.com indica que Instagram admite hasta 1080 × 1920 y 30 fps, y YouTube hasta 1080p y 60 fps. El ajuste vertical de este editor es exactamente 1080 × 1920."
-,
-  "tools.wedding-video-editor.p_text.this_editor_does_not_show_you_a_bitrate.e1aa81d7": "Este editor no muestra un control de tasa de bits. Por si te sirve, justright.tools publica una útil regla orientativa: unos 1000 a 2000 kbps para definición estándar, 2500 a 5000 kbps para HD y 8000 a 15000 kbps para Full HD, en una escala de calidad que va de 0 para lossless a 51 para la peor calidad, con un valor predeterminado de 23. Aquí el codificador elige una buena calidad para el tamaño de fotograma solicitado y tú no tienes que pensarlo."
-,
-  "tools.wedding-video-editor.h2_text.video_editor_comparison_what_the_other_f.267be478": "Comparativa de editores de vídeo: qué ofrecen las otras herramientas gratuitas"
-,
-  "tools.wedding-video-editor.p_text.the_2026_listicles_about_free_video_edit.29662981": "Las listas de 2026 sobre editores de vídeo gratuitos valoran las herramientas en la pantalla de exportación, no por su lista de funciones. clipcraft.ai llama a esa sección lo que las herramientas gratuitas suelen ocultar, y es la pregunta correcta. Esto es lo que las otras herramientas gratuitas dicen de sí mismas."
-,
-  "tools.wedding-video-editor.caption_text.checked_on_10_november_2026_every_site_c.70329c44": "Comprobado el 10 de noviembre de 2026. Cada sitio cambia sus propios límites, así que consulta la página actual antes de crear un flujo de trabajo alrededor de sus condiciones."
-,
-  "tools.wedding-video-editor.th_text.weddingai_video.7ba80bb9": "WeddingAI.video"
-,
-  "tools.wedding-video-editor.th_text.convertbox_app.eed08341": "convertbox.app"
-,
-  "tools.wedding-video-editor.th_text.feelthefile_com.2a18bf03": "feelthefile.com"
-,
-  "tools.wedding-video-editor.th_text.smoothclip_com.3ae94d3a": "smoothclip.com"
-,
-  "tools.wedding-video-editor.td_text.trims_a_clip.8a387345": "Recorta un clip"
-,
-  "tools.wedding-video-editor.td_text.yes.93cba074": "Sí"
-,
-  "tools.wedding-video-editor.td_text.not_stated.c48e684d": "No indicado"
-,
-  "tools.wedding-video-editor.td_text.changes_the_frame_size.e4b5aa19": "Cambia el tamaño del fotograma"
-,
-  "tools.wedding-video-editor.td_text.four_presets.54f5da0d": "4 preajustes"
-,
-  "tools.wedding-video-editor.td_text.up_to_1080_1920.87bc5f37": "Hasta 1080 × 1920"
-,
-  "tools.wedding-video-editor.td_text.exports_9_16_1_1_and_4_5.5e3010dd": "Exporta en 9:16, 1:1 y 4:5"
-,
-  "tools.wedding-video-editor.td_text.changes_the_container.0703103a": "Cambia el formato del archivo"
-,
-  "tools.wedding-video-editor.td_text.mp4_webm_mkv.7c1ef483": "MP4, WebM, MKV"
-,
-  "tools.wedding-video-editor.td_text.adds_text_or_captions.2f01105c": "Añade texto o subtítulos"
-,
-  "tools.wedding-video-editor.td_text.no.bafd7322": "No"
-,
-  "tools.wedding-video-editor.td_text.changes_the_speed.c7d783a0": "Cambia la velocidad"
-,
-  "tools.wedding-video-editor.td_text.from_0_25_to_4.6230222f": "De 0.25× a 4×"
-,
-  "tools.wedding-video-editor.td_text.joins_several_clips.c6cc99bc": "Une varios clips"
-,
-  "tools.wedding-video-editor.td_text.up_to_10_clips.d70acf87": "Hasta 10 clips"
-,
-  "tools.wedding-video-editor.td_text.where_the_work_happens.d802dc56": "Dónde se realiza el trabajo"
-,
-  "tools.wedding-video-editor.td_text.in_your_browser.ef138c0f": "En tu navegador"
-,
-  "tools.wedding-video-editor.td_text.in_the_browser.e2d1ac66": "En el navegador"
-,
-  "tools.wedding-video-editor.td_text.on_their_servers.911e9f57": "En sus servidores"
-,
-  "tools.wedding-video-editor.td_text.published_size_limit.f10406b9": "Límite de tamaño al publicar"
-,
-  "tools.wedding-video-editor.td_text.none_your_device_memory_is_the_limit.85dcaa28": "Ninguno, el límite es la memoria de tu dispositivo"
-,
-  "tools.wedding-video-editor.td_text.50_mb.290df3fc": "50 MB"
-,
-  "tools.wedding-video-editor.td_text.250_mb_per_file.56c90f2c": "250 MB por archivo"
-,
-  "tools.wedding-video-editor.td_text.watermark.ee20bb60": "Marca de agua"
-,
-  "tools.wedding-video-editor.td_text.none.6adf97f8": "Ninguna"
-,
-  "tools.wedding-video-editor.td_text.undo_and_redo.e4bcd18b": "Deshacer y rehacer"
-,
-  "tools.wedding-video-editor.td_text.up_to_50_steps.e9083c61": "Hasta 50 pasos"
-,
-  "tools.wedding-video-editor.p_text.two_rows_in_that_table_are_the_whole_dif.6530b28c": "Esas 2 filas de la tabla son toda la diferencia. Este editor nunca envía tu video de boda a ninguna parte y nunca te pide que te registres. smoothclip.com dice claramente que la renderización se realiza en nuestros servidores, no en tu portátil, y las comparaciones de 2026 coinciden en que esta es la característica que decide para la mayoría de las parejas."
-,
-  "tools.wedding-video-editor.h2_text.frequently_asked_questions.af2a4d28": "Preguntas frecuentes"
-,
-  "tools.wedding-video-editor.summary_text.are_my_wedding_videos_uploaded_to_a_serv.880a96ad": "¿Se suben mis videos de boda a un servidor?"
-,
-  "tools.wedding-video-editor.p_text.no_the_file_is_read_by_your_own_browser.5c073c54": "No. El archivo lo lee tu propio navegador, el clip se recorta ahí y la exportación se guarda ahí. No se envía nada a un servidor, no necesitas una cuenta y el archivo que recibes no tiene marca de agua."
-,
-  "tools.wedding-video-editor.summary_text.what_video_formats_does_the_editor_read.0ba55998": "¿Qué formatos de video lee el editor y qué puede exportar?"
-,
-  "tools.wedding-video-editor.p_text.it_reads_mp4_mov_webm_and_mkv_which_cove.b61dca9b": "Lee MP4, MOV, WebM y MKV, con los que suelen trabajar un teléfono, una cámara o un dron, y exporta MP4, WebM o MKV. MP4 es la opción más segura para teléfonos y WhatsApp, WebM genera los archivos más pequeños para la web y MKV conserva todas las pistas que puede incluir."
-,
-  "tools.wedding-video-editor.summary_text.will_trimming_or_converting_reduce_the_q.c30734f9": "¿Recortar o convertir reduce la calidad de mi video?"
-,
-  "tools.wedding-video-editor.p_text.trimming_a_clip_that_is_already_in_the_f.f0475edd": "Al recortar un clip que ya está en el formato que quieres, se copia el flujo de video original, así que no se vuelve a codificar y la imagen no se modifica. Al cambiar el tamaño o el contenedor, el video se vuelve a codificar y siempre se pierde algo de calidad. Todos los conversores hacen ese mismo intercambio."
-,
-  "tools.wedding-video-editor.summary_text.do_i_need_to_install_anything_or_create.8c4ab6f8": "¿Necesito instalar algo o crear una cuenta?"
-,
-  "tools.wedding-video-editor.p_text.no_there_is_no_app_to_install_no_account.a4909d4f": "No. No hay ninguna app que instalar, ni cuenta, ni correo electrónico, ni marca de agua. El codificador de video se descarga de este sitio la primera vez que exportas y, después, el navegador lo conserva en su propia caché."
-,
-  "tools.wedding-video-editor.summary_text.how_long_does_the_export_take.c518dda5": "¿Cuánto tarda la exportación?"
-,
-  "tools.wedding-video-editor.p_text.it_depends_on_the_job_and_on_your_machin.82986571": "Depende del trabajo y de tu equipo. Un clip corto que solo necesita recortarse se copia y termina en segundos, mientras que un clip largo que debe volver a codificarse a un nuevo tamaño requiere más tiempo y tarda varios minutos. La barra de progreso muestra cuánto ha avanzado. Como referencia, convertbox.app indica que un clip de 15 segundos se convierte en unos segundos y que uno cercano a su límite de 50 MB puede tardar hasta 1 minuto."
-,
-  "tools.wedding-video-editor.summary_text.is_there_a_file_size_limit.98374a01": "¿Hay un límite de tamaño de archivo?"
-,
-  "tools.wedding-video-editor.p_text.there_is_no_upload_cap_because_nothing_i.9e9d3f4d": "No hay ningún límite de subida porque no se sube nada. El límite real es la memoria libre de tu dispositivo, y un clip largo en alta definición necesita mucha. Para comparar, convertbox.app publica un máximo de 50 MB, feelthefile.com publica 250 MB por archivo y clipzeal.com publica 500 MB en ordenador."
-,
-  "tools.wedding-video-editor.summary_text.can_i_export_it_for_whatsapp_instagram_o.f10f1510": "¿Puedo exportarlo para WhatsApp, Instagram o YouTube?"
-,
-  "tools.wedding-video-editor.p_text.yes_that_is_what_the_size_presets_are_fo.209ac427": "Sí, para eso están los tamaños preestablecidos. convertbox.app recomienda MP4 con H.264 a 1080 x 1920 para Reels, TikTok y YouTube Shorts, mientras que feelthefile.com indica Instagram hasta 1080 x 1920 y 30 fps, y YouTube hasta 1080p y 60 fps. Elige el tamaño vertical, selecciona Recortar para rellenar y exporta en MP4."
-,
-  "tools.wedding-video-editor.summary_text.can_i_add_music_subtitles_or_change_the.e64163ff": "¿Puedo añadir música, subtítulos o cambiar la velocidad?"
-,
-  "tools.wedding-video-editor.p_text.no_and_this_page_does_not_pretend_otherw.0020a211": "No, y esta página no finge lo contrario. Recorta, cambia el tamaño y convierte. La música, los subtítulos, el cambio de velocidad y la unión de varios clips se omiten a propósito para que las 3 funciones que sí ofrece se hagan bien y rápido."
-,
-  "tools.wedding-video-editor.summary_text.which_browser_do_i_need.360303d4": "¿Qué navegador necesito?"
-,
-  "tools.wedding-video-editor.p_text.the_export_needs_webcodecs_the_browser_a.fe23c3d5": "La exportación necesita WebCodecs, la API del navegador que realiza el trabajo de vídeo. Chrome y Edge la incorporan desde hace años, Safari 16.4 y posteriores también, y freevideogenerator.io indica que Firefox ofrece compatibilidad limitada. Si el botón de exportación no funciona, normalmente es por esto."
-,
-  "tools.wedding-video-editor.summary_text.is_the_wedding_video_editor_free.be010af6": "¿El editor de vídeo de boda es gratis?"
-,
-  "tools.wedding-video-editor.p_text.yes_it_is_free_with_no_account_no_waterm.3d1f2935": "Sí. Es gratis, sin cuenta, sin marca de agua y sin límite de clips que puedas recortar. No hay nada que comprar ni nada que actualizar."
-,
-  "tools.wedding-video-editor.h2_text.more_free_wedding_tools.511ec8cc": "Más herramientas de boda gratis"
-,
-  "tools.wedding-video-editor.a_text.wedding_video_invitation_maker.9f6ee0a6": "Creador de invitaciones en vídeo para bodas"
-,
-  "tools.wedding-video-editor.a_text.photo_collage.942e207a": "Collage de fotos"
-,
-  "tools.wedding-video-editor.a_text.compress_photos.f1d8a20b": "Comprimir fotos"
-,
-  "tools.wedding-video-editor.a_text.crop_for_reels.46822554": "Recortar para Reels"
-,
-  "tools.wedding-video-editor.a_text.photo_book_planner.a9887dd0": "Planificador de libros de fotos"
-,
-  "tools.wedding-video-editor.a_text.stationery_set_maker.ac7a26d7": "Creador de sets de papelería"
-,
-  "tools.wedding-video-editor.a_text.all_tools.03153f40": "Todas las herramientas"
-,
-  "tools.wedding-video-editor.h2_text.related_guides.19ba9bbd": "Guías relacionadas"
-,
-  "tools.wedding-video-editor.h4_text.which_video_format_to_keep.7a90d902": "Qué formato de vídeo conservar"
-,
-  "tools.wedding-video-editor.span_text.read_article.034b8746": "Leer artículo →"
-,
-  "tools.wedding-video-editor.h4_text.how_long_a_wedding_video_should_be.572c7fec": "Duración ideal de un vídeo de boda"
-,
-  "tools.wedding-video-editor.h4_text.sending_a_large_wedding_video_to_family.064f38d6": "Enviar un vídeo de boda grande a la familia"
-,
-  "tools.wedding-video-editor.h4_text.adding_subtitles_to_a_wedding_video.03afad46": "Añadir subtítulos a un vídeo de boda"
-,
-  "tools.wedding-video-editor.h2_text.got_the_clip_you_want_now_make_the_whole.ca853815": "¿Ya tienes el clip que quieres? Crea ahora toda la película."
-,
-  "tools.wedding-video-editor.p_text.the_same_photos_and_names_become_a_weddi.a4f78132": "Tus mismas fotos y nombres se convierten en un vídeo de boda que tus invitados realmente verán. Funciona en el mismo navegador y tampoco se sube nada."
-,
-  "tools.wedding-video-editor.a_text.make_the_wedding_video.21d5caa0": "Crear el vídeo de boda →"
-,
-  "tools.copy.veditLoading.zzzzzz6c342": "Cargando el codificador de vídeo…"
-,
-  "tools.copy.veditSaved.zzzzzzcc5e8": "{name} guardado."
-,
-  "tools.copy.veditNoEncode.zzzzzz80733": "Este navegador no puede codificar ese códec de vídeo. Prueba con MP4 o abre la página en Chrome o Edge en un ordenador de escritorio."
-,
-  "tools.copy.veditUnreadable.zzzzzzc60ce": "No se pudo leer ese archivo o no tiene ninguna pista de vídeo. Prueba con un archivo MP4, MOV, WebM o MKV."
-,
-  "tools.copy.gifEncoderMissing.zzzzzz2120b": "No se pudo cargar el codificador de GIF."
-,
-  "tools.copy.gifTooMany.zzzzzzc5080": "Esta herramienta admite hasta {n} fotos a la vez."
-,
-  "tools.copy.gifMoveUp.zzzzzz7740c": "Subir"
-,
-  "tools.copy.gifMoveDown.zzzzzzbbba3": "Bajar"
-,
-  "tools.copy.gifNoPhotos.zzzzzze695a": "Primero, añade algunas fotos."
-,
-  "tools.copy.gifEncoding.zzzzzz34135": "Codificando el GIF"
-,
-  "tools.copy.gifReady.zzzzzz30515": "Tu GIF está listo."
-,
-  "tools.copy.gifFailed.zzzzzz4d8e0": "No se pudo crear el GIF."
-,
-  "tools.copy.gifStatus.zzzzzzf8841": "Añade algunas fotos para empezar tu GIF."
-,
-  "tools.wedding-stationery-set-maker.td_text.table_number.96005765": "Table number"
-,
-  "tools.wedding-stationery-set-maker.h4_text.what_to_put_on_a_wedding_invitation.c45a79e9": "What to put on a wedding invitation"
-,
-  "tools.wedding-stationery-set-maker.h4_text.how_to_print_your_stationery_set.b1ab1539": "How to print your stationery set"
-,
-  "tools.wedding-photo-contact-sheet.td_text.show_the_number_under_each_photo.b66390f7": "Show the number under each photo"
-,
-  "tools.wedding-photo-contact-sheet.td_text.show_the_file_name_under_each_photo.660ea72e": "Show the file name under each photo"
-,
-  "tools.wedding-photo-contact-sheet.td_text.columns.168b82d3": "Columns"
-,
-  "tools.wedding-photo-contact-sheet.th_text.columns.168b82d3": "Columns"
-,
-  "tools.wedding-photo-contact-sheet.td_text.2_columns.fc3e36f1": "2 columns"
-,
-  "tools.wedding-photo-contact-sheet.td_text.3_columns.7f6ed182": "3 columns"
-,
-  "tools.wedding-photo-contact-sheet.td_text.4_columns.792c30f0": "4 columns"
-,
-  "tools.wedding-photo-contact-sheet.td_text.5_columns.64b49904": "5 columns"
-,
-  "tools.wedding-photo-contact-sheet.td_text.6_columns.b3acc011": "6 columns"
-,
-  "tools.wedding-photo-contact-sheet.td_text.7_columns.27abceec": "7 columns"
-,
-  "tools.wedding-photo-contact-sheet.td_text.8_columns.69cd8160": "8 columns"
-,
-  "tools.wedding-photo-contact-sheet.summary_text.what_is_a_contact_sheet.451b8158": "What is a contact sheet?"
-,
-  "tools.wedding-pdf-editor.strong_text.merge_into_one_pdf.df912a30": "Merge into one PDF"
-,
-  "tools.wedding-pdf-editor.strong_text.page_groups_for_the_split.134d2020": "Page groups for the split"
-,
-  "tools.wedding-pdf-editor.strong_text.save_a_copy_without_a_password.2d1fb60d": "Save a copy without a password"
-,
-  "tools.wedding-photo-to-gif.td_text.time_on_each_photo.a10dd9d3": "Time on each photo"
-,
-  "tools.wedding-photo-to-gif.td_text.output_size.2e422b9d": "Output size"
-,
-  "tools.wedding-photo-to-gif.td_text.looping.a56d66d7": "Looping"
-,
+  "blog.why-wedding-video-important.expansion.li.3": "<strong>\"Vi mi propia boda como un extraño\".</strong> Las parejas dicen que el video les ayudó a REVIVIR el día. Las fotos muestran las perspectivas de otros; El video muestra lo que TÚ sentiste en ese momento.",
+  "tools.wedding-stationery-set-maker.th_text.envelope.5a4d5cec": "Sobre",
+  "tools.wedding-stationery-set-maker.td_text.a7_5_25_7_25_in.adb3af32": "A7 (5.25 × 7.25 in)",
+  "tools.wedding-stationery-set-maker.td_text.4_bar_a1.50a11aac": "4 barras (A1)",
+  "tools.wedding-stationery-set-maker.td_text.none_it_stands_on_the_table.53651548": "Ninguna: se mantiene de pie sobre la mesa",
+  "tools.wedding-stationery-set-maker.td_text.a2.c6bdf6f6": "A2",
+  "tools.wedding-stationery-set-maker.td_text.none_it_is_a_sign.1fd2cb20": "Ninguna: es un cartel",
+  "tools.wedding-stationery-set-maker.p_text.the_limits_up_front_one_set_is_one_pdf_o.3f20d8a4": "Los límites, de entrada: un conjunto es un PDF de seis páginas, el póster se imprime a 150 DPI en lugar de 300 y la página más grande está limitada por la memoria de tu propio dispositivo: un lienzo de 5400 × 7200 pixels ya excede lo que un móvil puede almacenar cómodamente. No tienes que subir nada ni preocuparte por el tamaño del archivo.",
+  "tools.wedding-stationery-set-maker.strong_text.print_at_100_or_actual_size_never_fit_to.0dd15e8d": "Imprime al 100% o en «Tamaño real», nunca en «Ajustar a la página»",
+  "tools.wedding-stationery-set-maker.span_text.a_scaled_sheet_turns_a_5_7_invitation_in.9a19e982": "Al cambiar la escala de una hoja, una invitación de 5 × 7 cambia de tamaño, las guías de corte dejan de coincidir con el papel y una tarjeta de 4 × 6 acaba saliendo de un sobre de 5 × 7.",
+  "tools.wedding-stationery-set-maker.p_text.eight_to_ten_weeks_before_the_wedding_fo.c65035e5": "Para una boda local, lo ideal es de ocho a diez semanas antes de la boda: seis semanas es el mínimo absoluto, el tiempo justo para que los invitados reserven un hotel, pero lo bastante cerca para que no parezca un anuncio. Para una boda de destino, con tres meses de antelación, porque la gente necesita organizar el viaje y el alojamiento. Los avisos de «Guarda la fecha» se envían por separado, con seis a ocho meses de antelación.",
+  "tools.wedding-stationery-set-maker.p_text.eight_to_ten_weeks_before_a_local_weddin.9c5fd0ef": "Para una boda local, hazlo de ocho a diez semanas antes; el mínimo absoluto son seis semanas. Para una boda de destino, hazlo con tres meses de antelación, para que los invitados puedan reservar sus viajes. Los avisos para reservar la fecha se envían por separado, con seis a ocho meses de antelación.",
+  "tools.wedding-stationery-set-maker.summary_text.should_i_print_at_100_or_fit_to_page.48e8fb23": "¿Debo imprimir al 100% o ajustar a la página?",
+  "tools.wedding-stationery-set-maker.p_text.at_100_or_on_the_setting_your_printer_ca.2de0d900": "Al 100%, o en la opción que tu impresora denomina «Tamaño real». «Ajustar a la página» reescala la hoja para adaptarla al papel que haya en la bandeja, por lo que la invitación sale con el tamaño equivocado y las marcas de corte ya no coinciden con el corte final.",
+  "tools.wedding-pdf-editor.h1_text.wedding_pdf_editor_merge_split_reorder_a.da2a1926": "Editor de PDF para bodas: combina, divide, reordena y rota páginas",
+  "tools.wedding-pdf-editor.p_text.combine_vendor_contracts_seating_charts.8ef98896": "Combina contratos con proveedores, planos de asientos, borradores de invitaciones y listas de comprobación en un solo PDF. Reordena las páginas, corrige la orientación de las que están de lado, divide un documento en archivos independientes y guarda una copia sin su contraseña",
+  "tools.wedding-pdf-editor.p_text.your_file_never_leaves_your_device_the_p.02493bf6": "Tu archivo nunca sale de tu dispositivo. El PDF se abre, se reorganiza y se escribe dentro de tu propio navegador. Sin subir archivos, sin cuenta y sin marca de agua",
+  "tools.wedding-pdf-editor.a_text.home.8cf04a97": "Hogar",
+  "tools.wedding-pdf-editor.a_text.free_tools.c746326b": "Herramientas gratuitas",
+  "tools.wedding-pdf-editor.span_text.wedding_pdf_editor.cb955046": "Editor de PDF para bodas",
+  "tools.wedding-pdf-editor.h2_text.1_add_your_pdf_files.6010bfa3": "1. Añade tus archivos PDF",
+  "tools.wedding-pdf-editor.label_text.pdf_files.ab8574a2": "Archivos PDF",
+  "tools.wedding-pdf-editor.small_text.one_run_takes_up_to_20_files_and_up_to_1.86ec116e": "Una ejecución admite hasta 20 archivos y hasta 1,500 páginas. El límite real es la memoria de tu dispositivo, por lo que un trabajo muy grande es mejor realizarlo en dos ejecuciones",
+  "tools.wedding-pdf-editor.h2_text.2_arrange_the_pages.a0b0dc2c": "2. Organiza las páginas",
+  "tools.wedding-pdf-editor.p_text.drag_a_page_to_move_it_or_use_the_arrow.99e1eb05": "Arrastra una página para moverla o utiliza los botones de flecha. Desmarca una página para excluirla del PDF. Los botones de rotación giran una página 90 grados cada vez",
+  "tools.wedding-pdf-editor.h2_text.3_export.878f26dc": "3. Exporta",
+  "tools.wedding-pdf-editor.label_text.page_groups_for_the_split.134d2020": "Grupos de páginas para la división",
+  "tools.wedding-pdf-editor.small_text.one_pdf_per_group_delivered_in_one_zip_a.950e20ec": "Un PDF por grupo, entregado en un único archivo ZIP. Los números cuentan las páginas del orden combinado que aparece arriba",
+  "tools.wedding-pdf-editor.button_text.merge_into_one_pdf.df912a30": "Combinar en un PDF",
+  "tools.wedding-pdf-editor.button_text.split_into_separate_pdfs_zip.d5efab74": "Dividir en PDF independientes (ZIP)",
+  "tools.wedding-pdf-editor.button_text.save_a_copy_without_a_password.2d1fb60d": "Guardar una copia sin contraseña",
+  "tools.wedding-pdf-editor.button_text.start_over.129b767a": "Empezar de nuevo",
+  "tools.wedding-pdf-editor.h2_text.what_this_wedding_pdf_editor_actually_do.62349c46": "Qué hace realmente este editor de PDF para bodas",
+  "tools.wedding-pdf-editor.p_text.a_wedding_produces_paperwork_in_pieces_t.64d6b589": "Una boda genera documentos dispersos: el contrato del fotógrafo, el plano del recinto, el plano de asientos, el número de invitados confirmado por el catering, el borrador de las invitaciones y el cronograma que la organizadora guarda en su teléfono. Después, todo el mundo pide un único PDF. Esta herramienta reúne esas páginas en un solo archivo, en el orden que quieras, sin enviar ni un solo byte a un servidor",
+  "tools.wedding-pdf-editor.p_text.it_does_five_jobs_and_it_does_all_five_o.10d41777": "Hace cinco tareas y las realiza todas en la misma página:",
+  "tools.wedding-pdf-editor.strong_text.merge.68be4837": "Combinar",
+  "tools.wedding-pdf-editor.span_text.several_pdf_files_into_one_document_in_a.99467f0b": "varios archivos PDF en un solo documento, en el orden que elijas.",
+  "tools.wedding-pdf-editor.strong_text.split.8a9e64d8": "Dividir",
+  "tools.wedding-pdf-editor.span_text.a_document_into_separate_pdfs_by_page_gr.58635f1b": "un documento en PDF separados por grupos de páginas como",
+  "tools.wedding-pdf-editor.span_text.delivered_as_one_zip_archive.c484e011": ", entregado como un único archivo ZIP.",
+  "tools.wedding-pdf-editor.strong_text.reorder.332c80b1": "Reordenar",
+  "tools.wedding-pdf-editor.span_text.pages_by_dragging_them_and_untick_the_on.6e6b1195": "las páginas arrastrándolas y desmarcando las que no quieras incluir en el archivo.",
+  "tools.wedding-pdf-editor.strong_text.rotate.8d2de536": "Girar",
+  "tools.wedding-pdf-editor.span_text.any_page_by_90_180_or_270_degrees_which.b359873e": "cualquier página en 90, 180 o 270 degrees, que es la solución para el escaneo que salió de lado.",
+  "tools.wedding-pdf-editor.strong_text.unlock.7e7123b0": "Desbloquear",
+  "tools.wedding-pdf-editor.span_text.a_file_that_opens_but_blocks_printing_or.1b1e5605": "un archivo que se abre pero bloquea la impresión o la edición, y guardar una copia sin las restricciones.",
+  "tools.wedding-pdf-editor.p_text.everything_runs_inside_your_browser_ther.dce918e1": "Todo funciona dentro de tu navegador. No necesitas una cuenta, no tienes que subir archivos, no hay marca de agua y no hay ningún límite en la cantidad de archivos que puedes procesar a lo largo del tiempo.",
+  "tools.wedding-pdf-editor.h2_text.how_to_merge_pdf_files.34706597": "Cómo combinar archivos PDF",
+  "tools.wedding-pdf-editor.li_text.drop_the_pdf_files_into_the_box_or_click.6c6f893e": "Arrastra los archivos PDF al recuadro o haz clic en el recuadro para buscar y seleccionar los archivos. La herramienta identifica el número de páginas y el tamaño real de cada página.",
+  "tools.wedding-pdf-editor.li_text.check_the_order_in_the_page_list_the_fil.269218cc": "Comprueba el orden de la lista de páginas. Los archivos se conservan en el orden en que los elegiste, por lo que todas las páginas del primer archivo aparecen antes que todas las páginas del segundo.",
+  "tools.wedding-pdf-editor.li_text.drag_any_page_up_or_down_until_the_list.924fcb51": "Arrastra cualquier página hacia arriba o hacia abajo hasta que la lista quede como quieras.",
+  "tools.wedding-pdf-editor.span_text.press.0610123b": "Pulsa",
+  "tools.wedding-pdf-editor.span_text.the_file_is_written_in_your_browser_and.8836c12a": ". El archivo se crea en tu navegador y se guarda directamente en tu dispositivo.",
+  "tools.wedding-pdf-editor.p_text.merging_copies_the_page_content_as_it_is.804276f0": "La combinación copia el contenido de las páginas tal cual. Los escaneos no se recomprimen, los dibujos vectoriales no se convierten en imágenes y cada página conserva su propio tamaño, por lo que un documento con páginas A4 y Letter conserva la mezcla de tamaños.",
+  "tools.wedding-pdf-editor.h2_text.how_to_split_a_pdf_into_separate_files.ec569b58": "Cómo dividir un PDF en archivos separados",
+  "tools.wedding-pdf-editor.span_text.type_the_page_groups_into_the.9f180655": "Introduce los grupos de páginas en el",
+  "tools.wedding-pdf-editor.span_text.box_a_group_is_a_page_number_a_range_suc.c3811671": "casilla. Un grupo es un número de página, un intervalo como",
+  "tools.wedding-pdf-editor.span_text.or_an_open_range_such_as.0d2b6ea1": ", o un intervalo abierto como",
+  "tools.wedding-pdf-editor.span_text.for_everything_from_page_5_to_the_end_se.73f2fad6": "para todo desde la página 5 hasta el final. Separa los grupos con comas:",
+  "tools.wedding-pdf-editor.span_text.gives_you_three_files.bcd91ac3": "te entrega tres archivos.",
+  "tools.wedding-pdf-editor.p_text.the_page_numbers_count_the_pages_of_the.b838579e": "Los números de página cuentan las páginas del orden combinado, así que desmarca primero las páginas que no quieras y los números coincidirán con lo que ves. Cada grupo se convierte en su propio PDF y todos llegan dentro de un único archivo ZIP, porque los navegadores bloquean una página que intenta guardar cinco archivos separados a la vez.",
+  "tools.wedding-pdf-editor.h2_text.how_to_reorder_and_rotate_pdf_pages.2c972e86": "Cómo reordenar y girar páginas PDF",
+  "tools.wedding-pdf-editor.p_text.drag_a_page_by_its_handle_on_the_left_or.6cfb7160": "Arrastra una página por el asa situada a la izquierda o utiliza las flechas hacia arriba y hacia abajo. Los botones con flechas hacen lo mismo que arrastrar y funcionan en un teléfono, donde arrastrar resulta incómodo. Desmarca una página y quedará fuera del archivo combinado.",
+  "tools.wedding-pdf-editor.p_text.the_rotate_buttons_turn_a_page_90_degree.50aef9c8": "Los botones de rotación giran una página 90 degrees en cada pulsación, por lo que dos pulsaciones dan 180 y tres te devuelven a 360. La rotación se aplica a la copia exportada; el archivo de tu dispositivo nunca se modifica. Cada fila también muestra el nombre del archivo y el número de página de origen, justo lo que necesitas cuando buscas una página concreta en una lista larga.",
+  "tools.wedding-pdf-editor.h2_text.two_types_of_pdf_password_and_which_one.c2bb573a": "Dos tipos de contraseña de PDF, y cuál tienes",
+  "tools.wedding-pdf-editor.p_text.almost_every_question_about_locked_pdfs.3926d3a6": "Casi todas las preguntas sobre los PDF bloqueados mezclan dos cosas distintas. Saber cuál tienes te ahorra mucho tiempo.",
+  "tools.wedding-pdf-editor.strong_text.type_1_the_file_needs_a_password_to_open.e355e987": "Tipo 1: el archivo necesita una contraseña para abrirse.",
+  "tools.wedding-pdf-editor.span_text.the_password_is_the_key_to_the_whole_doc.8469f815": "La contraseña es la clave de todo el documento. No hay forma de saltártela y ninguna herramienta, en línea o sin conexión, puede leer las páginas sin ella. Si tienes la contraseña, introdúcela en la casilla situada debajo de ese archivo y las páginas se incorporarán a la lista. La exportación quedará sin contraseña, así que podrás enviar el archivo combinado a tu fotógrafo sin enviarle la clave.",
+  "tools.wedding-pdf-editor.strong_text.type_2_the_file_opens_but_printing_copyi.ec7b96ce": "Tipo 2: el archivo se abre, pero la impresión, la copia o la edición están bloqueadas.",
+  "tools.wedding-pdf-editor.span_text.this_is_an_owner_password_and_it_does_no.96e0ff0e": "Esta es una contraseña de propietario y no te impide leer el archivo. Las páginas se abren con normalidad aquí y el",
+  "tools.wedding-pdf-editor.span_text.button_writes_the_same_pages_out_as_a_ne.a3ebf98c": "botón exporta las mismas páginas en un archivo nuevo sin esas restricciones.",
+  "tools.wedding-pdf-editor.p_text.there_is_a_third_limit_worth_naming_the.af98688a": "Hay un tercer límite que merece la pena mencionar. El cifrado que se puede abrir en un navegador corresponde al estándar más antiguo: RC4 y AES-128, hasta PDF 1.6. Muchos PDF más recientes utilizan AES-256, que llegó con PDF 2.0, y esos archivos no se pueden abrir aquí en absoluto. La herramienta lo indica exactamente en lugar de fallar en silencio, porque un fallo silencioso te dejaría pensando que el archivo estaba vacío.",
+  "tools.wedding-pdf-editor.h2_text.common_wedding_use_cases.f6c2196b": "Casos de uso habituales en bodas",
+  "tools.wedding-pdf-editor.strong_text.one_file_for_the_venue.3d175560": "Un único archivo para el lugar de la boda.",
+  "tools.wedding-pdf-editor.span_text.the_ceremony_plan_the_floor_plan_the_sea.0e7e6a05": "El plan de la ceremonia, el plano de distribución, el mapa de asientos, la hoja de ruta del día y los recuentos del catering, en ese orden, en un único PDF que el recinto podrá imprimir de una sola vez.",
+  "tools.wedding-pdf-editor.strong_text.contracts_for_the_planner.2104b279": "Contratos para quien organiza la boda.",
+  "tools.wedding-pdf-editor.span_text.the_photographer_the_caterer_the_florist.93ced02a": "El fotógrafo, la empresa de catering, la floristería y la empresa de alquiler en un solo documento, con las páginas giradas para que cada contrato quede en vertical.",
+  "tools.wedding-pdf-editor.strong_text.the_print_packet.3158f495": "El cuadernillo para imprimir.",
+  "tools.wedding-pdf-editor.span_text.the_invitation_draft_the_rsvp_card_the_m.36e3500a": "El borrador de la invitación, la tarjeta de respuesta, el menú y el cronograma, listos para entregar al impresor en un solo archivo.",
+  "tools.wedding-pdf-editor.strong_text.scans_from_the_phone.97d25cb2": "Escaneos realizados con el teléfono.",
+  "tools.wedding-pdf-editor.span_text.the_phone_s_note_app_or_scanner_makes_a.f3e794e5": "La aplicación de notas del teléfono o el escáner generan un PDF con una página por foto, a menudo en horizontal. Combina los archivos, gira las páginas mal orientadas y el archivo estará listo para imprimir.",
+  "tools.wedding-pdf-editor.strong_text.the_gift_and_thank_you_list.b5a66931": "La lista de regalos y de agradecimientos.",
+  "tools.wedding-pdf-editor.span_text.a_long_checklist_split_into_a_few_pages.07193c07": "Una lista de control extensa, repartida en unas pocas páginas para que pueda imprimirse por secciones y entregarse a dos personas.",
+  "tools.wedding-pdf-editor.h2_text.wedding_pdf_editor_compared_with_the_onl.e31a88bd": "Comparativa del editor de PDF para bodas con los sitios de PDF en línea",
+  "tools.wedding-pdf-editor.p_text.most_of_the_pages_that_rank_for_these_se.bfd292a7": "La mayoría de las páginas que aparecen en los resultados de estas búsquedas son sitios de PDF en línea: el archivo se sube, se procesa en un servidor y después se elimina. Es una forma válida de trabajar, pero implica que tus contratos quedan alojados en el ordenador de otra persona. Este editor opta por el camino contrario, y la tabla siguiente indica qué hace realmente cada uno.",
+  "tools.wedding-pdf-editor.th_text.what_it_does.b12c51b9": "Qué hace",
+  "tools.wedding-pdf-editor.th_text.weddingai_video.7ba80bb9": "WeddingAI.video",
+  "tools.wedding-pdf-editor.th_text.adobe_acrobat_online.3f8c0c2f": "Adobe Acrobat en línea",
+  "tools.wedding-pdf-editor.th_text.ilovepdf.72a74b85": "iLovePDF",
+  "tools.wedding-pdf-editor.th_text.smallpdf.cd6e7b62": "Smallpdf",
+  "tools.wedding-pdf-editor.td_text.where_your_file_is_processed.7525c876": "Dónde se procesa tu archivo",
+  "tools.wedding-pdf-editor.td_text.in_your_browser_the_file_never_leaves_yo.9d857182": "En tu navegador. El archivo nunca sale de tu dispositivo.",
+  "tools.wedding-pdf-editor.td_text.on_adobe_servers_the_file_is_deleted_unl.33098c33": "En los servidores de Adobe. El archivo se elimina salvo que inicies sesión para guardarlo.",
+  "tools.wedding-pdf-editor.td_text.on_their_servers_files_are_deleted_after.8c687c11": "En sus servidores. Los archivos se eliminan después de dos horas.",
+  "tools.wedding-pdf-editor.td_text.on_their_servers.c1edd08b": "En sus servidores.",
+  "tools.wedding-pdf-editor.td_text.use_without_an_account.857ca9be": "Se puede usar sin una cuenta",
+  "tools.wedding-pdf-editor.td_text.yes_no_account_no_email_no_limit_on_use.45fa5d48": "Sí. Sin cuenta, sin correo electrónico y sin límite de uso.",
+  "tools.wedding-pdf-editor.td_text.yes_for_a_one_off_merge.1b99ccae": "Sí, para una combinación única.",
+  "tools.wedding-pdf-editor.td_text.yes.b127099c": "Sí.",
+  "tools.wedding-pdf-editor.td_text.the_free_plan_is_tied_to_an_account.b4d48e6c": "El plan gratuito requiere una cuenta.",
+  "tools.wedding-pdf-editor.td_text.watermark_on_the_merged_file.51194aa1": "Marca de agua en el archivo combinado",
+  "tools.wedding-pdf-editor.td_text.none.983e45d9": "Ninguna.",
+  "tools.wedding-pdf-editor.td_text.none_the_page_shows_a_no_watermark_added.24a645bf": "Ninguna. La página muestra un distintivo de «sin marca de agua añadida».",
+  "tools.wedding-pdf-editor.td_text.free_use_is_limited_to_small_files_and_a.e2a96b93": "El uso gratuito está limitado a archivos pequeños y unas pocas tareas al día.",
+  "tools.wedding-pdf-editor.td_text.size_in_one_run.626dc54e": "Tamaño en una sola ejecución",
+  "tools.wedding-pdf-editor.td_text.up_to_20_files_of_up_to_200_mb_each_and.f64fe244": "Hasta 20 archivos de hasta 200 MB cada uno y hasta 1,500 páginas. El límite real es la memoria de tu dispositivo.",
+  "tools.wedding-pdf-editor.td_text.up_to_100_files_up_to_500_pages_each_and.fb877cd0": "Hasta 100 archivos, con hasta 500 páginas cada uno y hasta 1,500 páginas en total.",
+  "tools.wedding-pdf-editor.td_text.up_to_100_mb_and_25_files_at_once.214dfbc4": "Hasta 100 MB y 25 archivos a la vez.",
+  "tools.wedding-pdf-editor.td_text.5_mb_in_total_and_2_tasks_a_day.22899b1f": "5 MB en total y 2 tareas al día.",
+  "tools.wedding-pdf-editor.td_text.a_locked_pdf.6f9109b1": "Un PDF bloqueado",
+  "tools.wedding-pdf-editor.td_text.opens_the_older_rc4_and_aes_128_encrypti.c22704ea": "Abre el cifrado más antiguo RC4 y AES-128 cuando conoces la contraseña y elimina los bloqueos que solo imponen permisos. AES-256 no se puede abrir.",
+  "tools.wedding-pdf-editor.td_text.yes_password_protected_pdfs_can_be_merge.1f2d0bd3": "Sí, los PDF protegidos con contraseña se pueden combinar.",
+  "tools.wedding-pdf-editor.p_text.the_limits_above_are_as_published_on_the.5163ad38": "Los límites anteriores son los publicados en las páginas de los propios proveedores y se comprobaron el 2026-11-10. Fuentes de los límites gratuitos: la página de combinación de Adobe (página fechada el 29 de enero de 2025) para las cifras de 100 archivos y 1,500 páginas y la promesa de gestión de archivos, la página de precios de iLovePDF a través de pixeltools.io (comprobada el 2026-11-04) para las cifras de 100 MB y 25 archivos, y las páginas comparativas de 2026 sobre el plan gratuito de Smallpdf y los distintivos de «sin marca de agua». El límite gratuito propio de iLovePDF se cita de manera distinta en distintas fuentes, por lo que debes considerar ese número como no verificado. Los marcadores, los campos de formulario y los botones interactivos no se reconstruyen al copiar páginas entre archivos; se conservan el contenido de la página y su tamaño.",
+  "tools.wedding-pdf-editor.h2_text.frequently_asked_questions.af2a4d28": "Preguntas frecuentes",
+  "tools.wedding-pdf-editor.summary_text.are_my_files_uploaded_does_my_file_never.aba9baad": "¿Se suben mis archivos? ¿Mi archivo nunca sale de mi dispositivo?",
+  "tools.wedding-pdf-editor.p_text.no_your_pdfs_are_opened_rearranged_and_w.c86a465c": "No. Tus PDF se abren, reordenan y guardan mediante un pequeño programa que se ejecuta dentro de tu propio navegador, por lo que el archivo nunca sale de tu dispositivo. No se envía nada a un servidor, no hace falta una cuenta y no se añade ninguna marca de agua.",
+  "tools.wedding-pdf-editor.summary_text.is_there_a_limit_to_how_many_pdfs_i_can.d7bbdfee": "¿Hay un límite para la cantidad de PDF que puedo combinar a la vez?",
+  "tools.wedding-pdf-editor.p_text.yes_one_run_takes_up_to_20_files_of_up_t.106e7cb9": "Sí. Una ejecución admite hasta 20 archivos de hasta 200 MB cada uno y hasta 1,500 páginas en el documento combinado. El límite real es la memoria de tu propio dispositivo: una pestaña del navegador que se queda sin memoria detiene el proceso. Unas pocas centenas de páginas se procesan sin problemas y, cuando superes esa cantidad, es mejor hacerlo en dos ejecuciones.",
+  "tools.wedding-pdf-editor.summary_text.in_what_order_will_my_merged_pdf_files_a.8c500576": "¿En qué orden aparecerán mis archivos PDF combinados?",
+  "tools.wedding-pdf-editor.p_text.in_the_order_you_see_in_the_page_list_th.b9c6e829": "En el orden en que los ves en la lista de páginas. Los archivos se añaden en el orden en que los seleccionaste, de modo que todas las páginas del primer archivo aparecen antes que todas las páginas del segundo. Puedes arrastrar cualquier página hacia arriba o hacia abajo, así que el orden del PDF exportado siempre coincide con el de la pantalla.",
+  "tools.wedding-pdf-editor.summary_text.can_i_delete_and_reorder_pages_after_i_m.202676ea": "¿Puedo eliminar y reordenar páginas después de combinar archivos?",
+  "tools.wedding-pdf-editor.p_text.yes_and_you_do_it_before_the_export_rath.8ec4e848": "Sí, y debes hacerlo antes de exportar, no después. Arrastra una página para moverla, usa los botones con flechas o desmarca la casilla para excluirla por completo del PDF. Cada fila muestra el nombre del archivo y el número de la página de la que procede, para que puedas encontrar la página que quieras en una lista larga.",
+  "tools.wedding-pdf-editor.summary_text.will_the_formatting_of_my_merged_documen.625072f7": "¿Se conservará el formato de mis documentos combinados?",
+  "tools.wedding-pdf-editor.p_text.the_page_content_and_the_page_size_are_k.c9cbfc62": "El contenido y el tamaño de las páginas se conservan exactamente como estaban: no se redimensiona ni se recorta nada, y el texto vectorial mantiene su formato vectorial, por lo que el archivo combinado se imprime con la misma nitidez que los originales. Lo que no se reconstruye es la estructura adicional que rodea la página, como marcadores, campos de formulario y botones interactivos, porque la herramienta copia el contenido de las páginas en lugar de editar el documento original.",
+  "tools.wedding-pdf-editor.summary_text.does_merging_pdfs_reduce_the_quality_of.db27ebbe": "¿Combinar archivos PDF reduce la calidad de mis archivos?",
+  "tools.wedding-pdf-editor.p_text.no_merging_copies_the_page_content_as_it.ba7b20ce": "No. Al combinar archivos, el contenido de las páginas se copia tal cual, por lo que un escaneo no se comprime de nuevo y un dibujo vectorial no se convierte en una imagen. Lo único que cambia es el tamaño del archivo resultante, porque las páginas de todos los archivos se guardan en un único documento.",
+  "tools.wedding-pdf-editor.summary_text.can_i_merge_password_protected_pdfs.5c115d35": "¿Puedo combinar archivos PDF protegidos con contraseña?",
+  "tools.wedding-pdf-editor.p_text.yes_as_long_as_you_know_the_password_whe.46c140b3": "Sí, siempre que conozcas la contraseña. Cuando un archivo no se puede abrir, la herramienta muestra un campo de contraseña debajo de ese archivo; escribe la contraseña y las páginas se incorporarán a la lista. Sin esa contraseña, ninguna herramienta puede leer un PDF que la necesite para abrirse, incluida esta.",
+  "tools.wedding-pdf-editor.summary_text.can_i_unlock_a_pdf_without_the_password.d8ef3450": "¿Puedo desbloquear un PDF sin la contraseña?",
+  "tools.wedding-pdf-editor.p_text.it_depends_on_which_kind_of_lock_the_fil.99b1f3a3": "Depende del tipo de bloqueo del archivo. Un PDF que se abre con normalidad pero impide imprimir, copiar o editar puede guardarse aquí como un archivo nuevo sin esas restricciones, y para ello no hace falta ninguna contraseña. Un PDF que necesita una contraseña para abrirse no puede desbloquearse sin ella, y esta herramienta no intenta adivinar contraseñas. La compatibilidad con cifrados se limita al estándar anterior: RC4 y AES-128, hasta PDF 1.6. Muchos PDF más recientes utilizan AES-256 (PDF 2.0), y esos no se pueden abrir aquí; la herramienta lo indica en lugar de fallar silenciosamente.",
+  "tools.wedding-pdf-editor.summary_text.what_page_sizes_and_resolutions_does_the.2af1f1dc": "¿Qué tamaños de página y resoluciones admite el editor?",
+  "tools.wedding-pdf-editor.p_text.every_page_size_there_is_the_tool_reads.14da3568": "Admite todos los tamaños de página posibles. La herramienta lee el tamaño real de cada página, como Letter, A4, Legal, A5 o Tabloid, y la página exportada conserva ese tamaño, por lo que un documento con páginas A4 y Letter mantiene la mezcla de tamaños. No hay ninguna resolución que elegir, porque una página PDF no es una fotografía y el texto vectorial sigue nítido a cualquier tamaño. La herramienta solo funciona con archivos PDF, así que una foto en formato HEIC o AVIF debe convertirse primero en PDF.",
+  "tools.wedding-pdf-editor.summary_text.how_is_this_different_from_an_image_tile.22b0bbf7": "¿En qué se diferencia de un generador de mosaicos de imágenes y en qué formato se exporta?",
+  "tools.wedding-pdf-editor.p_text.an_image_tiler_lays_separate_photos_out.dde59795": "Un generador de mosaicos de imágenes distribuye fotos distintas en una página nueva, como una hoja de contactos. Esta herramienta nunca dibuja nada ni modifica una imagen: toma las páginas que ya están en un PDF y las coloca en el orden que quieras. La exportación es en PDF. La combinación produce un archivo, y la división genera un archivo ZIP con un PDF por grupo.",
+  "tools.wedding-pdf-editor.h2_text.more_free_wedding_tools.511ec8cc": "Más herramientas gratuitas para bodas",
+  "tools.wedding-pdf-editor.a_text.wedding_invitation_maker.5db6b040": "Creador de invitaciones de boda",
+  "tools.wedding-pdf-editor.a_text.stationery_set_maker.ac7a26d7": "Creador de sets de papelería",
+  "tools.wedding-pdf-editor.a_text.seating_chart_maker.c3981dda": "Creador de planos de mesas",
+  "tools.wedding-pdf-editor.a_text.save_the_date_maker.b3e21618": "Guarde el creador de fechas",
+  "tools.wedding-pdf-editor.a_text.photo_book_planner.a9887dd0": "Planificador de libros de fotos",
+  "tools.wedding-pdf-editor.a_text.heic_to_jpg.67ca8d18": "HEIC a JPG",
+  "tools.wedding-pdf-editor.a_text.compress_photos.f1d8a20b": "Comprimir fotos",
+  "tools.wedding-pdf-editor.a_text.all_tools.03153f40": "Todas las herramientas",
+  "tools.wedding-pdf-editor.h2_text.related_guides.19ba9bbd": "Guías relacionadas",
+  "tools.wedding-pdf-editor.h4_text.make_a_matching_stationery_set.9d9d85da": "Crear un conjunto de papelería a juego",
+  "tools.wedding-pdf-editor.span_text.read_article.034b8746": "Leer artículo →",
+  "tools.wedding-pdf-editor.h4_text.build_the_seating_chart.7d44b2cd": "Crear el plano de asientos",
+  "tools.wedding-pdf-editor.h4_text.wedding_invitation_video_guide.4e944d3a": "Guía en vídeo para invitaciones de boda",
+  "tools.wedding-pdf-editor.h4_text.ai_wedding_video_from_photos.01d216e6": "Vídeo de boda con IA a partir de fotos",
+  "tools.wedding-pdf-editor.h2_text.paperwork_in_one_file_now_the_film.7c613b58": "El papeleo en un archivo. Ahora, la película.",
+  "tools.wedding-pdf-editor.p_text.the_same_photos_and_names_become_a_weddi.a4f78132": "Las mismas fotos y nombres se convierten en un vídeo de boda que tus invitados ven de verdad. Funciona en el mismo navegador y tampoco se sube nada.",
+  "tools.wedding-pdf-editor.a_text.make_the_wedding_video.21d5caa0": "Crear el vídeo de boda →",
+  "tools.wedding-photo-to-gif.h1_text.wedding_photo_to_gif_free_animated_gif_m.de70dfd0": "Foto de boda a GIF: creador de GIF animados gratis",
+  "tools.wedding-photo-to-gif.p_text.turn_a_set_of_wedding_photos_into_a_loop.314c1633": "Convierte una serie de fotos de boda en un GIF animado en bucle. Aplica fundidos, desplazamientos o zooms entre las imágenes, ajusta la velocidad, previsualiza la animación y descárgala. Gratis y en tu navegador.",
+  "tools.wedding-photo-to-gif.p_text.your_photos_stay_on_your_device_nothing.69e0acc7": "Tus fotos permanecen en tu dispositivo. No se sube nada.",
+  "tools.wedding-photo-to-gif.a_text.home.8cf04a97": "Hogar",
+  "tools.wedding-photo-to-gif.a_text.free_tools.c746326b": "Herramientas gratuitas",
+  "tools.wedding-photo-to-gif.span_text.wedding_photo_to_gif.8fc416cf": "Foto de boda a GIF",
+  "tools.wedding-photo-to-gif.h2_text.1_add_your_photos.353bce8a": "1. Añade tus fotos",
+  "tools.wedding-photo-to-gif.button_text.remove_all_photos.6d8e2f06": "Eliminar todas las fotos",
+  "tools.wedding-photo-to-gif.h2_text.2_animation_settings.197ef8f1": "2. Ajustes de animación",
+  "tools.wedding-photo-to-gif.label_text.transition_between_photos.562406ed": "Transición entre fotos",
+  "tools.wedding-photo-to-gif.option_text.fade.04e0385c": "Fundido",
+  "tools.wedding-photo-to-gif.option_text.slide.6160a53e": "Desplazamiento",
+  "tools.wedding-photo-to-gif.option_text.zoom.4252b72e": "Zoom",
+  "tools.wedding-photo-to-gif.option_text.none_hard_cut.f18a9d19": "Ninguna (corte seco)",
+  "tools.wedding-photo-to-gif.label_text.time_on_each_photo.a10dd9d3": "Tiempo por foto",
+  "tools.wedding-photo-to-gif.span_text.each_photo_is_held_for.ce0a46ac": "Each photo is held for",
+  "tools.wedding-photo-to-gif.strong_text.800.7a53928f": "800",
+  "tools.wedding-photo-to-gif.span_text.ms_800_to_1000_ms_reads_as_a_calm_slides.8727606b": "ms. 800 to 1000 ms reads as a calm slideshow; 200 to 400 ms is roughly 10 frames per second.",
+  "tools.wedding-photo-to-gif.label_text.output_size.2e422b9d": "Tamaño de salida",
+  "tools.wedding-photo-to-gif.option_text.320_px_email_signature_small_sticker.ee649d64": "320 px (firma de correo, pegatina pequeña)",
+  "tools.wedding-photo-to-gif.option_text.480_px_chat_email_social_post.d3d1fce9": "480 px (chat, correo, publicación social)",
+  "tools.wedding-photo-to-gif.option_text.800_px_big_screen.735bb80e": "800 px (pantalla grande)",
+  "tools.wedding-photo-to-gif.label_text.how_a_photo_fills_the_frame.78ede154": "Cómo encaja la foto en el encuadre",
+  "tools.wedding-photo-to-gif.option_text.fit_whole_photo_bars_may_show.bb87e80c": "Mostrar la foto completa (pueden aparecer barras)",
+  "tools.wedding-photo-to-gif.option_text.fill_the_frame_edges_are_cropped.2c6961c1": "Llenar el encuadre (los bordes se recortan)",
+  "tools.wedding-photo-to-gif.label_text.looping.a56d66d7": "Repetición",
+  "tools.wedding-photo-to-gif.option_text.loop_forever.70ab55fc": "Repetir indefinidamente",
+  "tools.wedding-photo-to-gif.option_text.play_once.f8f5fb71": "Reproducir una vez",
+  "tools.wedding-photo-to-gif.p_text.drag_a_photo_in_the_list_to_change_the_o.361302a7": "Arrastra una foto de la lista para cambiar el orden o utiliza los botones de flecha. El orden de la lista es el orden de la animación.",
+  "tools.wedding-photo-to-gif.h2_text.3_preview_and_download.eb6494ae": "3. Previsualiza y descarga",
+  "tools.wedding-photo-to-gif.strong_text.0.cfcd2084": "0",
+  "tools.wedding-photo-to-gif.span_text.photos.d68f0b43": "fotos",
+  "tools.wedding-photo-to-gif.span_text.px.21de26ca": "px",
+  "tools.wedding-photo-to-gif.span_text.frames.dcdc1ac0": "fotogramas",
+  "tools.wedding-photo-to-gif.span_text.file_size.1908624a": "Tamaño del archivo",
+  "tools.wedding-photo-to-gif.p_text.build_the_gif_to_see_the_animation_exact.548d09e2": "Crea el GIF para ver la animación exactamente como se guardará.",
+  "tools.wedding-photo-to-gif.button_text.build_the_gif.e6d28fb5": "Crear el GIF",
+  "tools.wedding-photo-to-gif.button_text.download_the_gif.bda4db1c": "Descargar el GIF",
+  "tools.wedding-photo-to-gif.h2_text.how_to_make_a_wedding_photo_gif.8e8c20fb": "Cómo crear un GIF con fotos de boda",
+  "tools.wedding-photo-to-gif.p_text.a_still_photo_set_on_a_screen_is_lovely.3728bdf6": "Una foto fija en una pantalla es preciosa, pero dura poco. Un GIF animado hace una cosa más: se mueve. Desvanece la primera imagen hacia la segunda, mantén cada foto el tiempo suficiente para poder contemplarla y toda la galería se convertirá en un bucle que podrás enviar a alguien que no estuvo en la boda.",
+  "tools.wedding-photo-to-gif.strong_text.add_the_photos.539126ea": "Añade las fotos.",
+  "tools.wedding-photo-to-gif.span_text.drop_a_folder_into_the_box_or_click_it_a.c02f2569": "Arrastra una carpeta al recuadro o haz clic y búscala. Se admiten JPG, PNG y WebP. No se sube nada: el navegador lee los archivos directamente de tu disco duro.",
+  "tools.wedding-photo-to-gif.strong_text.put_them_in_order.932fc1b5": "Ponlas en orden.",
+  "tools.wedding-photo-to-gif.span_text.drag_a_photo_up_or_down_or_use_the_arrow.4577237c": "Arrastra una foto hacia arriba o hacia abajo, o utiliza los botones de flecha. La lista de la izquierda muestra el orden de reproducción de la animación.",
+  "tools.wedding-photo-to-gif.strong_text.choose_the_movement.8b09d447": "Elige el movimiento.",
+  "tools.wedding-photo-to-gif.span_text.a_fade_is_the_quietest_and_works_for_alm.9f246124": "El desvanecimiento es el efecto más discreto y funciona con casi cualquier conjunto de fotos de boda. El desplazamiento parece una presentación de diapositivas. El zoom atrae la mirada hacia el centro de la imagen.",
+  "tools.wedding-photo-to-gif.strong_text.set_the_speed_and_the_size.93fc9ee0": "Elige la velocidad y el tamaño.",
+  "tools.wedding-photo-to-gif.span_text.the_speed_control_sets_how_long_each_pho.f35dad65": "El control de velocidad determina cuánto tiempo se muestra cada foto. El control de tamaño determina el ancho del GIF final en píxeles.",
+  "tools.wedding-photo-to-gif.strong_text.build_watch_download.f401b2dd": "Crea, visualiza y descarga.",
+  "tools.wedding-photo-to-gif.span_text.the_preview_is_the_real_gif_encoded_in_t.81a911ef": "La vista previa es el GIF real, codificado en la página, así que lo que ves es exactamente el archivo que guardarás. El tamaño del archivo aparece encima antes de descargar nada.",
+  "tools.wedding-photo-to-gif.span_text.if_you_want_the_stills_as_well_for_print.3ee356a4": "Si también quieres las imágenes fijas para imprimirlas, crear un álbum o reducir una foto de teléfono de 12 megapíxeles antes de enviarla",
+  "tools.wedding-photo-to-gif.a_text.compress_wedding_photos.dccfc1f5": "Comprimir fotos de boda",
+  "tools.wedding-photo-to-gif.span_text.handles_that_and.07dc968f": "WeddingAI.video lo gestiona y",
+  "tools.wedding-photo-to-gif.a_text.heic_to_jpg.67ca8d18": "HEIC a JPG",
+  "tools.wedding-photo-to-gif.span_text.turns_iphone_files_into_something_every.ad37d691": "convierte los archivos del iPhone en algo que cualquier navegador puede abrir.",
+  "tools.wedding-photo-to-gif.h2_text.what_each_setting_does.8b2d6382": "Qué hace cada ajuste",
+  "tools.wedding-photo-to-gif.th_text.setting.51ac4bf6": "Ajuste",
+  "tools.wedding-photo-to-gif.th_text.what_it_changes.630c6897": "Qué modifica",
+  "tools.wedding-photo-to-gif.th_text.what_to_pick.fa332a62": "Qué elegir",
+  "tools.wedding-photo-to-gif.td_text.transition.afedf9af": "Transición",
+  "tools.wedding-photo-to-gif.td_text.how_one_photo_becomes_the_next.dece8d0a": "Cómo se pasa de una foto a la siguiente",
+  "tools.wedding-photo-to-gif.td_text.fade_for_portraits_slide_for_a_sequence.b6f4a8bd": "Fundido para retratos, deslizamiento para una secuencia y zoom para una toma individual",
+  "tools.wedding-photo-to-gif.td_text.how_long_a_photo_is_held_on_screen.8e205b01": "Tiempo que aparece cada foto en pantalla",
+  "tools.wedding-photo-to-gif.td_text.800_to_1000_ms_for_a_calm_slideshow.a59908b7": "800 a 1000 ms para una presentación tranquila",
+  "tools.wedding-photo-to-gif.td_text.the_width_of_the_gif_in_pixels.31cffbb4": "Ancho del GIF en píxeles",
+  "tools.wedding-photo-to-gif.td_text.480_px_for_a_chat_app_320_px_for_a_signa.1f1b9c03": "480 px para una app de chat y 320 px para una firma",
+  "tools.wedding-photo-to-gif.td_text.fill_or_fit.f0563a0f": "Rellenar o ajustar",
+  "tools.wedding-photo-to-gif.td_text.what_happens_to_a_photo_whose_shape_diff.d68317d2": "Qué ocurre con una foto cuya forma es diferente",
+  "tools.wedding-photo-to-gif.td_text.fit_whole_for_a_portrait_fill_for_a_grid.af75e5c0": "Ideal para un retrato, perfecto para una cuadrícula",
+  "tools.wedding-photo-to-gif.td_text.whether_the_gif_repeats.cffa1851": "Si el GIF se repite",
+  "tools.wedding-photo-to-gif.td_text.forever_for_chat_and_social_once_for_a_s.23476a8c": "Para siempre en chats y redes sociales, por un momento en pantalla",
+  "tools.wedding-photo-to-gif.td_text.order.a240fa27": "Orden",
+  "tools.wedding-photo-to-gif.td_text.the_sequence_of_the_photos.fe9d9ddb": "La secuencia de las fotos",
+  "tools.wedding-photo-to-gif.td_text.story_order_getting_ready_the_ceremony_t.b6f24f6d": "Orden narrativo: los preparativos, la ceremonia y la fiesta",
+  "tools.wedding-photo-to-gif.h2_text.picking_the_right_size_and_speed.45a7b1f0": "Cómo elegir el tamaño y la velocidad adecuados",
+  "tools.wedding-photo-to-gif.p_text.two_numbers_decide_how_a_gif_feels_the_w.06a80fc1": "2 números determinan la sensación de un GIF: el ancho del archivo y el tiempo que se muestra cada foto. Si los eliges bien, la animación parecerá intencionada; si los eliges mal, parecerá una presentación de fotos que ha perdido el hilo.",
+  "tools.wedding-photo-to-gif.strong_text.200_to_400_milliseconds_per_photo.908d44c7": "200 a 400 milisegundos por foto",
+  "tools.wedding-photo-to-gif.span_text.is_roughly_10_frames_per_second_and_it_s.817992b5": "equivale aproximadamente a 10 fotogramas por segundo y funciona bien en secuencias rápidas con imágenes similares: confeti, una pista de baile o las cajas de los anillos apareciendo una tras otra.",
+  "tools.wedding-photo-to-gif.strong_text.800_to_1000_milliseconds_per_photo.0724fbf6": "800 a 1000 milisegundos por foto",
+  "tools.wedding-photo-to-gif.span_text.is_the_slideshow_pace_and_it_is_the_righ.f862647b": "corresponde al ritmo de una presentación de fotos y es la mejor opción para las imágenes tranquilas: los retratos de los preparativos, la ceremonia o el primer baile. Una guía publicada recomienda entre 100 y 200 ms para un movimiento fluido y entre 500 y 1000 ms para GIF con estilo de presentación.",
+  "tools.wedding-photo-to-gif.strong_text.320_pixels_wide.ea1a4f58": "320 píxeles de ancho",
+  "tools.wedding-photo-to-gif.span_text.is_enough_for_an_email_signature_and_kee.8f0c988c": "es suficiente para una firma de correo electrónico y mantiene el archivo muy pequeño.",
+  "tools.wedding-photo-to-gif.strong_text.480_pixels.db47e397": "480 píxeles",
+  "tools.wedding-photo-to-gif.span_text.is_the_safe_default_for_a_chat_app_or_a.2acf15c1": "es la opción más segura para una aplicación de chat o una publicación en redes sociales: un creadorAdvice publicado señala que una animación de 480 píxeles y 10 fotogramas sigue siendo pequeña y se carga rápido.",
+  "tools.wedding-photo-to-gif.strong_text.800_pixels.8f701e0b": "800 píxeles",
+  "tools.wedding-photo-to-gif.span_text.is_for_a_big_screen.8a73329e": "es ideal para una pantalla grande.",
+  "tools.wedding-photo-to-gif.strong_text.keep_the_finished_file_under_5_mb.5d13b8f1": "Mantén el archivo final por debajo de 5 MB.",
+  "tools.wedding-photo-to-gif.span_text.that_is_the_figure_a_published_size_guid.0261cacd": "Esa es la cifra que recomienda una guía de tamaño publicada para un uso web práctico y queda muy por debajo del límite que aceptan las aplicaciones de mensajería.",
+  "tools.wedding-photo-to-gif.strong_text.keep_it_short.63be30be": "Que sea breve.",
+  "tools.wedding-photo-to-gif.span_text.two_to_six_seconds_is_the_length_most_pe.7de05e49": "De dos a seis segundos es el tiempo que la mayoría ve antes de dejar de mirar. Un conjunto de 20 fotos a 900 milisegundos por foto ya dura 18 segundos, así que usa menos fotos para un mensaje de chat y reserva el conjunto completo para una pantalla.",
+  "tools.wedding-photo-to-gif.h2_text.why_gif_colours_look_flatter_than_your_p.a1291dfd": "Por qué los colores de los GIF se ven más apagados que tus fotos",
+  "tools.wedding-photo-to-gif.p_text.a_gif_holds_only_256_colours_that_is_the.760bf3ce": "Un GIF solo admite 256 colores. Es una limitación del formato, no de tus fotografías: el formato la lleva desde que CompuServe lo introdujo en 1987, y todos los GIF de las aplicaciones de chat actuales siguen funcionando igual. Una foto de boda con tonos de piel suaves, un cielo delicate o un velo con degradado debe comprimirse en un rango mucho más limitado, por lo que el resultado puede parecer ligeramente granulado o plano.",
+  "tools.wedding-photo-to-gif.p_text.this_tool_builds_one_shared_palette_of_2.09eddf86": "Esta herramienta crea una paleta común de 256 colores a partir de todas tus fotos, que es la forma más fiel de hacerlo. Cada fotograma usa la misma gama de colores, así que la animación no parpadea entre fotogramas. La contrapartida es que una imagen muy cálida y otra muy fría dentro del mismo conjunto deben ponerse de acuerdo en un punto intermedio, y una de ellas puede cambiar ligeramente de tono. Es la misma limitación que tiene cualquier creador de GIF y no se puede evitar sin cambiar el formato.",
+  "tools.wedding-photo-to-gif.p_text.two_practical_tips_keep_the_set_to_photo.15b787f5": "Dos consejos prácticos. Limita el conjunto a fotos tomadas con la misma luz: una serie de fotos a la hora dorada se ve mucho mejor que cinco series de cinco habitaciones diferentes. Y, si alguna foto es más importante que las demás, reduce su tamaño excluyéndola del bucle y publícala por separado.",
+  "tools.wedding-photo-to-gif.h2_text.why_some_frames_have_bars_around_them.32305864": "Por qué algunos fotogramas tienen barras alrededor",
+  "tools.wedding-photo-to-gif.p_text.a_gif_cannot_change_its_size_in_the_midd.487340f6": "Un GIF no puede cambiar de tamaño durante una animación, por lo que el lienzo queda determinado por la primera foto que añades. Si la segunda foto tiene otra proporción, como un retrato vertical después de una foto grupal horizontal, debe ajustarse al mismo marco. Ahí aparecen las barras. Es la pregunta más habitual que recibe cualquier creador gratuito de GIF, porque la herramienta nunca la explica.",
+  "tools.wedding-photo-to-gif.span_text.there_are_only_two_honest_answers_and_th.d07f1ae6": "Solo hay dos respuestas honestas, y esta herramienta te ofrece las dos.",
+  "tools.wedding-photo-to-gif.strong_text.fit_whole_photo.fe553f8b": "Ajustar la foto completa",
+  "tools.wedding-photo-to-gif.span_text.keeps_every_pixel_and_shows_the_empty_sp.91ff7d0e": "Conserva todos los píxeles y muestra el espacio vacío como barras alrededor de la imagen.",
+  "tools.wedding-photo-to-gif.strong_text.fill_the_frame.76556aac": "Rellenar el marco",
+  "tools.wedding-photo-to-gif.span_text.covers_the_empty_space_by_cropping_the_p.7e66067d": "Cubre el espacio vacío recortando la foto según la proporción del lienzo. Esto pierde una franja de la imagen, pero ofrece una animación limpia y sin bordes. En un conjunto de boda que mezcla un retrato vertical con fotos horizontales, rellenar el marco suele verse mejor en un móvil, donde las barras destacarían mucho más.",
+  "tools.wedding-photo-to-gif.p_text.order_helps_too_the_first_photo_sets_the.8eea5e33": "El orden también ayuda. La primera foto determina la proporción de toda la animación, así que coloca primero una foto con una proporción similar a la de la mayoría de las demás y las barras desaparecerán casi por completo.",
+  "tools.wedding-photo-to-gif.h2_text.where_a_wedding_gif_works_best.4102fcfb": "Dónde funciona mejor un GIF de boda",
+  "tools.wedding-photo-to-gif.p_text.a_gif_is_a_good_fit_for_a_short_still_lo.ef4d5cbb": "Un GIF es ideal para un momento breve, estático y en bucle: la entrada, el beso, el primer baile o los confeti. En cambio, no es adecuado para una ceremonia larga, porque un GIF no tiene sonido ni controles de reproducción.",
+  "tools.wedding-photo-to-gif.strong_text.chat_apps.819cacdc": "Aplicaciones de chat.",
+  "tools.wedding-photo-to-gif.span_text.a_short_loop_is_exactly_what_these_are_b.7d95d032": "Un bucle breve es exactamente lo que estas aplicacionesDesigned para mostrar, y un archivo de 480 píxeles de menos de unos megabytes llega al instante.",
+  "tools.wedding-photo-to-gif.strong_text.social_posts.532046c2": "Publicaciones en redes sociales.",
+  "tools.wedding-photo-to-gif.span_text.a_silent_looping_self_contained_file_nee.240074cb": "Un archivo silencioso, en bucle y autónomo no necesita un reproductor de vídeo ni un enlace: empieza a reproducirse justo donde lo publicas.",
+  "tools.wedding-photo-to-gif.strong_text.a_screen_or_a_digital_frame.c40b9d28": "Una pantalla o un marco digital",
+  "tools.wedding-photo-to-gif.span_text.at_the_venue_or_at_home_here_a_gif_that.015d872d": "en el lugar de la boda o en casa. Aquí, un GIF que se reproduce una sola vez suele ser mejor que uno en bucle, porque si el bucle salta en el momento equivocado es justo lo que más llama la atención.",
+  "tools.wedding-photo-to-gif.strong_text.email_signatures_and_messages_to_older_r.c19bd7ec": "Firmas de correo electrónico y mensajes para familiares mayores",
+  "tools.wedding-photo-to-gif.span_text.where_a_video_file_is_too_heavy_and_a_li.bb3f902e": ", donde un archivo de vídeo pesa demasiado y un enlace implica un clic más.",
+  "tools.wedding-photo-to-gif.span_text.if_the_moment_deserves_sound_the_vows_th.03602ed6": "If the moment deserves sound - the vows, the speeches, the first dance - a GIF cannot carry it.",
+  "tools.wedding-photo-to-gif.a_text.the_wedding_invitation_video_maker.8b68300b": "the wedding invitation video maker",
+  "tools.wedding-photo-to-gif.span_text.and.be5d5d37": "and",
+  "tools.wedding-photo-to-gif.a_text.ai_wedding_video_from_photos.b250bd63": "Vídeo de boda con IA a partir de fotos",
+  "tools.wedding-photo-to-gif.span_text.build_a_film_from_the_same_pictures_and.86335a6a": "build a film from the same pictures, and",
+  "tools.wedding-photo-to-gif.a_text.the_wedding_photo_slideshow_guide.4216f8fc": "the wedding photo slideshow guide",
+  "tools.wedding-photo-to-gif.span_text.covers_how_to_sequence_them.da297fe8": "covers how to sequence them.",
+  "tools.wedding-photo-to-gif.h2_text.frequently_asked_questions.af2a4d28": "Preguntas frecuentes",
+  "tools.wedding-photo-to-gif.summary_text.how_do_i_make_a_gif_from_wedding_photos.a6cc7855": "¿Cómo hago un GIF con fotos de boda?",
+  "tools.wedding-photo-to-gif.p_text.add_your_photos_choose_how_they_should_m.9e993cdf": "Añade tus fotos, elige cómo quieres que se transformen unas en otras —un fundido, un deslizamiento o un zoom—, decide cuánto tiempo permanece cada foto en pantalla y, después, crea el GIF y descárgalo. Todo funciona en tu navegador, así que las pictures nunca se suben a ningún servidor y el archivo final llega a tu dispositivo en unos segundos.",
+  "tools.wedding-photo-to-gif.summary_text.are_my_photos_uploaded_to_a_server.c40be310": "¿Se suben mis fotos a un servidor?",
+  "tools.wedding-photo-to-gif.p_text.no_your_photos_are_read_resized_and_anim.09cf7642": "No. Tus fotos las lee, redimensiona y anima tu propio navegador, que también codifica el GIF. No se envía nada a ningún servidor, no necesitas una cuenta y el archivo no lleva marca de agua.",
+  "tools.wedding-photo-to-gif.summary_text.which_image_formats_can_i_use.b76c256c": "¿Qué formatos de imagen puedo usar?",
+  "tools.wedding-photo-to-gif.p_text.jpg_png_and_webp_work_everywhere_heic_fi.72203a7c": "Los archivos JPG, PNG y WebP funcionan en todas partes. Los archivos HEIC de un iPhone se pueden convertir primero con la herramienta HEIC a JPG de este sitio, y los archivos RAW de la cámara deben exportarse como JPG antes de que cualquier navegador pueda abrirlos.",
+  "tools.wedding-photo-to-gif.summary_text.how_many_photos_can_i_put_in_one_gif.17720914": "¿Cuántas fotos puedo incluir en un GIF?",
+  "tools.wedding-photo-to-gif.p_text.up_to_20_photos_at_a_time_a_published_gu.5e8a1be3": "Hasta 20 fotos a la vez. Una guía publicada para creadores de GIF gratuitos recomienda entre 3 y 20 imágenes por animación; superar esa cantidad aumenta el peso del archivo y el tiempo de espera.",
+  "tools.wedding-photo-to-gif.summary_text.why_do_my_photos_look_grainy_in_the_gif.d23e1cac": "¿Por qué mis fotos parecen con grano en el GIF?",
+  "tools.wedding-photo-to-gif.p_text.a_gif_holds_only_256_colours_so_a_weddin.58c4d8a9": "Un GIF solo admite 256 colores, por lo que una foto de boda con tonos de piel suaves o un cielo delicate debe comprimirse en un rango de colores mucho más limitado. Todo este GIF comparte una paleta de 256 colores elegida entre todas tus fotos, así que las imágenes con tonos muy diferentes pueden variar ligeramente de color.",
+  "tools.wedding-photo-to-gif.summary_text.why_do_some_frames_have_bars_around_them.69251bbe": "¿Por qué algunos fotogramas tienen barras alrededor?",
+  "tools.wedding-photo-to-gif.p_text.the_gif_canvas_takes_its_shape_from_your.63e665d0": "El lienzo del GIF adopta la forma de tu primera foto, porque un GIF no puede cambiar de tamaño durante la animación. Una foto con otra forma se ajusta completa, por lo que el espacio vacío aparece como barras, o se recorta para llenar el fotograma, por lo que se cortan los bordes de la foto. Puedes alternar entre ambas opciones cuando quieras.",
+  "tools.wedding-photo-to-gif.summary_text.can_i_make_the_gif_loop_forever_or_play.95b4d3d3": "¿Puedo hacer que el GIF se repita indefinidamente o que se reproduzca solo una vez?",
+  "tools.wedding-photo-to-gif.p_text.both_loop_forever_is_the_default_and_is.977a1ddc": "Ambas cosas. La repetición indefinida es la opción predeterminada y es la que esperan las apps de chat o las publicaciones sociales. Reproducir una vez guarda el archivo sin una instrucción de repetición, por lo que se detiene en la última foto: la opción ideal para una pantalla o un marco digital.",
+  "tools.wedding-photo-to-gif.summary_text.how_do_i_make_the_gif_faster_or_slower.eb27898a": "¿Cómo hago que el GIF sea más rápido o más lento?",
+  "tools.wedding-photo-to-gif.p_text.the_speed_control_sets_how_long_each_pho.35bd0e50": "El control de velocidad define cuánto tiempo se muestra cada foto, desde 200 milisegundos hasta 2 segundos. Para una presentación tranquila de retratos de boda, usa de 800 a 1000 milisegundos por foto. Para una secuencia de movimiento rápida, usa de 200 a 400 milisegundos, aproximadamente 10 fotogramas por segundo.",
+  "tools.wedding-photo-to-gif.summary_text.what_size_should_my_wedding_gif_be.31d8e0ac": "¿Qué tamaño debe tener mi GIF de boda?",
+  "tools.wedding-photo-to-gif.p_text.480_pixels_is_the_safe_choice_for_a_chat.599e6a10": "480 píxeles es una opción segura para una app de chat o un correo electrónico, y es el tamaño que recomienda una guía publicada para una animación pequeña y rápida. Usa 320 píxeles para una firma de correo electrónico o una pegatina pequeña, y 800 píxeles cuando el archivo se vaya a mostrar en una pantalla grande. Mantén el archivo final por debajo de 5 MB para un uso web práctico.",
+  "tools.wedding-photo-to-gif.summary_text.is_the_wedding_photo_to_gif_maker_free.96ad8fb6": "¿El conversor de fotos de boda a GIF es gratis?",
+  "tools.wedding-photo-to-gif.p_text.yes_there_is_no_account_no_watermark_no.e78d9965": "Sí. No hay cuenta, marca de agua, límite diario ni ningún coste. El GIF se codifica y se guarda en tu propio dispositivo, y todas las herramientas de este sitio funcionan de la misma manera.",
+  "tools.wedding-photo-to-gif.h2_text.more_free_wedding_tools.511ec8cc": "Más herramientas de boda gratis",
+  "tools.wedding-photo-to-gif.a_text.photo_collage.942e207a": "Collage de fotos",
+  "tools.wedding-photo-to-gif.a_text.contact_sheet.bee56ad6": "Hoja de contactos",
+  "tools.wedding-photo-to-gif.a_text.photo_book_planner.a9887dd0": "Planificador de libros de fotos",
+  "tools.wedding-photo-to-gif.a_text.compress_photos.f1d8a20b": "Comprimir fotos",
+  "tools.wedding-photo-to-gif.a_text.crop_for_reels.46822554": "Recorte para Reels",
+  "tools.wedding-photo-to-gif.a_text.all_tools.03153f40": "Todas las herramientas",
+  "tools.wedding-photo-to-gif.h2_text.related_guides.19ba9bbd": "Guías relacionadas",
+  "tools.wedding-photo-to-gif.h4_text.wedding_photo_slideshow.eebf0a40": "Presentación de fotos de boda",
+  "tools.wedding-photo-to-gif.span_text.read_article.034b8746": "Leer artículo →",
+  "tools.wedding-photo-to-gif.h4_text.ai_wedding_video_from_photos.01d216e6": "Vídeo de boda con IA a partir de fotos",
+  "tools.wedding-photo-to-gif.h4_text.couple_slideshow_video.ecb31003": "Vídeo de presentación de la pareja",
+  "tools.wedding-photo-to-gif.h4_text.wedding_video_formats.9d967d63": "Formatos de vídeo de boda",
+  "tools.wedding-photo-to-gif.h2_text.want_it_with_sound.9bf5f2d7": "¿Lo quieres con sonido?",
+  "tools.wedding-photo-to-gif.p_text.the_same_photographs_become_a_wedding_vi.ae81e6b4": "Las mismas fotografías se convierten en un vídeo de boda con música que tus invitados podrán ver desde el principio. Se reproduce en el mismo navegador y tampoco se sube nada.",
+  "tools.wedding-photo-to-gif.a_text.make_the_wedding_video.21d5caa0": "Crear el vídeo de boda →",
+  "tools.wedding-video-editor.h1_text.wedding_video_editor_trim_and_convert_vi.075332c4": "Editor de vídeo de boda: recorta y convierte gratis",
+  "tools.wedding-video-editor.p_text.cut_your_wedding_video_down_to_the_part.7f4ab55d": "Recorta tu vídeo de boda a lo esencial, ajústalo para Reels o WhatsApp y expórtalo como MP4, WebM o MKV. Todo funciona directamente en tu navegador.",
+  "tools.wedding-video-editor.p_text.your_video_is_never_uploaded_no_signup_n.f997cf69": "Tu vídeo nunca se sube. Sin registro, sin marca de agua y sin esperas.",
+  "tools.wedding-video-editor.a_text.home.8cf04a97": "Hogar",
+  "tools.wedding-video-editor.a_text.free_tools.c746326b": "Herramientas gratuitas",
+  "tools.wedding-video-editor.span_text.wedding_video_editor.b693a808": "Editor de vídeo de boda",
+  "tools.wedding-video-editor.h2_text.1_load_your_wedding_video.cd8335be": "1. Carga tu vídeo de boda",
+  "tools.wedding-video-editor.p_text.drop_your_wedding_video_here_or_click_to.9f04c9af": "Arrastra aquí tu vídeo de boda o haz clic para buscarlo",
+  "tools.wedding-video-editor.p_text.mp4_mov_webm_or_mkv_one_file_at_a_time.7baf2f40": "MP4, MOV, WebM o MKV. Un archivo a la vez.",
+  "tools.wedding-video-editor.p_text.nothing_is_uploaded_the_file_is_read_by.4a9b61af": "No se sube nada. Tu navegador lee el archivo y nunca sale de este dispositivo.",
+  "tools.wedding-video-editor.h2_text.2_preview_and_trim.edc44502": "2. Previsualiza y recorta",
+  "tools.wedding-video-editor.label_text.in_point_seconds.38a4f314": "Punto de inicio (segundos)",
+  "tools.wedding-video-editor.label_text.out_point_seconds.d8779555": "Punto de final (segundos)",
+  "tools.wedding-video-editor.button_text.set_the_in_point_from_the_playhead.d8bb2879": "Define el punto de inicio con el cursor de reproducción",
+  "tools.wedding-video-editor.button_text.set_the_out_point_from_the_playhead.ade8948e": "Define el punto de final con el cursor de reproducción",
+  "tools.wedding-video-editor.span_text.video_length.5f6bf905": "Duración del vídeo",
+  "tools.wedding-video-editor.span_text.clip_length.ac790719": "Duración del clip",
+  "tools.wedding-video-editor.span_text.source_frame_size.f92a8fd7": "Tamaño del fotograma de origen",
+  "tools.wedding-video-editor.span_text.file.8c7dd922": "Archivo",
+  "tools.wedding-video-editor.p_text.type_the_in_and_out_point_in_seconds_or.1b0d5c5d": "Escribe el punto de inicio y el punto de final en segundos, o reproduce el vídeo y pulsa los 2 botones. La barra amarilla de la línea de tiempo indica la parte que conservarás.",
+  "tools.wedding-video-editor.h2_text.3_export.878f26dc": "3. Exportar",
+  "tools.wedding-video-editor.label_text.output_frame_size.8c57ce5b": "Tamaño del fotograma de salida",
+  "tools.wedding-video-editor.option_text.original_size_no_re_encode_when_possible.c4d5465f": "Tamaño original (sin volver a codificar cuando sea posible)",
+  "tools.wedding-video-editor.option_text.1920_1080_full_hd_landscape.eb77d51d": "1920 × 1080 - Full HD horizontal",
+  "tools.wedding-video-editor.option_text.1080_1920_vertical_for_reels_and_tiktok.d124a281": "1080 × 1920 - vertical, para Reels y TikTok",
+  "tools.wedding-video-editor.option_text.1280_720_hd_smaller_file.60a4148d": "1280 × 720 - HD, archivo más pequeño",
+  "tools.wedding-video-editor.option_text.854_480_sd_smallest_file.51b65912": "854 × 480 - SD, archivo más pequeño",
+  "tools.wedding-video-editor.label_text.when_the_frame_size_changes.8cad5e21": "Al cambiar el tamaño del fotograma",
+  "tools.wedding-video-editor.option_text.letterbox_keep_the_whole_frame.adba8fa7": "Barras laterales: conserva todo el fotograma",
+  "tools.wedding-video-editor.option_text.crop_to_fill_the_frame.c71b0335": "Recorte para llenar el fotograma",
+  "tools.wedding-video-editor.label_text.output_format.b1fd524d": "Formato de salida",
+  "tools.wedding-video-editor.option_text.mp4_best_for_phones_and_whatsapp.e62d50c8": "MP4: la mejor opción para móviles y WhatsApp",
+  "tools.wedding-video-editor.option_text.webm_smallest_files_for_the_web.cb651fe6": "WebM: archivos más pequeños para la web",
+  "tools.wedding-video-editor.option_text.mkv_keeps_every_stream.1186166d": "MKV: conserva todas las pistas",
+  "tools.wedding-video-editor.button_text.export_the_video.4e80a9c2": "Exportar el vídeo",
+  "tools.wedding-video-editor.h2_text.what_the_wedding_video_editor_does.2f56b08c": "Qué hace el editor de vídeos de boda",
+  "tools.wedding-video-editor.p_text.a_full_wedding_video_is_long_three_hours.9a6ad76e": "Un vídeo de boda completo es largo. Tres horas de ceremonia no son algo que envíes a nadie. El clip que la gente realmente quiere suele durar cuarenta segundos, y el trabajo de verdad consiste en encontrar esos cuarenta segundos y hacerlos lo bastante pequeños para poder enviarlos.",
+  "tools.wedding-video-editor.p_text.this_editor_does_three_jobs_and_stops_th.9a024ade": "Este editor hace tres cosas y nada más. Recorta el vídeo entre un punto de inicio y un punto de final que tú eliges. Cambia el tamaño del fotograma cuando el clip debe adaptarse a la pantalla de un móvil o a un feed. Y guarda el resultado como MP4, WebM o MKV. Todo ocurre en tu propio dispositivo, así que no hay cargas, colas ni esperas por el servidor de otra persona.",
+  "tools.wedding-video-editor.p_text.the_engine_is_mediabunny_which_drives_th.9645f036": "El motor es mediabunny, que controla el codificador WebCodecs ya integrado en tu navegador. Por eso, el límite depende de la memoria libre de tu dispositivo y no de un límite de carga impuesto por otra persona. También por eso es importante el navegador que utilices.",
+  "tools.wedding-video-editor.h3_text.what_it_does.b12c51b9": "Qué ofrece",
+  "tools.wedding-video-editor.li_text.cuts_a_video_to_an_in_point_and_an_out_p.0888f4f7": "Recorta un vídeo entre un punto de inicio y un punto de final, en segundos.",
+  "tools.wedding-video-editor.li_text.sets_the_frame_size_to_1920_1080_1080_19.59188e92": "Establece el tamaño del fotograma en 1920 × 1080, 1080 × 1920, 1280 × 720 o 854 × 480.",
+  "tools.wedding-video-editor.li_text.fits_the_frame_either_by_letterboxing_so.82e79f95": "Adapta el fotograma con barras laterales para que no se corte nada, o lo recorta para llenarlo por completo.",
+  "tools.wedding-video-editor.li_text.writes_mp4_webm_or_mkv_and_downloads_one.d80ef249": "Guarda el vídeo como MP4, WebM o MKV y descarga un único archivo final.",
+  "tools.wedding-video-editor.li_text.shows_the_length_of_the_source_the_lengt.f9d22824": "Muestra la duración del archivo de origen, la duración del clip y las dimensiones del fotograma de origen mientras trabajas.",
+  "tools.wedding-video-editor.h3_text.what_it_does_not_do.287a070b": "Lo que no hace",
+  "tools.wedding-video-editor.li_text.no_music_no_subtitles_no_speed_change.4e5dd4f7": "Sin música, sin subtítulos, sin cambios de velocidad.",
+  "tools.wedding-video-editor.li_text.it_does_not_join_several_clips_into_one.179ad40e": "No une varios clips en uno.",
+  "tools.wedding-video-editor.li_text.no_filters_no_transitions_no_text_no_tim.271ef180": "Sin filtros, sin transiciones, sin texto, sin línea de tiempo.",
+  "tools.wedding-video-editor.li_text.no_account_no_cloud_rendering_no_waterma.15f457c2": "Sin cuenta, sin renderizado en la nube, sin marca de agua.",
+  "tools.wedding-video-editor.h2_text.how_to_trim_a_wedding_video.e9d73838": "Cómo recortar un video de boda",
+  "tools.wedding-video-editor.p_text.three_steps_and_the_middle_one_is_the_on.b71ff54d": "Tres pasos, y el del medio es el importante.",
+  "tools.wedding-video-editor.strong_text.load_the_file.e3470a38": "Carga el archivo.",
+  "tools.wedding-video-editor.span_text.drop_it_on_the_box_or_click_the_box_to_b.17d91716": "Arrástralo hasta el recuadro o haz clic en él para buscarlo. El video aparecerá de inmediato y la duración del origen se mostrará debajo del reproductor.",
+  "tools.wedding-video-editor.strong_text.set_the_two_points.4a35b1aa": "Define los dos puntos.",
+  "tools.wedding-video-editor.span_text.type_the_in_point_and_the_out_point_in_s.0cb129c8": "Escribe el punto de inicio y el punto de final en segundos, o reproduce el video y pulsa los dos botones para tomar el punto de inicio y el punto de final desde donde estés en ese momento.",
+  "tools.wedding-video-editor.strong_text.pick_the_size_and_the_format_then_export.2783125e": "Elige el tamaño y el formato y, después, exporta.",
+  "tools.wedding-video-editor.span_text.choose_a_frame_size_choose_whether_a_sma.407d1c67": "Elige las dimensiones del fotograma, decide si un fotograma más pequeño se mostrará con barras negras o recortado, selecciona MP4, WebM o MKV y pulsa el botón de exportación. Se descargará un archivo.",
+  "tools.wedding-video-editor.p_text.one_thing_is_worth_knowing_before_you_st.a9ae1278": "Conviene saber una cosa antes de empezar. Si el clip ya está en el formato que has elegido y no has cambiado las dimensiones del fotograma, el editor copia el flujo de video original en lugar de volver a codificarlo. Es rápido y no altera la imagen. En cuanto cambias el tamaño o el contenedor, el video debe volver a codificarse, y eso siempre supone una pequeña pérdida de calidad.",
+  "tools.wedding-video-editor.p_text.the_in_point_snaps_to_the_nearest_keyfra.b32af6b5": "El punto de inicio se ajusta al fotograma clave más cercano anterior. Es intencionado, porque un fotograma clave contiene una imagen completa, de modo que el primer fotograma de tu clip nunca está a medias. Por eso, el clip puede comenzar un instante antes del segundo que has escrito.",
+  "tools.wedding-video-editor.h2_text.which_format_should_you_export_for_whats.e4511fda": "¿Qué formato deberías exportar para WhatsApp, Instagram y YouTube?",
+  "tools.wedding-video-editor.p_text.the_format_is_the_wrapper_around_the_vid.511e22e8": "El formato es el contenedor del video y el audio. Es lo primero que debes acertar, porque determina dónde se podrá reproducir el archivo.",
+  "tools.wedding-video-editor.th_text.format.520d0db3": "Formato",
+  "tools.wedding-video-editor.th_text.video_inside.1adbf083": "Video incluido",
+  "tools.wedding-video-editor.th_text.audio_inside.bc78d377": "Audio integrado",
+  "tools.wedding-video-editor.th_text.best_for.422390fc": "Ideal para",
+  "tools.wedding-video-editor.td_text.mp4.96e814dc": "MP4",
+  "tools.wedding-video-editor.td_text.h_264_wherever_your_browser_can_encode_i.7e0e021f": "H.264 siempre que tu navegador pueda codificarlo; de lo contrario, el mejor códec que admita",
+  "tools.wedding-video-editor.td_text.copied_from_your_original_when_mp4_can_c.bc462f35": "Se copia desde el archivo original cuando el formato MP4 lo permite",
+  "tools.wedding-video-editor.td_text.phones_whatsapp_instagram_youtube_email.30fad532": "Móviles, WhatsApp, Instagram, YouTube, correo electrónico y cualquier televisor o proyector",
+  "tools.wedding-video-editor.td_text.webm.84f150cd": "WebM",
+  "tools.wedding-video-editor.td_text.vp9.ae4cfaa9": "VP9",
+  "tools.wedding-video-editor.td_text.opus_or_vorbis_copied_when_it_fits.64af7e91": "Opus o Vorbis, copiados cuando el formato lo permite",
+  "tools.wedding-video-editor.td_text.smaller_files_for_the_web_email_and_clou.4a1420a3": "Archivos más pequeños para la web, el correo electrónico y el almacenamiento en la nube",
+  "tools.wedding-video-editor.td_text.mkv.bc5a0dfb": "MKV",
+  "tools.wedding-video-editor.td_text.any_codec_your_browser_can_encode.a88e4e61": "Cualquier códec que tu navegador pueda codificar",
+  "tools.wedding-video-editor.td_text.keeping_a_master_copy_with_every_stream.f5cf8796": "Conserva una copia maestra con todas sus pistas",
+  "tools.wedding-video-editor.p_text.for_a_phone_use_mp4_convertbox_app_recom.840b7c02": "Para un móvil, usa MP4. convertbox.app recomienda MP4 con H.264 para Reels, TikTok y YouTube Shorts, y feelthefile.com indica que Instagram admite hasta 1080 × 1920 y 30 fps, y YouTube hasta 1080p y 60 fps. El ajuste vertical de este editor es exactamente 1080 × 1920.",
+  "tools.wedding-video-editor.p_text.this_editor_does_not_show_you_a_bitrate.e1aa81d7": "Este editor no muestra un control de tasa de bits. Por si te sirve, justright.tools publica una útil regla orientativa: unos 1000 a 2000 kbps para definición estándar, 2500 a 5000 kbps para HD y 8000 a 15000 kbps para Full HD, en una escala de calidad que va de 0 para lossless a 51 para la peor calidad, con un valor predeterminado de 23. Aquí el codificador elige una buena calidad para el tamaño de fotograma solicitado y tú no tienes que pensarlo.",
+  "tools.wedding-video-editor.h2_text.video_editor_comparison_what_the_other_f.267be478": "Comparativa de editores de vídeo: qué ofrecen las otras herramientas gratuitas",
+  "tools.wedding-video-editor.p_text.the_2026_listicles_about_free_video_edit.29662981": "Las listas de 2026 sobre editores de vídeo gratuitos valoran las herramientas en la pantalla de exportación, no por su lista de funciones. clipcraft.ai llama a esa sección lo que las herramientas gratuitas suelen ocultar, y es la pregunta correcta. Esto es lo que las otras herramientas gratuitas dicen de sí mismas.",
+  "tools.wedding-video-editor.caption_text.checked_on_10_november_2026_every_site_c.70329c44": "Comprobado el 10 de noviembre de 2026. Cada sitio cambia sus propios límites, así que consulta la página actual antes de crear un flujo de trabajo alrededor de sus condiciones.",
+  "tools.wedding-video-editor.th_text.weddingai_video.7ba80bb9": "WeddingAI.video",
+  "tools.wedding-video-editor.th_text.convertbox_app.eed08341": "convertbox.app",
+  "tools.wedding-video-editor.th_text.feelthefile_com.2a18bf03": "feelthefile.com",
+  "tools.wedding-video-editor.th_text.smoothclip_com.3ae94d3a": "smoothclip.com",
+  "tools.wedding-video-editor.td_text.trims_a_clip.8a387345": "Recorta un clip",
+  "tools.wedding-video-editor.td_text.yes.93cba074": "Sí",
+  "tools.wedding-video-editor.td_text.not_stated.c48e684d": "No indicado",
+  "tools.wedding-video-editor.td_text.changes_the_frame_size.e4b5aa19": "Cambia el tamaño del fotograma",
+  "tools.wedding-video-editor.td_text.four_presets.54f5da0d": "4 preajustes",
+  "tools.wedding-video-editor.td_text.up_to_1080_1920.87bc5f37": "Hasta 1080 × 1920",
+  "tools.wedding-video-editor.td_text.exports_9_16_1_1_and_4_5.5e3010dd": "Exporta en 9:16, 1:1 y 4:5",
+  "tools.wedding-video-editor.td_text.changes_the_container.0703103a": "Cambia el formato del archivo",
+  "tools.wedding-video-editor.td_text.mp4_webm_mkv.7c1ef483": "MP4, WebM, MKV",
+  "tools.wedding-video-editor.td_text.adds_text_or_captions.2f01105c": "Añade texto o subtítulos",
+  "tools.wedding-video-editor.td_text.no.bafd7322": "No",
+  "tools.wedding-video-editor.td_text.changes_the_speed.c7d783a0": "Cambia la velocidad",
+  "tools.wedding-video-editor.td_text.from_0_25_to_4.6230222f": "De 0.25× a 4×",
+  "tools.wedding-video-editor.td_text.joins_several_clips.c6cc99bc": "Une varios clips",
+  "tools.wedding-video-editor.td_text.up_to_10_clips.d70acf87": "Hasta 10 clips",
+  "tools.wedding-video-editor.td_text.where_the_work_happens.d802dc56": "Dónde se realiza el trabajo",
+  "tools.wedding-video-editor.td_text.in_your_browser.ef138c0f": "En tu navegador",
+  "tools.wedding-video-editor.td_text.in_the_browser.e2d1ac66": "En el navegador",
+  "tools.wedding-video-editor.td_text.on_their_servers.911e9f57": "En sus servidores",
+  "tools.wedding-video-editor.td_text.published_size_limit.f10406b9": "Límite de tamaño al publicar",
+  "tools.wedding-video-editor.td_text.none_your_device_memory_is_the_limit.85dcaa28": "Ninguno, el límite es la memoria de tu dispositivo",
+  "tools.wedding-video-editor.td_text.50_mb.290df3fc": "50 MB",
+  "tools.wedding-video-editor.td_text.250_mb_per_file.56c90f2c": "250 MB por archivo",
+  "tools.wedding-video-editor.td_text.watermark.ee20bb60": "Marca de agua",
+  "tools.wedding-video-editor.td_text.none.6adf97f8": "Ninguna",
+  "tools.wedding-video-editor.td_text.undo_and_redo.e4bcd18b": "Deshacer y rehacer",
+  "tools.wedding-video-editor.td_text.up_to_50_steps.e9083c61": "Hasta 50 pasos",
+  "tools.wedding-video-editor.p_text.two_rows_in_that_table_are_the_whole_dif.6530b28c": "Esas 2 filas de la tabla son toda la diferencia. Este editor nunca envía tu video de boda a ninguna parte y nunca te pide que te registres. smoothclip.com dice claramente que la renderización se realiza en nuestros servidores, no en tu portátil, y las comparaciones de 2026 coinciden en que esta es la característica que decide para la mayoría de las parejas.",
+  "tools.wedding-video-editor.h2_text.frequently_asked_questions.af2a4d28": "Preguntas frecuentes",
+  "tools.wedding-video-editor.summary_text.are_my_wedding_videos_uploaded_to_a_serv.880a96ad": "¿Se suben mis videos de boda a un servidor?",
+  "tools.wedding-video-editor.p_text.no_the_file_is_read_by_your_own_browser.5c073c54": "No. El archivo lo lee tu propio navegador, el clip se recorta ahí y la exportación se guarda ahí. No se envía nada a un servidor, no necesitas una cuenta y el archivo que recibes no tiene marca de agua.",
+  "tools.wedding-video-editor.summary_text.what_video_formats_does_the_editor_read.0ba55998": "¿Qué formatos de video lee el editor y qué puede exportar?",
+  "tools.wedding-video-editor.p_text.it_reads_mp4_mov_webm_and_mkv_which_cove.b61dca9b": "Lee MP4, MOV, WebM y MKV, con los que suelen trabajar un teléfono, una cámara o un dron, y exporta MP4, WebM o MKV. MP4 es la opción más segura para teléfonos y WhatsApp, WebM genera los archivos más pequeños para la web y MKV conserva todas las pistas que puede incluir.",
+  "tools.wedding-video-editor.summary_text.will_trimming_or_converting_reduce_the_q.c30734f9": "¿Recortar o convertir reduce la calidad de mi video?",
+  "tools.wedding-video-editor.p_text.trimming_a_clip_that_is_already_in_the_f.f0475edd": "Al recortar un clip que ya está en el formato que quieres, se copia el flujo de video original, así que no se vuelve a codificar y la imagen no se modifica. Al cambiar el tamaño o el contenedor, el video se vuelve a codificar y siempre se pierde algo de calidad. Todos los conversores hacen ese mismo intercambio.",
+  "tools.wedding-video-editor.summary_text.do_i_need_to_install_anything_or_create.8c4ab6f8": "¿Necesito instalar algo o crear una cuenta?",
+  "tools.wedding-video-editor.p_text.no_there_is_no_app_to_install_no_account.a4909d4f": "No. No hay ninguna app que instalar, ni cuenta, ni correo electrónico, ni marca de agua. El codificador de video se descarga de este sitio la primera vez que exportas y, después, el navegador lo conserva en su propia caché.",
+  "tools.wedding-video-editor.summary_text.how_long_does_the_export_take.c518dda5": "¿Cuánto tarda la exportación?",
+  "tools.wedding-video-editor.p_text.it_depends_on_the_job_and_on_your_machin.82986571": "Depende del trabajo y de tu equipo. Un clip corto que solo necesita recortarse se copia y termina en segundos, mientras que un clip largo que debe volver a codificarse a un nuevo tamaño requiere más tiempo y tarda varios minutos. La barra de progreso muestra cuánto ha avanzado. Como referencia, convertbox.app indica que un clip de 15 segundos se convierte en unos segundos y que uno cercano a su límite de 50 MB puede tardar hasta 1 minuto.",
+  "tools.wedding-video-editor.summary_text.is_there_a_file_size_limit.98374a01": "¿Hay un límite de tamaño de archivo?",
+  "tools.wedding-video-editor.p_text.there_is_no_upload_cap_because_nothing_i.9e9d3f4d": "No hay ningún límite de subida porque no se sube nada. El límite real es la memoria libre de tu dispositivo, y un clip largo en alta definición necesita mucha. Para comparar, convertbox.app publica un máximo de 50 MB, feelthefile.com publica 250 MB por archivo y clipzeal.com publica 500 MB en ordenador.",
+  "tools.wedding-video-editor.summary_text.can_i_export_it_for_whatsapp_instagram_o.f10f1510": "¿Puedo exportarlo para WhatsApp, Instagram o YouTube?",
+  "tools.wedding-video-editor.p_text.yes_that_is_what_the_size_presets_are_fo.209ac427": "Sí, para eso están los tamaños preestablecidos. convertbox.app recomienda MP4 con H.264 a 1080 x 1920 para Reels, TikTok y YouTube Shorts, mientras que feelthefile.com indica Instagram hasta 1080 x 1920 y 30 fps, y YouTube hasta 1080p y 60 fps. Elige el tamaño vertical, selecciona Recortar para rellenar y exporta en MP4.",
+  "tools.wedding-video-editor.summary_text.can_i_add_music_subtitles_or_change_the.e64163ff": "¿Puedo añadir música, subtítulos o cambiar la velocidad?",
+  "tools.wedding-video-editor.p_text.no_and_this_page_does_not_pretend_otherw.0020a211": "No, y esta página no finge lo contrario. Recorta, cambia el tamaño y convierte. La música, los subtítulos, el cambio de velocidad y la unión de varios clips se omiten a propósito para que las 3 funciones que sí ofrece se hagan bien y rápido.",
+  "tools.wedding-video-editor.summary_text.which_browser_do_i_need.360303d4": "¿Qué navegador necesito?",
+  "tools.wedding-video-editor.p_text.the_export_needs_webcodecs_the_browser_a.fe23c3d5": "La exportación necesita WebCodecs, la API del navegador que realiza el trabajo de vídeo. Chrome y Edge la incorporan desde hace años, Safari 16.4 y posteriores también, y freevideogenerator.io indica que Firefox ofrece compatibilidad limitada. Si el botón de exportación no funciona, normalmente es por esto.",
+  "tools.wedding-video-editor.summary_text.is_the_wedding_video_editor_free.be010af6": "¿El editor de vídeo de boda es gratis?",
+  "tools.wedding-video-editor.p_text.yes_it_is_free_with_no_account_no_waterm.3d1f2935": "Sí. Es gratis, sin cuenta, sin marca de agua y sin límite de clips que puedas recortar. No hay nada que comprar ni nada que actualizar.",
+  "tools.wedding-video-editor.h2_text.more_free_wedding_tools.511ec8cc": "Más herramientas de boda gratis",
+  "tools.wedding-video-editor.a_text.wedding_video_invitation_maker.9f6ee0a6": "Creador de invitaciones en vídeo para bodas",
+  "tools.wedding-video-editor.a_text.photo_collage.942e207a": "Collage de fotos",
+  "tools.wedding-video-editor.a_text.compress_photos.f1d8a20b": "Comprimir fotos",
+  "tools.wedding-video-editor.a_text.crop_for_reels.46822554": "Recortar para Reels",
+  "tools.wedding-video-editor.a_text.photo_book_planner.a9887dd0": "Planificador de libros de fotos",
+  "tools.wedding-video-editor.a_text.stationery_set_maker.ac7a26d7": "Creador de sets de papelería",
+  "tools.wedding-video-editor.a_text.all_tools.03153f40": "Todas las herramientas",
+  "tools.wedding-video-editor.h2_text.related_guides.19ba9bbd": "Guías relacionadas",
+  "tools.wedding-video-editor.h4_text.which_video_format_to_keep.7a90d902": "Qué formato de vídeo conservar",
+  "tools.wedding-video-editor.span_text.read_article.034b8746": "Leer artículo →",
+  "tools.wedding-video-editor.h4_text.how_long_a_wedding_video_should_be.572c7fec": "Duración ideal de un vídeo de boda",
+  "tools.wedding-video-editor.h4_text.sending_a_large_wedding_video_to_family.064f38d6": "Enviar un vídeo de boda grande a la familia",
+  "tools.wedding-video-editor.h4_text.adding_subtitles_to_a_wedding_video.03afad46": "Añadir subtítulos a un vídeo de boda",
+  "tools.wedding-video-editor.h2_text.got_the_clip_you_want_now_make_the_whole.ca853815": "¿Ya tienes el clip que quieres? Crea ahora toda la película.",
+  "tools.wedding-video-editor.p_text.the_same_photos_and_names_become_a_weddi.a4f78132": "Tus mismas fotos y nombres se convierten en un vídeo de boda que tus invitados realmente verán. Funciona en el mismo navegador y tampoco se sube nada.",
+  "tools.wedding-video-editor.a_text.make_the_wedding_video.21d5caa0": "Crear el vídeo de boda →",
+  "tools.copy.veditLoading.zzzzzz6c342": "Cargando el codificador de vídeo…",
+  "tools.copy.veditSaved.zzzzzzcc5e8": "{name} guardado.",
+  "tools.copy.veditNoEncode.zzzzzz80733": "Este navegador no puede codificar ese códec de vídeo. Prueba con MP4 o abre la página en Chrome o Edge en un ordenador de escritorio.",
+  "tools.copy.veditUnreadable.zzzzzzc60ce": "No se pudo leer ese archivo o no tiene ninguna pista de vídeo. Prueba con un archivo MP4, MOV, WebM o MKV.",
+  "tools.copy.gifEncoderMissing.zzzzzz2120b": "No se pudo cargar el codificador de GIF.",
+  "tools.copy.gifTooMany.zzzzzzc5080": "Esta herramienta admite hasta {n} fotos a la vez.",
+  "tools.copy.gifMoveUp.zzzzzz7740c": "Subir",
+  "tools.copy.gifMoveDown.zzzzzzbbba3": "Bajar",
+  "tools.copy.gifNoPhotos.zzzzzze695a": "Primero, añade algunas fotos.",
+  "tools.copy.gifEncoding.zzzzzz34135": "Codificando el GIF",
+  "tools.copy.gifReady.zzzzzz30515": "Tu GIF está listo.",
+  "tools.copy.gifFailed.zzzzzz4d8e0": "No se pudo crear el GIF.",
+  "tools.copy.gifStatus.zzzzzzf8841": "Añade algunas fotos para empezar tu GIF.",
+  "tools.wedding-stationery-set-maker.td_text.table_number.96005765": "Table number",
+  "tools.wedding-stationery-set-maker.h4_text.what_to_put_on_a_wedding_invitation.c45a79e9": "What to put on a wedding invitation",
+  "tools.wedding-stationery-set-maker.h4_text.how_to_print_your_stationery_set.b1ab1539": "How to print your stationery set",
+  "tools.wedding-photo-contact-sheet.td_text.show_the_number_under_each_photo.b66390f7": "Show the number under each photo",
+  "tools.wedding-photo-contact-sheet.td_text.show_the_file_name_under_each_photo.660ea72e": "Show the file name under each photo",
+  "tools.wedding-photo-contact-sheet.td_text.columns.168b82d3": "Columns",
+  "tools.wedding-photo-contact-sheet.th_text.columns.168b82d3": "Columns",
+  "tools.wedding-photo-contact-sheet.td_text.2_columns.fc3e36f1": "2 columns",
+  "tools.wedding-photo-contact-sheet.td_text.3_columns.7f6ed182": "3 columns",
+  "tools.wedding-photo-contact-sheet.td_text.4_columns.792c30f0": "4 columns",
+  "tools.wedding-photo-contact-sheet.td_text.5_columns.64b49904": "5 columns",
+  "tools.wedding-photo-contact-sheet.td_text.6_columns.b3acc011": "6 columns",
+  "tools.wedding-photo-contact-sheet.td_text.7_columns.27abceec": "7 columns",
+  "tools.wedding-photo-contact-sheet.td_text.8_columns.69cd8160": "8 columns",
+  "tools.wedding-photo-contact-sheet.summary_text.what_is_a_contact_sheet.451b8158": "What is a contact sheet?",
+  "tools.wedding-pdf-editor.strong_text.merge_into_one_pdf.df912a30": "Merge into one PDF",
+  "tools.wedding-pdf-editor.strong_text.page_groups_for_the_split.134d2020": "Page groups for the split",
+  "tools.wedding-pdf-editor.strong_text.save_a_copy_without_a_password.2d1fb60d": "Save a copy without a password",
+  "tools.wedding-photo-to-gif.td_text.time_on_each_photo.a10dd9d3": "Time on each photo",
+  "tools.wedding-photo-to-gif.td_text.output_size.2e422b9d": "Output size",
+  "tools.wedding-photo-to-gif.td_text.looping.a56d66d7": "Looping",
   "tools.wedding-video-editor.th_text.what_it_does.b12c51b9": "What it does",
   "tools.wedding-checklist-generator.h1_text.wedding_planning_checklist_generator.28edbd6f": "Generador de listas de boda",
   "tools.wedding-checklist-generator.p_text.a_month_by_month_plan_built_around_your.0dcaea13": "Un plan mes a mes organizado según la fecha de tu boda, desde 12+ meses antes hasta el día después de la boda. Marca las tareas como completadas en el navegador: no se sube nada.",
@@ -65935,5 +65445,62 @@
   "blog.wedding-dress-code-guide.summary_text.is_it_safe_to_ask_the_couple.318036cf": "¿Es seguro preguntarle a la pareja?",
   "blog.wedding-dress-code-guide.p_text.always_ask_what_the_venue_floor_is_l.49edab7e": "Siempre. Pregunte cómo es el piso del lugar y si existe un requisito de vestimenta para la ceremonia; esas dos respuestas resuelven la mayoría de las decisiones sobre vestimenta.",
   "blog.wedding-dress-code-guide.a_text.decode_the_exact_wording_on_your_inv.98dac56b": "Decodifica el texto exacto de tu invitación",
-  "tools.wedding-dress-code-decoder.a_text.read_the_full_dress_code_guide_for_g.efc380da": "Lea la guía completa del código de vestimenta para invitados."
+  "tools.section.title.planning": "Herramientas de planificación, redacción y invitados (14)",
+  "tools.section.desc.planning": "Planificadores gratuitos en el navegador para las partes de una boda que no son fotografías: listas de verificación, tiempo y dinero, votos, discursos, notas de agradecimiento y el código de vestimenta en la invitación.",
+  "tools.card.badge.planning.19": "Más de 100 tareas",
+  "tools.card.name.planning.19": "Lista de verificación para la planificación de bodas",
+  "tools.card.tag.planning.19": "Un plan mes a mes creado en torno a tu cita, con una barra de progreso guardada en tu navegador.",
+  "tools.card.badge.planning.20": "Botellas y cajas",
+  "tools.card.name.planning.20": "Calculadora de alcohol para bodas",
+  "tools.card.tag.planning.20": "Los huéspedes y los horarios del bar tienen una lista exacta de compras de vinos, cervezas, licores y tostadas.",
+  "tools.card.badge.planning.21": "150–250 palabras",
+  "tools.card.name.planning.21": "Escritor de votos matrimoniales",
+  "tools.card.tag.planning.21": "La estructura de cuatro partes, control de tono y control del tiempo de palabra. Solo tus palabras, nada de escritura fantasma de IA.",
+  "tools.card.badge.planning.22": "3 a 5 minutos",
+  "tools.card.name.planning.22": "Redactor de discursos de boda",
+  "tools.card.tag.planning.22": "Brindis de padrino, dama de honor y padres construidos a partir de sus propias historias, con un recuento de palabras en vivo.",
+  "tools.card.badge.planning.23": "80-85% locales",
+  "tools.card.name.planning.23": "Calculadora de recuento de invitados",
+  "tools.card.tag.planning.23": "Pronostique la asistencia real a partir de invitaciones y viajes, luego obtenga mesas, comidas y plazos de proveedores.",
+  "tools.card.badge.planning.24": "Ceremonia → despedida",
+  "tools.card.name.planning.24": "Cronología del día de la boda",
+  "tools.card.tag.planning.24": "Un día completo de programación construido hacia adelante y hacia atrás desde el momento de la ceremonia. Listo para el proveedor.",
+  "tools.card.badge.planning.25": "Para invitados",
+  "tools.card.name.planning.25": "Calculadora de regalos de boda",
+  "tools.card.tag.planning.25": "Una gama respetuosa de obsequios en efectivo basada en su relación, sus gastos de viaje y su propio presupuesto.",
+  "tools.card.badge.planning.26": "SSA primero",
+  "tools.card.name.planning.26": "Lista de verificación de cambio de nombre",
+  "tools.card.tag.planning.26": "La secuencia de la agencia estadounidense después del matrimonio, en el orden que impide que se rechacen las solicitudes.",
+  "tools.card.badge.planning.27": "Modo por lotes",
+  "tools.card.name.planning.27": "Generador de notas de agradecimiento",
+  "tools.card.tag.planning.27": "Una cálida nota por invitado, cada una lo suficientemente diferente como para que dos primos que comparan tarjetas se den cuenta.",
+  "tools.card.badge.planning.28": "Pisos y porciones",
+  "tools.card.name.planning.28": "Calculadora de porción de pastel",
+  "tools.card.tag.planning.28": "Los invitados cuentan en un plan de niveles, con estándares de postres estadounidenses y porciones de dedos del Reino Unido.",
+  "tools.card.badge.planning.29": "10 códigos de vestimenta",
+  "tools.card.name.planning.29": "Decodificador de código de vestimenta",
+  "tools.card.tag.planning.29": "Lo que realmente significan \"corbata negra opcional\" y otros nueve términos de invitación, para todos.",
+  "tools.card.badge.planning.30": "lista de sobres",
+  "tools.card.name.planning.30": "Calculadora de propinas de proveedores",
+  "tools.card.tag.planning.30": "Una propina sugerida por proveedor y una cifra total de efectivo, con contratos de cargo por servicio manejados.",
+  "tools.card.badge.planning.31": "Compartir e insertar",
+  "tools.card.name.planning.31": "Creador de cuenta regresiva para bodas",
+  "tools.card.tag.planning.31": "Un temporizador en vivo, un enlace para compartir, un iframe insertado para el sitio web de su boda y una tarjeta de historia.",
+  "tools.card.badge.planning.32": "Más de 40 preguntas",
+  "tools.card.name.planning.32": "Lista de verificación de preguntas del proveedor",
+  "tools.card.tag.planning.32": "Qué preguntar antes de firmar cada contrato, más las señales de alerta que deberían poner fin a la reunión.",
+  "tools.card.cta.try_free.19": "Pruébalo gratis →",
+  "tools.card.cta.try_free.20": "Pruébalo gratis →",
+  "tools.card.cta.try_free.21": "Pruébalo gratis →",
+  "tools.card.cta.try_free.22": "Pruébalo gratis →",
+  "tools.card.cta.try_free.23": "Pruébalo gratis →",
+  "tools.card.cta.try_free.24": "Pruébalo gratis →",
+  "tools.card.cta.try_free.25": "Pruébalo gratis →",
+  "tools.card.cta.try_free.26": "Pruébalo gratis →",
+  "tools.card.cta.try_free.27": "Pruébalo gratis →",
+  "tools.card.cta.try_free.28": "Pruébalo gratis →",
+  "tools.card.cta.try_free.29": "Pruébalo gratis →",
+  "tools.card.cta.try_free.30": "Pruébalo gratis →",
+  "tools.card.cta.try_free.31": "Pruébalo gratis →",
+  "tools.card.cta.try_free.32": "Pruébalo gratis →"
 }
