@@ -60,7 +60,7 @@
     });
     </script>
     
-    <link rel="stylesheet" href="/styles.min.css?v=3.41">
+    <link rel="stylesheet" href="/styles.min.css?v=3.42">
     <link rel="stylesheet" href="/styles/i18n.css">
 <script defer src="/js/main.min.js?v=3.22"></script>
     <style>
@@ -242,7 +242,7 @@ if ('serviceWorker' in navigator) {
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name" data-i18n="order.label_text.your_name.zzzzzz1">Your Name <span class="required-mark" aria-hidden="true">*</span></label>
-                            <input type="text" id="name" name="name" required autocomplete="name" placeholder="e.g., Sarah Johnson" data-i18n-attr="placeholder:order.input_placeholder.e_g_sarah_johnson.45211033" />
+                            <input type="text" id="name" name="name" required maxlength="100" autocomplete="name" placeholder="e.g., Sarah Johnson" data-i18n-attr="placeholder:order.input_placeholder.e_g_sarah_johnson.45211033" />
                         </div>
                         <div class="form-group">
                             <label for="email" data-i18n="order.label_text.email.zzzzzz2">Email <span class="required-mark" aria-hidden="true">*</span></label>
@@ -300,7 +300,7 @@ if ('serviceWorker' in navigator) {
                     <div class="form-row">
                         <div class="form-group form-group-full">
                             <label for="details" data-i18n="order.label_text.tell_us_about_your_project.zzzzzz5">Tell us about your project <span class="required-mark" aria-hidden="true">*</span></label>
-                            <textarea id="details" name="details" rows="5" required placeholder="A few sentences about your wedding, the footage you have, and what you'd like to achieve. If your wedding is within 6 months, mention the date so we can prioritize." data-i18n-attr="placeholder:order.textarea_placeholder.describe_your_vision_the_current_state_o.89880061"></textarea>
+                            <textarea id="details" name="details" rows="5" required maxlength="5000" placeholder="A few sentences about your wedding, the footage you have, and what you'd like to achieve. If your wedding is within 6 months, mention the date so we can prioritize." data-i18n-attr="placeholder:order.textarea_placeholder.describe_your_vision_the_current_state_o.89880061"></textarea>
                             <small class="form-hint" style="display:block;margin-top:.4rem;color:var(--color-text-light);font-size:.8125rem;" data-i18n="order.small_text.not_sure_which_service_fits.zzzzzzA">Not sure which service fits? Just describe your project &mdash; Sofia will recommend the best match in her reply.</small>
                         </div>
                     </div>
@@ -308,7 +308,7 @@ if ('serviceWorker' in navigator) {
                     <div class="form-row">
                         <div class="form-group">
                             <label for="upload-link" data-i18n="order.label_text.upload_link.zzzzzz6">Upload Link <span class="optional" style="color:var(--color-text-light);font-weight:400;" data-i18n="order.label_text.optional.zzzzzz8">(optional)</span></label>
-                            <input type="url" id="upload-link" name="upload_link" autocomplete="url" inputmode="url" placeholder="https://drive.google.com/..." data-i18n-attr="placeholder:order.input_placeholder.https_drive_google_com.53310346" />
+                            <input type="url" id="upload-link" name="upload_link" autocomplete="url" inputmode="url" pattern="https?://.*" placeholder="https://drive.google.com/..." data-i18n-attr="placeholder:order.input_placeholder.https_drive_google_com.53310346" />
                         </div>
                         <div class="form-group">
                             <label for="country" data-i18n="order.label_text.country.zzzzzz7">Country <span class="optional" style="color:var(--color-text-light);font-weight:400;" data-i18n="order.label_text.optional.zzzzzz8">(optional)</span></label>
@@ -381,6 +381,24 @@ if ('serviceWorker' in navigator) {
                                 invalid.push(name);
                             }
                         });
+                        // type=url only validates URL *syntax*: javascript:,
+                        // ftp: and data: all pass. The link is optional, but
+                        // when present it must be a real http(s) address.
+                        var link = form.querySelector('#upload-link');
+                        if (link && link.value.trim()) {
+                            var linkOk = false;
+                            try {
+                                var parsed = new URL(link.value.trim());
+                                linkOk = parsed.protocol === 'http:' || parsed.protocol === 'https:';
+                            } catch (e) { linkOk = false; }
+                            if (!linkOk) {
+                                link.setAttribute('aria-invalid', 'true');
+                                var linkLabel = form.querySelector('label[for="upload-link"]');
+                                invalid.push(linkLabel
+                                    ? linkLabel.textContent.replace(/[*\s]+$/, '').trim()
+                                    : 'Upload link');
+                            }
+                        }
                         if (invalid.length > 0) {
                             e.preventDefault();
                             if (errorEl) {

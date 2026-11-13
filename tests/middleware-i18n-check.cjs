@@ -302,6 +302,136 @@ async function run() {
         ]);
     }
 
+    // ------------------------------------------- 2026-11-13 audit fixes
+    // 1. P2-4  the currency pass must never inject a <span> into an inline
+    //          <script> string (the gift calculator showed raw HTML).
+    // 2. P2-3  /<lang>/pricing/ and /<lang>/tools/ must serve a localized
+    //          <title> + meta description, not the English source.
+    // 3. P3-9  duplicate URL spellings must 301 to the canonical path.
+    {
+        async function render(urlPath) {
+            const src = sourceFileFor(urlPath);
+            const request = new Request(ORIGIN + urlPath, {
+                method: "GET", headers: { "user-agent": "Mavis-Test/1.0" },
+            });
+            const context = {
+                request, env: {},
+                next: async () => new Response(fs.readFileSync(src), {
+                    status: 200,
+                    headers: { "content-type": "text/html; charset=utf-8" },
+                }),
+            };
+            const res = await onRequest(context);
+            return { res, html: await res.text() };
+        }
+        const head = (html) => {
+            const title = (html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i) || [])[1] || "";
+            const tag = (html.match(/<meta\b[^>]*\bname="description"[^>]*>/i) || [])[0] || "";
+            const desc = (tag.match(/\bcontent="([^"]*)"/) || [])[1] || "";
+            return { title: title.trim(), desc: desc.trim() };
+        };
+
+        {
+            fetchLog.length = 0;
+            const { html } = await render("/zh/tools/wedding-gift-calculator/");
+            const scripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/gi)]
+                .map((m) => m[1]).join("\n");
+            const outsideScripts = html.replace(
+                /<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, "");
+            report("/zh/tools/wedding-gift-calculator/", "", [
+                ["no currency span inside a <script> string", !/wa-local-price/.test(scripts),
+                    scripts.includes("wa-local-price") ? "raw HTML still in JS" : "clean"],
+                ["currency localization still works in visible copy",
+                    /wa-local-price/.test(outsideScripts),
+                    "visible spans: " + (outsideScripts.match(/wa-local-price/g) || []).length],
+            ]);
+        }
+
+        for (const [urlPath, expectTitle, forbid] of [
+            ["/de/pricing/", "Hochzeitsvideo-Preise", "Wedding Video Pricing"],
+            ["/de/tools/", "kostenlose Hochzeits-Tools", "32 Free Wedding Planning"],
+        ]) {
+            fetchLog.length = 0;
+            const { html } = await render(urlPath);
+            const { title, desc } = head(html);
+            const enDesc = "Wedding video pricing: 11 AI services";
+            report(urlPath, "", [
+                ["localized <title>", title.includes(expectTitle) && !title.includes(forbid), title.slice(0, 80)],
+                ["localized meta description", desc.length > 40 && !desc.startsWith(enDesc) &&
+                    !desc.startsWith("32 free browser-side"), desc.slice(0, 80)],
+            ]);
+        }
+
+        {
+            // P3-3 / P3-4: no two pages may share a SERP title, and the
+            // English (default-language) head must stay untouched.
+            const home = head((await render("/de/")).html).title;
+            const gen = head((await render("/de/ai-wedding-video-generator/")).html).title;
+            // sourceFileFor() falls back to the homepage for language-less
+            // paths, so serve the English pricing file explicitly here.
+            const enRes = await onRequest({
+                request: new Request(ORIGIN + "/pricing/", {
+                    method: "GET", headers: { "user-agent": "Mavis-Test/1.0" },
+                }),
+                env: {},
+                next: async () => new Response(fs.readFileSync(path.join(REPO, "pricing", "index.html")), {
+                    status: 200, headers: { "content-type": "text/html; charset=utf-8" },
+                }),
+            });
+            const en = head(await enRes.text()).title;
+            const hiOne = head((await render("/hi/blog/multilingual-wedding-video/")).html).title;
+            const hiTwo = head((await render("/hi/blog/multilingual-wedding-videos/")).html).title;
+            report("duplicate SERP titles", "", [
+                ["generator page has its own localized title",
+                    gen.length > 0 && gen !== home, "home: " + home.slice(0, 45) + " | gen: " + gen.slice(0, 45)],
+                ["English pricing head is unchanged",
+                    en.includes("Wedding Video Pricing"), en.slice(0, 70)],
+                ["the two hi multilingual articles have distinct titles",
+                    hiOne.length > 0 && hiTwo.length > 0 && hiOne !== hiTwo,
+                    hiOne.slice(0, 40) + " | " + hiTwo.slice(0, 40)],
+            ]);
+        }
+
+        {
+            const redirects = [];
+            // NOTE: /./pricing/ is NOT testable here - WHATWG URL parsing
+            // resolves the dot segment before the middleware ever sees the
+            // path, so the request already arrives as /pricing/. That spelling
+            // can never serve a second document.
+            for (const [urlPath, expected] of [
+                ["//pricing/", "/pricing/"],
+                ["/pricing//", "/pricing/"],
+                ["/index.html", "/"],
+                ["/tools/index.html", "/tools/"],
+            ]) {
+                const request = new Request(ORIGIN + urlPath, {
+                    method: "GET", headers: { "user-agent": "Mavis-Test/1.0" },
+                });
+                const res = await onRequest({ request, env: {}, next: async () => new Response("ok") });
+                const loc = res.headers.get("location");
+                redirects.push([
+                    urlPath + " -> " + loc,
+                    res.status === 301 && loc === expected,
+                    "status " + res.status,
+                ]);
+            }
+            const normal = await onRequest({
+                request: new Request(ORIGIN + "/pricing/", {
+                    method: "GET", headers: { "user-agent": "Mavis-Test/1.0" },
+                }),
+                env: {},
+                next: async () => new Response(fs.readFileSync(path.join(REPO, "pricing", "index.html")), {
+                    status: 200, headers: { "content-type": "text/html; charset=utf-8" },
+                }),
+            });
+            report("duplicate URL normalization", "", [
+                ...redirects,
+                ["canonical URL is not redirected", normal.status !== 301,
+                    "status " + normal.status],
+            ]);
+        }
+    }
+
     console.log(`\n${failures === 0 ? "ALL CHECKS PASSED" : failures + " CHECK(S) FAILED"}`);
     process.exit(failures === 0 ? 0 : 1);
 }

@@ -177,7 +177,24 @@ export async function loadI18nShards(origin, lang, version, html, extraNamespace
         const bfile = bundles[bid];
         if (bfile) {
             const payload = await fetchShard(origin, lang, version, bfile);
-            if (payload && Object.keys(payload).length) return payload;
+            if (payload && Object.keys(payload).length) {
+                if (!extraNamespaces || !extraNamespaces.length) return payload;
+                // A bundle holds exactly the page's bound keys. Fixed keys the
+                // middleware looks up by name (pricing.page_title,
+                // tools.meta_description, ...) are NOT bound, so merge their
+                // namespaces here too - otherwise a page served from a bundle
+                // would silently lose its localized head metadata.
+                const merged = { ...payload };
+                for (const ns of extraNamespaces) {
+                    const list = manifest[ns];
+                    if (!Array.isArray(list)) continue;
+                    for (const f of list) {
+                        const shard = await fetchShard(origin, lang, version, f);
+                        if (shard) Object.assign(merged, shard);
+                    }
+                }
+                return merged;
+            }
         }
     }
 

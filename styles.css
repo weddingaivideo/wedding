@@ -14,6 +14,19 @@
     --color-text: #2C2C2C;
     --color-text-light: #6B6B6B;
     --color-white: #FFFFFF;
+    /* Surfaces (2026-11-13): --color-white is used both as a card background
+       and as text on dark buttons, so it cannot simply be flipped for dark
+       mode. These variables keep every original light value exactly. */
+    --color-surface: #FFFFFF;
+    --color-surface-warm: #FFF7E6;
+    --color-surface-warm-2: #FFFAF0;
+    --color-surface-warm-3: #fffbeb;
+    --color-surface-warm-4: #FCFAF6;
+    --color-surface-warm-5: #F5F5F0;
+    --color-surface-warm-6: #FEF3E2;
+    --color-surface-warm-7: #F5E8F0;
+    --color-surface-error: #FFF5F5;
+    --color-on-dark: #FFFFFF;
     --color-border: #E5E0D8;
 
     --font-heading: 'Playfair Display', Georgia, serif;
@@ -255,7 +268,7 @@ h1, h2, h3, h4, h5, h6 {
     top: -100px;
     left: 0;
     background: var(--color-secondary);
-    color: var(--color-white);
+    color: var(--color-on-dark);
     padding: 0.75rem 1.25rem;
     font-weight: 600;
     font-size: 0.9375rem;
@@ -361,13 +374,13 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
 
 .btn-secondary {
     background: transparent;
-    color: var(--color-secondary);
+    color: var(--color-text);
     border: 2px solid var(--color-secondary);
 }
 
 .btn-secondary:hover {
     background: var(--color-secondary);
-    color: var(--color-white);
+    color: var(--color-on-dark);
 }
 
 .btn-nav {
@@ -421,7 +434,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    color: var(--color-secondary);
+    color: var(--color-text);
     font-weight: 600;
     text-decoration: none;
     background: transparent;
@@ -471,7 +484,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
 
 .section-header h2 {
     font-size: clamp(1.75rem, 4vw, 2.5rem);
-    color: var(--color-secondary);
+    color: var(--color-text);
     margin-bottom: var(--spacing-sm);
 }
 
@@ -518,7 +531,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
     margin: var(--spacing-lg) 0;
 }
 .cat-tech-specs .spec-card {
-    background: var(--color-white);
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-top: 3px solid #2e8cb8;
     border-radius: var(--radius-md);
@@ -547,7 +560,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
     margin: var(--spacing-lg) 0;
 }
 .cat-style-gallery .style-card {
-    background: var(--color-white);
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-top: 3px solid #c45a8a;
     border-radius: var(--radius-md);
@@ -561,7 +574,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
 }
 .cat-style-gallery .style-card .style-thumb {
     aspect-ratio: 4/3;
-    background: linear-gradient(135deg, #f5e8f0 0%, #e8d5f0 100%);
+    background: linear-gradient(135deg, var(--color-surface-warm-7) 0%, #e8d5f0 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -570,7 +583,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
 .cat-style-gallery .style-card .style-name {
     padding: var(--spacing-sm);
     font-weight: 600;
-    color: var(--color-secondary);
+    color: var(--color-text);
     font-size: 0.9375rem;
 }
 
@@ -581,7 +594,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
     margin: var(--spacing-lg) 0;
 }
 .cat-pledge .pledge-item {
-    background: var(--color-white);
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-left: 4px solid #8b4a3a;
     border-radius: var(--radius-md);
@@ -589,7 +602,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
 }
 .cat-pledge .pledge-item h4 {
     font-size: 0.9375rem;
-    color: var(--color-secondary);
+    color: var(--color-text);
     margin: 0 0 0.4rem 0;
     display: flex;
     align-items: center;
@@ -626,7 +639,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
     font-family: var(--font-heading);
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--color-secondary);
+    color: var(--color-text);
     flex-shrink: 1;
     min-width: 0;
 }
@@ -705,7 +718,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
     top: 100%;
     left: 0;
     min-width: 200px;
-    background: var(--color-white);
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-md);
@@ -787,7 +800,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
 
 .nav-dropdown-all-link:hover {
     background: var(--color-bg-alt) !important;
-    color: var(--color-secondary) !important;
+    color: var(--color-text) !important;
 }
 
 @media (max-width: 768px) {
@@ -933,7 +946,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
 
 .hero-title {
     font-size: clamp(2rem, 5vw, 3.5rem);
-    color: var(--color-white);
+    color: var(--color-on-dark);
     max-width: 800px;
     margin: 0 auto var(--spacing-md);
     text-shadow: 0 2px 20px rgba(0,0,0,0.3);
@@ -961,12 +974,12 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
 
 .hero-cta .btn-secondary {
     border-color: var(--color-white);
-    color: var(--color-white);
+    color: var(--color-on-dark);
 }
 
 .hero-cta .btn-secondary:hover {
-    background: var(--color-white);
-    color: var(--color-secondary);
+    background: var(--color-surface);
+    color: var(--color-text);
 }
 
 .hero-trust {
@@ -986,7 +999,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
 }
 
 .service-card {
-    background: var(--color-white);
+    background: var(--color-surface);
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
@@ -1021,7 +1034,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
 
 .service-card-body h3 {
     font-size: 1.375rem;
-    color: var(--color-secondary);
+    color: var(--color-text);
     margin-bottom: var(--spacing-sm);
 }
 
@@ -1055,7 +1068,7 @@ p, li, dd, dt, h1, h2, h3, h4, h5, h6, td, th, figcaption, blockquote, .wa-tool-
 }
 
 .case-card {
-    background: var(--color-white);
+    background: var(--color-surface);
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
@@ -1101,7 +1114,7 @@ a.case-img-link {
 
 .case-body h3 {
     font-size: 1.25rem;
-    color: var(--color-secondary);
+    color: var(--color-text);
     margin-bottom: var(--spacing-sm);
 }
 
@@ -1126,7 +1139,7 @@ a.case-img-link {
 
 /* ---------- TESTIMONIALS ---------- */
 .testimonials {
-    background: var(--color-white);
+    background: var(--color-surface);
 }
 
 .testimonials-grid {
@@ -1147,7 +1160,7 @@ a.case-img-link {
     height: 48px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-    color: var(--color-white);
+    color: var(--color-on-dark);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1173,7 +1186,7 @@ a.case-img-link {
 .testimonial-card cite {
     font-size: 0.8125rem;
     font-weight: 600;
-    color: var(--color-secondary);
+    color: var(--color-text);
     font-style: normal;
 }
 
@@ -1192,7 +1205,7 @@ a.case-img-link {
 }
 
 .faq-item {
-    background: var(--color-white);
+    background: var(--color-surface);
     border-radius: var(--radius-md);
     margin-bottom: var(--spacing-sm);
     border: 1px solid var(--color-border);
@@ -1203,7 +1216,7 @@ a.case-img-link {
     padding: var(--spacing-md) var(--spacing-lg);
     font-size: 1rem;
     font-weight: 600;
-    color: var(--color-secondary);
+    color: var(--color-text);
     cursor: pointer;
     list-style: none;
     display: flex;
@@ -1266,7 +1279,7 @@ a.case-img-link {
 
 .cta-content h2 {
     font-size: clamp(1.75rem, 4vw, 2.5rem);
-    color: var(--color-white);
+    color: var(--color-on-dark);
     margin-bottom: var(--spacing-sm);
 }
 
@@ -1289,7 +1302,7 @@ a.case-img-link {
 }
 
 .footer-brand .logo {
-    color: var(--color-white);
+    color: var(--color-on-dark);
     margin-bottom: var(--spacing-sm);
 }
 
@@ -1307,7 +1320,7 @@ a.case-img-link {
 .footer-col h4 {
     font-size: 0.875rem;
     font-weight: 700;
-    color: var(--color-white);
+    color: var(--color-on-dark);
     margin-bottom: var(--spacing-sm);
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -1363,7 +1376,7 @@ a.case-img-link {
 }
 
 .footer-bottom a:hover {
-    color: var(--color-white);
+    color: var(--color-on-dark);
 }
 
 .footer-social {
@@ -1387,7 +1400,7 @@ a.case-img-link {
 
 .social-link:hover {
     background: var(--color-primary);
-    color: var(--color-white);
+    color: var(--color-on-dark);
     transform: translateY(-2px);
 }
 
@@ -1447,7 +1460,7 @@ a.case-img-link {
     top: 72px;
     left: 0;
     right: 0;
-    background: var(--color-white);
+    background: var(--color-surface);
     border-top: 1px solid var(--color-border);
     box-shadow: var(--shadow-md);
     padding: var(--spacing-md);
@@ -1663,7 +1676,7 @@ a.case-img-link {
 }
 
 .split-half.after {
-    background: #f5f5f0;
+    background: var(--color-surface-warm-5);
 }
 
 .split-label {
@@ -1768,7 +1781,7 @@ a.case-img-link {
 
 .section-header h2 {
     font-size: clamp(1.75rem, 3vw, 2.5rem);
-    color: var(--color-secondary);
+    color: var(--color-text);
     margin-bottom: 0.75rem;
 }
 
@@ -1837,7 +1850,7 @@ a.case-img-link {
 
 .service-group-header h2 {
     font-size: clamp(1.5rem, 2.5vw, 2.25rem);
-    color: var(--color-secondary);
+    color: var(--color-text);
     margin-bottom: 0.75rem;
 }
 
@@ -1855,7 +1868,7 @@ a.case-img-link {
 }
 
 .service-sub-card {
-    background: var(--color-white);
+    background: var(--color-surface);
     border-radius: var(--radius-lg);
     padding: 1.5rem;
     border: 1px solid var(--color-border);
@@ -1873,7 +1886,7 @@ a.case-img-link {
 }
 
 .service-sub-card h3 a {
-    color: var(--color-secondary);
+    color: var(--color-text);
     text-decoration: none;
 }
 
@@ -1934,7 +1947,7 @@ a.case-img-link {
 
 .pricing-row .value {
     font-weight: 700;
-    color: var(--color-secondary);
+    color: var(--color-text);
 }
 
 .pricing-row .value.price {
@@ -2007,7 +2020,7 @@ a.case-img-link {
     border-radius: var(--radius-md);
     font-size: 1rem;
     font-family: inherit;
-    background: var(--color-white);
+    background: var(--color-surface);
     color: var(--color-text);
     transition: var(--transition);
 }
@@ -2125,7 +2138,7 @@ a.case-img-link {
 
 .contact-value {
     font-weight: 600;
-    color: var(--color-secondary);
+    color: var(--color-text);
 }
 
 /* ---------- WHY US (order.html) ---------- */
@@ -2233,7 +2246,7 @@ a.case-img-link {
 }
 
 .story-text h3 {
-    color: var(--color-secondary);
+    color: var(--color-text);
     margin-bottom: 0.75rem;
 }
 
@@ -2342,7 +2355,7 @@ a.case-img-link {
 }
 
 .testimonial-card {
-    background: var(--color-white);
+    background: var(--color-surface);
     border-radius: var(--radius-lg);
     padding: 1.5rem;
     box-shadow: var(--shadow-sm);
@@ -2423,7 +2436,7 @@ a.case-img-link {
 }
 
 .product-card {
-    background: var(--color-white);
+    background: var(--color-surface);
     border-radius: var(--radius-lg);
     overflow: hidden;
     border: 1px solid var(--color-border);
@@ -2518,7 +2531,7 @@ a.case-img-link {
 }
 
 .process-step {
-    background: var(--color-white);
+    background: var(--color-surface);
     border-radius: var(--radius-lg);
     padding: 1.5rem;
     border: 1px solid var(--color-border);
@@ -2540,7 +2553,7 @@ a.case-img-link {
 
 .process-step h3 {
     font-size: 1.125rem;
-    color: var(--color-secondary);
+    color: var(--color-text);
     margin-bottom: 0.5rem;
 }
 
@@ -2823,7 +2836,7 @@ a.case-img-link {
 
 /* ---------- SENSITIVITY NOTE (family-tribute.html) ---------- */
 .sensitivity-note {
-    background: #FEF3E2;
+    background: var(--color-surface-warm-6);
     border-left: 4px solid #E67E22;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     padding: 1rem 1.25rem;
@@ -2841,14 +2854,14 @@ a.case-img-link {
 
 .blog-article h2 {
     font-size: 1.75rem;
-    color: var(--color-secondary);
+    color: var(--color-text);
     margin: 2.5rem 0 1rem;
     font-family: var(--font-heading);
 }
 
 .blog-article h3 {
     font-size: 1.25rem;
-    color: var(--color-secondary);
+    color: var(--color-text);
     margin: 2rem 0 0.75rem;
     font-family: var(--font-heading);
 }
@@ -2888,7 +2901,7 @@ a.case-img-link {
 }
 
 .blog-article strong {
-    color: var(--color-secondary);
+    color: var(--color-text);
     font-weight: 700;
 }
 
@@ -2901,7 +2914,7 @@ a.case-img-link {
     padding: 0.125rem 0.375rem;
     border-radius: 3px;
     font-size: 0.9em;
-    color: var(--color-secondary);
+    color: var(--color-text);
 }
 
 .blog-article blockquote {
@@ -2986,7 +2999,7 @@ a.case-img-link {
 }
 
 .reference-card {
-    background: var(--color-white);
+    background: var(--color-surface);
     border: 2px dashed var(--color-primary);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
@@ -3016,7 +3029,7 @@ a.case-img-link {
     font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
     font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: 700;
-    color: var(--color-secondary);
+    color: var(--color-text);
     letter-spacing: 0.05em;
     background: var(--color-bg-alt);
     padding: 0.5rem 1rem;
@@ -3055,7 +3068,7 @@ a.case-img-link {
     max-width: 600px;
     margin: 0 auto var(--spacing-xl);
     padding: 1.25rem 1.5rem;
-    background: #fef3e2;
+    background: var(--color-surface-warm-6);
     border-left: 4px solid #e67e22;
     border-radius: var(--radius-md);
     color: #7b4000;
@@ -3090,7 +3103,7 @@ a.case-img-link {
 }
 
 .service-card-compact {
-    background:var(--color-white);
+    background:var(--color-surface);
     border:1px solid var(--color-border);
     border-radius:var(--radius-lg);
     padding:1.25rem;
@@ -3112,7 +3125,7 @@ a.case-img-link {
 
 .service-card-compact h3 {
     font-size:1rem;
-    color:var(--color-secondary);
+    color:var(--color-text);
     margin:0 0 0.5rem 0;
     font-weight:600;
     line-height:1.3;
@@ -3163,7 +3176,7 @@ a.case-img-link {
 .tool-card {
     display: flex;
     flex-direction: column;
-    background: var(--color-white);
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
@@ -3191,7 +3204,7 @@ a.case-img-link {
     padding: 0.2rem 0.55rem;
     border-radius: 999px;
     background: var(--color-bg-alt);
-    color: var(--color-secondary);
+    color: var(--color-text);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -3199,7 +3212,7 @@ a.case-img-link {
 
 .tool-name {
     font-size: 1.125rem;
-    color: var(--color-secondary);
+    color: var(--color-text);
     margin: 0;
     line-height: 1.25;
     flex: 1;
@@ -3237,4 +3250,34 @@ a.case-img-link {
     padding: 0.25rem 0.6rem;
     border-radius: 999px;
     font-weight: 600;
+}
+
+/* ---------- Dark mode (2026-11-13, P3-10) ----------
+   Every value replaced while adding this theme is byte-identical in the
+   LIGHT theme; only these tokens move when the OS asks for a dark UI.
+   The gold brand colour and the dark button fill (--color-secondary) stay
+   as they are, so --color-on-dark text keeps its contrast on those buttons. */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #14120F;
+        --color-bg-alt: #1E1B17;
+        --color-surface: #211E19;
+        --color-surface-warm: #2A241C;
+        --color-surface-warm-2: #262019;
+        --color-surface-warm-3: #2B2519;
+        --color-surface-warm-4: #241F1A;
+        --color-surface-warm-5: #25231E;
+        --color-surface-warm-6: #2B2319;
+        --color-surface-warm-7: #28202A;
+        --color-surface-error: #2E1D1D;
+        --color-text: #F3EEE5;
+        --color-text-light: #B6AC9C;
+        --color-border: #3B352C;
+        --color-accent: #3A3125;
+        --shadow-sm: 0 2px 8px rgba(0,0,0,0.45);
+        --shadow-md: 0 4px 20px rgba(0,0,0,0.55);
+        --shadow-lg: 0 8px 40px rgba(0,0,0,0.65);
+    }
+    body { background-color: var(--color-bg); }
+    .ft-row-btn:hover { background: var(--color-bg-alt); color: var(--color-text); }
 }

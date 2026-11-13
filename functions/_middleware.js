@@ -1009,6 +1009,40 @@ function replacePricingMeta(html, dict, lang) {
     return html;
 }
 
+// Localize the <title> and meta description of the two middleware-only hub
+// pages (/pricing/ and /tools/), which have NO localized static twin.
+//
+// Before 2026-11-13 all 10 non-English versions served the English SERP
+// title and description while their H1 was translated (P2-3). Unlike the
+// homepage, these pages never bound their head metadata to data-i18n keys,
+// so applyDataI18n() cannot reach them. The values live under fixed keys:
+//   pricing.page_title / pricing.meta_description
+//   tools.page_title   / tools.meta_description
+// in every dictionary. The caller loads those namespaces explicitly.
+//
+// Runs immediately after applyDataI18n, so setSocialMetaFromPage() sees a
+// changed title/description and carries the localized copy into og:/twitter:.
+function localizeHubPageHead(html, dict, lang, restNorm) {
+    if (!dict || lang === DEFAULT_LANG) return html;
+    const norm = (restNorm || "/").replace(/\/+$/, "") || "/";
+    const scope = norm === "/pricing" ? "pricing" : norm === "/tools" ? "tools" : null;
+    if (!scope) return html;
+
+    const titleVal = dict[scope + ".page_title"];
+    if (typeof titleVal === "string" && titleVal.trim()) {
+        html = html.replace(
+            /(<title\b[^>]*>)[\s\S]*?(<\/title>)/i,
+            (m, open, close) => open + escapeHtmlAttr(titleVal.trim()) + close
+        );
+    }
+    const descVal = dict[scope + ".meta_description"];
+    if (typeof descVal === "string" && descVal.trim()) {
+        const found = findMetaTag(html, ["name"], "description");
+        if (found) html = setMetaContent(html, found, escapeHtmlAttr(descVal.trim()));
+    }
+    return html;
+}
+
 // Localize the FAQ JSON-LD blocks (FAQPage @type) using i18n dict.
 //
 // Two scopes:
@@ -1646,9 +1680,18 @@ function localizeCurrencyForLang(html, lang) {
     //   起价 $9.9 <span class="wa-local-price" …>(≈ ¥71)</span>
     // on 6 localized homepages (es, pt, ja, ru, th, zh). The title now
     // keeps the plain price and no markup.
+    // 2026-11-13: script / style / noscript bodies must be hidden as well.
+    // The currency pass used to rewrite "$150" inside an inline <script>
+    // string literal into
+    //   '$150 <span class="wa-local-price" ...>(≈ ¥1,080)</span>'
+    // On /<lang>/tools/wedding-gift-calculator/ that string is rendered with
+    // textContent by js/tools/free-tools.js, so the visitor saw raw HTML
+    // instead of a price. A double-quoted JS string would have been a syntax
+    // error, and JSON-LD lives in <script> too - a rewritten price there
+    // breaks the JSON. These blocks are opaque to the currency pass now.
     const stash = [];
     const protectedHtml = html.replace(
-        /<meta\b[^>]*>|<title\b[^>]*>[\s\S]*?<\/title>/gi,
+        /<script\b[^>]*>[\s\S]*?<\/script\s*>|<style\b[^>]*>[\s\S]*?<\/style\s*>|<noscript\b[^>]*>[\s\S]*?<\/noscript\s*>|<meta\b[^>]*>|<title\b[^>]*>[\s\S]*?<\/title>/gi,
         (m) => {
             stash.push(m);
             return `<!--__WA_STASH_${stash.length - 1}__-->`;
@@ -1787,6 +1830,30 @@ function maybeLowercaseRedirect(path, url) {
     });
 }
 
+// 301 for the three spellings that used to serve a second 200 of the same
+// document (P3-9): "//pricing/", "/./pricing/" and "/index.html".
+// canonical + hreflang already point at the clean URL, but duplicate 200s
+// still split crawl budget and let a stale copy be indexed. Same skips as
+// the lowercase redirect, plus the middleware's own internal fetches.
+function maybeNormalizePathRedirect(path, url, request) {
+    if (request.headers.get("x-middleware-internal") === "1") return null;
+    const lower = path.toLowerCase();
+    if (lower.startsWith("/api/") || lower.startsWith("/functions/") ||
+        lower.startsWith("/i18n/") || lower.startsWith("/admin/")) return null;
+    let clean = path.replace(/\/{2,}/g, "/").replace(/\/\.\//g, "/");
+    if (clean === "/index.html" || clean.endsWith("/index.html")) {
+        clean = clean.slice(0, -"index.html".length);
+    }
+    if (clean === path) return null;
+    return new Response(null, {
+        status: 301,
+        headers: {
+            Location: clean + url.search,
+            "Cache-Control": "public, max-age=3600",
+        },
+    });
+}
+
 export const onRequest = async (context) => {
     try {
         const url = new URL(context.request.url);
@@ -1819,6 +1886,8 @@ export const onRequest = async (context) => {
         // asset paths, but uppercase asset paths would 404 without this).
         const lcRedirect = maybeLowercaseRedirect(path, url);
         if (lcRedirect) return lcRedirect;
+        const normRedirect = maybeNormalizePathRedirect(path, url, context.request);
+        if (normRedirect) return normRedirect;
         if (shouldSkip(path, context.request)) return context.next();
 
         // Per-request CSP nonce. Generated up-front so all response paths
@@ -2284,9 +2353,21 @@ export const onRequest = async (context) => {
                     // (see injectRuntimeI18n). It is only requested for
                     // tool pages, so no other page pays for the shard.
                     const isToolPage = /^\/tools(\/|$)/.test(rest || "");
+                    // #I18N-HUBHEAD: /<lang>/pricing/ and /<lang>/tools/ have
+                    // no localized static twin, so their head metadata is
+                    // rewritten from fixed dictionary keys (see
+                    // localizeHubPageHead). Those keys live in the "pricing"
+                    // and "tools" namespaces, which no data-i18n binding on
+                    // the English source page names - without loading them
+                    // explicitly the lookup silently returns undefined and
+                    // the page keeps its English title/description.
+                    const restForHead = (rest || "/").replace(/\/+$/, "") || "/";
+                    const extraNamespaces =
+                        restForHead === "/pricing" ? ["pricing"] :
+                        restForHead === "/tools" ? ["tools.copy", "tools"] :
+                        isToolPage ? ["tools.copy"] : [];
                     let dict = await loadI18nShards(
-                        SITE_ORIGIN, lang, version, text,
-                        isToolPage ? ["tools.copy"] : []
+                        SITE_ORIGIN, lang, version, text, extraNamespaces
                     );
                     if (!dict) dict = await loadI18nDict(lang, version);
                     if (dict) {
@@ -2302,6 +2383,12 @@ export const onRequest = async (context) => {
                         if (isToolPage) {
                             text = injectRuntimeI18n(text, dict, "tools.copy");
                         }
+                        // The two hub pages have no localized twin, so their
+                        // <title> and meta description were never bound to the
+                        // dictionary. Do it here, before setSocialMetaFromPage
+                        // compares pre/post title and carries the localized
+                        // copy into og:/twitter:.
+                        text = localizeHubPageHead(text, dict, lang, rest);
                         // Nav links on the middleware-rendered pages still carry
                         // the English /tools/ /order/ /about/ hrefs because the
                         // template is the English page with text swapped in.

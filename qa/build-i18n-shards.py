@@ -190,10 +190,24 @@ def swap_in(lang, staged):
     ts = str(int(time.time() * 1000))
     trash = os.path.join(TRASH_ROOT, f"{lang}.{ts}")
     os.makedirs(TRASH_ROOT, exist_ok=True)
-    if os.path.isdir(live):
-        os.replace(live, trash)
-    os.replace(staged, live)
-    shutil.rmtree(trash, ignore_errors=True)
+    # Windows intermittently refuses to rename a directory while an indexer
+    # or antivirus still holds a handle on a file inside it (WinError 5).
+    # Retry the pair of renames, restoring the live directory first so a
+    # half-swapped language never survives a failed build.
+    last = None
+    for attempt in range(6):
+        try:
+            if os.path.isdir(live):
+                os.replace(live, trash)
+            os.replace(staged, live)
+            shutil.rmtree(trash, ignore_errors=True)
+            return
+        except OSError as exc:
+            last = exc
+            if not os.path.isdir(live) and os.path.isdir(trash):
+                os.replace(trash, live)
+            time.sleep(0.5 * (attempt + 1))
+    raise last
 
 
 def ns_of(key):
