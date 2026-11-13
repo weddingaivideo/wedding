@@ -75,24 +75,35 @@ for (const l of LANGS.filter(x => x !== "en")) {
 // Three tool cards + a section were added to tools/index.html with keys that
 // existed in NO dictionary. applyDataI18n() leaves an unbound element's
 // English source text alone, so all 10 non-English locales showed English.
+//
+// The 2026-11 IA regroup replaced the 5 old sections with 4 task-based ones.
+// Card keys stayed namespaced and unchanged; the old tools.section.{edit,plan,
+// gen,docs,planning} keys were deliberately removed. Keep this regression
+// guard pointed at keys that are actually bound on the live hub.
 // ---------------------------------------------------------------------------
-console.log("\n=== tool-card keys exist in every language (not just ru) ===");
+console.log("\n=== tool-card + section keys exist in every language (not just ru) ===");
 const CARD_KEYS = [
     "tools.card.badge.docs.18", "tools.card.badge.gen.16", "tools.card.badge.gen.17",
     "tools.card.name.docs.18", "tools.card.name.gen.16", "tools.card.name.gen.17",
     "tools.card.tag.docs.18", "tools.card.tag.gen.16", "tools.card.tag.gen.17",
-    "tools.section.desc.docs", "tools.section.title.docs",
     "tools.card.cta.try_free.16", "tools.card.cta.try_free.17", "tools.card.cta.try_free.18",
 ];
+const SECTION_KEYS = [
+    "tools.section.title.photo", "tools.section.desc.photo",
+    "tools.section.title.invites", "tools.section.desc.invites",
+    "tools.section.title.numbers", "tools.section.desc.numbers",
+    "tools.section.title.words", "tools.section.desc.words",
+];
+const HUB_KEYS = CARD_KEYS.concat(SECTION_KEYS);
 for (const l of LANGS) {
-    const absent = CARD_KEYS.filter(k => !dicts[l][k]);
-    check(`${l}: 14 card keys present`, absent.length === 0,
+    const absent = HUB_KEYS.filter(k => !dicts[l][k]);
+    check(`${l}: ${HUB_KEYS.length} hub keys present`, absent.length === 0,
         absent.length ? `missing ${absent[0]}` : "all present");
 }
 for (const l of LANGS.filter(x => x !== "en")) {
-    const enLeft = CARD_KEYS.filter(k => dicts[l][k] === dicts.en[k]);
-    check(`${l}: card copy translated`, enLeft.length === 0,
-        enLeft.length ? `${enLeft.length} still English` : "0 English leftovers");
+    const enLeft = HUB_KEYS.filter(k => dicts[l][k] === dicts.en[k]);
+    check(`${l}: hub copy translated`, enLeft.length === 0,
+        enLeft.length ? `${enLeft.length} still English: ${enLeft[0]}` : "0 English leftovers");
 }
 
 // ---------------------------------------------------------------------------
