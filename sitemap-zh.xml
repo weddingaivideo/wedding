@@ -3443,4 +3443,22 @@
         <xhtml:link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/blog/wedding-dress-code-guide/" />
         <xhtml:link rel="alternate" hreflang="x-default" href="https://weddingai.video/blog/wedding-dress-code-guide/" />
     </url>
+    <url>
+        <loc>https://weddingai.video/zh/planning-tools/</loc>
+        <lastmod>2026-11-13</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://weddingai.video/planning-tools/" />
+        <xhtml:link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/planning-tools/" />
+        <xhtml:link rel="alternate" hreflang="es" href="https://weddingai.video/es/planning-tools/" />
+        <xhtml:link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/planning-tools/" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://weddingai.video/de/planning-tools/" />
+        <xhtml:link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/planning-tools/" />
+        <xhtml:link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/planning-tools/" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/planning-tools/" />
+        <xhtml:link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/planning-tools/" />
+        <xhtml:link rel="alternate" hreflang="th" href="https://weddingai.video/th/planning-tools/" />
+        <xhtml:link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/planning-tools/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://weddingai.video/planning-tools/" />
+    </url>
 </urlset>
