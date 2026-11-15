@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>婚礼宾客人数：可靠的出席率</title>
+<link rel="canonical" href="https://weddingai.video/zh/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="en" href="https://weddingai.video/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="zh" href="https://weddingai.video/zh/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="es" href="https://weddingai.video/es/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="fr" href="https://weddingai.video/fr/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="de" href="https://weddingai.video/de/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="pt" href="https://weddingai.video/pt/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="ja" href="https://weddingai.video/ja/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="ru" href="https://weddingai.video/ru/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="ar" href="https://weddingai.video/ar/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="th" href="https://weddingai.video/th/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="hi" href="https://weddingai.video/hi/guides/wedding-guest-count-calculator/">
+<link rel="alternate" hreflang="x-default" href="https://weddingai.video/guides/wedding-guest-count-calculator/">
+<meta name="description" content="根据距离、群体和季节的出席率，结合邀请名单估算实际婚礼宾客人数，并为携伴者预留缓冲。" />
+<meta property="og:type" content="article">
+<meta property="og:title" content="婚礼宾客人数：可靠的出席率">
+<meta property="og:description" content="根据距离、群体和季节的出席率，结合邀请名单估算实际婚礼宾客人数，并为携伴者预留缓冲。">
+<meta property="og:url" content="https://weddingai.video/zh/guides/wedding-guest-count-calculator/">
+<meta property="og:site_name" content="WeddingAI.video">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://weddingai.video/images/og-image-1200x630.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="婚礼宾客人数：可靠的出席率">
+<meta name="twitter:description" content="根据距离、群体和季节的出席率，结合邀请名单估算实际婚礼宾客人数，并为携伴者预留缓冲。">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#D4AF37">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/styles.min.css?v=3.42">
+<link rel="stylesheet" href="/styles/i18n.css">
+<script defer src="/js/main.min.js?v=3.22"></script>
+<script src="/js/langs.js" defer></script>
+<script src="/js/i18n.js?v=4.29" defer></script>
+<style>
+.gd-wrap{max-width:860px;margin:0 auto;padding:0 var(--spacing-md) var(--spacing-xl)}
+.gd-crumb{font-size:.82rem;color:var(--color-text-light);margin:var(--spacing-md) 0}
+.gd-crumb a{color:var(--color-primary);text-decoration:none}
+.gd-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.2;color:var(--color-text);margin:0 0 .8rem}
+.gd-lead{font-size:1.06rem;line-height:1.8;color:var(--color-text-light)}
+.gd-meta{font-size:.8rem;color:var(--color-text-light);margin:.8rem 0 1.4rem}
+.gd-cta{display:inline-block;background:var(--color-primary);color:#fff;padding:.7rem 1.25rem;border-radius:var(--radius-md);font-weight:700;text-decoration:none;font-size:.92rem}
+.gd-cta:hover{opacity:.9}
+.gd-section{margin-top:2.1rem}
+.gd-section>h2{font-size:1.42rem;color:var(--color-text);margin:0 0 .85rem;line-height:1.35}
+.gd-section p{line-height:1.85;color:var(--color-text-light);margin:0 0 .8rem}
+.gd-table{width:100%;border-collapse:collapse;font-size:.92rem}
+.gd-table th,.gd-table td{text-align:left;padding:.7rem .75rem;border-bottom:1px solid var(--color-border);vertical-align:top;line-height:1.6}
+.gd-table th{width:34%;color:var(--color-text);font-weight:650;background:var(--color-surface-warm-2)}
+.gd-table td{color:var(--color-text-light)}
+.gd-faq details{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:.85rem 1rem;margin-bottom:.6rem}
+.gd-faq summary{font-weight:650;color:var(--color-text);cursor:pointer}
+.gd-faq p{color:var(--color-text-light);line-height:1.75;margin:.6rem 0 0}
+.gd-related{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.8rem}
+.gd-related a{display:block;padding:.9rem 1rem;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;color:var(--color-primary);font-weight:600;font-size:.9rem}
+.gd-related a:hover{border-color:var(--color-primary)}
+.gd-foot{margin-top:2.4rem;padding:1.3rem;background:var(--color-surface-warm-2);border:1px solid var(--color-border);border-radius:var(--radius-md);text-align:center;line-height:2}
+.gd-foot a{color:var(--color-primary);font-weight:650;text-decoration:none;margin:0 .5rem}
+.gd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.85rem;margin:.9rem 0 0}
+.gd-card{display:flex;flex-direction:column;gap:.35rem;padding:1rem;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;color:inherit}
+.gd-card:hover{border-color:var(--color-primary)}
+.gd-card h3{margin:0;font-size:1rem;line-height:1.4;color:var(--color-text)}
+.gd-card p{margin:0;font-size:.83rem;line-height:1.6;color:var(--color-text-light)}
+.gd-group{margin-top:2rem}
+.gd-group>h2{font-size:1.35rem;color:var(--color-text);margin:0 0 .3rem}
+@media(max-width:600px){.gd-table th{width:42%}.gd-wrap{padding:0 var(--spacing-sm) var(--spacing-lg)}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "婚礼宾客人数计算器指南",
+  "description": "根据距离、群体和季节的出席率，结合邀请名单估算实际婚礼宾客人数，并为携伴者预留缓冲。",
+  "url": "https://weddingai.video/zh/guides/wedding-guest-count-calculator/",
+  "inLanguage": "zh_CN",
+  "datePublished": "2026-11-15",
+  "dateModified": "2026-11-15",
+  "wordCount": 299,
+  "author": {
+    "@type": "Organization",
+    "name": "WeddingAI.video",
+    "url": "https://weddingai.video/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "WeddingAI.video",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://weddingai.video/images/logo-full.jpeg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://weddingai.video/zh/guides/wedding-guest-count-calculator/"
+  },
+  "about": {
+    "@type": "SoftwareApplication",
+    "name": "婚礼宾客人数计算器指南",
+    "url": "https://weddingai.video/zh/tools/wedding-guest-count-calculator/",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "婚礼宾客的实际出席率通常是多少？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "常见的规划范围是总体预算的75–85%，但会根据出行距离、季节以及日期是否落在节假日周末而大幅变化。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "我们要邀请孩子吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "请在发出邀请函前决定，并在邀请函或婚礼网站上清楚说明。此处的含糊之处是最终人数超出预期的最大原因。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "最终确认人数须在何时截止？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "餐饮供应商通常要求在活动前7至14天提供最终人数。请将RSVP截止日期至少提前两周。"
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "WeddingAI.video",
+      "item": "https://weddingai.video/zh/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "所有免费工具",
+      "item": "https://weddingai.video/zh/tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "指南",
+      "item": "https://weddingai.video/zh/guides/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "婚礼宾客人数计算器指南",
+      "item": "https://weddingai.video/zh/guides/wedding-guest-count-calculator/"
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link" data-i18n="404.a_text.skip_to_main_content.85143743">Skip to main content</a>
+                <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" title="WeddingAI.video — wedding video services"><picture>
+    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" fetchpriority="high" loading="eager">
+  </picture></a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li class="nav-item-dropdown">
+                        <a href="/#services" title="Browse our wedding video services" data-i18n="404.a_text.services.84864121" aria-haspopup="true" aria-expanded="false">Services <span aria-hidden="true">▾</span></a>
+                        <ul class="nav-dropdown nav-dropdown-grouped" role="menu">
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.video_enhancement.98039549">Video Enhancement</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/zh/services/video-enhancement/slow-motion/" data-i18n="404.a_text.slow_motion.30129340">Slow Motion</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/video-enhancement/vintage-restoration/" data-i18n="404.a_text.vintage_restoration.91827364">Vintage Restoration</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.personalization.44366515">Personalization</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/wedding-trailer/" data-i18n="404.a_text.wedding_trailer.04692297">Wedding Trailer</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/ai-video-generator/" data-i18n="404.a_text.ai_video_generator.39420322">AI Video Generator</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/pet-wedding/" data-i18n="404.a_text.pet_wedding.23911820">Pet Wedding</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/multilingual/" data-i18n="404.a_text.multilingual.74639147">Multilingual</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/cartoon-style/" data-i18n="404.a_text.cartoon_style.16664616">Cartoon Style</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/personalization/meme-generator/" data-i18n="404.a_text.wedding_memes.22951185">Wedding Memes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-group" role="none">
+                                <div class="nav-dropdown-heading" role="presentation" data-i18n="search.strong_text.absence_compensation.22965696">Absence Compensation</div>
+                                <ul role="menu">
+                                    <li role="none"><a role="menuitem" href="/zh/services/absence-compensation/family-tribute/" data-i18n="404.a_text.family_tribute.39408322">Family Tribute</a></li>
+                                    <li role="none"><a role="menuitem" href="/zh/services/absence-compensation/family-message/" data-i18n="404.a_text.family_message.27013166">Family Message</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-dropdown-all" role="none">
+                                <a role="menuitem" href="/zh/services/" class="nav-dropdown-all-link" data-i18n="nav.a_text.view_all_services.91827365">View all services &rarr;</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/zh/gallery/" title="View our gallery and case studies" data-i18n="404.a_text.gallery.96646935">Gallery</a></li>
+                    <li><a href="/zh/blog/" title="Read our wedding video blog" data-i18n="404.a_text.blog.95723762">Blog</a></li>
+                    <li><a href="/zh/resources/" title="In-depth wedding video guides" data-i18n="404.a_text.resources.rrrrrrr1">Resources</a></li>
+                    <li><a href="/zh/tools/" title="Free online wedding photo tools" data-i18n="404.a_text.free_tools.91827366">Free Tools</a></li>
+
+                    <li><a href="/zh/about/" title="Learn about us" data-i18n="404.a_text.about.69447212">About</a></li>
+                    <li><a href="/zh/pricing/" title="View transparent pricing" data-i18n="404.a_text.pricing.43854765">Pricing</a></li>
+                    <li><a href="/order/" class="btn-nav" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
+                    <li class="wa-lang-switcher" data-no-i18n><select id="wa-lang-select" aria-label="Language"><option value="en">EN</option><option value="zh">中文</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="ja">JA</option><option value="ru">RU</option><option value="ar">AR</option><option value="th">TH</option>
+                    <option value="hi">HI</option></select></li>
+                </ul>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+<div class="gd-wrap">
+<nav class="gd-crumb"><a href="/zh/">WeddingAI.video</a> / <a href="/zh/tools/">所有免费工具</a> / <a href="/zh/guides/">指南</a> / 婚礼宾客人数计算器指南</nav>
+<article>
+<section class="gd-hero">
+  <h1 data-i18n="guides.wedding-guest-count-calculator.h1">婚礼宾客人数计算器指南</h1>
+  <p class="gd-lead" data-i18n="guides.wedding-guest-count-calculator.lead">你邀请的人数和实际供餐的人数并不相同。预算超支往往始于把这两个数字混为一谈。</p>
+  <p class="gd-meta"><span data-i18n="guides.common.reviewed">上次审核时间</span> · <time datetime="2026-11-15">2026-11-15</time></p>
+  <p><a class="gd-cta" href="/zh/tools/wedding-guest-count-calculator/" data-i18n="guides.common.cta">打开免费工具 →</a></p>
+</section>
+<section class="gd-section">
+  <h2 data-i18n="guides.common.quick_h2">快速参考</h2>
+  <table class="gd-table"><tbody>
+    <tr><th data-i18n="guides.wedding-guest-count-calculator.f1l">本地宾客</th><td data-i18n="guides.wedding-guest-count-calculator.f1v">通常为80–90%，无需长途出行时尤其如此</td></tr>
+    <tr><th data-i18n="guides.wedding-guest-count-calculator.f2l">外地宾客</th><td data-i18n="guides.wedding-guest-count-calculator.f2v">通常为60–75%，住宿费用较高时会更低</td></tr>
+    <tr><th data-i18n="guides.wedding-guest-count-calculator.f3l">目的地婚礼宾客</th><td data-i18n="guides.wedding-guest-count-calculator.f3v">通常为初始名单的35–55%</td></tr>
+    <tr><th data-i18n="guides.wedding-guest-count-calculator.f4l">缓冲</th><td data-i18n="guides.wedding-guest-count-calculator.f4v">确定最终宾客人数前，保留5%的余量</td></tr>
+  </tbody></table>
+</section>
+<section class="gd-section">
+  <h2 data-i18n="guides.common.how_h2">使用方法</h2>
+  <p data-i18n="guides.wedding-guest-count-calculator.s1">先按群体拆分名单，再分别套用出席率：直系亲属、本地朋友、外地朋友、同事和携伴者。对所有人统一采用75%的出席率，会高估目的地婚礼人数，也会低估本地婚礼人数。分别录入各群体后，估算结果才足以用来确定场地费用。</p>
+</section>
+<section class="gd-section">
+  <h2 data-i18n="guides.common.regional_h2">地区差异</h2>
+  <p data-i18n="guides.wedding-guest-count-calculator.s2">在US，通常会邀请同事，并让大多数单身宾客携伴，这会推高人数。UK和欧洲的婚礼更常在邀请函中明确列出每位宾客，并将白天宾客与晚间宾客分开，因此餐饮人数和晚间人数是两个独立数字。在南亚部分地区，邀请名单会面向整个社区，举办500人的婚礼也不罕见。</p>
+</section>
+<section class="gd-section">
+  <h2 data-i18n="guides.common.mistakes_h2">常见错误</h2>
+  <p data-i18n="guides.wedding-guest-count-calculator.s3">不要把估算人数当作预订人数。场地和餐饮商会按照合同最低人数及最终确认人数报价。先将场地容量确定在符合人数上限的水平，等RSVP截止后再把确认人数交给餐饮商，并加上预留的缓冲人数。</p>
+</section>
+<section class="gd-section gd-faq">
+  <h2 data-i18n="guides.common.faq_h2">快速解答</h2>
+  <details class="faq-item">
+    <summary data-i18n="guides.wedding-guest-count-calculator.q1">婚礼宾客的实际出席率通常是多少？</summary>
+    <p data-i18n="guides.wedding-guest-count-calculator.a1">常见的规划范围是总体预算的75–85%，但会根据出行距离、季节以及日期是否落在节假日周末而大幅变化。</p>
+  </details>
+  <details class="faq-item">
+    <summary data-i18n="guides.wedding-guest-count-calculator.q2">我们要邀请孩子吗？</summary>
+    <p data-i18n="guides.wedding-guest-count-calculator.a2">请在发出邀请函前决定，并在邀请函或婚礼网站上清楚说明。此处的含糊之处是最终人数超出预期的最大原因。</p>
+  </details>
+  <details class="faq-item">
+    <summary data-i18n="guides.wedding-guest-count-calculator.q3">最终确认人数须在何时截止？</summary>
+    <p data-i18n="guides.wedding-guest-count-calculator.a3">餐饮供应商通常要求在活动前7至14天提供最终人数。请将RSVP截止日期至少提前两周。</p>
+  </details>
+</section>
+<section class="gd-section">
+  <h2 data-i18n="guides.common.related_h2">相关免费工具</h2>
+  <div class="gd-related">
+    <a href="/zh/guides/wedding-alcohol-calculator/" data-i18n="guides.wedding-alcohol-calculator.h1">婚礼需要准备多少酒水 →</a>
+    <a href="/zh/guides/wedding-budget-calculator/" data-i18n="guides.wedding-budget-calculator.h1">婚礼预算拆分指南 →</a>
+  </div>
+</section>
+</article>
+<div class="gd-foot">
+  <a href="/zh/tools/" data-i18n="guides.common.all_tools">所有免费工具</a> · <a href="/zh/planning-tools/" data-i18n="guides.common.planning_hub">婚礼筹备工具</a> · <a href="/zh/guides/" data-i18n="guides.common.all_guides">所有婚礼指南</a>
+  <p data-i18n="guides.common.footer_note" style="font-size:.8rem;color:var(--color-text-light);margin:.5rem 0 0">所有工具均在浏览器中运行。无需上传，无需注册，也无水印。</p>
+</div>
+</div>
+</main>
+        <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo" title="WeddingAI.video — wedding video services"><picture>
+    <source srcset="/images/logo-full-178.avif 178w, /images/logo-full-356.avif 356w, /images/logo-full-712.avif 712w" type="image/avif" sizes="(max-width: 600px) 178px, 356px">
+    <source srcset="/images/logo-full-178.webp 178w, /images/logo-full-356.webp 356w, /images/logo-full-712.webp 712w" type="image/webp" sizes="(max-width: 600px) 178px, 356px">
+    <img src="/images/logo-full.jpeg" alt="WeddingAI.video" height="72" width="1619" loading="lazy">
+  </picture></a>
+                <p data-i18n="404.p_text.ai_powered_wedding_video_services_for_co.90691298">AI-powered wedding video services for couples worldwide.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <div class="footer-col">
+                        <h3 data-i18n="404.a_text.services.84864121">Services</h3>
+                        <ul>
+                                                                                    <li><a href="/zh/services/video-enhancement/slow-motion/" title="AI Slow Motion Enhancement" data-i18n="404.a_text.slow_motion.30129340">Slow Motion</a></li>
+                            <li><a href="/zh/services/video-enhancement/vintage-restoration/" title="Vintage Footage Restoration — VHS to 4K" data-i18n="404.a_text.vintage_restoration.91827364">Vintage Restoration</a></li>
+                            <li><a href="/zh/services/absence-compensation/family-tribute/" title="Tribute to Loved Ones" data-i18n="404.a_text.family_tribute.39408322">Family Tribute</a></li>
+                            <li><a href="/zh/services/absence-compensation/family-message/" title="Remote Family Video Message" data-i18n="404.a_text.family_message.27013166">Family Message</a></li>
+                            <li><a href="/zh/services/personalization/ai-video-generator/" title="AI Wedding Video Generator" data-i18n="404.a_text.ai_video_generator.39420322">AI Video Generator</a></li>
+                            <li><a href="/zh/services/personalization/wedding-trailer/" title="Cinematic Wedding Trailer" data-i18n="404.a_text.wedding_trailer.04692297">Wedding Trailer</a></li>
+                            <li><a href="/zh/services/personalization/pet-wedding/" title="Pet Wedding Video" data-i18n="404.a_text.pet_wedding.23911820">Pet Wedding</a></li>
+                            <li><a href="/zh/services/personalization/multilingual/" title="Multilingual Wedding Video" data-i18n="404.a_text.multilingual.74639147">Multilingual</a></li>
+                            <li><a href="/zh/services/personalization/cartoon-style/" title="Cartoon / Animated Style" data-i18n="404.a_text.cartoon_style.16664616">Cartoon Style</a></li>
+                            <li><a href="/zh/services/personalization/meme-generator/" title="Wedding GIFs & Memes" data-i18n="404.a_text.wedding_memes.22951185">Wedding Memes</a></li>
+                                                    </ul>
+                    </div>
+                <div class="footer-col">
+                    <h3 data-i18n="404.h3_text.company.16024258">Company</h3>
+                    <ul>
+                        <li><a href="/zh/about/" title="Learn about us" data-i18n="404.a_text.about_us.90074652">About Us</a></li>
+                        <li><a href="/zh/gallery/" title="View our gallery and case studies" data-i18n="404.a_text.gallery.96646935">Gallery</a></li>
+                        <li><a href="/order/" title="Get a free quote — start your project" data-i18n="404.a_text.get_a_quote.03314957">Get a Quote</a></li>
+                        <li><a href="/privacy/" title="Read our privacy policy" data-i18n="404.a_text.privacy_policy.78442268">Privacy Policy</a></li>
+                        <li><a href="/terms/" title="Read our terms of service" data-i18n="404.a_text.terms_of_service.30659181">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="404.h3_text.contact.47569808">Contact</h3>
+                    <ul>
+                        <li><a href="mailto:order@weddingai.video" title="Send us an email at order@weddingai.video">order@weddingai.video</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p data-i18n="404.p_text.2026_weddingai_video_all_rights_reserve.73926096">© 2026 WeddingAI.video. All rights reserved.</p>
+                <div class="footer-featured">
+                    <a class="footer-badge footer-badge-secondary" href="/zh/about/" title="500+ couples served, 4.9/5 rating" data-i18n="about.a_text.couples_served.ddddddd1" data-i18n-attr="title:about.a_text.couples_served_title.ddddddd3" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 0.75rem;background:var(--color-bg-alt);border-radius:6px;font-size:0.8125rem;font-weight:600;color:var(--color-secondary);text-decoration:none;border:1px solid var(--color-border);">⭐ 4.9/5 · 500+ couples</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

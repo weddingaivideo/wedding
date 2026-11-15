@@ -1,5 +1,11 @@
 """Refresh <lastmod> in all 11 per-language sitemap files to today's UTC date.
 
+DEPRECATED FOR NORMAL DEPLOYS — use `scripts/sync-sitemap-lastmod.py`.
+This script rewrites EVERY entry to today, which tells Google that all ~1900
+URLs changed on every deploy while the pages' own dateModified may be months
+older. `sync-sitemap-lastmod.py` derives each URL's date from real file history
+and still sets the sitemap.xml index to today (the only thing CI checks).
+
 Rewrites every <lastmod>...</lastmod> in sitemap-<lang>.xml (and in the
 sitemap.xml index) to one date. The URL set, the hreflang graph and the
 image:image blocks are left untouched — only the date changes.

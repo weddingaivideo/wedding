@@ -1272,6 +1272,7 @@ const LOCALIZABLE_HUB_SEGMENTS = new Set([
     "", "tools", "blog", "about", "pricing", "order",
     "services", "resources", "gallery", "privacy", "terms",
     "planning-tools",
+    "guides",
 ]);
 // Deep service paths are allowlisted too: /xx/services/<cat>/<slug>/ is
 // middleware-rendered like the hubs, verified 200 with a localised <title>

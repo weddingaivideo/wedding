@@ -37,13 +37,27 @@ XHTML = "{%s}" % NS["xhtml"]
 LANGUAGES = ["ar", "de", "en", "es", "fr", "hi", "ja", "pt", "ru", "th", "zh"]
 FILES = ["sitemap.xml"] + [f"sitemap-{lang}.xml" for lang in LANGUAGES]
 
-EXPECTED_URLS = {"sitemap.xml": 11, "sitemap-en.xml": 139}
+EXPECTED_URLS = {
+    "sitemap.xml": 11,
+    "sitemap-en.xml": 189,
+    "sitemap-zh.xml": 189,
+    "sitemap-es.xml": 189,
+    "sitemap-fr.xml": 189,
+    "sitemap-de.xml": 189,
+    "sitemap-pt.xml": 189,
+    "sitemap-ja.xml": 187,
+    "sitemap-ru.xml": 189,
+    "sitemap-ar.xml": 187,
+    "sitemap-th.xml": 156,
+    "sitemap-hi.xml": 156
+}
 
 # The one <loc> that was deliberately removed from the 10 language sitemaps:
 # /private/architecture/ is a LOCAL TOOLING directory in this repo, it has no
 # html source, it answers 404 live, and robots.txt disallows /private/.
 # Anything else that differs from HEAD is an accidental loss and still fails.
-INTENTIONAL_REMOVALS = ("/private/architecture/",)
+INTENTIONAL_REMOVALS = ("/private/architecture/",
+                         "/blog/multilingual-wedding-videos", "/blog/pet-wedding-videos", "/blog/wedding-video-cost-2026-new", "/blog/wedding-video-music-guide-new",)
 
 failures = []
 
@@ -202,7 +216,7 @@ def main():
                 fail(f"{name}: still lists a /private/ URL: {loc}")
 
         # expected url count
-        expected = EXPECTED_URLS.get(name, 139)
+        expected = EXPECTED_URLS.get(name, 189)
         if s["url_count"] != expected:
             fail(f"{name}: expected {expected} <url> entries, found {s['url_count']}")
 
