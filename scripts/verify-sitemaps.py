@@ -45,10 +45,10 @@ EXPECTED_URLS = {
     "sitemap-fr.xml": 189,
     "sitemap-de.xml": 189,
     "sitemap-pt.xml": 189,
-    "sitemap-ja.xml": 187,
+    "sitemap-ja.xml": 189,
     "sitemap-ru.xml": 189,
-    "sitemap-ar.xml": 187,
-    "sitemap-th.xml": 156,
+    "sitemap-ar.xml": 189,
+    "sitemap-th.xml": 177,
     "sitemap-hi.xml": 156
 }
 
@@ -58,6 +58,11 @@ EXPECTED_URLS = {
 # Anything else that differs from HEAD is an accidental loss and still fails.
 INTENTIONAL_REMOVALS = ("/private/architecture/",
                          "/blog/multilingual-wedding-videos", "/blog/pet-wedding-videos", "/blog/wedding-video-cost-2026-new", "/blog/wedding-video-music-guide-new",)
+
+# Guide URLs are quarantined per page while their translations are incomplete
+# and re-admitted once the copy is localised. Re-adding them is expected; any
+# other URL appearing out of nowhere is still a hard failure.
+INTENTIONAL_ADDITIONS = ("/guides/",)
 
 failures = []
 
@@ -199,9 +204,14 @@ def main():
                 gained = set(s["unique_locs"]) - set(b["unique_locs"])
                 unexpected_lost = {u for u in lost
                                    if not any(m in u for m in INTENTIONAL_REMOVALS)}
-                if gained:
+                unexpected_gained = {u for u in gained
+                                     if not any(m in u for m in INTENTIONAL_ADDITIONS)}
+                if unexpected_gained:
                     fail(f"{name}: <loc> entries GAINED vs HEAD "
-                         f"(gained={sorted(gained)})")
+                         f"(gained={sorted(unexpected_gained)})")
+                if gained - unexpected_gained:
+                    print(f"        (intentional guide re-index: "
+                          f"{len(gained - unexpected_gained)} urls)")
                 if unexpected_lost:
                     fail(f"{name}: <loc> entries LOST vs HEAD "
                          f"(lost={sorted(unexpected_lost)})")
