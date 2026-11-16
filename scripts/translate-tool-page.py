@@ -681,6 +681,23 @@ LATIN_KEEP = {
     "instagram", "whatsapp", "youtube", "youtube shorts", "tiktok", "reels",
     "pinterest", "google", "icloud", "dropbox", "mediabunny", "capcut",
     "ffmpeg", "imovie", "handbrake", "shotcut", "filmora", "vlc",
+    # The audio codecs the video editor names next to MP4 and WebM.
+    # The model keeps a codec name the way it keeps a format name, and
+    # the gate rejected a GOOD translation because "Vorbis" was not on
+    # the list - sixteen strings, in six languages, over and over.
+    "opus", "vorbis",
+    # "YouTube Shorts" is on the list, but the model writes "Shorts"
+    # on its own, and a bare "Shorts" has to be a product name here.
+    "shorts",
+    # Keyboard and platform names the copy quotes in a shortcut.
+    # (the assembler's own EXTRA_KEEP already had them)
+    "ctrl", "cmd", "shift", "mac",
+    # Print and prepress terms the photo tools name in one sentence.
+    "icc", "cmyk", "pdf/x",
+    # The Lightroom menus the contact sheet names, so the reader can find
+    # them in the program.
+    "template browser", "page grid", "cell spacing", "photo info",
+    "sequence and filename",
     # vendor domains
     "convertbox.app", "feelthefile.com", "smoothclip.com", "clipcraft.ai",
     "clipzeal.com", "freevideogenerator.io", "justright.tools",

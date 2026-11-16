@@ -127,6 +127,31 @@ STORED = [
      "On quantity: one invitation per household, plus 10 to 15 people, and "
      "you can also design the card yourself.",
      "es", None, False, "an English sentence in a Spanish page"),
+
+    # --- a CODEC name the model keeps, next to a format name ---
+    ("Opus or Vorbis, copied when it fits",
+     "Opus 或 Vorbis，合适时复制", "zh", None, True, "a codec name"),
+    ("Opus or Vorbis, copied when it fits",
+     "Opus または Vorbis、収まるものをコピー", "ja", None, True,
+     "a codec name next to a format name"),
+    ("Opus or Vorbis, copied when it fits",
+     "Opus oder Vorbis, je nachdem, was passt", "de", None, True,
+     "a codec name in a Latin language"),
+
+    # --- "Shorts" on its own, the way the model writes it ---
+    ("For a phone, use MP4. convertbox.app recommends MP4 with H.264 for "
+     "Reels, TikTok and YouTube Shorts.",
+     "手机观看请使用 MP4。convertbox.app 推荐在 Reels、TikTok 和 Shorts 中"
+     "使用采用 H.264 编码的 MP4。",
+     "zh", None, True, "a bare product name next to a vendor domain"),
+
+    # --- the Lightroom menus the copy quotes ---
+    ("Open the Print module - Alt+Ctrl+6 on Windows, ALT+CMD+6 on Mac - "
+     "pick a layout from the Template Browser, set the Page Grid and the "
+     "Cell Spacing.",
+     "Windows では Alt+Ctrl+6、Mac では ALT+CMD+6 で開き、Template "
+     "Browser からレイアウトを選び、Page Grid と Cell Spacing を設定します。",
+     "ja", None, True, "a menu name the copy quotes on purpose"),
 ]
 
 # (source, value, lang, expected_ok, why)
