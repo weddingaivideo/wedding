@@ -4004,3 +4004,221 @@ English. Twenty of them are correct: `Style` (fr), `Cocktail` (fr, de),
 (fr) and `5 oz (150 ml)` (de) are the words those languages use. Forcing
 a translation there creates the defect it claims to fix. Judge residue by
 "is this the word a local reader expects", not by "is it Latin script".
+
+## Three different "backlogs", and only one of them is the reader's (2026-11-16)
+
+During the Deploy 2 translation pass three numbers were called "the
+backlog" and all three were measuring different things. Before touching a
+translation script, know which one you are looking at.
+
+| measurement | what it counts | what it is good for |
+|---|---|---|
+| the runner's `[FAIL] N strings could not be translated` | one ATTEMPT of one string | nothing, on its own |
+| `scripts/assemble-deploy-patch.py`'s "N fell back to the English source" | every key whose value is the English source, **including** `5 × 7 in` | a work estimate |
+| the reader view (`.tmp/reader-sees.py`) | what a reader would actually read in English | the acceptance number |
+
+### TRAP: the runner's FAIL line prints the ENGLISH SOURCE, not the key
+
+The log line is
+
+```
+zh: untranslated English: '1000 milliseconds' | 800 to 1000 milliseconds per photo
+```
+
+The text after the `|` is the **English source string**, and it is NOT
+unique: several keys carry the same source under different hashes
+(`strong_text.800_to_1000_milliseconds_per_photo.0724fbf6` and the
+`p_text` paragraph both mention milliseconds). A later attempt may have
+repaired one of them and not the other, so a log line can name a string
+that is already perfectly translated in the dictionary.
+
+Proved on 2026-11-16: the zh dictionary held
+`每张照片 800 至 1000 毫秒` for the key the log appeared to complain about,
+while the one key that really was still English was
+`tools.wedding-photo-to-gif.p_text.the_speed_control_sets_how_long_each_pho.35bd0e50`
+in **ja**. The log was not wrong about the English span, but it was not
+about that key.
+
+**The rule**: to find what a reader sees, look the VALUE UP IN THE
+DICTIONARY, per key. Never infer it from a log line.
+
+### TRAP: "a measurement" is a phrase, not a number
+
+`5 × 7 in` has no translatable part and is spelled the same in every
+language - it must be left alone. `800 to 1000 milliseconds per photo`
+has one: the unit word. The model translates the second one correctly
+(`800 至 1000 毫秒`, `800 إلى 1000 مللي ثانية لكل صورة`), so a gate that
+rejects it is wrong and a gate that accepts the English is right.
+
+So the discriminator is **the whole phrase**, not "does it contain a
+digit". A unit word (`milliseconds`, `degrees`, `frames`, `percent`,
+`megabytes`) is part of the sentence and must be localized; a bare
+size or paper format is not.
+
+### The three-layer measurement, in the order to trust it
+
+1. **the dictionary**, per key: is the value still byte-identical to the
+   English source? (`.tmp/english-left-now.py`)
+2. **the patch**, per key, minus the measurement strings: what would
+   ship? (`.tmp/reader-sees.py`)
+3. **the live page**: what does a reader actually see? Fetch it through
+   the middleware and count the English SENTENCES - a Latin-word count
+   is meaningless on a Spanish or German page, where every word is
+   Latin. (`.tmp/live-english-before.py`)
+
+The live measurement is the only one that cannot lie about the
+middleware. Before Deploy 2 it found **30 English sentences** on the
+sampled th/ar/ru pages of four of the five new tools.
+
+### The shadow-repo negative control
+
+`scripts/check-i18n-meta-lengths.py` takes its root from the directory
+its own file sits in (`ROOT = Path(__file__).resolve().parent.parent`),
+so its zero can be re-proven **without touching the repository**: copy
+the script into a throwaway tree, give it a two-page fake site and
+eleven tiny dictionaries, inject a 220-character title into `zh.json`,
+and run it with `--strict`.
+
+* control (a normal title) -> exit 0, "0 titles"
+* negative (a 220-char title) -> exit 1, "1 titles"
+
+`.tmp/meta-negctl.py` does exactly that. A gate that reports a zero
+must be able to fail on a known positive before its zero means
+anything.
+
+## The translation gate read a Latin run as ONE word (2026-11-16)
+
+Twenty-seven values a reader would have seen in English, in four
+languages, were all the same defect in the gate.
+
+### The rule
+
+`LATIN_KEEP` is checked against a **whole run**, and a run is every
+space-separated stretch of Latin characters:
+
+```python
+LATIN_RUN_RE = re.compile(
+    r"[A-Za-z0-9][A-Za-z0-9'\u2019./\-]*"
+    r"(?:[ \u00a0]+[A-Za-z0-9][A-Za-z0-9'\u2019./\-]*)*")
+```
+
+So "Reels" passes (it is in the list) and "convertbox.app Reels" does
+not - that is one run of two names, and the list has no entry for it.
+The same for "Safari 16.4" and for "MP4 with H.264".
+
+And the word-by-word fallback only accepted digits, sizes and
+`UNIT_WORDS`, so a **product name** inside a run was rejected no matter
+what the list said.
+
+### TRAP: a sentence-ending period is not part of the token
+
+The Russian translation ends a clause with "MP4." and the tokenizer
+handed over the word `mp4.` - which is not `mp4`, so the format name was
+rejected and the whole paragraph with it. `run.strip(" .-/")` cleaned
+the ENDS of a run, but not the ends of the words INSIDE it.
+
+**The rule**: strip the trailing period from each word before comparing
+it. "H.264" and "16.4" keep their internal dot.
+
+### The fix
+
+* `technical_word_okay()` - a FUNCTION, so the regression test can turn
+  it off: a vendor domain, a `<digits>p` resolution, a product name
+  from `RUN_WORD_KEEP`.
+* `RUN_WORD_KEEP` - the product names that may sit NEXT TO another
+  name. It is deliberately **not** `LATIN_KEEP`: that list also holds
+  ordinary English words ("print", "fill", "none", "yes"), and a Chinese
+  sentence that says `print` in Latin letters IS an untranslated
+  fragment.
+* `LATIN_TARGET_KEEP["es"]` gains "has" - it is the Spanish verb
+  ("el formato que **has** elegido"), and the gate was rejecting a
+  correct Spanish sentence over it.
+
+### A negative control per RULE, not per file
+
+`scripts/check-translation-gate.py --negative-control` used to disable
+`script_independent()` and prove the test could see it. The new rules
+needed their own control, and they got one: the test now also disables
+`technical_word_okay()` and the Spanish "has", and every case that
+depends on them must flip to REJECTED.
+
+**A negative control that only covers the OLD rule cannot see a NEW
+rule.** That is the whole point of it.
+
+### What it bought
+
+| | before | after |
+|---|---|---|
+| reader-visible English in the five tools | 27 | 8 |
+| the video-editor paragraphs | 20 values in 6 languages | 0 |
+
+The remaining 8 were the model's own fault (it handed back the English
+source), not the gate's, and they were fixed by one more translation
+round with the fixed gate.
+
+## Two checkers that could not pass (2026-11-16)
+
+Both of these shipped as "checks" and both of them were unsatisfiable.
+They were found on 2026-11-16, hours apart, by the same thing: a check
+that reports a failure nobody can fix is a check that only knows how to
+fail.
+
+### `add-tools-to-sitemap.py` skipped a tool and then counted it
+
+```python
+for slug in TOOLS:
+    if re.search(r"<loc>...tools/%s/</loc>" % slug, text):
+        continue                       # already there -> skip
+    text = insert(text, slug, block)
+locs = re.findall(r"<loc>([^<]+)</loc>", text)
+if len(locs) != len(before_locs) + len(TOOLS):   # ...but still + 5
+```
+
+The first run added the five tools and passed. Every run after that
+skipped all five and still demanded five more, so it said "189 locs,
+expected 194" forever.
+
+**The rule**: the expectation has to count what was really INSERTED, and
+a separate assertion has to say what must be THERE ("the five tools are
+present"), whether this run put them there or not.
+
+### `fix-hub-count.py` sliced one string with another's offsets
+
+```python
+m = re.search(r'(<a[^>]*data-i18n="index\.a_text\.browse_all_13_free_tools'
+              r'[^"]*"[^>]*>)([^<]*)(</a>)', html, re.S)
+block = m.group(0)
+block = block[:m.start(2)] + (HOME_CTA % cards) + block[m.end(2):]
+```
+
+`m.start(2)` is an offset into **`html`**; `block` is a different
+string. The slice therefore landed past the end of `block`, and the
+result was the whole block PLUS the new text appended after the `</a>`.
+Every run added one more copy - and the deploy ran three times, so the
+home page read "Browse All 32 Free Tools" four times, three of them
+outside the anchor.
+
+**The rule**: when a regex match is sliced out of a string and then
+edited, the offsets have to be made RELATIVE to the new string
+(`len(m.group(1))`), or the edit is applied to the wrong place and the
+wrong way.
+
+### The reverse controls
+
+Neither fix is trusted because it "looks right":
+
+* the sitemap checker: a shadow tree with one tool's `x-default`
+  hreflang link removed must FAIL (and it does - "has 11 hreflang
+  links"); the untouched tree passes.
+* the hub counter: running it TWICE must leave the file byte-identical
+  (`Get-FileHash` before and after). The old code did not.
+
+### And the damage was found by LOOKING at the diff
+
+Nothing in the deploy gate noticed that the home page had four copies of
+its CTA. The gate passed, the dictionary was written, the shards were
+fresh. What found it was `git diff -- index.html` - one line, obviously
+wrong.
+
+**A gate that checks the things it was written to check will not notice
+a defect in a place it was not written to look.** Read the diff.

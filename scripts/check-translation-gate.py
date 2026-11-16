@@ -152,6 +152,84 @@ STORED = [
      "Windows では Alt+Ctrl+6、Mac では ALT+CMD+6 で開き、Template "
      "Browser からレイアウトを選び、Page Grid と Cell Spacing を設定します。",
      "ja", None, True, "a menu name the copy quotes on purpose"),
+
+    # --- a vendor domain and a product name INSIDE a translated sentence ---
+    # The video editor quotes two vendor sites, four platforms and a codec
+    # in one sentence. The model translated the sentence and kept the
+    # names; the gate read "MP4 convertbox.app" as one English run and
+    # threw the whole paragraph away in six languages at once.
+    ("For a phone, use MP4. convertbox.app recommends MP4 with H.264 for "
+     "Reels, TikTok and YouTube Shorts, and feelthefile.com lists Instagram "
+     "at up to 1080 × 1920 and 30 fps and YouTube at up to 1080p and 60 fps. "
+     "The vertical preset in this editor is exactly 1080 × 1920.",
+     "在手机上使用 MP4。convertbox.app 推荐在 Reels、TikTok 和 YouTube Shorts "
+     "中使用采用 H.264 的 MP4；feelthefile.com 列出的规格为 Instagram 最高 "
+     "1080 × 1920、30 fps，YouTube 最高 1080p、60 fps。本编辑器的竖屏预设正是 "
+     "1080 × 1920。",
+     "zh", None, True, "a vendor domain next to a format name"),
+    ("For a phone, use MP4. convertbox.app recommends MP4 with H.264 for "
+     "Reels, TikTok and YouTube Shorts, and feelthefile.com lists Instagram "
+     "at up to 1080 × 1920 and 30 fps and YouTube at up to 1080p and 60 fps. "
+     "The vertical preset in this editor is exactly 1080 × 1920.",
+     "For a phone, use MP4. convertbox.app recommends MP4 with H.264 for "
+     "Reels, TikTok and YouTube Shorts, and feelthefile.com lists Instagram "
+     "at up to 1080 × 1920 and 30 fps and YouTube at up to 1080p and 60 fps. "
+     "The vertical preset in this editor is exactly 1080 × 1920.",
+     "zh", None, False, "the same names, but the sentence is still English"),
+
+    # --- a browser name next to a version, in a Japanese sentence ---
+    ("The export needs WebCodecs, the browser API that does the actual "
+     "video work. Chrome and Edge have shipped it for years, Safari 16.4 and "
+     "newer have it, and freevideogenerator.io lists Firefox as limited "
+     "support. If the export button refuses to run, that is usually why.",
+     "書き出しには、実際に動画処理を行うブラウザAPIであるWebCodecsが必要です。"
+     "ChromeとEdgeでは数年前から対応しており、Safari 16.4以降でも利用できます。"
+     "freevideogenerator.ioではFirefoxは限定的なサポートと記載されています。"
+     "書き出しボタンが動作しない場合は、通常これが原因です。",
+     "ja", None, True, "browser names and a version in a Japanese sentence"),
+    ("The export needs WebCodecs, the browser API that does the actual "
+     "video work. Chrome and Edge have shipped it for years, Safari 16.4 and "
+     "newer have it, and freevideogenerator.io lists Firefox as limited "
+     "support. If the export button refuses to run, that is usually why.",
+     "The export needs WebCodecs, the browser API that does the actual "
+     "video work. Chrome and Edge have shipped it for years, Safari 16.4 and "
+     "newer have it, and freevideogenerator.io lists Firefox as limited "
+     "support. If the export button refuses to run, that is usually why.",
+     "ja", None, False, "the same names, but the sentence is still English"),
+
+    # --- "has" is the Spanish verb, not an English leftover ---
+    ("One thing is worth knowing before you start. If the clip is already in "
+     "the format you asked for and you did not change the frame size, the "
+     "editor copies the original video stream instead of re-encoding it. "
+     "That is fast and it changes nothing in the picture. As soon as you "
+     "change the size or the container, the video has to be re-encoded, and "
+     "a re-encode always costs a little quality.",
+     "Conviene saber una cosa antes de empezar. Si el clip ya está en el "
+     "formato que has elegido y no has cambiado las dimensiones del "
+     "fotograma, el editor copia el flujo de video original en lugar de "
+     "volver a codificarlo. Es rápido y no altera la imagen. En cuanto "
+     "cambias el tamaño o el contenedor, el video debe volver a codificarse, "
+     "y eso siempre supone una pequeña pérdida de calidad.",
+     "es", None, True, "the Spanish verb 'has'"),
+    ("One thing is worth knowing before you start. If the clip is already in "
+     "the format you asked for and you did not change the frame size, the "
+     "editor copies the original video stream instead of re-encoding it. "
+     "That is fast and it changes nothing in the picture. As soon as you "
+     "change the size or the container, the video has to be re-encoded, and "
+     "a re-encode always costs a little quality.",
+     "One thing is worth knowing before you start. If the clip is already in "
+     "the format you asked for and you did not change the frame size, the "
+     "editor copies the original video stream instead of re-encoding it. "
+     "That is fast and it changes nothing in the picture. As soon as you "
+     "change the size or the container, the video has to be re-encoded, and "
+     "a re-encode always costs a little quality.",
+     "es", None, False, "the English sentence in a Spanish page"),
+
+    # --- a numbered step whose label is a format name ---
+    ("1. Add your PDF files", "1. PDF ファイルを追加",
+     "ja", None, True, "a list marker next to a format name"),
+    ("1. Add your PDF files", "1. Add your PDF ファイルを追加",
+     "ja", None, False, "a list marker next to English words"),
 ]
 
 # (source, value, lang, expected_ok, why)
@@ -164,6 +242,17 @@ FRESH = [
     ("Output", "Output", "th", False, "an English echo"),
     ("Home", "Home", "ru", False, "an English echo"),
 ]
+
+
+# The cases that depend on the rules added on 2026-11-16: a technical
+# NAME is allowed next to another name inside a Latin run, and "has" is
+# the Spanish verb. The negative control has to be able to see them too,
+# or a test that cannot see them proves nothing about them.
+NEW_RULE_WHYS = {
+    "a vendor domain next to a format name",
+    "browser names and a version in a Japanese sentence",
+    "the Spanish verb 'has'",
+}
 
 
 def run_cases():
@@ -179,6 +268,40 @@ def run_cases():
             failures.append("llm_verify    %-3s %-22r expected_ok=%s reason=%r  (%s)"
                             % (lang, value[:22], ok, reason, why))
     return failures
+
+
+def negative_control_new_rules():
+    """Turn the NEW rules off and prove the test notices.
+
+    The first negative control disables script_independent(). That rule is
+    old; the rules of 2026-11-16 are newer and a test that cannot see
+    them is just as blind.
+    """
+    original_word_okay = T.technical_word_okay
+    original_keep = dict(T.LATIN_TARGET_KEEP)
+    depends = [c for c in STORED if c[5] in NEW_RULE_WHYS]
+    if not depends:
+        print("[FAIL] negative control: no case depends on the new rules")
+        return 1
+    T.technical_word_okay = lambda word: False
+    T.LATIN_TARGET_KEEP = {k: (set(v) - {"has"})
+                           for k, v in original_keep.items()}
+    try:
+        still_passing = [(s, v, l) for s, v, l, z, e, w in depends
+                          if e and T.verify_stored(s, v, 0, l, z)]
+    finally:
+        T.technical_word_okay = original_word_okay
+        T.LATIN_TARGET_KEEP = original_keep
+
+    if still_passing:
+        print("[FAIL] negative control: %d of %d new-rule cases still passed "
+              "without the rules: %r"
+              % (len(still_passing), len(depends), still_passing[:3]))
+        return 1
+    print("[OK] negative control: all %d new-rule cases change when the new "
+          "rules are disabled, so the test is sensitive to them."
+          % len(depends))
+    return 0
 
 
 def negative_control():
@@ -219,8 +342,8 @@ def negative_control():
     if problems:
         print("[FAIL] negative control: %s" % "; ".join(problems))
         return 1
-    print("[OK] negative control: %d of %d rule-dependent cases change when "
-          "the rule is disabled, so the test is sensitive to it."
+    print("[OK] negative control: with the rule off %d case(s) fail and all "
+          "%d rule-dependent cases flip, so the test is sensitive to it."
           % (len(failures), len(depends)))
     return 0
 
@@ -232,7 +355,10 @@ def main():
     args = ap.parse_args()
 
     if args.negative_control:
-        return negative_control()
+        rc = negative_control()
+        if rc:
+            return rc
+        return negative_control_new_rules()
 
     failures = run_cases()
     print("cases: %d" % (len(STORED) + len(FRESH)))

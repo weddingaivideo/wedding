@@ -147,19 +147,35 @@ def main():
         before_locs = re.findall(r"<loc>([^<]+)</loc>", text)
         if len(before_locs) != len(set(before_locs)):
             problems.append("%s already has duplicate locs" % name)
+        # How many entries this file actually needs. A tool that is ALREADY
+        # in the sitemap is skipped, so the expectation has to count the
+        # entries that were really INSERTED.
+        #
+        # The old check said "before + 5" no matter what, so it could only
+        # pass on a tree where none of the five tools was present yet.
+        # Deploy 1 put them there, and every run after that failed with
+        # "189 locs, expected 194" - a checker that could never pass.
+        added = 0
         for slug in TOOLS:
             if re.search(r"<loc>https://weddingai\.video/tools/%s/</loc>" % slug,
                          text):
                 continue
             block = build_block(slug, arabic_image_title(slug))
             text = insert(text, slug, block)
+            added += 1
         locs = re.findall(r"<loc>([^<]+)</loc>", text)
         if len(locs) != len(set(locs)):
             problems.append("%s has duplicate locs after the insert" % name)
-        if len(locs) != len(before_locs) + len(TOOLS):
+        if len(locs) != len(before_locs) + added:
             problems.append("%s: %d locs, expected %d"
                             % (name, len(locs),
-                               len(before_locs) + len(TOOLS)))
+                               len(before_locs) + added))
+        # The five tools must be THERE, whether they were already there or
+        # this run put them there.
+        for slug in TOOLS:
+            if not re.search(
+                    r"<loc>https://weddingai\.video/tools/%s/</loc>" % slug, text):
+                problems.append("%s: the entry for %s is missing" % (name, slug))
         # The hreflang graph of a new entry must match the one next to it.
         for slug in TOOLS:
             block = re.search(

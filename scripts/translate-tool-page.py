@@ -843,6 +843,32 @@ ENGLISH_ONLY_WORDS = {
 # languages uses it, and it is allowed back only for that language.
 LATIN_TARGET_KEEP = {
     "de": {"also", "man", "so", "war", "hat", "mehr", "hier", "vor"},
+    # "has" is the Spanish verb (tu has), so an English "has" inside a
+    # Spanish sentence is not necessarily a leftover.
+    "es": {"has"},
+}
+
+# Words that may sit INSIDE a longer Latin run.
+#
+# LATIN_KEEP is checked against a WHOLE run, so "Safari" passes on its own
+# and "Safari 16.4" does not - the run is two words and the rule sees one
+# string. The same happened to "convertbox.app Reels" and to "MP4 with
+# H.264". Those are product names, not copy: they are spelled the same in
+# every language, and the copy quotes them on purpose.
+#
+# This set is deliberately short and technical. It is NOT LATIN_KEEP:
+# LATIN_KEEP also holds ordinary English words ("print", "fill", "none",
+# "yes"), and a Chinese sentence that says "print" in Latin letters IS an
+# untranslated fragment.
+RUN_WORD_KEEP = {
+    # browsers the copy names next to a version ("Safari 16.4") or next to
+    # another browser ("Chrome and Edge")
+    "chrome", "edge", "safari", "firefox", "opera", "brave", "chromium",
+    # a product name next to another name ("Instagram Reels",
+    # "convertbox.app Reels", "YouTube Shorts")
+    "reels", "shorts", "tiktok", "instagram", "youtube",
+    # a codec with its version ("MP4 with H.264")
+    "h.264", "h.265", "hevc", "av1",
 }
 
 LATIN_RUN_RE = re.compile(
@@ -851,6 +877,38 @@ LATIN_RUN_RE = re.compile(
 NON_LATIN_RE = re.compile(
     r"[\u3040-\u30ff\u4e00-\u9fff\u0600-\u06ff\u0e00-\u0e7f\u0900-\u097f]")
 LATIN_TARGETS = ("en", "es", "fr", "de", "pt")
+
+
+def technical_word_okay(word):
+    """True for a word that is a technical NAME, not untranslated copy.
+
+    These are the words that must survive inside a longer Latin run. The
+    run "MP4 convertbox.app" is one run, so a vendor domain that sits next
+    to a format name used to turn the whole run into an English fragment
+    and throw the paragraph away. The same happened to "Safari 16.4",
+    to "convertbox.app Reels", to "1080p" and to the numbered step
+    "1. PDF".
+
+    Every one of them is spelled the same in every language, so a
+    translation that keeps them is still a translation.
+
+    It is a FUNCTION and not a block inside _run_is_allowed() so the
+    regression test can turn it off and prove it can see it.
+    """
+    # A vendor domain: "convertbox.app", "feelthefile.com".
+    if re.fullmatch(r"[a-z0-9\-]+(\.[a-z0-9\-]+)+", word):
+        return True
+    # A resolution with the industry "p" suffix: "1080p", "720p".
+    if re.fullmatch(r"\d{3,4}p", word):
+        return True
+    # A product name next to another name: "Safari 16.4",
+    # "convertbox.app Reels", "MP4 with H.264".
+    #
+    # A numbered list marker ("1.") is NOT here: the caller strips the
+    # sentence-ending period before it gets here, and "1" is a number.
+    if word in RUN_WORD_KEEP:
+        return True
+    return False
 
 
 def _run_is_allowed(run):
@@ -875,6 +933,13 @@ def _run_is_allowed(run):
     # only numbers, unit words and the glue between them
     words = re.findall(r"[A-Za-z0-9.]+", norm)
     for word in words:
+        # A SENTENCE-ENDING period is not part of the token. The Russian
+        # translation ends a clause with "MP4." and the tokenizer handed
+        # over "mp4." - which is not "mp4", so the format name was rejected
+        # and the whole paragraph with it.
+        word = word.rstrip(".")
+        if not word:
+            continue
         if word.isdigit():
             continue
         if re.fullmatch(r"\d+(?:\.\d+)?", word):
@@ -896,6 +961,10 @@ def _run_is_allowed(run):
         # every language - so a translated sentence is allowed to keep it.
         m2 = re.fullmatch(r"(\d+(?:\.\d+)?)([a-z]+)", word)
         if m2 and m2.group(2) in UNIT_WORDS:
+            continue
+        # A technical NAME next to another name: "MP4 convertbox.app",
+        # "Safari 16.4", "1. PDF".
+        if technical_word_okay(word):
             continue
         return False
     return True
@@ -1143,9 +1212,14 @@ def llm_prompt(items, target):
         "Rules:",
         "- Output ONLY a JSON array. One object per input item, in the same",
         "  order, with keys \"id\" (copy the input id) and \"text\".",
-        "- Keep every number, every measurement unit (in, cm, DPI, MB, %) and",
-        "  every placeholder token such as ZXQPROT0ZXQ EXACTLY as written.",
-        "  Never translate a digit and never drop one.",
+        "- Keep every number and every UNIT SYMBOL exactly as written (in,",
+        "  cm, mm, DPI, MB, GB, lb, gsm, %, fps), and every placeholder token",
+        "  such as ZXQPROT0ZXQ. Never translate a digit and never drop one.",
+        "- If the source spells a unit out in ENGLISH WORDS - percent,",
+        "  milliseconds, degrees, frames, pixels, megapixels, inches -",
+        "  TRANSLATE that word. Only the number stays as it is. \"100",
+        "  percent\" becomes \"100\" plus the word for percent in your",
+        "  language, never \"100 percent\" in Latin letters.",
         "- When the English text uses a DIGIT, write that number as a digit",
         "  too. Do not spell it out (\"1 column\" stays a digit, not \"one",
         "  column\"), because the reader is choosing a number on screen.",
@@ -1270,7 +1344,9 @@ def llm_strict_prompt(item, target):
         "- TRANSLATE EVERY WORD. Do not leave any phrase of the English",
         "  source in the translation. Keep in the original script only:",
         "  format names (PDF, MP4, GIF), the brand WeddingAI.video, app",
-        "  names, and measurement units (lb, gsm, DPI, inch).",
+        "  names, and unit SYMBOLS (lb, gsm, DPI, inch, %). A unit spelled",
+        "  out in English words (percent, milliseconds, degrees) is copy:",
+        "  translate it.",
     ] + (["- The translation MUST be at most %d characters long." % item["max"]]
          if item.get("max") else []) + [
         "",

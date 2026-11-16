@@ -305,7 +305,14 @@ def fix_home(html, cards):
         block = m.group(0)
         block = re.sub(r'title="[^"]*"', 'title="Browse all %d free wedding tools"'
                        % cards, block)
-        block = block[:m.start(2)] + (HOME_CTA % cards) + block[m.end(2):]
+        # The offsets of group 2 are ABSOLUTE - they point into `html`.
+        # `block` is a DIFFERENT string, so slicing it with them lands past
+        # its end: the old code produced the whole block PLUS the new text
+        # appended after the </a>, and every run added one more copy.
+        # The index ran three times and the link read four times.
+        start = len(m.group(1))
+        end = start + len(m.group(2))
+        block = block[:start] + (HOME_CTA % cards) + block[end:]
         html = html[:m.start()] + block + html[m.end():]
         changed.append("home cta")
     return html, changed
