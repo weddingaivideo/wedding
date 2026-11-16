@@ -4222,3 +4222,112 @@ wrong.
 
 **A gate that checks the things it was written to check will not notice
 a defect in a place it was not written to look.** Read the diff.
+
+---
+
+## The English a dictionary audit cannot see (2026-11-16)
+
+Deploy 2 shipped the five new tools with **all eleven dictionaries
+complete**: every key of the five tools' namespaces had a real
+translation in all ten foreign languages, and the reader-view counter
+said **one** English sentence was left.
+
+It was really **eight static strings and seventy-three runtime
+strings**, and a Russian reader met every one of them.
+
+### "The page is translated" is a property of the BINDINGS
+
+`applyDataI18n()` rewrites an element that carries `data-i18n="<key>"`.
+An element WITHOUT a binding keeps whatever the static file says - which
+for a language copy means English. So there are two kinds of English a
+dictionary cannot hold:
+
+* **static** - markup with no `data-i18n` at all;
+* **runtime** - a string the page's own JavaScript writes AFTER the
+  response was sent. No server-side pass can ever reach it.
+
+Neither has a key, so neither is visible to a dictionary audit, to
+`check-i18n-meta-lengths.py` (head only), to the shard-freshness gate
+(the shards are correct) or to the translation gate (there is no value
+to check).
+
+### The `<div>` gap in the binder
+
+`scripts/add-tool-i18n-bindings.py` binds the tags in `TEXT_TAGS`.
+`div` is not in it, because most divs are layout wrappers - but the
+drop zone's title and hint, the "no files yet" line and the page counter
+are all divs, and they were English in all ten languages.
+
+The binder now also binds the elements whose **CLASS** names a sentence
+(`EXTRA_BIND_CLASSES`). The class is the selector, not the tag: a new
+div with one of those classes is bound automatically and lands in the
+map like any other bound element.
+
+### The measurement was too coarse - and that is the same lesson twice
+
+The reader-view counter reported a sentence only when it was **25
+characters or longer** AND carried **four** English words outside a small
+allow list. "No PDF files yet." is 16 characters. The drop zone's title
+and hint were under the line. The counter said 1; the truth was 8 static
+strings plus 73 runtime ones.
+
+**A threshold that hides a defect is the same failure as a gate that
+cannot fail.** The new check (`scripts/check-reader-view.py`) compares
+EVERY visible run with the English source.
+
+### Who decides that a string is "the same in every language"
+
+Not a hand-written white list: **the site's own dictionary**. A run is
+by design when the key that holds it has the SAME value in the target
+language as in English - a measurement ("5 x 7 in"), a paper size
+("A5"), a format name ("PDF"), a brand ("Canva"), a competitor's product
+name. A key the site translated to something else, and the reader still
+sees in English, is a real defect.
+
+A white list written by hand would have rotted: "Greetings Island" is a
+competitor's product and reads the same everywhere, and every hand-typed
+list either forgets it or grows a hole.
+
+### The runtime path has two halves and BOTH are needed
+
+* `js/tools/common.js` holds the alias table (`COPY`), and
+* `i18n/<lang>.json` holds the value in every language.
+
+An alias that is in the table but not in the dictionary falls back to
+English **silently**. An alias that is in the dictionary but not in the
+table is never looked up at all. The middleware hands the whole
+`tools.copy` namespace to the client as `window.__WA_I18N__` - it
+selects every flat key starting with `tools.copy.`, so a new alias needs
+no middleware change.
+
+### The local `t()` wrapper needs params
+
+Three of the five pages had `function t(alias, fallback)`. A string with
+a `{n}` in it cannot be built without a third argument, so those pages
+could not use a placeholder at all. The wrapper now takes `params` and
+interpolates the fallback too - a string with a missing parameter must
+still render in English, not as "{n} pages".
+
+### A dropped placeholder is YOUR defect to catch
+
+The gate checks the digits. It does **not** check that `{n}` survived -
+the model is told to keep the placeholder, but nothing verifies it. The
+translation step checks every `{name}` in the source against the value
+and falls back to English when one is missing. "1 pages" for every page
+count is the failure this catches.
+
+### An example the reader replaces stays in English
+
+The form's placeholders ("e.g. Emma & Liam") and the menu sample in a
+textarea are examples the reader replaces, and all thirteen older tools
+keep them in English in all eleven dictionaries. The five new tools now
+follow the same rule. A `placeholder` is therefore NOT a translation
+gap, and a checker that flags it is wrong.
+
+### The gate, and its reverse control
+
+`scripts/check-reader-view.py` is step **9i** of
+`internal-tools/pre-deploy-check.ps1`, and it runs its own reverse
+control: `--inject` removes one binding and one runtime alias from
+every dictionary, and the report MUST then name them. A checker that
+cannot fail proves nothing, so the control is part of the gate.

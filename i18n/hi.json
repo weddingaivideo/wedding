@@ -67233,4 +67233,170 @@
   "guides.wedding-pdf-editor.a2": "Yes for any print PDF. Embedding, or converting text to outlines, prevents substitution on the printer's system.",
   "guides.wedding-pdf-editor.q3": "How do I make a PDF smaller?",
   "guides.wedding-pdf-editor.a3": "Downsample images to the target resolution, remove unused pages and metadata, and use the PDF's built-in optimiser. Do this on a copy, not the master."
+,
+  "tools.copy.pdfAesFormat.zzzzzz326ed": "यह PDF AES-256 एन्क्रिप्शन का उपयोग करता है (PDF 2.0)। यह टूल उस फ़ॉर्मैट को नहीं खोल सकता।"
+,
+  "tools.copy.pdfBroken.zzzzzz6d481": "यह फ़ाइल पढ़ी जा सकने योग्य PDF नहीं है।"
+,
+  "tools.copy.pdfCopyFailed.zzzzzzc4fd0": "किसी पृष्ठ की प्रतिलिपि नहीं बनाई जा सकी।"
+,
+  "tools.copy.pdfCustomSize.zzzzzz07d0b": "अपनी पसंद का आकार"
+,
+  "tools.copy.pdfEngineMissing.zzzzzzdebd0": "PDF इंजन लोड नहीं हो सका।"
+,
+  "tools.copy.pdfIncludePage.zzzzzz6f8b2": "पृष्ठ {n} शामिल करें"
+,
+  "tools.copy.pdfLandscape.zzzzzzee77c": "{size} क्षैतिज"
+,
+  "tools.copy.pdfLocked.zzzzzz8c522": "यह PDF एन्क्रिप्टेड है। इसे खोलने के लिए पासवर्ड टाइप करें।"
+,
+  "tools.copy.pdfLockedShort.zzzzzz5c8c0": "पासवर्ड के साथ खोला गया"
+,
+  "tools.copy.pdfMoveDown.zzzzzz3d191": "नीचे ले जाएँ"
+,
+  "tools.copy.pdfMoveUp.zzzzzz4315e": "ऊपर ले जाएँ"
+,
+  "tools.copy.pdfNoPages.zzzzzz5325f": "अभी तक कोई पृष्ठ नहीं है।"
+,
+  "tools.copy.pdfNoPagesInDoc.zzzzzz63a27": "इस PDF में कोई पृष्ठ नहीं है।"
+,
+  "tools.copy.pdfNoPagesSelected.zzzzzz1355c": "कोई पृष्ठ चयनित नहीं है।"
+,
+  "tools.copy.pdfNotAPdf.zzzzzz0d3b9": "{name} PDF फ़ाइल नहीं है।"
+,
+  "tools.copy.pdfNotOpen.zzzzzz48f21": "यह PDF अभी तक खोला नहीं गया है।"
+,
+  "tools.copy.pdfNothingToExport.zzzzzzd4b1e": "निर्यात के लिए कुछ नहीं था।"
+,
+  "tools.copy.pdfOneAtATime.zzzzzzd2289": "अनलॉक की गई प्रतिलिपि सहेजने के लिए एक समय में एक PDF लोड करें।"
+,
+  "tools.copy.pdfOpenButton.zzzzzz8f6b2": "खोलें"
+,
+  "tools.copy.pdfOpenFailed.zzzzzz4ec71": "यह फ़ाइल नहीं खोली जा सकी।"
+,
+  "tools.copy.pdfOpenedWithPassword.zzzzzzef070": "पासवर्ड के साथ खोला गया। निर्यात की गई फ़ाइल में न कोई पासवर्ड है और न ही कोई प्रतिबंध।"
+,
+  "tools.copy.pdfPageCountText.zzzzzz73d1b": "PDF में {m} में से {n} पेज"
+,
+  "tools.copy.pdfPageGroupsHint.zzzzzz62bf3": "पेजों के समूह लिखें, जैसे 1-3, 4, 5-"
+,
+  "tools.copy.pdfPageMany.zzzzzz4c3cb": "{n} पेज"
+,
+  "tools.copy.pdfPageOne.zzzzzz61a14": "{n} पेज"
+,
+  "tools.copy.pdfPageTitle.zzzzzz01998": "{n}. {file} — पेज {p}"
+,
+  "tools.copy.pdfPasswordFor.zzzzzzb8e31": "{name} के लिए PDF पासवर्ड"
+,
+  "tools.copy.pdfPasswordLabel.zzzzzz5ad8e": "PDF पासवर्ड"
+,
+  "tools.copy.pdfPortrait.zzzzzz39b4b": "{size} पोर्ट्रेट"
+,
+  "tools.copy.pdfSavedOne.zzzzzz6bd05": "एक PDF सहेजा गया, जिसमें {n} पेज हैं। कुछ भी अपलोड नहीं किया गया।"
+,
+  "tools.copy.pdfSavedUnlocked.zzzzzz9a6b2": "पासवर्ड और प्रिंटिंग प्रतिबंध दोनों के बिना एक कॉपी सहेजी गई।"
+,
+  "tools.copy.pdfSavedZip.zzzzzz80529": "{n} PDF फ़ाइलें एक ZIP संग्रह में सहेजी गईं।"
+,
+  "tools.copy.pdfSourceMissing.zzzzzzf922f": "एक स्रोत फ़ाइल मौजूद नहीं है।"
+,
+  "tools.copy.pdfTooBig.zzzzzzea682": "200 MB से अधिक है। पहले इसे विभाजित करें या छोटी फ़ाइल का उपयोग करें।"
+,
+  "tools.copy.pdfTooManyFiles.zzzzzzb54df": "एक बार में {n} तक फ़ाइलें। कोई फ़ाइल हटाएँ और दूसरी जोड़ें।"
+,
+  "tools.copy.pdfTooManyPages.zzzzzzb5117": "यह एक दस्तावेज़ के लिए 1,500 पेज की सीमा से अधिक है।"
+,
+  "tools.copy.pdfTurnLeft.zzzzzz23bfb": "बाएँ मुड़ें"
+,
+  "tools.copy.pdfTurnRight.zzzzzzcb3d0": "दाएँ मुड़ें"
+,
+  "tools.copy.pdfTurned.zzzzzz3bbe0": " · {deg}° घुमाया गया"
+,
+  "tools.copy.pdfUnknownError.zzzzzzbf803": "अज्ञात त्रुटि"
+,
+  "tools.copy.pdfUnreadable.zzzzzz37adb": "यह ब्राउज़र फ़ाइल पढ़ नहीं सकता।"
+,
+  "tools.copy.pdfWrongPassword.zzzzzza8f52": "उस पासवर्ड से फ़ाइल नहीं खुली।"
+,
+  "tools.copy.pdfZipMissing.zzzzzz824c8": "ZIP बिल्डर लोड नहीं हुआ।"
+,
+  "tools.copy.setAccepts.zzzzzzae190": "सहर्ष स्वीकार करते हैं"
+,
+  "tools.copy.setByDate.zzzzzz76c89": "{date} तक"
+,
+  "tools.copy.setByDateBelow.zzzzzz94120": "नीचे दी गई तारीख तक"
+,
+  "tools.copy.setDateTbc.zzzzzz592cb": "तारीख अभी तय नहीं हुई है"
+,
+  "tools.copy.setDressCode.zzzzzzb8af4": "ड्रेस कोड: {code}"
+,
+  "tools.copy.setGuestName.zzzzzz6b9a1": "मेहमान का नाम"
+,
+  "tools.copy.setHonorPresence.zzzzzze1c42": "उनके विवाह में आपकी उपस्थिति का गौरव प्राप्त करने की कृपा करें"
+,
+  "tools.copy.setKindlyReply.zzzzzz76ac3": "कृपया उत्तर दें"
+,
+  "tools.copy.setKindlyReplyBy.zzzzzz08e05": "{date} तक कृपया उत्तर दें"
+,
+  "tools.copy.setMenu.zzzzzzc37df": "मेन्यू"
+,
+  "tools.copy.setReceptionToFollow.zzzzzzd4f26": "इसके बाद रिसेप्शन होगा"
+,
+  "tools.copy.setRegrets.zzzzzza5e38": "गहरा खेद व्यक्त करते हैं"
+,
+  "tools.copy.setTable.zzzzzz7d448": "मेज़ {n}"
+,
+  "tools.copy.setTimeTbc.zzzzzzc3050": "समय अभी तय नहीं हुआ है"
+,
+  "tools.copy.setVenueTbc.zzzzzzac62e": "स्थान अभी तय नहीं हुआ है"
+,
+  "tools.copy.setWelcome.zzzzzz1de66": "हमारी शादी में आपका स्वागत है"
+,
+  "tools.copy.setWithFamilies.zzzzzz399c2": "उनके परिवारों के साथ"
+,
+  "tools.copy.setYourNames.zzzzzz7c591": "आपके नाम"
+,
+  "tools.copy.sheetAddPhotos.zzzzzzb422b": "कॉन्टैक्ट शीट बनाने के लिए कुछ फ़ोटो जोड़ें।"
+,
+  "tools.copy.sheetHeicFailed.zzzzzze86ea": "यह HEIC फ़ाइल डीकोड नहीं की जा सकी।"
+,
+  "tools.copy.sheetNoPhotos.zzzzzz2f160": "पहले कुछ फ़ोटो जोड़ें।"
+,
+  "tools.copy.sheetNothingToExport.zzzzzzc2bfe": "एक्सपोर्ट करने के लिए कुछ नहीं है।"
+,
+  "tools.copy.sheetOnlyFirst.zzzzzz434fa": "केवल पहली {n} फ़ोटो जोड़ी गईं। सीमा {max} है।"
+,
+  "tools.copy.sheetPageLabel.zzzzzz9a233": "पृष्ठ {n}"
+,
+  "tools.copy.sheetPdfSummaryMany.zzzzzzb6b6b": "PDF में {n} पृष्ठ हैं। पृष्ठ संख्याएँ 1 से {m} तक लगातार हैं।"
+,
+  "tools.copy.sheetPdfSummaryOne.zzzzzz3705e": "PDF में {n} पृष्ठ है। पृष्ठ संख्याएँ 1 से {m} तक लगातार हैं।"
+,
+  "tools.copy.sheetRendering.zzzzzz86a57": "{total} में से पृष्ठ {n} रेंडर हो रहा है"
+,
+  "tools.copy.sheetTooMany.zzzzzzaaf9f": "यह टूल एक बार में {n} तक फ़ोटो लेता है।"
+,
+  "tools.copy.sheetUnreadable.zzzzzz177df": "यह फ़ाइल पढ़ी नहीं जा सकी।"
+,
+  "tools.copy.veditEncoderMissing.zzzzzzdf7ed": "वीडियो एनकोडर लोड नहीं हो सका।"
+,
+  "tools.wedding-photo-contact-sheet.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "फ़ोटो यहाँ छोड़ें या फ़ाइलें चुनने के लिए क्लिक करें"
+,
+  "tools.wedding-photo-contact-sheet.div_text.jpg_png_webp_or_heic_up_to_100_photos_at.cd94268b": "JPG, PNG, WebP या HEIC। एक बार में 100 तक फ़ोटो।"
+,
+  "tools.wedding-pdf-editor.div_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "PDF फ़ाइलें यहाँ छोड़ें या फ़ाइलें चुनने के लिए क्लिक करें"
+,
+  "tools.wedding-pdf-editor.div_text.pdf_only_up_to_20_files_up_to_200_mb_eac.2fc70c65": "केवल PDF · 20 फ़ाइलें तक · प्रत्येक 200 MB तक · आपके डिवाइस पर ही रहती हैं"
+,
+  "tools.wedding-pdf-editor.div_text.no_pdf_files_yet_drop_some_above_to_star.01f028a1": "अभी तक कोई PDF फ़ाइल नहीं है। शुरू करने के लिए ऊपर कुछ फ़ाइलें छोड़ें।"
+,
+  "tools.wedding-pdf-editor.div_text.no_pages_yet.650ee538": "अभी तक कोई पृष्ठ नहीं है।"
+,
+  "tools.wedding-photo-to-gif.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "फ़ोटो यहाँ छोड़ें या फ़ाइलें चुनने के लिए क्लिक करें"
+,
+  "tools.wedding-photo-to-gif.div_text.jpg_png_or_webp_up_to_20_photos_at_a_tim.00929ef5": "JPG, PNG या WebP। एक बार में 20 तक फ़ोटो।"
+,
+  "tools.wedding-pdf-editor.aria_label_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "PDF फ़ाइलें यहाँ छोड़ें या फ़ाइलें चुनने के लिए क्लिक करें"
+,
+  "tools.wedding-photo-to-gif.alt_text.preview_of_the_animated_gif.5b0e2c31": "एनिमेटेड GIF का पूर्वावलोकन"
 }

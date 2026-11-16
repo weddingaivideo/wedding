@@ -680,19 +680,19 @@ Dessert</textarea>
 
       var STYLES = {
         classic: {
-          name: 'Classic', swatch: '#8a6a3d', bg: '#fffefb', ink: '#2b2b2b', accent: '#8a6a3d', rule: '#c9b28c',
+          name: 'Classic', i18n: 'setStyleClassic', swatch: '#8a6a3d', bg: '#fffefb', ink: '#2b2b2b', accent: '#8a6a3d', rule: '#c9b28c',
           head: "'Playfair Display', Georgia, serif", body: "'Inter', Georgia, serif", ornament: 'rule'
         },
         modern: {
-          name: 'Modern', swatch: '#c0392b', bg: '#ffffff', ink: '#111111', accent: '#c0392b', rule: '#111111',
+          name: 'Modern', i18n: 'setStyleModern', swatch: '#c0392b', bg: '#ffffff', ink: '#111111', accent: '#c0392b', rule: '#111111',
           head: "'Inter', Helvetica, Arial, sans-serif", body: "'Inter', Helvetica, Arial, sans-serif", ornament: 'block'
         },
         botanical: {
-          name: 'Botanical', swatch: '#7a8b6f', bg: '#f7f5ee', ink: '#3a4a3a', accent: '#7a8b6f', rule: '#c2cbb8',
+          name: 'Botanical', i18n: 'setStyleBotanical', swatch: '#7a8b6f', bg: '#f7f5ee', ink: '#3a4a3a', accent: '#7a8b6f', rule: '#c2cbb8',
           head: "'Playfair Display', Georgia, serif", body: "'Inter', Georgia, serif", ornament: 'leaf'
         },
         script: {
-          name: 'Script', swatch: '#b08b6b', bg: '#fffdf8', ink: '#4a4a4a', accent: '#b08b6b', rule: '#e2d5c4',
+          name: 'Script', i18n: 'setStyleScript', swatch: '#b08b6b', bg: '#fffdf8', ink: '#4a4a4a', accent: '#b08b6b', rule: '#e2d5c4',
           head: "'Great Vibes', 'Apple Chancery', cursive", body: "'Inter', Georgia, serif", ornament: 'sprig'
         }
       };
@@ -718,10 +718,15 @@ Dessert</textarea>
       var progressFill = document.getElementById('progress-fill');
       var progressText = document.getElementById('progress-text');
 
-      function t(alias, fallback) {
+      function t(alias, fallback, params) {
         try {
-          if (window.weddingAITool && window.weddingAITool.t) return window.weddingAITool.t(alias, fallback);
+          if (window.weddingAITool && window.weddingAITool.t) return window.weddingAITool.t(alias, fallback, params);
         } catch (e) { /* fall through */ }
+        if (params) {
+          return String(fallback).replace(/\{(\w+)\}/g, function (m, k) {
+            return Object.prototype.hasOwnProperty.call(params, k) ? String(params[k]) : m;
+          });
+        }
         return fallback;
       }
 
@@ -730,6 +735,11 @@ Dessert</textarea>
       // window.__WA_I18N__ - so they resolve in every language.
       function pieceName(p) {
         return p.i18n ? t(p.i18n, p.name) : p.name;
+      }
+
+      // The translated label of a style, the same mechanism as the pieces.
+      function styleName(s) {
+        return s.i18n ? t(s.i18n, s.name) : s.name;
       }
 
       // ---------- web fonts ------------------------------------------------
@@ -762,7 +772,7 @@ Dessert</textarea>
 
       function couple() {
         var a = field('partner-one'), b = field('partner-two');
-        if (!a && !b) return 'Your names';
+        if (!a && !b) return t('setYourNames', 'Your names');
         if (!a) return b;
         if (!b) return a;
         return a + ' & ' + b;
@@ -866,33 +876,33 @@ Dessert</textarea>
       function drawInvitation(c, s, scale) {
         var cx = s.w / 2;
         var y = 0.85;
-        y = drawLines(c, ['Together with their families'], cx, y, 0.26, 0.2, s.body, '400', s.ink, scale, s.w - 1.0);
+        y = drawLines(c, [t('setWithFamilies', 'Together with their families')], cx, y, 0.26, 0.2, s.body, '400', s.ink, scale, s.w - 1.0);
         y = drawLines(c, [couple()], cx, y + 0.55, 0.0, 0.9, s.head, '400', s.ink, scale, s.w - 0.9);
         y += 0.18;
         drawOrnament(c, cx, y, s, s.accent, scale);
         y += 0.45;
-        y = drawLines(c, ['request the honor of your presence at the marriage of'], cx, y, 0.26, 0.19, s.body, '400', s.ink, scale, s.w - 0.9);
+        y = drawLines(c, [t('setHonorPresence', 'request the honor of your presence at the marriage of')], cx, y, 0.26, 0.19, s.body, '400', s.ink, scale, s.w - 0.9);
         y += 0.28;
-        drawCentered(c, field('wedding-date') || 'Date to be confirmed', cx, y, 0.34, s.head, '400', s.ink, scale, s.w - 0.8);
+        drawCentered(c, field('wedding-date') || t('setDateTbc', 'Date to be confirmed'), cx, y, 0.34, s.head, '400', s.ink, scale, s.w - 0.8);
         y += 0.38;
-        drawCentered(c, field('wedding-time') || 'Time to be confirmed', cx, y, 0.22, s.body, '400', s.ink, scale, s.w - 0.8);
+        drawCentered(c, field('wedding-time') || t('setTimeTbc', 'Time to be confirmed'), cx, y, 0.22, s.body, '400', s.ink, scale, s.w - 0.8);
         y += 0.5;
-        drawCentered(c, field('venue') || 'Venue to be confirmed', cx, y, 0.28, s.head, '400', s.ink, scale, s.w - 0.8);
+        drawCentered(c, field('venue') || t('setVenueTbc', 'Venue to be confirmed'), cx, y, 0.28, s.head, '400', s.ink, scale, s.w - 0.8);
         y += 0.34;
         drawCentered(c, field('city') || '', cx, y, 0.2, s.body, '400', s.ink, scale, s.w - 0.8);
         y += 0.5;
         var reception = field('reception');
-        drawCentered(c, reception || 'Reception to follow', cx, y, 0.22, s.body, '400', s.ink, scale, s.w - 0.8);
+        drawCentered(c, reception || t('setReceptionToFollow', 'Reception to follow'), cx, y, 0.22, s.body, '400', s.ink, scale, s.w - 0.8);
         y += 0.36;
         var dress = field('dress-code');
         if (dress) {
-          drawCentered(c, 'Dress code: ' + dress, cx, y, 0.18, s.body, '400', s.ink, scale, s.w - 0.8);
+          drawCentered(c, t('setDressCode', 'Dress code: {code}', { code: dress }), cx, y, 0.18, s.body, '400', s.ink, scale, s.w - 0.8);
           y += 0.32;
         }
         var rsvp = field('rsvp-by');
         var web = field('website');
         var foot = [];
-        if (rsvp) foot.push('Kindly reply by ' + rsvp);
+        if (rsvp) foot.push(t('setKindlyReplyBy', 'Kindly reply by {date}', { date: rsvp }));
         if (web) foot.push(web);
         if (foot.length) {
           y = s.h - 0.75;
@@ -903,16 +913,16 @@ Dessert</textarea>
       function drawRsvp(c, s, scale) {
         var cx = s.w / 2;
         var y = 0.9;
-        drawCentered(c, 'Kindly reply', cx, y, 0.4, s.head, '400', s.ink, scale, s.w - 0.7);
+        drawCentered(c, t('setKindlyReply', 'Kindly reply'), cx, y, 0.4, s.head, '400', s.ink, scale, s.w - 0.7);
         y += 0.5;
         var rsvp = field('rsvp-by');
-        drawLines(c, rsvp ? ['by ' + rsvp] : ['by the date below'], cx, y, 0.3, 0.2, s.body, '400', s.ink, scale, s.w - 0.7);
+        drawLines(c, rsvp ? [t('setByDate', 'by {date}', { date: rsvp })] : [t('setByDateBelow', 'by the date below')], cx, y, 0.3, 0.2, s.body, '400', s.ink, scale, s.w - 0.7);
         y += 0.55;
         drawOrnament(c, cx, y, s, s.accent, scale);
         y += 0.55;
         drawLines(c, [couple()], cx, y, 0.0, 0.34, s.head, '400', s.ink, scale, s.w - 0.7);
         y += 0.7;
-        drawLines(c, ['Accepts with pleasure', 'Regrets with regret'], cx, y, 0.34, 0.19, s.body, '400', s.ink, scale, s.w - 0.7);
+        drawLines(c, [t('setAccepts', 'Accepts with pleasure'), t('setRegrets', 'Regrets with regret')], cx, y, 0.34, 0.19, s.body, '400', s.ink, scale, s.w - 0.7);
         y += 0.8;
         drawLines(c, ['M ____  ____ of ____'], cx, y, 0.0, 0.19, s.body, '400', s.ink, scale, s.w - 0.7);
         var web = field('website');
@@ -925,12 +935,12 @@ Dessert</textarea>
         var cx = s.w / 2;
         var y = 1.1;
         drawOrnament(c, cx, y - 0.35, s, s.accent, scale);
-        var name = field('guest-name') || 'Guest name';
+        var name = field('guest-name') || t('setGuestName', 'Guest name');
         var size = fitSize(c, name, s.w - 0.5, 0.42, 0.18, s.head, '400', scale);
         drawLines(c, [name], cx, y, 0.0, size, s.head, '400', s.ink, scale, s.w - 0.5);
         y += 0.55;
         var tbl = field('table-number');
-        drawLines(c, tbl ? ['Table ' + tbl] : [], cx, y, 0.0, 0.2, s.body, '400', s.accent, scale, s.w - 0.5);
+        drawLines(c, tbl ? [t('setTable', 'Table {n}', { n: tbl })] : [], cx, y, 0.0, 0.2, s.body, '400', s.accent, scale, s.w - 0.5);
       }
 
       function drawTable(c, s, scale) {
@@ -939,13 +949,13 @@ Dessert</textarea>
         var size = fitSize(c, tbl, s.w - 0.6, 0.95, 0.4, s.head, '400', scale);
         drawLines(c, [tbl], cx, 0.95, 0.0, size, s.head, '400', s.ink, scale, s.w - 0.6);
         drawOrnament(c, cx, 1.28, s, s.accent, scale);
-        drawLines(c, ['Table ' + tbl], cx, 1.62, 0.0, 0.2, s.body, '400', s.ink, scale, s.w - 0.6);
+        drawLines(c, [t('setTable', 'Table {n}', { n: tbl })], cx, 1.62, 0.0, 0.2, s.body, '400', s.ink, scale, s.w - 0.6);
       }
 
       function drawMenu(c, s, scale) {
         var cx = s.w / 2;
         var y = 0.75;
-        drawCentered(c, 'Menu', cx, y, 0.44, s.head, '400', s.ink, scale, s.w - 0.7);
+        drawCentered(c, t('setMenu', 'Menu'), cx, y, 0.44, s.head, '400', s.ink, scale, s.w - 0.7);
         y += 0.3;
         drawOrnament(c, cx, y, s, s.accent, scale);
         y += 0.45;
@@ -992,7 +1002,7 @@ Dessert</textarea>
           drawLines(c, [cty], cx, y, 0.0, 0.55, s.body, '400', s.ink, scale, s.w - 4.0);
           y += 0.8;
         }
-        drawLines(c, ['Welcome to our wedding'], cx, y, 0.0, 0.6, s.head, '400', s.accent, scale, s.w - 4.0);
+        drawLines(c, [t('setWelcome', 'Welcome to our wedding')], cx, y, 0.0, 0.6, s.head, '400', s.accent, scale, s.w - 4.0);
       }
 
       var DRAW = {
@@ -1115,7 +1125,7 @@ Dessert</textarea>
           var i = document.createElement('i');
           i.style.background = s.swatch;
           b.appendChild(i);
-          b.appendChild(document.createTextNode(s.name));
+          b.appendChild(document.createTextNode(styleName(s)));
           b.addEventListener('click', function () {
             state.style = key;
             buildStyleList();

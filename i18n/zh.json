@@ -70725,4 +70725,170 @@
   "guides.wedding-pdf-editor.a2": "任何用于打印的 PDF 都应该嵌入字体。嵌入字体或将文字转换为轮廓，可防止打印系统中替换字体。",
   "guides.wedding-pdf-editor.q3": "如何减小 PDF 的文件大小？",
   "guides.wedding-pdf-editor.a3": "将图像降采样至目标分辨率，删除未使用的页面和元数据，并使用 PDF 内置的优化工具。请对副本执行这些操作，不要对母版执行。"
+,
+  "tools.copy.pdfAesFormat.zzzzzz326ed": "此 PDF 使用 AES-256 加密（PDF 2.0）。此工具无法打开该格式。"
+,
+  "tools.copy.pdfBroken.zzzzzz6d481": "此文件无法读取为 PDF。"
+,
+  "tools.copy.pdfCopyFailed.zzzzzzc4fd0": "有一页无法复制。"
+,
+  "tools.copy.pdfCustomSize.zzzzzz07d0b": "自定义尺寸"
+,
+  "tools.copy.pdfEngineMissing.zzzzzzdebd0": "PDF 引擎未能加载。"
+,
+  "tools.copy.pdfIncludePage.zzzzzz6f8b2": "包含第 {n} 页"
+,
+  "tools.copy.pdfLandscape.zzzzzzee77c": "{size} 横向"
+,
+  "tools.copy.pdfLocked.zzzzzz8c522": "此 PDF 已加密。请输入密码以打开。"
+,
+  "tools.copy.pdfLockedShort.zzzzzz5c8c0": "已使用密码打开"
+,
+  "tools.copy.pdfMoveDown.zzzzzz3d191": "向下移动"
+,
+  "tools.copy.pdfMoveUp.zzzzzz4315e": "向上移动"
+,
+  "tools.copy.pdfNoPages.zzzzzz5325f": "尚无页面。"
+,
+  "tools.copy.pdfNoPagesInDoc.zzzzzz63a27": "此 PDF 没有页面。"
+,
+  "tools.copy.pdfNoPagesSelected.zzzzzz1355c": "未选择任何页面。"
+,
+  "tools.copy.pdfNotAPdf.zzzzzz0d3b9": "{name} 不是 PDF 文件。"
+,
+  "tools.copy.pdfNotOpen.zzzzzz48f21": "此 PDF 尚未打开。"
+,
+  "tools.copy.pdfNothingToExport.zzzzzzd4b1e": "没有可导出的内容。"
+,
+  "tools.copy.pdfOneAtATime.zzzzzzd2289": "每次仅加载一个 PDF，以保存无密码保护的副本。"
+,
+  "tools.copy.pdfOpenButton.zzzzzz8f6b2": "打开"
+,
+  "tools.copy.pdfOpenFailed.zzzzzz4ec71": "无法打开此文件。"
+,
+  "tools.copy.pdfOpenedWithPassword.zzzzzzef070": "已使用密码打开。导出的文件没有密码，也没有任何限制。"
+,
+  "tools.copy.pdfPageCountText.zzzzzz73d1b": "{n} 页 · PDF 内有 {m} 页"
+,
+  "tools.copy.pdfPageGroupsHint.zzzzzz62bf3": "输入页码分组，例如 1-3、4、5-"
+,
+  "tools.copy.pdfPageMany.zzzzzz4c3cb": "{n} 页"
+,
+  "tools.copy.pdfPageOne.zzzzzz61a14": "{n} 页"
+,
+  "tools.copy.pdfPageTitle.zzzzzz01998": "{n}. {file} — 第 {p} 页"
+,
+  "tools.copy.pdfPasswordFor.zzzzzzb8e31": "{name} 的 PDF 密码"
+,
+  "tools.copy.pdfPasswordLabel.zzzzzz5ad8e": "PDF 密码"
+,
+  "tools.copy.pdfPortrait.zzzzzz39b4b": "{size} 纵向"
+,
+  "tools.copy.pdfSavedOne.zzzzzz6bd05": "已保存一个包含 {n} 页的 PDF。未上传任何内容。"
+,
+  "tools.copy.pdfSavedUnlocked.zzzzzz9a6b2": "已保存副本，未设置密码，也没有打印限制。"
+,
+  "tools.copy.pdfSavedZip.zzzzzz80529": "已将 {n} 个 PDF 文件保存到一个 ZIP 压缩包中。"
+,
+  "tools.copy.pdfSourceMissing.zzzzzzf922f": "缺少源文件。"
+,
+  "tools.copy.pdfTooBig.zzzzzzea682": "文件超过 200 MB。请先将其拆分，或改用较小的文件。"
+,
+  "tools.copy.pdfTooManyFiles.zzzzzzb54df": "每次最多处理 {n} 个文件。请删除一个文件，再添加另一个。"
+,
+  "tools.copy.pdfTooManyPages.zzzzzzb5117": "已超过单个文档 1,500 页的上限。"
+,
+  "tools.copy.pdfTurnLeft.zzzzzz23bfb": "向左旋转"
+,
+  "tools.copy.pdfTurnRight.zzzzzzcb3d0": "向右旋转"
+,
+  "tools.copy.pdfTurned.zzzzzz3bbe0": " · 旋转了 {deg}°"
+,
+  "tools.copy.pdfUnknownError.zzzzzzbf803": "未知错误"
+,
+  "tools.copy.pdfUnreadable.zzzzzz37adb": "此浏览器无法读取该文件。"
+,
+  "tools.copy.pdfWrongPassword.zzzzzza8f52": "密码错误，无法打开该文件。"
+,
+  "tools.copy.pdfZipMissing.zzzzzz824c8": "ZIP 压缩包制作工具未能加载。"
+,
+  "tools.copy.setAccepts.zzzzzzae190": "欣然接受"
+,
+  "tools.copy.setByDate.zzzzzz76c89": "不迟于 {date}"
+,
+  "tools.copy.setByDateBelow.zzzzzz94120": "不迟于下方日期"
+,
+  "tools.copy.setDateTbc.zzzzzz592cb": "日期待定"
+,
+  "tools.copy.setDressCode.zzzzzzb8af4": "着装要求：{code}"
+,
+  "tools.copy.setGuestName.zzzzzz6b9a1": "宾客姓名"
+,
+  "tools.copy.setHonorPresence.zzzzzze1c42": "诚邀您莅临我们的婚礼"
+,
+  "tools.copy.setKindlyReply.zzzzzz76ac3": "敬请回复"
+,
+  "tools.copy.setKindlyReplyBy.zzzzzz08e05": "请于 {date} 前回复"
+,
+  "tools.copy.setMenu.zzzzzzc37df": "菜单"
+,
+  "tools.copy.setReceptionToFollow.zzzzzzd4f26": "随后举行婚宴"
+,
+  "tools.copy.setRegrets.zzzzzza5e38": "婉拒出席，深表遗憾"
+,
+  "tools.copy.setTable.zzzzzz7d448": "第 {n} 桌"
+,
+  "tools.copy.setTimeTbc.zzzzzzc3050": "时间待定"
+,
+  "tools.copy.setVenueTbc.zzzzzzac62e": "场地待定"
+,
+  "tools.copy.setWelcome.zzzzzz1de66": "欢迎参加我们的婚礼"
+,
+  "tools.copy.setWithFamilies.zzzzzz399c2": "谨代表双方家人"
+,
+  "tools.copy.setYourNames.zzzzzz7c591": "你们的姓名"
+,
+  "tools.copy.sheetAddPhotos.zzzzzzb422b": "添加一些照片来制作照片总览"
+,
+  "tools.copy.sheetHeicFailed.zzzzzze86ea": "无法解码此 HEIC 文件"
+,
+  "tools.copy.sheetNoPhotos.zzzzzz2f160": "请先添加一些照片"
+,
+  "tools.copy.sheetNothingToExport.zzzzzzc2bfe": "暂无可导出的内容"
+,
+  "tools.copy.sheetOnlyFirst.zzzzzz434fa": "仅添加了前 {n} 张照片，最多可添加 {max} 张"
+,
+  "tools.copy.sheetPageLabel.zzzzzz9a233": "第 {n} 页"
+,
+  "tools.copy.sheetPdfSummaryMany.zzzzzzb6b6b": "PDF 共 {n} 页，页码从 1 到 {m} 连续排列"
+,
+  "tools.copy.sheetPdfSummaryOne.zzzzzz3705e": "PDF 共 {n} 页，页码从 1 到 {m} 连续排列"
+,
+  "tools.copy.sheetRendering.zzzzzz86a57": "正在渲染第 {n} 页，共 {total} 页"
+,
+  "tools.copy.sheetTooMany.zzzzzzaaf9f": "此工具每次最多可处理 {n} 张照片"
+,
+  "tools.copy.sheetUnreadable.zzzzzz177df": "无法读取此文件"
+,
+  "tools.copy.veditEncoderMissing.zzzzzzdf7ed": "视频编码器加载失败"
+,
+  "tools.wedding-photo-contact-sheet.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "将照片拖放到此处，或点击浏览"
+,
+  "tools.wedding-photo-contact-sheet.div_text.jpg_png_webp_or_heic_up_to_100_photos_at.cd94268b": "JPG、PNG、WebP 或 HEIC，每次最多上传 100 张照片"
+,
+  "tools.wedding-pdf-editor.div_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "将 PDF 文件拖放到此处，或点击浏览"
+,
+  "tools.wedding-pdf-editor.div_text.pdf_only_up_to_20_files_up_to_200_mb_eac.2fc70c65": "仅限 PDF · 最多 20 个文件 · 每个文件最大 200 MB · 文件始终保留在您的设备上"
+,
+  "tools.wedding-pdf-editor.div_text.no_pdf_files_yet_drop_some_above_to_star.01f028a1": "尚无 PDF 文件，请在上方拖放文件以开始"
+,
+  "tools.wedding-pdf-editor.div_text.no_pages_yet.650ee538": "尚无页面。"
+,
+  "tools.wedding-photo-to-gif.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "将照片拖放到此处，或点击浏览"
+,
+  "tools.wedding-photo-to-gif.div_text.jpg_png_or_webp_up_to_20_photos_at_a_tim.00929ef5": "JPG、PNG 或 WebP，每次最多上传 20 张照片"
+,
+  "tools.wedding-pdf-editor.aria_label_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "将 PDF 文件拖放到此处，或点击浏览"
+,
+  "tools.wedding-photo-to-gif.alt_text.preview_of_the_animated_gif.5b0e2c31": "动画 GIF 预览"
 }

@@ -68812,4 +68812,170 @@
   "guides.wedding-pdf-editor.a2": "Yes for any print PDF. Embedding, or converting text to outlines, prevents substitution on the printer's system.",
   "guides.wedding-pdf-editor.q3": "How do I make a PDF smaller?",
   "guides.wedding-pdf-editor.a3": "Downsample images to the target resolution, remove unused pages and metadata, and use the PDF's built-in optimiser. Do this on a copy, not the master."
+,
+  "tools.copy.pdfAesFormat.zzzzzz326ed": "PDF นี้ใช้การเข้ารหัส AES-256 (PDF 2.0) เครื่องมือนี้ไม่สามารถเปิดรูปแบบดังกล่าว"
+,
+  "tools.copy.pdfBroken.zzzzzz6d481": "ไฟล์นี้ไม่ใช่ PDF ที่เปิดอ่านได้"
+,
+  "tools.copy.pdfCopyFailed.zzzzzzc4fd0": "ไม่สามารถคัดลอกหน้าได้"
+,
+  "tools.copy.pdfCustomSize.zzzzzz07d0b": "ขนาดกำหนดเอง"
+,
+  "tools.copy.pdfEngineMissing.zzzzzzdebd0": "ตัวประมวลผล PDF ไม่ได้โหลด"
+,
+  "tools.copy.pdfIncludePage.zzzzzz6f8b2": "รวมหน้า {n}"
+,
+  "tools.copy.pdfLandscape.zzzzzzee77c": "{size} แนวนอน"
+,
+  "tools.copy.pdfLocked.zzzzzz8c522": "PDF นี้ถูกเข้ารหัส กรอกรหัสผ่านเพื่อเปิด"
+,
+  "tools.copy.pdfLockedShort.zzzzzz5c8c0": "เปิดด้วยรหัสผ่าน"
+,
+  "tools.copy.pdfMoveDown.zzzzzz3d191": "เลื่อนลง"
+,
+  "tools.copy.pdfMoveUp.zzzzzz4315e": "เลื่อนขึ้น"
+,
+  "tools.copy.pdfNoPages.zzzzzz5325f": "ยังไม่มีหน้า"
+,
+  "tools.copy.pdfNoPagesInDoc.zzzzzz63a27": "PDF นี้ไม่มีหน้า"
+,
+  "tools.copy.pdfNoPagesSelected.zzzzzz1355c": "ไม่ได้เลือกหน้าใด"
+,
+  "tools.copy.pdfNotAPdf.zzzzzz0d3b9": "{name} ไม่ใช่ไฟล์ PDF"
+,
+  "tools.copy.pdfNotOpen.zzzzzz48f21": "PDF นี้ยังไม่ได้เปิด"
+,
+  "tools.copy.pdfNothingToExport.zzzzzzd4b1e": "ไม่มีรายการให้ส่งออก"
+,
+  "tools.copy.pdfOneAtATime.zzzzzzd2289": "โหลด PDF ทีละไฟล์เพื่อบันทึกสำเร็จฉบับที่ปลดล็อก"
+,
+  "tools.copy.pdfOpenButton.zzzzzz8f6b2": "เปิด"
+,
+  "tools.copy.pdfOpenFailed.zzzzzz4ec71": "ไม่สามารถเปิดไฟล์นี้ได้"
+,
+  "tools.copy.pdfOpenedWithPassword.zzzzzzef070": "เปิดด้วยรหัสผ่านแล้ว ไฟล์ที่ส่งออกไม่มีรหัสผ่านและไม่มีข้อจำกัด"
+,
+  "tools.copy.pdfPageCountText.zzzzzz73d1b": "{n} หน้า · {m} หน้าใน PDF"
+,
+  "tools.copy.pdfPageGroupsHint.zzzzzz62bf3": "ระบุกลุ่มหน้า เช่น 1-3, 4, 5-"
+,
+  "tools.copy.pdfPageMany.zzzzzz4c3cb": "{n} หน้า"
+,
+  "tools.copy.pdfPageOne.zzzzzz61a14": "{n} หน้า"
+,
+  "tools.copy.pdfPageTitle.zzzzzz01998": "{n}. {file} — หน้า {p}"
+,
+  "tools.copy.pdfPasswordFor.zzzzzzb8e31": "รหัสผ่าน PDF สำหรับ {name}"
+,
+  "tools.copy.pdfPasswordLabel.zzzzzz5ad8e": "รหัสผ่าน PDF"
+,
+  "tools.copy.pdfPortrait.zzzzzz39b4b": "{size} แนวตั้ง"
+,
+  "tools.copy.pdfSavedOne.zzzzzz6bd05": "บันทึก PDF ไฟล์เดียวที่มี {n} หน้า ไม่มีไฟล์ถูกอัปโหลด"
+,
+  "tools.copy.pdfSavedUnlocked.zzzzzz9a6b2": "บันทึกสำเนาไว้โดยไม่มีรหัสผ่านและไม่มีข้อจำกัดการพิมพ์"
+,
+  "tools.copy.pdfSavedZip.zzzzzz80529": "บันทึกไฟล์ PDF {n} ไฟล์ในไฟล์ ZIP ไฟล์เดียว"
+,
+  "tools.copy.pdfSourceMissing.zzzzzzf922f": "ไม่พบไฟล์ต้นฉบับ"
+,
+  "tools.copy.pdfTooBig.zzzzzzea682": "ใหญ่กว่า 200 MB โปรดแยกไฟล์ก่อนหรือใช้ไฟล์ที่มีขนาดเล็กลง"
+,
+  "tools.copy.pdfTooManyFiles.zzzzzzb54df": "ในการทำงานแต่ละครั้งมีได้สูงสุด {n} ไฟล์ นำไฟล์ออกแล้วเพิ่มไฟล์อื่น"
+,
+  "tools.copy.pdfTooManyPages.zzzzzzb5117": "เกินขีดจำกัด 1,500 หน้าสำหรับเอกสารหนึ่งฉบับ"
+,
+  "tools.copy.pdfTurnLeft.zzzzzz23bfb": "หมุนซ้าย"
+,
+  "tools.copy.pdfTurnRight.zzzzzzcb3d0": "หมุนขวา"
+,
+  "tools.copy.pdfTurned.zzzzzz3bbe0": " · หมุน {deg}°"
+,
+  "tools.copy.pdfUnknownError.zzzzzzbf803": "ข้อผิดพลาดที่ไม่ทราบสาเหตุ"
+,
+  "tools.copy.pdfUnreadable.zzzzzz37adb": "เบราว์เซอร์นี้ไม่สามารถอ่านไฟล์ได้"
+,
+  "tools.copy.pdfWrongPassword.zzzzzza8f52": "รหัสผ่านนั้นไม่สามารถเปิดไฟล์ได้"
+,
+  "tools.copy.pdfZipMissing.zzzzzz824c8": "เครื่องมือสร้าง ZIP ไม่โหลด"
+,
+  "tools.copy.setAccepts.zzzzzzae190": "รับทราบด้วยความยินดียิ่ง"
+,
+  "tools.copy.setByDate.zzzzzz76c89": "ภายในวันที่ {date}"
+,
+  "tools.copy.setByDateBelow.zzzzzz94120": "ภายในวันที่ระบุด้านล่าง"
+,
+  "tools.copy.setDateTbc.zzzzzz592cb": "วันที่รอการยืนยัน"
+,
+  "tools.copy.setDressCode.zzzzzzb8af4": "แนวทางการแต่งกาย: {code}"
+,
+  "tools.copy.setGuestName.zzzzzz6b9a1": "ชื่อผู้เข้าร่วมงาน"
+,
+  "tools.copy.setHonorPresence.zzzzzze1c42": "ขอเรียนเชิญคุณมาร่วมงานพิธีสมรสของ"
+,
+  "tools.copy.setKindlyReply.zzzzzz76ac3": "กรุณาตอบกลับ"
+,
+  "tools.copy.setKindlyReplyBy.zzzzzz08e05": "กรุณาตอบกลับภายในวันที่ {date}"
+,
+  "tools.copy.setMenu.zzzzzzc37df": "เมนู"
+,
+  "tools.copy.setReceptionToFollow.zzzzzzd4f26": "จะมีงานเลี้ยงรับรองต่อจากนี้"
+,
+  "tools.copy.setRegrets.zzzzzza5e38": "ขออภัยที่ไม่สามารถเข้าร่วมงาน"
+,
+  "tools.copy.setTable.zzzzzz7d448": "โต๊ะที่ {n}"
+,
+  "tools.copy.setTimeTbc.zzzzzzc3050": "เวลารอการยืนยัน"
+,
+  "tools.copy.setVenueTbc.zzzzzzac62e": "สถานที่รอการยืนยัน"
+,
+  "tools.copy.setWelcome.zzzzzz1de66": "ขอเชิญคุณมาร่วมงานแต่งงานของเรา"
+,
+  "tools.copy.setWithFamilies.zzzzzz399c2": "พร้อมด้วยครอบครัวของทั้งสองฝ่าย"
+,
+  "tools.copy.setYourNames.zzzzzz7c591": "ชื่อของคุณทั้งคู่"
+,
+  "tools.copy.sheetAddPhotos.zzzzzzb422b": "เพิ่มรูปภาพบางรูปเพื่อสร้างภาพรวม"
+,
+  "tools.copy.sheetHeicFailed.zzzzzze86ea": "ไม่สามารถถอดรหัสไฟล์ HEIC นี้ได้"
+,
+  "tools.copy.sheetNoPhotos.zzzzzz2f160": "กรุณาเพิ่มรูปภาพก่อน"
+,
+  "tools.copy.sheetNothingToExport.zzzzzzc2bfe": "ยังไม่มีรายการที่จะส่งออก"
+,
+  "tools.copy.sheetOnlyFirst.zzzzzz434fa": "เพิ่มเฉพาะรูปภาพ {n} รูปแรก จำนวนสูงสุดคือ {max}"
+,
+  "tools.copy.sheetPageLabel.zzzzzz9a233": "หน้า {n}"
+,
+  "tools.copy.sheetPdfSummaryMany.zzzzzzb6b6b": "เอกสาร PDF มี {n} หน้า เลขหน้าจะเรียงต่อเนื่องตั้งแต่ 1 ถึง {m}"
+,
+  "tools.copy.sheetPdfSummaryOne.zzzzzz3705e": "เอกสาร PDF มี {n} หน้า เลขหน้าจะเรียงต่อเนื่องตั้งแต่ 1 ถึง {m}"
+,
+  "tools.copy.sheetRendering.zzzzzz86a57": "กำลังสร้างหน้า {n} จาก {total}"
+,
+  "tools.copy.sheetTooMany.zzzzzzaaf9f": "เครื่องมือนี้รองรับรูปภาพได้สูงสุด {n} รูปต่อครั้ง"
+,
+  "tools.copy.sheetUnreadable.zzzzzz177df": "ไม่สามารถอ่านไฟล์นี้ได้"
+,
+  "tools.copy.veditEncoderMissing.zzzzzzdf7ed": "ตัวเข้ารหัสวิดีโอไม่สามารถโหลดได้"
+,
+  "tools.wedding-photo-contact-sheet.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "ลากรูปภาพมาวางที่นี่ หรือคลิกเพื่อเลือกไฟล์"
+,
+  "tools.wedding-photo-contact-sheet.div_text.jpg_png_webp_or_heic_up_to_100_photos_at.cd94268b": "JPG, PNG, WebP หรือ HEIC รองรับสูงสุด 100 รูปต่อครั้ง"
+,
+  "tools.wedding-pdf-editor.div_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "ลากไฟล์ PDF มาวางที่นี่ หรือคลิกเพื่อเลือกไฟล์"
+,
+  "tools.wedding-pdf-editor.div_text.pdf_only_up_to_20_files_up_to_200_mb_eac.2fc70c65": "เฉพาะ PDF · สูงสุด 20 ไฟล์ · สูงสุด 200 MB ต่อไฟล์ · เก็บไว้บนอุปกรณ์ของคุณ"
+,
+  "tools.wedding-pdf-editor.div_text.no_pdf_files_yet_drop_some_above_to_star.01f028a1": "ยังไม่มีไฟล์ PDF ลากไฟล์มาวางด้านบนเพื่อเริ่มต้น"
+,
+  "tools.wedding-pdf-editor.div_text.no_pages_yet.650ee538": "ยังไม่มีหน้า"
+,
+  "tools.wedding-photo-to-gif.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "ลากรูปภาพมาวางที่นี่ หรือคลิกเพื่อเลือกไฟล์"
+,
+  "tools.wedding-photo-to-gif.div_text.jpg_png_or_webp_up_to_20_photos_at_a_tim.00929ef5": "JPG, PNG หรือ WebP รองรับสูงสุด 20 รูปต่อครั้ง"
+,
+  "tools.wedding-pdf-editor.aria_label_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "ลากไฟล์ PDF มาวางที่นี่ หรือคลิกเพื่อเลือกไฟล์"
+,
+  "tools.wedding-photo-to-gif.alt_text.preview_of_the_animated_gif.5b0e2c31": "ตัวอย่าง GIF แบบเคลื่อนไหว"
 }

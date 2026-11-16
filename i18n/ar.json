@@ -69950,4 +69950,170 @@
   "guides.wedding-pdf-editor.a2": "نعم، في أي ملف PDF مخصص للطباعة. يهدف تضمين الخطوط أو تحويل النص إلى أشكال إلى منع استبدال الخطوط في نظام الطابعة.",
   "guides.wedding-pdf-editor.q3": "كيف يمكنني تصغير حجم ملف PDF؟",
   "guides.wedding-pdf-editor.a3": "خفّض دقة الصور إلى الدقة المطلوبة، وأزل الصفحات والبيانات الوصفية غير المستخدمة، واستخدم أداة التحسين المدمجة في PDF. نفّذ ذلك على نسخة وليس على الملف الأصلي."
+,
+  "tools.copy.pdfAesFormat.zzzzzz326ed": "يستخدم ملف PDF هذا تشفير AES-256 (PDF 2.0). لا يمكن لهذه الأداة فتح هذا التنسيق."
+,
+  "tools.copy.pdfBroken.zzzzzz6d481": "هذا الملف ليس ملف PDF قابلًا للقراءة."
+,
+  "tools.copy.pdfCopyFailed.zzzzzzc4fd0": "تعذّر نسخ إحدى الصفحات."
+,
+  "tools.copy.pdfCustomSize.zzzzzz07d0b": "حجم مخصص"
+,
+  "tools.copy.pdfEngineMissing.zzzzzzdebd0": "لم يتم تحميل محرك PDF."
+,
+  "tools.copy.pdfIncludePage.zzzzzz6f8b2": "إدراج الصفحة {n}"
+,
+  "tools.copy.pdfLandscape.zzzzzzee77c": "{size} أفقي"
+,
+  "tools.copy.pdfLocked.zzzzzz8c522": "ملف PDF هذا مشفّر. أدخل كلمة المرور لفتحه."
+,
+  "tools.copy.pdfLockedShort.zzzzzz5c8c0": "تم فتحه باستخدام كلمة مرور"
+,
+  "tools.copy.pdfMoveDown.zzzzzz3d191": "تحريك لأسفل"
+,
+  "tools.copy.pdfMoveUp.zzzzzz4315e": "تحريك لأعلى"
+,
+  "tools.copy.pdfNoPages.zzzzzz5325f": "لا توجد صفحات بعد."
+,
+  "tools.copy.pdfNoPagesInDoc.zzzzzz63a27": "لا يحتوي ملف PDF هذا على صفحات."
+,
+  "tools.copy.pdfNoPagesSelected.zzzzzz1355c": "لم يتم تحديد أي صفحات."
+,
+  "tools.copy.pdfNotAPdf.zzzzzz0d3b9": "{name} ليس ملف PDF."
+,
+  "tools.copy.pdfNotOpen.zzzzzz48f21": "لم يتم فتح ملف PDF هذا بعد."
+,
+  "tools.copy.pdfNothingToExport.zzzzzzd4b1e": "لم يكن هناك ما يتم تصديره."
+,
+  "tools.copy.pdfOneAtATime.zzzzzzd2289": "حمّل ملف PDF واحدًا في كل مرة لحفظ نسخة غير محمية بكلمة المرور."
+,
+  "tools.copy.pdfOpenButton.zzzzzz8f6b2": "فتح"
+,
+  "tools.copy.pdfOpenFailed.zzzzzz4ec71": "تعذّر فتح هذا الملف."
+,
+  "tools.copy.pdfOpenedWithPassword.zzzzzzef070": "تم الفتح باستخدام كلمة المرور. لا يحتوي الملف المُصدَّر على كلمة مرور ولا قيود."
+,
+  "tools.copy.pdfPageCountText.zzzzzz73d1b": "{n} صفحة · {m} في ملف PDF"
+,
+  "tools.copy.pdfPageGroupsHint.zzzzzz62bf3": "أدخل مجموعات الصفحات، على سبيل المثال 1-3، 4، 5-"
+,
+  "tools.copy.pdfPageMany.zzzzzz4c3cb": "{n} صفحات"
+,
+  "tools.copy.pdfPageOne.zzzzzz61a14": "{n} صفحة"
+,
+  "tools.copy.pdfPageTitle.zzzzzz01998": "{n}. {file} — الصفحة {p}"
+,
+  "tools.copy.pdfPasswordFor.zzzzzzb8e31": "كلمة مرور ملف PDF لـ {name}"
+,
+  "tools.copy.pdfPasswordLabel.zzzzzz5ad8e": "كلمة مرور PDF"
+,
+  "tools.copy.pdfPortrait.zzzzzz39b4b": "{size} عمودي"
+,
+  "tools.copy.pdfSavedOne.zzzzzz6bd05": "تم حفظ ملف PDF واحد يتكون من {n} صفحة. لم يتم رفع أي شيء."
+,
+  "tools.copy.pdfSavedUnlocked.zzzzzz9a6b2": "تم حفظ نسخة بدون كلمة مرور وبلا قيود الطباعة."
+,
+  "tools.copy.pdfSavedZip.zzzzzz80529": "تم حفظ {n} ملفات PDF في أرشيف ZIP واحد."
+,
+  "tools.copy.pdfSourceMissing.zzzzzzf922f": "أحد ملفات المصدر مفقود."
+,
+  "tools.copy.pdfTooBig.zzzzzzea682": "حجمه أكبر من 200 MB. قسّمه أولًا أو استخدم ملفًا أصغر."
+,
+  "tools.copy.pdfTooManyFiles.zzzzzzb54df": "ما يصل إلى {n} ملفات في عملية واحدة. أزل ملفًا وأضف ملفًا آخر."
+,
+  "tools.copy.pdfTooManyPages.zzzzzzb5117": "تجاوز الحد الأقصى المسموح به وهو 1,500 صفحة للمستند الواحد."
+,
+  "tools.copy.pdfTurnLeft.zzzzzz23bfb": "أدر إلى اليسار"
+,
+  "tools.copy.pdfTurnRight.zzzzzzcb3d0": "أدر إلى اليمين"
+,
+  "tools.copy.pdfTurned.zzzzzz3bbe0": " · تم التدوير {deg}°"
+,
+  "tools.copy.pdfUnknownError.zzzzzzbf803": "خطأ غير معروف"
+,
+  "tools.copy.pdfUnreadable.zzzzzz37adb": "لا يستطيع هذا المتصفح قراءة الملف."
+,
+  "tools.copy.pdfWrongPassword.zzzzzza8f52": "لم تنجح كلمة المرور في فتح الملف."
+,
+  "tools.copy.pdfZipMissing.zzzzzz824c8": "لم يتم تحميل أداة إنشاء ZIP."
+,
+  "tools.copy.setAccepts.zzzzzzae190": "يسعده الحضور"
+,
+  "tools.copy.setByDate.zzzzzz76c89": "في موعد أقصاه {date}"
+,
+  "tools.copy.setByDateBelow.zzzzzz94120": "قبل التاريخ المذكور أدناه"
+,
+  "tools.copy.setDateTbc.zzzzzz592cb": "سيتم تحديد التاريخ لاحقًا"
+,
+  "tools.copy.setDressCode.zzzzzzb8af4": "الزي المطلوب: {code}"
+,
+  "tools.copy.setGuestName.zzzzzz6b9a1": "اسم الضيف"
+,
+  "tools.copy.setHonorPresence.zzzzzze1c42": "نطلب شرف حضوركم لحفل زفاف"
+,
+  "tools.copy.setKindlyReply.zzzzzz76ac3": "يرجى الرد"
+,
+  "tools.copy.setKindlyReplyBy.zzzzzz08e05": "يرجى الرد قبل {date}"
+,
+  "tools.copy.setMenu.zzzzzzc37df": "قائمة الطعام"
+,
+  "tools.copy.setReceptionToFollow.zzzzzzd4f26": "يلي ذلك حفل الاستقبال"
+,
+  "tools.copy.setRegrets.zzzzzza5e38": "يعتذر عن عدم الحضور"
+,
+  "tools.copy.setTable.zzzzzz7d448": "الطاولة {n}"
+,
+  "tools.copy.setTimeTbc.zzzzzzc3050": "سيتم تحديد الوقت لاحقًا"
+,
+  "tools.copy.setVenueTbc.zzzzzzac62e": "سيتم تحديد المكان لاحقًا"
+,
+  "tools.copy.setWelcome.zzzzzz1de66": "أهلًا وسهلًا بكم في حفل زفافنا"
+,
+  "tools.copy.setWithFamilies.zzzzzz399c2": "بجانب عائلتيهما"
+,
+  "tools.copy.setYourNames.zzzzzz7c591": "أسماءكما"
+,
+  "tools.copy.sheetAddPhotos.zzzzzzb422b": "أضف بعض الصور لإنشاء ورقة التلامس."
+,
+  "tools.copy.sheetHeicFailed.zzzzzze86ea": "تعذر فك تشفير ملف HEIC هذا."
+,
+  "tools.copy.sheetNoPhotos.zzzzzz2f160": "أضف بعض الصور أولًا."
+,
+  "tools.copy.sheetNothingToExport.zzzzzzc2bfe": "لا يوجد شيء للتصدير"
+,
+  "tools.copy.sheetOnlyFirst.zzzzzz434fa": "تمت إضافة أول {n} صور فقط. الحد هو {max}."
+,
+  "tools.copy.sheetPageLabel.zzzzzz9a233": "الصفحة {n}"
+,
+  "tools.copy.sheetPdfSummaryMany.zzzzzzb6b6b": "يحتوي ملف PDF على {n} صفحات. تستمر أرقام الصفحات من 1 إلى {m}."
+,
+  "tools.copy.sheetPdfSummaryOne.zzzzzz3705e": "يحتوي ملف PDF على {n} صفحة. تستمر أرقام الصفحات من 1 إلى {m}."
+,
+  "tools.copy.sheetRendering.zzzzzz86a57": "جارٍ عرض الصفحة {n} من {total}"
+,
+  "tools.copy.sheetTooMany.zzzzzzaaf9f": "تدعم هذه الأداة حتى {n} صور في المرة الواحدة."
+,
+  "tools.copy.sheetUnreadable.zzzzzz177df": "تعذّرت قراءة هذا الملف."
+,
+  "tools.copy.veditEncoderMissing.zzzzzzdf7ed": "لم يتم تحميل مُرمِّز الفيديو"
+,
+  "tools.wedding-photo-contact-sheet.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "أفلت الصور هنا أو انقر للاستعراض"
+,
+  "tools.wedding-photo-contact-sheet.div_text.jpg_png_webp_or_heic_up_to_100_photos_at.cd94268b": "JPG أو PNG أو WebP أو HEIC. حتى 100 صورة في المرة الواحدة."
+,
+  "tools.wedding-pdf-editor.div_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "أفلت ملفات PDF هنا أو انقر للاستعراض"
+,
+  "tools.wedding-pdf-editor.div_text.pdf_only_up_to_20_files_up_to_200_mb_eac.2fc70c65": "PDF فقط · حتى 20 ملفًا · حتى 200 MB لكل ملف · تبقى الملفات على جهازك"
+,
+  "tools.wedding-pdf-editor.div_text.no_pdf_files_yet_drop_some_above_to_star.01f028a1": "لا توجد ملفات PDF بعد. أفلت بعض الملفات في الأعلى للبدء."
+,
+  "tools.wedding-pdf-editor.div_text.no_pages_yet.650ee538": "لا توجد صفحات بعد."
+,
+  "tools.wedding-photo-to-gif.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "أفلت الصور هنا أو انقر للاستعراض"
+,
+  "tools.wedding-photo-to-gif.div_text.jpg_png_or_webp_up_to_20_photos_at_a_tim.00929ef5": "JPG أو PNG أو WebP. حتى 20 صورة في المرة الواحدة."
+,
+  "tools.wedding-pdf-editor.aria_label_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "أفلت ملفات PDF هنا أو انقر للاستعراض"
+,
+  "tools.wedding-photo-to-gif.alt_text.preview_of_the_animated_gif.5b0e2c31": "معاينة GIF المتحرك"
 }

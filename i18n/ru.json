@@ -47500,4 +47500,170 @@
   "guides.wedding-pdf-editor.a2": "Да, для любого PDF для печати. Встраивание шрифтов или преобразование текста в контуры предотвращает его подмену в системе типографии.",
   "guides.wedding-pdf-editor.q3": "Как уменьшить размер PDF?",
   "guides.wedding-pdf-editor.a3": "Уменьшите разрешение изображений до целевого, удалите неиспользуемые страницы и метаданные, а затем воспользуйтесь встроенным оптимизатором PDF. Делайте это с копией, а не с исходным файлом."
+,
+  "tools.copy.pdfAesFormat.zzzzzz326ed": "Этот PDF защищён шифрованием AES-256 (PDF 2.0). Этот инструмент не может открыть файлы в этом формате."
+,
+  "tools.copy.pdfBroken.zzzzzz6d481": "Этот файл невозможно прочитать как PDF."
+,
+  "tools.copy.pdfCopyFailed.zzzzzzc4fd0": "Не удалось скопировать страницу."
+,
+  "tools.copy.pdfCustomSize.zzzzzz07d0b": "Нестандартный размер"
+,
+  "tools.copy.pdfEngineMissing.zzzzzzdebd0": "Не удалось загрузить модуль для работы с PDF."
+,
+  "tools.copy.pdfIncludePage.zzzzzz6f8b2": "Включить страницу {n}"
+,
+  "tools.copy.pdfLandscape.zzzzzzee77c": "{size} в альбомной ориентации"
+,
+  "tools.copy.pdfLocked.zzzzzz8c522": "Этот PDF защищён паролем. Введите пароль, чтобы открыть его."
+,
+  "tools.copy.pdfLockedShort.zzzzzz5c8c0": "открыт с помощью пароля"
+,
+  "tools.copy.pdfMoveDown.zzzzzz3d191": "Переместить вниз"
+,
+  "tools.copy.pdfMoveUp.zzzzzz4315e": "Переместить вверх"
+,
+  "tools.copy.pdfNoPages.zzzzzz5325f": "Пока нет страниц."
+,
+  "tools.copy.pdfNoPagesInDoc.zzzzzz63a27": "В этом PDF нет страниц."
+,
+  "tools.copy.pdfNoPagesSelected.zzzzzz1355c": "Не выбрано ни одной страницы."
+,
+  "tools.copy.pdfNotAPdf.zzzzzz0d3b9": "{name} не является PDF-файлом."
+,
+  "tools.copy.pdfNotOpen.zzzzzz48f21": "Этот PDF ещё не открыт."
+,
+  "tools.copy.pdfNothingToExport.zzzzzzd4b1e": "Нечего экспортировать."
+,
+  "tools.copy.pdfOneAtATime.zzzzzzd2289": "Загружайте по одному PDF, чтобы сохранить копию без пароля."
+,
+  "tools.copy.pdfOpenButton.zzzzzz8f6b2": "Открыть"
+,
+  "tools.copy.pdfOpenFailed.zzzzzz4ec71": "Не удалось открыть этот файл."
+,
+  "tools.copy.pdfOpenedWithPassword.zzzzzzef070": "Открыто с паролем. В экспортированном файле нет пароля и ограничений."
+,
+  "tools.copy.pdfPageCountText.zzzzzz73d1b": "{n} страниц · {m} в PDF"
+,
+  "tools.copy.pdfPageGroupsHint.zzzzzz62bf3": "Укажите группы страниц, например 1-3, 4, 5-"
+,
+  "tools.copy.pdfPageMany.zzzzzz4c3cb": "{n} страниц"
+,
+  "tools.copy.pdfPageOne.zzzzzz61a14": "{n} страница"
+,
+  "tools.copy.pdfPageTitle.zzzzzz01998": "{n}. {file} — страница {p}"
+,
+  "tools.copy.pdfPasswordFor.zzzzzzb8e31": "Пароль PDF для {name}"
+,
+  "tools.copy.pdfPasswordLabel.zzzzzz5ad8e": "Пароль PDF"
+,
+  "tools.copy.pdfPortrait.zzzzzz39b4b": "{size}, книжная ориентация"
+,
+  "tools.copy.pdfSavedOne.zzzzzz6bd05": "Сохранён один PDF-файл с {n} страницами. Ничего не было загружено."
+,
+  "tools.copy.pdfSavedUnlocked.zzzzzz9a6b2": "Сохранена копия без пароля и без ограничений на печать."
+,
+  "tools.copy.pdfSavedZip.zzzzzz80529": "Сохранено {n} PDF-файлов в одном ZIP-архиве."
+,
+  "tools.copy.pdfSourceMissing.zzzzzzf922f": "Отсутствует исходный файл."
+,
+  "tools.copy.pdfTooBig.zzzzzzea682": "Размер больше 200 MB. Сначала разделите файл или используйте файл меньшего размера."
+,
+  "tools.copy.pdfTooManyFiles.zzzzzzb54df": "До {n} файлов за один раз. Удалите файл и добавьте другой."
+,
+  "tools.copy.pdfTooManyPages.zzzzzzb5117": "Превышен лимит в 1,500 страниц для одного документа."
+,
+  "tools.copy.pdfTurnLeft.zzzzzz23bfb": "Повернуть влево"
+,
+  "tools.copy.pdfTurnRight.zzzzzzcb3d0": "Повернуть вправо"
+,
+  "tools.copy.pdfTurned.zzzzzz3bbe0": " · повернуто на {deg}°"
+,
+  "tools.copy.pdfUnknownError.zzzzzzbf803": "Неизвестная ошибка"
+,
+  "tools.copy.pdfUnreadable.zzzzzz37adb": "Не удалось открыть файл в этом браузере"
+,
+  "tools.copy.pdfWrongPassword.zzzzzza8f52": "Не удалось открыть файл с этим паролем"
+,
+  "tools.copy.pdfZipMissing.zzzzzz824c8": "Сборщик ZIP-архивов не загрузился"
+,
+  "tools.copy.setAccepts.zzzzzzae190": "Принимает с удовольствием"
+,
+  "tools.copy.setByDate.zzzzzz76c89": "до {date}"
+,
+  "tools.copy.setByDateBelow.zzzzzz94120": "до даты, указанной ниже"
+,
+  "tools.copy.setDateTbc.zzzzzz592cb": "Дата уточняется"
+,
+  "tools.copy.setDressCode.zzzzzzb8af4": "Дресс-код: {code}"
+,
+  "tools.copy.setGuestName.zzzzzz6b9a1": "Имя гостя"
+,
+  "tools.copy.setHonorPresence.zzzzzze1c42": "просит вас почтить своим присутствием наше бракосочетание"
+,
+  "tools.copy.setKindlyReply.zzzzzz76ac3": "Ответьте, пожалуйста"
+,
+  "tools.copy.setKindlyReplyBy.zzzzzz08e05": "Ответьте, пожалуйста, до {date}"
+,
+  "tools.copy.setMenu.zzzzzzc37df": "Меню"
+,
+  "tools.copy.setReceptionToFollow.zzzzzzd4f26": "После церемонии — банкет"
+,
+  "tools.copy.setRegrets.zzzzzza5e38": "К сожалению, не сможем присутствовать"
+,
+  "tools.copy.setTable.zzzzzz7d448": "Стол {n}"
+,
+  "tools.copy.setTimeTbc.zzzzzzc3050": "Время уточняется"
+,
+  "tools.copy.setVenueTbc.zzzzzzac62e": "Место проведения уточняется"
+,
+  "tools.copy.setWelcome.zzzzzz1de66": "Добро пожаловать на нашу свадьбу"
+,
+  "tools.copy.setWithFamilies.zzzzzz399c2": "Вместе с их семьями"
+,
+  "tools.copy.setYourNames.zzzzzz7c591": "Ваши имена"
+,
+  "tools.copy.sheetAddPhotos.zzzzzzb422b": "Добавьте несколько фотографий, чтобы создать контактный лист."
+,
+  "tools.copy.sheetHeicFailed.zzzzzze86ea": "Не удалось декодировать этот файл HEIC."
+,
+  "tools.copy.sheetNoPhotos.zzzzzz2f160": "Сначала добавьте несколько фотографий."
+,
+  "tools.copy.sheetNothingToExport.zzzzzzc2bfe": "Экспортировать нечего"
+,
+  "tools.copy.sheetOnlyFirst.zzzzzz434fa": "Были добавлены только первые {n} фото. Ограничение — {max}."
+,
+  "tools.copy.sheetPageLabel.zzzzzz9a233": "Страница {n}"
+,
+  "tools.copy.sheetPdfSummaryMany.zzzzzzb6b6b": "В PDF {n} страниц. Нумерация идет непрерывно от 1 до {m}."
+,
+  "tools.copy.sheetPdfSummaryOne.zzzzzz3705e": "В PDF {n} страница. Нумерация идет непрерывно от 1 до {m}."
+,
+  "tools.copy.sheetRendering.zzzzzz86a57": "Обработка страницы {n} из {total}"
+,
+  "tools.copy.sheetTooMany.zzzzzzaaf9f": "С помощью этого инструмента можно обработать до {n} фотографий за раз."
+,
+  "tools.copy.sheetUnreadable.zzzzzz177df": "Не удалось прочитать этот файл."
+,
+  "tools.copy.veditEncoderMissing.zzzzzzdf7ed": "Видеокодер не загрузился"
+,
+  "tools.wedding-photo-contact-sheet.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "Перетащите фотографии сюда или нажмите, чтобы выбрать их"
+,
+  "tools.wedding-photo-contact-sheet.div_text.jpg_png_webp_or_heic_up_to_100_photos_at.cd94268b": "JPG, PNG, WebP или HEIC. До 100 фотографий за раз."
+,
+  "tools.wedding-pdf-editor.div_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "Перетащите сюда файлы PDF или нажмите, чтобы выбрать их"
+,
+  "tools.wedding-pdf-editor.div_text.pdf_only_up_to_20_files_up_to_200_mb_eac.2fc70c65": "Только PDF · до 20 файлов · до 200 MB каждый · всё остаётся на вашем устройстве"
+,
+  "tools.wedding-pdf-editor.div_text.no_pdf_files_yet_drop_some_above_to_star.01f028a1": "Файлов PDF пока нет. Перетащите их выше, чтобы начать."
+,
+  "tools.wedding-pdf-editor.div_text.no_pages_yet.650ee538": "Пока нет страниц."
+,
+  "tools.wedding-photo-to-gif.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "Перетащите фотографии сюда или нажмите, чтобы выбрать их"
+,
+  "tools.wedding-photo-to-gif.div_text.jpg_png_or_webp_up_to_20_photos_at_a_tim.00929ef5": "JPG, PNG или WebP. До 20 фотографий за раз."
+,
+  "tools.wedding-pdf-editor.aria_label_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "Перетащите сюда файлы PDF или нажмите, чтобы выбрать их"
+,
+  "tools.wedding-photo-to-gif.alt_text.preview_of_the_animated_gif.5b0e2c31": "Предпросмотр анимированного GIF"
 }

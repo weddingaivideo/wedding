@@ -253,22 +253,22 @@
                 <div class="wa-tool-controls">
                     <div class="wa-tool-control" style="grid-column: 1 / -1;">
                         <label for="pdf-input" data-i18n="tools.wedding-pdf-editor.label_text.pdf_files.ab8574a2">PDF files</label>
-                        <div class="wa-tool-dropzone" id="pdf-zone" aria-label="Drop PDF files here or click to browse">
-                            <div class="wa-tool-dropzone-title">Drop PDF files here or click to browse</div>
-                            <div class="wa-tool-dropzone-hint">PDF only &middot; up to 20 files &middot; up to 200 MB each &middot; stays on your device</div>
+                        <div class="wa-tool-dropzone" id="pdf-zone" aria-label="Drop PDF files here or click to browse" data-i18n-attr="aria-label:tools.wedding-pdf-editor.aria_label_text.drop_pdf_files_here_or_click_to_browse.99ad43ba">
+                            <div class="wa-tool-dropzone-title" data-i18n="tools.wedding-pdf-editor.div_text.drop_pdf_files_here_or_click_to_browse.99ad43ba">Drop PDF files here or click to browse</div>
+                            <div class="wa-tool-dropzone-hint" data-i18n="tools.wedding-pdf-editor.div_text.pdf_only_up_to_20_files_up_to_200_mb_eac.2fc70c65">PDF only &middot; up to 20 files &middot; up to 200 MB each &middot; stays on your device</div>
                             <input type="file" id="pdf-input" accept="application/pdf,.pdf" multiple>
                         </div>
                         <small class="wa-pdf-note" data-i18n="tools.wedding-pdf-editor.small_text.one_run_takes_up_to_20_files_and_up_to_1.86ec116e">One run takes up to 20 files and up to 1,500 pages. Your device memory is the real limit, so a very large job is best done in two runs.</small>
                     </div>
                 </div>
-                <div class="wa-tool-empty" id="pdf-empty">No PDF files yet. Drop some above to start.</div>
+                <div class="wa-tool-empty" id="pdf-empty" data-i18n="tools.wedding-pdf-editor.div_text.no_pdf_files_yet_drop_some_above_to_star.01f028a1">No PDF files yet. Drop some above to start.</div>
                 <div class="wa-tool-file-list" id="pdf-file-list"></div>
             </div>
 
             <div class="wa-tool-card">
                 <h2 data-i18n="tools.wedding-pdf-editor.h2_text.2_arrange_the_pages.a0b0dc2c">2. Arrange the pages</h2>
                 <p class="wa-pdf-note" data-i18n="tools.wedding-pdf-editor.p_text.drag_a_page_to_move_it_or_use_the_arrow.99e1eb05">Drag a page to move it, or use the arrow buttons. Untick a page to leave it out of the PDF. The rotate buttons turn a page 90 degrees each time.</p>
-                <div class="wa-pdf-count" id="pdf-page-count">No pages yet.</div>
+                <div class="wa-pdf-count" id="pdf-page-count" data-i18n="tools.wedding-pdf-editor.div_text.no_pages_yet.650ee538">No pages yet.</div>
                 <div class="wa-pdf-pages" id="pdf-page-list"></div>
             </div>
 
@@ -555,11 +555,11 @@
         if (pdfLibPromise) return pdfLibPromise;
         var tool = window.weddingAITool;
         if (!tool || !tool.loadVendor) {
-          return Promise.reject(new Error('The PDF engine did not load.'));
+          return Promise.reject(new Error(t('pdfEngineMissing', 'The PDF engine did not load.')));
         }
         pdfLibPromise = tool.loadVendor('pdflib').then(function (ns) {
           var lib = ns || window.PDFLib;
-          if (!lib || !lib.PDFDocument) throw new Error('The PDF engine did not load.');
+          if (!lib || !lib.PDFDocument) throw new Error(t('pdfEngineMissing', 'The PDF engine did not load.'));
           return lib;
         });
         return pdfLibPromise;
@@ -567,10 +567,15 @@
 
       // Runtime strings the middleware cannot reach (it only translates the
       // html it served), so they go through the shared COPY table.
-      function t(alias, fallback) {
+      function t(alias, fallback, params) {
         try {
-          if (window.weddingAITool && window.weddingAITool.t) return window.weddingAITool.t(alias, fallback);
+          if (window.weddingAITool && window.weddingAITool.t) return window.weddingAITool.t(alias, fallback, params);
         } catch (e) { /* fall through */ }
+        if (params) {
+          return String(fallback).replace(/\{(\w+)\}/g, function (m, k) {
+            return Object.prototype.hasOwnProperty.call(params, k) ? String(params[k]) : m;
+          });
+        }
         return fallback;
       }
 
@@ -642,10 +647,10 @@
         ];
         for (var i = 0; i < table.length; i++) {
           var a = table[i];
-          if (Math.abs(w - a[0]) <= 4 && Math.abs(h - a[1]) <= 4) return a[2] + ' portrait';
-          if (Math.abs(w - a[1]) <= 4 && Math.abs(h - a[0]) <= 4) return a[2] + ' landscape';
+          if (Math.abs(w - a[0]) <= 4 && Math.abs(h - a[1]) <= 4) return t('pdfPortrait', '{size} portrait', { size: a[2] });
+          if (Math.abs(w - a[1]) <= 4 && Math.abs(h - a[0]) <= 4) return t('pdfLandscape', '{size} landscape', { size: a[2] });
         }
-        return 'custom size';
+        return t('pdfCustomSize', 'custom size');
       }
 
       // A page that is turned 90 or 270 degrees shows its sides swapped.
@@ -659,7 +664,7 @@
         try {
           return (err && err.name ? err.name + ' - ' : '') + (err && err.message ? err.message : String(err));
         } catch (e) {
-          return 'Unknown error';
+          return t('pdfUnknownError', 'Unknown error');
         }
       }
 
@@ -679,12 +684,12 @@
       function describeError(err, wrongPassword) {
         var kind = errorKind(err, wrongPassword);
         if (kind === 'aes256') {
-          return 'This PDF uses AES-256 encryption (PDF 2.0). This tool cannot open that format.';
+          return t('pdfAesFormat', 'This PDF uses AES-256 encryption (PDF 2.0). This tool cannot open that format.');
         }
-        if (kind === 'wrongpassword') return 'That password did not open the file.';
-        if (kind === 'locked') return 'This PDF is encrypted. Type the password to open it.';
-        if (kind === 'broken') return 'This file is not a readable PDF.';
-        return 'Could not open this file.';
+        if (kind === 'wrongpassword') return t('pdfWrongPassword', 'That password did not open the file.');
+        if (kind === 'locked') return t('pdfLocked', 'This PDF is encrypted. Type the password to open it.');
+        if (kind === 'broken') return t('pdfBroken', 'This file is not a readable PDF.');
+        return t('pdfOpenFailed', 'Could not open this file.');
       }
 
       function addFiles(fileList) {
@@ -693,12 +698,12 @@
         for (var i = 0; i < files.length; i++) {
           var file = files[i];
           if (added >= MAX_FILES) {
-            toast('Up to ' + MAX_FILES + ' files in one run. Remove a file and add another.', 'error');
+            toast(t('pdfTooManyFiles', 'Up to {n} files in one run. Remove a file and add another.', { n: MAX_FILES }), 'error');
             break;
           }
           var isPdf = /\.pdf$/i.test(file.name || '') || file.type === 'application/pdf';
           if (!isPdf) {
-            toast(file.name + ' is not a PDF file.', 'error');
+            toast(t('pdfNotAPdf', '{name} is not a PDF file.', { name: file.name }), 'error');
             continue;
           }
           var entry = {
@@ -716,7 +721,7 @@
           added++;
           if (entry.size > MAX_FILE_BYTES) {
             entry.status = 'error';
-            entry.error = 'Larger than 200 MB. Split it first or use a smaller file.';
+            entry.error = t('pdfTooBig', 'Larger than 200 MB. Split it first or use a smaller file.');
             renderFiles();
             updateButtons();
             continue;
@@ -731,7 +736,7 @@
       function readFile(file, entry) {
         if (!file.arrayBuffer) {
           entry.status = 'error';
-          entry.error = 'This browser cannot read the file.';
+          entry.error = t('pdfUnreadable', 'This browser cannot read the file.');
           renderFiles();
           updateButtons();
           return;
@@ -772,7 +777,7 @@
           renderPages();
           updateButtons();
           if (password) {
-            banner('Opened with the password. The exported file has no password and no restrictions.');
+            banner(t('pdfOpenedWithPassword', 'Opened with the password. The exported file has no password and no restrictions.'));
           }
           return doc;
         }).catch(function (err) {
@@ -790,7 +795,7 @@
         entry.pageCount = pages.length;
         if (state.pages.length + pages.length > MAX_PAGES) {
           entry.status = 'error';
-          entry.error = 'Over the 1,500 page limit for one document.';
+          entry.error = t('pdfTooManyPages', 'Over the 1,500 page limit for one document.');
           entry.doc = null;
           return;
         }
@@ -838,8 +843,8 @@
           sub.className = 'wa-tool-sub';
           var bits = [fmtBytes(f.size)];
           if (f.status === 'done') {
-            bits.push(f.pageCount + (f.pageCount === 1 ? ' page' : ' pages'));
-            if (f.locked) bits.push('opened with a password');
+            bits.push(f.pageCount === 1 ? t('pdfPageOne', '{n} page', { n: f.pageCount }) : t('pdfPageMany', '{n} pages', { n: f.pageCount }));
+            if (f.locked) bits.push(t('pdfLockedShort', 'opened with a password'));
           }
           if (f.status === 'loading') bits.push(t('working', 'Working'));
           if (f.status === 'queued') bits.push(t('working', 'Working'));
@@ -869,16 +874,16 @@
             pw.className = 'wa-pdf-pw';
             var pwLabel = document.createElement('label');
             pwLabel.setAttribute('for', 'pdf-pw-' + f.id);
-            pwLabel.textContent = 'PDF password';
+            pwLabel.textContent = t('pdfPasswordLabel', 'PDF password');
             var pwInput = document.createElement('input');
             pwInput.type = 'password';
             pwInput.id = 'pdf-pw-' + f.id;
             pwInput.autocomplete = 'off';
-            pwInput.setAttribute('aria-label', 'PDF password for ' + f.name);
+            pwInput.setAttribute('aria-label', t('pdfPasswordFor', 'PDF password for {name}', { name: f.name }));
             var pwBtn = document.createElement('button');
             pwBtn.type = 'button';
             pwBtn.className = 'btn btn-secondary btn-small';
-            pwBtn.textContent = 'Open';
+            pwBtn.textContent = t('pdfOpenButton', 'Open');
             pwBtn.addEventListener('click', function () {
               openDoc(f, pwInput.value).catch(function () { /* the row already shows why */ });
             });
@@ -928,7 +933,7 @@
           box.type = 'checkbox';
           box.className = 'wa-pdf-check';
           box.checked = p.include;
-          box.setAttribute('aria-label', 'Include page ' + (i + 1));
+          box.setAttribute('aria-label', t('pdfIncludePage', 'Include page {n}', { n: i + 1 }));
           box.addEventListener('change', function () {
             p.include = box.checked;
             renderPages();
@@ -939,22 +944,22 @@
           var main = document.createElement('div');
           var title = document.createElement('div');
           title.className = 'wa-pdf-page-title';
-          title.textContent = (i + 1) + '. ' + p.fileName + ' — page ' + (p.index + 1);
+          title.textContent = t('pdfPageTitle', '{n}. {file} — page {p}', { n: i + 1, file: p.fileName, p: p.index + 1 });
           main.appendChild(title);
           var meta = document.createElement('div');
           meta.className = 'wa-pdf-page-meta';
           var sz = shownSize(p);
           meta.textContent = Math.round(sz.w) + ' × ' + Math.round(sz.h) + ' pt · ' +
-            sizeName(sz.w, sz.h) + (p.rot ? ' · turned ' + p.rot + '°' : '');
+            sizeName(sz.w, sz.h) + (p.rot ? t('pdfTurned', ' · turned {deg}°', { deg: p.rot }) : '');
           main.appendChild(meta);
           row.appendChild(main);
 
           var tools = document.createElement('div');
           tools.className = 'wa-pdf-tools';
-          addTool(tools, '↑', 'Move up', function () { movePage(p.key, -1); }, i === 0);
-          addTool(tools, '↓', 'Move down', function () { movePage(p.key, 1); }, i === state.pages.length - 1);
-          addTool(tools, '↺', 'Turn left', function () { rotatePage(p.key, -90); });
-          addTool(tools, '↻', 'Turn right', function () { rotatePage(p.key, 90); });
+          addTool(tools, '↑', t('pdfMoveUp', 'Move up'), function () { movePage(p.key, -1); }, i === 0);
+          addTool(tools, '↓', t('pdfMoveDown', 'Move down'), function () { movePage(p.key, 1); }, i === state.pages.length - 1);
+          addTool(tools, '↺', t('pdfTurnLeft', 'Turn left'), function () { rotatePage(p.key, -90); });
+          addTool(tools, '↻', t('pdfTurnRight', 'Turn right'), function () { rotatePage(p.key, 90); });
           addTool(tools, '×', t('remove', 'Remove'), function () { removePage(p.key); });
           row.appendChild(tools);
 
@@ -985,8 +990,8 @@
         });
         if (countEl) {
           countEl.textContent = state.pages.length
-            ? state.pages.length + ' pages · ' + includedPages().length + ' in the PDF'
-            : 'No pages yet.';
+            ? t('pdfPageCountText', '{n} pages · {m} in the PDF', { n: state.pages.length, m: includedPages().length })
+            : t('pdfNoPages', 'No pages yet.');
         }
       }
 
@@ -1076,7 +1081,7 @@
           var chain = Promise.resolve();
           groups.forEach(function (g) {
             chain = chain.then(function () {
-              if (!g.file || !g.file.doc) throw new Error('A source file is missing.');
+              if (!g.file || !g.file.doc) throw new Error(t('pdfSourceMissing', 'A source file is missing.'));
               return out.copyPages(g.file.doc, g.indices).then(function (list) {
                 g.indices.forEach(function (idx, i) {
                   copied[g.file.id + ':' + idx] = list[i];
@@ -1097,7 +1102,7 @@
             return extra.then(function () {
               pages.forEach(function (p) {
                 var pg = dupCopies[p.key] || copied[p.fileId + ':' + p.index];
-                if (!pg) throw new Error('A page could not be copied.');
+                if (!pg) throw new Error(t('pdfCopyFailed', 'A page could not be copied.'));
                 pg.setRotation(rotValue(PDFLib, p.rot));
                 out.addPage(pg);
               });
@@ -1128,7 +1133,7 @@
       function exportMerged() {
         var pages = includedPages();
         if (!pages.length) {
-          toast('No pages are selected.', 'error');
+          toast(t('pdfNoPagesSelected', 'No pages are selected.'), 'error');
           return;
         }
         setProgress(15, t('working', 'Working'));
@@ -1139,7 +1144,7 @@
         }).then(function (bytes) {
           saveBytes(bytes, 'wedding-pdf-merged.pdf');
           setProgress(100, t('pdfReady', 'PDF ready'));
-          banner('Saved one PDF with ' + pages.length + ' pages. Nothing was uploaded.');
+          banner(t('pdfSavedOne', 'Saved one PDF with {n} pages. Nothing was uploaded.', { n: pages.length }));
         }).catch(function (err) {
           setProgress(0, '');
           toast(t('pdfFailed', 'Could not create the PDF') + ': ' + (err && err.message ? err.message : String(err)), 'error');
@@ -1180,17 +1185,17 @@
       function exportSplit() {
         var pages = includedPages();
         if (!pages.length) {
-          toast('No pages are selected.', 'error');
+          toast(t('pdfNoPagesSelected', 'No pages are selected.'), 'error');
           return;
         }
         var ranges = parseRanges(rangesEl ? rangesEl.value : '', pages.length);
         if (!ranges || !ranges.length) {
-          toast('Type the page groups, for example 1-3, 4, 5-', 'error');
+          toast(t('pdfPageGroupsHint', 'Type the page groups, for example 1-3, 4, 5-'), 'error');
           return;
         }
         var tool = window.weddingAITool;
         if (!tool || !tool.downloadZip) {
-          toast('The ZIP builder did not load.', 'error');
+          toast(t('pdfZipMissing', 'The ZIP builder did not load.'), 'error');
           return;
         }
         setProgress(10, t('working', 'Working'));
@@ -1212,12 +1217,12 @@
           });
         });
         chain.then(function () {
-          if (!blobs.length) throw new Error('There was nothing to export.');
+          if (!blobs.length) throw new Error(t('pdfNothingToExport', 'There was nothing to export.'));
           setProgress(85, t('working', 'Working'));
           return tool.downloadZip(blobs, 'wedding-pdf-split');
         }).then(function () {
           setProgress(100, t('pdfReady', 'PDF ready'));
-          banner('Saved ' + blobs.length + ' PDF files in one ZIP archive.');
+          banner(t('pdfSavedZip', 'Saved {n} PDF files in one ZIP archive.', { n: blobs.length }));
         }).catch(function (err) {
           setProgress(0, '');
           toast(t('pdfFailed', 'Could not create the PDF') + ': ' + (err && err.message ? err.message : String(err)), 'error');
@@ -1227,12 +1232,12 @@
       // A copy of the one loaded file with no password and no restrictions.
       function exportUnlocked() {
         if (state.files.length !== 1) {
-          toast('Load one PDF at a time to save an unlocked copy.', 'error');
+          toast(t('pdfOneAtATime', 'Load one PDF at a time to save an unlocked copy.'), 'error');
           return;
         }
         var f = state.files[0];
         if (!f.doc) {
-          toast('This PDF is not open yet.', 'error');
+          toast(t('pdfNotOpen', 'This PDF is not open yet.'), 'error');
           return;
         }
         var pages = [];
@@ -1240,7 +1245,7 @@
           if (state.pages[i].fileId === f.id) pages.push(state.pages[i]);
         }
         if (!pages.length) {
-          toast('This PDF has no pages.', 'error');
+          toast(t('pdfNoPagesInDoc', 'This PDF has no pages.'), 'error');
           return;
         }
         setProgress(20, t('working', 'Working'));
@@ -1251,7 +1256,7 @@
         }).then(function (bytes) {
           saveBytes(bytes, safeName(f.name.replace(/\.pdf$/i, ''), 'wedding-pdf') + '-unlocked.pdf');
           setProgress(100, t('pdfReady', 'PDF ready'));
-          banner('Saved a copy with no password and no printing restrictions.');
+          banner(t('pdfSavedUnlocked', 'Saved a copy with no password and no printing restrictions.'));
         }).catch(function (err) {
           setProgress(0, '');
           toast(t('pdfFailed', 'Could not create the PDF') + ': ' + (err && err.message ? err.message : String(err)), 'error');

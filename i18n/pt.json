@@ -65365,4 +65365,170 @@
   "guides.wedding-pdf-editor.a2": "Sim, em qualquer PDF para impressão. Incorporar as fontes ou converter o texto em contornos evita a substituição no sistema da impressora.",
   "guides.wedding-pdf-editor.q3": "Como减小 um PDF?",
   "guides.wedding-pdf-editor.a3": "Reduza a resolução das imagens à resolução desejada, remova páginas e metadados não utilizados e use o otimizador integrado do PDF. Faça isso em uma cópia, não no arquivo original."
+,
+  "tools.copy.pdfAesFormat.zzzzzz326ed": "Este PDF usa criptografia AES-256 (PDF 2.0). Esta ferramenta não pode abrir esse formato."
+,
+  "tools.copy.pdfBroken.zzzzzz6d481": "Este arquivo não é um PDF legível."
+,
+  "tools.copy.pdfCopyFailed.zzzzzzc4fd0": "Não foi possível copiar uma página."
+,
+  "tools.copy.pdfCustomSize.zzzzzz07d0b": "tamanho personalizado"
+,
+  "tools.copy.pdfEngineMissing.zzzzzzdebd0": "O mecanismo de PDF não foi carregado."
+,
+  "tools.copy.pdfIncludePage.zzzzzz6f8b2": "Incluir a página {n}"
+,
+  "tools.copy.pdfLandscape.zzzzzzee77c": "{size} horizontal"
+,
+  "tools.copy.pdfLocked.zzzzzz8c522": "Este PDF está criptografado. Digite a senha para abri-lo."
+,
+  "tools.copy.pdfLockedShort.zzzzzz5c8c0": "aberto com uma senha"
+,
+  "tools.copy.pdfMoveDown.zzzzzz3d191": "Mover para baixo"
+,
+  "tools.copy.pdfMoveUp.zzzzzz4315e": "Mover para cima"
+,
+  "tools.copy.pdfNoPages.zzzzzz5325f": "Ainda não há páginas."
+,
+  "tools.copy.pdfNoPagesInDoc.zzzzzz63a27": "Este PDF não tem páginas."
+,
+  "tools.copy.pdfNoPagesSelected.zzzzzz1355c": "Nenhuma página foi selecionada."
+,
+  "tools.copy.pdfNotAPdf.zzzzzz0d3b9": "{name} não é um arquivo PDF."
+,
+  "tools.copy.pdfNotOpen.zzzzzz48f21": "Este PDF ainda não foi aberto."
+,
+  "tools.copy.pdfNothingToExport.zzzzzzd4b1e": "Não havia nada para exportar."
+,
+  "tools.copy.pdfOneAtATime.zzzzzzd2289": "Carregue um PDF por vez para salvar uma cópia desbloqueada."
+,
+  "tools.copy.pdfOpenButton.zzzzzz8f6b2": "Abrir"
+,
+  "tools.copy.pdfOpenFailed.zzzzzz4ec71": "Não foi possível abrir este arquivo."
+,
+  "tools.copy.pdfOpenedWithPassword.zzzzzzef070": "Aberto com a senha. O arquivo exportado não tem senha nem restrições."
+,
+  "tools.copy.pdfPageCountText.zzzzzz73d1b": "{n} páginas · {m} no PDF"
+,
+  "tools.copy.pdfPageGroupsHint.zzzzzz62bf3": "Digite os grupos de páginas, por exemplo 1-3, 4, 5-"
+,
+  "tools.copy.pdfPageMany.zzzzzz4c3cb": "{n} páginas"
+,
+  "tools.copy.pdfPageOne.zzzzzz61a14": "{n} página"
+,
+  "tools.copy.pdfPageTitle.zzzzzz01998": "{n}. {file} — página {p}"
+,
+  "tools.copy.pdfPasswordFor.zzzzzzb8e31": "Senha do PDF para {name}"
+,
+  "tools.copy.pdfPasswordLabel.zzzzzz5ad8e": "Senha do PDF"
+,
+  "tools.copy.pdfPortrait.zzzzzz39b4b": "{size} em retrato"
+,
+  "tools.copy.pdfSavedOne.zzzzzz6bd05": "Um PDF com {n} páginas foi salvo. Nada foi enviado."
+,
+  "tools.copy.pdfSavedUnlocked.zzzzzz9a6b2": "Uma cópia sem senha e sem restrições de impressão foi salva."
+,
+  "tools.copy.pdfSavedZip.zzzzzz80529": "{n} arquivos PDF foram salvos em um único arquivo ZIP."
+,
+  "tools.copy.pdfSourceMissing.zzzzzzf922f": "Falta um arquivo de origem."
+,
+  "tools.copy.pdfTooBig.zzzzzzea682": "Maior que 200 MB. Divida-o primeiro ou use um arquivo menor."
+,
+  "tools.copy.pdfTooManyFiles.zzzzzzb54df": "Até {n} arquivos por execução. Remova um arquivo e adicione outro."
+,
+  "tools.copy.pdfTooManyPages.zzzzzzb5117": "Acima do limite de 1,500 páginas para um documento."
+,
+  "tools.copy.pdfTurnLeft.zzzzzz23bfb": "Gire à esquerda"
+,
+  "tools.copy.pdfTurnRight.zzzzzzcb3d0": "Gire à direita"
+,
+  "tools.copy.pdfTurned.zzzzzz3bbe0": " · girado {deg}°"
+,
+  "tools.copy.pdfUnknownError.zzzzzzbf803": "Erro desconhecido"
+,
+  "tools.copy.pdfUnreadable.zzzzzz37adb": "Este navegador não consegue ler o arquivo"
+,
+  "tools.copy.pdfWrongPassword.zzzzzza8f52": "A senha não conseguiu abrir o arquivo"
+,
+  "tools.copy.pdfZipMissing.zzzzzz824c8": "O construtor de ZIP não carregou"
+,
+  "tools.copy.setAccepts.zzzzzzae190": "Aceita com prazer"
+,
+  "tools.copy.setByDate.zzzzzz76c89": "até {date}"
+,
+  "tools.copy.setByDateBelow.zzzzzz94120": "até a data abaixo"
+,
+  "tools.copy.setDateTbc.zzzzzz592cb": "Data a ser confirmada"
+,
+  "tools.copy.setDressCode.zzzzzzb8af4": "Código de vestimenta: {code}"
+,
+  "tools.copy.setGuestName.zzzzzz6b9a1": "Nome do convidado"
+,
+  "tools.copy.setHonorPresence.zzzzzze1c42": "pedem a honra da presença de vocês no casamento de"
+,
+  "tools.copy.setKindlyReply.zzzzzz76ac3": "Confirme sua presença, por favor"
+,
+  "tools.copy.setKindlyReplyBy.zzzzzz08e05": "Confirme sua presença até {date}"
+,
+  "tools.copy.setMenu.zzzzzzc37df": "Cardápio"
+,
+  "tools.copy.setReceptionToFollow.zzzzzzd4f26": "Recepção a seguir"
+,
+  "tools.copy.setRegrets.zzzzzza5e38": "Recusa com pesar"
+,
+  "tools.copy.setTable.zzzzzz7d448": "Mesa {n}"
+,
+  "tools.copy.setTimeTbc.zzzzzzc3050": "Horário a ser confirmado"
+,
+  "tools.copy.setVenueTbc.zzzzzzac62e": "Local a ser confirmado"
+,
+  "tools.copy.setWelcome.zzzzzz1de66": "Sejam bem-vindos ao nosso casamento"
+,
+  "tools.copy.setWithFamilies.zzzzzz399c2": "Junto com suas famílias"
+,
+  "tools.copy.setYourNames.zzzzzz7c591": "Seus nomes"
+,
+  "tools.copy.sheetAddPhotos.zzzzzzb422b": "Adicione fotos para criar a folha de contato."
+,
+  "tools.copy.sheetHeicFailed.zzzzzze86ea": "Não foi possível decodificar este arquivo HEIC."
+,
+  "tools.copy.sheetNoPhotos.zzzzzz2f160": "Adicione fotos primeiro."
+,
+  "tools.copy.sheetNothingToExport.zzzzzzc2bfe": "Não há nada para exportar"
+,
+  "tools.copy.sheetOnlyFirst.zzzzzz434fa": "Apenas as primeiras {n} fotos foram adicionadas. O limite é {max}."
+,
+  "tools.copy.sheetPageLabel.zzzzzz9a233": "Página {n}"
+,
+  "tools.copy.sheetPdfSummaryMany.zzzzzzb6b6b": "O PDF tem {n} páginas. A numeração é contínua de 1 a {m}."
+,
+  "tools.copy.sheetPdfSummaryOne.zzzzzz3705e": "O PDF tem {n} página. A numeração é contínua de 1 a {m}."
+,
+  "tools.copy.sheetRendering.zzzzzz86a57": "Renderizando a página {n} de {total}"
+,
+  "tools.copy.sheetTooMany.zzzzzzaaf9f": "Esta ferramenta aceita até {n} fotos por vez."
+,
+  "tools.copy.sheetUnreadable.zzzzzz177df": "Não foi possível ler este arquivo."
+,
+  "tools.copy.veditEncoderMissing.zzzzzzdf7ed": "O codificador de vídeo não carregou"
+,
+  "tools.wedding-photo-contact-sheet.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "Arraste fotos para cá ou clique para selecionar"
+,
+  "tools.wedding-photo-contact-sheet.div_text.jpg_png_webp_or_heic_up_to_100_photos_at.cd94268b": "JPG, PNG, WebP ou HEIC. Até 100 fotos por vez."
+,
+  "tools.wedding-pdf-editor.div_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "Arraste arquivos PDF para cá ou clique para selecionar"
+,
+  "tools.wedding-pdf-editor.div_text.pdf_only_up_to_20_files_up_to_200_mb_eac.2fc70c65": "Somente PDF · até 20 arquivos · até 200 MB cada · permanece no seu dispositivo"
+,
+  "tools.wedding-pdf-editor.div_text.no_pdf_files_yet_drop_some_above_to_star.01f028a1": "Ainda não há arquivos PDF. Arraste alguns acima para começar."
+,
+  "tools.wedding-pdf-editor.div_text.no_pages_yet.650ee538": "Ainda não há páginas."
+,
+  "tools.wedding-photo-to-gif.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "Arraste fotos para cá ou clique para selecionar"
+,
+  "tools.wedding-photo-to-gif.div_text.jpg_png_or_webp_up_to_20_photos_at_a_tim.00929ef5": "JPG, PNG ou WebP. Até 20 fotos por vez."
+,
+  "tools.wedding-pdf-editor.aria_label_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "Arraste arquivos PDF para cá ou clique para selecionar"
+,
+  "tools.wedding-photo-to-gif.alt_text.preview_of_the_animated_gif.5b0e2c31": "Prévia do GIF animado"
 }

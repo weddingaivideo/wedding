@@ -77,6 +77,26 @@ SKIP_TAGS = {
     "col", "embed", "param", "track", "wbr",
 }
 
+# Elements that hold a sentence but whose TAG is not in TEXT_TAGS.
+#
+# WHY THIS EXISTS
+# ---------------
+# "div" is not in TEXT_TAGS, because most divs are layout wrappers with no
+# text of their own. But a few divs carry a whole sentence a reader sees
+# the moment the page opens - the drop zone's title and hint, the "no files
+# yet" line, the page counter. Those were left in English in every one of
+# the ten languages, because the binder simply skipped them.
+#
+# The class is the selector, not the tag: it names the few divs whose text
+# is copy. A new div with one of these classes is bound automatically, and
+# the element then appears in the map like any other bound element.
+EXTRA_BIND_CLASSES = {
+    "wa-tool-dropzone-title",
+    "wa-tool-dropzone-hint",
+    "wa-tool-empty",
+    "wa-pdf-count",
+}
+
 VOID_TAGS = {
     "area", "base", "br", "col", "embed", "hr", "img", "input", "link",
     "meta", "param", "source", "track", "wbr",
@@ -242,11 +262,13 @@ def collect(root, html, slug, out_keys):
                 continue
             visit(child)
         # Now decide about THIS element.
-        if el.name not in TEXT_TAGS:
+        attrs = attrs_of(el.open_raw)
+        classes = set((get_attr(attrs, "class") or "").split())
+        is_extra = bool(classes & EXTRA_BIND_CLASSES)
+        if el.name not in TEXT_TAGS and not is_extra:
             return
         if el.parent is not None and el.parent.name in SKIP_TAGS:
             return
-        attrs = attrs_of(el.open_raw)
         if has_attr(attrs, "data-i18n"):
             out_keys.append((get_attr(attrs, "data-i18n"), el.text(html)))
             return

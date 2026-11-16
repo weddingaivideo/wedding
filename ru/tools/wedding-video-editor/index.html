@@ -849,14 +849,14 @@
         }
         return new Promise(function (resolve, reject) {
           var timer = setTimeout(function () {
-            reject(new Error('The video encoder did not load'));
+            reject(new Error(t('veditEncoderMissing', 'The video encoder did not load')));
           }, 15000);
           window.addEventListener('weddingai-movie-ready', function () {
             clearTimeout(timer);
             if (window.weddingAIMovie && window.weddingAIMovie.load) {
               resolve(window.weddingAIMovie.load());
             } else {
-              reject(new Error('The video encoder did not load'));
+              reject(new Error(t('veditEncoderMissing', 'The video encoder did not load')));
             }
           });
         });

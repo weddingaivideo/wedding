@@ -872,6 +872,51 @@ foreach ($spec in @(
     }
 }
 
+# ---------- 9i. The reader view ----------
+# A dictionary can be complete and the page can still be English: the
+# middleware only rewrites an element that carries data-i18n, and a string
+# the page's own JavaScript writes after the response was sent can never
+# be reached by a server-side pass at all. Deploy 2 shipped the five new
+# tools with all eleven dictionaries complete and a Russian reader still
+# met eight static English strings and seventy-three runtime ones.
+#
+# This check replays the middleware on the static language copies and
+# compares every visible text run with the English source. The site's own
+# dictionary decides what is "the same in every language" (a measurement,
+# a paper size, a brand) - so there is no hand-written white list to rot.
+$readerViewScript = "$root\scripts\check-reader-view.py"
+if (Test-Path $readerViewScript) {
+    $py = $null
+    foreach ($candidate in @("python", "python3", "py")) {
+        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($cmd) { $py = $candidate; break }
+    }
+    if ($py) {
+        $rvOutput = & $py $readerViewScript 2>&1
+        $rvExit = $LASTEXITCODE
+        foreach ($line in (@($rvOutput) | Select-Object -Last 14)) {
+            Write-Host "  $($line -replace '^\s+','')" -ForegroundColor DarkGray
+        }
+        if ($rvExit -eq 0) {
+            Pass "The reader view is clean: no English text reaches a reader in any of the ten languages"
+        } else {
+            Fail "The reader view found English text on a localized tool page. A static string needs a data-i18n binding; a runtime string needs t('alias', 'fallback') plus a tools.copy value in every language. See scripts/check-reader-view.py."
+        }
+        # The reverse control: a checker that cannot fail proves nothing.
+        $rvCtl = & $py $readerViewScript --inject 2>&1
+        $rvCtlExit = $LASTEXITCODE
+        if ($rvCtlExit -eq 0) {
+            Fail "The reader-view negative control PASSED - the checker cannot fail, so its clean result proves nothing"
+        } else {
+            Pass "The reader-view negative control fails as it must"
+        }
+    } else {
+        Warn "Python not found in PATH; skipping the reader-view check."
+    }
+} else {
+    Warn "scripts\check-reader-view.py not found; skipping the reader-view check"
+}
+
 # ---------- 9c. Lead mail routing + delivery truth ----------
 # Background (2026-10-29): two weeks of leads were lost because the domain had
 # no MX record for 17 days, and because /api/quote.js recorded a 2xx from the

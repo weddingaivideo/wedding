@@ -869,6 +869,12 @@ RUN_WORD_KEEP = {
     "reels", "shorts", "tiktok", "instagram", "youtube",
     # a codec with its version ("MP4 with H.264")
     "h.264", "h.265", "hevc", "av1",
+    # an encryption algorithm with its key size ("AES-256"). The tokenizer
+    # splits "AES-256" into "AES" and "256" because the hyphen is not in
+    # its word class, so the ALGORITHM NAME was the token that had to be
+    # allowed - without it the whole sentence was called untranslated and
+    # the Hindi value was thrown away.
+    "aes",
 }
 
 LATIN_RUN_RE = re.compile(

@@ -66559,4 +66559,170 @@
   "guides.wedding-pdf-editor.a2": "Ja, bei jedem PDF für den Druck. Das Einbetten oder die Umwandlung von Text in Pfade verhindert eine Ersetzung auf dem System des Druckers.",
   "guides.wedding-pdf-editor.q3": "Wie kann ich ein PDF verkleinern?",
   "guides.wedding-pdf-editor.a3": "Reduziere die Bildauflösung auf die Zielauflösung, entferne unbenutzte Seiten und Metadaten und verwende den integrierten PDF-Optimierer. Führe dies an einer Kopie, nicht an der Originaldatei durch."
+,
+  "tools.copy.pdfAesFormat.zzzzzz326ed": "Dieses PDF verwendet AES-256-Verschlüsselung (PDF 2.0). Dieses Tool kann das Format nicht öffnen."
+,
+  "tools.copy.pdfBroken.zzzzzz6d481": "Diese Datei ist keine lesbare PDF-Datei."
+,
+  "tools.copy.pdfCopyFailed.zzzzzzc4fd0": "Eine Seite konnte nicht kopiert werden."
+,
+  "tools.copy.pdfCustomSize.zzzzzz07d0b": "Benutzerdefinierte Größe"
+,
+  "tools.copy.pdfEngineMissing.zzzzzzdebd0": "Die PDF-Engine wurde nicht geladen."
+,
+  "tools.copy.pdfIncludePage.zzzzzz6f8b2": "Seite {n} einbeziehen"
+,
+  "tools.copy.pdfLandscape.zzzzzzee77c": "{size} im Querformat"
+,
+  "tools.copy.pdfLocked.zzzzzz8c522": "Dieses PDF ist verschlüsselt. Geben Sie das Passwort ein, um es zu öffnen."
+,
+  "tools.copy.pdfLockedShort.zzzzzz5c8c0": "mit Passwort geöffnet"
+,
+  "tools.copy.pdfMoveDown.zzzzzz3d191": "Nach unten verschieben"
+,
+  "tools.copy.pdfMoveUp.zzzzzz4315e": "Nach oben verschieben"
+,
+  "tools.copy.pdfNoPages.zzzzzz5325f": "Noch keine Seiten vorhanden."
+,
+  "tools.copy.pdfNoPagesInDoc.zzzzzz63a27": "Dieses PDF enthält keine Seiten."
+,
+  "tools.copy.pdfNoPagesSelected.zzzzzz1355c": "Es sind keine Seiten ausgewählt."
+,
+  "tools.copy.pdfNotAPdf.zzzzzz0d3b9": "{name} ist keine PDF-Datei."
+,
+  "tools.copy.pdfNotOpen.zzzzzz48f21": "Dieses PDF ist noch nicht geöffnet."
+,
+  "tools.copy.pdfNothingToExport.zzzzzzd4b1e": "Es gab nichts zu exportieren."
+,
+  "tools.copy.pdfOneAtATime.zzzzzzd2289": "Laden Sie jeweils nur ein PDF, um eine unverschlüsselte Kopie zu speichern."
+,
+  "tools.copy.pdfOpenButton.zzzzzz8f6b2": "Öffnen"
+,
+  "tools.copy.pdfOpenFailed.zzzzzz4ec71": "Diese Datei konnte nicht geöffnet werden."
+,
+  "tools.copy.pdfOpenedWithPassword.zzzzzzef070": "Mit Passwort geöffnet. Die exportierte Datei kann ohne Passwort und ohne Einschränkungen geöffnet werden."
+,
+  "tools.copy.pdfPageCountText.zzzzzz73d1b": "{n} Seiten · {m} in der PDF"
+,
+  "tools.copy.pdfPageGroupsHint.zzzzzz62bf3": "Geben Sie die Seitengruppen ein, zum Beispiel 1-3, 4, 5-"
+,
+  "tools.copy.pdfPageMany.zzzzzz4c3cb": "{n} Seiten"
+,
+  "tools.copy.pdfPageOne.zzzzzz61a14": "{n} Seite"
+,
+  "tools.copy.pdfPageTitle.zzzzzz01998": "{n}. {file} — Seite {p}"
+,
+  "tools.copy.pdfPasswordFor.zzzzzzb8e31": "PDF-Passwort für {name}"
+,
+  "tools.copy.pdfPasswordLabel.zzzzzz5ad8e": "PDF-Passwort"
+,
+  "tools.copy.pdfPortrait.zzzzzz39b4b": "{size} im Hochformat"
+,
+  "tools.copy.pdfSavedOne.zzzzzz6bd05": "Eine PDF mit {n} Seiten gespeichert. Es wurde nichts hochgeladen."
+,
+  "tools.copy.pdfSavedUnlocked.zzzzzz9a6b2": "Eine Kopie ohne Passwort und ohne Druckbeschränkungen gespeichert."
+,
+  "tools.copy.pdfSavedZip.zzzzzz80529": "{n} PDF-Dateien in einem ZIP-Archiv gespeichert."
+,
+  "tools.copy.pdfSourceMissing.zzzzzzf922f": "Eine Quelldatei fehlt."
+,
+  "tools.copy.pdfTooBig.zzzzzzea682": "Größer als 200 MB. Teilen Sie die Datei zuerst auf oder verwenden Sie eine kleinere Datei."
+,
+  "tools.copy.pdfTooManyFiles.zzzzzzb54df": "Bis zu {n} Dateien pro Durchlauf. Entfernen Sie eine Datei und fügen Sie eine weitere hinzu."
+,
+  "tools.copy.pdfTooManyPages.zzzzzzb5117": "Das Limit von 1,500 Seiten für ein Dokument wurde überschritten."
+,
+  "tools.copy.pdfTurnLeft.zzzzzz23bfb": "Nach links drehen"
+,
+  "tools.copy.pdfTurnRight.zzzzzzcb3d0": "Nach rechts drehen"
+,
+  "tools.copy.pdfTurned.zzzzzz3bbe0": " · um {deg}° gedreht"
+,
+  "tools.copy.pdfUnknownError.zzzzzzbf803": "Unbekannter Fehler"
+,
+  "tools.copy.pdfUnreadable.zzzzzz37adb": "Dieser Browser kann die Datei nicht lesen."
+,
+  "tools.copy.pdfWrongPassword.zzzzzza8f52": "Dieses Passwort hat die Datei nicht geöffnet."
+,
+  "tools.copy.pdfZipMissing.zzzzzz824c8": "Das ZIP-Archivierungsprogramm wurde nicht geladen."
+,
+  "tools.copy.setAccepts.zzzzzzae190": "Nimmt gerne an"
+,
+  "tools.copy.setByDate.zzzzzz76c89": "bis {date}"
+,
+  "tools.copy.setByDateBelow.zzzzzz94120": "bis zum untenstehenden Datum"
+,
+  "tools.copy.setDateTbc.zzzzzz592cb": "Datum wird noch bestätigt"
+,
+  "tools.copy.setDressCode.zzzzzzb8af4": "Kleiderordnung: {code}"
+,
+  "tools.copy.setGuestName.zzzzzz6b9a1": "Name des Gastes"
+,
+  "tools.copy.setHonorPresence.zzzzzze1c42": "bitten um die Ehre Ihrer Anwesenheit bei der Hochzeit von"
+,
+  "tools.copy.setKindlyReply.zzzzzz76ac3": "Bitte um Rückmeldung"
+,
+  "tools.copy.setKindlyReplyBy.zzzzzz08e05": "Bitte um Rückmeldung bis {date}"
+,
+  "tools.copy.setMenu.zzzzzzc37df": "Menü"
+,
+  "tools.copy.setReceptionToFollow.zzzzzzd4f26": "Anschließend findet die Feier statt"
+,
+  "tools.copy.setRegrets.zzzzzza5e38": "Kann leider nicht teilnehmen"
+,
+  "tools.copy.setTable.zzzzzz7d448": "Tisch {n}"
+,
+  "tools.copy.setTimeTbc.zzzzzzc3050": "Uhrzeit wird noch bestätigt"
+,
+  "tools.copy.setVenueTbc.zzzzzzac62e": "Veranstaltungsort wird noch bestätigt"
+,
+  "tools.copy.setWelcome.zzzzzz1de66": "Willkommen zu unserer Hochzeit"
+,
+  "tools.copy.setWithFamilies.zzzzzz399c2": "Gemeinsam mit ihren Familien"
+,
+  "tools.copy.setYourNames.zzzzzz7c591": "Ihre Namen"
+,
+  "tools.copy.sheetAddPhotos.zzzzzzb422b": "Fügen Sie einige Fotos hinzu, um den Kontaktbogen zu erstellen."
+,
+  "tools.copy.sheetHeicFailed.zzzzzze86ea": "Diese HEIC-Datei konnte nicht dekodiert werden."
+,
+  "tools.copy.sheetNoPhotos.zzzzzz2f160": "Fügen Sie zuerst Fotos hinzu."
+,
+  "tools.copy.sheetNothingToExport.zzzzzzc2bfe": "Es gibt nichts zu exportieren"
+,
+  "tools.copy.sheetOnlyFirst.zzzzzz434fa": "Es wurden nur die ersten {n} Fotos hinzugefügt. Die maximale Anzahl beträgt {max}."
+,
+  "tools.copy.sheetPageLabel.zzzzzz9a233": "Seite {n}"
+,
+  "tools.copy.sheetPdfSummaryMany.zzzzzzb6b6b": "Das PDF hat {n} Seiten. Die Seitennummern laufen durchgehend von 1 bis {m}."
+,
+  "tools.copy.sheetPdfSummaryOne.zzzzzz3705e": "Das PDF hat {n} Seite. Die Seitennummern laufen durchgehend von 1 bis {m}."
+,
+  "tools.copy.sheetRendering.zzzzzz86a57": "Seite {n} von {total} wird gerendert"
+,
+  "tools.copy.sheetTooMany.zzzzzzaaf9f": "Dieses Werkzeug verarbeitet jeweils bis zu {n} Fotos."
+,
+  "tools.copy.sheetUnreadable.zzzzzz177df": "Diese Datei konnte nicht gelesen werden."
+,
+  "tools.copy.veditEncoderMissing.zzzzzzdf7ed": "Der Videoencoder wurde nicht geladen"
+,
+  "tools.wedding-photo-contact-sheet.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "Fotos hier ablegen oder klicken, um sie auszuwählen"
+,
+  "tools.wedding-photo-contact-sheet.div_text.jpg_png_webp_or_heic_up_to_100_photos_at.cd94268b": "JPG, PNG, WebP oder HEIC. Bis zu 100 Fotos gleichzeitig."
+,
+  "tools.wedding-pdf-editor.div_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "PDF-Dateien hier ablegen oder klicken, um sie auszuwählen"
+,
+  "tools.wedding-pdf-editor.div_text.pdf_only_up_to_20_files_up_to_200_mb_eac.2fc70c65": "Nur PDF · bis zu 20 Dateien · bis zu 200 MB pro Datei · bleibt auf Ihrem Gerät"
+,
+  "tools.wedding-pdf-editor.div_text.no_pdf_files_yet_drop_some_above_to_star.01f028a1": "Noch keine PDF-Dateien. Legen Sie oben einige ab, um zu beginnen."
+,
+  "tools.wedding-pdf-editor.div_text.no_pages_yet.650ee538": "Noch keine Seiten vorhanden."
+,
+  "tools.wedding-photo-to-gif.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "Fotos hier ablegen oder klicken, um sie auszuwählen"
+,
+  "tools.wedding-photo-to-gif.div_text.jpg_png_or_webp_up_to_20_photos_at_a_tim.00929ef5": "JPG, PNG oder WebP. Bis zu 20 Fotos gleichzeitig."
+,
+  "tools.wedding-pdf-editor.aria_label_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "PDF-Dateien hier ablegen oder klicken, um sie auszuwählen"
+,
+  "tools.wedding-photo-to-gif.alt_text.preview_of_the_animated_gif.5b0e2c31": "Vorschau des animierten GIFs"
 }

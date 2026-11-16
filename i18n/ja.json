@@ -68432,4 +68432,170 @@
   "guides.wedding-pdf-editor.a2": "印刷用のPDFでは常に埋め込みます。埋め込み、またはテキストをアウトライン化することで、プリンター側のシステムでのフォント置換を防げます。",
   "guides.wedding-pdf-editor.q3": "PDFを小さくするにはどうすればよいですか？",
   "guides.wedding-pdf-editor.a3": "画像を目標の解像度まで縮小し、未使用のページとメタデータを削除して、PDF内蔵の最適化機能を使います。元ファイルではなくコピーで作業してください。"
+,
+  "tools.copy.pdfAesFormat.zzzzzz326ed": "このPDFはAES-256暗号化（PDF 2.0）を使用しています。このツールではその形式を開けません。"
+,
+  "tools.copy.pdfBroken.zzzzzz6d481": "このファイルは読み取り可能なPDFではありません。"
+,
+  "tools.copy.pdfCopyFailed.zzzzzzc4fd0": "ページをコピーできませんでした。"
+,
+  "tools.copy.pdfCustomSize.zzzzzz07d0b": "カスタムサイズ"
+,
+  "tools.copy.pdfEngineMissing.zzzzzzdebd0": "PDFエンジンが読み込まれませんでした。"
+,
+  "tools.copy.pdfIncludePage.zzzzzz6f8b2": "{n}ページを含める"
+,
+  "tools.copy.pdfLandscape.zzzzzzee77c": "{size} 横向き"
+,
+  "tools.copy.pdfLocked.zzzzzz8c522": "このPDFは暗号化されています。開くにはパスワードを入力してください。"
+,
+  "tools.copy.pdfLockedShort.zzzzzz5c8c0": "パスワードで開きました"
+,
+  "tools.copy.pdfMoveDown.zzzzzz3d191": "下へ移動"
+,
+  "tools.copy.pdfMoveUp.zzzzzz4315e": "上へ移動"
+,
+  "tools.copy.pdfNoPages.zzzzzz5325f": "まだページがありません。"
+,
+  "tools.copy.pdfNoPagesInDoc.zzzzzz63a27": "このPDFにはページがありません。"
+,
+  "tools.copy.pdfNoPagesSelected.zzzzzz1355c": "ページが選択されていません。"
+,
+  "tools.copy.pdfNotAPdf.zzzzzz0d3b9": "{name}はPDFファイルではありません。"
+,
+  "tools.copy.pdfNotOpen.zzzzzz48f21": "このPDFはまだ開かれていません。"
+,
+  "tools.copy.pdfNothingToExport.zzzzzzd4b1e": "エクスポートするものがありません。"
+,
+  "tools.copy.pdfOneAtATime.zzzzzzd2289": "ロック解除済みのコピーを保存するには、PDFを1つずつ読み込んでください。"
+,
+  "tools.copy.pdfOpenButton.zzzzzz8f6b2": "開く"
+,
+  "tools.copy.pdfOpenFailed.zzzzzz4ec71": "このファイルを開けませんでした。"
+,
+  "tools.copy.pdfOpenedWithPassword.zzzzzzef070": "パスワードで開きました。エクスポートしたファイルにパスワードや制限はありません。"
+,
+  "tools.copy.pdfPageCountText.zzzzzz73d1b": "{n}ページ · PDF内{m}ページ"
+,
+  "tools.copy.pdfPageGroupsHint.zzzzzz62bf3": "ページ番号のグループを入力してください（例：1-3、4、5-）"
+,
+  "tools.copy.pdfPageMany.zzzzzz4c3cb": "{n}ページ"
+,
+  "tools.copy.pdfPageOne.zzzzzz61a14": "{n}ページ"
+,
+  "tools.copy.pdfPageTitle.zzzzzz01998": "{n}. {file} — {p}ページ"
+,
+  "tools.copy.pdfPasswordFor.zzzzzzb8e31": "{name}のPDFパスワード"
+,
+  "tools.copy.pdfPasswordLabel.zzzzzz5ad8e": "PDFパスワード"
+,
+  "tools.copy.pdfPortrait.zzzzzz39b4b": "{size} 縦向き"
+,
+  "tools.copy.pdfSavedOne.zzzzzz6bd05": "{n}ページのPDFを1つ保存しました。何もアップロードされていません。"
+,
+  "tools.copy.pdfSavedUnlocked.zzzzzz9a6b2": "パスワードや印刷制限のないコピーを保存しました。"
+,
+  "tools.copy.pdfSavedZip.zzzzzz80529": "PDFファイル{n}個をZIPアーカイブ1つに保存しました。"
+,
+  "tools.copy.pdfSourceMissing.zzzzzzf922f": "元のファイルがありません。"
+,
+  "tools.copy.pdfTooBig.zzzzzzea682": "200 MBを超えています。先に分割するか、より小さいファイルを使用してください。"
+,
+  "tools.copy.pdfTooManyFiles.zzzzzzb54df": "1回の実行で最大{n}個のファイルを扱えます。ファイルを削除して、別のファイルを追加してください。"
+,
+  "tools.copy.pdfTooManyPages.zzzzzzb5117": "1文書あたりの上限である1,500ページを超えています。"
+,
+  "tools.copy.pdfTurnLeft.zzzzzz23bfb": "左に回転"
+,
+  "tools.copy.pdfTurnRight.zzzzzzcb3d0": "右に回転"
+,
+  "tools.copy.pdfTurned.zzzzzz3bbe0": " · {deg}°回転"
+,
+  "tools.copy.pdfUnknownError.zzzzzzbf803": "不明なエラー"
+,
+  "tools.copy.pdfUnreadable.zzzzzz37adb": "このブラウザではファイルを読み取れません。"
+,
+  "tools.copy.pdfWrongPassword.zzzzzza8f52": "そのパスワードではファイルを開けませんでした。"
+,
+  "tools.copy.pdfZipMissing.zzzzzz824c8": "ZIP作成ツールが読み込まれませんでした。"
+,
+  "tools.copy.setAccepts.zzzzzzae190": "快くお受けします"
+,
+  "tools.copy.setByDate.zzzzzz76c89": "{date}まで"
+,
+  "tools.copy.setByDateBelow.zzzzzz94120": "下記の日付まで"
+,
+  "tools.copy.setDateTbc.zzzzzz592cb": "日付は未定です"
+,
+  "tools.copy.setDressCode.zzzzzzb8af4": "服装：{code}"
+,
+  "tools.copy.setGuestName.zzzzzz6b9a1": "ゲスト名"
+,
+  "tools.copy.setHonorPresence.zzzzzze1c42": "ご結婚を祝ってご列席の栄を賜りたく存じます"
+,
+  "tools.copy.setKindlyReply.zzzzzz76ac3": "ご返事をお願いいたします"
+,
+  "tools.copy.setKindlyReplyBy.zzzzzz08e05": "{date}までにご返事をお願いいたします"
+,
+  "tools.copy.setMenu.zzzzzzc37df": "メニュー"
+,
+  "tools.copy.setReceptionToFollow.zzzzzzd4f26": "披露宴は後ほど"
+,
+  "tools.copy.setRegrets.zzzzzza5e38": "心苦しくもご欠席をいたします"
+,
+  "tools.copy.setTable.zzzzzz7d448": "テーブル {n}"
+,
+  "tools.copy.setTimeTbc.zzzzzzc3050": "開始時刻は未定です"
+,
+  "tools.copy.setVenueTbc.zzzzzzac62e": "会場は未定です"
+,
+  "tools.copy.setWelcome.zzzzzz1de66": "私たちの結婚式へようこそ"
+,
+  "tools.copy.setWithFamilies.zzzzzz399c2": "両家の家族とともに"
+,
+  "tools.copy.setYourNames.zzzzzz7c591": "お二人の名前"
+,
+  "tools.copy.sheetAddPhotos.zzzzzzb422b": "写真を追加してコンタクトシートを作成してください。"
+,
+  "tools.copy.sheetHeicFailed.zzzzzze86ea": "このHEICファイルをデコードできませんでした。"
+,
+  "tools.copy.sheetNoPhotos.zzzzzz2f160": "まず写真を追加してください。"
+,
+  "tools.copy.sheetNothingToExport.zzzzzzc2bfe": "エクスポートする内容がありません"
+,
+  "tools.copy.sheetOnlyFirst.zzzzzz434fa": "最初の{n}枚の写真のみ追加されました。上限は{max}枚です。"
+,
+  "tools.copy.sheetPageLabel.zzzzzz9a233": "{n}ページ"
+,
+  "tools.copy.sheetPdfSummaryMany.zzzzzzb6b6b": "PDFは{n}ページです。ページ番号は1から{m}まで連番になっています。"
+,
+  "tools.copy.sheetPdfSummaryOne.zzzzzz3705e": "PDFは{n}ページです。ページ番号は1から{m}まで連番になっています。"
+,
+  "tools.copy.sheetRendering.zzzzzz86a57": "全{total}ページ中、{n}ページ目をレンダリングしています"
+,
+  "tools.copy.sheetTooMany.zzzzzzaaf9f": "このツールでは一度に最大{n}枚の写真を処理できます。"
+,
+  "tools.copy.sheetUnreadable.zzzzzz177df": "このファイルを読み取れませんでした。"
+,
+  "tools.copy.veditEncoderMissing.zzzzzzdf7ed": "動画エンコーダーを読み込めませんでした"
+,
+  "tools.wedding-photo-contact-sheet.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "ここに写真をドロップするか、クリックして選択してください"
+,
+  "tools.wedding-photo-contact-sheet.div_text.jpg_png_webp_or_heic_up_to_100_photos_at.cd94268b": "JPG、PNG、WebPまたはHEIC。一度に最大100枚の写真に対応しています。"
+,
+  "tools.wedding-pdf-editor.div_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "PDFファイルをここにドロップするか、クリックして選択してください"
+,
+  "tools.wedding-pdf-editor.div_text.pdf_only_up_to_20_files_up_to_200_mb_eac.2fc70c65": "PDFのみ · 最大20ファイル · 各ファイル最大200 MB · お使いの端末内に保存"
+,
+  "tools.wedding-pdf-editor.div_text.no_pdf_files_yet_drop_some_above_to_star.01f028a1": "PDFファイルはまだありません。上の領域にドロップして開始してください。"
+,
+  "tools.wedding-pdf-editor.div_text.no_pages_yet.650ee538": "まだページがありません。"
+,
+  "tools.wedding-photo-to-gif.div_text.drop_photos_here_or_click_to_browse.f53b80a7": "ここに写真をドロップするか、クリックして選択してください"
+,
+  "tools.wedding-photo-to-gif.div_text.jpg_png_or_webp_up_to_20_photos_at_a_tim.00929ef5": "JPG、PNGまたはWebP。一度に最大20枚の写真に対応しています。"
+,
+  "tools.wedding-pdf-editor.aria_label_text.drop_pdf_files_here_or_click_to_browse.99ad43ba": "PDFファイルをここにドロップするか、クリックして選択してください"
+,
+  "tools.wedding-photo-to-gif.alt_text.preview_of_the_animated_gif.5b0e2c31": "アニメーションGIFのプレビュー"
 }

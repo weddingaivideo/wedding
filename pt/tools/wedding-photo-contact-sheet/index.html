@@ -244,8 +244,8 @@
             <div class="wa-tool-card">
                 <h2 data-i18n="tools.wedding-photo-contact-sheet.h2_text.1_add_your_photos.353bce8a">1. Add your photos</h2>
                 <div class="wa-tool-dropzone" id="cs-drop">
-                    <div class="wa-tool-dropzone-title">Drop photos here or click to browse</div>
-                    <div class="wa-tool-dropzone-hint">JPG, PNG, WebP or HEIC. Up to 100 photos at a time.</div>
+                    <div class="wa-tool-dropzone-title" data-i18n="tools.wedding-photo-contact-sheet.div_text.drop_photos_here_or_click_to_browse.f53b80a7">Drop photos here or click to browse</div>
+                    <div class="wa-tool-dropzone-hint" data-i18n="tools.wedding-photo-contact-sheet.div_text.jpg_png_webp_or_heic_up_to_100_photos_at.cd94268b">JPG, PNG, WebP or HEIC. Up to 100 photos at a time.</div>
                     <input type="file" id="cs-file" accept="image/*" multiple>
                 </div>
                 <div class="wa-cs-list" id="cs-list"></div>
@@ -631,10 +631,15 @@
       var bannerEl = document.getElementById('cs-banner');
       var downloadBtn = document.getElementById('cs-download');
 
-      function t(alias, fallback) {
+      function t(alias, fallback, params) {
         try {
-          if (window.weddingAITool && window.weddingAITool.t) return window.weddingAITool.t(alias, fallback);
+          if (window.weddingAITool && window.weddingAITool.t) return window.weddingAITool.t(alias, fallback, params);
         } catch (e) { /* fall through */ }
+        if (params) {
+          return String(fallback).replace(/\{(\w+)\}/g, function (m, k) {
+            return Object.prototype.hasOwnProperty.call(params, k) ? String(params[k]) : m;
+          });
+        }
         return fallback;
       }
 
@@ -814,7 +819,7 @@
         c.textAlign = 'right';
         c.textBaseline = 'alphabetic';
         c.font = '400 ' + Math.round(0.13 * scale) + 'px ' + spec.body;
-        c.fillText('Page ' + pageNo, (spec.w - MARGIN) * scale, (spec.h - MARGIN * 0.55) * scale);
+        c.fillText(t('sheetPageLabel', 'Page {n}', { n: pageNo }), (spec.w - MARGIN) * scale, (spec.h - MARGIN * 0.55) * scale);
       }
 
       function renderPreview() {
@@ -850,7 +855,7 @@
               };
               img.onerror = function () {
                 URL.revokeObjectURL(url);
-                reject(new Error('This HEIC file could not be decoded.'));
+                reject(new Error(t('sheetHeicFailed', 'This HEIC file could not be decoded.')));
               };
               img.src = url;
             });
@@ -863,12 +868,12 @@
         if (!list.length) return;
         var room = MAX_PHOTOS - state.photos.length;
         if (room <= 0) {
-          toast('This tool takes up to ' + MAX_PHOTOS + ' photos at a time.', 'error');
+          toast(t('sheetTooMany', 'This tool takes up to {n} photos at a time.', { n: MAX_PHOTOS }), 'error');
           return;
         }
         if (list.length > room) {
           list = list.slice(0, room);
-          toast('Only the first ' + room + ' photos were added. The limit is ' + MAX_PHOTOS + '.', 'error');
+          toast(t('sheetOnlyFirst', 'Only the first {n} photos were added. The limit is {max}.', { n: room, max: MAX_PHOTOS }), 'error');
         }
         list.forEach(function (file) {
           var photo = {
@@ -886,7 +891,7 @@
             updateReadout();
             renderPreview();
           }).catch(function (err) {
-            toast((err && err.message) ? err.message : 'Could not read this file.', 'error');
+            toast((err && err.message) ? err.message : t('sheetUnreadable', 'Could not read this file.'), 'error');
           });
         });
         renderPhotoList();
@@ -967,9 +972,10 @@
         if (downloadBtn) downloadBtn.disabled = photos === 0;
         if (bannerEl) {
           bannerEl.textContent = photos
-            ? 'The PDF has ' + pages + (pages === 1 ? ' page.' : ' pages.') +
-              ' The numbers run continuously from 1 to ' + photos + '.'
-            : 'Add some photos to build the contact sheet.';
+            ? (pages === 1
+              ? t('sheetPdfSummaryOne', 'The PDF has {n} page. The numbers run continuously from 1 to {m}.', { n: pages, m: photos })
+              : t('sheetPdfSummaryMany', 'The PDF has {n} pages. The numbers run continuously from 1 to {m}.', { n: pages, m: photos }))
+            : t('sheetAddPhotos', 'Add some photos to build the contact sheet.');
         }
       }
 
@@ -987,7 +993,7 @@
           return;
         }
         if (!state.photos.length) {
-          toast('Add some photos first.', 'error');
+          toast(t('sheetNoPhotos', 'Add some photos first.'), 'error');
           return;
         }
         // The file is baked at the moment the canvas is drawn, so the export
@@ -996,7 +1002,7 @@
           var lay = layout();
           var spec = buildSpec(lay);
           var total = Math.ceil(state.photos.length / spec.perPage);
-          if (total < 1) throw new Error('There is nothing to export');
+          if (total < 1) throw new Error(t('sheetNothingToExport', 'There is nothing to export'));
           var makers = [];
           for (var p = 0; p < total; p++) {
             makers.push(makePage(spec, total, p));
@@ -1022,7 +1028,7 @@
           c.width = Math.round(spec.w * scale);
           c.height = Math.round(spec.h * scale);
           paint(c.getContext('2d'), spec, scale, pageIndex * spec.perPage);
-          setProgress(pageIndex + 1, total, 'Rendering page ' + (pageIndex + 1) + ' of ' + total);
+          setProgress(pageIndex + 1, total, t('sheetRendering', 'Rendering page {n} of {total}', { n: pageIndex + 1, total: total }));
           return { canvas: c, pageWidth: spec.w, pageHeight: spec.h };
         };
       }
