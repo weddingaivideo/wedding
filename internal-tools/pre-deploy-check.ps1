@@ -843,7 +843,8 @@ if (Test-Path $orderHintTest) {
 foreach ($spec in @(
     @{ File = "tests\middleware-i18n-check.cjs";       Label = "middleware i18n / RTL / shard path" },
     @{ File = "tests\runtime-copy-check.cjs";         Label = "tool + search runtime copy" },
-    @{ File = "tests\tool-extras-export-check.cjs";   Label = "tool .pdf / .ics export writers" }
+    @{ File = "tests\tool-extras-export-check.cjs";   Label = "tool .pdf / .ics export writers" },
+    @{ File = "tests\wasm-fallback-check.cjs";        Label = "the WebAssembly fallback is visible" }
 )) {
     $testPath = Join-Path $root $spec.File
     if (-not (Test-Path $testPath)) {
@@ -869,6 +870,33 @@ foreach ($spec in @(
         Pass "$($spec.Label): all checks passed"
     } else {
         Fail "$($spec.Label) regressed - run 'node $($spec.File)' for the full report"
+    }
+}
+
+# The reverse control for the WebAssembly-fallback check. A CSP that blocks
+# WASM used to make the tools silently produce a softer photo, and the only
+# trace was a console warning nobody reads. The check proves the notice
+# reaches the page; this proves the check can fail.
+$wasmCtl = Join-Path $root "tests\wasm-fallback-check.cjs"
+if (Test-Path $wasmCtl) {
+    $node = $null
+    foreach ($candidate in @("node", "nodejs")) {
+        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($cmd) { $node = $candidate; break }
+    }
+    if ($node) {
+        $ctlOutput = & $node $wasmCtl --negative-control 2>&1
+        $ctlExit = $LASTEXITCODE
+        foreach ($line in (@($ctlOutput) | Select-String -Pattern 'FAIL|RESULT:' | Select-Object -First 4)) {
+            Write-Host "  $($line -replace '^\s+','')" -ForegroundColor DarkGray
+        }
+        if ($ctlExit -eq 0) {
+            Pass "The WebAssembly-fallback negative control fails as it must"
+        } else {
+            Fail "The WebAssembly-fallback negative control passed - the check cannot fail, so its result proves nothing"
+        }
+    } else {
+        Warn "Node not found in PATH; skipping the WebAssembly-fallback negative control."
     }
 }
 

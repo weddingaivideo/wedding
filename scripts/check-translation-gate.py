@@ -230,6 +230,51 @@ STORED = [
      "ja", None, True, "a list marker next to a format name"),
     ("1. Add your PDF files", "1. Add your PDF ファイルを追加",
      "ja", None, False, "a list marker next to English words"),
+
+    # --- the two rules added on 2026-11-16 ------------------------------
+    # A value of "...." is what a failed pipeline leaves behind. It has no
+    # English word, no Latin run, and for a Latin target the script check is
+    # vacuous - so every other rule called it good.
+    ("Wedding Cake Servings Guide", "....", "ja", None, False,
+     "a placeholder, not a translation"),
+    ("Wedding Cake Servings Guide", "....", "de", None, False,
+     "a placeholder in a Latin target too"),
+    ("Wedding Cake Servings Guide", "How....", "ja", None, False,
+     "a truncated placeholder"),
+    # A word from ANOTHER language inside this one. foreign_spans() only
+    # looks for Latin runs, so the Chinese word in a Russian sentence was
+    # invisible to it.
+    ("A small display cake for photos", "Небольшой展示торт для фотографий",
+     "ru", None, False, "a Chinese word inside a Russian sentence"),
+    ("A small display cake for photos", "婚礼展示蛋糕",
+     "ja", None, False, "a Chinese sentence in the Japanese dictionary"),
+    ("A small display cake for photos", "Небольшой торт для фотографий",
+     "ru", None, True, "a clean Russian sentence"),
+    # ... and the rules must not fire on a good value.
+    ("Wedding date", "挙式日", "ja", "婚礼日期", True,
+     "Han is not foreign to Japanese"),
+    ("Wedding date", "婚礼日期", "zh", None, True,
+     "Han is not foreign to Chinese"),
+    ("WeddingAI.video", "WeddingAI.video", "ru", None, True,
+     "the brand stays Latin in every language"),
+    ("WeddingAI.video PDF", "WeddingAI.video PDF", "ru", None, True,
+     "a brand and a format name stay Latin"),
+    # A single Latin letter is a SIZE GRADE, not an English span: Japanese
+    # writes "A判" and keeps the letter. The gate used to reject the whole
+    # translation over it and the re-translation wrote the ENGLISH SOURCE
+    # into the Japanese dictionary instead.
+    ("A-series or square formats", "A判や正方形サイズ", "ja", None, True,
+     "a single Latin letter is not an English span"),
+    ("A-series or square formats", "A判や square formats", "ja", None, False,
+     "but a whole English phrase next to it still is"),
+    # A COLOUR PROFILE next to a format name. The names are already in
+    # LATIN_KEEP as whole runs; the gap was that they could not sit inside
+    # a LONGER run, and a correct Japanese paragraph was thrown away over
+    # "sRGB JPEG" on 2026-11-16.
+    ("Colour profiles differ too", "sRGB JPEG と Adobe RGB を選ぶ", "ja", None, True,
+     "a colour profile name next to another name"),
+    ("Colour profiles differ too", "sRGB JPEG と square formats を選ぶ", "ja", None, False,
+     "but an English phrase next to it still is"),
 ]
 
 # (source, value, lang, expected_ok, why)
@@ -241,6 +286,25 @@ FRESH = [
     ("Wedding date", "Wedding date", "ja", False, "an English echo"),
     ("Output", "Output", "th", False, "an English echo"),
     ("Home", "Home", "ru", False, "an English echo"),
+    # --- the two rules added on 2026-11-16 ------------------------------
+    ("Portion", "....", "ja", False, "a placeholder, not a translation"),
+    ("Portion", "....", "th", False, "a placeholder in any language"),
+    ("A small display cake", "Небольшой展示торт", "ru", False,
+     "a Chinese word inside a Russian sentence"),
+    ("A small display cake", "Небольшой торт", "ru", True,
+     "a clean Russian sentence"),
+    ("Part of the cake", "ケーキの一部", "ja", True,
+     "a clean Japanese sentence"),
+    # --- the single-letter rule, added 2026-11-16 after the re-translation
+    # --- lost a good Japanese value to it -------------------------------
+    ("A-series or square formats", "A判や正方形サイズ", "ja", True,
+     "a single Latin letter is not an English span"),
+    ("A-series or square formats", "A判や square formats", "ja", False,
+     "but a whole English phrase next to it still is"),
+    ("Colour profiles differ too", "sRGB JPEG と Adobe RGB を選ぶ", "ja", True,
+     "a colour profile name next to another name"),
+    ("Colour profiles differ too", "sRGB JPEG と square formats を選ぶ", "ja", False,
+     "but an English phrase next to it still is"),
 ]
 
 
@@ -252,6 +316,38 @@ NEW_RULE_WHYS = {
     "a vendor domain next to a format name",
     "browser names and a version in a Japanese sentence",
     "the Spanish verb 'has'",
+    "a single Latin letter is not an English span",
+    "a colour profile name next to another name",
+}
+
+# The good values that the 2026-11-16 rules must NOT fire on. They are
+# checked by the normal run (run_cases asserts they are accepted with the
+# rules ON); the negative control does not use them, because a case that is
+# accepted with the rules off as well is not a rule-dependent case.
+NEW_RULE_KEEP_WHYS = {
+    "Han is not foreign to Japanese",
+    "Han is not foreign to Chinese",
+    "the brand stays Latin in every language",
+    "a brand and a format name stay Latin",
+    "a clean Russian sentence",
+    "a clean Japanese sentence",
+}
+
+# The cases that MUST be rejected BECAUSE of the 2026-11-16 rules. With the
+# rules switched off they would be accepted, and that is exactly what the
+# negative control has to observe: a rule nothing depends on is a rule
+# nothing tests.
+#
+# The other new cases are the opposite kind: a good value that must still be
+# ACCEPTED. Those prove the rules do not fire on a brand, a format name, a
+# Han-character Japanese label or a clean sentence.
+NEW_RULE_REJECT_WHYS = {
+    "a placeholder, not a translation",
+    "a placeholder in a Latin target too",
+    "a placeholder in any language",
+    "a truncated placeholder",
+    "a Chinese word inside a Russian sentence",
+    "a Chinese sentence in the Japanese dictionary",
 }
 
 
@@ -275,32 +371,81 @@ def negative_control_new_rules():
 
     The first negative control disables script_independent(). That rule is
     old; the rules of 2026-11-16 are newer and a test that cannot see
-    them is just as blind.
+    them is just as blind. The 2026-11-16 rules are three: a technical
+    NAME may sit next to another name inside a Latin run, "has" is the
+    Spanish verb, and a value may not be a placeholder ("....") or carry a
+    word from another language.
     """
     original_word_okay = T.technical_word_okay
     original_keep = dict(T.LATIN_TARGET_KEEP)
-    depends = [c for c in STORED if c[5] in NEW_RULE_WHYS]
-    if not depends:
+    original_placeholder = T.placeholder_value
+    original_foreign = T.foreign_script_spans
+    original_single_letter = T.single_letter_run_allowed
+    # Two kinds of new-rule case, and they need OPPOSITE observations.
+    #
+    # (a) a case that must be ACCEPTED and that the new rules are what make
+    #     acceptable: with the rules off it has to be REJECTED. If it is
+    #     still accepted, the test cannot see the rule at all.
+    # (b) a case that must be REJECTED BECAUSE of the new rules: with the
+    #     rules off it has to be ACCEPTED. If it is still rejected, some
+    #     older rule was doing the work and the new rule is untested.
+    accept_depends = [c for c in STORED if c[5] in NEW_RULE_WHYS and c[4]]
+    accept_fresh = [c for c in FRESH if c[4] in NEW_RULE_WHYS and c[3]]
+    reject_depends = [c for c in STORED if c[5] in NEW_RULE_REJECT_WHYS]
+    reject_fresh = [c for c in FRESH if c[4] in NEW_RULE_REJECT_WHYS]
+    if not (accept_depends or accept_fresh or reject_depends or reject_fresh):
         print("[FAIL] negative control: no case depends on the new rules")
         return 1
     T.technical_word_okay = lambda word: False
     T.LATIN_TARGET_KEEP = {k: (set(v) - {"has"})
                            for k, v in original_keep.items()}
+    T.placeholder_value = lambda value: False
+    T.foreign_script_spans = lambda value, lang: []
+    # The single-letter allowance is a rule too: with it off, "A判" has to
+    # be REJECTED, or the test cannot see the rule at all.
+    T.single_letter_run_allowed = lambda run: False
     try:
-        still_passing = [(s, v, l) for s, v, l, z, e, w in depends
-                          if e and T.verify_stored(s, v, 0, l, z)]
+        still_passing = []
+        for s, v, l, z, e, w in accept_depends:
+            if T.verify_stored(s, v, 0, l, z):
+                still_passing.append((s, v, l))
+        for s, v, l, ok, w in accept_fresh:
+            if T.llm_verify(s, v, [], 0, l) is None:
+                still_passing.append((s, v, l))
+        newly_accepted = []
+        for s, v, l, z, e, w in reject_depends:
+            if T.verify_stored(s, v, 0, l, z):
+                newly_accepted.append((s, v, l))
+        for s, v, l, ok, w in reject_fresh:
+            if T.llm_verify(s, v, [], 0, l) is None:
+                newly_accepted.append((s, v, l))
     finally:
         T.technical_word_okay = original_word_okay
         T.LATIN_TARGET_KEEP = original_keep
+        T.placeholder_value = original_placeholder
+        T.foreign_script_spans = original_foreign
+        T.single_letter_run_allowed = original_single_letter
 
+    problems = []
     if still_passing:
-        print("[FAIL] negative control: %d of %d new-rule cases still passed "
-              "without the rules: %r"
-              % (len(still_passing), len(depends), still_passing[:3]))
+        problems.append("%d of %d accept-case(s) still passed without the new "
+                        "rules: %r" % (len(still_passing),
+                                        len(accept_depends) + len(accept_fresh),
+                                        still_passing[:3]))
+    if not newly_accepted:
+        problems.append("none of the %d reject-case(s) changed when the new "
+                        "rules were disabled, so an older rule was doing the "
+                        "work and the new rule is untested"
+                        % (len(reject_depends) + len(reject_fresh)))
+    if problems:
+        for p in problems:
+            print("[FAIL] negative control: %s" % p)
         return 1
-    print("[OK] negative control: all %d new-rule cases change when the new "
-          "rules are disabled, so the test is sensitive to them."
-          % len(depends))
+    print("[OK] negative control: with the rule off %d accept-case(s) flip to "
+          "rejected and %d reject-case(s) flip to accepted, so the test is "
+          "sensitive to the new rules."
+          % (len(accept_depends) + len(accept_fresh),
+             len(newly_accepted)))
     return 0
 
 

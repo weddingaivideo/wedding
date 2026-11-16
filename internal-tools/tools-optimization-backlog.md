@@ -757,6 +757,24 @@ benefit is removing a cap that has never been hit.
 2. **Are the tool pages allowed to carry ads?** 0 of 13 do today. The tools
    are the free, high-intent entry point and currently earn nothing — but
    they are also the pages that say "free, no signup" loudest.
+   → **RESOLVED 2026-11-16 by the owner: NO ads on tool pages.** Measured on
+   2026-11-16: AdSense is on **25** static pages — the 12 English top-level
+   pages (`/`, `/about/`, `/ai-wedding-video-generator/`, `/gallery/`,
+   `/order/`, `/pricing/`, `/privacy/`, `/resources/`, `/search/`,
+   `/services/` and its 13 sub-pages, `/success/`, `/terms/`) — and **0** on
+   `tools/` (32 pages), **0** on `blog/`, **0** on the 10 localized home
+   pages.
+   The tools are the free, high-intent entry point, and their whole promise
+   is "free, and nothing leaves your device". A third-party ad is the
+   loudest possible "this page earns money" signal on exactly the pages
+   that must not read that way. The intent behind them is
+   low-commercial ("free contact sheet", "free GIF export"), so fill rate
+   and CPC are poor while bounce is high — every impression is mostly a
+   lost visit. The $9.9 order funnel already starts at the tool CTA
+   ("Get a free quote"), and that click is worth more than an ad view. If
+   revenue has to grow, **`blog/` is the better surface**: it carries no ad
+   today, it has the traffic and the dwell time, and it does not break the
+   free-tool promise. **Tool pages keep 0 ads.**
 3. **Is "nothing leaves the device" a hard product promise, or a default that
    a paid HD mode may override?** Every cloud option in §5 hangs on this one
    answer.
@@ -797,3 +815,56 @@ benefit is removing a cap that has never been hit.
      quantisation);
    - **video editing** reuses **mediabunny**, which is already vendored —
      and ffmpeg.wasm is ruled out for good (see the fifth pass above).
+
+---
+
+## 10. Candidate tools (research note) — status
+
+`internal-tools/candidate-tools-research.md` (13 KB) was written on
+2026-11-12 as the research behind the five directions the owner picked. It
+used to live only as a link inside §9, which is the wrong home for it: §9
+is a list of open questions, and a reader who finds the note there cannot
+tell whether any of it shipped. It is now a section of its own.
+
+### 10.1 What shipped
+
+| direction | slug | shipped | dependency |
+|---|---|---|---|
+| Wedding stationery pack (invitation / place card / table card / poster / menu) | `tools/wedding-stationery-set-maker` | 2026-11-11 EN, 2026-11-12 all 11 languages | none — reuses the canvas + jsPDF pipeline |
+| Photo contact sheet | `tools/wedding-photo-contact-sheet` | 2026-11-11 EN, 2026-11-12 all 11 languages | none — canvas + jsPDF |
+| PDF merge / split / reorder / rotate / decrypt | `tools/wedding-pdf-editor` | 2026-11-11 EN, 2026-11-12 all 11 languages | `@cantoo/pdf-lib` — the only option that opens a password-protected PDF |
+| GIF export | `tools/wedding-photo-to-gif` | 2026-11-11 EN, 2026-11-12 all 11 languages | `gifenc` — per-frame independent quantisation |
+| Video editing / format conversion | `tools/wedding-video-editor` | 2026-11-11 EN, 2026-11-12 all 11 languages | reuses the vendored `mediabunny`; ffmpeg.wasm stays ruled out |
+
+All five are live in 11 languages and all five are **free** — a tool page
+may not carry a price (see AGENTS.md). The reader-visible pass that
+finished on 2026-11-16 (8 untranslated static strings + 73 untranslated
+runtime strings) is what made them genuinely usable outside English.
+
+### 10.2 The criteria that decided each library
+
+These are the four questions to answer **before** picking a library for a
+zero-build, self-hosted, strict-CSP static site. They are recorded in full
+in AGENTS.md; they are repeated here because a library choice is a
+decision someone will want to re-check later, and each one has already
+caught a real mistake:
+
+1. **The build type decides the CSP.** An `asm.js` build needs no
+   `'wasm-unsafe-eval'`; a WebAssembly build does. The test is to download
+   the shipped `dist` and grep it — the README is not evidence. `pica` is
+   the case in point: its WebAssembly is inlined in the bundle, so under
+   this site's CSP it silently falls back to pure-JS resampling.
+2. **The licence must be read from the package itself.** `npm view`'s
+   `license` field is not evidence; `SEE LICENSE IN LICENSE.md` means read
+   `LICENSE.md`. `@imgly/background-removal` is the case in point: widely
+   described as MIT, the file inside the package is AGPL-3.0.
+3. **The entry format decides whether `<script src>` can use it.** A package
+   that ships only ESM has to be loaded with `<script type="module">`.
+4. **A library with its own UI strings is an 11-language liability.** Grep
+   the `dist` for visible strings before adopting it.
+
+### 10.3 Still open
+
+The remaining candidate list and its rank order are unchanged since
+2026-11-12; nothing has been decided about them. See
+`internal-tools/candidate-tools-research.md`.

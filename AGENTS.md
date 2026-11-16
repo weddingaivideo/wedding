@@ -4331,3 +4331,309 @@ gap, and a checker that flags it is wrong.
 control: `--inject` removes one binding and one runtime alias from
 every dictionary, and the report MUST then name them. A checker that
 cannot fail proves nothing, so the control is part of the gate.
+## The owner decided: no ads on the tool pages (2026-11-16)
+
+Measured on 2026-11-16: AdSense is on **25** static pages - the 12 English
+top-level pages (`/`, `/about/`, `/ai-wedding-video-generator/`, `/gallery/`,
+`/order/`, `/pricing/`, `/privacy/`, `/resources/`, `/search/`, `/services/`
+and its 13 sub-pages, `/success/`, `/terms/`) - and on **0** of the 32 tool
+pages, **0** blog pages and **0** of the ten localized home pages.
+
+**Tool pages carry no ads. That is a decision, not an omission.** The tools
+are the free, high-intent entry point, and their whole promise is "free, and
+nothing leaves your device". A third-party ad is the loudest possible
+"this page earns money" signal on exactly the pages that must not read that
+way. The intent behind them is low-commercial ("free contact sheet",
+"free GIF export"), so fill rate and CPC are poor while bounce is high:
+every impression is mostly a lost visit. The $9.90 order funnel already
+starts at the tool CTA ("Get a free quote"), and that click is worth more
+than an ad view.
+
+**If revenue has to grow, `blog/` is the better surface**: it carries no ad
+today, it has the traffic and the dwell time, and it does not break the
+free-tool promise. This is recorded here so a later audit does not read the
+missing ad slots on `tools/` as a bug to fix.
+
+## The WebAssembly fallback must never be silent (2026-11-16)
+
+`'wasm-unsafe-eval'` is in the CSP because two live features need it, not
+as a precaution:
+
+* `js/tools/image-codecs.js` lazily loads the AVIF encoder
+  (`jsquash-avif`, WASM). Without the keyword the tool throws
+  "The AVIF encoder did not load." - loud, fine.
+* `tools/remove-background-wedding-portrait` runs MODNet on
+  `onnxruntime` (34 WASM instantiations). Without the keyword the AI
+  matting fails outright - loud, fine.
+* `pica` (20 WASM sites, used by 12+ tool pages) ships its resampler
+  **inlined in the bundle**. Its own `has_wasm()` catches the CSP failure
+  and returns false, and pica then uses its plain-JS resampler. **The tool
+  still worked and the photo was just visibly softer.**
+
+That third case was the quiet one, and quiet is what makes a defect
+permanent: the only trace was a `console.warn`, which nobody reads on a tool
+they use once. `announceWasmFallback()` in `js/tools/common.js` now puts a
+notice on the page (`#wa-wasm-notice`, `role="status"`), with the console
+keeping the detail. The string resolves through `tools.copy`, so it is
+translated in all eleven languages like any other runtime copy.
+
+`tests/wasm-fallback-check.cjs` proves it: it loads the real `common.js`
+into a stubbed browser, forces `pica.has_wasm()` to false and asserts that
+a notice element with text reaches `document.body`. Its `--negative-control`
+removes the notice call from the source and asserts the check then FAILS.
+Both run in the deploy gate (step 9h and its reverse control).
+
+**The rule**: a quality downgrade that the reader cannot see is a defect,
+not a graceful degradation. The fallback may stay - the plain canvas path
+always works - but it has to SAY so.
+
+## The music guide had two slugs, and one of them was a parked rewrite (2026-11-16)
+
+Measured before the fix:
+
+| | `blog/wedding-video-music-guide/` | `blog/wedding-video-music-guide-new/` |
+|---|---|---|
+| canonical | self | -> the A path |
+| hreflang self-ref | self | -> the B path (in EVERY language, including the German one) |
+| `robots` | (none) | `noindex,follow` |
+| local files | 11 languages, **0** | 9 languages, **9** |
+| in the sitemaps | yes (11 sitemaps, 1 loc each) | **no** |
+| dictionary | 147 keys | 651-1201 keys per language |
+
+So B was a **rewrite parked as noindex** with a canonical to A, and A was
+the live URL with no translations of its own - while B carried nine real
+translations. The blog hub showed **two cards for the same URL**, one per
+version, and `en.json` linked to the parked one in six places.
+
+**What was done**: B's body and B's nine translations were promoted onto A's
+URL, the `noindex` came off, every canonical and all twelve hreflang
+entries now point at A, the duplicate hub card was deleted, the parked URL
+answers with a 301 (22 rules), and the `-new` directory is gone. The
+dictionary namespaces were merged - `blog.wedding-video-music-guide-new.*`
+became `blog.wedding-video-music-guide.*`, and the two underscore
+namespaces held the SAME 52 suffixes, so B's values won.
+
+**Two traps worth keeping**:
+
+* **The key names of other articles' link bindings still contain the old
+  slug** (`blog.how-to-make-wedding-video.p_text.blogwedding_video_music_
+  guide_new.311ae64d`). Those are binding identifiers, not the article
+  namespace: the page's `data-i18n` attribute points at them by name and
+  the hash comes from the source text. Renaming them would mean renaming
+  them in every HTML file too. **The value is the truth - the href is what a
+  reader follows.**
+* **A rewrite of a whole rule file has to touch only the TARGET field.**
+  The first pass replaced the slug everywhere in the line, which turned
+  `/blog/wedding-video-music-guide-new/ -> /blog/wedding-video-music-guide/`
+  into `/blog/wedding-video-music-guide/ -> /blog/wedding-video-music-guide/`
+  - twenty self-redirect rules pointing the live article at itself. The
+  gate for a redirect file is: **source != target, ignoring the trailing
+  slash.**
+
+## The translation gate could not see a word from another language (2026-11-16)
+
+Two rules were added to `scripts/translate-tool-page.py` and wired into
+both `verify_stored()` and `llm_verify()`:
+
+* `placeholder_value(value)` - the value is nothing but dots. `"...."` is
+  what a failed pipeline leaves behind. It passed every other rule: no
+  English word, no Latin run, and for a Latin target the script check is
+  vacuous. The Japanese `guides/wedding-cake-serving-calculator` page
+  shipped with nineteen values of `"...."`, a `<title>` of
+  `technicalities....` and a meta description of `How....`.
+* `foreign_script_spans(value, lang)` - a run of a script that does not
+  belong to the target language. **`foreign_spans()` only looks for LATIN
+  runs**, so it is blind to the other direction: the Russian
+  `guides.wedding-cake-serving-calculator.s2` shipped with the Chinese word
+  `展示` glued into a Russian word (`небольшой展示торт`), and the gate said
+  nothing. Han is never foreign to `ja` or `zh` - that pair is settled with
+  the Chinese rendering instead.
+
+### A "value == English" is NOT a defect
+
+The first attempt at this audit counted 92 349 values and almost all of
+them were wrong. Deploy 3 already established the rule: **the site's own
+dictionary decides what is "the same in every language"** - a measurement
+("5 x 7 in"), a paper size ("A5"), a format name ("PDF"), a brand
+("WeddingAI.video"), a competitor's product name. A table cell that reads
+`WeddingAI.video | Included with $9.9 video` is the same in all ten
+languages ON PURPOSE.
+
+The discriminator for a non-Latin target is `carries_target_script()`: a
+value with no character of the target script was never translated. For
+Japanese, a pure-kanji label (`挙式日`, `契約`, `基準`) is valid Japanese
+and `_ja_kanji_only_is_japanese()` settles it against the Chinese
+rendering.
+
+**Measure the backlog with the site's own functions, never with a
+hand-written list.** A hand-written list is how 92 349 became 1 079.
+
+### The real guides.* backlog, measured 2026-11-16
+
+```
+hi 684   th 273   ja 85   ar 27   ru 10   de/es/fr/pt/zh 0
+```
+
+`hi` and `th` were the two big ones: the whole `guides.*` family was still
+English in Hindi, and 273 values were English in Thai. The `hi/guides/*`
+pages are `noindex` (the whole Hindi guides section is parked), but the
+Thai ones are indexed, so the English was reader-visible.
+
+**Two detectors need a minimum length, or they invent work**: a foreign
+script run of ONE character is a coincidence, and a Markdown table rule
+(`---`, `|------|`) is punctuation that is identical in every language BY
+DESIGN - only a value made of DOTS is a placeholder.
+
+### The gate rejected two GOOD translations, and the fallback wrote English into the Japanese dictionary
+
+The rule is "a translation that fails the gate is never written; the
+ENGLISH SOURCE is written instead, so the reader sees English rather than
+a broken sentence". That fallback is right for a bad translation and
+terrible for a good one that the gate misjudged: the reader gets a whole
+English paragraph where a Japanese one belonged. Two such judgements
+happened on 2026-11-16, and both are now fixed.
+
+**1. A single Latin letter is a SIZE GRADE, not an English span.**
+The English source says "A-series"; the Japanese says "A判". The Latin
+run regex matches the "A" on its own, the run was not on the allow list,
+and `guides.wedding-photo-book-planner.s2` was rejected - twice - and the
+English source went into the Japanese dictionary. Japanese writes "A判",
+"Aサイズ", "B面"; Thai writes "A4".
+
+`single_letter_run_allowed()` is a FUNCTION, not an inline test, so the
+regression test can turn it off and prove the test can see it.
+
+**2. A COLOUR PROFILE next to a format name.** "sRGB JPEG" and
+"Adobe RGB" are names, spelled the same in every language, and both are
+already in `LATIN_KEEP` as WHOLE runs. The gap was that they could not sit
+inside a LONGER run: `LATIN_KEEP` is checked against the whole run, and
+the per-word loop only consulted `RUN_WORD_KEEP`. The Japanese
+translation of the photo-book paragraph was correct in every word and was
+thrown away over "sRGB JPEG". `RUN_WORD_KEEP` now holds `srgb`, `rgb`,
+`cmyk`, `adobe`, `jpeg`, `icc`.
+
+`LATIN_KEEP` itself also holds ordinary English words ("print", "fill",
+"best", "none") - it is checked against a WHOLE run, where they are UI
+labels. That is why the per-word layer is a separate, deliberately short
+list and NOT `LATIN_KEEP`.
+
+**3. "WebAssembly" was not on any list.** The notice that tells the
+reader the tool fell back to a slower resampler has to NAME the thing,
+and five languages kept the English sentence because the name was
+rejected.
+
+**The generalisation**: an allow list has to cover the names the COPY
+quotes, and the layer a name is checked in has to match the way the copy
+uses it. A name that is allowed on its own is not thereby allowed next
+to another name.
+
+### Chinese copy in the Japanese dictionary: 665 values, and a detector that has to iterate
+
+The new gate rules - "reject a placeholder" and "reject a foreign
+script" - cannot see Chinese inside a Japanese value, because Han IS the
+Japanese script. `1. 价格实惠` and "vendor" both pass every script check
+in a ja value.
+
+The oracle is the site itself: `i18n/zh.json` is this project's own
+Chinese corpus. The rule:
+
+> a ja value is Chinese when it contains a maximal run of Han characters
+> that occurs in the Chinese corpus and in NO Japanese value that contains
+> kana
+
+Three things had to be right, and each was wrong in the first version:
+
+| what | wrong version | why it fails | right |
+|---|---|---|---|
+| the unit | a 2-character sliding window | flags "字化" out of 数字化, misses "其它" | the maximal Han run |
+| the Japanese corpus | every ja value with kana | a contaminated value that HAS kana puts its Chinese fragments into the corpus, and the next value holding the same fragment then looks Japanese | the corpus excludes the values already flagged |
+| the iteration | flag, then skip the flagged keys | the iteration oscillates between "455" and "0" and reports an empty result | flag, exclude the flagged values from the CORPUS, detect over every value again |
+
+Measured 2026-11-16 with the rule that works:
+
+```
+ja 665 values   (26 of them in the guides.* family)
+```
+
+The false-positive rate is about 3%: a Japanese compound that the
+Chinese corpus happens to share - 可視化, 処理前, 具体例, 共通要素,
+三幕構成, 儀式完了, 大文字化. Those are Japanese, and the rule reports
+them because the Chinese dictionary contains the same characters.
+
+**The same damage is NOT confined to Japanese.** Measured with the
+foreign-script rule, the values that hold Chinese or Japanese in a
+dictionary that is written in another script:
+
+```
+th 2185   ar 1305   ru 118   en 118   de/es/fr/pt 5-10 each   hi 0
+```
+
+The Thai and Arabic counts are the big ones, and they are not all
+Chinese: some of them hold JAPANESE ("ステップ1：素材を準備しない",
+"プレミアムプラン（10万円〜）"). Each affected key holds a DIFFERENT
+bad value in each language, so it is not one string copied around - it is
+a translation pipeline that reused values across languages, and every
+language needs its own re-translation.
+
+**The throughput ceiling of the gateway, measured 2026-11-16** (60 real
+English sources, Thai):
+
+| configuration | per value |
+|---|---|
+| batch 20, 1 worker | 1.4 s |
+| batch 60, 1 worker | 2.9 s |
+| batch 20, 3 workers | 1.5 s |
+
+The model's thinking time is paid PER REQUEST and grows with the batch,
+so a bigger batch is slower per value, and the gateway serialises the
+thinking across workers, so more workers do not help. **Batch 20, one
+worker.** The rate limiter inside one process is shared
+(`LLM_GATE_LOCK`), so several workers in ONE process cannot cause the
+429 wall that two PROCESSES cause.
+
+### The dictionary's tail writes its separator COMMA ON ITS OWN LINE
+
+The last ~170 lines of every dictionary (the `tools.*` block) look like
+this:
+
+```
+  "tools.copy.veditEncoderMissing.zzzzzzdf7ed": "The video encoder did not load"
+  ,
+  "tools.wedding-photo-contact-sheet...": "Drop photos here"
+```
+
+Everywhere else the comma is attached to the key line. An insert helper
+that assumes the normal format writes a file that does not parse, and the
+error it produces points at a line far away from the cause:
+
+```
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes
+```
+
+The fix is to detect the lone comma and put the new key AFTER it, with a
+lone comma of its own after that.
+
+### The dictionary edit is TEXT LEVEL, and the key count is the assertion
+
+The dictionaries are 6-17 MB and their key order is meaningful, so they
+are never re-serialised: a `json.dumps` rewrite would touch every byte.
+The edit replaces the ONE line of the key, and the file is written with a
+temp file plus `os.replace`.
+
+The assertion after the write is the key COUNT. It caught a real
+mistake: an insert that added a key without removing the line it was
+supposed to replace changed the count by one, and the run stopped
+instead of shipping a dictionary with a duplicated key.
+
+### "The English source is a safe fallback" is only true for a bad translation
+
+When a translation fails the gate, the English source is written instead.
+For a value that was never translated, that is the best available
+answer. For a value that WAS translated and the gate misjudged, it
+replaces a good sentence with a bad one.
+
+So the gate's job is not only to reject - it has to reject the RIGHT
+things, and a rejection that discards a good translation costs more than
+the defect it was looking for. Every false rejection found during the
+2026-11-16 re-translation was fixed at the rule, not by letting the
+value through.

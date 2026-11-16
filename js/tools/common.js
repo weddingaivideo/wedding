@@ -276,6 +276,10 @@ function loadVendor(lib) {
     sheetTooMany: 'tools.copy.sheetTooMany.zzzzzzaaf9f',
     sheetUnreadable: 'tools.copy.sheetUnreadable.zzzzzz177df',
     veditEncoderMissing: 'tools.copy.veditEncoderMissing.zzzzzzdf7ed',
+    // added 2026-11-16: the WebAssembly fallback notice (see
+    // announceWasmFallback below). Without it a CSP that blocks WASM made
+    // the tools silently produce a worse photo.
+    wasmFallback: 'tools.copy.wasmFallback.zzzzzzw16f',
   };
 
   // Replace {name} placeholders with values from `params`.
@@ -933,6 +937,43 @@ function loadVendor(lib) {
     });
   }
 
+  // ---------- the WebAssembly fallback must not be silent -----------------
+  //
+  // pica's has_wasm() returns FALSE when the CSP blocks the WebAssembly
+  // compile, and the page then keeps working with a visibly softer photo:
+  // the canvas drawImage() path resamples with the browser's bilinear
+  // filter instead of pica's multi-step resample. Nothing on the page
+  // said so, so the defect was invisible - the tool looked fine and the
+  // quality quietly dropped.
+  //
+  // A console warning is not enough: nobody reads the console of a tool
+  // they use once. The fallback now SAYS SO, on the page, and the console
+  // keeps the detail.
+  var wasmNoticeShown = false;
+
+  function announceWasmFallback(reason) {
+    if (wasmNoticeShown) return;
+    wasmNoticeShown = true;
+    if (window.console && console.warn) {
+      console.warn('[weddingai] ' + reason +
+        " - check the CSP for 'wasm-unsafe-eval'; falling back to the JS path.");
+    }
+    try {
+      if (!document || !document.body) return;
+      var el = document.createElement('div');
+      el.id = 'wa-wasm-notice';
+      el.setAttribute('role', 'status');
+      el.textContent = t('wasmFallback',
+        'WebAssembly is unavailable in this browser, so this tool is using a slower, lower-quality fallback.');
+      el.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:2147483000;' +
+        'padding:10px 16px;background:#3a2a12;color:#ffd9a0;font:14px/1.45 system-ui,' +
+        '-apple-system,Segoe UI,sans-serif;text-align:center';
+      document.body.appendChild(el);
+    } catch (e) {
+      // the console warning above already said it
+    }
+  }
+
   // ---------- high-quality resize -------------------------------------------
   //
   // The canvas drawImage() path resamples with the browser's bilinear filter,
@@ -943,17 +984,15 @@ function loadVendor(lib) {
   // 'wasm-unsafe-eval' in the CSP (added 2026-11-09 in buildCsp() and
   // _headers). If that keyword is ever missing, pica's has_wasm() returns
   // false and it silently falls back to its plain-JS resampler - the page
-  // keeps working, the quality quietly drops. We surface that in the console
-  // so the failure is visible instead of invisible.
+  // keeps working, the quality quietly drops. announceWasmFallback() puts
+  // that on the page, so the failure is visible instead of invisible.
   function resizeCanvas(source, width, height, opts) {
     opts = opts || {};
     var usePica = opts.pica !== false;
     if (!usePica) return drawToCanvas(source, width, height);
     return loadVendor('pica').then(function (pica) {
       if (pica && typeof pica.has_wasm === 'function' && !pica.has_wasm()) {
-        if (window.console && console.warn) {
-          console.warn('[weddingai] pica has no WASM (check the CSP for ' + "'wasm-unsafe-eval'" + '); falling back to the JS resampler.');
-        }
+        announceWasmFallback('pica has no WASM');
       }
       var out = document.createElement('canvas');
       out.width = width;
@@ -964,6 +1003,7 @@ function loadVendor(lib) {
       }).then(function () { return out; });
     }).catch(function () {
       // pica failed for any reason - the plain canvas path always works.
+      announceWasmFallback('pica failed');
       return drawToCanvas(source, width, height);
     });
   }

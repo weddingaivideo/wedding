@@ -670,6 +670,11 @@ LATIN_KEEP = {
     # acronyms
     "ai", "api", "rsvp", "diy", "alt", "ui", "ux", "url", "raw", "exif",
     "rgb", "dng", "mp", "tiff",
+    # The WebAssembly runtime. The notice that tells the reader the tool
+    # fell back to a slower resampler has to NAME the thing, and a
+    # translation that keeps the name is still a translation - without
+    # this, five languages kept the English sentence on 2026-11-16.
+    "webassembly",
     # brands and products
     "weddingai.video", "weddingai", "adobe", "lightroom", "lightroom classic",
     "acrobat", "canva", "ilovepdf", "compuserve", "iphone", "webcodecs",
@@ -875,6 +880,17 @@ RUN_WORD_KEEP = {
     # allowed - without it the whole sentence was called untranslated and
     # the Hindi value was thrown away.
     "aes",
+    # COLOUR PROFILES next to a format name ("sRGB JPEG", "Adobe RGB").
+    #
+    # The print-and-photo copy names these in combination, and each of them
+    # is already in LATIN_KEEP as a whole run - so the gap was only that
+    # they could not sit inside a LONGER run. Measured 2026-11-16: the
+    # Japanese translation of guides.wedding-photo-book-planner.s2 was
+    # correct in every word, and the gate rejected it over "sRGB JPEG";
+    # the re-translation then wrote the ENGLISH SOURCE into the Japanese
+    # dictionary. These are names, not copy, and none of them is an
+    # ordinary English word.
+    "srgb", "rgb", "cmyk", "adobe", "jpeg", "icc",
 }
 
 LATIN_RUN_RE = re.compile(
@@ -917,10 +933,33 @@ def technical_word_okay(word):
     return False
 
 
+def single_letter_run_allowed(run):
+    """True for a Latin run of exactly one letter.
+
+    A single letter is a SIZE GRADE, not an English span. Japanese writes
+    "A判", "Aサイズ", "B面" and Thai writes "A4"; the model keeps that
+    letter, and the gate used to throw the whole translation away.
+
+    Measured 2026-11-16: guides.wedding-photo-book-planner.s2 was
+    rejected twice with "untranslated English: 'A'" because the English
+    source says "A-series" and the Japanese says "A判" - and the run
+    regex matches the "A" on its own. The re-translation then wrote the
+    ENGLISH SOURCE into the Japanese dictionary, so a reader saw an
+    English paragraph where a Japanese one belonged.
+
+    It is a FUNCTION and not an inline test so the regression test can
+    turn it off and prove the test can see it.
+    """
+    norm = re.sub(r"\s+", " ", run.strip(" .-/")).lower()
+    return len(norm) == 1 and norm.isalpha()
+
+
 def _run_is_allowed(run):
     """True when a Latin run is a name, a unit or a measurement."""
     norm = re.sub(r"\s+", " ", run.strip(" .-/")).lower()
     if not norm:
+        return True
+    if single_letter_run_allowed(run):
         return True
     if norm in LATIN_KEEP:
         return True
@@ -1132,6 +1171,91 @@ def foreign_spans(text, lang):
     return bad
 
 
+# ---------------------------------------------------------------------------
+# The two rules added on 2026-11-16.
+#
+# WHY THEY ARE NEEDED
+# --------------------
+# foreign_spans() looks for LATIN runs inside a non-Latin translation. That
+# is the right question for English leftovers, and it is blind to the other
+# direction: a Chinese or Japanese word sitting inside a Russian sentence is
+# not a Latin run, so foreign_spans() returns an empty list and the gate
+# calls the value good. Measured on 2026-11-16, the Russian
+# guides.wedding-cake-serving-calculator.s2 shipped with the Chinese word
+# "展示" glued into a Russian word ("небольшой展示торт") and the gate said
+# nothing.
+#
+# And a value that is nothing but dots - "...." - is what a failed pipeline
+# leaves behind. It passed every rule: it has no English word, no Latin run,
+# and for a Latin target the script check is vacuous.
+# ---------------------------------------------------------------------------
+
+# The script each language is written in, and the scripts that are FOREIGN
+# to it. Japanese and Chinese share the Han characters, so Han is never
+# foreign to ja or zh - that pair is settled with the Chinese rendering
+# instead (_ja_kanji_only_is_japanese).
+FOREIGN_SCRIPTS = {
+    "ru": [(r"[\u4e00-\u9fff]", 2), (r"[\u3040-\u30ff]", 2), (r"[\u0600-\u06ff]", 3),
+           (r"[\u0e00-\u0e7f]", 3), (r"[\u0900-\u097f]", 3)],
+    "ar": [(r"[\u4e00-\u9fff]", 2), (r"[\u3040-\u30ff]", 2), (r"[\u0400-\u04ff]", 3),
+           (r"[\u0e00-\u0e7f]", 3), (r"[\u0900-\u097f]", 3)],
+    "th": [(r"[\u4e00-\u9fff]", 2), (r"[\u3040-\u30ff]", 2), (r"[\u0400-\u04ff]", 3),
+           (r"[\u0600-\u06ff]", 3), (r"[\u0900-\u097f]", 3)],
+    "hi": [(r"[\u4e00-\u9fff]", 2), (r"[\u3040-\u30ff]", 2), (r"[\u0400-\u04ff]", 3),
+           (r"[\u0600-\u06ff]", 3), (r"[\u0e00-\u0e7f]", 3)],
+    "zh": [(r"[\u3040-\u30ff]", 2), (r"[\u0400-\u04ff]", 3), (r"[\u0600-\u06ff]", 3),
+           (r"[\u0e00-\u0e7f]", 3), (r"[\u0900-\u097f]", 3)],
+    "ja": [(r"[\u0400-\u04ff]", 3), (r"[\u0600-\u06ff]", 3), (r"[\u0e00-\u0e7f]", 3),
+           (r"[\u0900-\u097f]", 3)],
+}
+
+# A value that is nothing but dots and spaces. A Markdown table rule
+# ("---", "|------|") is punctuation too, but it is IDENTICAL in every
+# language by design, so the rule asks for dots only.
+PLACEHOLDER_RE = re.compile(r"^[\s.\u2026\u3002]{3,}$")
+
+
+def placeholder_value(value):
+    """True when the value is a placeholder rather than a translation.
+
+    "...." is what a failed pipeline leaves behind. It passed every other
+    rule: no English word, no Latin run, and for a Latin-script target the
+    script check is vacuous. Measured on 2026-11-16, the Japanese
+    guides.wedding-cake-serving-calculator page shipped with nineteen
+    values of "...." and its <title> read "technicalities....".
+    """
+    if not isinstance(value, str):
+        return False
+    return bool(PLACEHOLDER_RE.match(value.strip()))
+
+
+def foreign_script_spans(value, lang):
+    """Runs of a script that does not belong to the target language.
+
+    foreign_spans() finds ENGLISH inside a translation. This finds a
+    FOREIGN language inside a translation - the Chinese word in the middle
+    of a Russian sentence, the Thai sentence that landed in the Japanese
+    dictionary. The minimum run length keeps a single coincidental
+    character from failing a good value.
+    """
+    if not isinstance(value, str) or not value:
+        return []
+    if lang in LATIN_TARGETS:
+        # For a Latin target every other language's script is foreign.
+        pats = [(r"[\u4e00-\u9fff]", 2), (r"[\u3040-\u30ff]", 2),
+                (r"[\u0400-\u04ff]", 3), (r"[\u0600-\u06ff]", 3),
+                (r"[\u0e00-\u0e7f]", 3), (r"[\u0900-\u097f]", 3)]
+    else:
+        pats = FOREIGN_SCRIPTS.get(lang, [])
+    bad = []
+    for pat, minlen in pats:
+        for m in re.finditer(pat + r"+", value):
+            if len(m.group(0)) >= minlen:
+                bad.append(m.group(0))
+    return bad
+
+
+
 # The allowed phrases that carry more than one word. They are cut out of a
 # Latin-script translation before the word-by-word check runs, so "Save the
 # dates" does not read as three English words.
@@ -1287,6 +1411,8 @@ def llm_verify(src, dst, saved, maxlen, lang=None):
     """Return a reason string when the translation is not usable."""
     if not dst or not dst.strip():
         return "empty"
+    if placeholder_value(dst):
+        return "a placeholder, not a translation"
     for i in range(len(saved)):
         if BRAND_MASK % i not in dst:
             return "brand mask %d eaten" % i
@@ -1295,6 +1421,13 @@ def llm_verify(src, dst, saved, maxlen, lang=None):
     if BRAND not in dst and BRAND in src:
         return "brand lost"
     if lang:
+        # A word from ANOTHER language inside this one. foreign_spans()
+        # only looks for Latin runs, so the Chinese word in the middle of
+        # a Russian sentence passed every check.
+        if lang != "en":
+            foreign = foreign_script_spans(dst, lang)
+            if foreign:
+                return "a word from another language: %r" % foreign[0][:40]
         # The untranslated-span gate. See foreign_spans() for why no other
         # check sees this.
         spans = foreign_spans(dst, lang)
@@ -1446,6 +1579,16 @@ def verify_stored(source, value, maxlen, lang=None, zh_value=None):
     Japanese branch below.
     """
     if not value or not value.strip():
+        return False
+    # A value of "...." is what a failed pipeline leaves behind. It passed
+    # every other rule: no English word, no Latin run, and for a Latin
+    # target the script check is vacuous.
+    if placeholder_value(value):
+        return False
+    # A word from ANOTHER language inside this one. foreign_spans() only
+    # looks for Latin runs, so the Chinese word in a Russian sentence was
+    # invisible to it.
+    if lang and lang != "en" and foreign_script_spans(value, lang):
         return False
     if BRAND not in value and BRAND in source:
         return False
